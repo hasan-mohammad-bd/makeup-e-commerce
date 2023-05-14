@@ -1,5 +1,7 @@
-import "@fortawesome/fontawesome-svg-core/styles.css";
 import './globals.css'
+
+// ** Import Components
+import Header from './components/Header'
 
 export const metadata = {
   title: 'Sotota Stall',
@@ -9,6 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Header/>
       <body>{children}</body>
     </html>
   )
