@@ -1,6 +1,10 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
+// ** Import Icons
+import { HiMagnifyingGlass } from "react-icons/hi2"
+
+
 const Search = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const router = useRouter();
@@ -21,29 +25,19 @@ const Search = () => {
             handleSearch();
         }
     };
+
     return (
         <>
             <form>
-                <select className="select-active">
-                    <option>All Categories</option>
-                    <option>Women's</option>
-                    <option>Men's</option>
-                    <option>Cellphones</option>
-                    <option>Computer</option>
-                    <option>Electronics</option>
-                    <option> Accessories</option>
-                    <option>Home & Garden</option>
-                    <option>Luggage</option>
-                    <option>Shoes</option>
-                    <option>Mother & Kids</option>
-                </select>
                 <input
                     value={searchTerm}
                     onKeyDown={handleInput}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     type="text"
-                    placeholder="Search"
+                    placeholder="আপনার কাঙ্খিত পণ্য সার্চ করুন"
+                    className="border-r-0"
                 />
+                <button type="submit" className="search-btn"><HiMagnifyingGlass size={24} color="#fff"/></button>
             </form>
         </>
     );

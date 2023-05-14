@@ -5,6 +5,9 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Search from "../elements/Search";
 
+// ** Import Icons
+import { HiOutlineHeart, HiOutlineShoppingCart, HiOutlineUser } from "react-icons/hi2"
+
 const Header = ({
     totalCartItems,
     totalCompareItems,
@@ -21,67 +24,52 @@ const Header = ({
                 setScroll(scrollCheck);
             }
         });
-    });
+    }, []);
 
     const handleToggle = () => setToggled(!isToggled);
 
     return (
         <>
-            <header className="header-area">
-                <div className="header-middle header-middle-ptb-1 d-none d-lg-block">
-                    <div className="container">
-                        <div className="header-wrap">
-                            <div className="logo logo-width-1">
-                                <Link href="/">
-                                    <Image
-                                        src="/assets/images/logo.png"
-                                        alt="logo" width={200} height={48}
-                                    />
-                                </Link>
+            <header className="header border-b border-slate-300 py-4">
+                <div className="container">
+                    <div className="header-wrap flex justify-between items-center">
+                        <div className="header-left flex justify-between items-center gap-4">
+                            <Link href="/" className="logo">
+                                <Image
+                                    src="/assets/images/logo.png"
+                                    alt="logo" width={200} height={48}
+                                />
+                            </Link>
+                            <div className="nav-menu">
+                                <Link href="/">স্মার্ট ফোন</Link>
+                                <Link href="/">স্মার্ট ওয়াচ</Link>
+                                <Link href="/">ল্যাপটপ</Link>
+                                <Link href="/">আরও</Link>
                             </div>
-                            <div className="header-right">
-                                <div className="search-style-2">
-                                    <Search />
-                                </div>
-                                <div className="header-action-right">
-                                    <div className="header-action-2">
-                                        <div className="header-action-icon-2">
-                                            <Link href="/shop-compare">
-                                                {/* <Image
-                                                    className="svgInject"
-                                                    alt="Evara"
-                                                    src="/assets/imgs/theme/icons/icon-compare.svg"
-                                                /> */}
-                                                <span className="pro-count blue">
-                                                    {totalCompareItems}
-                                                </span>
-                                            </Link>
-                                        </div>
-                                        <div className="header-action-icon-2">
-                                            <Link href="/shop-wishlist">
-                                                {/* <Image
-                                                    className="svgInject"
-                                                    alt="Evara"
-                                                    src="/assets/imgs/theme/icons/icon-heart.svg"
-                                                /> */}
-                                                <span className="pro-count blue">
-                                                    {totalWishlistItems}
-                                                </span>
-                                            </Link>
-                                        </div>
-                                        <div className="header-action-icon-2">
-                                            <Link href="/shop-cart">
-                                                {/* <Image
-                                                    alt="Evara"
-                                                    src="/assets/imgs/theme/icons/icon-cart.svg"
-                                                /> */}
-                                                <span className="pro-count blue">
-                                                    {totalCartItems}
-                                                </span>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div className="header-right flex justify-between items-center gap-6">
+                            <div className="nav-search">
+                                <Search />
+                            </div>
+                            <div className="header-actions flex gap-4">
+                                <Link href="/shop-compare" className="single-action">
+                                    <HiOutlineHeart size={24}/>
+                                    <span className="pro-count blue">
+                                        {totalCompareItems}
+                                    </span>
+                                </Link>
+                                <Link href="/shop-wishlist" className="single-action">
+                                    <HiOutlineShoppingCart size={24}/>
+                                    <span className="pro-count blue">
+                                        {totalWishlistItems}
+                                    </span>
+                                </Link>
+                                <Link href="/shop-cart" className="single-action">
+                                    <HiOutlineUser size={24}/>
+                                    <span className="pro-count blue">
+                                        {totalCartItems}
+                                    </span>
+                                </Link>
                             </div>
                         </div>
                     </div>

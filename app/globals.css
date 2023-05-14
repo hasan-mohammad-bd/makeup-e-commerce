@@ -2,16 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700 family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900 &display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --body-font: 'Noto Sans', sans-serif;
+  --title-font: 'Hind Siliguri', sans-serif;
 }
 
 @layer base{
   body{
-    @apply font-body
+    /* @apply font-body  */
   }
+
+  input{
+    @apply h-12 text-base font-title font-normal border border-slate-300 rounded-s-lg py-3 px-4 focus:outline-0 focus:border-primary
+  }
+
+  input::placeholder{
+    @apply text-base font-title font-normal text-slate-300
+  }
+
+  button svg{
+    @apply mx-auto
+  }
+}
+
+@layer components {
+  .container {
+    @apply xl:max-w-[1276px];
+  }
+
+}
+
+
+/* Global Css */
+
+.search-btn{
+  @apply absolute w-12 h-12 bg-primary rounded-e-lg outline-none text-center
+}
+
+
+/* Header */
+
+.nav-menu a{
+  @apply text-base font-title font-normal text-slate-500 px-4 py-3 ease-in duration-100 hover:text-primary
+}
+
+.nav-search{
+  width: 364px;
+}
+
+.nav-search input{
+  width: calc(100% - 48px);
+}
+
+.header-actions .single-action{
+  @apply inline-flex justify-center items-center w-12 h-12 text-[#475569] border border-slate-300 rounded-full
+}
+
+/* Footer */
+
+.footer-widget p,
+.footer-widget li a{
+  @apply inline-block text-base font-normal font-body text-white mb-3 ease-in duration-100 hover:text-primary
+}
+
+.footer-widget h5{
+  @apply text-base/[16px] font-semibold font-title text-[#00B7C9] mt-5 mb-8
+}
+
+.footer-widget .info-list li{
+  @apply flex items-center gap-4 
+}
+
+.footer-widget .info-list svg{
+  @apply text-white mb-3
 }

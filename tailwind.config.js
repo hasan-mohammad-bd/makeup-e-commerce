@@ -8,14 +8,29 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        body: ['Hind Siliguri', 'sans-serif'],
-        title: ['Noto Sans', 'sans-serif']
+        body: ['var(--font-body)', 'sans-serif'],
+        title: ['var(--font-title)', 'sans-serif']
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      screens:{
+        sm: "576px",
+        md: "768px",
+        lg: "992px",
+        xl: "1200px",
       },
+      container:{  
+        center: true,
+        padding: "1rem"
+      },
+      colors: {
+        primary: "#F99104",
+        slate: {
+          300: "#CBD5E1",
+          400: "#94A3B8",
+          500: "#64748B",
+          700: "#334155",
+          900: "#0F172A"
+        }
+      }
     },
   },
   plugins: [],
