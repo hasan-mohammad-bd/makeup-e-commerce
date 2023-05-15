@@ -22,7 +22,7 @@ const Intro = () => {
                 pagination={true}
                 className="hero-slider"
             >
-                <SwiperSlide>
+                <SwiperSlide className="mt-6 mb-8">
                     <div className="single-hero-slider bg-black rounded-2xl px-12 py-10">
                         <div className="grid grid-cols-12 items-center">
                             <div className="col-span-7">

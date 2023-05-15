@@ -1,3 +1,4 @@
+import ServiceFeatures from "./components/ServiceFeatures";
 import Intro from "./components/sliders/Intro";
 export default function Home() {
   return (
@@ -6,6 +7,12 @@ export default function Home() {
       <section className="banner">
         <div className="container">
           <Intro />
+        </div>
+      </section>
+
+      <section className="service-features">
+        <div className="container">
+          <ServiceFeatures/>
         </div>
       </section>
       

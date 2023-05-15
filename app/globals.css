@@ -60,6 +60,16 @@
   @apply inline-flex justify-center items-center w-12 h-12 text-[#475569] border border-slate-300 rounded-full
 }
 
+/* Service Features */
+
+.single-feature{
+  @apply relative pr-4
+}
+
+.single-feature:not(:first-of-type)::before{
+  @apply absolute content-[''] left-[-32px] top-0 w-px h-full bg-slate-300
+}
+
 /* Footer */
 
 .footer-widget p,
