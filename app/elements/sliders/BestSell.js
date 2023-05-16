@@ -9,7 +9,7 @@ SwiperCore.use([Navigation]);
 // ** Import Icons
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
 
-const FlashSale = ({saleProducts}) => {
+const BestSell = ({bestProducts}) => {
 
     return (
         <>
@@ -23,7 +23,7 @@ const FlashSale = ({saleProducts}) => {
                     nextEl: ".custom_next_n",
                 }}
             >
-                {saleProducts?.map((product, i) => (
+                {bestProducts?.map((product, i) => (
                     <SwiperSlide key={i}>
                         <SingleProduct product={product} />
                     </SwiperSlide>
@@ -42,4 +42,4 @@ const FlashSale = ({saleProducts}) => {
     );
 };
 
-export default FlashSale;
+export default BestSell;

@@ -51,9 +51,9 @@ const SingleProduct = ({
 
             {!loading ?  (
                 <>
-                    <div className="product-card-wrap bg-white border border-slate-200 rounded-xl">
+                    <div className="product-card-wrap flex items-center gap-3 bg-white border border-slate-200 rounded-xl p-4">
                         <div className="product-img-action-wrap relative">
-                            <div className="product-img p-2 pb-0">
+                            <div className="product-img">
                                 <Link
                                     href="/products/[slug]"
                                     as={`/products/${product.slug}`}
@@ -62,24 +62,24 @@ const SingleProduct = ({
                                         className="default-img"
                                         src={product.images[0].img}
                                         alt={product.title}
-                                        width={220}
-                                        height={220}
+                                        width={116}
+                                        height={116}
                                         priority={true}
                                     />
                                     
                                 </Link>
                             </div>
                             <div className="product-action">
-                                <a
+                                {/* <a
                                     aria-label="Add To Wishlist"
                                     className="action-btn"
                                     onClick={(e) => handleWishlist(product)}
                                 >
                                     <HiOutlineHeart/>
-                                </a>
+                                </a> */}
                             </div>
                         </div>
-                        <div className="product-content-wrap p-3">
+                        <div className="product-content-wrap">
                             <div className="product-category">
                                 <Link href="/products" className="text-xs text-primary capitalize">
                                     {product.brand}
@@ -99,7 +99,7 @@ const SingleProduct = ({
                                 <del className="old-price text-sm font-normal text-slate-400">{product.oldPrice ? `$ ${product.oldPrice}`:null}</del>
                                 <span className="discount inline-block text-xs text-white bg-red-500 rounded-md py-.5 px-1 ml-2">{product.discount.percentage}%</span>
                             </div>
-                            <div className="product-actions flex justify-center items-center gap-2">
+                            {/* <div className="product-actions flex justify-center items-center gap-2">
                                 <a
                                     aria-label="Add To Cart"
                                     className="action-btn"
@@ -110,7 +110,7 @@ const SingleProduct = ({
                                 <Link href={"/"} className="buy-btn">
                                     এখনই কিনুন <HiArrowLongRight size={20}/>
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 

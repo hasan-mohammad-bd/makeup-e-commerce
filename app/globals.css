@@ -50,7 +50,7 @@
 }
 
 .slider-btn{
-  @apply absolute top-1/2 left-5 inline-flex justify-center items-center w-12 h-12 bg-[#F8FAFC] rounded-full translate-y-1/2 z-10 cursor-pointer
+  @apply absolute top-1/2 left-5 inline-flex justify-center items-center w-12 h-12 bg-[#F8FAFC] rounded-full translate-y-[-1/2] z-10 cursor-pointer
 }
 
 .slider-next{
@@ -113,6 +113,10 @@
 
 .buy-btn{
   @apply flex justify-center items-center gap-2 text-base/[16px] font-semibold font-title text-white bg-[#F99104] w-[168px] rounded-md py-2
+}
+
+.new-slider .swiper-slide .product-card-wrap:first-of-type{
+  @apply mb-5
 }
 
 /* Footer */
