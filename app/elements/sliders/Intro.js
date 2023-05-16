@@ -49,7 +49,7 @@ const Intro = () => {
                         </div>
                     </div>
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className="mt-6 mb-8">
                     <div className="single-hero-slider bg-black rounded-2xl px-12 py-10">
                         <div className="grid grid-cols-12 items-center">
                             <div className="col-span-7">
@@ -76,7 +76,7 @@ const Intro = () => {
                         </div>
                     </div>
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className="mt-6 mb-8">
                     <div className="single-hero-slider bg-black rounded-2xl px-12 py-10">
                         <div className="grid grid-cols-12 items-center">
                             <div className="col-span-7">
@@ -104,15 +104,6 @@ const Intro = () => {
                     </div>
                 </SwiperSlide>
             </Swiper>
-
-            <div className="slider-arrow hero-slider-1-arrow">
-                <span className="slider-btn slider-prev slick-arrow custom_prev_i1">
-                    <i className="fi-rs-angle-left"></i>
-                </span>
-                <span className="slider-btn slider-next slick-arrow custom_next_i1">
-                    <i className="fi-rs-angle-right"></i>
-                </span>
-            </div>
         </>
     );
 };

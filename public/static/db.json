@@ -52,8 +52,8 @@
             "tags": "women",
             "sizes": "s",
             "stock": 0,
-            "review": 10,
-            "rating": 3,
+            "review": 1.2,
+            "rating": 4.5,
             "ratingScore": 90,
             "created": ""
         },
@@ -943,7 +943,7 @@
             ],
             "condition": "best",
             "color": "blue",
-            "brand": "armani",
+            "brand": "havit",
             "category": "clothing",
             "featured": false,
             "trending": true,
@@ -962,7 +962,7 @@
                 "purple"
             ],
             "weight": 150,
-            "tags": "havit",
+            "tags": "women",
             "sizes": "s",
             "stock": 8,
             "review": 1.2,

@@ -3,7 +3,7 @@ import FlashSaleSlider from "../elements/sliders/FlashSale";
 const  FlashSale = async () => {
 
   async function fetchProducts() {
-    const res  = await fetch(`${process.env.server}/products`);
+    const res  = await fetch(`${process.env.server}/products`, { cache: 'force-cache' });
     const allProducts = await res.json();
     
     // Recommendation: handle errors

@@ -11,6 +11,11 @@ import React, { useEffect, useState } from "react";
 // import { addToWishlist } from "../../redux/action/wishlistAction";
 import Loader from './../elements/Loader';
 
+// ** Import Icon
+import { FaStar } from "react-icons/fa";
+import { HiOutlineHeart, HiOutlineShoppingCart, HiArrowLongRight } from "react-icons/hi2"
+
+
 
 const SingleProduct = ({
     product,
@@ -46,87 +51,65 @@ const SingleProduct = ({
 
             {!loading ?  (
                 <>
-                    <div className="product-cart-wrap mb-30">
-                        <div className="product-img-action-wrap">
-                            <div className="product-img product-img-zoom">
+                    <div className="product-card-wrap border border-slate-200 rounded-xl">
+                        <div className="product-img-action-wrap relative">
+                            <div className="product-img p-2 pb-0">
                                 <Link
                                     href="/products/[slug]"
                                     as={`/products/${product.slug}`}
                                 >
                                     <Image
-                                            className="default-img"
-                                            src={product.images[0].img}
-                                            alt={product.title}
-                                            width={220}
-                                            height={220}
+                                        className="default-img"
+                                        src={product.images[0].img}
+                                        alt={product.title}
+                                        width={220}
+                                        height={220}
+                                        priority={true}
                                     />
                                     
                                 </Link>
                             </div>
-                            <div className="product-action-1">
-                                <a
-                                    aria-label="Quick view"
-                                    className="action-btn hover-up"
-                                    data-bs-toggle="modal"
-                                    onClick={(e) => openQuickView(product)}
-                                >
-                                    <i className="fi-rs-eye"></i>
-                                </a>
+                            <div className="product-action">
                                 <a
                                     aria-label="Add To Wishlist"
-                                    className="action-btn hover-up"
+                                    className="action-btn"
                                     onClick={(e) => handleWishlist(product)}
                                 >
-                                    <i className="fi-rs-heart"></i>
+                                    <HiOutlineHeart/>
                                 </a>
-                                <a
-                                    aria-label="Compare"
-                                    className="action-btn hover-up"
-                                    onClick={(e) => handleCompare(product)}
-                                >
-                                    <i className="fi-rs-shuffle"></i>
-                                </a>
-                            </div>
-
-                            <div className="product-badges product-badges-position product-badges-mrg">
-                                {product.trending ? <span className="hot">Hot</span>:null }
-                                {product.created ? <span className="new">New</span>:null }
-                                {product.totalSell > 100 ? <span className="best">Best Sell</span>:null }
-                                {product.discount.isActive ? <span className="sale">Sale</span>:null }
-                                {product.discount.percentage >= 5 ? <span className="hot">{product.discount.percentage}%</span>:null }
                             </div>
                         </div>
-                        <div className="product-content-wrap">
+                        <div className="product-content-wrap p-3">
                             <div className="product-category">
-                                <Link href="/products">
-                                {product.brand}
+                                <Link href="/products" className="text-xs text-primary capitalize">
+                                    {product.brand}
                                 </Link>
                             </div>
                             <h2>
-                            <Link
-                                    href="/products/[slug]"
-                                    as={`/products/${product.slug}`}
-                                >
+                            <Link href={`/products/${product.slug}`} className="product-title text-base font-semibold text-slate-900 font-body overflow-text">
                                     {product.title}
                                     </Link>
                             </h2>
-                            <div className="rating-result" title="90%">
-                                <span>
-                                    <span>{product.ratingScore}%</span>
-                                </span>
+                            <div className="rating-result flex items-center gap-3 mb-4">
+                                <span className="text-sm/[16px] font-semibold text-slate-900">{product.rating}<FaStar size={12} className="inline text-primary align-middle"/></span>
+                                <span className="text-sm/[16px] font-semibold text-slate-900">{product.review}K</span>
                             </div>
-                            <div className="product-price">
-                                <span>${product.price} </span>
-                                <span className="old-price">{product.oldPrice ? `$ ${product.oldPrice}`:null}</span>
+                            <div className="product-price mb-3">
+                                <span className="text-lg/[24px] font-semibold text-red-500">${product.price} </span>
+                                <del className="old-price text-sm font-normal text-slate-400">{product.oldPrice ? `$ ${product.oldPrice}`:null}</del>
+                                <span className="discount inline-block text-xs text-white bg-red-500 rounded-md py-.5 px-1 ml-2">{product.discount.percentage}%</span>
                             </div>
-                            <div className="product-action-1 show">
+                            <div className="product-actions flex justify-center items-center gap-2">
                                 <a
                                     aria-label="Add To Cart"
-                                    className="action-btn hover-up"
+                                    className="action-btn"
                                     onClick={(e) => handleCart(product)}
                                 >
-                                    <i className="fi-rs-shopping-bag-add"></i>
+                                    <HiOutlineShoppingCart size={24}/>
                                 </a>
+                                <Link href={"/"} className="buy-btn">
+                                    এখনই কিনুন <HiArrowLongRight size={20}/>
+                                </Link>
                             </div>
                         </div>
                     </div>

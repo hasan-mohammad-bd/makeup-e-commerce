@@ -19,7 +19,8 @@ const Footer = () => {
                                             src="/assets/images/logo.png"
                                             alt="Sotota Stall"
                                             width={200}
-                                            height={38}
+                                            height={0}
+                                            className="w-auto h-auto"
                                         />
                                     </Link>
                                     <ul className="info-list">
@@ -72,11 +73,11 @@ const Footer = () => {
                                     <div className="footer-links mb-6">
                                         <p>সোশ্যাল লিংক</p>
                                         <div className="social-links flex items-center gap-5">
-                                            <Link href=""><Image src="/assets/images/icons/fb.svg" alt="Facebook" width={24} height={24} /></Link>
-                                            <Link href=""><Image src="/assets/images/icons/YouTube.svg" alt="Youtube" width={24} height={24} /></Link>
-                                            <Link href=""><Image src="/assets/images/icons/TikTok.svg" alt="TikTok" width={24} height={24} /></Link>
-                                            <Link href=""><Image src="/assets/images/icons/twitter.svg" alt="Twitter" width={24} height={24} /></Link>
-                                            <Link href=""><Image src="/assets/images/icons/linkedin.svg" alt="Linkedin" width={24} height={24} /></Link>
+                                            <Link href=""><Image src="/assets/images/icons/fb.svg" alt="Facebook" width="0" height="0" className="w-auto h-auto" /></Link>
+                                            <Link href=""><Image src="/assets/images/icons/YouTube.svg" alt="Youtube" width="0" height="0" className="w-auto h-auto" /></Link>
+                                            <Link href=""><Image src="/assets/images/icons/TikTok.svg" alt="TikTok" width="0" height="0" className="w-auto h-auto" /></Link>
+                                            <Link href=""><Image src="/assets/images/icons/twitter.svg" alt="Twitter" width="0" height="0" className="w-auto h-auto" /></Link>
+                                            <Link href=""><Image src="/assets/images/icons/linkedin.svg" alt="Linkedin" width="0" height="0" className="w-auto h-auto" /></Link>
                                         </div>
                                     </div>
                                     <div className="footer-links">

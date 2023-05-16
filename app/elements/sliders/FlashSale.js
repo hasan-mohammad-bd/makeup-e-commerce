@@ -15,7 +15,7 @@ const FlashSale = ({saleProducts}) => {
         <>
             <Swiper
                 modules={[Navigation]}
-                slidesPerView={4}
+                slidesPerView={5}
                 spaceBetween={15}
                 loop={false}
                 navigation={{
