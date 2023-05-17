@@ -11,8 +11,8 @@ const Footer = () => {
             <footer className="footer bg-slate-900 pt-14">
                 <div className="footer-top pb-5">
                     <div className="container">
-                        <div className="grid grid-cols-12 items-center">
-                            <div className="col-span-3">
+                        <div className="grid grid-cols-4 justify-between items-center gap-6">
+                            <div className="col-span-1">
                                 <div className="footer-widget">
                                     <Link href="/" className="logo inline-block mb-3">
                                         <Image
@@ -20,7 +20,7 @@ const Footer = () => {
                                             alt="Sotota Stall"
                                             width={200}
                                             height={0}
-                                            className="w-auto h-auto"
+                                            className="h-auto"
                                         />
                                     </Link>
                                     <ul className="info-list">
@@ -30,7 +30,7 @@ const Footer = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <div className="col-span-3">
+                            <div className="col-span-1">
                                 <div className="footer-widget">
                                     <h5>কোম্পানি</h5>
                                     <ul className="footer-list">
@@ -49,7 +49,7 @@ const Footer = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <div className="col-span-3">
+                            <div className="col-span-1">
                                 <div className="footer-widget">
                                     <h5>হেল্প</h5>
                                     <ul className="footer-list">
@@ -68,7 +68,7 @@ const Footer = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <div className="col-span-3">
+                            <div className="col-span-1">
                                 <div className="footer-widget">
                                     <div className="footer-links mb-6">
                                         <p>সোশ্যাল লিংক</p>
