@@ -13,6 +13,7 @@ import Image from "next/image";
 // ** Import Iocns
 import { HiArrowLongRight } from "react-icons/hi2"
 import VideoBanner from "./elements/VideoBanner";
+import Banner1 from "./components/Banner1";
 
 export default function Home() {
   return (
@@ -78,6 +79,12 @@ export default function Home() {
             <BestSell/>
           </div>
 
+        </div>
+      </section>
+
+      <section className="banners">
+        <div className="container">
+          <Banner1/>
         </div>
       </section>
 
