@@ -19,8 +19,8 @@ const FlashSale = ({saleProducts}) => {
                 spaceBetween={20}
                 loop={false}
                 navigation={{
-                    prevEl: ".custom_prev_n",
-                    nextEl: ".custom_next_n",
+                    prevEl: ".custom_prev_f",
+                    nextEl: ".custom_next_f",
                 }}
             >
                 {saleProducts?.map((product, i) => (
@@ -31,10 +31,10 @@ const FlashSale = ({saleProducts}) => {
             </Swiper>
 
             <div className="slider-arrow">
-                <span className="slider-btn slider-prev slick-arrow custom_prev_n">
+                <span className="slider-btn slider-prev slick-arrow custom_prev_f">
                     <TfiAngleLeft/>
                 </span>
-                <span className="slider-btn slider-next slick-arrow custom_next_n">
+                <span className="slider-btn slider-next slick-arrow custom_next_f">
                     <TfiAngleRight/>
                 </span>
             </div>

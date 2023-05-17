@@ -1,40 +1,44 @@
 'use client'
 
+import Link from "next/link";
+import Image from "next/image";
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SingleProduct from "../../components/SingleProduct";
+
 
 SwiperCore.use([Navigation]);
 
 // ** Import Icons
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
 
-const BestSell = ({bestProducts}) => {
+const Brands = ({brands}) => {
 
     return (
         <>
             <Swiper
                 modules={[Navigation]}
-                slidesPerView={5}
+                slidesPerView={8}
                 spaceBetween={20}
                 loop={false}
                 navigation={{
-                    prevEl: ".custom_prev_b",
-                    nextEl: ".custom_next_b",
+                    prevEl: ".custom_prev_br",
+                    nextEl: ".custom_next_br",
                 }}
             >
-                {bestProducts?.map((product, i) => (
+                {brands?.map((brand, i) => (
                     <SwiperSlide key={i}>
-                        <SingleProduct product={product} />
+                        <Link href={`/`} className="barnd-img border border-slate-300 rounded-xl p-2">
+                            <Image src={`/assets/images/brands/${brand.image}`} alt={brand.name} width={118} height={118}/>
+                        </Link>
                     </SwiperSlide>
                 ))}
             </Swiper>
 
             <div className="slider-arrow">
-                <span className="slider-btn slider-prev slick-arrow custom_prev_b">
+                <span className="slider-btn slider-prev slick-arrow custom_prev_br">
                     <TfiAngleLeft/>
                 </span>
-                <span className="slider-btn slider-next slick-arrow custom_next_b">
+                <span className="slider-btn slider-next slick-arrow custom_next_br">
                     <TfiAngleRight/>
                 </span>
             </div>
@@ -42,4 +46,4 @@ const BestSell = ({bestProducts}) => {
     );
 };
 
-export default BestSell;
+export default Brands;
