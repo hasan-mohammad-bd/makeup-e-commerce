@@ -12,6 +12,7 @@ import Image from "next/image";
 
 // ** Import Iocns
 import { HiArrowLongRight } from "react-icons/hi2"
+import VideoBanner from "./elements/VideoBanner";
 
 export default function Home() {
   return (
@@ -68,7 +69,7 @@ export default function Home() {
       <section className="best-sell bg-slate-50 py-14">
         <div className="container">
 
-          <div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 py-3">
+          <div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
             <h2 className="sec-title"><Image src={`/assets/images/icons/fire-1.png`} alt="Fire" width={32} height={32} className="inline-block mr-1"/>বেস্ট সেলিং প্রডাক্ট</h2>
             <Link href="/products" className="all-btn">সবগুলো  দেখুন <HiArrowLongRight size={24}/> </Link>
           </div>
@@ -83,7 +84,7 @@ export default function Home() {
       <section className="all-products py-14">
         <div className="container">
 
-          <div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 py-3">
+          <div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
             <h2 className="sec-title">সকল প্রডাক্ট</h2>
             <Link href="/products" className="all-btn">সবগুলো  দেখুন <HiArrowLongRight size={24}/> </Link>
           </div>
@@ -98,7 +99,7 @@ export default function Home() {
       <section className="new-products py-14">
         <div className="container">
 
-          <div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 py-3">
+          <div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
             <h2 className="sec-title">শপে নতুন এসেছে</h2>
             <Link href="/products" className="all-btn">সবগুলো  দেখুন <HiArrowLongRight size={24}/> </Link>
           </div>
@@ -110,10 +111,12 @@ export default function Home() {
         </div>
       </section>
 
+      <VideoBanner/>
+
       <section className="all-brands py-14">
         <div className="container">
 
-          <div className="sec-heading border-b border-slate-200 py-3">
+          <div className="sec-heading border-b border-slate-200 pb-3">
             <h2 className="sec-title">আমাদের ব্র্যান্ড সমূহ</h2>
           </div>
 

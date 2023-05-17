@@ -1,13 +1,15 @@
 import './globals.css'
 
 // ** Import Components
-import Header from './components/Header'
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Cart from "./elements/Cart"
 
 //** Swiper Slider
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import Footer from './components/Footer';
+
 
 export const metadata = {
   title: 'Sotota Stall',
@@ -21,6 +23,7 @@ export default function RootLayout({ children }) {
         <Header/>
         {children}
         <Footer/>
+        <Cart/>
       </body>
     </html>
   )
