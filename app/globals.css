@@ -85,7 +85,11 @@
 }
 
 .breadcrumb a:not(:last-of-type)::after{
-  @apply absolute content-[url('/assets/images/icons/chv-right.svg')] top-0.5 right-[-24px] w-5 h-5 text-white
+  @apply absolute content-[url('/assets/images/icons/chv-right-wht.svg')] top-0.5 right-[-24px] w-5 h-5 text-white
+}
+
+.breadcrumb-2 a:not(:last-of-type)::after{
+  @apply content-[url('/assets/images/icons/chv-right.svg')]
 }
 
 
@@ -143,8 +147,12 @@
 /* Footer */
 
 .footer-widget p,
-.footer-widget li a{
-  @apply inline-block text-base font-normal font-body text-white mb-3 ease-in duration-100 hover:text-primary
+.footer-widget a{
+  @apply inline-block text-base font-normal font-body text-white mb-3 ease-in duration-100
+}
+
+.footer-widget a{
+  @apply hover:text-primary
 }
 
 .footer-widget h5{

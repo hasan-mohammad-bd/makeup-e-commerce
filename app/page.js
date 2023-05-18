@@ -42,7 +42,7 @@ export default function Home() {
               </div>
               <Timer targetDate="2023-5-20"/>
             </div>
-            <Link href="/products" className="all-btn bg-white">সবগুলো  দেখুন <HiArrowLongRight size={24}/> </Link>
+            <Link href="/products/flash-sale" className="all-btn bg-white">সবগুলো  দেখুন <HiArrowLongRight size={24}/> </Link>
           </div>
 
           <div className="flashSale-slider border border-primary rounded-2xl p-6 pt-16">
@@ -57,7 +57,7 @@ export default function Home() {
 
           <div className="sec-heading w-full flex justify-between items-center">
             <h2 className="sec-title !text-white">জনপ্রিয় ক্যাটাগর‍ি</h2>
-            <Link href="/products" className="all-btn !text-white">সবগুলো  দেখুন <HiArrowLongRight size={24}/> </Link>
+            <Link href="/categories" className="all-btn !text-white">সবগুলো  দেখুন <HiArrowLongRight size={24}/> </Link>
           </div>
 
           <div className="category-slider mt-12  relative">

@@ -33,7 +33,10 @@ module.exports = {
         red: {
           500: "#EF4444"
         }
-      }
+      },
+      maxWidth: {
+        '1/2': '50%',
+      },
     },
   },
   plugins: [],
