@@ -26,7 +26,7 @@ const Brands = ({category}) => {
                 {category?.map((category, i) => (
                     <SwiperSlide key={i}>
                         <Link href={`/`} className="category-img flex justify-center items-center w-[164px] h-[164px] bg-white rounded-full">
-                            <Image src={`/assets/images/category/${category.image}`} alt={category.name} width={116} height={78}/>
+                            <Image src={`/assets/images/category/${category.image}`} alt={category.title} width={116} height={78} style={{ width: 'auto', height: 'auto' }}/>
                         </Link>
                     </SwiperSlide>
                 ))}

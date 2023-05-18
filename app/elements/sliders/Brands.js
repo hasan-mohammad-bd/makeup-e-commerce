@@ -28,7 +28,7 @@ const Brands = ({brands}) => {
                 {brands?.map((brand, i) => (
                     <SwiperSlide key={i}>
                         <Link href={`/`} className="barnd-img inline-block border border-slate-300 rounded-xl p-2">
-                            <Image src={`/assets/images/brands/${brand.image}`} alt={brand.name} width={118} height={118}/>
+                            <Image src={`/assets/images/brands/${brand.image}`} alt={brand.title} width={118} height={118} style={{ width: 'auto', height: 'auto' }}/>
                         </Link>
                     </SwiperSlide>
                 ))}

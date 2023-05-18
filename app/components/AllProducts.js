@@ -1,7 +1,6 @@
-import BestSellSlider from "../elements/sliders/FlashSale";
 import SingleProduct from "./SingleProduct";
 
-const  BestSell = async () => {
+const  AllProducts = async () => {
 
   async function fetchProducts() {
     const res  = await fetch(`${process.env.server}/products`, { cache: 'force-cache' });
@@ -22,7 +21,7 @@ const  BestSell = async () => {
 
   return (
     <>
-        <div className="products-wpr grid grid-cols-5 gap-x-5 gap-y-12">
+        <div className="products-wpr grid grid-cols-5 gap-x-5 gap-y-12 mb-12">
             {allProducts?.map((product, i) => (
                 <div className="col-span-1" key={i}>
                     <SingleProduct product={product} />
@@ -34,4 +33,4 @@ const  BestSell = async () => {
   );
 };
 
-export default BestSell;
+export default AllProducts;

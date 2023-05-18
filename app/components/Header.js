@@ -37,13 +37,13 @@ const Header = ({
                             <Link href="/" className="logo">
                                 <Image
                                     src="/assets/images/logo.png"
-                                    alt="logo" width={200} height={48}
+                                    alt="Sototal Stall" width={200} height={48}
                                 />
                             </Link>
                             <div className="nav-menu">
-                                <Link href="/">স্মার্ট ফোন</Link>
-                                <Link href="/">স্মার্ট ওয়াচ</Link>
-                                <Link href="/">ল্যাপটপ</Link>
+                                <Link href="/products/phone">স্মার্ট ফোন</Link>
+                                <Link href="/products/watch">স্মার্ট ওয়াচ</Link>
+                                <Link href="/products/laptop">ল্যাপটপ</Link>
                                 <Link href="/">আরও</Link>
                             </div>
                         </div>

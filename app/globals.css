@@ -22,6 +22,10 @@
     @apply text-base font-title font-normal text-slate-300
   }
 
+  select{
+    @apply appearance-none bg-[url('/assets/images/icons/chv-down.svg')] bg-no-repeat bg-[length:24px_40px] bg-[right_1rem_center]
+  }
+
   svg{
     @apply inline-block mb-[3px]
   }
@@ -74,6 +78,14 @@
 .cart .content{
   background-image: linear-gradient(90deg, #EF4444 -2.83%, #F99104 100%);
   @apply px-3 py-2
+}
+
+.breadcrumb a:not(:last-of-type){
+  @apply relative inline-block mr-6
+}
+
+.breadcrumb a:not(:last-of-type)::after{
+  @apply absolute content-[url('/assets/images/icons/chv-right.svg')] top-0.5 right-[-24px] w-5 h-5 text-white
 }
 
 

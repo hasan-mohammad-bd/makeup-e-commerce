@@ -24,8 +24,8 @@ const Banner1 = () => {
                 <div className="col-span-1">
                     <div className="grid grid-cols-3 gap-6">
                         <div className="col-span-2">
-                            <div className="grid grid-cols-12 items-center bg-amber-50 rounded-2xl p-6 pb-10">
-                                <div className="content col-span-10">
+                            <div className="grid grid-cols-12 items-center bg-amber-50 rounded-2xl p-6 pb-9">
+                                <div className="content col-span-9">
                                     <p className="text-sm mb-1">বাজারের সেরা দামে</p>
                                     <p className="text-lg font-bold font-title">আইফোন ১১ পাচ্ছন মাত্র</p>
                                     <div className="flex items-center gap-1 mt-3">
@@ -33,12 +33,12 @@ const Banner1 = () => {
                                         <span className="text-sm text-slate-500">টাকায়</span>
                                     </div>
                                 </div>
-                                <div className="banner-img col-span-2">
-                                    <Image src={`/assets/images/shop/phone.png`} alt="Banner" width={0} height={142} sizes="100vw" className="w-full rounded-2xl"/>
+                                <div className="banner-img col-span-3">
+                                    <Image src={`/assets/images/shop/phone.png`} alt="Banner" width={80} height={142} className="rounded-2xl"/>
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 items-center bg-slate-100 rounded-2xl p-6 mt-6">
-                                <div className="content col-span-1 flex flex-col justify-between gap-12">
+                                <div className="content col-span-1 flex flex-col justify-between gap-11">
                                     <div className="">
                                         <p className="text-sm mb-1">শাওমি ৩৪ ইঞ্চি মনিটর কিনুন</p>
                                         <p className="text-lg font-bold font-title">সহজ কিস্তিতে</p>
