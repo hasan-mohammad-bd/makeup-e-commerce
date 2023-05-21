@@ -49,8 +49,8 @@ const page = ({params}) => {
                             <li className="text-lg text-slate-600">নির্দিষ্ট দিনে দুপুর ১২ টার পর এক্সপ্রেস ডেলিভারি কনফার্ম করলে তা পরবর্তী দিন ডেলিভারি দেয়া হবে</li>
                         </ul>
                     </div>
-                    <div className="contact border-t border-slate-200 py-4 text-center">
-                        <p className="flex justify-center items-center gap-5 bg-primary-200 border border-primary rounded-xl p-4"><span className="text-xl font-bold font-title text-slate-900">যে কোন জিজ্ঞাসা বা অর্ডার করতে আমাদের কল করুন:</span> <Link href="tel:01720060958" className="text-xl font-bold font-title text-primary"><BsFillTelephoneFill/> 01720060958</Link> <span className="text-sm text-slate-500">অথবা</span> <Link href="tel:01720060977" className="text-xl font-bold font-title text-primary"><BsFillTelephoneFill/> 01720060977</Link></p>
+                    <div className="contact border-t border-slate-200 py-5 text-center">
+                        <p className="flex justify-center items-center gap-5 bg-amber-200 border border-primary rounded-xl p-4"><span className="text-xl font-bold font-title text-slate-900">যে কোন জিজ্ঞাসা বা অর্ডার করতে আমাদের কল করুন:</span> <Link href="tel:01720060958" className="text-xl font-bold font-title text-primary"><BsFillTelephoneFill/> 01720060958</Link> <span className="text-sm text-slate-500">অথবা</span> <Link href="tel:01720060977" className="text-xl font-bold font-title text-primary"><BsFillTelephoneFill/> 01720060977</Link></p>
                     </div>
                 </div>
             </div>

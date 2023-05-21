@@ -23,6 +23,9 @@ module.exports = {
       },
       colors: {
         primary: "#F99104",
+        amber: {
+          200: "#FFF6EB"
+        },
         slate: {
           300: "#CBD5E1",
           400: "#94A3B8",
