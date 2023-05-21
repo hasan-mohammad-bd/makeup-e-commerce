@@ -1,8 +1,7 @@
 import Link from "next/link";
 
 // ** Imoprt icons
-import { HiOutlineFilter } from "react-icons/hi";
-import AllProducts from "@/app/components/AllProducts";
+import { BsFillTelephoneFill } from "react-icons/bs";
 
 const page = ({params}) => {
 
@@ -18,7 +17,7 @@ const page = ({params}) => {
             </div>
 
             <div className="container">
-                <div className="booking-policy mb-12">
+                <div className="booking-policy mb-4">
                     <div className="heading border-b border-slate-200 py-4 mb-4">
                         <h3 className="text-4xl/[48px] font-bold font-title text-slate-900">সততা স্টলের বুকিং পলিসি</h3>
                     </div>
@@ -49,6 +48,9 @@ const page = ({params}) => {
                             <li className="text-lg text-slate-600 mb-4">এক্সপ্রেস ডেলিভারি উক্ত দিন দুপুর ১২টার আগে কনফার্ম করলে সেই দিনেই ডেলিভারি করে দেয়া হবে</li>
                             <li className="text-lg text-slate-600">নির্দিষ্ট দিনে দুপুর ১২ টার পর এক্সপ্রেস ডেলিভারি কনফার্ম করলে তা পরবর্তী দিন ডেলিভারি দেয়া হবে</li>
                         </ul>
+                    </div>
+                    <div className="contact flex justify-center items-center border-t border-slate-200 gap-5 py-4">
+                        <span className="text-xl font-bold font-title text-slate-900">যে কোন জিজ্ঞাসা বা অর্ডার করতে আমাদের কল করুন:</span> <Link href="tel:01720060958" className="text-xl font-bold font-title text-primary"><BsFillTelephoneFill/> 01720060958</Link> <span className="text-sm text-slate-500">অথবা</span> <Link href="tel:01720060977" className="text-xl font-bold font-title text-primary"><BsFillTelephoneFill/> 01720060977</Link>
                     </div>
                 </div>
             </div>
