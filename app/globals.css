@@ -92,6 +92,10 @@
   @apply content-[url('/assets/images/icons/chv-right.svg')]
 }
 
+.list-stl li{
+  @apply list-disc ms-6
+}
+
 
 /* Header */
 
