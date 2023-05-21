@@ -170,3 +170,7 @@
 .footer-widget .info-list svg{
   @apply text-white mb-3
 }
+
+.ReactCollapse--collapse {
+  transition: height 500ms;
+}
