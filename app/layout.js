@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Cart from "./elements/Cart";
 import CheckConnection from './components/CheckConnection';
 
+
 //** Swiper Slider
 import "swiper/css";
 import "swiper/css/pagination";

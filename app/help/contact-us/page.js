@@ -129,7 +129,7 @@ const Contact = () => {
                                 <li className="flex items-center gap-2 bg-slate-700 rounded-lg p-6 mb-4"><BsFillTelephoneFill size={14} color="#ffffff"/><Link href="tel:০১৭৬৮৫৭২৬৫৮" className="text-white">০১৭৬৮৫৭২৬৫৮</Link></li>
                                 <li className="flex items-center gap-2 bg-slate-700 rounded-lg p-6 mb-4"><FaEnvelope ize={14} color="#ffffff"/><Link href="mailto:sototastall@gmail.com" className="text-white">sototastall@gmail.com</Link></li>
                             </ul>
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.419994637345!2d90.35608507599457!3d23.76805398809721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c1e5280a3149%3A0x625fd2bcd25924aa!2sMedia365%20Limited!5e0!3m2!1sbn!2sbd!4v1684737614659!5m2!1sbn!2sbd" className="block border-0 rounded-lg mt-4" width="100%" height={280} allowfullscreen=""></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.419994637345!2d90.35608507599457!3d23.76805398809721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c1e5280a3149%3A0x625fd2bcd25924aa!2sMedia365%20Limited!5e0!3m2!1sbn!2sbd!4v1684737614659!5m2!1sbn!2sbd" className="block border-0 rounded-lg mt-4" width="100%" height={280} allowFullScreen=""></iframe>
                         </div>
                     </div>
                 </div>

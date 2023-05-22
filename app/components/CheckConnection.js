@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { redirect } from "next/navigation";
-const CheckConnection = ({children}) => {
 
+// ** Import Components
+import NoInterNet from "./NoInterNet";
+const CheckConnection = ({children}) => {
+    
     const [status, setStatus] = useState(true);
 
     useEffect(() => {
@@ -22,7 +25,7 @@ const CheckConnection = ({children}) => {
 
     return (
         <>
-            {status ? children : redirect('/no-internet')}
+            {status ? children : <NoInterNet/>}
 
         </>
     )
