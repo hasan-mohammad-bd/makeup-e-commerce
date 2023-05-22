@@ -21,6 +21,10 @@
   input::placeholder{
     @apply text-base font-title font-normal text-slate-300
   }
+  
+  input:-webkit-autofill{
+    -webkit-box-shadow: 0 0 0px 100px white inset;
+  }
 
   select{
     @apply appearance-none bg-[url('/assets/images/icons/chv-down.svg')] bg-no-repeat bg-[length:24px_40px] bg-[right_1rem_center]
@@ -151,11 +155,15 @@
 
 .contact-wpr input,
 .contact-wpr textarea{
-  @apply w-full border-white rounded-lg
+  @apply w-full border border-white rounded-lg py-3 px-4 focus:bg-white focus:border-primary focus:outline-none
 }
 
 .submit-btn{
   @apply w-[240px] text-lg font-semibold font-title text-white bg-[#F99104] rounded-lg py-3
+}
+
+.errorMsg{
+  @apply text-base text-red-500 mt-2
 }
 
 /* Footer */

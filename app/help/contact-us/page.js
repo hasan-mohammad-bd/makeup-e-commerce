@@ -9,10 +9,16 @@ import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 
 const Contact = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     
     const onSubmit = (data) => {
         console.log(data);
+        reset({
+            name: '',
+            email: '',
+            subject: '',
+            msg: ''
+        })
     };
 
     
@@ -34,30 +40,27 @@ const Contact = () => {
                     </div>
                     <div className="contact-wpr flex items-center gap-12 bg-slate-200 rounded-2xl p-8">
                         <form className="basis-3/5" onSubmit={handleSubmit(onSubmit)}>
-                            <div className="form-control">
+                            <div className="form-control mb-4">
                                 <label className="block text-base text-slate-900 mb-2">আপনার নাম</label>
                                 <input
-                                    type="password"
-                                    name="password"
-                                    {...register("password", {
-                                    required: "Password is required.",
-                                    minLength: {
-                                        value: 6,
-                                        message: "Password should be at-least 6 characters."
-                                    }
+                                    type="text"
+                                    name="name"
+                                    placeholder="নাম লিখুন"
+                                    {...register("name", {
+                                    required: "Name is required.",
                                     })}
                                 />
-                                {errors.password && (
-                                    <p className="errorMsg">{errors.password.message}</p>
+                                {errors.name && (
+                                    <p className="errorMsg">{errors.name.message}</p>
                                 )}
                             </div>
-                            <div className="form-control">
+                            <div className="form-control mb-4">
                                 <label className="block text-base text-slate-900 mb-2">আপনার ইমেইল (যদি থাকে)</label>
                                 <input
-                                    type="text"
+                                    type="email"
                                     name="email"
+                                    placeholder="ইমেইল লিখুন"
                                     {...register("email", {
-                                    required: "Email is required.",
                                     pattern: {
                                         value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
                                         message: "Email is not valid."
@@ -66,38 +69,32 @@ const Contact = () => {
                                 />
                                 {errors.email && <p className="errorMsg">{errors.email.message}</p>}
                             </div>
-                            <div className="form-control">
+                            <div className="form-control mb-4">
                                 <label className="block text-base text-slate-900 mb-2">সাবজেক্ট</label>
                                 <input
                                     type="text"
-                                    name="email"
-                                    {...register("email", {
-                                    required: "Email is required.",
-                                    pattern: {
-                                        value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                                        message: "Email is not valid."
-                                    }
+                                    name="subject"
+                                    placeholder="সাবজেক্ট লিখুন"
+                                    {...register("subject", {
+                                    required: "Subject is required.",
                                     })}
                                 />
-                                {errors.email && <p className="errorMsg">{errors.email.message}</p>}
+                                {errors.subject && <p className="errorMsg">{errors.subject.message}</p>}
                             </div>
-                            <div className="form-control">
+                            <div className="form-control mb-4">
                                 <label className="block text-base text-slate-900 mb-2">মেসেজ</label>
                                 <textarea
                                     className="h-[148px]"
                                     type="text"
-                                    name="email"
-                                    {...register("email", {
-                                    required: "Email is required.",
-                                    pattern: {
-                                        value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                                        message: "Email is not valid."
-                                    }
+                                    name="msg"
+                                    placeholder="আপনার মেসেজ লিখুন"
+                                    {...register("msg", {
+                                    required: "Message is required.",
                                     })}
                                 />
-                                {errors.email && <p className="errorMsg">{errors.email.message}</p>}
+                                {errors.msg && <p className="errorMsg">{errors.msg.message}</p>}
                             </div>
-                            <div className="form-control">
+                            <div className="form-control mt-11">
                                 <label></label>
                                 <button type="submit" className="submit-btn">মেসেজ পাঠান</button>
                             </div>
