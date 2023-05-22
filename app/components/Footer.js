@@ -38,13 +38,13 @@ const Footer = () => {
                                             <Link href="#">আমাদের সম্পর্কে</Link>
                                         </li>
                                         <li>
-                                            <Link href="#">প্রাইভেসি পলিসি</Link>
+                                            <Link href="/company/privacy-policy">প্রাইভেসি পলিসি</Link>
                                         </li>
                                         <li>
-                                            <Link href="#">বুকিং পলিসি</Link>
+                                            <Link href="/company/booking-policy">বুকিং পলিসি</Link>
                                         </li>
                                         <li>
-                                            <Link href="#">ট্রামস এন্ড কন্ডিশন</Link>
+                                            <Link href="/company/terms-and-conditions">ট্রামস এন্ড কন্ডিশন</Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -60,10 +60,10 @@ const Footer = () => {
                                             <Link href="#">শিপিং</Link>
                                         </li>
                                         <li>
-                                            <Link href="#">যোগাযোগ করুন</Link>
+                                            <Link href="/help/contact-us">যোগাযোগ করুন</Link>
                                         </li>
                                         <li>
-                                            <Link href="#">প্রশ্ন এবং জিজ্ঞাসা</Link>
+                                            <Link href="/help/qna">প্রশ্ন এবং জিজ্ঞাসা</Link>
                                         </li>
                                     </ul>
                                 </div>
