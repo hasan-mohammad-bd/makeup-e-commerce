@@ -3,7 +3,8 @@ import './globals.css'
 // ** Import Components
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Cart from "./elements/Cart"
+import Cart from "./elements/Cart";
+import CheckConnection from './components/CheckConnection';
 
 //** Swiper Slider
 import "swiper/css";
@@ -21,7 +22,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Header/>
-        {children}
+        <CheckConnection>
+          {children}
+        </CheckConnection>
         <Footer/>
         <Cart/>
       </body>

@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-// ** Imoprt icons
-import { HiOutlineFilter } from "react-icons/hi";
-import AllProducts from "@/app/components/AllProducts";
+export const metadata = {
+    title: 'Sotota Stall || Privacy Policy',
+};
 
-const page = ({params}) => {
+const PrivacyPolicy = () => {
 
     return (
         <>
@@ -63,4 +63,4 @@ const page = ({params}) => {
     )
 }
 
-export default page;
+export default PrivacyPolicy;

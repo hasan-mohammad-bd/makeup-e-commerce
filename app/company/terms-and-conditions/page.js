@@ -3,7 +3,11 @@ import Link from "next/link";
 // ** Imoprt icons
 import { BsFillTelephoneFill } from "react-icons/bs";
 
-const page = ({params}) => {
+export const metadata = {
+    title: 'Sotota Stall || Terms And Conditions',
+};
+
+const TermsConditions = ({params}) => {
 
     return (
         <>
@@ -60,4 +64,4 @@ const page = ({params}) => {
     )
 }
 
-export default page;
+export default TermsConditions;

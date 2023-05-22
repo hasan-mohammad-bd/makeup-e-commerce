@@ -7,6 +7,10 @@ import { useForm } from "react-hook-form";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 
+export const metadata = {
+    title: 'Sotota Stall || Contact Us',
+};
+
 const Contact = () => {
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
