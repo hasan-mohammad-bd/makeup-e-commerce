@@ -27,10 +27,10 @@ const SingleProduct = ({
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-    }, []);
+        if(Object.keys(product).length !== 0){
+            setLoading(false)
+        }
+    }, [product]);
 
     const handleCart = (product) => {
         addToCart(product);

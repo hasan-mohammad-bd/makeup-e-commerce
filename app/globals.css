@@ -96,7 +96,6 @@
   @apply list-disc ms-6
 }
 
-
 /* Header */
 
 .nav-menu a{
@@ -146,6 +145,17 @@
 
 .new-slider .swiper-slide .product-card-wrap:first-of-type{
   @apply mb-5
+}
+
+/* Contact Form */
+
+.contact-wpr input,
+.contact-wpr textarea{
+  @apply w-full border-white rounded-lg
+}
+
+.submit-btn{
+  @apply w-[240px] text-lg font-semibold font-title text-white bg-[#F99104] rounded-lg py-3
 }
 
 /* Footer */
