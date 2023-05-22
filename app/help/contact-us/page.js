@@ -11,14 +11,34 @@ const Contact = () => {
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     
-    const onSubmit = (data) => {
-        console.log(data);
-        reset({
-            name: '',
-            email: '',
-            subject: '',
-            msg: ''
-        })
+    const onSubmit = async (data, event) => {
+        
+        event.preventDefault();
+
+        const response = await fetch("/api/contact", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+		});
+
+        if (response.ok) {
+			console.log("Message sent successfully", data);
+			// reset the form
+			reset({
+                name: '',
+                email: '',
+                subject: '',
+                msg: ''
+            })
+		}
+
+        if (!response.ok) {
+			console.log("Error sending message");
+		}
+
+        
     };
 
     
