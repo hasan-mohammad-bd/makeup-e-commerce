@@ -82,7 +82,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="banners">
+      <section className="banners pt-14">
         <div className="container">
           <Banner1/>
         </div>
