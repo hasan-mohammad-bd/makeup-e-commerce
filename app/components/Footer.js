@@ -8,7 +8,7 @@ import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 const Footer = () => {
     return (
         <>
-            <footer className="footer bg-slate-900 pt-14">
+            <footer className="footer relative bg-slate-900 pt-14 overflow-hidden z-10">
                 <div className="footer-top pb-5">
                     <div className="container">
                         <div className="grid grid-cols-4 justify-between items-center gap-6">

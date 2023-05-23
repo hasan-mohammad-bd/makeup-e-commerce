@@ -168,6 +168,10 @@
 
 /* Footer */
 
+.footer::after{
+  @apply absolute content-[url("/assets/images/ellipse.png")] top-[-75%] right-0 h-12 z-[-1]
+}
+
 .footer-widget p,
 .footer-widget a{
   @apply inline-block text-base font-normal font-body text-white mb-3 ease-in duration-100
