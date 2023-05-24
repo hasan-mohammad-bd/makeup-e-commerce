@@ -1,4 +1,5 @@
-import './globals.css'
+import 'rc-slider/assets/index.css';
+import './globals.css';
 
 // ** Import Components
 import Header from './components/Header';

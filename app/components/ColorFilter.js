@@ -2,14 +2,17 @@
 
 import { useEffect, useState } from "react";
 
-const CategoryFilter = ({ updateProductFilters }) => {
+const ColorFilter = ({ updateProductFilters }) => {
     
-    const categories = [
-        {value: "একশন ক্যামেরা (২৩২)"},
-        {value: "হেডফোন (১৩১)"},
-        {value: "স্মার্ট ওয়াচ (৫৩২)"},
-        {value: "স্মার্ট ইলেকট্রনিক্স (৬৭৩)"},
-        {value: "পাওয়ার ব্যাংক (৭৭)"},
+    const colors = [
+        {
+            value: "লাল (২)",
+            color: "red-500",
+        },
+        {
+            value: "নিল (৬)",
+            color: "blue-500",
+        },
     ];
 
     
@@ -33,13 +36,14 @@ const CategoryFilter = ({ updateProductFilters }) => {
     return (
         <>
             <div className="pr-5">
-                <h6 className="text-sm font-bold text-slate-900 border-b border-slate-200 pb-3">ক্যাটাগরি থেকে কেনাকাটা</h6>
+                <h6 className="text-sm font-bold text-slate-900 border-b border-slate-200 pb-3">কালার</h6>
                 <div className="category-filter">
-                    {categories?.map((cat, i) => (
+                    {colors?.map((color, i) => (
                         <div className="input-grp mt-3" key={i}>
                             <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={i}>
                                 <input type="checkbox" id={i} />
-                                {cat.value}
+                                <span className={`inline-block w-3 h-3 bg-${color.color} rounded-full`}></span>
+                                {color.value}
                             </label>
                         </div>
                     ))}
@@ -49,4 +53,4 @@ const CategoryFilter = ({ updateProductFilters }) => {
     );
 };
 
-export default CategoryFilter;
+export default ColorFilter;
