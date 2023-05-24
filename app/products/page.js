@@ -1,10 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import SingleProduct from "@/app/components/SingleProduct";
+import Filter from "@/app/components/Filter";
 import SortSelect from "@/app/elements/SortSelect";
 
 // ** Imoprt icons
-import { HiOutlineFilter } from "react-icons/hi";
 import AllProducts from "@/app/components/AllProducts";
 
 const page = ({params}) => {
@@ -71,9 +70,8 @@ const page = ({params}) => {
 
             <div className="container">
                 <div className="toolbar grid grid-cols-5 gap-5 my-5">
-                    <div className="col-span-1 flex items-center gap-3 bg-slate-50 rounded-xl px-4 py-3">
-                        <HiOutlineFilter size={20}/>
-                        <span className="text-base text-slate-900">স্মার্ট ইলেকট্রনিক্স</span>
+                    <div className="col-span-1">
+                        <Filter/>
                     </div>
                     <div className="col-span-4 flex justify-between items-center bg-slate-50 rounded-xl px-4 py-3">
                         <p>এখানে ৬৭ টি প্রডাক্ট আছে</p>

@@ -25,10 +25,10 @@ const Brands = ({category}) => {
             >
                 {category?.map((category, i) => (
                     <SwiperSlide key={i}>
-                        <Link href={`/`} className="category-img flex justify-center items-center w-[164px] h-[164px] bg-white rounded-full">
+                        <Link href={`/products/${category.title}`} className="category-img flex justify-center items-center w-[164px] h-[164px] bg-white rounded-full">
                             <Image src={`/assets/images/category/${category.image}`} alt={category.title} width={116} height={78} style={{ width: 'auto', height: 'auto' }}/>
                         </Link>
-                        <Link href={`/products/category.title`} className="block text-lg text-white text-center mt-4">{category.title}</Link>
+                        <Link href={`/products/${category.title}`} className="block text-lg text-white text-center mt-4">{category.title}</Link>
                     </SwiperSlide>
                 ))}
             </Swiper>
