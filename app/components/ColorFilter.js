@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-const ColorFilter = ({ setFilters, updateProductFilters }) => {
+const ColorFilter = ({ setFilters, updateProductFilters, checkedElms }) => {
     
     const colors = [
         {
@@ -64,7 +64,7 @@ const ColorFilter = ({ setFilters, updateProductFilters }) => {
                     {colors?.map((color, i) => (
                         <div className="input-grp mt-3" key={i}>
                             <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={`clr-${i}`}>
-                                <input type="checkbox" id={`clr-${i}`} name="color" value={color.value} onChange={handleChange} />
+                                <input type="checkbox" id={`clr-${i}`} name="color" value={color.value} ref={element => checkedElms?.current.push(element)} onChange={handleChange} />
                                 <span className={`inline-block w-3 h-3 bg-${color.value}-500 rounded-full`}></span>
                                 {color.label}
                             </label>

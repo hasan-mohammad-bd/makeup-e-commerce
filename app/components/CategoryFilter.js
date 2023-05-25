@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-const CategoryFilter = ({ setFilters, updateProductFilters }) => {
+const CategoryFilter = ({ setFilters, updateProductFilters, checkedElms }) => {
     
     const categories = [
         {   
@@ -64,6 +64,10 @@ const CategoryFilter = ({ setFilters, updateProductFilters }) => {
     //     setActive(active == i ? 0 : i);
     // };
 
+    useEffect(() => {
+
+    }, [])
+
     return (
         <>
             <div className="pr-5">
@@ -72,7 +76,7 @@ const CategoryFilter = ({ setFilters, updateProductFilters }) => {
                     {categories?.map((cat, i) => (
                         <div className="input-grp mt-3" key={i}>
                             <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={`cat-${i}`}>
-                                <input type="checkbox" id={`cat-${i}`} name="category" value={cat.value} onChange={handleChange} />
+                                <input type="checkbox" id={`cat-${i}`} name="category" value={cat.value} ref={element => checkedElms.current.push(element)} onChange={handleChange} />
                                 {cat.label}
                             </label>
                         </div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const BrandFilter = ({ setFilters, updateProductFilters }) => {
+const BrandFilter = ({ setFilters, updateProductFilters, checkedElms }) => {
     
     const brands = [
         {
@@ -65,7 +65,7 @@ const BrandFilter = ({ setFilters, updateProductFilters }) => {
     //     setSizes(target);
     //     setActive(active == i ? 0 : i);
     // };
-
+    
     return (
         <>
             <div className="pr-5">
@@ -74,7 +74,7 @@ const BrandFilter = ({ setFilters, updateProductFilters }) => {
                     {brands?.map((brand, i) => (
                         <div className="input-grp mt-3" key={i}>
                             <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={`brd-${i}`}>
-                                <input type="checkbox" id={`brd-${i}`} name="brand" value={brand.value} onChange={handleChange} />
+                                <input type="checkbox" id={`brd-${i}`} name="brand" value={brand.value} ref={element => checkedElms?.current.push(element)} onChange={handleChange} />
                                 {brand.label}
                             </label>
                         </div>
