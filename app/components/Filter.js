@@ -29,7 +29,7 @@ const Filter = () => {
 
         checkedElms?.current.forEach(ele => {
             if(ele?.value === val){
-                ele.checked = !ele.checked
+                ele.checked = false
             }
         })
 
@@ -40,10 +40,13 @@ const Filter = () => {
 
         setProductFilters({});
         checkedElms?.current.forEach(ele => {
+
             if(ele?.checked){
                 ele.checked = !ele.checked
             }
+
         })
+
     }
 
     useEffect(() => {
@@ -64,9 +67,9 @@ const Filter = () => {
                         <IoCloseOutline size={24} className="text-red-500 cursor-pointer lg:hidden" onClick={() => removeFilter(key,val)}/>
                     </div>
                 </div>
-                {Object.keys(productFilters).some( key => productFilters[key].length !== 0) &&
+                {Object.keys(productFilters).filter(key => key !== 'price').some( key => productFilters[key].length !== 0) &&
                     <div className="flex items-center flex-wrap gap-2">
-                        {Object.keys(productFilters).map( key => (
+                        {Object.keys(productFilters).filter(key => key !== 'price').map( key => (
                             productFilters[key].map((val, indx) => (
                                 <div className="flex items-center gap-1 bg-slate-100 border-slate-200 rounded px-2 py-1" key={indx}>
                                     {key === 'color' && <span className={`inline-block w-3 h-3 bg-${val}-500 rounded-full`}></span>}

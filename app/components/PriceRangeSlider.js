@@ -4,20 +4,23 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Slider from 'rc-slider';
 
-const PriceRangeSlider = ({ updateProductFilters }) => {
+const PriceRangeSlider = ({ setFilters, updateProductFilters }) => {
     
     // const Router = useRouter();
     // const searchTerm = Router.query.search;
 
     const [price, setPrice] = useState({ value: { min: 3200, max: 8800 } });
 
-    // useEffect(() => {
-    //     const filters = {
-    //         price: price.value,
-    //     };
+    useEffect(() => {
 
-    //     updateProductFilters(filters);
-    // }, [price, searchTerm]);
+        setFilters(prev =>(
+            {
+                ...prev,
+                price : price.value
+            }
+        ))
+
+    }, [price, setFilters]);
 
     return (
         <div className="pr-5">
