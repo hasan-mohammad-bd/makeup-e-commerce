@@ -39,7 +39,7 @@
   }
 
   svg{
-    @apply inline-block mb-[3px]
+    @apply inline-block
   }
 
   button svg{

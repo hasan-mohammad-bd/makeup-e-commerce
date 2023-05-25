@@ -2,15 +2,51 @@
 
 import { useEffect, useState } from "react";
 
-const BrandFilter = ({ updateProductFilters }) => {
+const BrandFilter = ({ setFilters, updateProductFilters }) => {
     
     const brands = [
-        {value: "DJI (8)"},
-        {value: "Go Pro (6)"},
-        {value: "Insta365 (2)"},
-        {value: "EKEN (12)"},
-        {value: "SJCAM (6)"},
+        {
+            label: "DJI (8)",
+            value: "dji"
+        },
+        {
+            label: "Go Pro (6)",
+            value: "go-pro"
+        },
+        {
+            label: "Insta365 (2)",
+            value: "insta365"},
+        {
+            label: "EKEN (12)",
+            value: "eken"
+        },
+        {
+            label: "SJCAM (6)",
+            value: "sjcm"
+        },
     ];
+
+    const handleChange = (e) => {
+
+        if(e.target.checked){
+            setFilters(prev => (
+                {
+                    ...prev,
+                    [e.target.name]: prev[e.target.name] ? [...prev[e.target.name], e.target.value] : [e.target.value] 
+                }
+            ))
+        } else {
+            setFilters(prev => (
+
+                {
+                    ...prev,
+                    [e.target.name]: prev[e.target.name]?.filter(item => item !== e.target.value)
+                }
+                
+            ))
+        }
+        
+    }
 
     
 
@@ -38,8 +74,8 @@ const BrandFilter = ({ updateProductFilters }) => {
                     {brands?.map((brand, i) => (
                         <div className="input-grp mt-3" key={i}>
                             <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={i}>
-                                <input type="checkbox" id={i} />
-                                {brand.value}
+                                <input type="checkbox" id={i} name="brand" value={brand.value} onChange={handleChange} />
+                                {brand.label}
                             </label>
                         </div>
                     ))}

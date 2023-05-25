@@ -2,18 +2,40 @@
 
 import { useEffect, useState } from "react";
 
-const ColorFilter = ({ updateProductFilters }) => {
+const ColorFilter = ({ setFilters, updateProductFilters }) => {
     
     const colors = [
         {
-            value: "লাল (২)",
-            color: "red-500",
+            label: "লাল (২)",
+            value: "red",
         },
         {
-            value: "নিল (৬)",
-            color: "blue-500",
+            label: "নিল (৬)",
+            value: "blue",
         },
     ];
+
+    const handleChange = (e) => {
+
+        if(e.target.checked){
+            setFilters(prev => (
+                {
+                    ...prev,
+                    [e.target.name]: prev[e.target.name] ? [...prev[e.target.name], e.target.value] : [e.target.value] 
+                }
+            ))
+        } else {
+            setFilters(prev => (
+
+                {
+                    ...prev,
+                    [e.target.name]: prev[e.target.name]?.filter(item => item !== e.target.value)
+                }
+                
+            ))
+        }
+        
+    }
 
     
 
@@ -41,9 +63,9 @@ const ColorFilter = ({ updateProductFilters }) => {
                     {colors?.map((color, i) => (
                         <div className="input-grp mt-3" key={i}>
                             <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={i}>
-                                <input type="checkbox" id={i} />
-                                <span className={`inline-block w-3 h-3 bg-${color.color} rounded-full`}></span>
-                                {color.value}
+                                <input type="checkbox" id={i} name="color" value={color.value} onChange={handleChange} />
+                                <span className={`inline-block w-3 h-3 bg-${color.value}-500 rounded-full`}></span>
+                                {color.label}
                             </label>
                         </div>
                     ))}

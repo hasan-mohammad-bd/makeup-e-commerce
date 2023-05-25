@@ -2,17 +2,51 @@
 
 import { useEffect, useState } from "react";
 
-const CategoryFilter = ({ updateProductFilters }) => {
+const CategoryFilter = ({ setFilters, updateProductFilters }) => {
     
     const categories = [
-        {value: "একশন ক্যামেরা (২৩২)"},
-        {value: "হেডফোন (১৩১)"},
-        {value: "স্মার্ট ওয়াচ (৫৩২)"},
-        {value: "স্মার্ট ইলেকট্রনিক্স (৬৭৩)"},
-        {value: "পাওয়ার ব্যাংক (৭৭)"},
+        {   
+            label: "একশন ক্যামেরা (২৩২)",
+            value: "action-camera"},
+        {
+            label: "হেডফোন (১৩১)",
+            value: "headphone"
+        },
+        {
+            label: "স্মার্ট ওয়াচ (৫৩২)",
+            value: "smart-watch"
+        },
+        {
+            label: "স্মার্ট ইলেকট্রনিক্স (৬৭৩)",
+            value: "smart-elec"
+        },
+        {
+            label: "পাওয়ার ব্যাংক (৭৭)",
+            value: "power-bank"
+        },
     ];
 
-    
+    const handleChange = (e) => {
+
+        if(e.target.checked){
+            setFilters(prev => (
+                {
+                    ...prev,
+                    [e.target.name]: prev[e.target.name] ? [...prev[e.target.name], e.target.value] : [e.target.value] 
+                }
+            ))
+        } else {
+            setFilters(prev => (
+
+                {
+                    ...prev,
+                    [e.target.name]: prev[e.target.name]?.filter(item => item !== e.target.value)
+                }
+                
+            ))
+        }
+        
+    }
 
     // const [selectedSizes, setSizes] = useState([]);
     // const [active, setActive] = useState(0);
@@ -38,8 +72,8 @@ const CategoryFilter = ({ updateProductFilters }) => {
                     {categories?.map((cat, i) => (
                         <div className="input-grp mt-3" key={i}>
                             <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={i}>
-                                <input type="checkbox" id={i} />
-                                {cat.value}
+                                <input type="checkbox" id={i} name="category" value={cat.value} onChange={handleChange} />
+                                {cat.label}
                             </label>
                         </div>
                     ))}

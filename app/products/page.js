@@ -70,7 +70,7 @@ const page = ({params}) => {
 
             <div className="container">
                 <div className="toolbar grid grid-cols-5 gap-5 my-5">
-                    <div className="col-span-1">
+                    <div className="relative col-span-1">
                         <Filter/>
                     </div>
                     <div className="col-span-4 flex justify-between items-center bg-slate-50 rounded-xl px-4 py-3">
