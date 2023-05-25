@@ -71,8 +71,8 @@ const CategoryFilter = ({ setFilters, updateProductFilters }) => {
                 <div className="category-filter">
                     {categories?.map((cat, i) => (
                         <div className="input-grp mt-3" key={i}>
-                            <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={i}>
-                                <input type="checkbox" id={i} name="category" value={cat.value} onChange={handleChange} />
+                            <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={`cat-${i}`}>
+                                <input type="checkbox" id={`cat-${i}`} name="category" value={cat.value} onChange={handleChange} />
                                 {cat.label}
                             </label>
                         </div>

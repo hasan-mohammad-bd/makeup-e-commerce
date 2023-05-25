@@ -73,8 +73,8 @@ const BrandFilter = ({ setFilters, updateProductFilters }) => {
                 <div className="category-filter">
                     {brands?.map((brand, i) => (
                         <div className="input-grp mt-3" key={i}>
-                            <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={i}>
-                                <input type="checkbox" id={i} name="brand" value={brand.value} onChange={handleChange} />
+                            <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={`brd-${i}`}>
+                                <input type="checkbox" id={`brd-${i}`} name="brand" value={brand.value} onChange={handleChange} />
                                 {brand.label}
                             </label>
                         </div>

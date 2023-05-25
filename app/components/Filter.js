@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CategoryFilter from "./CategoryFilter";
 import BrandFilter from "./BrandFilter";
 import ColorFilter from "./ColorFilter";
@@ -16,7 +16,19 @@ const Filter = () => {
 
     const [productFilters, setProductFilters] = useState({})
 
-    console.log(productFilters)
+    const removeFilter = (key,val) => {
+        console.log(key,val)
+        setProductFilters(prev => (
+            {
+                ...prev,
+                [key] : prev[key].filter(item => item !== val)
+            }
+        ))
+    }
+
+    useEffect(() => {
+        
+    }, [productFilters])
 
     return (
         <>
@@ -27,16 +39,19 @@ const Filter = () => {
             <div className={`filter-sidebar absolute top-0 left-0 ${open ? 'flex flex-col' : 'hidden'} w-full bg-white border-r border-slate-200 gap-y-7 z-10`}>
                 <div className="flex justify-between items-center gap-4 border-b border-slate-200 py-6 pr-5">
                     <h6 className="text-base/[16px] font-semibold text-primary">ফিল্টার</h6>
-                    <button className="text-sm text-red-500">রিসেট করুন</button>
+                    <div className="flex items-center gap-1">
+                        <button className="text-sm text-red-500 hidden lg:block" onClick={() => setProductFilters({})}>রিসেট করুন</button>
+                        <IoCloseOutline size={24} className="text-red-500 cursor-pointer lg:hidden" onClick={() => removeFilter(key,val)}/>
+                    </div>
                 </div>
-                {Object.keys(productFilters).length !==0 && Object.keys(productFilters).every( key => productFilters[key].length !== 0) && 
-                    <div>
+                {Object.keys(productFilters).some( key => productFilters[key].length !== 0) &&
+                    <div className="flex items-center flex-wrap gap-2">
                         {Object.keys(productFilters).map( key => (
                             productFilters[key].map((val, indx) => (
-                                <div key={indx}>
+                                <div className="flex items-center gap-1 bg-slate-100 border-slate-200 rounded px-2 py-1" key={indx}>
                                     {key === 'color' && <span className={`inline-block w-3 h-3 bg-${val}-500 rounded-full`}></span>}
-                                    <p>{val}</p>
-                                    <IoCloseOutline/>
+                                    <p className="text-sm text-slate-900">{val}</p>
+                                    <IoCloseOutline size={24} className="text-red-500 cursor-pointer" onClick={() => removeFilter(key,val)}/>
                                 </div>
                             ))
                         ))}

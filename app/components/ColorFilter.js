@@ -60,10 +60,11 @@ const ColorFilter = ({ setFilters, updateProductFilters }) => {
             <div className="pr-5">
                 <h6 className="text-sm font-bold text-slate-900 border-b border-slate-200 pb-3">কালার</h6>
                 <div className="category-filter">
+                    {/* bg-blue-500 */}
                     {colors?.map((color, i) => (
                         <div className="input-grp mt-3" key={i}>
-                            <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={i}>
-                                <input type="checkbox" id={i} name="color" value={color.value} onChange={handleChange} />
+                            <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={`clr-${i}`}>
+                                <input type="checkbox" id={`clr-${i}`} name="color" value={color.value} onChange={handleChange} />
                                 <span className={`inline-block w-3 h-3 bg-${color.value}-500 rounded-full`}></span>
                                 {color.label}
                             </label>
