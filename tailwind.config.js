@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,8 +11,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        body: ['var(--font-body)', 'sans-serif'],
-        title: ['var(--font-title)', 'sans-serif']
+        body: ['"Noto Sans"', ...defaultTheme.fontFamily.sans],
+        title: ['"Hind Siliguri"', ...defaultTheme.fontFamily.serif]
       },
       screens:{
         sm: "576px",
