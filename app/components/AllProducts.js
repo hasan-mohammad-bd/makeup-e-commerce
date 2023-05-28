@@ -3,7 +3,7 @@ import SingleProduct from "./SingleProduct";
 const  AllProducts = async () => {
 
   async function fetchProducts() {
-    const res  = await fetch(`${process.env.server}/products`, { cache: 'force-cache' });
+    const res  = await fetch(`${process.env.server}/products`, { cache: 'no-store' });
     const allProducts = await res.json();
     
     // Recommendation: handle errors
