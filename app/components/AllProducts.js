@@ -3,7 +3,7 @@ import SingleProduct from "./SingleProduct";
 const  AllProducts = async () => {
 
   async function fetchProducts() {
-    const res  = await fetch(`${process.env.server}/products`, { cache: 'no-store' });
+    const res  = await fetch(`${process.env.server}/products`, { next: { revalidate: 60 } });
     const allProducts = await res.json();
     
     // Recommendation: handle errors
@@ -21,14 +21,14 @@ const  AllProducts = async () => {
 
   return (
     <>
-        <div className="products-wpr grid grid-cols-5 gap-x-5 gap-y-12 mb-12">
-            {allProducts?.map((product, i) => (
-                <div className="col-span-1" key={i}>
-                    <SingleProduct product={product} />
-                </div>
-            ))}
-        </div>
+      <div className="products-wpr grid grid-cols-5 gap-x-5 gap-y-12 mb-12">
+        {allProducts?.map((product, i) => (
+          <div className="col-span-1" key={i}>
+            <SingleProduct product={product} />
+          </div>
+        ))}
         
+      </div>
     </>
   );
 };

@@ -1,6 +1,6 @@
-import NewArrivalSlider from "../elements/sliders/NewArrival";
+import SingleProduct from "./SingleProductList";
 
-const  NewArrival = async () => {
+const  LatestViews = async () => {
 
   async function fetchProducts() {
     const res  = await fetch(`${process.env.server}/products`, { next: { revalidate: 60 } });
@@ -25,9 +25,16 @@ const  NewArrival = async () => {
 
   return (
     <>
-      <NewArrivalSlider newProducts={newProducts}/>
+        <div className="products-wpr grid grid-cols-4 gap-5">
+            {newProducts?.slice(0,16)?.map((product, i) => (
+            <div className="col-span-1" key={i}>
+                <SingleProduct product={product} />
+            </div>
+            ))}
+        
+        </div>
     </>
   );
 };
 
-export default NewArrival;
+export default LatestViews;

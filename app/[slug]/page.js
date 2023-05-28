@@ -1,87 +1,57 @@
+'use cliet'
+
 import Link from "next/link";
-import Image from "next/image";
-import Filter from "@/app/components/Filter";
-import SortSelect from "@/app/elements/SortSelect";
 
 // ** Imoprt icons
 import AllProducts from "@/app/components/AllProducts";
+import LatestViews from "../components/LatestViews";
 
 const page = ({params}) => {
-    
+
     const {slug} = params
 
-    var data = [
-        {
-            id: 1,
-            title: "স্মার্ট ইলেকট্রনিক্স",
-            image: "1.png",
-        },
-        {
-            id: 2,
-            title: "হেডফোন",
-            image: "5.png",
-        },
-        {
-            id: 3,
-            title: "স্মার্ট ওয়াচ",
-            image: "6.png",
-        },
-        {
-            id: 4,
-            title: "একশন ক্যামেরা",
-            image: "4.png",
-        },
-        {
-            id: 5,
-            title: "অডিও ডিভাইস",
-            image: "2.png",
-        },
-    ];
-
     return (
-        <>
-            <div className="breadcrumb bg-[url('/assets/images/banner/pdctpage-banner.png')] bg-no-repeat bg-cover py-20">
-                <div className="container">
-                    <div className="text-center">
-                        <h3 className="text-2xl font-bold font-title text-white mb-4">একশন ক্যামেরা</h3>
+        <>  
+            <div className="container">
+                <div className="breadcrumb breadcrumb-2 py-5">
+                    <div className="container">
                         <div>
-                            <Link href={`/`} className="text-base text-white hover:text-primary">হোম</Link>
-                            <Link href={`/products/camera`} className="text-base text-white hover:text-primary">একশন ক্যামেরা</Link>
+                            <Link href={`/`} className="text-base text-slate-600 hover:text-primary">হোম</Link>
+                            {Object.keys(params).map((key, indx) => (
+                                <Link href={`/${params[key]}`} className={`text-base ${params[key] === slug ? 'text-slate-900' : 'text-slate-600'} hover:text-primary`} key={indx}>{params[key]}</Link>
+                            ))}
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div className="border-b border-slate-300 py-8">
+            <div className="all-products py-14">
                 <div className="container">
-                    <h6 className="text-base font-semibold font-title text-slate-900 mb-4">সেরা ৫টি ক্যাটাগরি</h6>
-                    <div className="flex items-center gap-5">
-                        {data?.slice(0,5)?.map((cat, i) => (
-                            <div className="category flex flex-1 items-center gap-4 border border-slate-300 rounded-xl p-3.5" key={i}>
-                                <div className="image flex items-center justify-center w-12 h-12 bg-amber-50 rounded-2xl">
-                                    <Link href={`/products/${cat.title}`}><Image src={`/assets/images/category/${cat.image}`} alt="cat.title" width={0} height={0} sizes="100vw" style={{ width: 'auto', height: 'auto' }}/></Link>
-                                </div>
-                                <Link href={`/products/${cat.title}`} className="text-base text-slate-900">{cat.title}</Link>
-                            </div>
-                        ))}
+
+                    <div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
+                        <h2 className="sec-title">একই ক্যাটাগরির আরও প্রোডাক্ট</h2>
                     </div>
+
+                    <div className="bestSell-slider mt-6">
+                        <AllProducts/>
+                    </div>
+
                 </div>
             </div>
 
-            <div className="container">
-                <div className="toolbar grid grid-cols-5 gap-5 my-5">
-                    <div className="relative col-span-1">
-                        <Filter/>
+
+            <div className="container ">
+                <div className="latest-viewed-products bg-slate-50 border border-slate-100 rounded-xl p-6 pt-8 mb-14">
+
+                    <div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
+                        <h2 className="sec-title">সর্বশেষ যে প্রোডাক্ট গুলো দেখেছেন</h2>
                     </div>
-                    <div className="col-span-4 flex justify-between items-center bg-slate-50 rounded-xl px-4 py-3">
-                        <p>এখানে ৬৭ টি প্রডাক্ট আছে</p>
-                        <SortSelect/>
+
+                    <div className="mt-6 ">
+                        <LatestViews/>
                     </div>
+
                 </div>
-                <AllProducts/>
             </div>
-
-
         </>
     )
 }
