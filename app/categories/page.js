@@ -67,7 +67,7 @@ const page = ({params}) => {
                             <Link href={`/`} className="category-img flex justify-center items-center w-[164px] h-[164px] bg-amber-50 rounded-full">
                                 <Image src={`/assets/images/category/${category.image}`} alt={category.title} width={116} height={78} style={{ width: 'auto', height: 'auto' }}/>
                             </Link>
-                            <Link href={`/${category.title}`} className="block text-lg text-slate-700 text-center mt-4">{category.title}</Link>
+                            <Link href={`/products/${category.title}`} className="block text-lg text-slate-700 text-center mt-4">{category.title}</Link>
                         </div>
                     ))}
                 </div>
