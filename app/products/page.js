@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Filter from "@/app/components/Filter";
@@ -5,6 +6,11 @@ import SortSelect from "@/app/elements/SortSelect";
 
 // ** Imoprt icons
 import AllProducts from "@/app/components/AllProducts";
+
+// ** Search Fallback
+function SearchBarFallback() {
+    return <>placeholder</>
+}
 
 const page = ({params}) => {
     
@@ -75,7 +81,9 @@ const page = ({params}) => {
                     </div>
                     <div className="col-span-4 flex justify-between items-center bg-slate-50 rounded-xl px-4 py-3">
                         <p>এখানে ৬৭ টি প্রডাক্ট আছে</p>
-                        <SortSelect/>
+                        <Suspense fallback={<SearchBarFallback />}>
+                            <SortSelect/>
+                        </Suspense>
                     </div>
                 </div>
                 <AllProducts/>

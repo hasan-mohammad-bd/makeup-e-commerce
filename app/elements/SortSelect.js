@@ -1,21 +1,13 @@
 'use client'
 
-// import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const SortSelect = ({ updateProductFilters }) => {
 
-    // const searchTerm = useSearchParams().get('search');
+    const searchTerm = useSearchParams().get('search');
 
     const [featured, setFeatured] = useState("");
-
-    // useEffect(() => {
-    //     const filters = {
-    //         featured,
-    //     };
-
-    //     updateProductFilters(filters);
-    // }, [searchTerm, featured]);
 
     useEffect(() => {
         // const filters = {
@@ -23,7 +15,7 @@ const SortSelect = ({ updateProductFilters }) => {
         // };
 
         // updateProductFilters(filters);
-    }, [featured]);
+    }, [searchTerm, featured]);
 
     const seleceOption = (e) => {
         setFeatured(e.target.value);
