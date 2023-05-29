@@ -11,8 +11,6 @@ const Timer = ({targetDate}) => {
 
     const countDownDate = new Date(targetDate).getTime();
 
-    console.log("ss",countDownDate)
-
     const [countDown, setCountDown] = useState(
         countDownDate - new Date().getTime()
     );
@@ -31,19 +29,19 @@ const Timer = ({targetDate}) => {
         <>
             <div className="sale-counter flex gap-3">
                 <div className="single-counter flex flex-col justify-center items-center w-14 h-14 bg-red-500 rounded-lg">
-                    <p className='count-num text-base font-semibold font-title text-white'>{days}</p>
+                    <p className='count-num text-base font-semibold font-title text-white' suppressHydrationWarning>{days}</p>
                     <p className='text-xs text-white'>দিন</p>
                 </div>
                 <div className="single-counter flex flex-col justify-center items-center w-14 h-14 bg-red-500 rounded-lg">
-                    <p className='count-num text-base font-semibold font-title text-white'>{hours}</p>
+                    <p className='count-num text-base font-semibold font-title text-white' suppressHydrationWarning>{hours}</p>
                     <p className='text-xs text-white'>ঘন্টা</p>
                 </div>
                 <div className="single-counter flex flex-col justify-center items-center w-14 h-14 bg-red-500 rounded-lg">
-                    <p className='count-num text-base font-semibold font-title text-white'>{minutes}</p>
+                    <p className='count-num text-base font-semibold font-title text-white' suppressHydrationWarning>{minutes}</p>
                     <p className='text-xs text-white'>মিনিট</p>
                 </div>
                 <div className="single-counter flex flex-col justify-center items-center w-14 h-14 bg-red-500 rounded-lg">
-                    <p className='count-num text-base font-semibold font-title text-white'>{seconds}</p>
+                    <p className='count-num text-base font-semibold font-title text-white' suppressHydrationWarning>{seconds}</p>
                     <p className='text-xs text-white'>সেকেন্ড</p>
                 </div>
             </div>

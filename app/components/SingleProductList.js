@@ -86,7 +86,7 @@ const SingleProduct = ({
                                 </Link>
                             </div>
                             <h2>
-                            <Link href={`/products/${product.slug}`} className="product-title text-base font-semibold text-slate-900 font-body overflow-text">
+                            <Link href={`/${product.slug}`} className="product-title text-base font-semibold text-slate-900 font-body overflow-text">
                                     {product.title}
                                     </Link>
                             </h2>

@@ -52,7 +52,7 @@ const page = ({params}) => {
                         <div className="content flex-1">
                             <h3 className="text-3xl font-bold font-title text-slate-900 mb-2">ফ্ল্যাশ সেল চলছে</h3>
                             <p className="text-lgtext-slate-600 mb-4">অফার চলবে আর মাত্র</p>
-                            <Timer targetDate="2023-5-20"/>
+                            <Timer targetDate="2023-5-31"/>
                         </div>
                         <div className="img flex-1">
                             <Image src={`/assets/images/banner/robot.png`} alt="image" width={0} height={0} sizes="100vw" style={{ width: '100%'}}/>
