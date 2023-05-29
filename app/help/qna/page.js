@@ -7,10 +7,6 @@ import QAItem from "@/app/elements/QAItem";
 // ** Imoprt icons
 import { BsFillTelephoneFill } from "react-icons/bs";
 
-export const metadata = {
-    title: 'Sotota Stall || QnA',
-};
-
 const QnA = () => {
 
     const [open, setOpen] = useState(0);

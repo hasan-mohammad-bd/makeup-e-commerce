@@ -1,6 +1,9 @@
 
 
-const page = () => {
+const page = ({params}) => {
+
+    
+
     return (
         <>
             

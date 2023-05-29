@@ -7,7 +7,7 @@ import SortSelect from "@/app/elements/SortSelect";
 import AllProducts from "@/app/components/AllProducts";
 
 const page = ({params}) => {
-
+    
     const {slug} = params
 
     var data = [
