@@ -95,7 +95,7 @@ const SingleProduct = ({
                                 <span className="text-sm/[16px] font-semibold text-slate-900">{product.review}K</span>
                             </div>
                             <div className="product-price mb-3">
-                                <span className="text-lg/[24px] font-semibold text-red-500">${product.price} </span>
+                                <span className="text-lg/[24px] font-semibold text-red-500">{product.price} </span>
                                 <del className="old-price text-sm font-normal text-slate-400">{product.oldPrice ? `$ ${product.oldPrice}`:null}</del>
                                 <span className="discount inline-block text-xs text-white bg-red-500 rounded-md py-.5 px-1 ml-2">{product.discount.percentage}%</span>
                             </div>

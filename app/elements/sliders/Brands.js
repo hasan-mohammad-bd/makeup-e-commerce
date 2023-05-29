@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 
 SwiperCore.use([Navigation]);

@@ -40,7 +40,7 @@ export default function Home() {
                 <h2 className="sec-title">ফ্ল্যাশ সেল চলছে</h2>
                 <p>অফার চলবে আর মাত্র</p>
               </div>
-              <Timer targetDate="2023-5-25"/>
+              <Timer targetDate="2023-5-31"/>
             </div>
             <Link href="/products/flash-sale" className="all-btn bg-white">সবগুলো  দেখুন <HiArrowLongRight size={24}/> </Link>
           </div>
