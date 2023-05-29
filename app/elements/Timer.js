@@ -11,6 +11,8 @@ const Timer = ({targetDate}) => {
 
     const countDownDate = new Date(targetDate).getTime();
 
+    console.log("ss",countDownDate)
+
     const [countDown, setCountDown] = useState(
         countDownDate - new Date().getTime()
     );
