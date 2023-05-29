@@ -4,11 +4,11 @@ const ProductDetails = ({product}) => {
     return (
         <>
             <div className="product-details">
-                <div className="grid grid-cols-2">
-                    <div className="col-span-1">
+                <div className="flex gap-6">
+                    <div className="flex-1">
                         <ThumbSlider product={product}/>
                     </div>
-                    <div className="col-span-1">
+                    <div className="flex-1">
                         <div className="product-content-wrap">
                             <p className="text-sm font-bold text-primary capitalize">{product?.brand || 'Havit'}</p>
                             <h5 className="text-2xl font-bold font-title text-slate-900">{product?.title || 'Insta360 GO 2 একশন ক্যামেরা 9MP 3K জলরোধী একশন ক্যামেরা'}</h5>
