@@ -1,24 +1,22 @@
 import SingleProduct from "./SingleProductList";
 
-const  LatestViews = async () => {
-
-  async function fetchProducts() {
-    const res  = await fetch(`${process.env.server}/products`, { next: { revalidate: 60 } });
-    const allProducts = await res.json();
-    
-    // Recommendation: handle errors
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error('Failed to fetch data');
-    }
+async function fetchProducts() {
+  const res  = await fetch(`${process.env.server}/products`, { next: { revalidate: 60 } });
+  const allProducts = await res.json();
   
-    const newProducts = allProducts.sort(function (a, b) {
-        return a.created > b.created ? -1 : 1;
-    });
-    
-    return newProducts;
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
   }
-    
+
+  const newProducts = allProducts.sort(function (a, b) {
+      return a.created > b.created ? -1 : 1;
+  });
+  
+  return newProducts;
+}
+const  LatestViews = async () => {
 
   const newProducts = await fetchProducts()
 

@@ -1,10 +1,9 @@
-'use cliet'
-
 import Link from "next/link";
 
 // ** Imoprt icons
 import AllProducts from "@/app/components/AllProducts";
 import LatestViews from "../components/LatestViews";
+import ProductDetails from "../components/ProductDetails";
 
 const page = ({params}) => {
 
@@ -23,6 +22,9 @@ const page = ({params}) => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="container">
+                <ProductDetails/>
             </div>
             <div className="all-products py-14">
                 <div className="container">

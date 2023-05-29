@@ -151,7 +151,7 @@
 }
 
 .product-img-action-wrap .action-btn{
-  @apply absolute top-3 right-3 inline-flex justify-center items-center w-7 h-7 border border-slate-300 rounded-full cursor-pointer ease-in duration-100 hover:bg-primary hover:text-white hover:border-primary
+  @apply absolute top-3 right-3 inline-flex justify-center items-center w-7 h-7 bg-white border border-slate-300 rounded-full cursor-pointer ease-in duration-100 hover:bg-primary hover:text-white hover:border-primary
 }
 
 .product-actions .action-btn{
