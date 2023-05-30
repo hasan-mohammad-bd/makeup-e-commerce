@@ -23,7 +23,7 @@ const PriceRangeSlider = ({ setFilters, updateProductFilters }) => {
     }, [price, setFilters]);
 
     return (
-        <div className="pr-5">
+        <div className="price-range pr-5">
             <h6 className="text-sm font-bold text-slate-900 border-b border-slate-200 pb-3 mb-3">প্রইজ</h6>
             <Slider
                 range
