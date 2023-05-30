@@ -17,7 +17,7 @@ const Brands = ({category}) => {
                 slidesPerView={6}
                 spaceBetween={50}
                 loop={false}
-                pagination={true}
+                pagination={{ clickable: true }}
                 // navigation={{
                 //     prevEl: ".custom_prev_cat",
                 //     nextEl: ".custom_next_cat",
