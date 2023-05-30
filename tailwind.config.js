@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        body: ['Noto Sans', ...defaultTheme.fontFamily.sans],
+        body: ['Noto Sans Bengali', ...defaultTheme.fontFamily.sans],
         title: ['Hind Siliguri', ...defaultTheme.fontFamily.serif]
       },
       screens:{
