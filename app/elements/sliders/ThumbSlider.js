@@ -74,28 +74,26 @@ const ThumbSlider = ({product}) => {
                         }}
                         modules={[Thumbs, Autoplay]}
                     >
-                        {slides.map((slide, index) => {
-                            return (
-                            <SwiperSlide key={index}>
-                                <div className="slider-imag relative">
-                                    <Image src={`/assets/images/shop/product-preview.png`} alt="" width={0} height={0} sizes="100vw" className="w-full"/>
-                                    <div className="product-action absolute top-4 right-4">
-                                        <Link
-                                            href={''}
-                                            aria-label="Add To Wishlist"
-                                            className="action-btn inline-flex justify-center items-center w-11 h-11 bg-white border-slate-300 rounded-lg hover:bg-primary hover:text-white"
-                                            onClick={(e) => handleWishlist(product)}
-                                        >
-                                            <HiOutlineHeart size={18}/>
-                                        </Link>
+                        {slides.map((slide, index) => (
+                                <SwiperSlide key={index}>
+                                    <div className="slider-imag relative">
+                                        <Image src={`/assets/images/shop/product-preview.png`} alt="" width={0} height={0} sizes="100vw" className="w-full"/>
+                                        <div className="product-action absolute top-4 right-4">
+                                            <Link
+                                                href={''}
+                                                aria-label="Add To Wishlist"
+                                                className="action-btn inline-flex justify-center items-center w-11 h-11 bg-white border-slate-300 rounded-lg hover:bg-primary hover:text-white"
+                                                onClick={(e) => handleWishlist(product)}
+                                            >
+                                                <HiOutlineHeart size={18}/>
+                                            </Link>
+                                        </div>
+                                        {true && <a href="youtube.com" target="_blank" className="vid-icon absolute inline-flex justify-center items-center top-1/2 left-1/2 w-[72px] h-[72px] rounded-full drop-shadow-[0_0px_60px_rgba(0,0,0,0.16)] translate-x-[-50%] translate-y-[-50%]">
+                                            <HiPlayCircle size={60} className="text-white hover:text-primary"/>
+                                        </a>}
                                     </div>
-                                    {true && <a href="youtube.com" target="_blank" className="vid-icon absolute inline-flex justify-center items-center top-1/2 left-1/2 w-[72px] h-[72px] rounded-full drop-shadow-[0_0px_60px_rgba(0,0,0,0.16)] translate-x-[-50%] translate-y-[-50%]">
-                                        <HiPlayCircle size={60} className="text-white hover:text-primary"/>
-                                    </a>}
-                                </div>
-                            </SwiperSlide>
-                            );
-                        })}
+                                </SwiperSlide>
+                            ))}
                     </Swiper>
                 </div>
             </div>
