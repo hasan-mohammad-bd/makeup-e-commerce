@@ -1,4 +1,3 @@
-
 'use client'
 
 import Image from "next/image";
@@ -70,7 +69,7 @@ const ProductDetails = ({product}) => {
                                     ))}
                                 </div>
                             </div>
-                            <div className="my-5">
+                            <div className="mt-5 mb-8">
                                 <p className="font-semibold font-title text-slate-900 mb-2">সেরা অফার <TbTag size={24} className="text-primary mb-1"/></p>
                                 <ul className="coupon-info">
                                     <li className="relative text-slate-900 pl-4">কুপন ডিসকাউন্ট: <span className="font-semibold text-title text-secondary-700">&#2547;400 ছাড়!</span></li>
@@ -78,6 +77,34 @@ const ProductDetails = ({product}) => {
                                     <li className="relative text-slate-900 pl-4 mb-3">প্রযোজ্য: ৳2000 উপরে অর্ডারে (শুধুমাত্র প্রথম কেনাকাটায়)</li>
                                 </ul>
                                 <Link href="#" className="text-secondary-700 underline">অফারের সকল প্রডাক্ট দেখুন</Link>
+                            </div>
+                            <div className="delivery flex flex-wrap gap-y-7 bg-slate-50 border border-slate-200 rounded-lg py-4">
+                                <div className="single-info">
+                                    <Image src={`/assets/images/icons/inside.png`} alt="" width={0} height={0} sizes="100vw" className="w-full"/>
+                                    <div>
+                                        <p className="text-slate-600">ডেলিভারি খরচ:</p>
+                                        <p className="text-slate-600">ঢাকার ভিতরে - ৬০ টাকা</p>
+                                    </div>
+                                </div>
+                                <div className="single-info border-l border-slate-200">
+                                    <Image src={`/assets/images/icons/outside.png`} alt="" width={0} height={0} sizes="100vw" className="w-full"/>
+                                    <div>
+                                        <p className="text-slate-600">ডেলিভারি খরচ:</p>
+                                        <p className="text-slate-600">ঢাকার বাইরে - ১৩০ টাকা</p>
+                                    </div>
+                                </div>
+                                <div className="single-info">
+                                    <Image src={`/assets/images/icons/COD.png`} alt="" width={0} height={0} sizes="100vw" className="w-full"/>
+                                    <div>
+                                        <p className="text-slate-600">সারাদেশ এ ক্যাশ অন ডেলিভারি</p>
+                                    </div>
+                                </div>
+                                <div className="single-info border-l border-slate-200">
+                                    <Image src={`/assets/images/icons/paymnt.png`} alt="" width={0} height={0} sizes="100vw" className="w-full"/>
+                                    <div>
+                                        <p className="text-slate-600">নিরাপদ পেমেন্ট করার সহজ মাধ্যম</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
