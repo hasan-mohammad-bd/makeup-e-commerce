@@ -24,7 +24,7 @@ const Header = ({
                 setScroll(scrollCheck);
             }
         });
-    }, []);
+    }, [scroll]);
 
     const handleToggle = () => setToggled(!isToggled);
 
@@ -41,9 +41,9 @@ const Header = ({
                                 />
                             </Link>
                             <div className="nav-menu">
-                                <Link href="/phone">স্মার্ট ফোন</Link>
-                                <Link href="/watch">স্মার্ট ওয়াচ</Link>
-                                <Link href="/laptop">ল্যাপটপ</Link>
+                                <Link href="/products/phone">স্মার্ট ফোন</Link>
+                                <Link href="/products/watch">স্মার্ট ওয়াচ</Link>
+                                <Link href="/products/laptop">ল্যাপটপ</Link>
                                 <Link href="/products">আরও</Link>
                             </div>
                         </div>

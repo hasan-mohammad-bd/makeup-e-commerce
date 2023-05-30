@@ -19,7 +19,7 @@ const Intro = () => {
                 slidesPerView={1}
                 spaceBetween={0}
                 loop={false}
-                pagination={true}
+                pagination={{ clickable: true }}
                 className="hero-slider"
             >
                 <SwiperSlide className="mt-6 mb-8">
