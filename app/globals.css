@@ -199,36 +199,24 @@
   @apply w-full max-w-full min-w-0 max-h-screen min-h-0
 }
 
-/* .slider-prev,
-.slider-next {
-  cursor: pointer;
-  text-align: center;
-  font-size: 14px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+/* Product Details */
+
+.product-details .meta-data svg{
+  @apply mb-1
 }
-.slider-prev:focus,
-.slider-next:focus {
-  outline: none;
+
+.product-details .meta-data p,
+.product-details .meta-data span{
+  @apply relative text-base text-slate-900
 }
-.slider-thumbs {
-  height: calc(400px - 96px);
+
+.product-details .meta-data p::before{
+  @apply absolute content-[""] top-[6px] left-[-16px] w-[1px] h-3 bg-slate-200
 }
-.slider-thumbs .slider-image {
-  transition: 0.25s;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-  opacity: 0.5;
+
+.coupon-info li::before{
+  @apply absolute content-[""] top-2 left-0 w-2 h-2 bg-slate-400 rounded-full
 }
-.slider-thumbs .slider-image:hover {
-  opacity: 1;
-} */
 
 /* Footer */
 
