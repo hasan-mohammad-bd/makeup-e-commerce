@@ -222,6 +222,18 @@
   @apply w-1/2 grid grid-cols-[28px_1fr] items-center gap-3 px-5
 }
 
+.product-tab-links a{
+  @apply relative inline-block text-slate-600 border-b-2 border-transparent px-6 py-3
+}
+
+.product-tab-links a.active{
+  @apply text-secondary-700 border-secondary-700
+}
+
+.product-tab-links li:not(:last-of-type) a::after{
+  @apply absolute content-[""] right-0 w-[1px] h-6 bg-slate-200
+}
+
 /* Footer */
 
 .footer::after{
