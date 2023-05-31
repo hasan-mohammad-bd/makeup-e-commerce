@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import ThumbSlider from "../elements/sliders/ThumbSlider";
+import ThumbSlider from "@/app/elements/sliders/ThumbSlider";
+import ProductBanner from "@/app/elements/sliders/ProductBanner";
+import ProductReview from "@/app/elements/sliders/ProductReview";
 
 // ** Import Icon
 import { HiStar, HiChatBubbleLeftRight, HiShare, HiPlayCircle } from "react-icons/hi2";
@@ -10,6 +12,7 @@ import { TfiAngleRight } from "react-icons/tfi";
 import { TbTag } from "react-icons/tb";
 import { IoCopy } from "react-icons/io5";
 import { BsFillTelephoneFill } from "react-icons/bs";
+
 const ProductDetails = ({product}) => {
     return (
         <>
@@ -122,7 +125,7 @@ const ProductDetails = ({product}) => {
                                 <Link href={`#`}>প্রশ্ন ও উত্তর</Link>
                             </li>
                         </ul>
-                        <div className="product-tab-content">
+                        <div className="product-tab-content py-8 border-b-4 border-slate-200">
                             <div className="description">
                                 <h4 className="text-2xl font-bold font-title text-slate-900">প্রডাক্টের বিবরণ:</h4>
                                 <p className="text-slate-700 my-5">Insta360 Go 2 Tiny Mighty Action Camera 1440P 50fps স্পোর্টস ক্যামেরা IPX8 4M ওয়াটারপ্রুফ ফ্লোস্টেট স্ট্যাবিলাইজেশন হাইপারল্যাপ্স স্লো মোশন রি-মোট কন্ট্রোল অটো এডিটিং WI-FI প্রিভিউ সমর্থন করে<br/><br/>
@@ -143,64 +146,77 @@ const ProductDetails = ({product}) => {
                                         <li className="text-slate-700 mb-4">বাক্সে: 1x Insta360 GO 2, 1x চার্জ কেস, 1x লেন্স গার্ড (প্রি-ইনস্টল), 1x ম্যাগনেট পেন্ডেন্ট, 1x পিভট স্ট্যান্ড, 1x ইজি ক্লিপ এবং 1x টাইপ-সি চার্জ ক্যাবল।</li>
                                     </ul>
                                     <Image src={`/assets/images/shop/insta360.jpg`} alt="Insta 360" width={0} height={0} sizes="100vw" className="w-auto mt-4"/>
-                                    <Image src={`/assets/images/shop/insta-quality.jpg`} alt="Insta 360" width={0} height={0} sizes="100vw" className="w-auto my-6"/>
+                                    <Image src={`/assets/images/shop/insta-quality.jpg`} alt="Insta 360" width={0} height={0} sizes="100vw" className="w-auto mt-6"/>
                                 </div>
-                                <div className="blogs">
-                                    <p className="text-primary mb-1">ফ্লোস্টেট স্টেবিলাইজেশন</p>
-                                    <h4 className="text-2xl font-bold font-title text-slate-900">বাটারী মসৃণ ধার্মিকতা</h4>
-                                    <p className="text-slate-700 mt-5">এটা বিশ্বাস করার জন্য আপনাকে দেখতে হবে। ফ্লোস্টেট স্টেবিলাইজেশন আপনার শট এবং দিগন্তকে পুরোপুরি স্থির রাখে। ঝাঁকান, বাম্প এবং রোল প্রস্তুত।</p>
-                                    <div className="grid grid-cols-2 gap-5 mt-10">
-                                        <div className="col-span-1">
-                                            <div className="blog">
-                                                <Image src={`/assets/images/shop/slowmo.jpg`} alt="Slow Motion" width={0} height={0} sizes="100vw" className="w-auto"/>
-                                                <div className="content">
-                                                    <h5 className="text-2xl font-bold font-title text-slate-900 my-4">ওওওওহ আস্তে আস্তে</h5>
-                                                    <p className="text-slate-700">গতি সামলাতে পারেননি? মাখন-মসৃণ 120fps-এ একটি গুরুত্বপূর্ণ মুহূর্তকে 4x স্লো-মোতে স্লো করুন</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-span-1">
-                                            <div className="blog">
-                                                <Image src={`/assets/images/shop/ai.jpg`} alt="AI" width={0} height={0} sizes="100vw" className="w-auto"/>
-                                                <div className="content">
-                                                    <h5 className="text-2xl font-bold font-title text-slate-900 my-4">AI হল দখল...</h5>
-                                                    <p className="text-slate-700">FlashCut 2.0 এর সাথে আপনার সম্পাদনা করুন। AI আপনার পছন্দের ক্লিপগুলি নেয়, সেগুলিকে একটি গল্পে রাখে</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-span-2">
-                                            <div className="blog flex items-center gap-5">
-                                                <Image src={`/assets/images/shop/magnet.jpg`} alt="Magnet" width={0} height={0} sizes="100vw" className="w-auto"/>
-                                                <div className="content">
-                                                    <h5 className="text-2xl font-bold font-title text-slate-900 my-4">দেখো, হাত নেই!</h5>
-                                                    <p className="text-slate-700">শট পেতে আর কোন ফিডলিং নেই। ম্যাগনেট প্যান্ডেন্টের সাথে আপনার শার্টে GO 2 পপ করুন, রেকর্ড করতে এবং শুটিং করতে টিপুন। এমনকি একটি বাচ্চাও এটি বের করতে পারে।</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-span-2">
-                                            <div className="blog flex items-center gap-5">
-                                                <div className="content">
-                                                    <h5 className="text-2xl font-bold font-title text-slate-900 my-4">ওওআহহহ এটা দ্রুত।</h5>
-                                                    <p className="text-slate-700">জ্যাম টাইমশিফ্ট মোডের সাথে একটি দ্রুত হাইপারল্যাপসে সমস্ত অ্যাকশন প্যাক করুন। বাস্তব জীবনের চেয়ে 6 গুণ দ্রুত।</p>
-                                                </div>
-                                                <Image src={`/assets/images/shop/fastmo.jpg`} alt="Magnet" width={0} height={0} sizes="100vw" className="w-auto"/>
+                            </div>
+                            <div className="blogs my-8">
+                                <p className="text-primary mb-1">ফ্লোস্টেট স্টেবিলাইজেশন</p>
+                                <h4 className="text-2xl font-bold font-title text-slate-900">বাটারী মসৃণ ধার্মিকতা</h4>
+                                <p className="text-slate-700 mt-5">এটা বিশ্বাস করার জন্য আপনাকে দেখতে হবে। ফ্লোস্টেট স্টেবিলাইজেশন আপনার শট এবং দিগন্তকে পুরোপুরি স্থির রাখে। ঝাঁকান, বাম্প এবং রোল প্রস্তুত।</p>
+                                <div className="grid grid-cols-2 gap-5 mt-10">
+                                    <div className="col-span-1">
+                                        <div className="blog">
+                                            <Image src={`/assets/images/shop/slowmo.jpg`} alt="Slow Motion" width={0} height={0} sizes="100vw" className="w-auto"/>
+                                            <div className="content">
+                                                <h5 className="text-2xl font-bold font-title text-slate-900 my-4">ওওওওহ আস্তে আস্তে</h5>
+                                                <p className="text-slate-700">গতি সামলাতে পারেননি? মাখন-মসৃণ 120fps-এ একটি গুরুত্বপূর্ণ মুহূর্তকে 4x স্লো-মোতে স্লো করুন</p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="my-6">
-                                    <h4 className="text-2xl font-bold font-title text-slate-900">রিভিউ ভিডিও</h4>
-                                    <div className="slider-imag relative mt-4">
-                                        <Image src={`/assets/images/shop/video-review.jpg`} alt="" width={0} height={0} sizes="100vw" className="w-auto"/>
-                                        <a href="youtube.com" target="_blank" className="vid-icon absolute inline-flex justify-center items-center top-1/2 left-1/2 w-[72px] h-[72px] rounded-full drop-shadow-[0_0px_60px_rgba(0,0,0,0.16)] translate-x-[-50%] translate-y-[-50%]">
-                                            <HiPlayCircle size={60} className="text-white hover:text-primary"/>
-                                        </a>
+                                    <div className="col-span-1">
+                                        <div className="blog">
+                                            <Image src={`/assets/images/shop/ai.jpg`} alt="AI" width={0} height={0} sizes="100vw" className="w-auto"/>
+                                            <div className="content">
+                                                <h5 className="text-2xl font-bold font-title text-slate-900 my-4">AI হল দখল...</h5>
+                                                <p className="text-slate-700">FlashCut 2.0 এর সাথে আপনার সম্পাদনা করুন। AI আপনার পছন্দের ক্লিপগুলি নেয়, সেগুলিকে একটি গল্পে রাখে</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-span-2">
+                                        <div className="blog flex items-center gap-5">
+                                            <Image src={`/assets/images/shop/magnet.jpg`} alt="Magnet" width={0} height={0} sizes="100vw" className="w-auto"/>
+                                            <div className="content">
+                                                <h5 className="text-2xl font-bold font-title text-slate-900 my-4">দেখো, হাত নেই!</h5>
+                                                <p className="text-slate-700">শট পেতে আর কোন ফিডলিং নেই। ম্যাগনেট প্যান্ডেন্টের সাথে আপনার শার্টে GO 2 পপ করুন, রেকর্ড করতে এবং শুটিং করতে টিপুন। এমনকি একটি বাচ্চাও এটি বের করতে পারে।</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-span-2">
+                                        <div className="blog flex items-center gap-5">
+                                            <div className="content">
+                                                <h5 className="text-2xl font-bold font-title text-slate-900 my-4">ওওআহহহ এটা দ্রুত।</h5>
+                                                <p className="text-slate-700">জ্যাম টাইমশিফ্ট মোডের সাথে একটি দ্রুত হাইপারল্যাপসে সমস্ত অ্যাকশন প্যাক করুন। বাস্তব জীবনের চেয়ে 6 গুণ দ্রুত।</p>
+                                            </div>
+                                            <Image src={`/assets/images/shop/fastmo.jpg`} alt="Magnet" width={0} height={0} sizes="100vw" className="w-auto"/>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="contact bg-amber-200 border border-primary rounded-xl p-5 text-center">
-                                    <h5 className="text-2xl font-bold font-title text-slate-900 mb-3">আরও কিছু জানার থাকলে</h5>
-                                    <p className="flex justify-center items-center gap-4"><span className="text-base text-slate-900">কল করুন:</span> <Link href="tel:01720060958" className="text-2xl font-bold font-title text-primary"><BsFillTelephoneFill/> 01720060958</Link></p>
+                            </div>
+                            <div>
+                                <h4 className="text-2xl font-bold font-title text-slate-900 mb-4">পৃথিবী তোমার খেলার মাঠ</h4>
+                                <div className="relative bg-slate-100 border-slate-200 rounded-xl p-4 pb-8">
+                                    <ProductBanner/>
                                 </div>
+                                <div className="relative bg-slate-100 border-slate-200 rounded-xl p-4 mt-8">
+                                    <ProductReview/>
+                                </div>
+                            </div>
+                            <div className="mt-8">
+                                <h4 className="text-2xl font-bold font-title text-slate-900 mb-4">যা যা সাথে থাকবে</h4>
+                                <Image src={`/assets/images/shop/accessories.jpg`} alt="Insta 360" width={0} height={0} sizes="100vw" className="w-auto"/>
+                            </div>
+                            <div className="my-8">
+                                <h4 className="text-2xl font-bold font-title text-slate-900">রিভিউ ভিডিও</h4>
+                                <div className="slider-imag relative mt-4">
+                                    <Image src={`/assets/images/shop/video-review.jpg`} alt="" width={0} height={0} sizes="100vw" className="w-auto"/>
+                                    <a href="youtube.com" target="_blank" className="vid-icon absolute inline-flex justify-center items-center top-1/2 left-1/2 w-[72px] h-[72px] rounded-full drop-shadow-[0_0px_60px_rgba(0,0,0,0.16)] translate-x-[-50%] translate-y-[-50%]">
+                                        <HiPlayCircle size={60} className="text-white hover:text-primary"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="contact bg-amber-200 border border-primary rounded-xl p-5 text-center">
+                                <h5 className="text-2xl font-bold font-title text-slate-900 mb-3">আরও কিছু জানার থাকলে</h5>
+                                <p className="flex justify-center items-center gap-4"><span className="text-base text-slate-900">কল করুন:</span> <Link href="tel:01720060958" className="text-2xl font-bold font-title text-primary"><BsFillTelephoneFill/> 01720060958</Link></p>
                             </div>
                         </div>
                     </div>
