@@ -1,26 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
+import { fetchData } from "@/utils/fetchData";
 
-async function fetchSettings() {
-  const res = await fetch(`${process.env.API_BASE_URL}/settings`, {
-    next: { revalidate: 60 },
-    headers: {
-      AmsPublickey: process.env.AmsPublickey,
-      AmsPrivateKey: process.env.AmsPrivateKey,
-    },
-  });
-  const settings = await res.json();
-
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return settings;
-}
 const NavItems = async () => {
-  const settings = await fetchSettings();
+  const settings = await fetchData({ api: "settings", revalidate: 60 });
   const headerPages = settings?.data?.header_page;
 
   return (
