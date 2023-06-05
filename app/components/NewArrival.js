@@ -1,31 +1,16 @@
 import NewArrivalSlider from "../elements/sliders/NewArrival";
+import { fetchData } from "@/utils/fetchData";
 
-const  NewArrival = async () => {
-
-  async function fetchProducts() {
-    const res  = await fetch(`${process.env.server}/products`, { next: { revalidate: 60 } });
-    const allProducts = await res.json();
-    
-    // Recommendation: handle errors
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error('Failed to fetch data');
-    }
-  
-    const newProducts = allProducts.sort(function (a, b) {
-        return a.created > b.created ? -1 : 1;
-    });
-    
-    return newProducts;
-  }
-    
-
-  const newProducts = await fetchProducts()
-
+const NewArrival = async () => {
+  const data = await fetchData({ api: "products", revalidate: 60 });
+  const allProducts = data?.products || [];
+  const newProducts = allProducts.sort(function (a, b) {
+    return a.created > b.created ? -1 : 1;
+  });
 
   return (
     <>
-      <NewArrivalSlider newProducts={newProducts}/>
+      <NewArrivalSlider newProducts={newProducts} />
     </>
   );
 };

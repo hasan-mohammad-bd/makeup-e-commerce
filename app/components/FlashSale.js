@@ -1,29 +1,14 @@
 import FlashSaleSlider from "../elements/sliders/FlashSale";
+import { fetchData } from "@/utils/fetchData";
 
-const  FlashSale = async () => {
-
-  async function fetchProducts() {
-    const res  = await fetch(`${process.env.server}/products`, { cache: 'force-cache' });
-    const allProducts = await res.json();
-    
-    // Recommendation: handle errors
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error('Failed to fetch data');
-    }
-  
-    const saleProducts = allProducts.filter(item => item.discount.isActive)
-    
-    return saleProducts;
-  }
-    
-
-  const saleProducts = await fetchProducts()
-
+const FlashSale = async () => {
+  const data = await fetchData({ api: "products", revalidate: 60 });
+  const allProducts = data?.products || [];
+  const saleProducts = allProducts.filter((item) => item.discount.isActive);
 
   return (
     <>
-      <FlashSaleSlider saleProducts={saleProducts}/>
+      <FlashSaleSlider saleProducts={saleProducts} />
     </>
   );
 };

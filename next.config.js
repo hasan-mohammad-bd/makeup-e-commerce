@@ -3,7 +3,7 @@ const dev = process.env.NODE_ENV !== "production";
 
 const nextConfig = {
   env: {
-    server: dev ? process.env.API_BASE_URL_DEV : process.env.API_BASE_URL,
+    server: dev ? process.env.API_BASE_URL : process.env.API_BASE_URL,
   },
   images: {
     remotePatterns: [

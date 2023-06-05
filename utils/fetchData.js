@@ -8,7 +8,8 @@
  * message "Failed to fetch data".
  */
 export async function fetchData(config) {
-  const res = await fetch(`${process.env.API_BASE_URL}/${config?.api}`, {
+  // fetch(`${process.env.server}/products`, { cache: 'force-cache' });
+  const res = await fetch(`${process.env.server}/${config?.api}`, {
     next: { revalidate: config?.revalidate || 60 },
     headers: {
       AmsPublickey: process.env.AmsPublickey,
