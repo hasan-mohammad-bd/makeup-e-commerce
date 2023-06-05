@@ -11,8 +11,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        body: ['"Noto Sans"', ...defaultTheme.fontFamily.sans],
-        title: ['"Hind Siliguri"', ...defaultTheme.fontFamily.serif]
+        body: ['Noto Sans Bengali', ...defaultTheme.fontFamily.sans],
+        title: ['Hind Siliguri', ...defaultTheme.fontFamily.serif]
       },
       screens:{
         sm: "576px",
@@ -26,6 +26,9 @@ module.exports = {
       },
       colors: {
         primary: "#F99104",
+        secondary: {
+          700: "#00B7C9"
+        },
         amber: {
           200: "#FFF6EB"
         },

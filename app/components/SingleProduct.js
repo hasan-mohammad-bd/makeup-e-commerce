@@ -70,13 +70,14 @@ const SingleProduct = ({
                                 </Link>
                             </div>
                             <div className="product-action">
-                                <a
+                                <Link 
+                                    href={''}
                                     aria-label="Add To Wishlist"
                                     className="action-btn"
                                     onClick={(e) => handleWishlist(product)}
                                 >
                                     <HiOutlineHeart/>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="product-content-wrap p-3">

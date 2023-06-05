@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 @layer base{
   body{
-    @apply font-body
+    @apply font-body box-border
   }
 
   input{
@@ -103,15 +103,15 @@
   @apply list-disc ms-6
 }
 
-.rc-slider-track{
+.price-range .rc-slider-track{
   @apply h-[6px] bg-primary rounded-none
 }
 
-.rc-slider-handle {
+.price-range .rc-slider-handle {
   @apply w-4 h-4 border-solid border-2 border-transparent rounded shadow-[0_0_6px_rgba(0,0,0,0.1)] cursor-pointer opacity-100 hover:border-transparent active:border-primary active:shadow-none active:cursor-pointer focus:border-primary focus-visible:border-primary focus-visible:shadow-none
 }
 
-.rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging{
+.price-range .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging{
   @apply border-primary shadow-none
 }
 
@@ -184,43 +184,55 @@
 /* Product Thumb Slider */
 
 .slider {
-  @apply grid grid-cols-6 items-start gap-4
+  @apply grid grid-cols-[64px_1fr] items-start
 }
 
 .thumb-slider .swiper{
-  @apply max-h-[525px]
+  @apply w-full max-w-full min-w-0 max-h-max min-h-0
 }
 
-/* .slider-prev,
-.slider-next {
-  cursor: pointer;
-  text-align: center;
-  font-size: 14px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.thumb-slider .swiper-slide-thumb-active img{
+  @apply border-primary
 }
-.slider-prev:focus,
-.slider-next:focus {
-  outline: none;
+
+.preview-slider .swiper{
+  @apply w-full max-w-full min-w-0 max-h-screen min-h-0
 }
-.slider-thumbs {
-  height: calc(400px - 96px);
+
+/* Product Details */
+
+.product-details .meta-data svg{
+  @apply mb-1
 }
-.slider-thumbs .slider-image {
-  transition: 0.25s;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-  opacity: 0.5;
+
+.product-details .meta-data p,
+.product-details .meta-data span{
+  @apply relative text-base text-slate-900
 }
-.slider-thumbs .slider-image:hover {
-  opacity: 1;
-} */
+
+.product-details .meta-data p::before{
+  @apply absolute content-[""] top-[6px] left-[-16px] w-[1px] h-3 bg-slate-200
+}
+
+.coupon-info li::before{
+  @apply absolute content-[""] top-2 left-0 w-2 h-2 bg-slate-400 rounded-full
+}
+
+.delivery .single-info{
+  @apply w-1/2 grid grid-cols-[28px_1fr] items-center gap-3 px-5
+}
+
+.product-tab-links a{
+  @apply relative inline-block text-slate-600 border-b-2 border-transparent px-6 py-3
+}
+
+.product-tab-links a.active{
+  @apply text-secondary-700 border-secondary-700
+}
+
+.product-tab-links li:not(:last-of-type) a::after{
+  @apply absolute content-[""] right-0 w-[1px] h-6 bg-slate-200
+}
 
 /* Footer */
 

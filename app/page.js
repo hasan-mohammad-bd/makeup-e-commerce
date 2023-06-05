@@ -40,7 +40,7 @@ export default function Home() {
                 <h2 className="sec-title">ফ্ল্যাশ সেল চলছে</h2>
                 <p>অফার চলবে আর মাত্র</p>
               </div>
-              <Timer targetDate="2023-5-31"/>
+              <Timer targetDate="2023-7-31"/>
             </div>
             <Link href="/products/flash-sale" className="all-btn bg-white">সবগুলো  দেখুন <HiArrowLongRight size={24}/> </Link>
           </div>
@@ -48,7 +48,6 @@ export default function Home() {
           <div className="flashSale-slider border border-primary rounded-2xl p-6 pt-16">
             <FlashSale/>
           </div>
-
         </div>
       </section>
 

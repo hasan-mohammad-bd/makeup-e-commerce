@@ -1,22 +1,9 @@
 import SingleProduct from "./SingleProduct";
+import { fetchData } from "@/utils/fetchData";
 
-async function fetchProducts() {
-
-  const res  = await fetch(`${process.env.server}/products`, { next: { revalidate: 60 } });
-  const allProducts = await res.json();
-  
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data');
-  }
-
-  return allProducts;
-}
-const  AllProducts = async () => {
-
-  const allProducts = await fetchProducts()
-
+const AllProducts = async () => {
+  const data = await fetchData({ api: "products", revalidate: 60 });
+  const allProducts = data?.products || [];
 
   return (
     <>
@@ -26,7 +13,6 @@ const  AllProducts = async () => {
             <SingleProduct product={product} />
           </div>
         ))}
-        
       </div>
     </>
   );
