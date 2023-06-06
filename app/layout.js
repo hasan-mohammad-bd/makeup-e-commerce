@@ -2,11 +2,11 @@ import "rc-slider/assets/index.css";
 import "./globals.css";
 
 // ** Import Components
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Cart from "./elements/Cart";
-import CheckConnection from "./components/CheckConnection";
-import NavItems from "./components/NavItems";
+import Footer from "@/components/footer/Footer";
+import Cart from "@/components/elements/Cart";
+import CheckConnection from "@/components/CheckConnection";
+import Header from "@/components/navbar/Header";
+import NavItems from "@/components/navbar/NavItems";
 
 //** Swiper Slider
 import "swiper/css";

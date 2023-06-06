@@ -1,4 +1,4 @@
-import BestSellSlider from "../elements/sliders/BestSell";
+import BestSellSlider from "./elements/sliders/BestSell";
 import { fetchData } from "@/utils/fetchData";
 
 const BestSell = async () => {

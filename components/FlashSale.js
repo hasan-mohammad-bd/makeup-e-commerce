@@ -1,4 +1,4 @@
-import FlashSaleSlider from "../elements/sliders/FlashSale";
+import FlashSaleSlider from "./elements/sliders/FlashSale";
 import { fetchData } from "@/utils/fetchData";
 
 const FlashSale = async () => {

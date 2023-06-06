@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import QAItem from "@/app/elements/QAItem";
+import QAItem from "@/components/elements/QAItem";
 
 // ** Imoprt icons
 import { BsFillTelephoneFill } from "react-icons/bs";

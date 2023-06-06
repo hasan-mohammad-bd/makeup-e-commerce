@@ -1,4 +1,4 @@
-import NewArrivalSlider from "../elements/sliders/NewArrival";
+import NewArrivalSlider from "./elements/sliders/NewArrival";
 import { fetchData } from "@/utils/fetchData";
 
 const NewArrival = async () => {

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 // ** Import Image 
-import NoInternetImg from '../../public/assets/images/banner/no-internet.png'
+import NoInternetImg from '../public/assets/images/banner/no-internet.png'
 
 
 // ** Imoprt icons

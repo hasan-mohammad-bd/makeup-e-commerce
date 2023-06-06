@@ -1,4 +1,4 @@
-import CategorySlider from "../elements/sliders/Category";
+import CategorySlider from "./elements/sliders/Category";
 const Category = async () => {
   var data = [
     {

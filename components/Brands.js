@@ -1,4 +1,4 @@
-import BrandSlider from "../elements/sliders/Brands";
+import BrandSlider from "./elements/sliders/Brands";
 const Brands = async () => {
   var data = [
     {
