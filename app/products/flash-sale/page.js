@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import Image from "next/image";
-import SortSelect from "@/app/elements/SortSelect";
+import SortSelect from "@/components/elements/SortSelect";
 
 // ** Imoprt icons
 import { HiOutlineFilter } from "react-icons/hi";
 import AllProducts from "@/components/AllProducts";
-import Timer from "@/app/elements/Timer";
+import Timer from "@/components/elements/Timer";
 
 // ** Search Fallback
 function SearchBarFallback() {
