@@ -17,6 +17,7 @@ import { TfiAngleRight } from "react-icons/tfi";
 import { TbTag } from "react-icons/tb";
 import { IoCopy } from "react-icons/io5";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import { QuestionAnswer } from "@/app/products/[slug]/QuestionAnswer";
 
 const ProductDetails = ({ product }) => {
   return (
@@ -222,6 +223,7 @@ const ProductDetails = ({ product }) => {
                 </div>
               </div>
             </div>
+            {/* tabs view */}
             <ul className="product-tab-links flex justify-between items-center border-b border-slate-200 py-5 mt-5">
               <li>
                 <Link href={`#`} className="active">
@@ -473,6 +475,8 @@ const ProductDetails = ({ product }) => {
                   </a>
                 </div>
               </div>
+              {/* Product QA  */}
+              <QuestionAnswer />
               <div className="contact bg-amber-200 border border-primary rounded-xl p-5 text-center">
                 <h5 className="text-2xl font-bold font-title text-slate-900 mb-3">
                   আরও কিছু জানার থাকলে

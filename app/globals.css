@@ -1,44 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-  body{
-    @apply font-body box-border
+@layer base {
+  body {
+    @apply font-body box-border;
   }
 
-  input{
-    @apply h-12 text-base font-title font-normal border border-slate-300 rounded-s-lg py-3 px-4 focus:outline-0 focus:border-primary
+  input {
+    @apply h-12 text-base font-title font-normal border border-slate-300 rounded-s-lg py-3 px-4 focus:outline-0 focus:border-primary;
   }
 
-  input::placeholder{
-    @apply text-base font-title font-normal text-slate-300
+  input::placeholder {
+    @apply text-base font-title font-normal text-slate-300;
   }
-  
-  input:-webkit-autofill{
+
+  input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 100px white inset;
   }
 
   input[type="checkbox"] {
-    @apply relative appearance-none w-5 h-5 border-slate-300 rounded p-0 cursor-pointer after:absolute after:content-[''] after:w-full after:h-full after:top-[-50%] after:left-1/2 after:translate-x-[-25%] after:translate-y-1/4 checked:after:content-[url('/assets/images/icons/chk.svg')]  checked:bg-primary checked:border-primary
+    @apply relative appearance-none w-5 h-5 border-slate-300 rounded p-0 cursor-pointer after:absolute after:content-[''] after:w-full after:h-full after:top-[-50%] after:left-1/2 after:translate-x-[-25%] after:translate-y-1/4 checked:after:content-[url('/assets/images/icons/chk.svg')]  checked:bg-primary checked:border-primary;
   }
 
   /* input[type="checkbox"]::after {
     @apply absolute top-0 left-[1/2] hidden text-sm text-white translate-x-[-50%]
   } */
 
-  select{
-    @apply appearance-none bg-[url('/assets/images/icons/chv-down.svg')] bg-no-repeat bg-[length:24px_40px] bg-[right_1rem_center]
+  select {
+    @apply appearance-none bg-[url('/assets/images/icons/chv-down.svg')] bg-no-repeat bg-[length:24px_40px] bg-[right_1rem_center];
   }
 
-  svg{
-    @apply inline-block
+  svg {
+    @apply inline-block;
   }
 
-  button svg{
-    @apply mx-auto
+  button svg {
+    @apply mx-auto;
   }
 }
 
@@ -46,219 +46,222 @@
   .container {
     @apply xl:max-w-[1276px];
   }
-
 }
-
 
 /* Global Css */
 
-.sec-title{
-  @apply text-2xl font-bold font-title text-slate-900
+.sec-title {
+  @apply text-2xl font-bold font-title text-slate-900;
 }
 
-.search-btn{
-  @apply absolute w-12 h-12 bg-primary rounded-e-lg outline-none text-center
+.search-btn {
+  @apply absolute w-12 h-12 bg-primary rounded-e-lg outline-none text-center;
 }
 
-.all-btn{
-  @apply inline-flex items-center gap-2 text-base/[16px] font-semibold font-title text-primary
+.all-btn {
+  @apply inline-flex items-center gap-2 text-base/[16px] font-semibold font-title text-primary;
 }
 
-.slider-btn{
-  @apply absolute top-1/2 left-5 inline-flex justify-center items-center w-12 h-12 bg-[#F8FAFC] rounded-full translate-y-[-1/2] z-10 cursor-pointer
+.primary-btn {
+  @apply inline-flex items-center justify-center gap-2 text-white font-semibold font-title bg-primary rounded-lg text-center box-border py-3;
 }
 
-.slider-next{
-  @apply left-auto right-5
+.slider-btn {
+  @apply absolute top-1/2 left-5 inline-flex justify-center items-center w-12 h-12 bg-[#F8FAFC] rounded-full translate-y-[-1/2] z-10 cursor-pointer;
 }
 
-.swiper-button-disabled{
-  @apply text-slate-200
+.slider-next {
+  @apply left-auto right-5;
 }
 
-.overflow-text{
+.swiper-button-disabled {
+  @apply text-slate-200;
+}
+
+.overflow-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  @apply overflow-y-hidden text-ellipsis
+  @apply overflow-y-hidden text-ellipsis;
 }
 
-.cart .content{
-  background-image: linear-gradient(90deg, #EF4444 -2.83%, #F99104 100%);
-  @apply px-3 py-2
+.cart .content {
+  background-image: linear-gradient(90deg, #ef4444 -2.83%, #f99104 100%);
+  @apply px-3 py-2;
 }
 
-.breadcrumb a:not(:last-of-type){
-  @apply relative inline-block mr-6
+.breadcrumb a:not(:last-of-type) {
+  @apply relative inline-block mr-6;
 }
 
-.breadcrumb a:not(:last-of-type)::after{
-  @apply absolute content-[url('/assets/images/icons/chv-right-wht.svg')] top-0.5 right-[-24px] w-5 h-5 text-white
+.breadcrumb a:not(:last-of-type)::after {
+  @apply absolute content-[url('/assets/images/icons/chv-right-wht.svg')] top-0.5 right-[-24px] w-5 h-5 text-white;
 }
 
-.breadcrumb-2 a:not(:last-of-type)::after{
-  @apply content-[url('/assets/images/icons/chv-right.svg')]
+.breadcrumb-2 a:not(:last-of-type)::after {
+  @apply content-[url('/assets/images/icons/chv-right.svg')];
 }
 
-.list-stl li{
-  @apply list-disc ms-6
+.list-stl li {
+  @apply list-disc ms-6;
 }
 
-.price-range .rc-slider-track{
-  @apply h-[6px] bg-primary rounded-none
+.price-range .rc-slider-track {
+  @apply h-[6px] bg-primary rounded-none;
 }
 
 .price-range .rc-slider-handle {
-  @apply w-4 h-4 border-solid border-2 border-transparent rounded shadow-[0_0_6px_rgba(0,0,0,0.1)] cursor-pointer opacity-100 hover:border-transparent active:border-primary active:shadow-none active:cursor-pointer focus:border-primary focus-visible:border-primary focus-visible:shadow-none
+  @apply w-4 h-4 border-solid border-2 border-transparent rounded shadow-[0_0_6px_rgba(0,0,0,0.1)] cursor-pointer opacity-100 hover:border-transparent active:border-primary active:shadow-none active:cursor-pointer focus:border-primary focus-visible:border-primary focus-visible:shadow-none;
 }
 
-.price-range .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging{
-  @apply border-primary shadow-none
+.price-range
+  .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
+  @apply border-primary shadow-none;
 }
 
 /* Header */
 
-.nav-menu a{
-  @apply text-base font-title font-normal text-slate-500 px-4 py-3 ease-in duration-100 hover:text-primary
+.nav-menu a {
+  @apply text-base font-title font-normal text-slate-500 px-4 py-3 ease-in duration-100 hover:text-primary;
 }
 
-.nav-search{
+.nav-search {
   width: 364px;
 }
 
-.nav-search input{
+.nav-search input {
   width: calc(100% - 48px);
 }
 
-.header-actions .single-action{
-  @apply inline-flex justify-center items-center w-12 h-12 text-[#475569] border border-slate-300 rounded-full ease-in duration-100 hover:bg-primary hover:text-white hover:border-transparent
+.header-actions .single-action {
+  @apply inline-flex justify-center items-center w-12 h-12 text-[#475569] border border-slate-300 rounded-full ease-in duration-100 hover:bg-primary hover:text-white hover:border-transparent;
 }
 
 /* Service Features */
 
-.single-feature{
-  @apply relative pr-4
+.single-feature {
+  @apply relative pr-4;
 }
 
-.single-feature:not(:first-of-type)::before{
-  @apply absolute content-[''] left-[-32px] top-0 w-px h-full bg-slate-300
+.single-feature:not(:first-of-type)::before {
+  @apply absolute content-[''] left-[-32px] top-0 w-px h-full bg-slate-300;
 }
 
 /* Single Product */
 
-.product-title{
+.product-title {
   -webkit-line-clamp: 1;
-  @apply my-1
+  @apply my-1;
 }
 
-.product-img-action-wrap .action-btn{
-  @apply absolute top-3 right-3 inline-flex justify-center items-center w-7 h-7 bg-white border border-slate-300 rounded-full cursor-pointer ease-in duration-100 hover:bg-primary hover:text-white hover:border-primary
+.product-img-action-wrap .action-btn {
+  @apply absolute top-3 right-3 inline-flex justify-center items-center w-7 h-7 bg-white border border-slate-300 rounded-full cursor-pointer ease-in duration-100 hover:bg-primary hover:text-white hover:border-primary;
 }
 
-.product-actions .action-btn{
-  @apply inline-flex justify-center items-center w-9 h-9 text-primary border border-primary rounded-lg cursor-pointer ease-in duration-100 hover:bg-primary hover:text-white hover:border-primary
+.product-actions .action-btn {
+  @apply inline-flex justify-center items-center w-9 h-9 text-primary border border-primary rounded-lg cursor-pointer ease-in duration-100 hover:bg-primary hover:text-white hover:border-primary;
 }
 
-.buy-btn{
-  @apply flex justify-center items-center gap-2 text-base/[16px] font-semibold font-title text-white bg-[#F99104] w-[168px] rounded-md py-2
+.buy-btn {
+  @apply flex justify-center items-center gap-2 text-base/[16px] font-semibold font-title text-white bg-[#F99104] w-[168px] rounded-md py-2;
 }
 
-.new-slider .swiper-slide .product-card-wrap:first-of-type{
-  @apply mb-5
+.new-slider .swiper-slide .product-card-wrap:first-of-type {
+  @apply mb-5;
 }
 
 /* Contact Form */
 
 .contact-wpr input,
-.contact-wpr textarea{
-  @apply w-full border border-white rounded-lg py-3 px-4 focus:bg-white focus:border-primary focus:outline-none
+.contact-wpr textarea {
+  @apply w-full border border-white rounded-lg py-3 px-4 focus:bg-white focus:border-primary focus:outline-none;
 }
 
-.submit-btn{
-  @apply w-[240px] text-lg font-semibold font-title text-white bg-[#F99104] rounded-lg py-3
+.submit-btn {
+  @apply w-[240px] text-lg font-semibold font-title text-white bg-[#F99104] rounded-lg py-3;
 }
 
-.errorMsg{
-  @apply text-base text-red-500 mt-2
+.errorMsg {
+  @apply text-base text-red-500 mt-2;
 }
 
 /* Product Thumb Slider */
 
 .slider {
-  @apply grid grid-cols-[64px_1fr] items-start
+  @apply grid grid-cols-[64px_1fr] items-start;
 }
 
-.thumb-slider .swiper{
-  @apply w-full max-w-full min-w-0 max-h-max min-h-0
+.thumb-slider .swiper {
+  @apply w-full max-w-full min-w-0 max-h-max min-h-0;
 }
 
-.thumb-slider .swiper-slide-thumb-active img{
-  @apply border-primary
+.thumb-slider .swiper-slide-thumb-active img {
+  @apply border-primary;
 }
 
-.preview-slider .swiper{
-  @apply w-full max-w-full min-w-0 max-h-screen min-h-0
+.preview-slider .swiper {
+  @apply w-full max-w-full min-w-0 max-h-screen min-h-0;
 }
 
 /* Product Details */
 
-.product-details .meta-data svg{
-  @apply mb-1
+.product-details .meta-data svg {
+  @apply mb-1;
 }
 
 .product-details .meta-data p,
-.product-details .meta-data span{
-  @apply relative text-base text-slate-900
+.product-details .meta-data span {
+  @apply relative text-base text-slate-900;
 }
 
-.product-details .meta-data p::before{
-  @apply absolute content-[""] top-[6px] left-[-16px] w-[1px] h-3 bg-slate-200
+.product-details .meta-data p::before {
+  @apply absolute content-[""] top-[6px] left-[-16px] w-[1px] h-3 bg-slate-200;
 }
 
-.coupon-info li::before{
-  @apply absolute content-[""] top-2 left-0 w-2 h-2 bg-slate-400 rounded-full
+.coupon-info li::before {
+  @apply absolute content-[""] top-2 left-0 w-2 h-2 bg-slate-400 rounded-full;
 }
 
-.delivery .single-info{
-  @apply w-1/2 grid grid-cols-[28px_1fr] items-center gap-3 px-5
+.delivery .single-info {
+  @apply w-1/2 grid grid-cols-[28px_1fr] items-center gap-3 px-5;
 }
 
-.product-tab-links a{
-  @apply relative inline-block text-slate-600 border-b-2 border-transparent px-6 py-3
+.product-tab-links a {
+  @apply relative inline-block text-slate-600 border-b-2 border-transparent px-6 py-3;
 }
 
-.product-tab-links a.active{
-  @apply text-secondary-700 border-secondary-700
+.product-tab-links a.active {
+  @apply text-secondary-700 border-secondary-700;
 }
 
-.product-tab-links li:not(:last-of-type) a::after{
-  @apply absolute content-[""] right-0 w-[1px] h-6 bg-slate-200
+.product-tab-links li:not(:last-of-type) a::after {
+  @apply absolute content-[""] right-0 w-[1px] h-6 bg-slate-200;
 }
 
 /* Footer */
 
-.footer::after{
-  @apply absolute content-[url("/assets/images/ellipse.png")] top-[-75%] right-0 h-12 z-[-1]
+.footer::after {
+  @apply absolute content-[url("/assets/images/ellipse.png")] top-[-75%] right-0 h-12 z-[-1];
 }
 
 .footer-widget p,
-.footer-widget a{
-  @apply inline-block text-base font-normal font-body text-white mb-3 ease-in duration-100
+.footer-widget a {
+  @apply inline-block text-base font-normal font-body text-white mb-3 ease-in duration-100;
 }
 
-.footer-widget a{
-  @apply hover:text-primary
+.footer-widget a {
+  @apply hover:text-primary;
 }
 
-.footer-widget h5{
-  @apply text-base/[16px] font-semibold font-title text-[#00B7C9] mt-5 mb-8
+.footer-widget h5 {
+  @apply text-base/[16px] font-semibold font-title text-[#00B7C9] mt-5 mb-8;
 }
 
-.footer-widget .info-list li{
-  @apply flex items-center gap-4 
+.footer-widget .info-list li {
+  @apply flex items-center gap-4;
 }
 
-.footer-widget .info-list svg{
-  @apply text-white mb-3
+.footer-widget .info-list svg {
+  @apply text-white mb-3;
 }
 
 .ReactCollapse__collapse {

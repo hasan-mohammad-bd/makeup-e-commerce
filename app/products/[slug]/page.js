@@ -20,6 +20,12 @@ const page = ({ params }) => {
               >
                 হোম
               </Link>
+              <Link
+                href={`/products`}
+                className="text-base text-slate-600 hover:text-primary"
+              >
+                প্রডাক্টস
+              </Link>
               {Object.keys(params).map((key, indx) => (
                 <Link
                   href={`/${params[key]}`}
