@@ -18,6 +18,7 @@ import { TbTag } from "react-icons/tb";
 import { IoCopy } from "react-icons/io5";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { QuestionAnswer } from "@/app/products/[slug]/QuestionAnswer";
+import { Specifications } from "@/app/products/[slug]/Specifications";
 
 const ProductDetails = ({ product }) => {
   return (
@@ -241,6 +242,7 @@ const ProductDetails = ({ product }) => {
               </li>
             </ul>
             <div className="product-tab-content py-8 border-b-4 border-slate-200">
+              <Specifications />
               <div className="description">
                 <h4 className="text-2xl font-bold font-title text-slate-900">
                   প্রডাক্টের বিবরণ:

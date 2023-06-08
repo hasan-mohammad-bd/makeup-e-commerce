@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { AnswerIcon } from "@/public/assets/images/icons/svg/AnswerIcon";
-import { QuestionIcon } from "@/public/assets/images/icons/svg/QuestionIcon";
+import { AnswerIcon } from "@/components/elements/svg/AnswerIcon";
+import { QuestionIcon } from "@/components/elements/svg/QuestionIcon";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 

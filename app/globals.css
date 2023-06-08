@@ -66,6 +66,12 @@
   @apply inline-flex items-center justify-center gap-2 text-white font-semibold font-title bg-primary rounded-lg text-center box-border py-3;
 }
 
+.text-btn {
+  @apply inline-flex items-center justify-center gap-2 text-primary font-title bg-transparent box-border py-3;
+}
+
+
+
 .slider-btn {
   @apply absolute top-1/2 left-5 inline-flex justify-center items-center w-12 h-12 bg-[#F8FAFC] rounded-full translate-y-[-1/2] z-10 cursor-pointer;
 }
