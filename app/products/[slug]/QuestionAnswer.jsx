@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
-import { AnswerIcon } from "@/components/elements/svg/AnswerIcon";
-import { QuestionIcon } from "@/components/elements/svg/QuestionIcon";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
+import { AnswerIcon, QuestionIcon } from "@/components/elements/svg";
 
 const allQuestions = [
   {
@@ -62,7 +61,7 @@ const allQuestions = [
   },
 ];
 
-export const QuestionAnswer = ({ questions }) => {
+const QuestionAnswer = ({ questions }) => {
   const [isSearch, setIsSearch] = useState(false);
   return (
     <div className="question-answer mb-8">
@@ -141,3 +140,5 @@ export const QuestionAnswer = ({ questions }) => {
     </div>
   );
 };
+
+export default QuestionAnswer;

@@ -1,4 +1,4 @@
-export const AnswerIcon = (props) => {
+const AnswerIcon = (props) => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" {...props}>
       <path
@@ -13,3 +13,5 @@ export const AnswerIcon = (props) => {
     </svg>
   );
 };
+
+export default AnswerIcon;

@@ -1,6 +1,6 @@
 import { BiPlus } from "react-icons/bi";
 
-export const Specifications = ({ specifications }) => {
+const Specifications = ({ specifications }) => {
   return (
     <div className="question-answer mb-8">
       <h4 className="text-2xl font-bold font-title text-slate-900">
@@ -171,3 +171,5 @@ export const Specifications = ({ specifications }) => {
     </div>
   );
 };
+
+export default Specifications;
