@@ -26,17 +26,12 @@ const page = ({ params }) => {
               >
                 প্রডাক্টস
               </Link>
-              {Object.keys(params).map((key, indx) => (
-                <Link
-                  href={`/${params[key]}`}
-                  className={`text-base ${
-                    params[key] === slug ? "text-slate-900" : "text-slate-600"
-                  } hover:text-primary`}
-                  key={indx}
-                >
-                  {params[key]}
-                </Link>
-              ))}
+              <Link
+                href={`/products/${params.slug}`}
+                className={`text-base text-slate-900 hover:text-primary`}
+              >
+                {params.slug}
+              </Link>
             </div>
           </div>
         </div>

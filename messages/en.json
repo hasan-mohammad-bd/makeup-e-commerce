@@ -1,0 +1,14 @@
+{
+  "Index": {
+    "title": "Hello world!"
+  },
+  "contact-us": {
+    "breadcrumb": {
+      "home": "Home",
+      "contact": "Contact"
+    },
+    "title": "Contact Us",
+    "address": "52/1, Road No #12, Shekertech, Adabor, Muhammadpur, Dhaka-1207",
+    "phone": "01768572658"
+  }
+}

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import Search from "../elements/Search";
 
 // ** Import Icons
 import {
@@ -10,6 +9,8 @@ import {
   HiOutlineShoppingCart,
   HiOutlineUser,
 } from "react-icons/hi2";
+import Search from "../elements/Search";
+import LanguageSelector from "./LanguageSelector";
 
 const Header = ({
   totalCartItems,
@@ -17,10 +18,10 @@ const Header = ({
   toggleClick,
   totalWishlistItems,
   children,
+  locale,
 }) => {
   const [isToggled, setToggled] = useState(false);
   const [scroll, setScroll] = useState(0);
-
   useEffect(() => {
     document.addEventListener("scroll", () => {
       const scrollCheck = window.scrollY >= 100;
@@ -56,6 +57,7 @@ const Header = ({
                   <HiOutlineUser size={24} />
                   <span className="pro-count blue">{totalCartItems}</span>
                 </Link>
+                <LanguageSelector locale={locale} />
               </div>
             </div>
           </div>

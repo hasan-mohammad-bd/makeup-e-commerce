@@ -17,9 +17,9 @@ import { TfiAngleRight } from "react-icons/tfi";
 import { TbTag } from "react-icons/tb";
 import { IoCopy } from "react-icons/io5";
 import { BsFillTelephoneFill } from "react-icons/bs";
-import QuestionAnswer from "@/app/products/[slug]/QuestionAnswer";
-import Specifications from "@/app/products/[slug]/Specifications";
-import RatingReviews from "@/app/products/[slug]/(reviews)/RatingReviews";
+import RatingReviews from "@/app/[locale]/products/[slug]/(reviews)/RatingReviews";
+import Specifications from "@/app/[locale]/products/[slug]/Specifications";
+import QuestionAnswer from "@/app/[locale]/products/[slug]/QuestionAnswer";
 
 const ProductDetails = ({ product }) => {
   return (

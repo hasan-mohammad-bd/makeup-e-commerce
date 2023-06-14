@@ -1,3 +1,11 @@
+import {
+  // getTranslations, // like `useTranslations`
+  // getFormatter, // like `useFormatter`
+  getLocale, // like `useLocale`
+  // getNow, // like `useNow`
+  // getTimeZone // like `useTimeZone`
+} from "next-intl/server";
+
 /**
  * This is an asynchronous function that fetches data from an API using the provided configuration and
  * returns the data.
@@ -14,6 +22,7 @@ export async function fetchData(config) {
     headers: {
       AmsPublickey: process.env.AmsPublickey,
       AmsPrivateKey: process.env.AmsPrivateKey,
+      lang: getLocale(),
     },
   });
   const data = await res.json();

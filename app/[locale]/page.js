@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import ServiceFeatures from "@/components/ServiceFeatures";
-import Intro from "@/components/elements/sliders/Intro";
+import Intro from "@/components/Intro";
 import FlashSale from "@/components/FlashSale";
 import BestSell from "@/components/BestSell";
 import AllProducts from "@/components/AllProducts";
