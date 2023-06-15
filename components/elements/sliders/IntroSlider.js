@@ -10,7 +10,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { HiChevronRight } from "react-icons/hi2";
 
 const IntroSlider = ({ sliders }) => {
-  console.log(sliders, "sliders");
 
   return (
     <>

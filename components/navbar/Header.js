@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // ** Import Icons
 import {
@@ -11,6 +11,8 @@ import {
 } from "react-icons/hi2";
 import Search from "../elements/Search";
 import LanguageSelector from "./LanguageSelector";
+import { HiArrowNarrowRight } from "react-icons/hi";
+import LoginModal from "../elements/modals/login/LoginModal";
 
 const Header = ({
   totalCartItems,
@@ -21,7 +23,36 @@ const Header = ({
   locale,
 }) => {
   const [isToggled, setToggled] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [scroll, setScroll] = useState(0);
+
+  //start of popover
+  const [userOpen, setUserOpen] = useState(false);
+  const popoverRef = useRef(null);
+
+  const togglePopover = () => {
+    setUserOpen((prevState) => !prevState);
+  };
+
+  const handleModalOpen = () => {
+    setUserOpen(false);
+    setShowModal(true);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+        setUserOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  //end of popover
+
   useEffect(() => {
     document.addEventListener("scroll", () => {
       const scrollCheck = window.scrollY >= 100;
@@ -53,16 +84,42 @@ const Header = ({
                   <HiOutlineShoppingCart size={24} />
                   <span className="pro-count blue">{totalWishlistItems}</span>
                 </Link>
-                <Link href="/shop-cart" className="single-action">
-                  <HiOutlineUser size={24} />
-                  <span className="pro-count blue">{totalCartItems}</span>
-                </Link>
+                <div className="relative" ref={popoverRef}>
+                  <button className="single-action" onClick={togglePopover}>
+                    <HiOutlineUser size={24} />
+                    <span className="pro-count blue">{totalCartItems}</span>
+                  </button>
+                  {userOpen && (
+                    <div className="absolute right-0 top-0 z-10 mt-14">
+                      <div className="relative bg-white px-6 py-8 w-52 border border-slate-300 rounded-lg">
+                        <div className="absolute top-0 right-0 transform -translate-x-1/2 -translate-y-1/2 rotate-45 w-4 h-4 bg-white border-l border-t border-slate-300"></div>
+                        <p className="text-slate-500 text-base font-bold text-center">
+                          আপনার একাউন্ট লগ-ইন করা নেই
+                        </p>
+                        <div className="flex justify-center mt-4">
+                          <button
+                            className="primary-btn px-6"
+                            onClick={handleModalOpen}
+                          >
+                            লগ-ইন করুন
+                            <HiArrowNarrowRight />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
                 <LanguageSelector locale={locale} />
               </div>
             </div>
           </div>
         </div>
       </header>
+      <LoginModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        title={"স্বাগতম"}
+      />
     </>
   );
 };
