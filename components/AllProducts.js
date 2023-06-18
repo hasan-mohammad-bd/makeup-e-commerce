@@ -1,9 +1,10 @@
 import SingleProduct from "./SingleProduct";
 import { fetchData } from "@/utils/fetchData";
+import productData from "../public/static/db.json";
 
 const AllProducts = async () => {
   const data = await fetchData({ api: "products", revalidate: 60 });
-  const allProducts = data?.products || [];
+  const allProducts = data?.products || productData?.products || [];
 
   return (
     <>

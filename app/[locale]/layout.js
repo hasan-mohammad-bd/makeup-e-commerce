@@ -7,10 +7,11 @@ import { notFound } from "next/navigation";
 
 // ** Import Components
 import Footer from "@/components/footer/Footer";
-import Cart from "@/components/elements/Cart";
 import CheckConnection from "@/components/CheckConnection";
 import Header from "@/components/navbar/Header";
 import NavItems from "@/components/navbar/NavItems";
+import CartTray from "@/components/elements/CartTray";
+import ReduxProvider from "@/store/ReduxProvider";
 
 //** Swiper Slider
 import "swiper/css";
@@ -33,12 +34,14 @@ export default function RootLayout({ children, params }) {
   return (
     <html lang={locale}>
       <body>
-        <Header locale={locale}>
-          <NavItems />
-        </Header>
-        <CheckConnection>{children}</CheckConnection>
-        <Footer />
-        <Cart />
+        <ReduxProvider>
+          <Header locale={locale}>
+            <NavItems />
+          </Header>
+          <CheckConnection>{children}</CheckConnection>
+          <Footer />
+          <CartTray />
+        </ReduxProvider>
       </body>
     </html>
   );

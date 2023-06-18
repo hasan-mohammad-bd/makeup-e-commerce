@@ -20,8 +20,8 @@ export async function fetchData(config) {
   const res = await fetch(`${process.env.server}/${config?.api}`, {
     next: { revalidate: config?.revalidate || 60 },
     headers: {
-      AmsPublickey: process.env.AmsPublickey,
-      AmsPrivateKey: process.env.AmsPrivateKey,
+      AmsPublickey: process.env.AMS_PUBLIC_KEY,
+      AmsPrivateKey: process.env.AMS_PRIVATE_KEY,
       lang: getLocale(),
     },
   });
