@@ -12,7 +12,9 @@ import {
 import Search from "../elements/Search";
 import LanguageSelector from "./LanguageSelector";
 import { HiArrowNarrowRight } from "react-icons/hi";
-import LoginModal from "../elements/modals/login/LoginModal";
+import LoginModal from "../modals/login/LoginModal";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleCart } from "@/store/features/cartSlice";
 
 const Header = ({
   totalCartItems,
@@ -25,6 +27,8 @@ const Header = ({
   const [isToggled, setToggled] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [scroll, setScroll] = useState(0);
+  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   //start of popover
   const [userOpen, setUserOpen] = useState(false);
@@ -80,10 +84,15 @@ const Header = ({
                   <HiOutlineHeart size={24} />
                   <span className="pro-count blue">{totalCompareItems}</span>
                 </Link>
-                <Link href="/shop-wishlist" className="single-action">
+                <button
+                  onClick={() => dispatch(toggleCart())}
+                  className="single-action relative"
+                >
                   <HiOutlineShoppingCart size={24} />
-                  <span className="pro-count blue">{totalWishlistItems}</span>
-                </Link>
+                  <span className="absolute -right-2 -top-2 bg-red-500 text-white px-2 text-center rounded-full">
+                    {cart?.length || 0}
+                  </span>
+                </button>
                 <div className="relative" ref={popoverRef}>
                   <button className="single-action" onClick={togglePopover}>
                     <HiOutlineUser size={24} />

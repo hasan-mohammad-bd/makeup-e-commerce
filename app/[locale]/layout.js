@@ -17,6 +17,8 @@ import ReduxProvider from "@/store/ReduxProvider";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import Cart from "@/components/side-drawers/Cart";
+import ProductSelect from "@/components/side-drawers/ProductSelect";
 
 export const metadata = {
   title: "Sotota Stall",
@@ -41,6 +43,8 @@ export default function RootLayout({ children, params }) {
           <CheckConnection>{children}</CheckConnection>
           <Footer />
           <CartTray />
+          <Cart />
+          <ProductSelect />
         </ReduxProvider>
       </body>
     </html>

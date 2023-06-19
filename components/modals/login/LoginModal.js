@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import Modal from "../../Modal";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import SocialLogin from "./SocialLogin";
 import OtpForm from "./OtpForm";
-import { TURBO_TRACE_DEFAULT_MEMORY_LIMIT } from "next/dist/shared/lib/constants";
+import Modal from "@/components/elements/Modal";
 
 const LoginModal = ({ showModal, setShowModal, title }) => {
   const [otpSent, setOtpSent] = useState(false);

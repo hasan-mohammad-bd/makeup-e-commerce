@@ -3,12 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-// import { connect } from "react-redux";
-// import { toast } from "react-toastify";
-// import { addToCart } from "../../redux/action/cart";
-// import { addToCompare } from "../../redux/action/compareAction";
-// import { openQuickView } from "../../redux/action/quickViewAction";
-// import { addToWishlist } from "../../redux/action/wishlistAction";
 import Loader from "./elements/Loader";
 
 // ** Import Icon
@@ -18,15 +12,17 @@ import {
   HiOutlineShoppingCart,
   HiArrowLongRight,
 } from "react-icons/hi2";
+import { useDispatch } from "react-redux";
+import { addToSelected } from "@/store/features/cartSlice";
 
 const SingleProduct = ({
   product,
-  addToCart,
   addToCompare,
   addToWishlist,
   openQuickView,
 }) => {
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (Object.keys(product).length !== 0) {
@@ -34,9 +30,8 @@ const SingleProduct = ({
     }
   }, [product]);
 
-  const handleCart = (product) => {
-    addToCart(product);
-    toast.success("Add to Cart !");
+  const handleAddToCart = (product) => {
+    dispatch(addToSelected(product));
   };
 
   const handleCompare = (product) => {
@@ -121,7 +116,7 @@ const SingleProduct = ({
                 <a
                   aria-label="Add To Cart"
                   className="action-btn"
-                  onClick={(e) => handleCart(product)}
+                  onClick={(e) => handleAddToCart(product)}
                 >
                   <HiOutlineShoppingCart size={24} />
                 </a>
