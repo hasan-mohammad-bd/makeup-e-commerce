@@ -86,7 +86,7 @@ const Checkout = () => {
               )
             )}
           </div>
-          <div className="p-4 mt-8 bg-[#FFF6EB] shadow border border-primary rounded-lg">
+          <div className="p-4 mt-8 bg-amber-200 shadow border border-primary rounded-lg">
             <h4 className="text-slate-700 font-bold">
               ডেলিভারি মেথড নির্বাচন করুন
             </h4>
@@ -209,7 +209,7 @@ const Checkout = () => {
                     onClick={() => handlePayOptionChange(option)}
                     className={`rounded-lg ${
                       selectedOption.key === option.key
-                        ? "bg-[#FFF6EB] border border-primary"
+                        ? "bg-amber-200 border border-primary"
                         : "bg-slate-100"
                     } p-4 relative text-slate-700 flex flex-col justify-between gap-2`}
                   >

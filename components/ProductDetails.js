@@ -129,7 +129,7 @@ const ProductDetails = ({ product }) => {
                         className="peer hidden"
                       />
                       <label
-                        className="inline-block text-slate-700 border border-slate-300 rounded-lg px-4 py-3 whitespace-nowrap cursor-pointer peer-checked:text-primary peer-checked:bg-[#FFF6EB] peer-checked:border-primary"
+                        className="inline-block text-slate-700 border border-slate-300 rounded-lg px-4 py-3 whitespace-nowrap cursor-pointer peer-checked:text-primary peer-checked:bg-amber-200 peer-checked:border-primary"
                         htmlFor={`size-${i}`}
                       >
                         Extra Large
