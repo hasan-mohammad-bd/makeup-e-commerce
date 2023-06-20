@@ -180,6 +180,12 @@
   @apply mb-5;
 }
 
+/* From common classes  */
+.form-control input,
+.form-control textarea {
+  @apply w-full rounded-lg;
+}
+
 /* Contact Form */
 
 .contact-wpr input,

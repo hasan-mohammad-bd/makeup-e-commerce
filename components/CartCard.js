@@ -15,7 +15,7 @@ const sizes = [
 
 const CartCard = ({ item }) => {
   return (
-    <div className="relative cart-card p-3 shadow rounded-lg mb-4">
+    <div className="relative cart-card p-3 bg-white shadow rounded-lg mb-3">
       <button className="absolute right-1.5 top-1 bg-transparent text-red-500">
         <MdDeleteSweep />
       </button>

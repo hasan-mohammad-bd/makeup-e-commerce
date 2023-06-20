@@ -54,10 +54,13 @@ const Cart = () => {
           <p className="">সর্বমোট:</p>
           <h3 className="text-slate-900 font-bold">৳16539</h3>
         </div>
-        <button className="bg-primary py-3 px-6 w-full text-white rounded-lg text-center">
+        <Link
+          href={"/checkout"}
+          className="bg-primary py-3 px-6 w-full text-white rounded-lg text-center"
+        >
           <span className="mr-2">এখনই কিনুন</span>
           <HiArrowLongRight size={20} />
-        </button>
+        </Link>
       </div>
     </DrawerRight>
   );

@@ -86,10 +86,13 @@ const ProductSelect = () => {
             <HiOutlineShoppingCart size={24} />
             <span className="ml-2">কার্টে রাখুন</span>
           </button>
-          <button className="bg-primary py-3 w-full px-6 text-white rounded-lg text-center">
-            <span className="mr-2">কার্টে রাখুন</span>
+          <Link
+            href={"/checkout"}
+            className="bg-primary py-3 w-full px-6 text-white rounded-lg text-center"
+          >
+            <span className="mr-2">এখনই কিনুন</span>
             <HiArrowLongRight size={20} />
-          </button>
+          </Link>
         </div>
         <Link href="/products/productIdOrSlug" className="text-secondary-700">
           <p className="text-center">প্রডাক্টির বিস্তারিত দেখতে ক্লক করুন</p>
