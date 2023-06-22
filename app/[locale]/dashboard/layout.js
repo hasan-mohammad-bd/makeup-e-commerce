@@ -1,7 +1,10 @@
 "use client";
 
+import { logOut } from "@/store/features/authSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 //icons
 import { FaClipboardList, FaUser } from "react-icons/fa";
@@ -43,10 +46,17 @@ const navItems = [
     icon: <HiTicket />,
     path: "/dashboard/support-ticket",
   },
-  { text: "লগ-আউট", icon: <IoLogOut />, path: "/dashboard/logout" },
   // Add more items as needed
 ];
 export default function DashboardLayout({ children }) {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    dispatch(logOut());
+    router.push("/");
+  };
+
   const pathname = usePathname();
   return (
     <div className="bg-slate-100">
@@ -79,6 +89,19 @@ export default function DashboardLayout({ children }) {
                     </Link>
                   </li>
                 ))}
+                <li
+                  className={`flex items-center py-3 px-4 rounded-lg w-full font-bold`}
+                >
+                  <button
+                    className="flex items-center space-x-2"
+                    onClick={handleLogout}
+                  >
+                    <span className={`text-amber-400 font-bold text-xl`}>
+                      <IoLogOut />
+                    </span>
+                    <span>লগ-আউট</span>
+                  </button>
+                </li>
               </ul>
             </nav>
           </div>

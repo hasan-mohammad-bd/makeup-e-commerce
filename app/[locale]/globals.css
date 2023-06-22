@@ -29,7 +29,7 @@
     @apply absolute top-0 left-[1/2] hidden text-sm text-white translate-x-[-50%]
   } */
 
-  select {
+  .select {
     @apply appearance-none bg-[url('/assets/images/icons/chv-down.svg')] bg-no-repeat bg-[length:24px_40px] bg-[right_1rem_center];
   }
 

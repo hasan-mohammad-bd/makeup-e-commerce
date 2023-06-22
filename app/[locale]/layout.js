@@ -1,6 +1,6 @@
 import "rc-slider/assets/index.css";
 import "./globals.css";
-
+import "react-toastify/dist/ReactToastify.css";
 // ** int18n
 import { useLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -27,7 +27,6 @@ export const metadata = {
 
 export default function RootLayout({ children, params }) {
   const locale = useLocale();
-
   // Show a 404 error if the user requests an unknown locale
   if (params.locale !== locale) {
     notFound();
