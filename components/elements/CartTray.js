@@ -2,19 +2,17 @@
 
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-// import { useRouter } from "next/navigation";
 
 // ** Import Icons
 import { TbCurrencyTaka } from "react-icons/tb";
 import { toggleCart } from "@/store/features/cartSlice";
+import { getMultipliedColumnTotal } from "@/utils/getTotal";
 
 const CartTray = () => {
-  // const router = useRouter();
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const handleCart = () => {
-    // router.push("/cart");
     dispatch(toggleCart());
   };
 
@@ -37,7 +35,7 @@ const CartTray = () => {
           <p className="text-xs text-white">{cart?.length} আইটেম</p>
           <p className="text-xs font-semibold text-white">
             <TbCurrencyTaka size={14} className="font-semibold" />
-            168,699
+            {getMultipliedColumnTotal(cart, "quantity", "new_price")}
           </p>
         </div>
       </div>

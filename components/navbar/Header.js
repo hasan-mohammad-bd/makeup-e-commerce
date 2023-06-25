@@ -16,14 +16,7 @@ import LoginModal from "../modals/login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "@/store/features/cartSlice";
 
-const Header = ({
-  totalCartItems,
-  totalCompareItems,
-  toggleClick,
-  totalWishlistItems,
-  children,
-  locale,
-}) => {
+const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
   const [isToggled, setToggled] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [scroll, setScroll] = useState(0);

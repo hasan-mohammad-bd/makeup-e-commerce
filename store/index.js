@@ -13,4 +13,14 @@ const store = configureStore({
     getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
+// Add local storage persistence
+store.subscribe(() => {
+  const cartItems = store.getState().cart.cart;
+  try {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  } catch (error) {
+    console.error("Error saving cart items to local storage:", error);
+  }
+});
+
 export default store;

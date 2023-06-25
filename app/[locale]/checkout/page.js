@@ -3,9 +3,10 @@ import CartCard from "@/components/CartCard";
 import CustomRadio from "@/components/elements/CustomRadio";
 import PayOptionIcon from "@/components/elements/svg/PayOptionIcon";
 import Image from "next/image";
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiPlus } from "react-icons/fi";
+import { useSelector } from "react-redux";
 
 const payOptions = [
   {
@@ -41,9 +42,9 @@ const Checkout = () => {
   const [selectedOption, setSelectedOption] = useState(payOptions[0]);
   const [deliveryMethod, setDeliveryMethod] = useState(deliveryMethods[0]);
   const [orderCollapsed, setOrderCollapsed] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
 
   //slicing cart items based on orderCollapsed
-  const cart = new Array(5).fill(3);
   const cartItems = orderCollapsed ? cart : cart.slice(0, 3);
 
   const handlePayOptionChange = (option) => {
@@ -77,7 +78,7 @@ const Checkout = () => {
                       onClick={() => setOrderCollapsed(true)}
                     >
                       <FiPlus />
-                      আরও ৩
+                      {cart.length - 2}
                     </button>
                   </div>
                 </div>

@@ -13,7 +13,7 @@ import {
   HiArrowLongRight,
 } from "react-icons/hi2";
 import { useDispatch } from "react-redux";
-import { addToSelected } from "@/store/features/cartSlice";
+import { addToCart, addToSelected } from "@/store/features/cartSlice";
 
 const SingleProduct = ({
   product,
@@ -31,7 +31,11 @@ const SingleProduct = ({
   }, [product]);
 
   const handleAddToCart = (product) => {
-    dispatch(addToSelected(product));
+    if (product.productVariants.length) {
+      dispatch(addToSelected(product));
+    } else {
+      dispatch(addToCart(product));
+    }
   };
 
   const handleCompare = (product) => {
@@ -53,8 +57,8 @@ const SingleProduct = ({
                 <Link href="/products/[slug]" as={`/products/${product.slug}`}>
                   <Image
                     className="default-img"
-                    src={product.images[0].img}
-                    alt={product.title}
+                    src={product?.image || "/assets/images/no-image.png"}
+                    alt={product?.product_name}
                     width={220}
                     height={220}
                     priority={true}
@@ -78,7 +82,7 @@ const SingleProduct = ({
                   href="/products"
                   className="text-xs text-primary capitalize"
                 >
-                  {product.brand}
+                  {product?.brand?.brand_name || "No Brand"}
                 </Link>
               </div>
               <h2>
@@ -86,40 +90,43 @@ const SingleProduct = ({
                   href={`/products/${product.slug}`}
                   className="product-title text-base font-semibold text-slate-900 font-body overflow-text"
                 >
-                  {product.title}
+                  {product?.product_name}
                 </Link>
               </h2>
               <div className="rating-result flex items-center gap-3 mb-4">
                 <span className="text-sm/[16px] font-semibold text-slate-900">
-                  {product.rating}
+                  {product?.rating}
                   <FaStar
                     size={12}
                     className="inline text-primary align-middle"
                   />
                 </span>
                 <span className="text-sm/[16px] font-semibold text-slate-900">
-                  {product.review}K
+                  {product?.review}K
                 </span>
               </div>
               <div className="product-price mb-3">
                 <span className="text-lg/[24px] font-semibold text-red-500">
-                  {product.price}{" "}
+                  {product?.new_price}{" "}
                 </span>
                 <del className="old-price text-sm font-normal text-slate-400">
-                  {product.oldPrice ? `$ ${product.oldPrice}` : null}
+                  {product?.old_price ? `$ ${product.old_price}` : null}
                 </del>
                 <span className="discount inline-block text-xs text-white bg-red-500 rounded-md py-.5 px-1 ml-2">
-                  {product.discount.percentage}%
+                  {product?.discount?.percentage || "NotFound"}%
                 </span>
               </div>
               <div className="product-actions flex justify-center items-center gap-2">
-                <a
+                <button
                   aria-label="Add To Cart"
                   className="action-btn"
                   onClick={(e) => handleAddToCart(product)}
                 >
-                  <HiOutlineShoppingCart size={24} />
-                </a>
+                  <HiOutlineShoppingCart
+                    size={24}
+                    className="active:scale-90"
+                  />
+                </button>
                 <Link href={"/"} className="buy-btn">
                   এখনই কিনুন <HiArrowLongRight size={20} />
                 </Link>

@@ -23,10 +23,7 @@ const authAPI = apiSlice.injectEndpoints({
       invalidatesTags: ["user"],
     }),
     getUser: builder.query({
-      query: () => ({
-        url: "user",
-        method: "POST",
-      }),
+      query: () => `user`,
       providesTags: ["user"],
     }),
   }),

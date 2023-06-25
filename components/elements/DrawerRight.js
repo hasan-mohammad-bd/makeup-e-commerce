@@ -31,7 +31,7 @@ const DrawerRight = ({ title, children, show, setShow }) => {
             </button>
           </div>
           {/*body*/}
-          {children ? (
+          {children && show ? (
             children
           ) : (
             <p className="text-slate-500 text-lg leading-relaxed">

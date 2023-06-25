@@ -7,6 +7,7 @@ import { HiArrowLongRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import CartCard from "../CartCard";
 import { FiPlus } from "react-icons/fi";
+import { getMultipliedColumnTotal } from "@/utils/getTotal";
 
 const Cart = () => {
   const { isCartOpen, cart } = useSelector((state) => state.cart);
@@ -32,15 +33,12 @@ const Cart = () => {
       </div>
       <div className="p-3 flex flex-col h-[77%]">
         <div className="overflow-y-auto">
-          {new Array(3).fill(3).map((item) => (
-            <CartCard key={item} item={item} />
+          {cart.map((item) => (
+            <CartCard key={item.id} item={item} />
           ))}
 
           <div className="my-8 text-center">
-            <Link
-              href="/products/productIdOrSlug"
-              className="text-secondary-700 font-bold"
-            >
+            <Link href="/products" className="text-secondary-700 font-bold">
               <span className="inline-flex items-center">
                 <FiPlus size={24} className="mr-2" />
                 আরো শপিং করুন
@@ -52,7 +50,9 @@ const Cart = () => {
       <div className="fixed left-0 bottom-0 w-full p-4 bg-slate-50 border-t border-slate-200 flex gap-12 justify-between items-center">
         <div className="text-center">
           <p className="">সর্বমোট:</p>
-          <h3 className="text-slate-900 font-bold">৳16539</h3>
+          <h3 className="text-slate-900 font-bold">
+            ৳ {getMultipliedColumnTotal(cart, "quantity", "new_price")}
+          </h3>
         </div>
         <Link
           href={"/checkout"}
