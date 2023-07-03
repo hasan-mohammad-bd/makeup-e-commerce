@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Loader from "./elements/Loader";
+import { useRouter } from "next/navigation";
 
 // ** Import Icon
 import { FaStar } from "react-icons/fa";
@@ -23,6 +24,7 @@ const SingleProduct = ({
 }) => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     if (Object.keys(product).length !== 0) {
@@ -35,6 +37,16 @@ const SingleProduct = ({
       dispatch(addToSelected(product));
     } else {
       dispatch(addToCart(product));
+    }
+  };
+
+  // Buy Now action
+  const handleCheckout = (product) => {
+    if (product.productVariants.length) {
+      dispatch(addToSelected(product));
+    } else {
+      dispatch(addToCart(product));
+      router.push("/checkout");
     }
   };
 
@@ -94,27 +106,29 @@ const SingleProduct = ({
                 </Link>
               </h2>
               <div className="rating-result flex items-center gap-3 mb-4">
-                <span className="text-sm/[16px] font-semibold text-slate-900">
-                  {product?.rating}
-                  <FaStar
-                    size={12}
-                    className="inline text-primary align-middle"
-                  />
-                </span>
-                <span className="text-sm/[16px] font-semibold text-slate-900">
-                  {product?.review}K
-                </span>
+                <div className="font-semibold text-slate-900 inline-flex gap-1 justify-center">
+                  {product?.rating || 0}
+                  <FaStar className="inline text-primary align-middle" />
+                </div>
+                <div className="font-semibold text-slate-900 inline-flex gap-1 justify-center">
+                  {product?.review || 0}K
+                </div>
               </div>
-              <div className="product-price mb-3">
+              <div className="product-price mb-3 flex gap-2">
                 <span className="text-lg/[24px] font-semibold text-red-500">
-                  {product?.new_price}{" "}
+                  ৳{product?.new_price}
                 </span>
-                <del className="old-price text-sm font-normal text-slate-400">
-                  {product?.old_price ? `$ ${product.old_price}` : null}
-                </del>
-                <span className="discount inline-block text-xs text-white bg-red-500 rounded-md py-.5 px-1 ml-2">
-                  {product?.discount?.percentage || "NotFound"}%
-                </span>
+                {typeof product?.discount_percentage === "number" &&
+                product?.discount_percentage > 0 ? (
+                  <>
+                    <del className="old-price text-lg/[24px] font-normal text-slate-400">
+                      {product?.old_price}
+                    </del>
+                    <span className="discount inline-block text-xs text-white bg-red-500 rounded-md py-1 px-1 ml-2">
+                      -{product?.discount_percentage.toFixed(2)}%
+                    </span>
+                  </>
+                ) : null}
               </div>
               <div className="product-actions flex justify-center items-center gap-2">
                 <button
@@ -127,9 +141,12 @@ const SingleProduct = ({
                     className="active:scale-90"
                   />
                 </button>
-                <Link href={"/"} className="buy-btn">
+                <button
+                  onClick={() => handleCheckout(product)}
+                  className="buy-btn px-2"
+                >
                   এখনই কিনুন <HiArrowLongRight size={20} />
-                </Link>
+                </button>
               </div>
             </div>
           </div>

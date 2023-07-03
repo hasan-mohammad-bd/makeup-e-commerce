@@ -74,15 +74,16 @@ const ProductSelect = () => {
               <h3 className="text-xl text-red-500">
                 ৳{selectedProduct?.new_price || 0}
               </h3>
-              {selectedProduct?.old_price ? (
-                <h4 className="text-md text-slate-300 line-through">
-                  ৳{selectedProduct?.old_price}
-                </h4>
-              ) : null}
-              {selectedProduct?.discount_percentage ? (
-                <div className="rounded-full px-3 text-sm py-1 text-white bg-red-500">
-                  {selectedProduct?.discount_percentage}% OFF
-                </div>
+              {typeof selectedProduct?.discount_percentage === "number" &&
+              selectedProduct?.discount_percentage > 0 ? (
+                <>
+                  <del className="text-xl text-slate-300">
+                    ৳ {selectedProduct?.old_price}
+                  </del>
+                  <div className="rounded-full px-3 text-sm py-1 text-white bg-red-500">
+                    -{selectedProduct?.discount_percentage.toFixed(2)}% OFF
+                  </div>
+                </>
               ) : null}
             </div>
           </div>
@@ -143,6 +144,7 @@ const ProductSelect = () => {
           </button>
           <Link
             href={"/checkout"}
+            onClick={closeDrawer}
             className="bg-primary py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
           >
             <span className="mr-2">এখনই কিনুন</span>

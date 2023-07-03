@@ -8,7 +8,7 @@ const DrawerRight = ({ title, children, show, setShow }) => {
       {show && (
         <div
           className="fixed top-0 left-0 z-30 w-full h-screen bg-black opacity-50"
-          //   onClick={setShow}
+          onClick={() => setShow(false)}
         />
       )}
 

@@ -38,7 +38,11 @@ const Cart = () => {
           ))}
 
           <div className="my-8 text-center">
-            <Link href="/products" className="text-secondary-700 font-bold">
+            <Link
+              href="/products"
+              onClick={closeCart}
+              className="text-secondary-700 font-bold"
+            >
               <span className="inline-flex items-center">
                 <FiPlus size={24} className="mr-2" />
                 আরো শপিং করুন
@@ -56,7 +60,8 @@ const Cart = () => {
         </div>
         <Link
           href={"/checkout"}
-          className="bg-primary py-3 px-6 w-full text-white rounded-lg text-center"
+          onClick={closeCart}
+          className="bg-primary py-3 px-6 w-full text-white rounded-lg text-center active:scale-95"
         >
           <span className="mr-2">এখনই কিনুন</span>
           <HiArrowLongRight size={20} />

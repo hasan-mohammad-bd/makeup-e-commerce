@@ -45,17 +45,16 @@ const CartCard = ({ item }) => {
               ? product_name.slice(0, 50) + "..."
               : product_name}
           </h4>
-          <div className="flex gap-3 products-center">
+          <div className="flex gap-3 products-center items-center">
             <h3 className="text-xl text-red-500">৳ {new_price}</h3>
-            {old_price ? (
-              <h4 className="text-md text-slate-300 line-through">
-                ৳ {product.old_price}
-              </h4>
-            ) : null}
-            {discount_percentage ? (
-              <div className="rounded-full px-3 text-sm py-1 text-white bg-red-500">
-                {discount_percentage}% OFF
-              </div>
+            {typeof discount_percentage === "number" &&
+            discount_percentage > 0 ? (
+              <>
+                <del className="text-xl text-slate-300">৳ {old_price}</del>
+                <div className="rounded-full px-3 text-sm py-1 text-white bg-red-500">
+                  -{discount_percentage.toFixed(2)}% OFF
+                </div>
+              </>
             ) : null}
           </div>
         </div>

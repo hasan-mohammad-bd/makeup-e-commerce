@@ -17,6 +17,7 @@ const initialState = {
   isCartOpen: false,
   selectedProduct: null,
   cart: loadCartItemsFromLocalStorage() || [], // Initialize with local storage data or an empty array
+  couponDiscount: null,
 };
 
 const cartSlice = createSlice({
@@ -113,6 +114,18 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.cart = [];
     },
+
+    // Add coupon discount
+    addDiscountInfo: (state, action) => {
+      const discount = action.payload;
+      state.couponDiscount = discount;
+    },
+
+    // Clear coupon discount
+    clearDiscountInfo: (state, action) => {
+      const discount = action.payload;
+      state.couponDiscount = discount;
+    },
   },
 });
 
@@ -125,6 +138,8 @@ export const {
   removeQuantity,
   removeFromCart,
   clearCart,
+  addDiscountInfo,
+  clearDiscountInfo,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

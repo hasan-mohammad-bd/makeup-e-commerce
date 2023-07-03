@@ -1,12 +1,24 @@
 "use client";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { getMultipliedColumnTotal } from "@/utils/getTotal";
+
+//components
 import CartCard from "@/components/CartCard";
 import CustomRadio from "@/components/elements/CustomRadio";
+import CouponModal from "@/components/modals/CouponModal";
+
+//store
+import { useGetUserQuery } from "@/store/features/api/authAPI";
+import { clearCart, clearDiscountInfo } from "@/store/features/cartSlice";
+
+//Icons
 import PayOptionIcon from "@/components/elements/svg/PayOptionIcon";
-import Image from "next/image";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { FiPlus } from "react-icons/fi";
-import { useSelector } from "react-redux";
 
 const payOptions = [
   {
@@ -42,7 +54,13 @@ const Checkout = () => {
   const [selectedOption, setSelectedOption] = useState(payOptions[0]);
   const [deliveryMethod, setDeliveryMethod] = useState(deliveryMethods[0]);
   const [orderCollapsed, setOrderCollapsed] = useState(false);
-  const { cart } = useSelector((state) => state.cart);
+  const [showModal, setShowModal] = useState(false);
+  const { cart, couponDiscount } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  //ways to get user after reload
+  const { data, isLoading, isSuccess, isError } = useGetUserQuery();
 
   //slicing cart items based on orderCollapsed
   const cartItems = orderCollapsed ? cart : cart.slice(0, 3);
@@ -58,8 +76,65 @@ const Checkout = () => {
     reset,
   } = useForm();
 
-  const onSubmit = async (data, event) => {
+  useEffect(() => {
+    reset();
+  }, [isSuccess, reset]);
+
+  // if (isLoading) return <p>Loading............</p>;
+  if (isError) console.log("error occurred");
+  const user = data?.data || {};
+
+  //Product wise discount business logics
+  // const getDiscountedPrice = (cart) => {
+  //   let dis_price = 0;
+  //   const calculateDiscount = (price, dis_percent) => {
+  //     if (typeof dis_percent !== "number" || dis_percent <= 0) {
+  //       return 0;
+  //     }
+  //     const discountAmount = price * (dis_percent / 100);
+  //     return discountAmount;
+  //   };
+  //   if (Array.isArray(cart)) {
+  //     cart.forEach((row) => {
+  //       dis_price +=
+  //         (row?.quantity || 1) *
+  //         calculateDiscount(row?.old_price || 0, row.discount_percentage);
+  //     });
+  //   }
+  //   return dis_price;
+  // };
+
+  const getCouponDiscount = (totalPrice) => {
+    let discountAmount = 0;
+    if (couponDiscount?.discount_type === "percentage") {
+      discountAmount = totalPrice * (couponDiscount?.discount_amount / 100);
+      if (discountAmount > couponDiscount?.max_discount) {
+        return couponDiscount?.max_discount || 0;
+      }
+      return discountAmount;
+    } else if (couponDiscount?.discount_type === "flat") {
+      return couponDiscount?.discount_amount;
+    }
+    return discountAmount;
+  };
+
+  //Summary calculation
+  const total = getMultipliedColumnTotal(cart, "quantity", "new_price");
+  // const discountedPrice = getDiscountedPrice(cart);
+  const discountedPrice = getCouponDiscount(total);
+
+  const placeAnOrder = async (data, event) => {
     event.preventDefault();
+    console.log(data);
+    console.log(total);
+    console.log(discountedPrice);
+    console.log(cart);
+    console.log(deliveryMethod.charges);
+    console.log(selectedOption.key);
+    dispatch(clearDiscountInfo());
+    dispatch(clearCart());
+    toast.success("Order successful");
+    router.push("checkout/success/SST263598");
   };
 
   return (
@@ -107,31 +182,38 @@ const Checkout = () => {
           <div className="text-slate-700 p-4 rounded-lg shadow bg-white my-3">
             <div className="flex-between my-2">
               <p>মোট টাকার পরিমান</p>
-              <p>৳5968.00</p>
+              <p>৳{total}</p>
             </div>
             <div className="flex-between my-2">
               <p>ডিসকাউন্ট পাচ্ছেন</p>
-              <p className="text-red-500">-৳2654.00</p>
+              <p className="text-red-500">-৳{discountedPrice}</p>
             </div>
             <div className="flex-between my-2">
               <p>কুপন/প্রোমো ডিসকাউন্ট</p>
-              <p className="text-primary underline cursor-pointer">
-                কোড যোগ করুন
-              </p>
+              {couponDiscount ? (
+                <span className="text-primary">{couponDiscount.code}</span>
+              ) : (
+                <button
+                  className="text-btn underline"
+                  onClick={() => setShowModal(true)}
+                >
+                  কোড যোগ করুন
+                </button>
+              )}
             </div>
             <div className="border-b border-slate-300 my-2"></div>
             <div className="flex-between my-2">
               <p>মোট পরিমান</p>
-              <p>-৳3314.00</p>
+              <p>৳{total - discountedPrice}</p>
             </div>
             <div className="flex-between my-2">
               <p>ডেলিভারি খরচ</p>
-              <p>৳60.00</p>
+              <p>৳{deliveryMethod.charges}</p>
             </div>
             <div className="border-b border-slate-900 my-2"></div>
             <div className="flex-between my-2 font-bold">
               <p>পরিশোধ করতে হবে</p>
-              <p>৳3374.00</p>
+              <p>৳{total - discountedPrice + deliveryMethod.charges}</p>
             </div>
           </div>
         </div>
@@ -141,7 +223,7 @@ const Checkout = () => {
             <span className="text-primary">অর্ডার কনফার্ম করুন</span> বাটনে
             ক্লিক করুন
           </h3>
-          <form className="w-full mt-6" onSubmit={handleSubmit(onSubmit)}>
+          <form className="w-full mt-6" onSubmit={handleSubmit(placeAnOrder)}>
             <div className="grid grid-cols-2 gap-4">
               <div className="form-control mb-4">
                 <label className="block text-base text-slate-900 mb-2">
@@ -150,6 +232,7 @@ const Checkout = () => {
                 <input
                   type="text"
                   name="name"
+                  defaultValue={user?.name}
                   placeholder="নাম লিখুন"
                   {...register("name", {
                     required: "Name is required.",
@@ -165,16 +248,16 @@ const Checkout = () => {
                   মোবাইল নাম্বার
                 </label>
                 <input
-                  type="mobile"
-                  name="mobile"
-                  defaultValue={"01768572658"}
-                  placeholder="ইমেইল লিখুন"
-                  {...register("mobile", {})}
+                  type="phone"
+                  name="phone"
+                  defaultValue={user?.phone}
+                  placeholder="মোবাইল নাম্বার লিখুন"
+                  {...register("phone", {})}
                   disabled={true}
                   className="cursor-not-allowed"
                 />
-                {errors.mobile && (
-                  <p className="errorMsg">{errors.mobile.message}</p>
+                {errors.phone && (
+                  <p className="errorMsg">{errors.phone.message}</p>
                 )}
               </div>
             </div>
@@ -237,13 +320,22 @@ const Checkout = () => {
               </div>
             </div>
             <div className="form-control mt-11">
-              <button type="submit" className="primary-btn w-full">
+              <button
+                disabled={!cart?.length}
+                type="submit"
+                className="primary-btn w-full disabled:bg-slate-300 disabled:cursor-not-allowed"
+              >
                 অর্ডার কনফার্ম করুন
               </button>
             </div>
           </form>
         </div>
       </div>
+      <CouponModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        title={"কুপন কোড"}
+      />
     </section>
   );
 };
