@@ -13,11 +13,6 @@ import { IoLogOut } from "react-icons/io5";
 import { MdRateReview } from "react-icons/md";
 import { RiQuestionAnswerFill } from "react-icons/ri";
 
-export const metadata = {
-  title: "Sotota Stall || User Dashboard",
-  description: "All user activity Of Sotota Stall",
-};
-
 const navItems = [
   { text: "আমার প্রফাইল", icon: <FaUser />, path: "/dashboard" },
   {
