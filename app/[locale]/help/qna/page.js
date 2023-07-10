@@ -1,124 +1,63 @@
-'use client'
-
-import { useState } from "react";
 import Link from "next/link";
-import QAItem from "@/components/elements/QAItem";
 
 // ** Imoprt icons
 import { BsFillTelephoneFill } from "react-icons/bs";
+import QNAItems from "@/components/QNAItems";
 
 const QnA = () => {
+  return (
+    <>
+      <div className="breadcrumb breadcrumb-2 py-5 border-b border-slate-200">
+        <div className="container">
+          <div>
+            <Link
+              href={`/`}
+              className="text-base text-slate-600 hover:text-primary"
+            >
+              হোম
+            </Link>
+            <Link
+              href={`/help/qna`}
+              className="text-base text-slate-900 hover:text-primary"
+            >
+              প্রশ্ন ও উত্তর
+            </Link>
+          </div>
+        </div>
+      </div>
 
-    const [open, setOpen] = useState(0);
-
-    const toggleOpen = (index) => {
-        if(open === index){
-            setOpen(null)
-        }
-
-        setOpen(index)
-    }
-
-    const data = [
-        {
-            title: "অর্ডার",
-            desc: [
-                {
-                    ques: "কিভাবে অর্ডার করবো?",
-                    ans: "আপনি সাইট ব্রাউজ করতে পারেন বা আপনার পছন্দের পণ্যগুলি খুঁজে পেতে আমাদের সার্চ ইঞ্জিন ব্যবহার করতে পারেন৷ তারপরে আপনি সেগুলিকে আপনার শপিং ব্যাগে যুক্ত করতে পারেন এবং প্লেস অর্ডারে ক্লিক করতে পারেন। আপনি আমাদের আপনার ঠিকানা জানান, একটি প্রসবের সময় নির্বাচন করুন - এবং ভয়েলা, আপনার কাজ শেষ৷ একজন সততা স্টোরের প্রতিনিধি তারপর আপনার অর্ডার সরাসরি আপনার বাড়িতে বা অফিসে পৌঁছে দেবেন৷"
-                },
-                {
-                    ques: "অর্ডার সম্পন্ন হতে কত ‍দিন সময় লাগে?",
-                    ans: "অর্ডার প্লেস করার ২ থেকে ৩ ঘন্টার মধ্যে অর্ডার কনফার্ম হবে, কনফার্ম হওয়ার পর ১৬ থেকে ২৪ ঘন্টার মধ্যে প্রডাক্ট শিপমেন্টে পাঠনো হবে, ২ থেকে ৩ দিনের মধ্যে প্রডাক্ট ডেলিভারি পাবেন৷"
-                },
-            ]
-
-        },
-        {
-            title: "পেমেন্ট ",
-            desc: [
-                {
-                    ques: "কিভাবে অর্ডার করবো?",
-                    ans: "আপনি সাইট ব্রাউজ করতে পারেন বা আপনার পছন্দের পণ্যগুলি খুঁজে পেতে আমাদের সার্চ ইঞ্জিন ব্যবহার করতে পারেন৷ তারপরে আপনি সেগুলিকে আপনার শপিং ব্যাগে যুক্ত করতে পারেন এবং প্লেস অর্ডারে ক্লিক করতে পারেন। আপনি আমাদের আপনার ঠিকানা জানান, একটি প্রসবের সময় নির্বাচন করুন - এবং ভয়েলা, আপনার কাজ শেষ৷ একজন সততা স্টোরের প্রতিনিধি তারপর আপনার অর্ডার সরাসরি আপনার বাড়িতে বা অফিসে পৌঁছে দেবেন৷"
-                },
-                {
-                    ques: "অর্ডার সম্পন্ন হতে কত ‍দিন সময় লাগে?",
-                    ans: "অর্ডার প্লেস করার ২ থেকে ৩ ঘন্টার মধ্যে অর্ডার কনফার্ম হবে, কনফার্ম হওয়ার পর ১৬ থেকে ২৪ ঘন্টার মধ্যে প্রডাক্ট শিপমেন্টে পাঠনো হবে, ২ থেকে ৩ দিনের মধ্যে প্রডাক্ট ডেলিভারি পাবেন৷"
-                },
-            ]
-
-        },
-        {
-            title: "ডেলিভারি",
-            desc: [
-                {
-                    ques: "কিভাবে অর্ডার করবো?",
-                    ans: "আপনি সাইট ব্রাউজ করতে পারেন বা আপনার পছন্দের পণ্যগুলি খুঁজে পেতে আমাদের সার্চ ইঞ্জিন ব্যবহার করতে পারেন৷ তারপরে আপনি সেগুলিকে আপনার শপিং ব্যাগে যুক্ত করতে পারেন এবং প্লেস অর্ডারে ক্লিক করতে পারেন। আপনি আমাদের আপনার ঠিকানা জানান, একটি প্রসবের সময় নির্বাচন করুন - এবং ভয়েলা, আপনার কাজ শেষ৷ একজন সততা স্টোরের প্রতিনিধি তারপর আপনার অর্ডার সরাসরি আপনার বাড়িতে বা অফিসে পৌঁছে দেবেন৷"
-                },
-                {
-                    ques: "অর্ডার সম্পন্ন হতে কত ‍দিন সময় লাগে?",
-                    ans: "অর্ডার প্লেস করার ২ থেকে ৩ ঘন্টার মধ্যে অর্ডার কনফার্ম হবে, কনফার্ম হওয়ার পর ১৬ থেকে ২৪ ঘন্টার মধ্যে প্রডাক্ট শিপমেন্টে পাঠনো হবে, ২ থেকে ৩ দিনের মধ্যে প্রডাক্ট ডেলিভারি পাবেন৷"
-                },
-            ]
-
-        },
-        {
-            title: "রিটার্ন পলিসি",
-            desc: [
-                {
-                    ques: "কিভাবে অর্ডার করবো?",
-                    ans: "আপনি সাইট ব্রাউজ করতে পারেন বা আপনার পছন্দের পণ্যগুলি খুঁজে পেতে আমাদের সার্চ ইঞ্জিন ব্যবহার করতে পারেন৷ তারপরে আপনি সেগুলিকে আপনার শপিং ব্যাগে যুক্ত করতে পারেন এবং প্লেস অর্ডারে ক্লিক করতে পারেন। আপনি আমাদের আপনার ঠিকানা জানান, একটি প্রসবের সময় নির্বাচন করুন - এবং ভয়েলা, আপনার কাজ শেষ৷ একজন সততা স্টোরের প্রতিনিধি তারপর আপনার অর্ডার সরাসরি আপনার বাড়িতে বা অফিসে পৌঁছে দেবেন৷"
-                },
-                {
-                    ques: "অর্ডার সম্পন্ন হতে কত ‍দিন সময় লাগে?",
-                    ans: "অর্ডার প্লেস করার ২ থেকে ৩ ঘন্টার মধ্যে অর্ডার কনফার্ম হবে, কনফার্ম হওয়ার পর ১৬ থেকে ২৪ ঘন্টার মধ্যে প্রডাক্ট শিপমেন্টে পাঠনো হবে, ২ থেকে ৩ দিনের মধ্যে প্রডাক্ট ডেলিভারি পাবেন৷"
-                },
-            ]
-
-        },
-        {
-            title: "ট্রামস এন্ড কন্ডিশন",
-            desc: [
-                {
-                    ques: "কিভাবে অর্ডার করবো?",
-                    ans: "আপনি সাইট ব্রাউজ করতে পারেন বা আপনার পছন্দের পণ্যগুলি খুঁজে পেতে আমাদের সার্চ ইঞ্জিন ব্যবহার করতে পারেন৷ তারপরে আপনি সেগুলিকে আপনার শপিং ব্যাগে যুক্ত করতে পারেন এবং প্লেস অর্ডারে ক্লিক করতে পারেন। আপনি আমাদের আপনার ঠিকানা জানান, একটি প্রসবের সময় নির্বাচন করুন - এবং ভয়েলা, আপনার কাজ শেষ৷ একজন সততা স্টোরের প্রতিনিধি তারপর আপনার অর্ডার সরাসরি আপনার বাড়িতে বা অফিসে পৌঁছে দেবেন৷"
-                },
-                {
-                    ques: "অর্ডার সম্পন্ন হতে কত ‍দিন সময় লাগে?",
-                    ans: "অর্ডার প্লেস করার ২ থেকে ৩ ঘন্টার মধ্যে অর্ডার কনফার্ম হবে, কনফার্ম হওয়ার পর ১৬ থেকে ২৪ ঘন্টার মধ্যে প্রডাক্ট শিপমেন্টে পাঠনো হবে, ২ থেকে ৩ দিনের মধ্যে প্রডাক্ট ডেলিভারি পাবেন৷"
-                },
-            ]
-
-        },
-    ]
-    return (
-        <>
-            <div className="breadcrumb breadcrumb-2 py-5 border-b border-slate-200">
-                <div className="container">
-                    <div>
-                        <Link href={`/`} className="text-base text-slate-600 hover:text-primary">হোম</Link>
-                        <Link href={`/help/qna`} className="text-base text-slate-900 hover:text-primary">প্রশ্ন ও উত্তর</Link>
-                    </div>
-                </div>
-            </div>
-
-            <div className="container">
-                <div className="qna mb-20">
-                    <div className="heading border-b border-slate-200 py-4 mb-6">
-                        <h3 className="text-4xl/[48px] font-bold font-title text-slate-900">প্রশ্ন ও উত্তর</h3>
-                    </div>
-                    <div className="qna-wpr">
-                        {data?.map((item, index) => (
-                            <QAItem item={{...item, index}} key={index} open={open === index } toggleOpen={toggleOpen}/>
-                        ))}
-                    </div>
-                </div>
-                <div className="contact border-t border-slate-200 py-5 text-center">
-                    <p className="flex justify-center items-center gap-5 bg-amber-200 border border-primary rounded-xl p-4"><span className="text-xl font-bold font-title text-slate-900">যে কোন জিজ্ঞাসা বা অর্ডার করতে আমাদের কল করুন:</span> <Link href="tel:01720060958" className="text-xl font-bold font-title text-primary"><BsFillTelephoneFill/> 01720060958</Link> <span className="text-sm text-slate-500">অথবা</span> <Link href="tel:01720060977" className="text-xl font-bold font-title text-primary"><BsFillTelephoneFill/> 01720060977</Link></p>
-                </div>
-            </div>
-        </>
-    )
-}
+      <div className="container">
+        <div className="qna mb-20">
+          <div className="heading border-b border-slate-200 py-4 mb-6">
+            <h3 className="text-4xl/[48px] font-bold font-title text-slate-900">
+              প্রশ্ন ও উত্তর
+            </h3>
+          </div>
+          <QNAItems />
+        </div>
+        <div className="contact border-t border-slate-200 py-5 text-center">
+          <p className="flex justify-center items-center gap-5 bg-amber-200 border border-primary rounded-xl p-4">
+            <span className="text-xl font-bold font-title text-slate-900">
+              যে কোন জিজ্ঞাসা বা অর্ডার করতে আমাদের কল করুন:
+            </span>{" "}
+            <Link
+              href="tel:01720060958"
+              className="text-xl font-bold font-title text-primary"
+            >
+              <BsFillTelephoneFill /> 01720060958
+            </Link>{" "}
+            <span className="text-sm text-slate-500">অথবা</span>{" "}
+            <Link
+              href="tel:01720060977"
+              className="text-xl font-bold font-title text-primary"
+            >
+              <BsFillTelephoneFill /> 01720060977
+            </Link>
+          </p>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default QnA;

@@ -34,7 +34,7 @@ const navItems = [
   {
     text: "প্রশ্ন ও উত্তর",
     icon: <RiQuestionAnswerFill />,
-    path: "/dashboard/my-qa",
+    path: "/dashboard/qna",
   },
   {
     text: "সাপোর্ট টিকিট",
