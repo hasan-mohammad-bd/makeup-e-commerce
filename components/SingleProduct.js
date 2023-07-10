@@ -15,14 +15,12 @@ import {
 } from "react-icons/hi2";
 import { useDispatch } from "react-redux";
 import { addToCart, addToSelected } from "@/store/features/cartSlice";
+import { useAddToWishListMutation } from "@/store/features/api/wishListAPI";
+import { toast } from "react-toastify";
 
-const SingleProduct = ({
-  product,
-  addToCompare,
-  addToWishlist,
-  openQuickView,
-}) => {
+const SingleProduct = ({ product, addToCompare }) => {
   const [loading, setLoading] = useState(true);
+  const [addToWishlist] = useAddToWishListMutation();
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -33,7 +31,7 @@ const SingleProduct = ({
   }, [product]);
 
   const handleAddToCart = (product) => {
-    if (product.productVariants.length) {
+    if (product?.productVariants?.length) {
       dispatch(addToSelected(product));
     } else {
       dispatch(addToCart(product));
@@ -55,9 +53,13 @@ const SingleProduct = ({
     toast.success("Add to Compare !");
   };
 
-  const handleWishlist = (product) => {
-    addToWishlist(product);
-    toast.success("Add to Wishlist !");
+  const handleWishlist = async (productId) => {
+    try {
+      await addToWishlist({ product_id: productId });
+      toast.success("Product added to Wishlist!");
+    } catch (error) {
+      toast.error("Failed to add to wishlist");
+    }
   };
   return (
     <>
@@ -78,14 +80,14 @@ const SingleProduct = ({
                 </Link>
               </div>
               <div className="product-action">
-                <Link
+                <button
                   href={""}
                   aria-label="Add To Wishlist"
                   className="action-btn"
-                  onClick={(e) => handleWishlist(product)}
+                  onClick={(e) => handleWishlist(product?.id)}
                 >
                   <HiOutlineHeart />
-                </Link>
+                </button>
               </div>
             </div>
             <div className="product-content-wrap p-3">
