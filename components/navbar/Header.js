@@ -15,6 +15,8 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 import LoginModal from "../modals/login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "@/store/features/cartSlice";
+import { useGetUserQuery } from "@/store/features/api/authAPI";
+import AuthUserMenus from "./AuthUserMenus";
 
 const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
   const [isToggled, setToggled] = useState(false);
@@ -22,6 +24,12 @@ const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
   const [scroll, setScroll] = useState(0);
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
+  //ways to get user after reload
+  const { data, isLoading, isError } = useGetUserQuery();
+  // if (isLoading) return <p>Loading............</p>;
+  if (isError) console.log("error occurred");
+  const user = data?.data || null;
 
   //start of popover
   const [userOpen, setUserOpen] = useState(false);
@@ -89,9 +97,8 @@ const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
                 <div className="relative" ref={popoverRef}>
                   <button className="single-action" onClick={togglePopover}>
                     <HiOutlineUser size={24} />
-                    <span className="pro-count blue">{totalCartItems}</span>
                   </button>
-                  {userOpen && (
+                  {userOpen && !user ? (
                     <div className="absolute right-0 top-0 z-10 mt-14">
                       <div className="relative bg-white px-6 py-8 w-52 border border-slate-300 rounded-lg">
                         <div className="absolute top-0 right-0 transform -translate-x-1/2 -translate-y-1/2 rotate-45 w-4 h-4 bg-white border-l border-t border-slate-300"></div>
@@ -109,7 +116,11 @@ const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
                         </div>
                       </div>
                     </div>
-                  )}
+                  ) : null}
+                  {/* for authenticated user */}
+                  {userOpen && user ? (
+                    <AuthUserMenus togglePopover={togglePopover} />
+                  ) : null}
                 </div>
                 <LanguageSelector locale={locale} />
               </div>
