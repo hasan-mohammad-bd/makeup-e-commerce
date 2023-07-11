@@ -1,7 +1,7 @@
 "use client";
+import Image from "next/image";
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import Image from "next/image";
 import { AnswerIcon, QuestionIcon } from "@/components/elements/svg";
 
 const allQuestions = [
@@ -66,9 +66,9 @@ const QuestionAnswer = ({ questions }) => {
   return (
     <div className="question-answer mb-8">
       <div className="flex justify-between items-center">
-        <h4 className="text-2xl font-bold font-title text-slate-900">
+        <h2 className="text-2xl font-bold font-title text-slate-900">
           এই প্রডাক্ট সম্পর্কে প্রশ্ন ও উত্তর (2658)
-        </h4>
+        </h2>
         <button
           className="w-[48px] h-[48px] bg-white rounded-full border-2 border-[#E2E8F0] flex justify-center items-center"
           onClick={() => setIsSearch(true)}

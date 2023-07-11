@@ -1,7 +1,8 @@
-import { StarHalfIcon, StarIcon } from "@/components/elements/svg";
 import Image from "next/image";
-import ReviewImages from "./ReviewImages";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
+import { StarHalfIcon, StarIcon } from "@/components/elements/svg";
+
+import ReviewImages from "./ReviewImages";
 
 const RatingReviewCard = ({ reviewImages }) => {
   return (

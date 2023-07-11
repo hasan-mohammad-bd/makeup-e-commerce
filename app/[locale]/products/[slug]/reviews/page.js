@@ -1,5 +1,5 @@
-import { StarIcon, StarHalfIcon } from "@/components/elements/svg";
 import Image from "next/image";
+import { StarIcon, StarHalfIcon } from "@/components/elements/svg";
 // import { HiOutlineFilter } from "react-icons/hi";
 import RatingReviewCard from "./RatingReviewCard";
 import ReviewImages from "./ReviewImages";
@@ -107,7 +107,7 @@ const RatingReviews = ({ ratingReviews }) => {
         <div className="ml-auto flex gap-4 items-center">
           <div className="sort-by-dropdown-wrap">
             <select
-              className="w-[13rem] text-base text-slate-900 bg-white border border-slate-300 rounded-lg px-3 py-2.5 focus:outline-0"
+              className="select w-[13rem] text-base text-slate-900 bg-white border border-slate-300 rounded-lg px-3 py-2.5 focus:outline-0"
               // onChange={(e) => selectOption(e)}
             >
               <option value="random">এলোমেলো</option>
@@ -119,7 +119,7 @@ const RatingReviews = ({ ratingReviews }) => {
           <div className="sort-by-dropdown-wrap">
             {/* <HiOutlineFilter size={20} className="absolute left-3 top-2" /> */}
             <select
-              className="w-48 text-base text-slate-900 bg-white border border-slate-300 rounded-lg px-3 py-2.5 focus:outline-0"
+              className="select w-48 text-base text-slate-900 bg-white border border-slate-300 rounded-lg px-3 py-2.5 focus:outline-0"
               // onChange={(e) => selectOption(e)}
             >
               <option value="all-star">সব স্টার</option>
