@@ -1,9 +1,8 @@
 "use client";
 import CountButton from "@/components/elements/CountButton";
-import Image from "next/image";
 import React, { useState } from "react";
 import OrderCard from "./OrderCard";
-import NoOrders from "./NoOrders";
+import NoItems from "../NoItems";
 
 const orderFilters = [
   { key: "all-orders", title: "সব অর্ডার", count: 4 },
@@ -50,7 +49,7 @@ const MyOrders = () => {
           ))}
         </div>
       ) : (
-        <NoOrders />
+        <NoItems title={"কোন অর্ডার নেই"} />
       )}
     </div>
   );

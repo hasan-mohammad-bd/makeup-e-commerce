@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import WishListCard from "./WishListCard";
-import NoWishList from "./NoWishList";
 import { useGetWishListQuery } from "@/store/features/api/wishListAPI";
+import NoItems from "../NoItems";
 
 const MyWishList = () => {
   const { data } = useGetWishListQuery();
@@ -14,14 +14,14 @@ const MyWishList = () => {
         <div className="mt-4">
           {wishedProducts.map((product, index) =>
             index == 1 ? (
-                <WishListCard key={product.id} product={product} stockOut />
+              <WishListCard key={product.id} product={product} stockOut />
             ) : (
               <WishListCard key={product.id} product={product} />
             )
           )}
         </div>
       ) : (
-        <NoWishList />
+        <NoItems title={"কোন প্রডাক্ট নেই"} />
       )}
     </div>
   );

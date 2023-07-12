@@ -56,7 +56,7 @@ export default function AuthUserMenus({ togglePopover }) {
       <div className="relative bg-white pl-2 py-6 w-52 border border-slate-300 rounded-lg">
         <div className="absolute top-0 right-0 transform -translate-x-1/2 -translate-y-1/2 rotate-45 w-4 h-4 bg-white border-l border-t border-slate-300"></div>
         <div className="content-area">
-          <ul className="w-[15.25rem]">
+          <ul className="w-[15.25rem] text-slate-500">
             {navItems.map((item) => (
               <li
                 key={item.path}
@@ -65,12 +65,14 @@ export default function AuthUserMenus({ togglePopover }) {
                 <Link
                   href={item.path}
                   onClick={() => togglePopover()}
-                  className="flex items-center space-x-2 text-amber-400 hover:text-primary"
+                  className="flex items-center space-x-2 group"
                 >
-                  <span className={`font-bold text-xl`}>{item.icon}</span>
-                  <span className="text-slate-500 hover:text-primary">
-                    {item.text}
+                  <span
+                    className={`font-bold text-xl text-amber-400 group-hover:text-primary`}
+                  >
+                    {item.icon}
                   </span>
+                  <span className="group-hover:text-primary">{item.text}</span>
                 </Link>
               </li>
             ))}
@@ -78,15 +80,15 @@ export default function AuthUserMenus({ togglePopover }) {
               className={`flex items-center py-3 px-4 rounded-lg w-full font-bold`}
             >
               <button
-                className="flex items-center space-x-2 text-amber-400 hover:text-primary"
+                className="flex items-center space-x-2 group"
                 onClick={handleLogout}
               >
-                <span className={`font-bold text-xl`}>
+                <span
+                  className={`font-bold text-xl text-amber-400 group-hover:text-primary`}
+                >
                   <IoLogOut />
                 </span>
-                <span className="text-slate-500 hover:text-primary">
-                  লগ-আউট
-                </span>
+                <span className="group-hover:text-primary">লগ-আউট</span>
               </button>
             </li>
           </ul>

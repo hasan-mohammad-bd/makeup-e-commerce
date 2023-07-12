@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-function NoWishList(props) {
+function NoItems({ title }) {
   return (
     <div className="flex-center mt-28">
       <div className="flex-center flex-col jus h-[25rem] w-[25rem] rounded-2xl border border-slate-300">
@@ -10,12 +10,12 @@ function NoWishList(props) {
           height={216}
           width={216}
           alt="not-item"
-          sizes="100vh"
+          sizes="216px"
         />
-        <h3 className="font-bold text-slate-700">কোন প্রডাক্ট নেই</h3>
+        <h3 className="font-bold text-slate-700">{title ?? "কোন আইটেম নেই"}</h3>
       </div>
     </div>
   );
 }
 
-export default NoWishList;
+export default NoItems;
