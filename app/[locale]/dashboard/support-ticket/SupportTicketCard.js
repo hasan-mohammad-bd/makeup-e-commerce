@@ -68,14 +68,19 @@ function SupportTicketCard({ ticket }) {
               <p className="text-right">১৫ এপ্রিল, ২০২৩</p>
             </div>
           </div>
-          <div className="">
-            <Image
-              src={productImage}
-              height={90}
-              width={90}
-              sizes="90px"
-              alt="product-img"
-            />
+          <div className="flex gap-4">
+            {Array(2)
+              .fill(2)
+              .map((image, index) => (
+                <Image
+                  key={index}
+                  src={productImage}
+                  height={90}
+                  width={90}
+                  sizes="90px"
+                  alt="product-img"
+                />
+              ))}
           </div>
         </>
       ) : null}

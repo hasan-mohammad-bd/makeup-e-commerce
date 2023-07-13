@@ -13,6 +13,10 @@
     @apply h-12 text-base font-title font-normal border border-slate-300 rounded-s-lg py-3 px-4 focus:outline-0 focus:border-primary;
   }
 
+  textarea {
+    @apply text-base font-title font-normal border border-slate-300  py-3 px-4 focus:outline-0 focus:border-primary;
+  }
+
   input::placeholder {
     @apply text-base font-title font-normal text-slate-300;
   }
