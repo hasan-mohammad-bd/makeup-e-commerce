@@ -71,7 +71,7 @@
 }
 
 .text-btn {
-  @apply inline-flex items-center justify-center gap-2 text-primary font-title bg-transparent box-border py-3;
+  @apply inline-flex items-center justify-center gap-2 text-primary font-title bg-transparent box-border p-2;
 }
 .icon-btn {
   @apply inline-flex items-center justify-center gap-2 font-title bg-transparent box-border py-3;

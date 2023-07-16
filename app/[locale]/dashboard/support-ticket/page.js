@@ -25,7 +25,7 @@ export default function page() {
       </div>
       <div className="flex items-center mt-4 gap-4 border-b border-slate-300">
         <button
-          className={`font-title bg-transparent box-border py-2 border-b-4 ${
+          className={`font-title bg-transparent box-border py-2 border-b-2 ${
             selectedTab === "running" ? "border-primary" : "border-transparent"
           }`}
           onClick={() => setSelectedTab("running")}
@@ -33,7 +33,7 @@ export default function page() {
           <span>রানিং টিকিট (১)</span>
         </button>
         <button
-          className={`font-title bg-transparent box-border py-2 border-b-4 ${
+          className={`font-title bg-transparent box-border py-2 border-b-2 ${
             selectedTab === "completed"
               ? "border-primary"
               : "border-transparent"
