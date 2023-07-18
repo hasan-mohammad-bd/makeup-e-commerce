@@ -198,7 +198,7 @@
 }
 
 .submit-btn {
-  @apply w-[240px] text-lg font-semibold font-title text-white bg-[#F99104] rounded-lg py-3;
+  @apply w-[240px] text-lg font-semibold font-title text-white bg-[#F99104] rounded-lg py-3 active:scale-95;
 }
 
 .errorMsg {

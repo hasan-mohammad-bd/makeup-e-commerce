@@ -49,18 +49,17 @@ const OrderReviewCard = ({ order }) => {
                 <Image
                   src={"/assets/images/shop/product-thumb-1.png"}
                   alt="product"
-                  height={84}
-                  width={100}
-                  sizes="84px"
+                  height={80}
+                  width={80}
+                  sizes="80px"
                 />
               </div>
-              <div className="flex flex-col justify-between w-full">
-                <h5 className={`text-primary`}>No Brand</h5>
+              <div className="flex flex-col gap-1 w-full">
                 <h4>
                   প্রিমিয়াম কোয়ালিটির ইয়ার ব্লুটুথ হেডফোন, মাইক্রোফোন সহ
                   বাচ্চাদের এবং প্রাপ্তবয়স্কদের জন্য
                 </h4>
-                <div className="flex products-center justify-between text-sm mt-4">
+                <div className="flex products-center justify-between text-sm">
                   <div className="flex items-center gap-3">
                     <div className="px-2 border border-slate-300 rounded-md">
                       সাদা
@@ -92,7 +91,7 @@ const OrderReviewCard = ({ order }) => {
         </div>
         {!order?.isReviewed ? (
           <div className="flex justify-end mt-4">
-            <Link href={"/"} className="text-btn">
+            <Link href={"/dashboard/my-reviews/new"} className="text-btn">
               রিভিউ লিখুন <BsArrowRight />
             </Link>
           </div>

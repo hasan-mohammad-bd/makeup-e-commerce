@@ -1,14 +1,17 @@
 import { generateUniqueId } from "@/utils/getUniqueId";
 import { createSlice } from "@reduxjs/toolkit";
 
+// Helper function to load cart items from local storage
 const loadCartItemsFromLocalStorage = () => {
-  try {
-    const cartItems = localStorage.getItem("cartItems");
-    if (cartItems) {
-      return JSON.parse(cartItems);
+  if (typeof window !== "undefined") {
+    try {
+      const cartItems = localStorage.getItem("cartItems");
+      if (cartItems) {
+        return JSON.parse(cartItems);
+      }
+    } catch (error) {
+      console.error("Error loading cart items from local storage:", error);
     }
-  } catch (error) {
-    console.error("Error loading cart items from local storage:", error);
   }
   return null; // Return null if no cart items found or error occurred
 };

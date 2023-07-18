@@ -28,6 +28,7 @@ module.exports = {
         primary: "#F99104",
         secondary: {
           700: "#00B7C9",
+          800: "#00A7B8",
         },
         amber: {
           200: "#FFF6EB",
