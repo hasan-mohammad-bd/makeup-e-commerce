@@ -5,45 +5,32 @@ import SortSelect from "@/components/elements/SortSelect";
 
 // ** Imoprt icons
 import AllProducts from "@/components/AllProducts";
+import { fetchData } from "@/utils/fetchData";
+import noImage from "@/public/assets/images/no-image.png";
 
-const page = ({ params }) => {
+const page = async ({ params }) => {
   const { slug } = params;
+  const [categoryResponse, dataResponse] = await Promise.allSettled([
+    fetchData({ api: `category/${slug}` }),
+    fetchData({ api: "popular-categories" }),
+  ]);
 
-  var data = [
-    {
-      id: 1,
-      title: "স্মার্ট ইলেকট্রনিক্স",
-      image: "1.png",
-    },
-    {
-      id: 2,
-      title: "হেডফোন",
-      image: "5.png",
-    },
-    {
-      id: 3,
-      title: "স্মার্ট ওয়াচ",
-      image: "6.png",
-    },
-    {
-      id: 4,
-      title: "একশন ক্যামেরা",
-      image: "4.png",
-    },
-    {
-      id: 5,
-      title: "অডিও ডিভাইস",
-      image: "2.png",
-    },
-  ];
+  const category =
+    categoryResponse.status === "fulfilled"
+      ? categoryResponse.value?.data || {}
+      : {};
+  const popularCategories =
+    dataResponse.status === "fulfilled" ? dataResponse.value?.data || [] : [];
 
   return (
     <>
-      <div className="breadcrumb bg-[url('/assets/images/banner/pdctpage-banner.png')] bg-no-repeat bg-cover py-20">
+      <div
+        className={`breadcrumb bg-[url('/assets/images/banner/pdctpage-banner.png')] bg-no-repeat bg-cover py-20`}
+      >
         <div className="container">
           <div className="text-center">
             <h3 className="text-2xl font-bold font-title text-white mb-4">
-              একশন ক্যামেরা
+              {category?.category_name}
             </h3>
             <div>
               <Link
@@ -53,10 +40,10 @@ const page = ({ params }) => {
                 হোম
               </Link>
               <Link
-                href={`/products/camera`}
+                href={`/products/category/${category.slug}`}
                 className="text-base text-white hover:text-primary"
               >
-                একশন ক্যামেরা
+                {category?.category_name}
               </Link>
             </div>
           </div>
@@ -69,28 +56,27 @@ const page = ({ params }) => {
             সেরা ৫টি ক্যাটাগরি
           </h6>
           <div className="flex items-center gap-5">
-            {data?.slice(0, 5)?.map((cat, i) => (
+            {popularCategories?.slice(0, 5)?.map((cat, i) => (
               <div
                 className="category flex flex-1 items-center gap-4 border border-slate-300 rounded-xl p-3.5"
                 key={i}
               >
                 <div className="image flex items-center justify-center w-12 h-12 bg-amber-50 rounded-2xl">
-                  <Link href={`/products/${cat.title}`}>
+                  <Link href={`/products/category/${cat.slug}`}>
                     <Image
-                      src={`/assets/images/category/${cat.image}`}
-                      alt="cat.title"
-                      width={0}
-                      height={0}
-                      sizes="100vw"
-                      style={{ width: "auto", height: "auto" }}
+                      src={cat?.image || noImage}
+                      alt={cat.category_name}
+                      width={48}
+                      height={31}
+                      className="w-[48px] h-[31px] object-contain"
                     />
                   </Link>
                 </div>
                 <Link
-                  href={`/products/${cat.title}`}
+                  href={`/products/category/${cat.slug}`}
                   className="text-base text-slate-900"
                 >
-                  {cat.title}
+                  {cat.category_name}
                 </Link>
               </div>
             ))}

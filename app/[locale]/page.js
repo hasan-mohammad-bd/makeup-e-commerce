@@ -7,11 +7,11 @@ import BestSell from "@/components/BestSell";
 import AllProducts from "@/components/AllProducts";
 import NewArrival from "@/components/NewArrival";
 import Brands from "@/components/Brands";
-import Category from "@/components/Category";
 import Link from "next/link";
 import Timer from "@/components/elements/Timer";
 import VideoBanner from "@/components/elements/VideoBanner";
 import Banner1 from "@/components/Banner1";
+import PopularCategories from "@/components/PopularCategories";
 
 // ** Import Iocns
 import { HiArrowLongRight } from "react-icons/hi2";
@@ -67,7 +67,7 @@ export default function Home() {
           </div>
 
           <div className="category-slider mt-12  relative">
-            <Category />
+            <PopularCategories />
           </div>
         </div>
       </section>

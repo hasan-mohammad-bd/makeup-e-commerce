@@ -3,7 +3,7 @@ import { fetchData } from "@/utils/fetchData";
 // import productData from "../public/static/db.json";
 
 const AllProducts = async () => {
-  const data = await fetchData({ api: "products", revalidate: 60 });
+  const data = await fetchData({ api: "products" });
   const allProducts = data?.data || [];
   // console.log(data)
 
