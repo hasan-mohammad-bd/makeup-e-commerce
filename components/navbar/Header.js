@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "@/store/features/cartSlice";
 import { useGetUserQuery } from "@/store/features/api/authAPI";
 import AuthUserMenus from "./AuthUserMenus";
+import Image from "next/image";
 
 const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
   const [isToggled, setToggled] = useState(false);
@@ -81,7 +82,7 @@ const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
                 {/* <NavItems /> */}
               </div>
               <div className="header-actions flex gap-4">
-                <Link href="/shop-compare" className="single-action">
+                <Link href="/dashboard/my-wishlist" className="single-action">
                   <HiOutlineHeart size={24} />
                   <span className="pro-count blue">{totalCompareItems}</span>
                 </Link>
@@ -96,7 +97,17 @@ const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
                 </button>
                 <div className="relative" ref={popoverRef}>
                   <button className="single-action" onClick={togglePopover}>
-                    <HiOutlineUser size={24} />
+                    {user?.image ? (
+                      <Image
+                        src={user.image}
+                        alt="Profile"
+                        height={40}
+                        width={40}
+                        className="h-10 w-10 rounded-full"
+                      />
+                    ) : (
+                      <HiOutlineUser size={24} />
+                    )}
                   </button>
                   {userOpen && !user ? (
                     <div className="absolute right-0 top-0 z-10 mt-14">

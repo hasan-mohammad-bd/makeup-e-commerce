@@ -12,13 +12,9 @@ const MyWishList = () => {
       <h2 className="text-slate-900 font-bold text-2xl">আমার উইশ লিষ্ট</h2>
       {wishedProducts.length ? (
         <div className="mt-4">
-          {wishedProducts.map((product, index) =>
-            index == 1 ? (
-              <WishListCard key={product.id} product={product} stockOut />
-            ) : (
-              <WishListCard key={product.id} product={product} />
-            )
-          )}
+          {wishedProducts.map((product) => (
+            <WishListCard key={product.id} product={product} />
+          ))}
         </div>
       ) : (
         <NoItems title={"কোন প্রডাক্ট নেই"} />

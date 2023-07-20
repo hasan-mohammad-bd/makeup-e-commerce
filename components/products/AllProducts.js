@@ -1,9 +1,10 @@
-import SingleProduct from "./SingleProduct";
 import { fetchData } from "@/utils/fetchData";
-// import productData from "../public/static/db.json";
+import SingleProduct from "./SingleProduct";
 
-const AllProducts = async () => {
-  const data = await fetchData({ api: "products" });
+const AllProducts = async ({ searchParams = {} }) => {
+  // console.log(searchParams);
+  const params = new URLSearchParams(searchParams);
+  const data = await fetchData({ api: `products?${params.toString()}` });
   const allProducts = data?.data || [];
   // console.log(data)
 

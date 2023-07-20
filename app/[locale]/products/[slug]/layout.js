@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AllProducts from "@/components/AllProducts";
+import AllProducts from "@/components/products/AllProducts";
 import LatestViews from "@/components/LatestViews";
 import ProductDetails from "./ProductDetails";
 import ActiveLink from "@/components/elements/ActiveLink";

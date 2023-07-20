@@ -1,12 +1,9 @@
-import NewArrivalSlider from "./elements/sliders/NewArrival";
+import NewArrivalSlider from "./elements/sliders/NewArrivalSlider";
 import { fetchData } from "@/utils/fetchData";
 
 const NewArrival = async () => {
-  const data = await fetchData({ api: "products" });
-  const allProducts = data?.products || [];
-  const newProducts = allProducts.sort(function (a, b) {
-    return a.created > b.created ? -1 : 1;
-  });
+  const data = await fetchData({ api: "product-latest" });
+  const newProducts = data?.data || [];
 
   return (
     <>

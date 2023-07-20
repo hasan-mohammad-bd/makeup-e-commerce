@@ -3,8 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Loader from "./elements/Loader";
 import { useRouter } from "next/navigation";
+import { getSlicedText } from "@/utils/formatText";
+import Loader from "../elements/Loader";
 
 // ** Import Icon
 import { FaStar } from "react-icons/fa";
@@ -24,6 +25,20 @@ const SingleProduct = ({ product, addToCompare }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const {
+    id,
+    slug,
+    image,
+    product_name,
+    brand,
+    rating,
+    review,
+    new_price,
+    old_price,
+    discount_percentage,
+    productVariants,
+  } = product;
+
   useEffect(() => {
     if (Object.keys(product).length !== 0) {
       setLoading(false);
@@ -31,7 +46,7 @@ const SingleProduct = ({ product, addToCompare }) => {
   }, [product]);
 
   const handleAddToCart = (product) => {
-    if (product?.productVariants?.length) {
+    if (productVariants?.length) {
       dispatch(addToSelected(product));
     } else {
       dispatch(addToCart(product));
@@ -40,7 +55,7 @@ const SingleProduct = ({ product, addToCompare }) => {
 
   // Buy Now action
   const handleCheckout = (product) => {
-    if (product.productVariants.length) {
+    if (productVariants.length) {
       dispatch(addToSelected(product));
     } else {
       dispatch(addToCart(product));
@@ -68,11 +83,11 @@ const SingleProduct = ({ product, addToCompare }) => {
           <div className="product-card-wrap bg-white border border-slate-200 rounded-xl">
             <div className="product-img-action-wrap relative">
               <div className="product-img p-2 pb-0">
-                <Link href="/products/[slug]" as={`/products/${product.slug}`}>
+                <Link href="/products/[slug]" as={`/products/${slug}`}>
                   <Image
                     className="default-img"
-                    src={product?.image || "/assets/images/no-image.png"}
-                    alt={product?.product_name}
+                    src={image || "/assets/images/no-image.png"}
+                    alt={product_name}
                     width={220}
                     height={220}
                     priority={true}
@@ -84,7 +99,7 @@ const SingleProduct = ({ product, addToCompare }) => {
                   href={""}
                   aria-label="Add To Wishlist"
                   className="action-btn"
-                  onClick={(e) => handleWishlist(product?.id)}
+                  onClick={(e) => handleWishlist(id)}
                 >
                   <HiOutlineHeart />
                 </button>
@@ -96,38 +111,38 @@ const SingleProduct = ({ product, addToCompare }) => {
                   href="/products"
                   className="text-xs text-primary capitalize"
                 >
-                  {product?.brand?.brand_name || "No Brand"}
+                  {brand?.brand_name || "No Brand"}
                 </Link>
               </div>
               <h2>
                 <Link
-                  href={`/products/${product.slug}`}
+                  href={`/products/${slug}`}
                   className="product-title text-base font-semibold text-slate-900 font-body overflow-text"
                 >
-                  {product?.product_name}
+                  {getSlicedText(product_name, 20)}
                 </Link>
               </h2>
               <div className="rating-result flex items-center gap-3 mb-4">
                 <div className="font-semibold text-slate-900 inline-flex gap-1 justify-center">
-                  {product?.rating || 0}
+                  {rating || 0}
                   <FaStar className="inline text-primary align-middle" />
                 </div>
                 <div className="font-semibold text-slate-900 inline-flex gap-1 justify-center">
-                  {product?.review || 0}K
+                  {review || 0}K
                 </div>
               </div>
               <div className="product-price mb-3 flex gap-2">
                 <span className="text-lg/[24px] font-semibold text-red-500">
-                  ৳{product?.new_price}
+                  ৳{new_price}
                 </span>
-                {typeof product?.discount_percentage === "number" &&
-                product?.discount_percentage > 0 ? (
+                {typeof discount_percentage === "number" &&
+                discount_percentage > 0 ? (
                   <>
                     <del className="old-price text-lg/[24px] font-normal text-slate-400">
-                      {product?.old_price}
+                      {old_price}
                     </del>
                     <span className="discount inline-block text-xs text-white bg-red-500 rounded-md py-1 px-1 ml-2">
-                      -{product?.discount_percentage.toFixed(2)}%
+                      -{discount_percentage.toFixed(2)}%
                     </span>
                   </>
                 ) : null}

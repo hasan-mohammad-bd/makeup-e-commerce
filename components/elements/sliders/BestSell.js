@@ -2,7 +2,7 @@
 
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SingleProduct from "@/components/SingleProduct";
+import SingleProduct from "@/components/products/SingleProduct";
 
 SwiperCore.use([Navigation]);
 

@@ -1,26 +1,26 @@
 import Link from "next/link";
 import Image from "next/image";
-import Filter from "@/components/Filter";
-import SortSelect from "@/components/elements/SortSelect";
 
 // ** Imoprt icons
-import AllProducts from "@/components/AllProducts";
 import { fetchData } from "@/utils/fetchData";
 import noImage from "@/public/assets/images/no-image.png";
+import ProductsWithFilter from "@/components/products/ProductsWithFilter";
 
 const page = async ({ params }) => {
-  const { slug } = params;
-  const [categoryResponse, dataResponse] = await Promise.allSettled([
-    fetchData({ api: `category/${slug}` }),
-    fetchData({ api: "popular-categories" }),
+  const { brand_id } = params;
+  const [brandResponse, topBrands] = await Promise.allSettled([
+    fetchData({ api: `brands/${brand_id}` }),
+    fetchData({ api: "brands" }),
   ]);
 
-  const category =
-    categoryResponse.status === "fulfilled"
-      ? categoryResponse.value?.data || {}
-      : {};
-  const popularCategories =
-    dataResponse.status === "fulfilled" ? dataResponse.value?.data || [] : [];
+  const brand =
+    brandResponse.status === "fulfilled" ? brandResponse.value?.data || {} : {};
+  const popularBrands =
+    topBrands.status === "fulfilled" ? topBrands.value?.data || [] : [];
+
+  const searchParams = {
+    brand_id: brand?.id,
+  };
 
   return (
     <>
@@ -30,7 +30,7 @@ const page = async ({ params }) => {
         <div className="container">
           <div className="text-center">
             <h3 className="text-2xl font-bold font-title text-white mb-4">
-              {category?.category_name}
+              {brand?.brand_name}
             </h3>
             <div>
               <Link
@@ -40,10 +40,16 @@ const page = async ({ params }) => {
                 হোম
               </Link>
               <Link
-                href={`/products/category/${category.slug}`}
+                href={`/brands`}
                 className="text-base text-white hover:text-primary"
               >
-                {category?.category_name}
+                ব্র্যান্ড সমূহ
+              </Link>
+              <Link
+                href={`/brands/${brand?.id}`}
+                className="text-base text-white hover:text-primary"
+              >
+                {brand?.brand_name}
               </Link>
             </div>
           </div>
@@ -53,19 +59,19 @@ const page = async ({ params }) => {
       <div className="border-b border-slate-300 py-8">
         <div className="container">
           <h6 className="text-base font-semibold font-title text-slate-900 mb-4">
-            সেরা ৫টি ক্যাটাগরি
+            সেরা ৫টি ব্র্যান্ড
           </h6>
           <div className="flex items-center gap-5">
-            {popularCategories?.slice(0, 5)?.map((cat, i) => (
+            {popularBrands?.slice(0, 5)?.map((brand, i) => (
               <div
-                className="category flex flex-1 items-center gap-4 border border-slate-300 rounded-xl p-3.5"
+                className="brands flex flex-1 items-center gap-4 border border-slate-300 rounded-xl p-3.5"
                 key={i}
               >
                 <div className="image flex items-center justify-center w-12 h-12 bg-amber-50 rounded-2xl">
-                  <Link href={`/products/category/${cat.slug}`}>
+                  <Link href={`/brands/${brand.id}`}>
                     <Image
-                      src={cat?.image || noImage}
-                      alt={cat.category_name}
+                      src={brand?.image || noImage}
+                      alt={brand.brand_name}
                       width={48}
                       height={31}
                       className="w-[48px] h-[31px] object-contain"
@@ -73,10 +79,10 @@ const page = async ({ params }) => {
                   </Link>
                 </div>
                 <Link
-                  href={`/products/category/${cat.slug}`}
+                  href={`/brands/${brand.id}`}
                   className="text-base text-slate-900"
                 >
-                  {cat.category_name}
+                  {brand.brand_name}
                 </Link>
               </div>
             ))}
@@ -84,18 +90,7 @@ const page = async ({ params }) => {
         </div>
       </div>
 
-      <div className="container">
-        <div className="toolbar grid grid-cols-5 gap-5 my-5">
-          <div className="relative col-span-1">
-            <Filter />
-          </div>
-          <div className="col-span-4 flex justify-between items-center bg-slate-50 rounded-xl px-4 py-3">
-            <p>এখানে ৬৭ টি প্রডাক্ট আছে</p>
-            <SortSelect />
-          </div>
-        </div>
-        <AllProducts />
-      </div>
+      <ProductsWithFilter searchParams={searchParams} />
     </>
   );
 };

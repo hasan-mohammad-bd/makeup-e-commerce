@@ -4,8 +4,8 @@ import { fetchData } from "@/utils/fetchData";
 import noImage from "@/public/assets/images/no-image.png";
 
 const page = async () => {
-  const data = await fetchData({ api: "categories?no_child=1" });
-  const categories = data?.data || [];
+  const data = await fetchData({ api: "brands" });
+  const brands = data?.data || [];
 
   return (
     <>
@@ -19,10 +19,10 @@ const page = async () => {
               হোম
             </Link>
             <Link
-              href={`/categories`}
+              href={`/brands`}
               className="text-base text-slate-900 hover:text-primary"
             >
-              ক্যাটাগরি
+              ব্র্যান্ড সমূহ
             </Link>
           </div>
         </div>
@@ -30,15 +30,15 @@ const page = async () => {
 
       <div className="container mt-12 mb-24">
         <div className="flex items-center flex-wrap gap-10">
-          {categories?.map((category, i) => (
-            <div className="category" key={i}>
+          {brands?.map((brand, i) => (
+            <div className="brand" key={i}>
               <Link
-                href={`/categories/${category.slug}`}
-                className="category-img flex justify-center items-center w-[164px] h-[164px] bg-amber-50 rounded-full"
+                href={`/brands/${brand.id}`}
+                className="brand-img flex justify-center items-center w-[164px] h-[164px] bg-amber-50 rounded-full"
               >
                 <Image
-                  src={category?.image || noImage}
-                  alt={category.category_name}
+                  src={brand?.image || noImage}
+                  alt={brand.brand_name}
                   width={116}
                   height={78}
                   // style={{ width: "auto", height: "auto" }}
@@ -46,10 +46,10 @@ const page = async () => {
                 />
               </Link>
               <Link
-                href={`/categories/${category.slug}`}
+                href={`/brands/${brand.id}`}
                 className="block text-lg text-slate-700 text-center mt-4"
               >
-                {category.category_name}
+                {brand.brand_name}
               </Link>
             </div>
           ))}

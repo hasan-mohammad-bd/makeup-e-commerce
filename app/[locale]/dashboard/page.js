@@ -5,12 +5,15 @@ import { useForm } from "react-hook-form";
 import {
   useGetCountriesQuery,
   useGetUserQuery,
+  useUpdateProfileMutation,
 } from "@/store/features/api/authAPI";
 import ProfileImageUpload from "./ProfileImageUpload";
+import { toast } from "react-toastify";
 // import { useSelector } from "react-redux";
 
 const MyProfile = () => {
   const [editMode, setEditMode] = useState(false);
+  const [profileImageFile, setProfileImageFile] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState({
     name: "Bangladesh",
     flag: "🇧🇩",
@@ -25,6 +28,8 @@ const MyProfile = () => {
     return country || selectedCountry;
   };
 
+  const [updateProfile] = useUpdateProfileMutation();
+
   const {
     register,
     handleSubmit,
@@ -34,24 +39,45 @@ const MyProfile = () => {
   // const { user } = useSelector((state) => state.auth); //we can store user data to stop useless fetching
 
   //ways to get user after reload
-  const { data, isLoading, isError } = useGetUserQuery();
-  // if (isLoading) return <p>Loading............</p>;
-  if (isError) console.log("error occurred");
+  const { data } = useGetUserQuery();
   const user = data?.data || {};
-  console.log(user);
 
   const handleUserUpdate = async (data, event) => {
-    event.preventDefault();
-    console.log(data);
     const country = getCountryName(data.dial_code);
-    console.log(country);
+    const formData = new FormData();
+    formData.append("image", profileImageFile || user?.image);
+    formData.append("name", data.name);
+    formData.append("birth_date", data.birth_date);
+    formData.append("gender", data.gender);
+    formData.append("email", data.email);
+    formData.append("phone", data.phone);
+    formData.append("alt_phone_no", data.alt_phone_no);
+    formData.append("country", country);
+
+    updateProfile(formData)
+      .unwrap()
+      .then((response) => {
+        // Handle the successful response if necessary
+        toast.success("Profile updated successfully!");
+        setEditMode(false);
+      })
+      .catch((error) => {
+        // Handle the error if necessary
+        toast.error("Failed to update profile");
+        // console.log(error);
+      });
   };
 
   return (
     <div className="px-10 py-6">
       <h2 className="text-slate-900 font-bold text-2xl">আমার প্রফাইল</h2>
       <form className="basis-3/5" onSubmit={handleSubmit(handleUserUpdate)}>
-        <ProfileImageUpload />
+        <ProfileImageUpload
+          profileImageFile={profileImageFile}
+          setProfileImageFile={setProfileImageFile}
+          editMode={editMode}
+          user={user}
+        />
         <div className="grid grid-cols-2 gap-8">
           <div className="form-control">
             <label className="block text-base text-slate-500 mb-2">
@@ -72,6 +98,10 @@ const MyProfile = () => {
                   placeholder="আপনার নাম লিখুন"
                   {...register("name", {
                     required: "Name is required.",
+                    maxLength: {
+                      value: 20,
+                      message: "Name is too large",
+                    },
                   })}
                 />
                 {errors.name && (
@@ -120,13 +150,13 @@ const MyProfile = () => {
                   defaultValue={user?.gender}
                 >
                   <option disabled>লিঙ্গ নির্বাচন করুন</option>
-                  <option key="male" value="male">
+                  <option key="Male" value="Male">
                     Male
                   </option>
-                  <option key="female" value="female">
+                  <option key="Female" value="Female">
                     Female
                   </option>
-                  <option key="male" value="male">
+                  <option key="Others" value="Other">
                     Others
                   </option>
                 </select>
@@ -170,7 +200,7 @@ const MyProfile = () => {
             <label className="block text-slate-500 mb-2">ফোন নাম্বার</label>
             {!editMode ? (
               <p className="text-slate-800">
-                {user?.phone || (
+                {(user?.phone && user?.country_code + user.phone) || (
                   <span className="text-slate-300">ফোন নাম্বার লিখুন</span>
                 )}
               </p>
@@ -214,7 +244,8 @@ const MyProfile = () => {
             </label>
             {!editMode ? (
               <p className="text-slate-800">
-                {user?.alt_phone_no || (
+                {(user?.alt_phone_no &&
+                  user?.country_code + user.alt_phone_no) || (
                   <span className="text-slate-300">
                     বিকল্প ফোন নাম্বার লিখুন
                   </span>

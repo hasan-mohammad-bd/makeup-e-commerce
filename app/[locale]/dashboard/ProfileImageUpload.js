@@ -3,51 +3,73 @@ import { useState } from "react";
 import { BsCameraFill } from "react-icons/bs";
 import profileAvatar from "@/public/assets/images/profile_avatar.png";
 
-const ProfileImageUpload = () => {
-  const [image, setImage] = useState(null);
+const ProfileImageUpload = ({
+  profileImageFile,
+  setProfileImageFile,
+  editMode,
+  user,
+}) => {
+  const [validationError, setValidationError] = useState("");
+
+  const validateImage = (file) => {
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    const maxSize = 5 * 1024 * 1024; // 5MB
+
+    if (!allowedExtensions.test(file.name)) {
+      return "Only JPG, JPEG, and PNG files are allowed.";
+    }
+    if (file.size > maxSize) {
+      return "File size exceeds the maximum limit of 5MB.";
+    }
+
+    return "";
+  };
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setImage(reader.result);
-      }
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
+    const validationError = validateImage(file);
+    if (validationError) {
+      setValidationError(validationError);
+      return;
     }
+    setProfileImageFile(file);
+    if (file) setValidationError("");
   };
 
   return (
-    <div className="relative w-32 h-32 mb-16 mt-8">
+    <div className="mb-16 mt-8">
       <div className="w-32 h-32 relative rounded-full bg-gray-200">
-        {/* {image ? ( */}
         <Image
-          src={image || profileAvatar}
+          src={
+            profileImageFile
+              ? URL.createObjectURL(profileImageFile)
+              : null || user?.image || profileAvatar
+          }
           alt="Profile"
           height={128}
           width={128}
           className="w-full h-full rounded-full"
         />
-        {/* ) : null} */}
-        <label
-          htmlFor="image-upload"
-          className="absolute bottom-0 right-0 w-9 h-9 bg-primary rounded-full flex items-center justify-center cursor-pointer border-2 border-white"
-        >
-          <BsCameraFill className="text-white" />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            id="image-upload"
-            className="hidden"
-          />
-        </label>
+        {editMode && (
+          <label
+            htmlFor="image-upload"
+            className="absolute bottom-0 right-0 w-9 h-9 bg-primary rounded-full flex items-center justify-center cursor-pointer border-2 border-white"
+          >
+            <BsCameraFill className="text-white" />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              id="image-upload"
+              className="hidden"
+            />
+          </label>
+        )}
+        <h3 className="text-center m-3 text-slate-500">প্রফাইল ফটো</h3>
       </div>
-      <h3 className="text-center mt-3 text-slate-500">প্রফাইল ফটো</h3>
+      {validationError && editMode && (
+        <div className="text-red-500 mt-12">{validationError}</div>
+      )}
     </div>
   );
 };

@@ -4,11 +4,10 @@ import ServiceFeatures from "@/components/ServiceFeatures";
 import Intro from "@/components/Intro";
 import FlashSale from "@/components/FlashSale";
 import BestSell from "@/components/BestSell";
-import AllProducts from "@/components/AllProducts";
+import AllProducts from "@/components/products/AllProducts";
 import NewArrival from "@/components/NewArrival";
 import Brands from "@/components/Brands";
 import Link from "next/link";
-import Timer from "@/components/elements/Timer";
 import VideoBanner from "@/components/elements/VideoBanner";
 import Banner1 from "@/components/Banner1";
 import PopularCategories from "@/components/PopularCategories";
@@ -31,29 +30,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flash-sale mt-28 mb-12">
-        <div className="container relative">
-          <div className="sec-heading absolute top-[-30px] left-0 w-full flex justify-between items-center px-8">
-            <div className="flex gap-4 bg-white">
-              <div>
-                <h2 className="sec-title">ফ্ল্যাশ সেল চলছে</h2>
-                <p>অফার চলবে আর মাত্র</p>
-              </div>
-              <Timer targetDate="2023-7-31" />
-            </div>
-            <Link href="/products/flash-sale" className="all-btn bg-white">
-              সবগুলো দেখুন <HiArrowLongRight size={24} />{" "}
-            </Link>
-          </div>
-
-          <div className="flashSale-slider border border-primary rounded-2xl p-6 pt-16">
-            <FlashSale />
-          </div>
-        </div>
-      </section>
+      <FlashSale />
 
       <section
-        className="all-category py-14"
+        className="all-category py-14 mt-12"
         style={{
           backgroundImage: "linear-gradient(90deg, #00B7C9 0%, #00C999 100%)",
         }}
@@ -136,8 +116,11 @@ export default function Home() {
 
       <section className="all-brands py-14">
         <div className="container">
-          <div className="sec-heading border-b border-slate-200 pb-3">
+          <div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
             <h2 className="sec-title">আমাদের ব্র্যান্ড সমূহ</h2>
+            <Link href="/brands" className="all-btn">
+              সবগুলো দেখুন <HiArrowLongRight size={24} />{" "}
+            </Link>
           </div>
 
           <div className="brands-slider mt-6  relative">

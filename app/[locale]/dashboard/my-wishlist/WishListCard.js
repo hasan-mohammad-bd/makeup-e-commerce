@@ -8,7 +8,7 @@ import { useRemoveFromWishListMutation } from "@/store/features/api/wishListAPI"
 import { addToCart, addToSelected } from "@/store/features/cartSlice";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 
-const WishListCard = ({ product, stockOut }) => {
+const WishListCard = ({ product }) => {
   const [deleteFromWishlist] = useRemoveFromWishListMutation();
   const dispatch = useDispatch();
 
@@ -20,7 +20,10 @@ const WishListCard = ({ product, stockOut }) => {
     old_price,
     productVariants,
     discount_percentage,
+    stock_qty,
   } = product;
+
+  const stockOut = stock_qty <= 0 ? true : false;
 
   const handleDelete = async (productId) => {
     try {

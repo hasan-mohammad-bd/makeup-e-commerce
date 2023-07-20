@@ -6,7 +6,7 @@ const TicketImagesUpload = ({ setImageFiles }) => {
 
   const validateImages = (files) => {
     const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-    const maxSize = 2 * 1024 * 1024; // 2MB
+    const maxSize = 5 * 1024 * 1024; // 5MB
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -14,7 +14,7 @@ const TicketImagesUpload = ({ setImageFiles }) => {
         return "Only JPG, JPEG, and PNG files are allowed.";
       }
       if (file.size > maxSize) {
-        return "File size exceeds the maximum limit of 2MB.";
+        return "File size exceeds the maximum limit of 5MB.";
       }
     }
 

@@ -2,14 +2,14 @@
 
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SingleProduct from "../../../components/SingleProductList";
 
 SwiperCore.use([Navigation]);
 
 // ** Import Icons
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
+import SingleProductList from "@/components/products/SingleProductList";
 
-const NewArrival = ({ newProducts, chunk_size }) => {
+const NewArrivalSlider = ({ newProducts, chunk_size }) => {
   const productChunks = (newProducts, chunk_size = 2) =>
     new Array(Math.ceil(newProducts.length / chunk_size))
       .fill()
@@ -33,7 +33,7 @@ const NewArrival = ({ newProducts, chunk_size }) => {
         {newProductsArray?.map((product, i) => (
           <SwiperSlide key={i}>
             {product.map((product, i) => (
-              <SingleProduct product={product} key={i} />
+              <SingleProductList product={product} key={i} />
             ))}
           </SwiperSlide>
         ))}
@@ -51,4 +51,4 @@ const NewArrival = ({ newProducts, chunk_size }) => {
   );
 };
 
-export default NewArrival;
+export default NewArrivalSlider;

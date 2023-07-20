@@ -1,5 +1,5 @@
-import SingleProduct from "./SingleProductList";
 import { fetchData } from "@/utils/fetchData";
+import SingleProduct from "./products/SingleProduct";
 
 const LatestViews = async () => {
   const data = await fetchData({ api: "products" });

@@ -26,6 +26,14 @@ const authAPI = apiSlice.injectEndpoints({
       query: () => `user`,
       providesTags: ["user"],
     }),
+    updateProfile: builder.mutation({
+      query: (payload) => ({
+        url: "update-profile",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 
@@ -34,4 +42,5 @@ export const {
   useOtpLoginMutation,
   useVerifyOtpMutation,
   useGetUserQuery,
+  useUpdateProfileMutation,
 } = authAPI;

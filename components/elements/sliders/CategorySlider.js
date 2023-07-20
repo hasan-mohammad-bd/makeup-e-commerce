@@ -27,7 +27,7 @@ const CategorySlider = ({ categories }) => {
         {categories?.map((category, i) => (
           <SwiperSlide key={i}>
             <Link
-              href={`/products/category/${category.slug}`}
+              href={`/categories/${category.slug}`}
               className="category-img flex justify-center items-center w-[164px] h-[164px] bg-white rounded-full"
             >
               <Image
@@ -40,7 +40,7 @@ const CategorySlider = ({ categories }) => {
               />
             </Link>
             <Link
-              href={`/products/category/${category.slug}`}
+              href={`/categories/${category.slug}`}
               className="block text-lg text-white text-center mt-4"
             >
               {category.category_name}
