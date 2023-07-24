@@ -9,14 +9,6 @@ import { Thumbs, Autoplay } from "swiper";
 // ** Import Icon
 import { HiOutlineHeart, HiPlayCircle } from "react-icons/hi2";
 
-const slides = [
-  "https://picsum.photos/1920/1080",
-  "https://picsum.photos/1920/1081",
-  "https://picsum.photos/1920/1082",
-  "https://picsum.photos/1920/1083",
-  "https://picsum.photos/1920/1084",
-];
-
 const ThumbSlider = ({ product }) => {
   const [imagesNavSlider, setImagesNavSlider] = useState(null);
 
@@ -31,7 +23,7 @@ const ThumbSlider = ({ product }) => {
               disableOnInteraction: false,
             }}
             direction="vertical"
-            slidesPerView={5}
+            slidesPerView={"auto"}
             breakpoints={{
               0: {
                 direction: "horizontal",
@@ -42,15 +34,15 @@ const ThumbSlider = ({ product }) => {
             }}
             modules={[Thumbs, Autoplay]}
           >
-            {slides.map((slide, index) => (
+            {product.photos.map((slide, index) => (
               <SwiperSlide key={index}>
                 <div className="slider-image cursor-pointer">
                   <Image
-                    src={`/assets/images/shop/product-thumb-${index + 1}.png`}
+                    src={slide}
                     alt=""
                     width={64}
                     height={64}
-                    className="border border-transparent rounded-lg mb-3"
+                    className="border border-transparent h-16 w-16 cursor-pointer rounded-lg mb-3"
                   />
                 </div>
               </SwiperSlide>
@@ -77,16 +69,16 @@ const ThumbSlider = ({ product }) => {
             }}
             modules={[Thumbs, Autoplay]}
           >
-            {slides.map((slide, index) => (
+            {product.photos.map((slide, index) => (
               <SwiperSlide key={index}>
                 <div className="slider-imag relative">
                   <Image
-                    src={`/assets/images/shop/product-preview.png`}
+                    src={slide}
                     alt=""
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    className="w-auto"
+                    width={524}
+                    height={524}
+                    // sizes="100vw"
+                    className="h-[32.75rem] w-[32.75rem] object-contain rounded-lg"
                   />
                   <div className="product-action absolute top-4 right-4">
                     <Link
@@ -99,8 +91,8 @@ const ThumbSlider = ({ product }) => {
                     </Link>
                   </div>
                   {true && (
-                    <a
-                      href="youtube.com"
+                    <Link
+                      href="https://www.youtube.com/"
                       target="_blank"
                       className="vid-icon absolute inline-flex justify-center items-center top-1/2 left-1/2 w-[72px] h-[72px] rounded-full drop-shadow-[0_0px_60px_rgba(0,0,0,0.16)] translate-x-[-50%] translate-y-[-50%]"
                     >
@@ -108,7 +100,7 @@ const ThumbSlider = ({ product }) => {
                         size={60}
                         className="text-white hover:text-primary"
                       />
-                    </a>
+                    </Link>
                   )}
                 </div>
               </SwiperSlide>

@@ -26,7 +26,14 @@ export const apiSlice = createApi({
     },
   }),
 
-  tagTypes: ["countries", "user", "wishlist", "s-ticket", "s-ticket-type"],
+  tagTypes: [
+    "countries",
+    "user",
+    "wishlist",
+    "s-ticket",
+    "s-ticket-type",
+    "visited",
+  ],
   endpoints: () => ({}),
 });
 

@@ -32,7 +32,7 @@ const Brands = ({ brands }) => {
               className="barnd-img inline-block border border-slate-300 rounded-xl p-2"
             >
               <Image
-                src={brand.image || noImage}
+                src={brand.brand_image || noImage}
                 alt={brand.title}
                 width={118}
                 height={118}

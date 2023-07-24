@@ -2,15 +2,51 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { TbTag } from "react-icons/tb";
+import { IoCall, IoCopy } from "react-icons/io5";
+import ThumbSlider from "@/components/elements/sliders/ThumbSlider";
+import { getSlicedText } from "@/utils/formatText";
+import DescriptionViewer from "@/components/DescriptionViewer";
+import { addToCart } from "@/store/features/cartSlice";
+import ProductVariantSelect from "@/components/products/ProductVariantSelect";
 
 // ** Import Icon
-import { HiStar, HiChatBubbleLeftRight, HiShare } from "react-icons/hi2";
-import { TfiAngleRight } from "react-icons/tfi";
-import { TbTag } from "react-icons/tb";
-import { IoCopy } from "react-icons/io5";
-import ThumbSlider from "@/components/elements/sliders/ThumbSlider";
+import {
+  HiStar,
+  HiChatBubbleLeftRight,
+  HiShare,
+  HiOutlineShoppingCart,
+  HiOutlineArrowLongRight,
+} from "react-icons/hi2";
 
 const ProductDetails = ({ product }) => {
+  const [selectedVariant, setSelectedVariant] = useState(null);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleAddToCart = () => {
+    if (product?.productVariants?.length) {
+      const variantProduct = {
+        ...product,
+        variantId: selectedVariant?.id,
+        selectedVariant,
+        // sizes: colors[selectedColor],
+      };
+      // console.log(variantProduct);
+      dispatch(addToCart(variantProduct));
+    } else {
+      dispatch(addToCart(product));
+    }
+  };
+
+  const handleBuyNow = () => {
+    handleAddToCart();
+    router.push("/checkout");
+  };
+
   return (
     <>
       <div className="product-details">
@@ -21,11 +57,10 @@ const ProductDetails = ({ product }) => {
           <div className="w-1/2">
             <div className="product-content-wrap">
               <p className="text-sm font-bold text-primary capitalize mb-2">
-                {product?.brand || "Havit"}
+                {product?.brand?.brand_name || "No Brand"}
               </p>
               <h5 className="text-2xl font-bold font-title text-slate-900">
-                {product?.title ||
-                  "Insta360 GO 2 একশন ক্যামেরা 9MP 3K জলরোধী একশন ক্যামেরা"}
+                {getSlicedText(product?.product_name, 100)}
               </h5>
               <div className="meta-data flex items-center gap-8 my-2">
                 <div className="rating-point flex gap-1">
@@ -46,86 +81,71 @@ const ProductDetails = ({ product }) => {
                   </span>
                   <span>4.5</span>
                 </div>
-                <p>1265 রেটিং</p>
+                <p>{product?.total_rating || 0} রেটিং</p>
                 <p>
                   <HiChatBubbleLeftRight
                     size={20}
                     className="text-secondary-700"
                   />{" "}
-                  32 প্রশ্ন এবং উত্তর
+                  {product?.total_question_answer || 0} প্রশ্ন এবং উত্তর
                 </p>
                 <p>
                   <HiShare size={20} /> শেয়ার করুন
                 </p>
               </div>
-              <p className="desc text-base text-slate-600">
-                {product?.desc ||
-                  "nsta360 GO 2 9MP 3K ওয়াটারপ্রুফ স্মল অ্যাকশন ক্যামেরা Insta360 GO 2 9MP 3K ওয়াটারপ্রুফ স্মল অ্যাকশন ক্যামেরা সহ আসে। এই অ্যাকশন ক্যামেরাটি ফ্লোস্টেট স্ট্যাবিলাইজেশন, হাইপারল্যাপস, ওয়াইফাই প্রিভিউ, হ্যান্ডস-ফ্রি, মাউন্ট এনিহোয়ার, 1440p 50fps সহ বৈশিষ্ট্যযুক্ত। 4m (13ft) পর্যন্ত জলরোধী এবং এটি 13' পর্যন্ত IPX8 জলরোধী"}
-              </p>
+              {/* short description  */}
+              <DescriptionViewer
+                details={product?.product_short_description}
+                className={"desc text-base text-slate-600"}
+              />
               <div className="product-price flex items-center gap-4 border-b border-slate-200 py-5">
                 <span className="text-3xl/[48px] font-bold font-title text-slate-900">
-                  {product?.price || "৳ 22,153"}{" "}
+                  ৳ {product?.new_price || "0.00"}{" "}
                 </span>
-                <del className="old-price text-lg/[24px] font-normal text-slate-400">
-                  {product?.oldPrice ? `$ ${product?.oldPrice}` : "৳ 32,999"}
-                </del>
-                <span className="discount inline-block text-base font-semibold font-title text-white bg-red-500 rounded-md py-1 px-2">
-                  {product?.discount?.percentage || "-44"}%
-                </span>
+                {product?.old_price > product?.new_price ? (
+                  <>
+                    <del className="old-price text-lg/[24px] font-normal text-slate-400">
+                      ৳{" "}
+                      {product?.old_price ? `$ ${product?.old_price}` : "0.00"}
+                    </del>
+                    <span className="discount inline-block text-base font-semibold font-title text-white bg-red-500 rounded-md py-1 px-2">
+                      - {product?.discount_percentage || "0.00"}%
+                    </span>
+                  </>
+                ) : null}
               </div>
-              <div className="color-select my-5">
-                <p className="text-slate-900 mb-2">কালার নির্বাচন করুন:</p>
-                <div className="flex  gap-2">
-                  {new Array(8).fill(8)?.map((clr, i) => (
-                    <div className="input-grp" key={i}>
-                      <input
-                        type="radio"
-                        id={`clr-${i}`}
-                        name="color"
-                        value=""
-                        className="peer hidden"
-                      />
-                      <label
-                        className="inline-block border border-slate-300 rounded-lg p-1 cursor-pointer peer-checked:border-primary"
-                        htmlFor={`cat-${i}`}
-                      >
-                        <Image
-                          src={`/assets/images/shop/color-product.png`}
-                          width={52}
-                          height={52}
-                          alt=""
-                        />
-                      </label>
-                    </div>
-                  ))}
-                </div>
+              {product?.productVariants?.length ? (
+                <ProductVariantSelect
+                  productVariants={product?.productVariants}
+                  selectedVariant={selectedVariant}
+                  setSelectedVariant={setSelectedVariant}
+                />
+              ) : null}
+              <div className="product-actions my-6 flex gap-4 justify-between items-center">
+                <button
+                  className="bg-secondary-700 py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
+                  onClick={handleAddToCart}
+                >
+                  <HiOutlineShoppingCart size={24} />
+                  <span className="ml-2">কার্টে রাখুন</span>
+                </button>
+                <button
+                  onClick={handleBuyNow}
+                  className="bg-primary py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
+                >
+                  <span className="mr-2">এখনই কিনুন</span>
+                  <HiOutlineArrowLongRight size={20} />
+                </button>
               </div>
-              <div className="size-select">
-                <div className="flex justify-between items-center">
-                  <p className="text-slate-900 mb-2">সাইজ নির্বাচন করুন:</p>
-                  <p className="text-base text-secondary-700 mb-2">
-                    সাইজ চার্ট দেখুন <TfiAngleRight />
-                  </p>
-                </div>
-                <div className="flex  gap-2">
-                  {new Array(6).fill(8)?.map((size, i) => (
-                    <div className="input-grp" key={i}>
-                      <input
-                        type="radio"
-                        id={`size-${i}`}
-                        name="size"
-                        value=""
-                        className="peer hidden"
-                      />
-                      <label
-                        className="inline-block text-slate-700 border border-slate-300 rounded-lg px-4 py-3 whitespace-nowrap cursor-pointer peer-checked:text-primary peer-checked:bg-amber-200 peer-checked:border-primary"
-                        htmlFor={`size-${i}`}
-                      >
-                        Extra Large
-                      </label>
-                    </div>
-                  ))}
-                </div>
+              <div className="bg-slate-200 rounded-lg flex justify-between items-center flex-wrap px-5 py-6 font-bold">
+                <p className="text-slate-900">বিস্তারিত জানতে কল করুন</p>
+                <p className="text-primary">
+                  <IoCall /> 01720060958
+                </p>
+                <p className="text-slate-500">অথবা</p>
+                <p className="text-primary">
+                  <IoCall /> 01720060977
+                </p>
               </div>
               <div className="mt-5 mb-8">
                 <p className="font-semibold font-title text-slate-900 mb-2">

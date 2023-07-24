@@ -1,39 +1,20 @@
 "use client";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import DrawerRight from "@/components/elements/DrawerRight";
 import { addToCart, removeFromSelected } from "@/store/features/cartSlice";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
+import ProductVariantSelect from "../products/ProductVariantSelect";
 
 const ProductSelect = () => {
   const { selectedProduct } = useSelector((state) => state.cart);
-  const [colors, setColors] = useState([]);
-  const [selectedColor, setSelectedColor] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(null);
-
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const variants = selectedProduct?.productVariants || [];
-    if (variants.length) {
-      // Group the data based on color
-      const colorVariantsGroup = variants.reduce((result, variant) => {
-        const { color } = variant;
-        if (!result[color]) {
-          result[color] = [];
-        }
-        result[color].push(variant);
-        return result;
-      }, {});
-      const firstColor = Object.keys(colorVariantsGroup)[0];
-      setColors(colorVariantsGroup);
-      setSelectedColor(firstColor);
-      setSelectedVariant(colorVariantsGroup[firstColor][0]);
-    }
-  }, [selectedProduct?.productVariants]);
+  const router = useRouter();
 
   const handleAddToCart = () => {
     const variantProduct = {
@@ -48,6 +29,12 @@ const ProductSelect = () => {
 
   const closeDrawer = (param) => {
     dispatch(removeFromSelected());
+  };
+
+  const handleBuyNow = () => {
+    handleAddToCart();
+    closeDrawer();
+    router.push("/checkout");
   };
 
   return (
@@ -88,52 +75,13 @@ const ProductSelect = () => {
             </div>
           </div>
         </div>
-        <div className="product-color mt-4">
-          <h4 className="text-slate-700 py-3 font-bold">
-            কালার নির্বাচন করুন:
-          </h4>
-          {selectedColor ? (
-            <div className="flex gap-2">
-              {Object.keys(colors).map((key) => (
-                <Image
-                  key={key}
-                  src={"/assets/images/review/image-2.png"}
-                  alt="product"
-                  height={52}
-                  width={52}
-                  sizes="52px"
-                  title={key}
-                  className={`rounded-md border-2 ${
-                    key === selectedColor
-                      ? "border-primary"
-                      : "border-slate-300"
-                  } cursor-pointer`}
-                  onClick={() => setSelectedColor(key)}
-                />
-              ))}
-            </div>
-          ) : null}
-        </div>
-        <div className="product-size mt-4">
-          <h4 className="text-slate-700 py-3 font-bold">সাইজ নির্বাচন করুন:</h4>
-          {colors[selectedColor]?.length ? (
-            <div className="flex gap-2 flex-wrap">
-              {colors[selectedColor]?.map((variant) => (
-                <div
-                  key={variant.id}
-                  className={`py-3 px-4 rounded-lg text-slate-700 border-2 ${
-                    variant?.id === selectedVariant?.id
-                      ? "border-primary"
-                      : "border-slate-300"
-                  } cursor-pointer`}
-                  onClick={() => setSelectedVariant(variant)}
-                >
-                  {variant.size}
-                </div>
-              ))}
-            </div>
-          ) : null}
-        </div>
+        {selectedProduct?.productVariants?.length ? (
+          <ProductVariantSelect
+            productVariants={selectedProduct?.productVariants}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+          />
+        ) : null}
         <div className="product-actions my-6 flex gap-4 justify-between items-center">
           <button
             className="bg-secondary-700 py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
@@ -142,14 +90,13 @@ const ProductSelect = () => {
             <HiOutlineShoppingCart size={24} />
             <span className="ml-2">কার্টে রাখুন</span>
           </button>
-          <Link
-            href={"/checkout"}
-            onClick={closeDrawer}
+          <button
+            onClick={handleBuyNow}
             className="bg-primary py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
           >
             <span className="mr-2">এখনই কিনুন</span>
             <HiArrowLongRight size={20} />
-          </Link>
+          </button>
         </div>
         <Link href="/products/productIdOrSlug" className="text-secondary-700">
           <p className="text-center">প্রডাক্টির বিস্তারিত দেখতে ক্লক করুন</p>

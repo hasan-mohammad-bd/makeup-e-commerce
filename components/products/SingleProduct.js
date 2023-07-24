@@ -85,12 +85,12 @@ const SingleProduct = ({ product, addToCompare }) => {
               <div className="product-img p-2 pb-0">
                 <Link href="/products/[slug]" as={`/products/${slug}`}>
                   <Image
-                    className="default-img"
+                    className="default-img h-56 w-56 rounded-lg"
                     src={image || "/assets/images/no-image.png"}
                     alt={product_name}
-                    width={220}
-                    height={220}
-                    priority={true}
+                    width={226}
+                    height={226}
+                    // priority={true}
                   />
                 </Link>
               </div>
@@ -108,7 +108,7 @@ const SingleProduct = ({ product, addToCompare }) => {
             <div className="product-content-wrap p-3">
               <div className="product-category">
                 <Link
-                  href="/products"
+                  href={`/brands/${brand?.id ? brand?.id : ""}`}
                   className="text-xs text-primary capitalize"
                 >
                   {brand?.brand_name || "No Brand"}

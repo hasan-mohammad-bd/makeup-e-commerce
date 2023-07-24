@@ -6,7 +6,6 @@ const AllProducts = async ({ searchParams = {} }) => {
   const params = new URLSearchParams(searchParams);
   const data = await fetchData({ api: `products?${params.toString()}` });
   const allProducts = data?.data || [];
-  // console.log(data)
 
   return (
     <>

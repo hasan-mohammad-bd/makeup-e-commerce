@@ -21,7 +21,7 @@ const FlashSale = async () => {
             </div>
             <Timer targetDate={flashSaleInfo?.expire_time} />
           </div>
-          <Link href="/products/flash-sale" className="all-btn bg-white">
+          <Link href="/flash-sale" className="all-btn bg-white">
             সবগুলো দেখুন <HiArrowLongRight size={24} />{" "}
           </Link>
         </div>
@@ -35,8 +35,3 @@ const FlashSale = async () => {
 };
 
 export default FlashSale;
-
-// {
-//   "status": false,
-//   "message": "No flash sale abaiable at this moment"
-// }

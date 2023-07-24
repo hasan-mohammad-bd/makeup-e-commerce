@@ -1,13 +1,19 @@
+import DescriptionViewer from "@/components/DescriptionViewer";
+import { fetchData } from "@/utils/fetchData";
 import { BiPlus } from "react-icons/bi";
 
-const Specifications = ({ specifications }) => {
+const Specifications = async ({ params }) => {
+  const { slug } = params;
+  const response = await fetchData({ api: `products/${slug}` });
+  const product = response?.data || {};
   return (
     <div className="question-answer mb-8">
       <h4 className="text-2xl font-bold font-title text-slate-900">
         স্পেসিফিকেশন:
       </h4>
       <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-        <div class="inline-block min-w-full shadow-sm rounded-lg overflow-hidden mb-3">
+        <DescriptionViewer details={product?.specification} />
+        {/* <div class="inline-block min-w-full shadow-sm rounded-lg overflow-hidden mb-3">
           <table class="min-w-full leading-normal">
             <thead className="bg-slate-200 text-slate-900">
               <tr>
@@ -166,7 +172,7 @@ const Specifications = ({ specifications }) => {
             <BiPlus />
             আরও জানুন
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

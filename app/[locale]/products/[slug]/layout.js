@@ -1,26 +1,44 @@
 import Link from "next/link";
 import AllProducts from "@/components/products/AllProducts";
-import LatestViews from "@/components/LatestViews";
+import LastVisitedProducts from "@/components/LastVisitedProducts";
 import ProductDetails from "./ProductDetails";
 import ActiveLink from "@/components/elements/ActiveLink";
+import { fetchData } from "@/utils/fetchData";
+import { notFound } from "next/navigation";
+import React from "react";
 
-export default function ProductDetailsLayout({ children, params }) {
+export const metadata = {
+  title: "Sotota Stall || product details page",
+  description: "product details page",
+};
+
+export default async function ProductDetailsLayout({ children, params }) {
+  const { slug } = params;
+  if (slug === "null") return notFound();
+  const response = await fetchData({ api: `products/${slug}` });
+  const product = response?.data || {};
+
+  //Category Filter
+  const searchParams = {
+    category_id: product?.category?.id,
+  };
+
   const tabItems = [
-    { id: 1, title: "প্রডাক্টের বিবরণ", path: `/products/${params.slug}` },
+    { id: 1, title: "প্রডাক্টের বিবরণ", path: `/products/${slug}` },
     {
       id: 2,
       title: "স্পেসিফিকেশন",
-      path: `/products/${params.slug}/specifications`,
+      path: `/products/${slug}/specifications`,
     },
     {
       id: 3,
       title: "রেটিং ও রিভিউ",
-      path: `/products/${params.slug}/reviews`,
+      path: `/products/${slug}/reviews`,
     },
     {
       id: 4,
       title: "প্রশ্ন ও উত্তর",
-      path: `/products/${params.slug}/qna`,
+      path: `/products/${slug}/qna`,
     },
   ];
   return (
@@ -42,17 +60,17 @@ export default function ProductDetailsLayout({ children, params }) {
                 প্রডাক্টস
               </Link>
               <Link
-                href={`/products/${params.slug}`}
+                href={`/products/${slug}`}
                 className={`text-base text-slate-900 hover:text-primary`}
               >
-                {params.slug}
+                {slug}
               </Link>
             </div>
           </div>
         </div>
       </div>
       <div className="container">
-        <ProductDetails />
+        <ProductDetails product={product} />
         <div className="flex justify-end">
           <div className="w-1/2">
             {/* tabs view */}
@@ -76,23 +94,13 @@ export default function ProductDetailsLayout({ children, params }) {
             <h2 className="sec-title">একই ক্যাটাগরির আরও প্রোডাক্ট</h2>
           </div>
 
-          <div className="bestSell-slider mt-6">
-            <AllProducts />
+          <div className="category-products mt-6">
+            <AllProducts searchParams={searchParams} />
           </div>
         </div>
       </div>
 
-      <div className="container ">
-        <div className="latest-viewed-products bg-slate-50 border border-slate-100 rounded-xl p-6 pt-8 mb-14">
-          <div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
-            <h2 className="sec-title">সর্বশেষ যে প্রোডাক্ট গুলো দেখেছেন</h2>
-          </div>
-
-          <div className="mt-6 ">
-            <LatestViews />
-          </div>
-        </div>
-      </div>
+      <LastVisitedProducts visitedProductId={product?.id} />
     </>
   );
 }

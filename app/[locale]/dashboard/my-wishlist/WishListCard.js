@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useRemoveFromWishListMutation } from "@/store/features/api/wishListAPI";
 import { addToCart, addToSelected } from "@/store/features/cartSlice";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
+import { getSlicedText } from "@/utils/formatText";
 
 const WishListCard = ({ product }) => {
   const [deleteFromWishlist] = useRemoveFromWishListMutation();
@@ -14,6 +15,7 @@ const WishListCard = ({ product }) => {
 
   const {
     id,
+    slug,
     brand,
     product_name,
     new_price,
@@ -69,14 +71,18 @@ const WishListCard = ({ product }) => {
           ) : null}
         </div>
         <div className="flex flex-col justify-between w-full">
-          <h5 className={`text-primary ${stockOut ? "opacity-50" : ""}`}>
+          <Link
+            href={`/brands/${brand?.id}`}
+            className={`text-primary ${stockOut ? "opacity-50" : ""}`}
+          >
             {brand?.brand_name || "No Brand"}
-          </h5>
-          <h4 className={`${stockOut ? "opacity-50" : ""}`}>
-            {product_name?.length >= 100
-              ? product_name.slice(0, 100) + "..."
-              : product_name}
-          </h4>
+          </Link>
+          <Link
+            href={`/products/${slug}`}
+            className={`${stockOut ? "opacity-50" : ""}`}
+          >
+            {getSlicedText(product_name, 100)}
+          </Link>
           <div className="flex justify-between items-center">
             <div
               className={`flex gap-3 products-center items-center ${

@@ -5,9 +5,13 @@ import { HiPlayCircle } from "react-icons/hi2";
 
 import ProductBanner from "@/components/elements/sliders/ProductBanner";
 import ProductReview from "@/components/elements/sliders/ProductReview";
+import DescriptionViewer from "@/components/DescriptionViewer";
+import { fetchData } from "@/utils/fetchData";
 
-const page = ({ params }) => {
+const page = async ({ params }) => {
   const { slug } = params;
+  const response = await fetchData({ api: `products/${slug}` });
+  const product = response?.data || {};
 
   return (
     <div className="">
@@ -15,7 +19,8 @@ const page = ({ params }) => {
         <h4 className="text-2xl font-bold font-title text-slate-900">
           প্রডাক্টের বিবরণ:
         </h4>
-        <p className="text-slate-700 my-5">
+        <DescriptionViewer details={product?.details} />
+        {/* <p className="text-slate-700 my-5">
           Insta360 Go 2 Tiny Mighty Action Camera 1440P 50fps স্পোর্টস ক্যামেরা
           IPX8 4M ওয়াটারপ্রুফ ফ্লোস্টেট স্ট্যাবিলাইজেশন হাইপারল্যাপ্স স্লো মোশন
           রি-মোট কন্ট্রোল অটো এডিটিং WI-FI প্রিভিউ সমর্থন করে
@@ -90,7 +95,7 @@ const page = ({ params }) => {
             sizes="100vw"
             className="w-auto mt-6"
           />
-        </div>
+        </div> */}
       </div>
       <div className="blogs my-8">
         <p className="text-primary mb-1">ফ্লোস্টেট স্টেবিলাইজেশন</p>
