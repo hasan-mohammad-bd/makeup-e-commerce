@@ -11,7 +11,7 @@ import {
 } from "@/store/features/api/supportTicketAPI";
 import { toast } from "react-toastify";
 
-export default function page() {
+export default function AddSupportTicket() {
   const [imageFiles, setImageFiles] = useState([]);
   const { data } = useGetSupportTicketTypesQuery();
   const ticketTypes = data?.data || [];

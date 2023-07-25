@@ -10,7 +10,7 @@ const orders = [
   { id: 4, isReviewed: true, items: ["1", "2"] },
 ];
 
-export default function page() {
+export default function MyReview() {
   const [isReviewed, setIsReviewed] = useState(false);
   const filteredOrders = orders.filter(
     (order) => order.isReviewed === isReviewed
@@ -41,7 +41,7 @@ export default function page() {
       </div>
       <div className="my-reviews mt-8">
         {filteredOrders.length ? (
-          filteredOrders.map((order) => <OrderReviewCard order={order} />)
+          filteredOrders.map((order, index) => <OrderReviewCard key={index} order={order} />)
         ) : (
           <NoItems title={"কোন রিভিউ নেই"} />
         )}

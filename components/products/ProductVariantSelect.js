@@ -28,7 +28,7 @@ export default function ProductVariantSelect({
       setSelectedColor(firstColor);
       setSelectedVariant(colorVariantsGroup[firstColor][0]);
     }
-  }, [productVariants]);
+  }, [productVariants, setSelectedVariant]);
 
   return (
     <div>

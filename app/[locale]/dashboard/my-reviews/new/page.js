@@ -17,7 +17,7 @@ const order = {
   ],
 };
 
-export default function page() {
+const AddReview = () => {
   // const [imageFiles, setImageFiles] = useState([]);
   const [reviews, setReviews] = useState({});
   const [imageFiles, setImageFiles] = useState({});
@@ -178,3 +178,5 @@ export default function page() {
     </div>
   );
 }
+
+export default AddReview

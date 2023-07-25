@@ -44,7 +44,7 @@ const OrderReviewCard = ({ order }) => {
       <div className="p-4 bg-white rounded-2xl border-2 border-slate-200 mb-3">
         <div className="ordered-items">
           {order.items.map((item, index) => (
-            <div className={`flex gap-4 my-4`}>
+            <div key={index} className={`flex gap-4 my-4`}>
               <div className="">
                 <Image
                   src={"/assets/images/shop/product-thumb-1.png"}

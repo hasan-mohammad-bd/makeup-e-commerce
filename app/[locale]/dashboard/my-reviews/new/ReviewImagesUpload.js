@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState } from "react";
 import { BsCameraFill } from "react-icons/bs";
 
@@ -40,9 +41,11 @@ const ReviewImagesUpload = ({ itemId, imageFiles, updateImageFiles }) => {
         {imageFiles[itemId] &&
           imageFiles[itemId].map((file, index) => (
             <div key={index} className="w-24 h-24">
-              <img
+              <Image
                 src={URL.createObjectURL(file)}
                 alt={`Image ${index}`}
+                height={96}
+                width={96}
                 className="object-cover h-full rounded-lg"
               />
             </div>

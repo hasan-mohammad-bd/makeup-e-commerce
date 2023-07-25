@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState } from "react";
 
 const TicketImagesUpload = ({ setImageFiles }) => {
@@ -85,9 +86,11 @@ const TicketImagesUpload = ({ setImageFiles }) => {
         <div className="flex gap-4 mt-3">
           {images.map((image, index) => (
             <div key={index} className="w-16 h-16">
-              <img
+              <Image
                 src={image}
                 alt={`Image ${index}`}
+                height={64}
+                width={64}
                 className="object-cover h-full rounded-lg"
               />
             </div>

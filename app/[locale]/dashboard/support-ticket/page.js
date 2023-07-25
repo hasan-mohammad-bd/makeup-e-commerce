@@ -6,7 +6,7 @@ import NoItems from "../NoItems";
 import Link from "next/link";
 import { useGetSupportTicketQuery } from "@/store/features/api/supportTicketAPI";
 
-export default function page() {
+export default function SupportTicket() {
   const [selectedTab, setSelectedTab] = useState("running");
   const { data } = useGetSupportTicketQuery();
   const supportTickets = data?.data || [];
