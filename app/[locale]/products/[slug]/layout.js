@@ -1,6 +1,6 @@
 import Link from "next/link";
 import AllProducts from "@/components/products/AllProducts";
-import LastVisitedProducts from "@/components/LastVisitedProducts";
+import LastVisitedProducts from "@/components/products/LastVisitedProducts";
 import ProductDetails from "./ProductDetails";
 import ActiveLink from "@/components/elements/ActiveLink";
 import { fetchData } from "@/utils/fetchData";

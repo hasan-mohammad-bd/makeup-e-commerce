@@ -1,36 +1,33 @@
 "use client";
 
 import { useEffect } from "react";
-import SingleProductList from "./products/SingleProductList";
+import { useSelector } from "react-redux";
+import SingleProductList from "./SingleProductList";
 import {
   useAddToVisitedMutation,
   useGetVisitedProductsQuery,
 } from "@/store/features/api/visitedProductsAPI";
-import { useGetUserQuery } from "@/store/features/api/authAPI";
 
 const LastVisitedProducts = ({ visitedProductId }) => {
-  //ways to get user after reload
-  const { data: userData, isLoading: userLoading } = useGetUserQuery();
-  // if (isLoading) return <p>Loading............</p>;
-  const user = userData?.data || null;
-
-  const { data, isLoading } = useGetVisitedProductsQuery();
+  const { user } = useSelector((state) => state.auth);
   const [addToVisited] = useAddToVisitedMutation();
-  const visitedProducts = data || [];
+  const { data, isLoading } = useGetVisitedProductsQuery();
+  const visitedProducts = data?.data || [];
+  // console.log(visitedProducts);
 
   // Adding product to visited list
   useEffect(() => {
     if (visitedProductId && user) {
-      // addToVisited({ product_id: visitedProductId, date: new Date() })
-      //   .unwrap()
-      //   .then((response) => {
-      //     // Handle the successful response if necessary
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     // Handle the error if necessary
-      //     console.log(error);
-      //   });
+      addToVisited({ product_id: visitedProductId, date: new Date() });
+      // .unwrap()
+      // .then((response) => {
+      //   // Handle the successful response if necessary
+      //   console.log(response);
+      // })
+      // .catch((error) => {
+      //   // Handle the error if necessary
+      //   console.log(error);
+      // });
     }
   }, [visitedProductId, user]);
 
