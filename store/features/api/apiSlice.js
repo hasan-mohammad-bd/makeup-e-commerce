@@ -33,6 +33,8 @@ export const apiSlice = createApi({
     "s-ticket",
     "s-ticket-type",
     "visited",
+    "orders",
+    "order",
   ],
   endpoints: () => ({}),
 });

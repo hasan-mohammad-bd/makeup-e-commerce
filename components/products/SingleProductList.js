@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { getSlicedText } from "@/utils/formatText";
-import Loader from "../elements/Loader";
+import Loader from "../elements/loaders/Loader";
 
 // ** Import Icon
 import { FaStar } from "react-icons/fa";

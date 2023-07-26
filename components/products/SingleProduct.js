@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getSlicedText } from "@/utils/formatText";
-import Loader from "../elements/Loader";
+import Loader from "../elements/loaders/Loader";
 
 // ** Import Icon
 import { FaStar } from "react-icons/fa";
@@ -14,12 +14,13 @@ import {
   HiOutlineShoppingCart,
   HiArrowLongRight,
 } from "react-icons/hi2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addToSelected } from "@/store/features/cartSlice";
 import { useAddToWishListMutation } from "@/store/features/api/wishListAPI";
 import { toast } from "react-toastify";
 
 const SingleProduct = ({ product, addToCompare }) => {
+  const { user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [addToWishlist] = useAddToWishListMutation();
   const dispatch = useDispatch();
@@ -69,6 +70,10 @@ const SingleProduct = ({ product, addToCompare }) => {
   };
 
   const handleWishlist = async (productId) => {
+    if (!user) {
+      toast.error("You're not logged in");
+      return;
+    }
     try {
       await addToWishlist({ product_id: productId });
       toast.success("Product added to Wishlist!");

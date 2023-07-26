@@ -3,6 +3,7 @@ import CountButton from "@/components/elements/CountButton";
 import React, { useState } from "react";
 import OrderCard from "./OrderCard";
 import NoItems from "../NoItems";
+import { useGetOrdersQuery } from "@/store/features/api/orderAPI";
 
 const orderFilters = [
   { key: "all-orders", title: "সব অর্ডার", count: 4 },
@@ -21,6 +22,8 @@ const orders = [
 ];
 
 const MyOrders = () => {
+  const { data: myOrders = [], isLoading } = useGetOrdersQuery();
+  console.log(myOrders);
   const [selectedFilter, setSelectedFilter] = useState(orderFilters[0]);
   let filteredOrders = orders;
   if (selectedFilter.key !== "all-orders") {

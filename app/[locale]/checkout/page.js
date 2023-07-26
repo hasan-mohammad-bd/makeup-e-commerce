@@ -6,15 +6,20 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { getMultipliedColumnTotal } from "@/utils/getTotal";
+import {
+  getCouponDiscount,
+  getOrderFormattedCartItems,
+} from "./checkoutBusinessLogics";
 
 //components
 import CartCard from "@/components/CartCard";
 import CustomRadio from "@/components/elements/CustomRadio";
 import CouponModal from "@/components/modals/CouponModal";
+import ArticleLoader from "@/components/elements/loaders/ArticleLoader";
 
 //store
-import { useGetUserQuery } from "@/store/features/api/authAPI";
 import { clearCart, clearDiscountInfo } from "@/store/features/cartSlice";
+import { usePlaceAnOrderMutation } from "@/store/features/api/orderAPI";
 
 //Icons
 import PayOptionIcon from "@/components/elements/svg/PayOptionIcon";
@@ -22,7 +27,7 @@ import { FiPlus } from "react-icons/fi";
 
 const payOptions = [
   {
-    key: "cash_on_delivery",
+    key: "COD",
     title: "ক্যাশ অন ডেলিভারি",
     images: [
       { url: "/assets/images/payments/cash-on-del.png", height: 35, width: 35 },
@@ -46,8 +51,8 @@ const payOptions = [
 ];
 
 const deliveryMethods = [
-  { key: "inside_dhaka", title: "ঢাকার ভিতরে", charges: 60 },
-  { key: "outside_dhaka", title: "ঢাকার বাহিরে", charges: 130 },
+  { key: "inside dhaka", title: "ঢাকার ভিতরে", charges: 60 },
+  { key: "outside dhaka", title: "ঢাকার বাহিরে", charges: 130 },
 ];
 
 const Checkout = () => {
@@ -55,12 +60,12 @@ const Checkout = () => {
   const [deliveryMethod, setDeliveryMethod] = useState(deliveryMethods[0]);
   const [orderCollapsed, setOrderCollapsed] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const { cart, couponDiscount } = useSelector((state) => state.cart);
+  const { cart, discountCoupon } = useSelector((state) => state.cart);
+  const { user, isLoading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  //ways to get user after reload
-  const { data, isLoading, isSuccess, isError } = useGetUserQuery();
+  const [placeAnOrder] = usePlaceAnOrderMutation();
 
   //slicing cart items based on orderCollapsed
   const cartItems = orderCollapsed ? cart : cart.slice(0, 3);
@@ -78,63 +83,49 @@ const Checkout = () => {
 
   useEffect(() => {
     reset();
-  }, [isSuccess, reset]);
-
-  // if (isLoading) return <p>Loading............</p>;
-  if (isError) console.log("error occurred");
-  const user = data?.data || {};
-
-  //Product wise discount business logics
-  // const getDiscountedPrice = (cart) => {
-  //   let dis_price = 0;
-  //   const calculateDiscount = (price, dis_percent) => {
-  //     if (typeof dis_percent !== "number" || dis_percent <= 0) {
-  //       return 0;
-  //     }
-  //     const discountAmount = price * (dis_percent / 100);
-  //     return discountAmount;
-  //   };
-  //   if (Array.isArray(cart)) {
-  //     cart.forEach((row) => {
-  //       dis_price +=
-  //         (row?.quantity || 1) *
-  //         calculateDiscount(row?.old_price || 0, row.discount_percentage);
-  //     });
-  //   }
-  //   return dis_price;
-  // };
-
-  const getCouponDiscount = (totalPrice) => {
-    let discountAmount = 0;
-    if (couponDiscount?.discount_type === "percentage") {
-      discountAmount = totalPrice * (couponDiscount?.discount_amount / 100);
-      if (discountAmount > couponDiscount?.max_discount) {
-        return couponDiscount?.max_discount || 0;
-      }
-      return discountAmount;
-    } else if (couponDiscount?.discount_type === "flat") {
-      return couponDiscount?.discount_amount;
-    }
-    return discountAmount;
-  };
+  }, [user, reset]);
 
   //Summary calculation
   const total = getMultipliedColumnTotal(cart, "quantity", "new_price");
-  // const discountedPrice = getDiscountedPrice(cart);
-  const discountedPrice = getCouponDiscount(total);
+  const discountedPrice = getCouponDiscount(discountCoupon, total);
 
-  const placeAnOrder = async (data, event) => {
-    event.preventDefault();
-    console.log(data);
-    console.log(total);
-    console.log(discountedPrice);
-    console.log(cart);
-    console.log(deliveryMethod.charges);
-    console.log(selectedOption.key);
-    dispatch(clearDiscountInfo());
-    dispatch(clearCart());
-    toast.success("Order successful");
-    router.push("checkout/success/SST263598");
+  const handleOrderPlace = async (data, event) => {
+    const newOrder = {
+      name: data.name,
+      alt_name: data.name,
+      phone: user?.country_code + user?.phone,
+      alt_phone: user?.country_code + user?.alt_phone_no,
+      address: data.address,
+      alt_address: data.address,
+      order_items: getOrderFormattedCartItems(cart),
+      payment_type: selectedOption.key,
+      delevery_type: deliveryMethod.key,
+      delevery_charge: deliveryMethod.charges,
+      coupon: discountCoupon?.code || null,
+      coupon_discount: discountedPrice,
+      subtotal: total,
+      after_discount: total - discountedPrice,
+      grand_total: total - discountedPrice + deliveryMethod.charges,
+      note: "Not Paid",
+    };
+
+    // console.log(newOrder);
+
+    placeAnOrder(newOrder)
+      .unwrap()
+      .then((response) => {
+        // Handle the successful response if necessary
+        // console.log(response);
+        dispatch(clearDiscountInfo());
+        dispatch(clearCart());
+        toast.success("Order successful");
+        router.push(`checkout/success/${response?.data?.id}`);
+      })
+      .catch((error) => {
+        // Handle the error if necessary
+        toast.error("Failed to place an order");
+        console.log(error);
+      });
   };
 
   return (
@@ -190,8 +181,8 @@ const Checkout = () => {
             </div>
             <div className="flex-between my-2">
               <p>কুপন/প্রোমো ডিসকাউন্ট</p>
-              {couponDiscount ? (
-                <span className="text-primary">{couponDiscount.code}</span>
+              {discountCoupon ? (
+                <span className="text-primary">{discountCoupon.code}</span>
               ) : (
                 <button
                   className="text-btn underline"
@@ -223,61 +214,70 @@ const Checkout = () => {
             <span className="text-primary">অর্ডার কনফার্ম করুন</span> বাটনে
             ক্লিক করুন
           </h3>
-          <form className="w-full mt-6" onSubmit={handleSubmit(placeAnOrder)}>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="form-control mb-4">
-                <label className="block text-base text-slate-900 mb-2">
-                  আপনার নাম
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  defaultValue={user?.name}
-                  placeholder="নাম লিখুন"
-                  {...register("name", {
-                    required: "Name is required.",
-                  })}
-                />
-                {errors.name && (
-                  <p className="errorMsg">{errors.name.message}</p>
-                )}
-              </div>
+          <form
+            className="w-full mt-6"
+            onSubmit={handleSubmit(handleOrderPlace)}
+          >
+            {isLoading ? (
+              <ArticleLoader />
+            ) : (
+              <>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="form-control mb-4">
+                    <label className="block text-base text-slate-900 mb-2">
+                      আপনার নাম
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      defaultValue={user?.name}
+                      placeholder="নাম লিখুন"
+                      {...register("name", {
+                        required: "Name is required.",
+                      })}
+                    />
+                    {errors.name && (
+                      <p className="errorMsg">{errors.name.message}</p>
+                    )}
+                  </div>
 
-              <div className="form-control mb-4">
-                <label className="block text-base text-slate-900 mb-2">
-                  মোবাইল নাম্বার
-                </label>
-                <input
-                  type="phone"
-                  name="phone"
-                  defaultValue={user?.phone}
-                  placeholder="মোবাইল নাম্বার লিখুন"
-                  {...register("phone", {})}
-                  disabled={true}
-                  className="cursor-not-allowed"
-                />
-                {errors.phone && (
-                  <p className="errorMsg">{errors.phone.message}</p>
-                )}
-              </div>
-            </div>
-            <div className="form-control mb-4">
-              <label className="block text-base text-slate-900 mb-2">
-                আপনার ঠিকানা
-              </label>
-              <textarea
-                className="h-[148px] border border-slate-300 p-4"
-                type="text"
-                name="address"
-                placeholder="আপনার সম্পূর্ণ ঠিকানা লিখুন"
-                {...register("address", {
-                  required: "Address is required.",
-                })}
-              />
-              {errors.address && (
-                <p className="errorMsg">{errors.address.message}</p>
-              )}
-            </div>
+                  <div className="form-control mb-4">
+                    <label className="block text-base text-slate-900 mb-2">
+                      মোবাইল নাম্বার
+                    </label>
+                    <input
+                      type="phone"
+                      name="phone"
+                      defaultValue={user?.country_code + user?.phone}
+                      placeholder="মোবাইল নাম্বার লিখুন"
+                      {...register("phone", {})}
+                      disabled={true}
+                      className="cursor-not-allowed"
+                    />
+                    {errors.phone && (
+                      <p className="errorMsg">{errors.phone.message}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="form-control mb-4">
+                  <label className="block text-base text-slate-900 mb-2">
+                    আপনার ঠিকানা
+                  </label>
+                  <textarea
+                    className="h-[148px] border border-slate-300 p-4"
+                    type="text"
+                    name="address"
+                    placeholder="আপনার সম্পূর্ণ ঠিকানা লিখুন"
+                    {...register("address", {
+                      required: "Address is required.",
+                    })}
+                  />
+                  {errors.address && (
+                    <p className="errorMsg">{errors.address.message}</p>
+                  )}
+                </div>
+              </>
+            )}
             <div className="form-control my-8">
               <div className="border-b-2 border-slate-300 border-dashed"></div>
             </div>
@@ -321,7 +321,7 @@ const Checkout = () => {
             </div>
             <div className="form-control mt-11">
               <button
-                disabled={!cart?.length}
+                disabled={!cart?.length || selectedOption.key !== "COD"}
                 type="submit"
                 className="primary-btn w-full disabled:bg-slate-300 disabled:cursor-not-allowed"
               >

@@ -3,16 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: null,
   isLoading: true,
-  isError: false,
-  error: "",
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setUserLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
     setUser: (state, action) => {
       state.user = action.payload;
+      state.isLoading = false;
     },
     logOut: (state) => {
       state.user = null;
@@ -22,6 +24,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, logOut } = authSlice.actions;
+export const { setUserLoading, setUser, logOut } = authSlice.actions;
 
 export default authSlice.reducer;

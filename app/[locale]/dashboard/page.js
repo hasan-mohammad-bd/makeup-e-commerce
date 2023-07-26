@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 import {
   useGetCountriesQuery,
-  useGetUserQuery,
   useUpdateProfileMutation,
 } from "@/store/features/api/authAPI";
 import ProfileImageUpload from "./ProfileImageUpload";
@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 // import { useSelector } from "react-redux";
 
 const MyProfile = () => {
+  const { user, isLoading } = useSelector((state) => state.auth);
   const [editMode, setEditMode] = useState(false);
   const [profileImageFile, setProfileImageFile] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState({
@@ -36,11 +37,6 @@ const MyProfile = () => {
     formState: { errors },
     reset,
   } = useForm();
-  // const { user } = useSelector((state) => state.auth); //we can store user data to stop useless fetching
-
-  //ways to get user after reload
-  const { data } = useGetUserQuery();
-  const user = data?.data || {};
 
   const handleUserUpdate = async (data, event) => {
     const country = getCountryName(data.dial_code);
@@ -67,6 +63,8 @@ const MyProfile = () => {
         // console.log(error);
       });
   };
+
+  // if (isLoading) return <p className="text-2xl text-red-500">Loading.....</p>;
 
   return (
     <div className="px-10 py-6">

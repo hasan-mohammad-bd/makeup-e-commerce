@@ -20,7 +20,7 @@ const initialState = {
   isCartOpen: false,
   selectedProduct: null,
   cart: loadCartItemsFromLocalStorage() || [], // Initialize with local storage data or an empty array
-  couponDiscount: null,
+  discountCoupon: null,
 };
 
 const cartSlice = createSlice({
@@ -121,13 +121,13 @@ const cartSlice = createSlice({
     // Add coupon discount
     addDiscountInfo: (state, action) => {
       const discount = action.payload;
-      state.couponDiscount = discount;
+      state.discountCoupon = discount;
     },
 
     // Clear coupon discount
     clearDiscountInfo: (state, action) => {
       const discount = action.payload;
-      state.couponDiscount = discount;
+      state.discountCoupon = discount;
     },
   },
 });

@@ -24,13 +24,8 @@ const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
   const [showModal, setShowModal] = useState(false);
   const [scroll, setScroll] = useState(0);
   const { cart } = useSelector((state) => state.cart);
+  const { user, isLoading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
-  //ways to get user after reload
-  const { data, isLoading, isError } = useGetUserQuery();
-  // if (isLoading) return <p>Loading............</p>;
-  if (isError) console.log("error occurred");
-  const user = data?.data || null;
 
   //start of popover
   const [userOpen, setUserOpen] = useState(false);
