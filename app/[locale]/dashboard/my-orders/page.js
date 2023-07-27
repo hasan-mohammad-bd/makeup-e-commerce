@@ -4,31 +4,49 @@ import React, { useState } from "react";
 import OrderCard from "./OrderCard";
 import NoItems from "../NoItems";
 import { useGetOrdersQuery } from "@/store/features/api/orderAPI";
-
-const orderFilters = [
-  { key: "all-orders", title: "সব অর্ডার", count: 4 },
-  { key: "confirmed", title: "নিশ্চিত", count: 1 },
-  { key: "in-deliver", title: "ডেলিভারিতে", count: 0 },
-  { key: "completed", title: "সম্পন্ন", count: 2 },
-  { key: "canceled", title: "বাতিল", count: 1 },
-];
-
-const orders = [
-  // { id: 1, paymentStatus: "পরিশোধ", orderStatus: "ডেলিভারিতে" },
-  { id: 2, paymentStatus: "বাকি", orderStatus: "নিশ্চিত" },
-  { id: 3, paymentStatus: "বাকি", orderStatus: "সম্পন্ন" },
-  { id: 4, paymentStatus: "বাকি", orderStatus: "সম্পন্ন" },
-  { id: 5, paymentStatus: "বাকি", orderStatus: "বাতিল" },
-];
+import { getCountByKeyValue } from "@/utils/itemsCount";
+import orderFilterKeys from "./OrderFilterKeys";
+import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
 
 const MyOrders = () => {
-  const { data: myOrders = [], isLoading } = useGetOrdersQuery();
-  console.log(myOrders);
+  const { data: ordersData, isLoading } = useGetOrdersQuery();
+  const myOrders = ordersData?.data || [];
+  // console.log(myOrders[0]);
+
+  const orderFilters = [
+    { key: "all-orders", title: "সব অর্ডার", count: myOrders.length },
+    {
+      key: orderFilterKeys.pending,
+      title: "পেন্ডিং",
+      count: getCountByKeyValue(myOrders, "status", orderFilterKeys.pending),
+    },
+    {
+      key: orderFilterKeys.confirmed,
+      title: "নিশ্চিত",
+      count: getCountByKeyValue(myOrders, "status", orderFilterKeys.confirmed),
+    },
+    {
+      key: orderFilterKeys.inDeliver,
+      title: "ডেলিভারিতে",
+      count: getCountByKeyValue(myOrders, "status", orderFilterKeys.inDeliver),
+    },
+    {
+      key: orderFilterKeys.complete,
+      title: "সম্পন্ন",
+      count: getCountByKeyValue(myOrders, "status", orderFilterKeys.complete),
+    },
+    {
+      key: orderFilterKeys.cancelled,
+      title: "বাতিল",
+      count: getCountByKeyValue(myOrders, "status", orderFilterKeys.cancelled),
+    },
+  ];
+
   const [selectedFilter, setSelectedFilter] = useState(orderFilters[0]);
-  let filteredOrders = orders;
+  let filteredOrders = myOrders;
   if (selectedFilter.key !== "all-orders") {
-    filteredOrders = orders.filter(
-      (order) => order.orderStatus === selectedFilter.title
+    filteredOrders = myOrders.filter(
+      (order) => order?.status === selectedFilter.key
     );
   }
   return (
@@ -45,7 +63,11 @@ const MyOrders = () => {
           />
         ))}
       </div>
-      {filteredOrders.length ? (
+      {isLoading ? (
+        <div className="py-4">
+          <ItemsListLoader itemHeight={110} noImage={true} viewBoxWidth={900} />
+        </div>
+      ) : filteredOrders.length ? (
         <div className="py-3">
           {filteredOrders.map((order) => (
             <OrderCard key={order.id} order={order} />

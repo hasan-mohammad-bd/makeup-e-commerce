@@ -3,14 +3,19 @@ import React from "react";
 import WishListCard from "./WishListCard";
 import { useGetWishListQuery } from "@/store/features/api/wishListAPI";
 import NoItems from "../NoItems";
+import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
 
 const MyWishList = () => {
-  const { data } = useGetWishListQuery();
+  const { data, isLoading } = useGetWishListQuery();
   const wishedProducts = data?.data || [];
   return (
     <div className="px-10 py-6">
       <h2 className="text-slate-900 font-bold text-2xl">আমার উইশ লিষ্ট</h2>
-      {wishedProducts.length ? (
+      {isLoading ? (
+        <div className="py-4">
+          <ItemsListLoader itemHeight={90} viewBoxWidth={900} />
+        </div>
+      ) : wishedProducts.length ? (
         <div className="mt-4">
           {wishedProducts.map((product) => (
             <WishListCard key={product.id} product={product} />

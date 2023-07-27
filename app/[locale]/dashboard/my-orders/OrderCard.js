@@ -2,70 +2,91 @@ import Link from "next/link";
 import React from "react";
 import { HiLocationMarker } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
+import orderFilterKeys from "./OrderFilterKeys";
 
 function OrderCard({ order }) {
-  const getClass = (orderStatus) => {
-    let classNames = "";
-    switch (orderStatus) {
-      case "ডেলিভারিতে":
-        classNames = "bg-blue-500";
+  const {
+    id,
+    invoice_no,
+    sale_date,
+    status,
+    total_amount,
+    paid_amount,
+    due_amount,
+    shipping,
+    total_product,
+  } = order;
+
+  const getOrderStatus = (status) => {
+    let statusElement = <span className="rounded-lg px-2 py-1">{status}</span>;
+    switch (status) {
+      case orderFilterKeys.pending:
+        statusElement = (
+          <span className="rounded-lg px-2 py-1 bg-yellow-500">পেন্ডিং</span>
+        );
         break;
-      case "নিশ্চিত":
-        classNames = "bg-yellow-500";
+      case orderFilterKeys.confirmed:
+        statusElement = (
+          <span className="rounded-lg px-2 py-1 bg-secondary-700">নিশ্চিত</span>
+        );
         break;
-      case "সম্পন্ন":
-        classNames = "bg-green-500";
+      case orderFilterKeys.inDeliver:
+        statusElement = (
+          <span className="rounded-lg px-2 py-1 bg-blue-500">ডেলিভারিতে</span>
+        );
         break;
-      case "বাতিল":
-        classNames = "bg-red-500";
+      case orderFilterKeys.complete:
+        statusElement = (
+          <span className="rounded-lg px-2 py-1 bg-green-500">সম্পন্ন</span>
+        );
         break;
-      default:
-        classNames = "bg-yellow-500";
+      case orderFilterKeys.cancelled:
+        statusElement = (
+          <span className="rounded-lg px-2 py-1 bg-red-500">বাতিল</span>
+        );
+        break;
     }
-    return classNames;
+    return statusElement;
   };
+
   return (
     <div className="text-slate-900 p-4 rounded-lg bg-slate-100 my-4">
       <div className="grid grid-cols-4 justify-between">
         <div>
           <h3 className="text-slate-500 mb-3">তারিখ</h3>
-          <h3>১২ এপ্রিল, ২০২৩</h3>
+          <h3>{new Date(sale_date).toLocaleDateString("bn-BD")}</h3>
         </div>
         <div>
           <h3 className="text-slate-500 mb-3">অর্ডার আইডি</h3>
-          <h3>SST263598</h3>
+          <h3>{invoice_no}</h3>
         </div>
         <div>
           <h3 className="text-slate-500 mb-3">টাকার পরিমান</h3>
           <h3>
-            ৳2630.00{" "}
+            ৳ {total_amount || "Invalid"}{" "}
             <span
               className={`${
-                order?.paymentStatus === "পরিশোধ"
-                  ? "text-green-500"
-                  : "text-red-500"
+                due_amount > 0 ? "text-red-500" : "text-green-500"
               }`}
             >
-              {order?.paymentStatus}
+              {due_amount > 0 ? "বাকি" : "পরিশোধ"}
             </span>
           </h3>
         </div>
         <div className="text-right">
-          <h3 className="text-white mb-3">
-            <span className={`${getClass(order?.orderStatus)} rounded-lg p-1`}>
-              {order?.orderStatus}
-            </span>
-          </h3>
-          <h3>২ টি প্রডাক্ট</h3>
+          <h3 className="text-white mb-3">{getOrderStatus(status)}</h3>
+          <h3>{total_product} টি প্রডাক্ট</h3>
         </div>
       </div>
       <div className="border-b border-slate-300 my-3"></div>
       <div className="flex justify-between items-center">
         <h3>
-          <HiLocationMarker className="text-red-500" /> জোড়গাছা, সাঁথিয়া, পাবনা৷
-          বিস্তারিত দেখুন
+          <HiLocationMarker className="text-red-500" /> {shipping?.address}
         </h3>
-        <Link href={"/dashboard/my-orders-details/"} className="text-slate-500">
+        <Link
+          href={`/dashboard/my-orders/details/${id}`}
+          className="text-slate-500"
+        >
           বিস্তারিত দেখুন <HiArrowLongRight />
         </Link>
       </div>
