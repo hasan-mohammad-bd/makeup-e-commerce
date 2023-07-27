@@ -5,6 +5,7 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 import { MdDeleteSweep } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import * as cartActions from "@/store/features/cartSlice";
+import { getSlicedText } from "@/utils/formatText";
 
 const CartCard = ({ item }) => {
   const {
@@ -40,11 +41,7 @@ const CartCard = ({ item }) => {
         />
         <div className="flex flex-col justify-between">
           <h5 className="text-primary">{brand?.brand_name || "No Brand"}</h5>
-          <h4>
-            {product_name?.length >= 50
-              ? product_name.slice(0, 50) + "..."
-              : product_name}
-          </h4>
+          <h4>{getSlicedText(product_name, 50)}</h4>
           <div className="flex gap-3 products-center items-center">
             <h3 className="text-xl text-red-500">৳ {new_price}</h3>
             {typeof discount_percentage === "number" &&
