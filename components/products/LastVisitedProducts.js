@@ -29,7 +29,7 @@ const LastVisitedProducts = ({ visitedProductId }) => {
       //   console.log(error);
       // });
     }
-  }, [visitedProductId, user]);
+  }, [visitedProductId, user, addToVisited]);
 
   if (!user) return null;
 

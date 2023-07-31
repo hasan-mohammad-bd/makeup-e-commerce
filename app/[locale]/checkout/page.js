@@ -24,6 +24,7 @@ import { usePlaceAnOrderMutation } from "@/store/features/api/orderAPI";
 //Icons
 import PayOptionIcon from "@/components/elements/svg/PayOptionIcon";
 import { FiPlus } from "react-icons/fi";
+import getToken from "@/utils/getToken";
 
 const payOptions = [
   {
@@ -34,20 +35,20 @@ const payOptions = [
     ],
   },
   {
-    key: "bkash",
-    title: "বিকাশ পেমেন্ট",
-    images: [
-      { url: "/assets/images/payments/bkash.png", height: 35, width: 64 },
-    ],
-  },
-  {
-    key: "visa",
+    key: "OP",
     title: "অনলাইন পেমেন্ট",
     images: [
-      { url: "/assets/images/payments/visa-icon.png", height: 35, width: 35 },
-      { url: "/assets/images/payments/visa.png", height: 35, width: 64 },
+      { url: "/assets/images/payments/sslcom.png", height: 70, width: 200 },
     ],
   },
+  // {
+  //   key: "visa",
+  //   title: "অনলাইন পেমেন্ট",
+  //   images: [
+  //     { url: "/assets/images/payments/visa-icon.png", height: 35, width: 35 },
+  //     { url: "/assets/images/payments/visa.png", height: 35, width: 64 },
+  //   ],
+  // },
 ];
 
 const deliveryMethods = [
@@ -56,7 +57,7 @@ const deliveryMethods = [
 ];
 
 const Checkout = () => {
-  const [selectedOption, setSelectedOption] = useState(payOptions[0]);
+  const [payOption, setPayOption] = useState(payOptions[0]);
   const [deliveryMethod, setDeliveryMethod] = useState(deliveryMethods[0]);
   const [orderCollapsed, setOrderCollapsed] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -71,7 +72,7 @@ const Checkout = () => {
   const cartItems = orderCollapsed ? cart : cart.slice(0, 3);
 
   const handlePayOptionChange = (option) => {
-    setSelectedOption(option);
+    setPayOption(option);
   };
 
   const {
@@ -98,7 +99,7 @@ const Checkout = () => {
       address: data.address,
       alt_address: data.address,
       order_items: getOrderFormattedCartItems(cart),
-      payment_type: selectedOption.key,
+      payment_type: payOption.key,
       delivery_type: deliveryMethod.key,
       delivery_charge: deliveryMethod.charges,
       coupon: discountCoupon?.code || null,
@@ -109,23 +110,43 @@ const Checkout = () => {
       note: "Not Paid",
     };
 
-    // console.log(newOrder);
-
-    placeAnOrder(newOrder)
-      .unwrap()
-      .then((response) => {
-        // Handle the successful response if necessary
-        // console.log(response);
-        dispatch(clearDiscountInfo());
-        dispatch(clearCart());
-        toast.success("Order successful");
-        router.push(`checkout/success/${response?.data?.id}`);
-      })
-      .catch((error) => {
-        // Handle the error if necessary
-        toast.error("Failed to place an order");
-        console.log(error);
-      });
+    if (payOption.key == "OP") {
+      try {
+        const res = await fetch("/api/payments/sslcz", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${getToken()}`,
+          },
+          body: JSON.stringify(newOrder),
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data?.GatewayPageURL) {
+          toast.success("Online payment is processing please wait");
+          dispatch(clearDiscountInfo());
+          window.location.replace(data.GatewayPageURL);
+        }
+      } catch (error) {
+        toast.error("Something went wrong...", error);
+      }
+    } else {
+      placeAnOrder(newOrder)
+        .unwrap()
+        .then((response) => {
+          // Handle the successful response if necessary
+          // console.log(response);
+          dispatch(clearDiscountInfo());
+          dispatch(clearCart());
+          toast.success("Order successful");
+          router.push(`checkout/success/${response?.sale?.id}`);
+        })
+        .catch((error) => {
+          // Handle the error if necessary
+          toast.error("Failed to place an order");
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -292,15 +313,13 @@ const Checkout = () => {
                     key={option}
                     onClick={() => handlePayOptionChange(option)}
                     className={`rounded-lg ${
-                      selectedOption.key === option.key
+                      payOption.key === option.key
                         ? "bg-amber-200 border border-primary"
                         : "bg-slate-100"
                     } p-4 relative text-slate-700 flex flex-col justify-between gap-2`}
                   >
                     <div className="flex justify-end">
-                      <CustomRadio
-                        isChecked={selectedOption.key === option.key}
-                      />
+                      <CustomRadio isChecked={payOption.key === option.key} />
                     </div>
                     <div className="flex gap-4">
                       {option.images.map((image) => (
@@ -321,7 +340,7 @@ const Checkout = () => {
             </div>
             <div className="form-control mt-11">
               <button
-                disabled={!cart?.length || selectedOption.key !== "COD"}
+                disabled={!cart?.length}
                 type="submit"
                 className="primary-btn w-full disabled:bg-slate-300 disabled:cursor-not-allowed"
               >

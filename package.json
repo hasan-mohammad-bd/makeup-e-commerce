@@ -34,6 +34,7 @@
     "redux": "^4.2.1",
     "server-only": "^0.0.1",
     "sharp": "^0.32.1",
+    "sslcommerz-lts": "^1.1.0",
     "swiper": "^9.3.1",
     "tailwind-merge": "^1.13.2",
     "tailwindcss": "3.3.2"

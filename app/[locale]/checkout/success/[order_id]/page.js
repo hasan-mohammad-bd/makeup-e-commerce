@@ -46,20 +46,16 @@ const OrderSuccess = ({ params }) => {
               <div className="flex-between my-2 font-bold">
                 <p>
                   প্রদেয় পরিমান{" "}
-                  {dueAmount > 0 ? (
-                    <span className="bg-red-100 px-2 rounded-lg text-red-500">
-                      বাকি
-                    </span>
-                  ) : (
-                    ""
-                  )}
+                  <span className="bg-red-100 px-2 rounded-lg text-red-500">
+                    বাকি
+                  </span>
                 </p>
                 <p>৳ {dueAmount}</p>
               </div>
             </div>
             <div className="actions  my-6 flex gap-4 justify-between items-center">
               <Link
-                href={"/dashboard/my-orders"}
+                href={`/dashboard/my-orders/details/${order_id}`}
                 className="bg-secondary-700 py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
               >
                 অর্ডার ট্র্যাক করুন
