@@ -41,19 +41,11 @@ const payOptions = [
       { url: "/assets/images/payments/sslcom.png", height: 70, width: 200 },
     ],
   },
-  // {
-  //   key: "visa",
-  //   title: "অনলাইন পেমেন্ট",
-  //   images: [
-  //     { url: "/assets/images/payments/visa-icon.png", height: 35, width: 35 },
-  //     { url: "/assets/images/payments/visa.png", height: 35, width: 64 },
-  //   ],
-  // },
 ];
 
 const deliveryMethods = [
   { key: "inside dhaka", title: "ঢাকার ভিতরে", charges: 60 },
-  { key: "outside dhaka", title: "ঢাকার বাহিরে", charges: 130 },
+  { key: "outside dhaka", title: "ঢাকার বাহিরে", charges: 100 },
 ];
 
 const Checkout = () => {
@@ -109,6 +101,7 @@ const Checkout = () => {
       grand_total: total - discountedPrice + deliveryMethod.charges,
       note: "Not Paid",
     };
+    // console.log(newOrder);
 
     if (payOption.key == "OP") {
       try {
@@ -121,11 +114,14 @@ const Checkout = () => {
           body: JSON.stringify(newOrder),
         });
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         if (data?.GatewayPageURL) {
           toast.success("Online payment is processing please wait");
           dispatch(clearDiscountInfo());
+          dispatch(clearCart());
           window.location.replace(data.GatewayPageURL);
+        } else {
+          toast.error("Something went wrong");
         }
       } catch (error) {
         toast.error("Something went wrong...", error);

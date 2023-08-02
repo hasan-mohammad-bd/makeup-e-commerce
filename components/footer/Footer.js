@@ -7,11 +7,9 @@ import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 import { fetchData } from "@/utils/fetchData";
 
 const Footer = async () => {
-  const { data: settings = {} } = await fetchData({
-    api: "settings",
-    revalidate: 60,
-  });
-  const footerPage = settings?.footer_page;
+  const { data: settings = {} } = await fetchData({ api: "info/basic" });
+  const footerPage = settings?.footer_page || {};
+  const helpPage = settings?.help_page || {};
   return (
     <>
       <footer className="footer relative bg-slate-900 pt-14 overflow-hidden z-10">
@@ -65,18 +63,11 @@ const Footer = async () => {
                 <div className="footer-widget">
                   <h5>হেল্প</h5>
                   <ul className="footer-list">
-                    <li>
-                      <Link href="#">পেমেন্টস</Link>
-                    </li>
-                    <li>
-                      <Link href="#">শিপিং</Link>
-                    </li>
-                    <li>
-                      <Link href="/help/contact-us">যোগাযোগ করুন</Link>
-                    </li>
-                    <li>
-                      <Link href="/help/qna">প্রশ্ন এবং জিজ্ঞাসা</Link>
-                    </li>
+                    {Object.keys(helpPage).map((key) => (
+                      <li key={key}>
+                        <Link href={helpPage[key]}>{key}</Link>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -85,49 +76,49 @@ const Footer = async () => {
                   <div className="footer-links mb-6">
                     <p>সোশ্যাল লিংক</p>
                     <div className="social-links flex items-center gap-5">
-                      <Link href="">
+                      <Link href={settings.facebook_link}>
                         <Image
-                          src="/assets/images/icons/fb.svg"
+                          src="/assets/icons/social/fb.svg"
                           alt="Facebook"
-                          width="0"
-                          height="0"
-                          className="w-auto h-auto"
+                          width="24"
+                          height="24"
+                          className="w-6 h-6"
                         />
                       </Link>
-                      <Link href="">
+                      <Link href={settings.youtube_link}>
                         <Image
-                          src="/assets/images/icons/YouTube.svg"
+                          src="/assets/icons/social/YouTube.svg"
                           alt="Youtube"
-                          width="0"
-                          height="0"
-                          className="w-auto h-auto"
+                          width="24"
+                          height="24"
+                          className="w-6 h-6"
                         />
                       </Link>
-                      <Link href="">
+                      <Link href={settings.whatsapp_link}>
                         <Image
-                          src="/assets/images/icons/TikTok.svg"
+                          src="/assets/icons/social/whatsapp.png"
                           alt="TikTok"
-                          width="0"
-                          height="0"
-                          className="w-auto h-auto"
+                          width="24"
+                          height="24"
+                          className="w-6 h-6"
                         />
                       </Link>
-                      <Link href="">
+                      <Link href={settings.twitter_link}>
                         <Image
-                          src="/assets/images/icons/twitter.svg"
+                          src="/assets/icons/social/twitter.svg"
                           alt="Twitter"
-                          width="0"
-                          height="0"
-                          className="w-auto h-auto"
+                          width="24"
+                          height="24"
+                          className="w-6 h-6"
                         />
                       </Link>
-                      <Link href="">
+                      <Link href={settings.linkedin_link}>
                         <Image
-                          src="/assets/images/icons/linkedin.svg"
+                          src="/assets/icons/social/linkedin.svg"
                           alt="Linkedin"
-                          width="0"
-                          height="0"
-                          className="w-auto h-auto"
+                          width="24"
+                          height="24"
+                          className="w-6 h-6"
                         />
                       </Link>
                     </div>
@@ -136,19 +127,19 @@ const Footer = async () => {
                     <p>পেমেন্ট মেথড</p>
                     <div className="payment-methods flex items-center gap-6">
                       <Image
-                        src="/assets/images/icons/payment.png"
+                        src="/assets/icons/payments/payment.png"
                         alt="Payment"
                         width={32}
                         height={23}
                       />
                       <Image
-                        src="/assets/images/icons/bkash.png"
+                        src="/assets/icons/payments/bkash.png"
                         alt="Bkash"
                         width={32}
                         height={23}
                       />
                       <Image
-                        src="/assets/images/icons/visa.png"
+                        src="/assets/icons/payments/visa.png"
                         alt="visa"
                         width={52}
                         height={23}

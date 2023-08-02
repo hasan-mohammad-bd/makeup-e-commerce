@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 
 // ** Import Icons
 import { TbCurrencyTaka } from "react-icons/tb";
 import { toggleCart } from "@/store/features/cartSlice";
 import { getMultipliedColumnTotal } from "@/utils/getTotal";
+import { BsCart3 } from "react-icons/bs";
 
 const CartTray = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -23,13 +23,7 @@ const CartTray = () => {
         onClick={handleCart}
       >
         <div className="icon bg-white border border-r-0 border-primary rounded-ss-lg px-1 text-center">
-          <Image
-            src="/assets/images/icons/cart.svg"
-            alt="Cart"
-            width={58}
-            height={58}
-            className="inline-block"
-          />
+          <BsCart3 size={40} className="text-primary m-3" />
         </div>
         <div className="content rounded-es-lg text-center">
           <p className="text-xs text-white">{cart?.length} আইটেম</p>

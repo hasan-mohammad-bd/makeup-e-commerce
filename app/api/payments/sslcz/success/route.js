@@ -2,6 +2,12 @@ import { postData } from "@/utils/postData";
 import { redirect } from "next/navigation";
 
 export async function POST(request) {
+  // try {
+  //   const data = await request.json();
+  //   console.log(data);
+  // } catch (error) {
+  //   console.log(error);
+  // }
   const { searchParams } = new URL(request.url);
   const orderId = searchParams.get("order");
   const tranId = searchParams.get("tran");

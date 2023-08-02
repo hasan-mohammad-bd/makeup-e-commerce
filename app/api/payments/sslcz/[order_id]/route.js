@@ -1,25 +1,28 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { postData } from "@/utils/postData";
-import { handleOrderSSLPay } from "./SSLPayment";
+import { handleOrderSSLPay } from "../SSLPayment";
 
-export async function POST(request) {
-  const newOrder = await request.json();
-
+export async function GET(request, { params }) {
+  const { order_id } = params;
   const headersList = headers();
   const bearerToken = headersList.get("authorization");
-  // console.log(bearerToken);
 
   try {
-    const order = await postData(
-      { api: "checkout", authorization: bearerToken },
-      newOrder
-    );
+    // getting order detail using id
+    const res = await fetch(`${process.env.server}/order/show/${order_id}`, {
+      headers: {
+        AmsPublickey: process.env.AMS_PUBLIC_KEY,
+        AmsPrivateKey: process.env.AMS_PRIVATE_KEY,
+        authorization: bearerToken,
+      },
+    });
+    const order = await res.json();
+
     if (order?.status === false) {
-      console.log(order, "order creation response in ssl");
+      console.log(order, "Could not found the order");
       return NextResponse.error(
-        { message: "Order Creation failed" },
-        { status: 500 }
+        { message: "Could not found the order" },
+        { status: 404 }
       );
     }
     // console.log(order);

@@ -9,7 +9,6 @@ const OrderSuccess = ({ params }) => {
   const { order_id } = params;
   const { data: orderData, isLoading } = useGetOrderByIdQuery(order_id);
   const order = orderData?.sale || null;
-  const dueAmount = order?.total_amount - order?.paid_amount;
   // console.log(order);
   return (
     <div className="container min-h-screen">
@@ -50,7 +49,7 @@ const OrderSuccess = ({ params }) => {
                     বাকি
                   </span>
                 </p>
-                <p>৳ {dueAmount}</p>
+                <p>৳ {order?.due_amount}</p>
               </div>
             </div>
             <div className="actions  my-6 flex gap-4 justify-between items-center">

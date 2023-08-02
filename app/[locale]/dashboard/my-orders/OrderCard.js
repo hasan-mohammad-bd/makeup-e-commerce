@@ -3,6 +3,7 @@ import React from "react";
 import { HiLocationMarker } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
 import orderFilterKeys from "./OrderFilterKeys";
+import handleSSLOrderPayLater from "@/utils/sslPay";
 
 function OrderCard({ order }) {
   const {
@@ -11,7 +12,7 @@ function OrderCard({ order }) {
     sale_date,
     status,
     total_amount,
-    paid_amount,
+    // paid_amount,
     due_amount,
     shipping,
     total_product,
@@ -73,10 +74,21 @@ function OrderCard({ order }) {
             </span>
           </h3>
         </div>
-        <div className="text-right">
-          <h3 className="text-white mb-3">{getOrderStatus(status)}</h3>
-          <h3>{total_product} টি প্রডাক্ট</h3>
-        </div>
+        {due_amount > 0 ? (
+          <div className="text-right">
+            <button
+              onClick={() => handleSSLOrderPayLater(id)}
+              className="inline-block bg-primary py-2 px-4 text-white rounded-lg text-center active:scale-95"
+            >
+              পেমেন্ট করুন
+            </button>
+          </div>
+        ) : (
+          <div className="text-right">
+            <h3 className="text-white mb-3">{getOrderStatus(status)}</h3>
+            <h3>{total_product} টি প্রডাক্ট</h3>
+          </div>
+        )}
       </div>
       <div className="border-b border-slate-300 my-3"></div>
       <div className="flex justify-between items-center">
