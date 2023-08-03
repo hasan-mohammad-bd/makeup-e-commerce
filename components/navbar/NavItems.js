@@ -3,7 +3,7 @@ import Image from "next/image";
 import { fetchData } from "@/utils/fetchData";
 
 const NavItems = async () => {
-  const { data: settings = {} } = await fetchData({ api: "settings" });
+  const { data: settings = {} } = await fetchData({ api: "info/basic" });
   const headerPages = settings?.header_page;
 
   return (

@@ -20,6 +20,7 @@ import ArticleLoader from "@/components/elements/loaders/ArticleLoader";
 //store
 import { clearCart, clearDiscountInfo } from "@/store/features/cartSlice";
 import { usePlaceAnOrderMutation } from "@/store/features/api/orderAPI";
+import { setGlobalLoader } from "@/store/features/commonSlice";
 
 //Icons
 import PayOptionIcon from "@/components/elements/svg/PayOptionIcon";
@@ -35,7 +36,7 @@ const payOptions = [
     ],
   },
   {
-    key: "OP",
+    key: "Online",
     title: "অনলাইন পেমেন্ট",
     images: [
       { url: "/assets/images/payments/sslcom.png", height: 70, width: 200 },
@@ -83,6 +84,8 @@ const Checkout = () => {
   const discountedPrice = getCouponDiscount(discountCoupon, total);
 
   const handleOrderPlace = async (data, event) => {
+    dispatch(setGlobalLoader(true));
+
     const newOrder = {
       name: data.name,
       alt_name: data.name,
@@ -99,11 +102,11 @@ const Checkout = () => {
       subtotal: total,
       after_discount: total - discountedPrice,
       grand_total: total - discountedPrice + deliveryMethod.charges,
-      note: "Not Paid",
+      // note: "",
     };
     // console.log(newOrder);
 
-    if (payOption.key == "OP") {
+    if (payOption.key == "Online") {
       try {
         const res = await fetch("/api/payments/sslcz", {
           method: "POST",
@@ -114,6 +117,7 @@ const Checkout = () => {
           body: JSON.stringify(newOrder),
         });
         const data = await res.json();
+        dispatch(setGlobalLoader(false));
         // console.log(data);
         if (data?.GatewayPageURL) {
           toast.success("Online payment is processing please wait");
@@ -124,6 +128,7 @@ const Checkout = () => {
           toast.error("Something went wrong");
         }
       } catch (error) {
+        dispatch(setGlobalLoader(false));
         toast.error("Something went wrong...", error);
       }
     } else {
@@ -134,11 +139,13 @@ const Checkout = () => {
           // console.log(response);
           dispatch(clearDiscountInfo());
           dispatch(clearCart());
+          dispatch(setGlobalLoader(false));
           toast.success("Order successful");
           router.push(`checkout/success/${response?.sale?.id}`);
         })
         .catch((error) => {
           // Handle the error if necessary
+          dispatch(setGlobalLoader(false));
           toast.error("Failed to place an order");
           console.log(error);
         });

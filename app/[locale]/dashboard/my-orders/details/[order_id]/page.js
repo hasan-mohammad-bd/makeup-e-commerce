@@ -56,7 +56,7 @@ const OrderDetail = ({ params }) => {
               </div>
               <div>
                 <h4 className="font-bold">{sale?.shipping?.name}</h4>
-                <p>{sale?.shipping?.mobile}</p>
+                <p>{sale?.shipping?.phone}</p>
                 <p>{sale?.shipping?.address}</p>
               </div>
             </div>

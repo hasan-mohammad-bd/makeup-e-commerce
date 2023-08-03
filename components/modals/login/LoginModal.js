@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import SocialLogin from "./SocialLogin";
 import OtpForm from "./OtpForm";
@@ -12,9 +13,11 @@ import {
   useGetCountriesQuery,
   useOtpLoginMutation,
 } from "@/store/features/api/authAPI";
-import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setGlobalLoader } from "@/store/features/commonSlice";
 
 const LoginModal = ({ showModal, setShowModal, title }) => {
+  const dispatch = useDispatch();
   const [otpSent, setOtpSent] = useState(false);
   const [phone, setPhone] = useState("");
   const [selectedCountry, setSelectedCountry] = useState({
@@ -23,7 +26,7 @@ const LoginModal = ({ showModal, setShowModal, title }) => {
     code: "BD",
     dial_code: "+880",
   });
-  const { data, isLoading } = useGetCountriesQuery();
+  const { data } = useGetCountriesQuery();
 
   const getCountryName = (dialCode) => {
     const country = countries.find((country) => country.dial_code === dialCode);
@@ -32,14 +35,23 @@ const LoginModal = ({ showModal, setShowModal, title }) => {
 
   const countries = data?.data || [];
 
-  const [sendOTP, { isSuccess, data: otpResponse, isError }] =
+  const [sendOTP, { isSuccess, isLoading, data: otpResponse, isError }] =
     useOtpLoginMutation();
+
+  //handling global loader
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setGlobalLoader(true));
+    } else {
+      dispatch(setGlobalLoader(false));
+    }
+  }, [isLoading, dispatch]);
 
   useEffect(() => {
     if (isSuccess && otpResponse) {
       toast.success("OTP has been sent to your mobile");
       toast(otpResponse?.otp_message);
-      console.log(otpResponse, "OTP Response");
+      // console.log(otpResponse, "OTP Response");
       setOtpSent(true);
     } else if (isError) {
       console.error("Failed to send OTP");
@@ -53,8 +65,7 @@ const LoginModal = ({ showModal, setShowModal, title }) => {
     reset,
   } = useForm();
 
-  const onSubmit = async (data, event) => {
-    event.preventDefault();
+  const onSubmit = async (data) => {
     const country = getCountryName(data.dial_code);
     const loginData = {
       phone_no: data.phone,

@@ -6,14 +6,24 @@ import { useRouter } from "next/navigation";
 import { useVerifyOtpMutation } from "@/store/features/api/authAPI";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/store/features/authSlice";
+import { setGlobalLoader } from "@/store/features/commonSlice";
 
 const OtpForm = ({ selectedCountry, phone, setShowModal }) => {
   const [otp, setOtp] = useState(Array(6).fill(""));
-  const [verifyOTP, { isSuccess, data: user, isError }] =
+  const [verifyOTP, { isSuccess, isLoading, data: user, isError }] =
     useVerifyOtpMutation();
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+
+  //handling global loader
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setGlobalLoader(true));
+    } else {
+      dispatch(setGlobalLoader(false));
+    }
+  }, [isLoading, dispatch]);
 
   useEffect(() => {
     if (isSuccess && user) {
@@ -70,7 +80,6 @@ const OtpForm = ({ selectedCountry, phone, setShowModal }) => {
     });
   };
 
-  // console.log(otp, "touhid-otp");
   return (
     <div className="otp">
       <div className=" mb-8">

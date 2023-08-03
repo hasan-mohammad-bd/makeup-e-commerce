@@ -20,6 +20,7 @@ import "swiper/css/navigation";
 import Cart from "@/components/side-drawers/Cart";
 import ProductSelect from "@/components/side-drawers/ProductSelect";
 import PersistUser from "./PersistUser";
+import GlobalLoader from "./GlobalLoader";
 
 export const metadata = {
   title: "Sotota Stall",
@@ -46,6 +47,7 @@ export default function RootLayout({ children, params }) {
           <Cart />
           <ProductSelect />
           <PersistUser />
+          <GlobalLoader />
         </ReduxProvider>
       </body>
     </html>

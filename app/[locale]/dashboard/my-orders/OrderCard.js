@@ -1,11 +1,16 @@
+"use client";
 import Link from "next/link";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { HiLocationMarker } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
 import orderFilterKeys from "./OrderFilterKeys";
 import handleSSLOrderPayLater from "@/utils/sslPay";
+import { setGlobalLoader } from "@/store/features/commonSlice";
 
 function OrderCard({ order }) {
+  const dispatch = useDispatch();
+
   const {
     id,
     invoice_no,
@@ -77,7 +82,11 @@ function OrderCard({ order }) {
         {due_amount > 0 ? (
           <div className="text-right">
             <button
-              onClick={() => handleSSLOrderPayLater(id)}
+              onClick={() =>
+                handleSSLOrderPayLater(id, (loading) =>
+                  dispatch(setGlobalLoader(loading))
+                )
+              }
               className="inline-block bg-primary py-2 px-4 text-white rounded-lg text-center active:scale-95"
             >
               পেমেন্ট করুন

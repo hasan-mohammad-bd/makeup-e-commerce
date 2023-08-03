@@ -11,6 +11,7 @@ import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
 const MyOrders = () => {
   const { data: ordersData, isLoading } = useGetOrdersQuery();
   const myOrders = ordersData?.data || [];
+
   // console.log(myOrders[0]);
 
   const orderFilters = [

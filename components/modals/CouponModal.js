@@ -7,6 +7,7 @@ import Modal from "../elements/Modal";
 import { useForm } from "react-hook-form";
 import axiosInstance from "@/utils/axiosInstance";
 import { addDiscountInfo } from "@/store/features/cartSlice";
+import { setGlobalLoader } from "@/store/features/commonSlice";
 
 const CouponModal = ({ showModal, setShowModal, title }) => {
   const [error, setError] = useState(false);
@@ -20,9 +21,11 @@ const CouponModal = ({ showModal, setShowModal, title }) => {
   const onSubmit = async (data, event) => {
     event.preventDefault();
     setError(false);
+    dispatch(setGlobalLoader(true));
     try {
       const coupon = data.coupon_code;
       const response = await axiosInstance.get(`coupons/${coupon}`);
+      dispatch(setGlobalLoader(false));
       if (response.status === 200) {
         toast.success("coupon discount applied");
         dispatch(addDiscountInfo(response.data.data));
@@ -32,6 +35,7 @@ const CouponModal = ({ showModal, setShowModal, title }) => {
       }
     } catch (error) {
       setError(true);
+      dispatch(setGlobalLoader(false));
     }
   };
   return (
