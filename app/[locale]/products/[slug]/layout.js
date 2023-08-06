@@ -19,7 +19,7 @@ export default async function ProductDetailsLayout({ children, params }) {
   const product = response?.data || {};
 
   //Category Filter
-  const searchParams = {
+  const customSearchParams = {
     category_id: product?.category?.id,
   };
 
@@ -95,7 +95,7 @@ export default async function ProductDetailsLayout({ children, params }) {
           </div>
 
           <div className="category-products mt-6">
-            <AllProducts searchParams={searchParams} />
+            <AllProducts customSearchParams={customSearchParams} />
           </div>
         </div>
       </div>

@@ -9,13 +9,13 @@ import NewArrival from "@/components/NewArrival";
 import Brands from "@/components/Brands";
 import Link from "next/link";
 import VideoBanner from "@/components/elements/VideoBanner";
-import Banner1 from "@/components/Banner1";
+import FeaturedBanner from "@/components/FeaturedBanner";
 import PopularCategories from "@/components/PopularCategories";
 
 // ** Import Iocns
 import { HiArrowLongRight } from "react-icons/hi2";
 
-export default function Home() {
+export default function Home({ searchParams }) {
   return (
     <main>
       <section className="banner">
@@ -78,7 +78,7 @@ export default function Home() {
 
       <section className="banners pt-14">
         <div className="container">
-          <Banner1 />
+          <FeaturedBanner />
         </div>
       </section>
 
@@ -92,7 +92,7 @@ export default function Home() {
           </div>
 
           <div className="bestSell-slider mt-6">
-            <AllProducts />
+            <AllProducts customSearchParams={searchParams} pagination={true} />
           </div>
         </div>
       </section>

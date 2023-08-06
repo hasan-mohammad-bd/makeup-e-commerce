@@ -1,21 +1,28 @@
 import { fetchData } from "@/utils/fetchData";
 import SingleProduct from "./SingleProduct";
+import PaginationWithSummery from "../PaginationWithSummery";
 
-const AllProducts = async ({ searchParams = {} }) => {
-  // console.log(searchParams);
-  const params = new URLSearchParams(searchParams);
+const AllProducts = async ({ customSearchParams = {}, pagination }) => {
+  const params = new URLSearchParams(customSearchParams);
   const data = await fetchData({ api: `products?${params.toString()}` });
-  const allProducts = data?.data || [];
+  const products = data?.data || [];
+  const meta = data?.meta || {};
 
   return (
     <>
       <div className="products-wpr grid grid-cols-5 gap-x-5 gap-y-12 mb-12">
-        {allProducts?.map((product, i) => (
+        {products?.map((product, i) => (
           <div className="col-span-1" key={i}>
             <SingleProduct product={product} />
           </div>
         ))}
       </div>
+      {pagination && (
+        <PaginationWithSummery
+          meta={meta}
+          totalItemsShowing={products?.length}
+        />
+      )}
     </>
   );
 };

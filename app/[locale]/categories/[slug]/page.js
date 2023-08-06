@@ -6,7 +6,7 @@ import ProductsWithFilter from "@/components/products/ProductsWithFilter";
 // ** Imoprt icons
 import noImage from "@/public/assets/images/no-image.png";
 
-const page = async ({ params }) => {
+const page = async ({ params, searchParams }) => {
   const { slug } = params;
   const [categoryResponse, dataResponse] = await Promise.allSettled([
     fetchData({ api: `category/${slug}` }),
@@ -20,8 +20,10 @@ const page = async ({ params }) => {
   const popularCategories =
     dataResponse.status === "fulfilled" ? dataResponse.value?.data || [] : [];
 
-  const searchParams = {
+  //forming search params
+  const customSearchParams = {
     category_id: category?.id,
+    ...searchParams,
   };
 
   return (
@@ -92,7 +94,7 @@ const page = async ({ params }) => {
         </div>
       </div>
 
-      <ProductsWithFilter searchParams={searchParams} />
+      <ProductsWithFilter customSearchParams={customSearchParams} />
     </>
   );
 };

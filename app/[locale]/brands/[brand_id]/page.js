@@ -6,7 +6,7 @@ import { fetchData } from "@/utils/fetchData";
 import noImage from "@/public/assets/images/no-image.png";
 import ProductsWithFilter from "@/components/products/ProductsWithFilter";
 
-const page = async ({ params }) => {
+const page = async ({ params, searchParams }) => {
   const { brand_id } = params;
   const [brandResponse, topBrands] = await Promise.allSettled([
     fetchData({ api: `brands/${brand_id}` }),
@@ -18,8 +18,10 @@ const page = async ({ params }) => {
   const popularBrands =
     topBrands.status === "fulfilled" ? topBrands.value?.data || [] : [];
 
-  const searchParams = {
+  //forming search params
+  const customSearchParams = {
     brand_id: brand?.id,
+    ...searchParams,
   };
 
   return (
@@ -90,7 +92,7 @@ const page = async ({ params }) => {
         </div>
       </div>
 
-      <ProductsWithFilter searchParams={searchParams} />
+      <ProductsWithFilter customSearchParams={customSearchParams} />
     </>
   );
 };

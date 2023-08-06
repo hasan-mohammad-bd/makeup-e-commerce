@@ -1,19 +1,15 @@
-import { Suspense } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import Filter from "@/components/Filter";
-import SortSelect from "@/components/elements/SortSelect";
-
-// ** Imoprt icons
-import AllProducts from "@/components/products/AllProducts";
+import ProductsWithFilter from "@/components/products/ProductsWithFilter";
+// import Pagination from "@/components/Pagination";
 
 // ** Search Fallback
 function SearchBarFallback() {
   return <>placeholder</>;
 }
 
-const page = ({ params }) => {
+const page = ({ params, searchParams }) => {
   const { slug } = params;
+  // console.log(searchParams);
 
   return (
     <>
@@ -41,20 +37,7 @@ const page = ({ params }) => {
         </div>
       </div>
 
-      <div className="container">
-        <div className="toolbar grid grid-cols-5 gap-5 my-5">
-          <div className="relative col-span-1">
-            <Filter />
-          </div>
-          <div className="col-span-4 flex justify-between items-center bg-slate-50 rounded-xl px-4 py-3">
-            <p>এখানে ৬৭ টি প্রডাক্ট আছে</p>
-            <Suspense fallback={<SearchBarFallback />}>
-              <SortSelect />
-            </Suspense>
-          </div>
-        </div>
-        <AllProducts />
-      </div>
+      <ProductsWithFilter customSearchParams={searchParams} />
     </>
   );
 };
