@@ -8,6 +8,7 @@ import { useRemoveFromWishListMutation } from "@/store/features/api/wishListAPI"
 import { addToCart, addToSelected } from "@/store/features/cartSlice";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { getSlicedText } from "@/utils/formatText";
+import noImage from "@/public/assets/images/no-image.png";
 
 const WishListCard = ({ product }) => {
   const [deleteFromWishlist] = useRemoveFromWishListMutation();
@@ -44,6 +45,7 @@ const WishListCard = ({ product }) => {
     }
   };
 
+  // console.log(product);
   return (
     <div className="relative px-3 py-4 bg-white shadow rounded-lg mb-3">
       <button
@@ -52,15 +54,14 @@ const WishListCard = ({ product }) => {
       >
         <FiTrash2 />
       </button>
-      <div className={`flex gap-2`}>
+      <div className={`flex gap-4`}>
         <div className="relative">
           <Image
-            src={"/assets/images/review/image-2.png"}
+            src={product.image || noImage}
             alt="product"
-            height={84}
-            width={100}
-            sizes="84px"
-            className={stockOut ? "opacity-50" : ""}
+            height={80}
+            width={96}
+            className={`${stockOut ? "opacity-50" : ""} w-24 h-20`}
           />
           {stockOut ? (
             <div className="w-full h-full rounded absolute left-0 top-0 flex items-center justify-center">

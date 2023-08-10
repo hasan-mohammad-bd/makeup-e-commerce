@@ -7,6 +7,7 @@ import { HiArrowLongRight } from "react-icons/hi2";
 import orderFilterKeys from "./OrderFilterKeys";
 import handleSSLOrderPayLater from "@/utils/sslPay";
 import { setGlobalLoader } from "@/store/features/commonSlice";
+import { getBdFormattedDate } from "@/utils/formatDate";
 
 function OrderCard({ order }) {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function OrderCard({ order }) {
     due_amount,
     shipping,
     total_product,
+    payment_type,
   } = order;
 
   const getOrderStatus = (status) => {
@@ -60,7 +62,7 @@ function OrderCard({ order }) {
       <div className="grid grid-cols-4 justify-between">
         <div>
           <h3 className="text-slate-500 mb-3">তারিখ</h3>
-          <h3>{new Date(sale_date).toLocaleDateString("bn-BD")}</h3>
+          <h3>{getBdFormattedDate(sale_date)}</h3>
         </div>
         <div>
           <h3 className="text-slate-500 mb-3">অর্ডার আইডি</h3>
@@ -75,11 +77,15 @@ function OrderCard({ order }) {
                 due_amount > 0 ? "text-red-500" : "text-green-500"
               }`}
             >
-              {due_amount > 0 ? "বাকি" : "পরিশোধ"}
+              {due_amount > 0
+                ? payment_type !== "COD"
+                  ? "পেমেন্ট অসম্পূর্ণ"
+                  : "বাকি"
+                : "পরিশোধ"}
             </span>
           </h3>
         </div>
-        {due_amount > 0 ? (
+        {due_amount > 0 && payment_type !== "COD" ? (
           <div className="text-right">
             <button
               onClick={() =>

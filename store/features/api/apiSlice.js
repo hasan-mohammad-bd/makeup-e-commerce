@@ -35,6 +35,8 @@ export const apiSlice = createApi({
     "visited",
     "orders",
     "order",
+    "categories",
+    "product-qna",
   ],
   endpoints: () => ({}),
 });

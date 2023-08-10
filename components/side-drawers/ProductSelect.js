@@ -9,6 +9,7 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import ProductVariantSelect from "../products/ProductVariantSelect";
+import noImage from "@/public/assets/images/no-image.png";
 
 const ProductSelect = () => {
   const { selectedProduct } = useSelector((state) => state.cart);
@@ -46,7 +47,7 @@ const ProductSelect = () => {
       <div className="p-6">
         <div className="product-info flex gap-2">
           <Image
-            src={"/assets/images/review/image-2.png"}
+            src={selectedProduct?.image || noImage}
             alt="product"
             height={84}
             width={84}

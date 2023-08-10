@@ -6,6 +6,7 @@ import { MdDeleteSweep } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import * as cartActions from "@/store/features/cartSlice";
 import { getSlicedText } from "@/utils/formatText";
+import noImage from "@/public/assets/images/no-image.png";
 
 const CartCard = ({ item }) => {
   const {
@@ -13,6 +14,7 @@ const CartCard = ({ item }) => {
     product_name,
     new_price,
     old_price,
+    image,
     // productVariants,
     discount_percentage,
     quantity,
@@ -33,7 +35,7 @@ const CartCard = ({ item }) => {
       </button>
       <div className="flex gap-2">
         <Image
-          src={"/assets/images/review/image-2.png"}
+          src={image || noImage}
           alt="product"
           height={84}
           width={84}

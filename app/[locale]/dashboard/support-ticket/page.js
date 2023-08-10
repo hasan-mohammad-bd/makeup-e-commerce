@@ -5,13 +5,23 @@ import SupportTicketCard from "./SupportTicketCard";
 import NoItems from "../NoItems";
 import Link from "next/link";
 import { useGetSupportTicketQuery } from "@/store/features/api/supportTicketAPI";
+import { getCountByKeyNotValue, getCountByKeyValue } from "@/utils/itemsCount";
+import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
 
 export default function SupportTicket() {
   const [selectedTab, setSelectedTab] = useState("running");
-  const { data } = useGetSupportTicketQuery();
+  const { data, isLoading } = useGetSupportTicketQuery();
   const supportTickets = data?.data || [];
-  console.log(supportTickets);
-
+  let filteredTickets = [];
+  if (selectedTab === "Completed") {
+    filteredTickets = supportTickets.filter(
+      (ticket) => ticket?.status === "Completed"
+    );
+  } else {
+    filteredTickets = supportTickets.filter(
+      (ticket) => ticket?.status !== "Completed"
+    );
+  }
   return (
     <div className="px-10 py-6">
       <div className="mb-6 flex justify-between items-center">
@@ -30,24 +40,40 @@ export default function SupportTicket() {
           }`}
           onClick={() => setSelectedTab("running")}
         >
-          <span>রানিং টিকিট (১)</span>
+          <span>
+            রানিং টিকিট (
+            {getCountByKeyNotValue(supportTickets, "status", "Completed")})
+          </span>
         </button>
         <button
           className={`font-title bg-transparent box-border py-2 border-b-2 ${
-            selectedTab === "completed"
+            selectedTab === "Completed"
               ? "border-primary"
               : "border-transparent"
           }`}
-          onClick={() => setSelectedTab("completed")}
+          onClick={() => setSelectedTab("Completed")}
         >
-          <span>সম্পন্ন হয়েছে (২)</span>
+          <span>
+            সম্পন্ন হয়েছে (
+            {getCountByKeyValue(supportTickets, "status", "Completed")})
+          </span>
         </button>
       </div>
-      <div className="support-tickets pt-4">
-        <SupportTicketCard />
-        <SupportTicketCard />
-        {/* <NoItems title={"কোন টিকিট নেই"} /> */}
-      </div>
+      {isLoading ? (
+        <div className="py-4">
+          <ItemsListLoader itemHeight={110} noImage={true} viewBoxWidth={900} />
+        </div>
+      ) : (
+        <div className="support-tickets pt-4">
+          {filteredTickets?.length ? (
+            filteredTickets.map((ticket) => (
+              <SupportTicketCard key={ticket.id} ticket={ticket} />
+            ))
+          ) : (
+            <NoItems title={"কোন টিকিট নেই"} />
+          )}
+        </div>
+      )}
     </div>
   );
 }

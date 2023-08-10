@@ -33,8 +33,8 @@ export const handleOrderSSLPay = async (order, bearerToken) => {
     product_name: "Computer.",
     product_category: "Electronic",
     product_profile: "general",
-    cus_name: sale.customer.name,
-    cus_email: sale.customer.email,
+    cus_name: sale.customer.name || sale.shipping.name,
+    cus_email: sale.customer.email || "demo@demo.com",
     cus_add1: "Dhaka",
     cus_add2: "Dhaka",
     cus_city: "Dhaka",
@@ -51,9 +51,10 @@ export const handleOrderSSLPay = async (order, bearerToken) => {
     ship_postcode: 1000,
     ship_country: "Bangladesh",
   };
-  //   console.log(sslPaymentData);
+  // console.log(sslPaymentData);
 
   const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live);
   const sslResponse = await sslcz.init(sslPaymentData);
+  // console.log(sslResponse);
   return sslResponse;
 };

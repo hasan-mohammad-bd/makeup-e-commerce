@@ -32,8 +32,8 @@ const SingleProduct = ({ product, addToCompare }) => {
     image,
     product_name,
     brand,
-    rating,
-    review,
+    averate_rating,
+    total_rating,
     new_price,
     old_price,
     discount_percentage,
@@ -129,11 +129,11 @@ const SingleProduct = ({ product, addToCompare }) => {
               </h2>
               <div className="rating-result flex items-center gap-3 mb-4">
                 <div className="font-semibold text-slate-900 inline-flex gap-1 justify-center">
-                  {rating || 0}
+                  {averate_rating || 0}
                   <FaStar className="inline text-primary align-middle" />
                 </div>
                 <div className="font-semibold text-slate-900 inline-flex gap-1 justify-center">
-                  {review || 0}K
+                  {total_rating === 0 ? "No Rating" : total_rating}
                 </div>
               </div>
               <div className="product-price mb-3 flex gap-2">

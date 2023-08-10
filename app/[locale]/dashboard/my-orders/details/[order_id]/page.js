@@ -8,6 +8,7 @@ import { HiArrowLongLeft } from "react-icons/hi2";
 import OrderTracking from "./OrderTracking";
 import SaleProductCard from "./SaleProductCard";
 import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
+import { getBdFormattedDate } from "@/utils/formatDate";
 
 const OrderDetail = ({ params }) => {
   const { order_id } = params;
@@ -74,7 +75,7 @@ const OrderDetail = ({ params }) => {
               </div>
               <div className="flex-between my-2">
                 <p>অর্ডারের তারিখ</p>
-                <p>৳{new Date(sale.sale_date).toLocaleDateString("bn-BD")}</p>
+                <p>{getBdFormattedDate(sale.sale_date)}</p>
               </div>
 
               <div className="flex-between my-2">

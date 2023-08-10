@@ -142,6 +142,7 @@ const LoginModal = ({ showModal, setShowModal, title }) => {
             phone={phone}
             selectedCountry={selectedCountry}
             setShowModal={setShowModal}
+            setOtpSent={setOtpSent}
           />
         )}
         <SocialLogin />

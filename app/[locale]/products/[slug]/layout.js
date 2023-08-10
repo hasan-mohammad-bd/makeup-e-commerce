@@ -2,10 +2,10 @@ import Link from "next/link";
 import AllProducts from "@/components/products/AllProducts";
 import LastVisitedProducts from "@/components/products/LastVisitedProducts";
 import ProductDetails from "./ProductDetails";
-import ActiveLink from "@/components/elements/ActiveLink";
 import { fetchData } from "@/utils/fetchData";
 import { notFound } from "next/navigation";
 import React from "react";
+import { getSlicedText } from "@/utils/formatText";
 
 export const metadata = {
   title: "Sotota Stall || product details page",
@@ -38,7 +38,7 @@ export default async function ProductDetailsLayout({ children, params }) {
     {
       id: 4,
       title: "প্রশ্ন ও উত্তর",
-      path: `/products/${slug}/qna`,
+      path: `/products/${slug}/qna/${product?.id}`,
     },
   ];
   return (
@@ -63,30 +63,16 @@ export default async function ProductDetailsLayout({ children, params }) {
                 href={`/products/${slug}`}
                 className={`text-base text-slate-900 hover:text-primary`}
               >
-                {slug}
+                {getSlicedText(slug, 50)}
               </Link>
             </div>
           </div>
         </div>
       </div>
       <div className="container">
-        <ProductDetails product={product} />
-        <div className="flex justify-end">
-          <div className="w-1/2">
-            {/* tabs view */}
-            <ul className="product-tab-links flex justify-between items-center border-b border-slate-200 py-5 mt-5">
-              {tabItems.map((item) => (
-                <li key={item.id}>
-                  <ActiveLink href={item.path}>{item.title}</ActiveLink>
-                </li>
-              ))}
-            </ul>
-            {/* tabs content  */}
-            <div className="product-tab-content pt-8 pb-4 border-b-4 border-slate-200">
-              {children}
-            </div>
-          </div>
-        </div>
+        <ProductDetails product={product} tabItems={tabItems}>
+          {children}
+        </ProductDetails>
       </div>
       <div className="all-products py-14">
         <div className="container">

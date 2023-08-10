@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "@/store/features/authSlice";
 import { setGlobalLoader } from "@/store/features/commonSlice";
 
-const OtpForm = ({ selectedCountry, phone, setShowModal }) => {
+const OtpForm = ({ selectedCountry, phone, setShowModal, setOtpSent }) => {
   const [otp, setOtp] = useState(Array(6).fill(""));
   const [verifyOTP, { isSuccess, isLoading, data: user, isError }] =
     useVerifyOtpMutation();
@@ -31,12 +31,13 @@ const OtpForm = ({ selectedCountry, phone, setShowModal }) => {
       localStorage.setItem("token", user.token);
       dispatch(setUser(user.data));
       setShowModal(false);
+      setOtpSent(false);
       router.push("/dashboard");
       // console.log(user, "user Data");
     } else if (isError) {
       toast.error("Oops! OTP not Matched");
     }
-  }, [isSuccess, isError, user, dispatch, router, setShowModal]);
+  }, [isSuccess, isError, user, dispatch, router, setShowModal, setOtpSent]);
 
   const handleOTPVerification = () => {
     const jointedOtp = otp.join("");

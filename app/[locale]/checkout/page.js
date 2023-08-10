@@ -26,6 +26,7 @@ import { setGlobalLoader } from "@/store/features/commonSlice";
 import PayOptionIcon from "@/components/elements/svg/PayOptionIcon";
 import { FiPlus } from "react-icons/fi";
 import getToken from "@/utils/getToken";
+import RequireAuth from "@/components/hoks/RequireAuth";
 
 const payOptions = [
   {
@@ -362,4 +363,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default RequireAuth(Checkout);

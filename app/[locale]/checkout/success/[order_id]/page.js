@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { FaCheck } from "react-icons/fa";
 import ArticleLoader from "@/components/elements/loaders/ArticleLoader";
+import { getBdFormattedDate } from "@/utils/formatDate";
 
 const OrderSuccess = ({ params }) => {
   const { order_id } = params;
@@ -39,7 +40,7 @@ const OrderSuccess = ({ params }) => {
               </div>
               <div className="flex-between my-2">
                 <p>অর্ডারের তারিখ</p>
-                <p>{new Date(order?.sale_date).toLocaleDateString("bn-BD")}</p>
+                <p>{getBdFormattedDate(order?.sale_date)}</p>
               </div>
               <div className="border-b border-slate-700 my-2"></div>
               <div className="flex-between my-2 font-bold">

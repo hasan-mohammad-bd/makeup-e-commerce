@@ -17,6 +17,7 @@ export async function GET(request, { params }) {
       },
     });
     const order = await res.json();
+    // console.log(order);
 
     if (order?.status === false) {
       console.log(order, "Could not found the order");

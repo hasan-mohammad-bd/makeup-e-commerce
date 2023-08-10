@@ -15,16 +15,18 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 import LoginModal from "../modals/login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "@/store/features/cartSlice";
-import { useGetUserQuery } from "@/store/features/api/authAPI";
 import AuthUserMenus from "./AuthUserMenus";
 import Image from "next/image";
+import { setLoginModalOpen } from "@/store/features/authSlice";
 
 const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
   const [isToggled, setToggled] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [scroll, setScroll] = useState(0);
   const { cart } = useSelector((state) => state.cart);
-  const { user, isLoading } = useSelector((state) => state.auth);
+  const { user, isLoading, isLoginModalOpen } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
 
   //start of popover
@@ -37,7 +39,8 @@ const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
 
   const handleModalOpen = () => {
     setUserOpen(false);
-    setShowModal(true);
+    // setShowModal(true);
+    dispatch(setLoginModalOpen(true));
   };
 
   useEffect(() => {
@@ -135,8 +138,8 @@ const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
         </div>
       </header>
       <LoginModal
-        showModal={showModal}
-        setShowModal={setShowModal}
+        showModal={isLoginModalOpen}
+        setShowModal={(show) => dispatch(setLoginModalOpen(show))}
         title={"স্বাগতম"}
       />
     </>

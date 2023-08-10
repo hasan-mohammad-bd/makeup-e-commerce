@@ -7,16 +7,22 @@ import ProductList from "@/components/products/ProductList";
 import Timer from "@/components/elements/Timer";
 import { fetchData } from "@/utils/fetchData";
 import { notFound } from "next/navigation";
+import PaginationWithSummery from "@/components/PaginationWithSummery";
 
 // ** Search Fallback
 function SearchBarFallback() {
   return <>placeholder</>;
 }
 
-const page = async () => {
-  const flashSaleResponse = await fetchData({ api: "product-flash-sale" });
+const FlashSellingProducts = async ({ searchParams }) => {
+  const params = new URLSearchParams(searchParams);
+  // console.log(searchParams);
+  const flashSaleResponse = await fetchData({
+    api: `product-flash-sale?${params.toString()}`,
+  });
   const flashSaleInfo = flashSaleResponse?.flashSale || {};
   const products = flashSaleResponse?.data || [];
+  const meta = flashSaleResponse?.meta || {};
   if (flashSaleResponse?.status === false) return notFound();
 
   return (
@@ -45,7 +51,7 @@ const page = async () => {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container lg:mb-20">
         <div className="toolbar flex justify-between items-center bg-slate-50 rounded-xl px-4 py-3 my-5">
           <p>এখানে {products?.length} টি প্রডাক্ট আছে</p>
           <Suspense fallback={<SearchBarFallback />}>
@@ -53,9 +59,13 @@ const page = async () => {
           </Suspense>
         </div>
         <ProductList products={products} />
+        <PaginationWithSummery
+          meta={meta}
+          totalItemsShowing={products?.length}
+        />
       </div>
     </>
   );
 };
 
-export default page;
+export default FlashSellingProducts;

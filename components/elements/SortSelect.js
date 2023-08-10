@@ -1,22 +1,29 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const SortSelect = ({ updateProductFilters }) => {
-  const searchTerm = useSearchParams().get("search");
+const SortSelect = () => {
+  const router = useRouter();
+  let pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const [featured, setFeatured] = useState("");
+  // Get a new searchParams string by merging the current
+  // searchParams with a provided key/value pair
+  const createQueryString = useCallback(
+    (name, value) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
 
-  useEffect(() => {
-    // const filters = {
-    //     featured,
-    // };
-    // updateProductFilters(filters);
-  }, [searchTerm, featured]);
+      return params.toString();
+    },
+    [searchParams]
+  );
 
-  const seleceOption = (e) => {
-    setFeatured(e.target.value);
+  const handleOptionChange = (e) => {
+    router.push(
+      pathname + "?" + createQueryString("sort_type", e.target.value)
+    );
   };
 
   return (
@@ -28,14 +35,14 @@ const SortSelect = ({ updateProductFilters }) => {
         <div className="sort-by-dropdown-wrap">
           <select
             className="select w-72 text-base text-slate-900 bg-white border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-0"
-            onChange={(e) => seleceOption(e)}
+            onChange={(e) => handleOptionChange(e)}
           >
-            <option value="">এলোমেলো</option>
+            <option value="default">এলোমেলো</option>
             <option value="new">নতুন প্রডাক্ট</option>
-            <option value="lowToHigh">দাম (কম থেকে বেশি)</option>
-            <option value="highToLow">দাম (বেশি থেকে কম)</option>
-            <option value="lowToHigh">রেটিং (কম থেকে বেশি)</option>
-            <option value="highToLow">রেটিং (বেশি থেকে কম)</option>
+            <option value="low_high">দাম (কম থেকে বেশি)</option>
+            <option value="high_low">দাম (বেশি থেকে কম)</option>
+            <option value="rating_low_high">রেটিং (কম থেকে বেশি)</option>
+            <option value="rating_high_low">রেটিং (বেশি থেকে কম)</option>
           </select>
         </div>
       </div>

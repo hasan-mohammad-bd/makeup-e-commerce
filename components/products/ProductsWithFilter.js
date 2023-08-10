@@ -3,7 +3,6 @@ import Filter from "@/components/Filter";
 import SortSelect from "@/components/elements/SortSelect";
 import ProductList from "./ProductList";
 import { fetchData } from "@/utils/fetchData";
-import Pagination from "../elements/Paginator";
 import PaginationWithSummery from "../PaginationWithSummery";
 
 const ProductsWithFilter = async ({ customSearchParams = {} }) => {

@@ -4,13 +4,12 @@ import noImage from "@/public/assets/images/no-image.png";
 import { getSlicedText } from "@/utils/formatText";
 
 const SaleProductCard = ({ saleProduct }) => {
-  // console.log(saleProduct);
   return (
     <div className="px-3 py-2 bg-white rounded-2xl border-b border-slate-200">
       <div className={`flex gap-4`}>
         <div className="">
           <Image
-            src={noImage}
+            src={saleProduct?.product?.image || noImage}
             alt="product"
             height={96}
             width={96}

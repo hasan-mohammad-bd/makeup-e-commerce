@@ -34,9 +34,9 @@ const Brands = ({ brands }) => {
               <Image
                 src={brand.brand_image || noImage}
                 alt={brand.title}
-                width={118}
-                height={118}
-                style={{ width: "auto", height: "auto" }}
+                width={112}
+                height={112}
+                className="w-28 h-28 object-contain"
               />
             </Link>
           </SwiperSlide>

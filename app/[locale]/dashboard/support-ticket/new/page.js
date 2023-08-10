@@ -2,17 +2,23 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { HiArrowLongLeft } from "react-icons/hi2";
 import TicketImagesUpload from "./TicketImagesUpload";
+
 import {
   useAddSupportTicketMutation,
   useGetSupportTicketTypesQuery,
 } from "@/store/features/api/supportTicketAPI";
-import { toast } from "react-toastify";
+import { useGetOrdersQuery } from "@/store/features/api/orderAPI";
+import { useRouter } from "next/navigation";
 
 export default function AddSupportTicket() {
+  const router = useRouter();
   const [imageFiles, setImageFiles] = useState([]);
+  const { data: ordersData } = useGetOrdersQuery();
+  const myOrders = ordersData?.data || [];
   const { data } = useGetSupportTicketTypesQuery();
   const ticketTypes = data?.data || [];
 
@@ -24,26 +30,26 @@ export default function AddSupportTicket() {
     formState: { errors },
   } = useForm();
 
-  const handleUserUpdate = (data, event) => {
+  const handleUserUpdate = (data) => {
     const { orderNumber, problemType, subject, msg } = data;
-    // console.log(data);
-    // console.log(imageFiles);
     const formData = new FormData();
     if (imageFiles.length) {
       imageFiles.forEach((image) => {
-        formData.append("images", image);
+        formData.append("images[]", image);
       });
     }
     formData.append("order_id", orderNumber);
     formData.append("title", subject);
     formData.append("description", msg);
     formData.append("support_ticket_type_id", problemType);
+
     addSupportTicket(formData)
       .unwrap()
       .then((response) => {
         // Handle the successful response if necessary
         console.log(response);
         toast.success("Support ticket added successfully!");
+        router.push("/dashboard/support-ticket");
       })
       .catch((error) => {
         // Handle the error if necessary
@@ -82,15 +88,11 @@ export default function AddSupportTicket() {
                 <option disabled selected>
                   অর্ডার নাম্বার নির্বাচন করুন
                 </option>
-                <option key="SST263598" value="SST263598">
-                  SST263598
-                </option>
-                <option key="SST263756" value="SST263756">
-                  SST263598
-                </option>
-                <option key="SST264425" value="SST264425">
-                  SST264425
-                </option>
+                {myOrders.map((order) => (
+                  <option key={order.id} value={order.id}>
+                    {order.invoice_no}
+                  </option>
+                ))}
               </select>
               {errors.orderNumber && (
                 <p className="errorMsg">{errors.orderNumber.message}</p>

@@ -12,6 +12,7 @@ import { getSlicedText } from "@/utils/formatText";
 import DescriptionViewer from "@/components/DescriptionViewer";
 import { addToCart } from "@/store/features/cartSlice";
 import ProductVariantSelect from "@/components/products/ProductVariantSelect";
+import ActiveLink from "@/components/elements/ActiveLink";
 
 // ** Import Icon
 import {
@@ -22,7 +23,7 @@ import {
   HiOutlineArrowLongRight,
 } from "react-icons/hi2";
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = ({ children, product, tabItems }) => {
   const [selectedVariant, setSelectedVariant] = useState(null);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -49,10 +50,40 @@ const ProductDetails = ({ product }) => {
 
   return (
     <>
-      <div className="product-details">
-        <div className="flex gap-5">
+      <div className="relative product-details">
+        <div className="flex gap-10">
           <div className="w-1/2">
-            <ThumbSlider product={product} />
+            <div className="sticky top-4">
+              <ThumbSlider product={product} />
+              <div className="py-4">
+                <div className="product-actions my-6 flex gap-4 justify-between items-center">
+                  <button
+                    className="bg-secondary-700 py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
+                    onClick={handleAddToCart}
+                  >
+                    <HiOutlineShoppingCart size={24} />
+                    <span className="ml-2">কার্টে রাখুন</span>
+                  </button>
+                  <button
+                    onClick={handleBuyNow}
+                    className="bg-primary py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
+                  >
+                    <span className="mr-2">এখনই কিনুন</span>
+                    <HiOutlineArrowLongRight size={20} />
+                  </button>
+                </div>
+                <div className="bg-slate-200 rounded-lg flex justify-between items-center flex-wrap px-5 py-6 font-bold">
+                  <p className="text-slate-900">বিস্তারিত জানতে কল করুন</p>
+                  <p className="text-primary">
+                    <IoCall /> 01720060958
+                  </p>
+                  <p className="text-slate-500">অথবা</p>
+                  <p className="text-primary">
+                    <IoCall /> 01720060977
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="w-1/2">
             <div className="product-content-wrap">
@@ -87,7 +118,7 @@ const ProductDetails = ({ product }) => {
                     size={20}
                     className="text-secondary-700"
                   />{" "}
-                  {product?.total_question_answer || 0} প্রশ্ন এবং উত্তর
+                  {product?.toptal_question_answer || 0} প্রশ্ন এবং উত্তর
                 </p>
                 <p>
                   <HiShare size={20} /> শেয়ার করুন
@@ -102,14 +133,14 @@ const ProductDetails = ({ product }) => {
                 <span className="text-3xl/[48px] font-bold font-title text-slate-900">
                   ৳ {product?.new_price || "0.00"}{" "}
                 </span>
-                {product?.old_price > product?.new_price ? (
+                {product?.discount_percentage > 0 ? (
                   <>
                     <del className="old-price text-lg/[24px] font-normal text-slate-400">
                       ৳{" "}
                       {product?.old_price ? `$ ${product?.old_price}` : "0.00"}
                     </del>
                     <span className="discount inline-block text-base font-semibold font-title text-white bg-red-500 rounded-md py-1 px-2">
-                      - {product?.discount_percentage || "0.00"}%
+                      - {product?.discount_percentage?.toFixed(2)}%
                     </span>
                   </>
                 ) : null}
@@ -121,32 +152,6 @@ const ProductDetails = ({ product }) => {
                   setSelectedVariant={setSelectedVariant}
                 />
               ) : null}
-              <div className="product-actions my-6 flex gap-4 justify-between items-center">
-                <button
-                  className="bg-secondary-700 py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
-                  onClick={handleAddToCart}
-                >
-                  <HiOutlineShoppingCart size={24} />
-                  <span className="ml-2">কার্টে রাখুন</span>
-                </button>
-                <button
-                  onClick={handleBuyNow}
-                  className="bg-primary py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
-                >
-                  <span className="mr-2">এখনই কিনুন</span>
-                  <HiOutlineArrowLongRight size={20} />
-                </button>
-              </div>
-              <div className="bg-slate-200 rounded-lg flex justify-between items-center flex-wrap px-5 py-6 font-bold">
-                <p className="text-slate-900">বিস্তারিত জানতে কল করুন</p>
-                <p className="text-primary">
-                  <IoCall /> 01720060958
-                </p>
-                <p className="text-slate-500">অথবা</p>
-                <p className="text-primary">
-                  <IoCall /> 01720060977
-                </p>
-              </div>
               <div className="mt-5 mb-8">
                 <p className="font-semibold font-title text-slate-900 mb-2">
                   সেরা অফার <TbTag size={24} className="text-primary mb-1" />
@@ -235,6 +240,20 @@ const ProductDetails = ({ product }) => {
               </div>
             </div>
             {/* tabs-view previous position */}
+            <div className="tabs-view">
+              {/* tabs view */}
+              <ul className="sticky top-0 bg-white product-tab-links flex justify-between items-center border-b border-slate-200 py-5 mt-5">
+                {tabItems.map((item) => (
+                  <li key={item.id}>
+                    <ActiveLink href={item.path}>{item.title}</ActiveLink>
+                  </li>
+                ))}
+              </ul>
+              {/* tabs content  */}
+              <div className="product-tab-content pt-8 pb-4 border-b-4 border-slate-200">
+                {children}
+              </div>
+            </div>
           </div>
         </div>
       </div>

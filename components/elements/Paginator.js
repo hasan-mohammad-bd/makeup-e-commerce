@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import Link from "next/link";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 
 /**
  * The `Pagination` function is a React component that renders a pagination UI based on the provided
@@ -10,8 +10,9 @@ import { usePathname, useSearchParams } from "next/navigation";
  * @params paginationItems - sets the limit for paginate items to be shown
  */
 export default function Paginator({ meta, paginateItems }) {
+  const { locale } = useParams();
   let pathname = usePathname();
-  if (pathname === "/") pathname = "/products"; //deactivate if you want pagination in home page
+  if (pathname === "/" || pathname === "/" + locale) pathname = "/products"; //deactivate if you want pagination in home page
   const searchParams = useSearchParams();
 
   // Get a new searchParams string by merging the current
@@ -26,8 +27,10 @@ export default function Paginator({ meta, paginateItems }) {
     [searchParams]
   );
 
-  const links = meta?.links || [];
-  if (Array.isArray(links) && links.length) {
+  let links = [];
+  if (Array.isArray(meta?.links)) {
+    links = [...meta.links];
+    console.log(links);
     links.shift();
     links.pop();
   }
