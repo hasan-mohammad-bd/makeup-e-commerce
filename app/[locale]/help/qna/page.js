@@ -35,7 +35,7 @@ const QnA = () => {
           </div>
           <QNAItems />
         </div>
-        <div className="contact border-t border-slate-200 py-5 text-center">
+        <div className="contact border-t border-slate-200 py-5 text-center mb-10">
           <p className="flex justify-center items-center gap-5 bg-amber-200 border border-primary rounded-xl p-4">
             <span className="text-xl font-bold font-title text-slate-900">
               যে কোন জিজ্ঞাসা বা অর্ডার করতে আমাদের কল করুন:

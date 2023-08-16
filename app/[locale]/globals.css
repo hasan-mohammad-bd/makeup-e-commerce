@@ -229,8 +229,9 @@
   @apply mb-1;
 }
 
-.product-details .meta-data p,
-.product-details .meta-data span {
+/* .product-details .meta-data span,  */
+.product-details .meta-data p
+{
   @apply relative text-base text-slate-900;
 }
 

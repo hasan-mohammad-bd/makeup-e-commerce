@@ -33,7 +33,7 @@ export default async function ProductDetailsLayout({ children, params }) {
     {
       id: 3,
       title: "রেটিং ও রিভিউ",
-      path: `/products/${slug}/reviews`,
+      path: `/products/${slug}/reviews/${product?.id}`,
     },
     {
       id: 4,

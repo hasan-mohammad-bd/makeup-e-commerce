@@ -37,6 +37,10 @@ export const apiSlice = createApi({
     "order",
     "categories",
     "product-qna",
+    "faqs",
+    "user-reviews",
+    "product-reviews",
+    "user-review-show",
   ],
   endpoints: () => ({}),
 });

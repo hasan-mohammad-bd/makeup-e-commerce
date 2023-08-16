@@ -5,7 +5,7 @@ import Image from "next/image";
 import Modal from "@/components/elements/Modal";
 import ReviewImageSlider from "@/components/elements/sliders/ReviewImageSlider";
 
-const ReviewImages = ({ reviewImages, max }) => {
+const ReviewImagesBackup = ({ reviewImages, max }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -42,4 +42,4 @@ const ReviewImages = ({ reviewImages, max }) => {
   );
 };
 
-export default ReviewImages;
+export default ReviewImagesBackup;

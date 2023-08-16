@@ -2,19 +2,26 @@
 import { useState } from "react";
 import NoItems from "../NoItems";
 import OrderReviewCard from "./OrderReviewCard";
-
-const orders = [
-  { id: 1, isReviewed: false, items: ["1"] },
-  { id: 2, isReviewed: false, items: ["1", "2"] },
-  { id: 3, isReviewed: true, items: ["1"] },
-  { id: 4, isReviewed: true, items: ["1", "2"] },
-];
+import { useGetUserReviewsQuery } from "@/store/features/api/productReviewAPI";
+import {
+  getFilteredByKeyNotValue,
+  getFilteredByKeyValue,
+} from "@/utils/getFilteredItems";
+import { getCountByKeyNotValue, getCountByKeyValue } from "@/utils/itemsCount";
+import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
 
 export default function MyReview() {
+  const { data, isLoading } = useGetUserReviewsQuery();
+  const myReviews = data?.data || [];
+  // console.log(myReviews);
   const [isReviewed, setIsReviewed] = useState(false);
-  const filteredOrders = orders.filter(
-    (order) => order.isReviewed === isReviewed
-  );
+
+  let filteredReviews = [];
+  if (!isReviewed && !isLoading) {
+    filteredReviews = getFilteredByKeyValue(myReviews, "total_review", 0);
+  } else if (!isLoading) {
+    filteredReviews = getFilteredByKeyNotValue(myReviews, "total_review", 0);
+  }
 
   return (
     <div className="px-10 py-6">
@@ -28,7 +35,9 @@ export default function MyReview() {
           }`}
           onClick={() => setIsReviewed((preRevState) => !preRevState)}
         >
-          <span>রিভিউ পেন্ডিং (2)</span>
+          <span>
+            রিভিউ পেন্ডিং ({getCountByKeyValue(myReviews, "total_review", 0)})
+          </span>
         </button>
         <button
           className={`font-title bg-transparent box-border py-2 border-b-2 ${
@@ -36,16 +45,26 @@ export default function MyReview() {
           }`}
           onClick={() => setIsReviewed((preRevState) => !preRevState)}
         >
-          <span>রিভিউ হয়েছে (2)</span>
+          <span>
+            রিভিউ হয়েছে ({getCountByKeyNotValue(myReviews, "total_review", 0)})
+          </span>
         </button>
       </div>
-      <div className="my-reviews mt-8">
-        {filteredOrders.length ? (
-          filteredOrders.map((order, index) => <OrderReviewCard key={index} order={order} />)
-        ) : (
-          <NoItems title={"কোন রিভিউ নেই"} />
-        )}
-      </div>
+      {isLoading ? (
+        <div className="py-8">
+          <ItemsListLoader itemHeight={110} noImage={true} viewBoxWidth={900} />
+        </div>
+      ) : (
+        <div className="my-reviews mt-8">
+          {filteredReviews.length ? (
+            filteredReviews.map((sellReview, index) => (
+              <OrderReviewCard key={index} sellReview={sellReview} />
+            ))
+          ) : (
+            <NoItems title={"কোন রিভিউ নেই"} />
+          )}
+        </div>
+      )}
     </div>
   );
 }

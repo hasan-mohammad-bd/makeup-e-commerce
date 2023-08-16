@@ -11,7 +11,7 @@ export const getCountByKeyValue = (items, key, value) => {
   let count = 0;
   if (Array.isArray(items)) {
     items.forEach((item) => {
-      if (item[key] && item[key] === value) {
+      if (item[key] === value) {
         count++;
       }
     });
@@ -34,7 +34,7 @@ export const getCountByKeyNotValue = (items, key, value) => {
   let count = 0;
   if (Array.isArray(items)) {
     items.forEach((item) => {
-      if (item[key] && item[key] !== value) {
+      if (item[key] !== value) {
         count++;
       }
     });

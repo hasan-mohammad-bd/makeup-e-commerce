@@ -4,23 +4,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { AiFillSmile } from "react-icons/ai";
-import { BsInfoCircleFill, BsStar, BsStarFill } from "react-icons/bs";
+import { BsInfoCircleFill } from "react-icons/bs";
 import { HiArrowLongLeft } from "react-icons/hi2";
-import ReviewImagesUpload from "./ReviewImagesUpload";
+import ReviewImagesUpload from "../ReviewImagesUpload";
+import {
+  useAddReviewMutation,
+  useGetUserReviewShowQuery,
+} from "@/store/features/api/productReviewAPI";
+import noImage from "@/public/assets/images/no-image.png";
+import { getBdFormattedDate } from "@/utils/formatDate";
+import { Rating } from "react-simple-star-rating";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
-const order = {
-  id: 10,
-  isReviewed: false,
-  items: [
-    { id: 1, name: "product 1" },
-    { id: 2, name: "product 2" },
-  ],
-};
-
-const AddReview = () => {
-  // const [imageFiles, setImageFiles] = useState([]);
+const AddReview = ({ params }) => {
+  const { order_id } = params;
   const [reviews, setReviews] = useState({});
+  const [ratings, setRatings] = useState({});
   const [imageFiles, setImageFiles] = useState({});
+  const [validationError, setValidationError] = useState(false);
+
+  const { data } = useGetUserReviewShowQuery(order_id);
+  const reviewShow = data?.data || {};
+  const totalItemsCount = reviewShow?.products?.length || 0;
+
+  const [createReview] = useAddReviewMutation();
+  const router = useRouter();
+
+  // Function to update the rating for a specific item
+  const updateRating = (itemId, rating) => {
+    // console.log(itemId, rating);
+    setRatings((prevRating) => ({
+      ...prevRating,
+      [itemId]: rating,
+    }));
+  };
 
   // Function to update the review text for a specific item
   const updateReviewText = (itemId, newText) => {
@@ -49,6 +67,40 @@ const AddReview = () => {
     });
   };
 
+  // Handling review creating
+  const handleReviewSubmit = async () => {
+    if (
+      Object.keys(ratings).length !== totalItemsCount ||
+      Object.keys(reviews).length !== totalItemsCount
+    ) {
+      setValidationError(true);
+      return;
+    }
+
+    try {
+      const createPromises = reviewShow?.products?.map((product, index) => {
+        const formData = new FormData();
+        if (imageFiles[index] && imageFiles[index].length) {
+          imageFiles[index].forEach((image) => {
+            formData.append("image[]", image);
+          });
+        }
+        formData.append("sele_id", reviewShow?.id);
+        formData.append("product_id", product.product_id);
+        formData.append("rating", ratings[index]);
+        formData.append("comment", reviews[index]);
+        console.log(formData);
+        return createReview(formData);
+      });
+      await Promise.all(createPromises);
+      toast.success("Review Added Successfully");
+      router.push("/dashboard/my-reviews");
+    } catch (error) {
+      toast.error("Failed to add reviews");
+      console.log(error);
+    }
+  };
+
   return (
     <div className="px-10 py-6">
       <div className="heading">
@@ -64,62 +116,73 @@ const AddReview = () => {
         <div className="relative">
           <div className="sec-heading absolute top-[-10px] left-0 w-full px-8">
             <span className="bg-white text-secondary-700 px-2">
-              ডেলিভারি সম্পন্ন হয়েছে: ১২ মার্চ ২০২৩ - ১২:৪৩
+              ডেলিভারি সম্পন্ন হয়েছে:{" "}
+              {getBdFormattedDate(reviewShow?.delivered_at)}
             </span>
           </div>
           <div className="p-4 bg-white rounded-2xl border-2 border-slate-200 mb-3">
             <div className="ordered-items">
-              {order.items.map((item, index) => (
-                <div key={item.id}>
+              {reviewShow?.products?.map((product, index) => (
+                <div key={index}>
                   <div className={`flex gap-4 my-4`}>
                     <div className="">
                       <Image
-                        src={"/assets/images/shop/product-thumb-1.png"}
+                        src={product.image || noImage}
                         alt="product"
-                        height={60}
-                        width={60}
-                        sizes="60px"
+                        height={64}
+                        width={64}
+                        className="h-16 w-16"
                       />
                     </div>
                     <div className="flex flex-col gap-1 w-full">
-                      <h4 className="font-semibold">
-                        প্রিমিয়াম কোয়ালিটির ইয়ার ব্লুটুথ হেডফোন, মাইক্রোফোন সহ
-                        বাচ্চাদের এবং প্রাপ্তবয়স্কদের জন্য
-                      </h4>
-                      <div className="flex items-center gap-3 text-sm">
-                        <div className="px-2 border border-slate-300 rounded-md">
-                          সাদা
+                      <h4 className="font-semibold">{product.product_name}</h4>
+                      {product.color && product.size && (
+                        <div className="flex items-center gap-3">
+                          <div className="px-2 border border-slate-300 rounded-md">
+                            {product.color}
+                          </div>
+                          <div className="px-2 border border-slate-300 rounded-md">
+                            {product.size}
+                          </div>
                         </div>
-                        <div className="px-2 border border-slate-300 rounded-md">
-                          Small
-                        </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                   {/* Rating Area */}
                   <div className="flex gap-4">
                     <div className="text-center">
-                      <p className="font-semibold">রেটিং দিন:</p>
+                      <p className="font-semibold">
+                        <span className="text-primary">*</span> রেটিং দিন:
+                      </p>
                       <div className="bg-slate-100 h-[8.75rem] w-[10.5rem] flex flex-col justify-between gap-2 items-center p-4">
-                        <span className="flex items-center gap-1 text-primary">
-                          <BsStarFill />
-                          <BsStarFill />
-                          <BsStarFill />
-                          <BsStarFill />
-                          {/* <BsStarHalf /> */}
-                          <BsStar />
-                        </span>
+                        <div
+                          style={{
+                            direction: "ltr",
+                            fontFamily: "sans-serif",
+                            touchAction: "none",
+                          }}
+                        >
+                          <Rating
+                            size={24}
+                            allowFraction
+                            onClick={(rating) => updateRating(index, rating)}
+                            transition
+                          />
+                        </div>
                         <p>অসাধারণ</p>
                         <p className="text-primary">
                           <AiFillSmile size={24} />
                         </p>
                       </div>
+                      {validationError && !ratings[index] && (
+                        <p className="errorMsg">Rating required</p>
+                      )}
                     </div>
                     <div className="flex-1">
                       <div className="form-control w-full">
                         <div className="flex-between mb-2">
                           <label className="block font-semibold text-slate-900">
-                            মতামত লিখুন:
+                            <span className="text-primary">*</span> মতামত লিখুন:
                           </label>
                           <span className="text-base text-secondary-800">
                             যেভাবে একটি সুন্দর রিভিউ লিখবেন{" "}
@@ -134,15 +197,18 @@ const AddReview = () => {
                           type="text"
                           name="msg"
                           placeholder="আপনার মতামত লিখুন"
-                          value={reviews[item.id] || ""}
+                          value={reviews[index] || ""}
                           onChange={(e) =>
-                            updateReviewText(item.id, e.target.value)
+                            updateReviewText(index, e.target.value)
                           }
                         />
+                        {validationError && !reviews[index] && (
+                          <p className="errorMsg">Review message is required</p>
+                        )}
                       </div>
                       <div>
                         <ReviewImagesUpload
-                          itemId={item.id}
+                          itemId={index}
                           imageFiles={imageFiles}
                           updateImageFiles={updateImageFiles}
                         />
@@ -163,20 +229,23 @@ const AddReview = () => {
                       </li>
                     </ul>
                   </div>
-                  {order.items.length > 1 && index < order.items.length - 1 && (
-                    <div className="border-b-2 border-dashed border-slate-300 mb-8"></div>
-                  )}
+                  {reviewShow?.products?.length > 1 &&
+                    index < reviewShow?.products?.length - 1 && (
+                      <div className="border-b-2 border-dashed border-slate-300 mb-8"></div>
+                    )}
                 </div>
               ))}
             </div>
           </div>
         </div>
         <div className="flex justify-end my-4">
-          <button className="submit-btn">রিভিউ দিন</button>
+          <button onClick={handleReviewSubmit} className="submit-btn">
+            রিভিউ দিন
+          </button>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default AddReview
+export default AddReview;

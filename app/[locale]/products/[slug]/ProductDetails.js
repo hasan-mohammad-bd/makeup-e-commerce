@@ -13,10 +13,10 @@ import DescriptionViewer from "@/components/DescriptionViewer";
 import { addToCart } from "@/store/features/cartSlice";
 import ProductVariantSelect from "@/components/products/ProductVariantSelect";
 import ActiveLink from "@/components/elements/ActiveLink";
+import { Rating } from "react-simple-star-rating";
 
 // ** Import Icon
 import {
-  HiStar,
   HiChatBubbleLeftRight,
   HiShare,
   HiOutlineShoppingCart,
@@ -94,23 +94,14 @@ const ProductDetails = ({ children, product, tabItems }) => {
                 {getSlicedText(product?.product_name, 100)}
               </h5>
               <div className="meta-data flex items-center gap-8 my-2">
-                <div className="rating-point flex gap-1">
-                  <span>
-                    <HiStar size={20} />
-                  </span>
-                  <span>
-                    <HiStar size={20} />
-                  </span>
-                  <span>
-                    <HiStar size={20} />
-                  </span>
-                  <span>
-                    <HiStar size={20} />
-                  </span>
-                  <span>
-                    <HiStar size={20} />
-                  </span>
-                  <span>4.5</span>
+                <div className="flex gap-1 items-center">
+                  <Rating
+                    initialValue={product?.averate_rating || 5}
+                    allowFraction
+                    readonly
+                    size={24}
+                  />
+                  <span>{product?.averate_rating || 5}</span>
                 </div>
                 <p>{product?.total_rating || 0} রেটিং</p>
                 <p>
@@ -242,7 +233,7 @@ const ProductDetails = ({ children, product, tabItems }) => {
             {/* tabs-view previous position */}
             <div className="tabs-view">
               {/* tabs view */}
-              <ul className="sticky top-0 bg-white product-tab-links flex justify-between items-center border-b border-slate-200 py-5 mt-5">
+              <ul className="sticky top-0 bg-white z-20 product-tab-links flex justify-between items-center border-b border-slate-200 py-5 mt-5">
                 {tabItems.map((item) => (
                   <li key={item.id}>
                     <ActiveLink href={item.path}>{item.title}</ActiveLink>

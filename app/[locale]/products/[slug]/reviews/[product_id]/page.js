@@ -1,8 +1,10 @@
-import Image from "next/image";
-import { StarIcon, StarHalfIcon } from "@/components/elements/svg";
-// import { HiOutlineFilter } from "react-icons/hi";
+"use client";
+import { useSearchParams } from "next/navigation";
 import RatingReviewCard from "./RatingReviewCard";
-import ReviewImages from "./ReviewImages";
+import { Rating } from "react-simple-star-rating";
+import { useGetProductReviewsQuery } from "@/store/features/api/productReviewAPI";
+import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
+import ReviewImagesBackup from "./ReviewImagesBackup";
 
 const reviewImages = [
   { title: "review Image", imgUrl: "/assets/images/review/image-1.png" },
@@ -15,7 +17,18 @@ const reviewImages = [
   { title: "review Image", imgUrl: "/assets/images/review/image-1.png" },
 ];
 
-const RatingReviews = ({ ratingReviews }) => {
+const RatingReviews = ({ params }) => {
+  const { product_id } = params;
+  const searchParams = useSearchParams();
+  const queryParams = new URLSearchParams(searchParams);
+
+  const { data, isLoading } = useGetProductReviewsQuery(
+    product_id + "?" + queryParams.toString()
+  );
+  const allReviews = data?.data || [];
+  const meta = data?.meta || {};
+  // console.log(allReviews);
+
   return (
     <div className="question-answer mb-8">
       <h2 className="text-2xl font-bold font-title text-slate-900">
@@ -24,12 +37,14 @@ const RatingReviews = ({ ratingReviews }) => {
       <div className="rating grid grid-cols-7 mt-3 mb-5 pb-6 border-b-[1px] border-slate-200">
         <div className="justify-self-start col-span-2 text-center flex flex-col justify-center items-center">
           <h3 className="text-2xl font-bold text-slate-950">4.5</h3>
-          <div className="flex items-center my-3">
-            <StarIcon className="w-5 h-5" fill="#F59E0B" />
-            <StarIcon className="w-5 h-5" fill="#F59E0B" />
-            <StarIcon className="w-5 h-5" fill="#F59E0B" />
-            <StarIcon className="w-5 h-5" fill="#F59E0B" />
-            <StarHalfIcon className="w-5 h-5" fill="#F59E0B" empty="#E2E8F0" />
+          <div className="my-3">
+            <Rating
+              initialValue={5}
+              allowFraction
+              readonly
+              size={24}
+              transition
+            />
           </div>
           <p className="text-slate-700">1265 গুলো রেটিং</p>
         </div>
@@ -94,7 +109,7 @@ const RatingReviews = ({ ratingReviews }) => {
           কাস্টমারের দেয়া ছবি গুলো
         </h2>
         <div className="bg-slate-50 rounded-md mt-3 h-[7.375rem] py-4 pl-4">
-          <ReviewImages reviewImages={reviewImages} max={6} />
+          <ReviewImagesBackup reviewImages={reviewImages} max={6} />
         </div>
       </div>
       <div
@@ -133,11 +148,19 @@ const RatingReviews = ({ ratingReviews }) => {
         </div>
       </div>
       {/* Rating Review Cards */}
-      <div className="mt-2">
-        {new Array(5).fill(5).map((review) => (
-          <RatingReviewCard key={review} reviewImages={reviewImages} />
-        ))}
-      </div>
+      {isLoading ? (
+        <ItemsListLoader noImage={true} numItems={3} />
+      ) : (
+        <div className="mt-2">
+          {allReviews.map((review) => (
+            <RatingReviewCard
+              key={review.id}
+              review={review}
+              reviewImages={reviewImages}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

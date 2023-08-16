@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { AiFillSmile } from "react-icons/ai";
-import { BsStar, BsStarFill } from "react-icons/bs";
-import productImage from "@/public/assets/images/shop/product-10.png";
+import { Rating } from "react-simple-star-rating";
 
 export default function ReviewSummaryPopover({ review }) {
+  // console.log(review);
   return (
     <div className="absolute right-0 top-[40px] z-10">
       <div className="relative bg-white p-6 border w-[33.5rem] border-slate-300 rounded-lg">
@@ -11,12 +11,13 @@ export default function ReviewSummaryPopover({ review }) {
         <div className="content-area flex gap-4">
           <div className="bg-slate-100 h-[8.75rem] w-[10.5rem] flex flex-col justify-between gap-2 items-center p-4">
             <span className="flex items-center gap-1 text-primary">
-              <BsStarFill />
-              <BsStarFill />
-              <BsStarFill />
-              <BsStarFill />
-              {/* <BsStarHalf /> */}
-              <BsStar />
+              <Rating
+                initialValue={review?.rating || 5}
+                allowFraction
+                readonly
+                size={24}
+                transition
+              />
             </span>
             <p>অসাধারণ</p>
             <p className="text-primary">
@@ -24,25 +25,18 @@ export default function ReviewSummaryPopover({ review }) {
             </p>
           </div>
           <div className="">
-            <p>
-              প্রোডাক্টটি ভাল লেগেছে। যদিও এখনো ব্যবহার করে দেখি নাই।
-              আনবক্সিংভিডিও আপলোড করা হয়েছে Vromon Vibes ইউটিউব চ্যানেলে। চাইলে
-              দেখতে পারেন।
-            </p>
+            <p>{review?.comment}</p>
             <div className="flex gap-4 mt-3">
-              {Array(2)
-                .fill(2)
-                .map((image, index) => (
-                  <Image
-                    key={index}
-                    src={productImage}
-                    height={90}
-                    width={90}
-                    sizes="90px"
-                    alt="product-img"
-                    className="rounded-lg"
-                  />
-                ))}
+              {review?.images?.map((item, index) => (
+                <Image
+                  key={index}
+                  src={item.image}
+                  height={90}
+                  width={90}
+                  alt="product-img"
+                  className="rounded-lg h-20 w-20 border border-slate-300"
+                />
+              ))}
             </div>
           </div>
         </div>
