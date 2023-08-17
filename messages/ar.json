@@ -2,6 +2,11 @@
   "Index": {
     "title": "مرحبا بالعالم!"
   },
+  "homepage": {
+    "navbar": {
+      "moreBtn": "حتى أكثر"
+    }
+  },
   "contact-us": {
     "breadcrumb": {
       "home": "وطن",

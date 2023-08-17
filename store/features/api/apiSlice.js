@@ -41,6 +41,7 @@ export const apiSlice = createApi({
     "user-reviews",
     "product-reviews",
     "user-review-show",
+    "popular-search",
   ],
   endpoints: () => ({}),
 });

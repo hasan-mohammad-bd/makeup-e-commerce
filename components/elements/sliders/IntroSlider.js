@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -10,16 +10,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { HiChevronRight } from "react-icons/hi2";
 
 const IntroSlider = ({ sliders }) => {
+  // console.log(sliders);
 
   return (
     <>
       <Swiper
-        modules={[Pagination]}
+        modules={[Pagination, Autoplay]}
         slidesPerView={1}
         spaceBetween={0}
-        loop={false}
+        loop={true}
         pagination={{ clickable: true }}
         className="hero-slider"
+        autoplay={{ delay: 3000 }}
       >
         {sliders.map((slide) => (
           <SwiperSlide key={slide?.id} className="mt-6 mb-8">
@@ -52,8 +54,8 @@ const IntroSlider = ({ sliders }) => {
                 <div className="col-span-5">
                   <div className="single-slider-img text-right">
                     <Image
-                      className="animated slider-1-1"
-                      src="/assets/images/banner/banner-1.png"
+                      className="animated slider-1-1 object-cover h-[252px] w-[472px]"
+                      src={slide?.image || `/assets/images/banner/banner-1.png`}
                       alt="Watch"
                       width={472}
                       height={252}

@@ -136,7 +136,23 @@
 /* Header */
 
 .nav-menu a {
-  @apply text-base font-title font-normal text-slate-500 px-4 py-3 ease-in duration-100 hover:text-primary;
+  @apply text-base font-title font-normal text-slate-500  ease-in duration-100 hover:text-primary;
+}
+
+/* since nested groupes are not supported we have to use 
+     regular css for the nested dropdowns 
+  */
+.nav-nested-menu li > ul {
+  transform: translatex(100%) scale(0);
+}
+.nav-nested-menu li:hover > ul {
+  transform: translatex(101%) scale(1);
+}
+.nav-nested-menu li > a svg {
+  transform: rotate(-90deg);
+}
+.nav-nested-menu li:hover > a svg {
+  transform: rotate(-270deg);
 }
 
 .nav-search {
@@ -230,8 +246,7 @@
 }
 
 /* .product-details .meta-data span,  */
-.product-details .meta-data p
-{
+.product-details .meta-data p {
   @apply relative text-base text-slate-900;
 }
 

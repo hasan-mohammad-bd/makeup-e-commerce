@@ -73,12 +73,10 @@ const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
       <header className="header border-b border-slate-300 py-4">
         <div className="container">
           <div className="header-wrap flex justify-between items-center">
+            {/* Nav Items  */}
             {children}
             <div className="header-right flex justify-between items-center gap-6">
-              <div className="nav-search">
-                <Search />
-                {/* <NavItems /> */}
-              </div>
+              <Search />
               <div className="header-actions flex gap-4">
                 <Link href="/dashboard/my-wishlist" className="single-action">
                   <HiOutlineHeart size={24} />

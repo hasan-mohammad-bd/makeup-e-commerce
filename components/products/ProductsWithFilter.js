@@ -4,6 +4,7 @@ import SortSelect from "@/components/elements/SortSelect";
 import ProductList from "./ProductList";
 import { fetchData } from "@/utils/fetchData";
 import PaginationWithSummery from "../PaginationWithSummery";
+import NoProducts from "./NoProducts";
 
 const ProductsWithFilter = async ({ customSearchParams = {} }) => {
   const params = new URLSearchParams(customSearchParams);
@@ -25,7 +26,7 @@ const ProductsWithFilter = async ({ customSearchParams = {} }) => {
           <SortSelect />
         </div>
       </div>
-      <ProductList products={products} />
+      {products?.length ? <ProductList products={products} /> : <NoProducts />}
       <PaginationWithSummery meta={meta} totalItemsShowing={products?.length} />
     </div>
   );

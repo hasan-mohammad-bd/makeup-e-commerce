@@ -2,6 +2,11 @@
   "Index": {
     "title": "ওহে বিশ্ব!"
   },
+  "homepage": {
+    "navbar": {
+      "moreBtn": "আরোও"
+    }
+  },
   "contact-us": {
     "breadcrumb": {
       "home": "হোম",

@@ -2,6 +2,11 @@
   "Index": {
     "title": "Hello world!"
   },
+  "homepage": {
+    "navbar": {
+      "moreBtn": "More"
+    }
+  },
   "contact-us": {
     "breadcrumb": {
       "home": "Home",
