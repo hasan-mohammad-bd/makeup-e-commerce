@@ -56,11 +56,13 @@ const OrderReviewCard = ({ sellReview }) => {
                   alt="product"
                   height={80}
                   width={80}
-                  className="h-20 w-20"
+                  className="h-20 w-20 rounded-lg"
                 />
               </div>
               <div className="flex flex-col gap-1 w-full">
-                <h4>{product.product_name}</h4>
+                <h4 className="product-title overflow-text">
+                  {product.product_name}
+                </h4>
                 <div className="flex products-center justify-between text-sm">
                   {product.color && product.size && (
                     <div className="flex items-center gap-3">

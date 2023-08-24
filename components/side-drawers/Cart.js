@@ -31,7 +31,7 @@ const Cart = () => {
         ১৫০০ টাকার উপের অর্ডার করেল ডেলিভারি চার্জ ফ্রী! সারাদেশে ক্যাশ অন
         ডেলিভারি।
       </div>
-      <div className="p-3 flex flex-col h-[77%]">
+      <div className="p-8 flex flex-col h-[77%]">
         <div className="overflow-y-auto">
           {cart.map((item) => (
             <CartCard key={item.id} item={item} />
@@ -55,13 +55,13 @@ const Cart = () => {
         <div className="text-center">
           <p className="">সর্বমোট:</p>
           <h3 className="text-slate-900 font-bold">
-            ৳ {getMultipliedColumnTotal(cart, "quantity", "new_price")}
+            {`৳ ${getMultipliedColumnTotal(cart, "quantity", "new_price")}`}
           </h3>
         </div>
         <Link
           href={"/checkout"}
           onClick={closeCart}
-          className="bg-primary py-3 px-6 w-full text-white rounded-lg text-center active:scale-95"
+          className="bg-primary py-3 px-6 w-[276px] text-white rounded-lg text-center active:scale-95"
         >
           <span className="mr-2">এখনই কিনুন</span>
           <HiArrowLongRight size={20} />

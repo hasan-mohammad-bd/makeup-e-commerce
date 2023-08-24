@@ -5,15 +5,19 @@ import React from "react";
 import { useGetOrderByIdQuery } from "@/store/features/api/orderAPI";
 
 import { HiArrowLongLeft } from "react-icons/hi2";
+import { FaCloudDownloadAlt } from "react-icons/fa";
 import OrderTracking from "./OrderTracking";
 import SaleProductCard from "./SaleProductCard";
 import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
 import { getBdFormattedDate } from "@/utils/formatDate";
+import { setGlobalLoader } from "@/store/features/commonSlice";
+import handleSSLOrderPayLater from "@/utils/sslPay";
+import { useDispatch } from "react-redux";
 
 const OrderDetail = ({ params }) => {
   const { order_id } = params;
+  const dispatch = useDispatch();
   const { data: orderData, isLoading } = useGetOrderByIdQuery(order_id);
-  // console.log(orderData);
   const sale = orderData?.sale || {};
   const saleProducts = orderData?.saleProducts || [];
 
@@ -29,7 +33,7 @@ const OrderDetail = ({ params }) => {
         </Link>
       </div>
       <div className="content bg-slate-200 text-slate-700 rounded-lg p-5">
-        <OrderTracking orderData={orderData} />
+        <OrderTracking orderData={orderData} isLoading={isLoading} />
         <div className="bg-white rounded-lg p-4 mt-5">
           <h3 className="text-xl font-bold font-title mb-4">প্রডাক্টগুলো</h3>
           {isLoading ? (
@@ -46,7 +50,7 @@ const OrderDetail = ({ params }) => {
             <ItemsListLoader numItems={1} viewBoxWidth={900} />
           ) : (
             <div className="flex gap-6">
-              <div className="bg-slate-100 flex justify-center items-center p-5">
+              <div className="bg-slate-100 rounded-xl flex justify-center items-center p-5">
                 <Image
                   src={"/assets/icons/location/located-pin.svg"}
                   height={36}
@@ -106,14 +110,36 @@ const OrderDetail = ({ params }) => {
                         : "text-green-500 bg-green-100"
                     }`}
                   >
-                    {sale.due_amount > 0 ? "বাকি" : "পরিশোধ"}
+                    {sale.due_amount > 0
+                      ? sale.payment_type !== "COD"
+                        ? "পেমেন্ট অসম্পূর্ণ"
+                        : "বাকি"
+                      : "পরিশোধ"}
                   </span>
                 </p>
                 <p>৳{sale.due_amount}</p>
               </div>
-              <button className="bg-slate-200 p-3 w-full my-3 rounded-lg">
-                ইনভয়েস ডাউনলোড করুন
-              </button>
+              {sale.due_amount > 0 && sale.payment_type !== "COD" ? (
+                <button
+                  onClick={() =>
+                    handleSSLOrderPayLater(sale.id, (loading) =>
+                      dispatch(setGlobalLoader(loading))
+                    )
+                  }
+                  className="w-full bg-primary py-2 px-4 mb-3 mt-5 text-white rounded-lg text-center active:scale-95"
+                >
+                  পেমেন্ট করুন
+                </button>
+              ) : (
+                <a
+                  target="_blank"
+                  href={`${process.env.serverBaseUrl}/in/${sale.customer.id}/${sale.id}/sale`}
+                  className="bg-slate-200 p-3 block text-center hover:text-primary w-full mb-3 mt-5 rounded-lg"
+                >
+                  <FaCloudDownloadAlt size={24} className="mr-2" /> ইনভয়েস
+                  ডাউনলোড করুন
+                </a>
+              )}
             </>
           )}
         </div>

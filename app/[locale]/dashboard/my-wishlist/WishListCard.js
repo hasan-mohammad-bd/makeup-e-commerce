@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import { useRemoveFromWishListMutation } from "@/store/features/api/wishListAPI";
 import { addToCart, addToSelected } from "@/store/features/cartSlice";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { getSlicedText } from "@/utils/formatText";
 import noImage from "@/public/assets/images/no-image.png";
 
 const WishListCard = ({ product }) => {
@@ -47,7 +46,7 @@ const WishListCard = ({ product }) => {
 
   // console.log(product);
   return (
-    <div className="relative px-3 py-4 bg-white shadow rounded-lg mb-3">
+    <div className="relative px-3 py-4 bg-white border border-slate-200 rounded-xl mb-3">
       <button
         className="absolute right-1.5 top-1 bg-transparent text-red-500"
         onClick={() => handleDelete(id)}
@@ -80,9 +79,11 @@ const WishListCard = ({ product }) => {
           </Link>
           <Link
             href={`/products/${slug}`}
-            className={`${stockOut ? "opacity-50" : ""}`}
+            className={`${
+              stockOut ? "opacity-50" : ""
+            } product-title overflow-text`}
           >
-            {getSlicedText(product_name, 100)}
+            {product_name}
           </Link>
           <div className="flex justify-between items-center">
             <div

@@ -32,16 +32,16 @@ const NavItems = async () => {
             <div key={category.id} className="group inline-block">
               <Link
                 href={`/categories/${category.slug}`}
-                className="px-2 py-3 bg-white rounded-sm flex items-center"
+                className="px-2 py-4 bg-white rounded-sm flex items-center"
               >
                 {category.category_name}
               </Link>
               {category.child_categories.length ? (
-                <ul className="nav-nested-menu z-20 bg-white border rounded-lg transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-[8rem] py-2">
+                <ul className="py-2 box-border nav-nested-menu z-20 bg-white border rounded-lg transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-[12rem]">
                   {category.child_categories.map((subCategory) => (
                     <li
                       key={subCategory.id}
-                      className="rounded-sm relative px-3 py-1 hover:bg-gray-100"
+                      className="rounded-sm relative p-3 pl-5 hover:bg-gray-100"
                     >
                       <Link
                         href={`/categories/${subCategory.slug}`}
@@ -63,13 +63,16 @@ const NavItems = async () => {
                         ) : null}
                       </Link>
                       {subCategory.child_categories.length ? (
-                        <ul className="bg-white border rounded-lg py-2 absolute top-0 right-0 transition duration-150 ease-in-out origin-top-left min-w-[8rem]">
+                        <ul className="bg-white border rounded-lg px-2 absolute top-0 right-0 transition duration-150 ease-in-out origin-top-left min-w-[12rem]">
                           {subCategory.child_categories.map((childCategory) => (
                             <li
                               key={childCategory.id}
-                              className="px-3 py-1 hover:bg-gray-100"
+                              className="p-3 hover:bg-gray-100"
                             >
-                              <Link href={`/categories/${childCategory.slug}`}>
+                              <Link
+                                href={`/categories/${childCategory.slug}`}
+                                className="w-full text-left flex items-center outline-none focus:outline-none"
+                              >
                                 {childCategory.category_name}
                               </Link>
                             </li>
@@ -83,7 +86,7 @@ const NavItems = async () => {
             </div>
           ))}
           <Link
-            href={`/categories`}
+            href={`/products`}
             className="px-2 py-3 bg-white rounded-sm flex items-center"
           >
             More

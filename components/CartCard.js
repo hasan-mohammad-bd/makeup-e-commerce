@@ -1,15 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { FiMinus, FiPlus } from "react-icons/fi";
-import { MdDeleteSweep } from "react-icons/md";
+import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import * as cartActions from "@/store/features/cartSlice";
-import { getSlicedText } from "@/utils/formatText";
 import noImage from "@/public/assets/images/no-image.png";
+import { getFractionFixed } from "@/utils/formatNumber";
+import Link from "next/link";
 
 const CartCard = ({ item }) => {
   const {
+    slug,
     brand,
     product_name,
     new_price,
@@ -26,24 +27,31 @@ const CartCard = ({ item }) => {
 
   const dispatch = useDispatch();
   return (
-    <div className="relative cart-card p-3 bg-white shadow rounded-lg mb-3">
+    <div className="relative cart-card p-4 bg-white border border-slate-200 rounded-xl mb-3">
       <button
-        className="absolute right-1.5 top-1 bg-transparent text-red-500"
+        className="absolute right-4 top-4 bg-transparent text-red-500"
         onClick={() => dispatch(cartActions.removeFromCart(cartId))}
       >
-        <MdDeleteSweep />
+        <FiTrash2 />
       </button>
       <div className="flex gap-2">
         <Image
           src={image || noImage}
           alt="product"
-          height={84}
-          width={84}
-          sizes="84px"
+          height={80}
+          width={80}
+          className="h-20 w-20 rounded-lg"
         />
         <div className="flex flex-col justify-between">
           <h5 className="text-primary">{brand?.brand_name || "No Brand"}</h5>
-          <h4>{getSlicedText(product_name, 50)}</h4>
+          <h2>
+            <Link
+              href={`/products/${slug}`}
+              className="product-title text-base font-semibold text-slate-900 font-body overflow-text"
+            >
+              {product_name}
+            </Link>
+          </h2>
           <div className="flex gap-3 products-center items-center">
             <h3 className="text-xl text-red-500">৳ {new_price}</h3>
             {typeof discount_percentage === "number" &&
@@ -51,7 +59,7 @@ const CartCard = ({ item }) => {
               <>
                 <del className="text-xl text-slate-300">৳ {old_price}</del>
                 <div className="rounded-full px-3 text-sm py-1 text-white bg-red-500">
-                  -{discount_percentage.toFixed(2)}% OFF
+                  -{getFractionFixed(discount_percentage)}% OFF
                 </div>
               </>
             ) : null}
@@ -83,7 +91,7 @@ const CartCard = ({ item }) => {
             </>
           ) : null}
         </div>
-        <div className="flex products-center gap-3 text-slate-900">
+        <div className="flex items-center products-center gap-3 text-slate-900">
           <button
             className="bg-transparent border border-primary rounded px-1"
             onClick={() => dispatch(cartActions.addQuantity(cartId))}

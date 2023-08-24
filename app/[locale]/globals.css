@@ -96,6 +96,7 @@
 .overflow-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  /* -webkit-line-clamp: 1; */
   @apply overflow-y-hidden text-ellipsis;
 }
 

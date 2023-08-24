@@ -10,6 +10,7 @@ import { HiArrowLongRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import ProductVariantSelect from "../products/ProductVariantSelect";
 import noImage from "@/public/assets/images/no-image.png";
+import { getFractionFixed } from "@/utils/formatNumber";
 
 const ProductSelect = () => {
   const { selectedProduct } = useSelector((state) => state.cart);
@@ -69,7 +70,8 @@ const ProductSelect = () => {
                     ৳ {selectedProduct?.old_price}
                   </del>
                   <div className="rounded-full px-3 text-sm py-1 text-white bg-red-500">
-                    -{selectedProduct?.discount_percentage.toFixed(2)}% OFF
+                    -{getFractionFixed(selectedProduct?.discount_percentage)}%
+                    OFF
                   </div>
                 </>
               ) : null}

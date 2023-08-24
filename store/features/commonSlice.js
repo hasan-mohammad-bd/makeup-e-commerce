@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isGlobalLoading: false,
+  isFilterPanelOpen: false,
 };
 
 const commonSlice = createSlice({
@@ -11,9 +12,12 @@ const commonSlice = createSlice({
     setGlobalLoader: (state, action) => {
       state.isGlobalLoading = action.payload;
     },
+    toggleFilterPanel: (state) => {
+      state.isFilterPanelOpen = !state.isFilterPanelOpen;
+    },
   },
 });
 
-export const { setGlobalLoader } = commonSlice.actions;
+export const { setGlobalLoader, toggleFilterPanel } = commonSlice.actions;
 
 export default commonSlice.reducer;

@@ -36,7 +36,7 @@ const CategorySlider = ({ categories }) => {
                 width={116}
                 height={78}
                 //   style={{ width: "auto", height: "auto" }}
-                className="w-[116px] h-[78px] object-contain"
+                className="w-[116px] h-[78px] object-contain hover:scale-110"
               />
             </Link>
             <Link

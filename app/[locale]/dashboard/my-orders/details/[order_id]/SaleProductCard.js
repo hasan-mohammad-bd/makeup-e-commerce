@@ -1,23 +1,30 @@
 "use client";
 import Image from "next/image";
 import noImage from "@/public/assets/images/no-image.png";
-import { getSlicedText } from "@/utils/formatText";
+import Link from "next/link";
 
 const SaleProductCard = ({ saleProduct }) => {
   return (
-    <div className="px-3 py-2 bg-white rounded-2xl border-b border-slate-200">
+    <div className="px-3 py-2 bg-white border-b border-slate-200">
       <div className={`flex gap-4`}>
         <div className="">
           <Image
             src={saleProduct?.product?.image || noImage}
             alt="product"
-            height={96}
-            width={96}
-            className="h-24 w-24"
+            height={80}
+            width={80}
+            className="h-20 w-20 rounded-lg"
           />
         </div>
         <div className="flex flex-col gap-2 w-full">
-          <h4>{getSlicedText(saleProduct.product.product_name, 100)}</h4>
+          <h2>
+            <Link
+              href={`/products/${saleProduct.product.slug}`}
+              className="product-title text-base font-semibold text-slate-900 font-body overflow-text"
+            >
+              {saleProduct.product.product_name}
+            </Link>
+          </h2>
           {saleProduct?.product_variant && (
             <div className="flex text-sm items-center gap-3">
               <div className="px-2 border border-slate-300 rounded-md">

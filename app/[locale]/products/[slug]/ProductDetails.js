@@ -5,8 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { TbTag } from "react-icons/tb";
-import { IoCall, IoCopy } from "react-icons/io5";
 import ThumbSlider from "@/components/elements/sliders/ThumbSlider";
 import { getSlicedText } from "@/utils/formatText";
 import DescriptionViewer from "@/components/DescriptionViewer";
@@ -14,6 +12,7 @@ import { addToCart } from "@/store/features/cartSlice";
 import ProductVariantSelect from "@/components/products/ProductVariantSelect";
 import ActiveLink from "@/components/elements/ActiveLink";
 import { Rating } from "react-simple-star-rating";
+import { formatLongNumber, getFractionFixed } from "@/utils/formatNumber";
 
 // ** Import Icon
 import {
@@ -22,6 +21,8 @@ import {
   HiOutlineShoppingCart,
   HiOutlineArrowLongRight,
 } from "react-icons/hi2";
+import { TbTag } from "react-icons/tb";
+import { IoCall, IoCopy } from "react-icons/io5";
 
 const ProductDetails = ({ children, product, tabItems }) => {
   const [selectedVariant, setSelectedVariant] = useState(null);
@@ -101,15 +102,16 @@ const ProductDetails = ({ children, product, tabItems }) => {
                     readonly
                     size={24}
                   />
-                  <span>{product?.averate_rating || 5}</span>
+                  <span>{getFractionFixed(product?.averate_rating || 5)}</span>
                 </div>
-                <p>{product?.total_rating || 0} রেটিং</p>
+                <p>{formatLongNumber(product?.total_rating)} রেটিং</p>
                 <p>
                   <HiChatBubbleLeftRight
                     size={20}
                     className="text-secondary-700"
                   />{" "}
-                  {product?.toptal_question_answer || 0} প্রশ্ন এবং উত্তর
+                  {formatLongNumber(product?.toptal_question_answer || 0)}{" "}
+                  প্রশ্ন এবং উত্তর
                 </p>
                 <p>
                   <HiShare size={20} /> শেয়ার করুন
@@ -131,7 +133,7 @@ const ProductDetails = ({ children, product, tabItems }) => {
                       {product?.old_price ? `$ ${product?.old_price}` : "0.00"}
                     </del>
                     <span className="discount inline-block text-base font-semibold font-title text-white bg-red-500 rounded-md py-1 px-2">
-                      - {product?.discount_percentage?.toFixed(2)}%
+                      - {getFractionFixed(product?.discount_percentage)}%
                     </span>
                   </>
                 ) : null}

@@ -1,53 +1,63 @@
 import React from "react";
-import { HiCheck } from "react-icons/hi";
+import OrderStep from "./OrderStep";
+import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
 
-export default function OrderTracking({ orderData }) {
-  // console.log(orderData);
+export default function OrderTracking({ orderData, isLoading }) {
+  const { seleStatus: saleStatus } = orderData || {};
+  // console.log(saleStatus);
   return (
     <div className="bg-white rounded-lg min-h-[300px] p-5">
       <h3 className="text-xl font-bold font-title">পার্সেল ট্র্যাকিং</h3>
       <div className="pl-2 pt-4">
-        <ol class="relative text-slate-600">
-          <li class="pb-10 pl-6 border-l border-dashed border-slate-300">
-            <div class="absolute flex items-center justify-center w-6 h-6 bg-slate-400 rounded-full -left-3"></div>
-            <div className="ml-3">
-              <h3 class="font-title font-bold mb-2">প্যাকি সম্পন্ন</h3>
-              <p>রাইডার ডেলিভারির জন্য আপনার প্রডাক্ট তুলে নিয়েছে</p>
-            </div>
-          </li>
-          <li class="pb-10 pl-6 border-l border-dashed border-slate-300">
-            <div class="absolute flex items-center justify-center w-6 h-6 bg-slate-400 rounded-full -left-3"></div>
-            <div className="ml-3">
-              <h3 class="font-title font-bold mb-2">প্যাকিং</h3>
-              <p>আপনি আপনার প্রডাক্ট হাতে পেয়েছেন</p>
-            </div>
-          </li>
-          <li class="pb-10 pl-6 border-l border-slate-300">
-            <span class="absolute flex items-center justify-center w-6 h-6 bg-primary rounded-full -left-3">
-              <HiCheck className="text-white" />
-            </span>
-            <h3 class="text-primary">১২ এপ্রিল, ২০২৩ ০১:৫৫</h3>
-            <div className="bg-slate-200 p-4 rounded-lg mt-4">
-              <h3 className="font-title font-bold mb-2">প্রসেসিং</h3>
-              <p>
-                আপনার অর্ডার পেয়েছি, আমাদের প্রতিনিধি শিঘ্রই অর্ডার নিশ্চিত করবে
-              </p>
-            </div>
-          </li>
-          <li class="pb-3 pl-6 border-l border-slate-300">
-            <span class="absolute flex items-center justify-center w-6 h-6 bg-primary rounded-full -left-3">
-              <HiCheck className="text-white" />
-            </span>
-            <h3 class="text-primary">১২ এপ্রিল, ২০২৩ ১২:৩৩</h3>
-            <div className="bg-slate-200 p-4 rounded-lg mt-4">
-              <h3 className="font-title font-bold mb-2">অর্ডার প্লেসড</h3>
-              <p>
-                আপনার অর্ডার সফলভাবে সততা স্টোরে এ প্লেসড হয়েছে৷ আপনার অর্ডার
-                আইডি #{orderData?.sale?.invoice_no}
-              </p>
-            </div>
-          </li>
-        </ol>
+        {isLoading ? (
+          <ItemsListLoader numItems={3} noImage={true} viewBoxWidth={900} />
+        ) : (
+          <ol class="relative text-slate-600">
+            <OrderStep
+              date={saleStatus?.Complete?.created_at}
+              title={"সম্পন্ন হয়েছে"}
+              message={`আপনি আপনার প্রডাক্ট হাতে পেয়েছেন`}
+              isComplete={saleStatus?.Complete}
+            />
+            <OrderStep
+              date={saleStatus?.Delivery?.created_at}
+              title={"ডেলিভারিতে"}
+              message={`আপনার পণ্য ডেলিভারির জন্য দেওয়া হয়েছে`}
+              isComplete={saleStatus?.Delivery}
+            />
+            <OrderStep
+              date={saleStatus?.PackingCompleat?.created_at}
+              title={"প্যাকি সম্পন্ন"}
+              message={`আপনার প্রডাক্টি প্যাক করা হয়েছে`}
+              isComplete={saleStatus?.PackingCompleat}
+            />
+            <OrderStep
+              date={saleStatus?.Packing?.created_at}
+              title={"প্যাকিং"}
+              message={`আমরা আপনার প্রডাক্টি প্যাক করছি`}
+              isComplete={saleStatus?.Packing}
+            />
+            <OrderStep
+              date={saleStatus?.Confirm?.created_at}
+              title={"নিশ্চিত"}
+              message={`আপনার অর্ডার নিশ্চিত করা হয়েছে`}
+              isComplete={saleStatus?.Confirm}
+            />
+            <OrderStep
+              date={saleStatus?.Processing?.created_at}
+              title={"প্রসেসিং"}
+              message={`আপনার অর্ডার পেয়েছি, আমাদের প্রতিনিধি শিঘ্রই অর্ডার নিশ্চিত করবে`}
+              isComplete={saleStatus?.Processing}
+            />
+            <OrderStep
+              date={saleStatus?.Pending?.created_at}
+              title={"অর্ডার প্লেসড"}
+              message={`আপনার অর্ডার সফলভাবে সততা স্টোরে এ প্লেসড হয়েছে৷ আপনার অর্ডার
+            আইডি #${orderData?.sale?.invoice_no}`}
+              isComplete={saleStatus?.Pending}
+            />
+          </ol>
+        )}
       </div>
     </div>
   );

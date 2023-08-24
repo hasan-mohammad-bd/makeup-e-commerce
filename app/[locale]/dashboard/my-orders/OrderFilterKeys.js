@@ -1,6 +1,6 @@
 const orderFilterKeys = {
   pending: "Pending",
-  confirmed: "Processing",
+  confirmed: "Confirm",
   inDeliver: "Delivery",
   complete: "Complete",
   cancelled: "Cancelled",

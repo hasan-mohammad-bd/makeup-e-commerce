@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
-const DrawerRight = ({ title, children, show, setShow }) => {
+const DrawerLeft = ({ title, children, show, setShow }) => {
   return (
     <>
       {/* Backdrop */}
@@ -14,8 +14,8 @@ const DrawerRight = ({ title, children, show, setShow }) => {
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 z-50 w-[31rem] h-screen overflow-y-auto transition-transform ease-in-out duration-300 transform ${
-          show ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 left-0 z-50 w-[25rem] h-screen overflow-y-auto transition-transform ease-in-out duration-300 transform ${
+          show ? "translate-x-0" : "-translate-x-full"
         } bg-white`}
         tabIndex="-1"
       >
@@ -37,7 +37,7 @@ const DrawerRight = ({ title, children, show, setShow }) => {
             children
           ) : (
             <p className="text-slate-500 text-lg leading-relaxed">
-              This is a regular side drawer
+              This is a regular left side drawer
             </p>
           )}
         </div>
@@ -46,4 +46,4 @@ const DrawerRight = ({ title, children, show, setShow }) => {
   );
 };
 
-export default DrawerRight;
+export default DrawerLeft;

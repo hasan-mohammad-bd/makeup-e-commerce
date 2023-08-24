@@ -1,10 +1,12 @@
 import React from "react";
-import Filter from "@/components/Filter";
+// import Filter from "@/components/Filter";
 import SortSelect from "@/components/elements/SortSelect";
 import ProductList from "./ProductList";
 import { fetchData } from "@/utils/fetchData";
 import PaginationWithSummery from "../PaginationWithSummery";
 import NoProducts from "./NoProducts";
+import FilterMenu from "../FilterMenu";
+import FilterPanel from "../side-drawers/FilterPanel";
 
 const ProductsWithFilter = async ({ customSearchParams = {} }) => {
   const params = new URLSearchParams(customSearchParams);
@@ -17,9 +19,10 @@ const ProductsWithFilter = async ({ customSearchParams = {} }) => {
 
   return (
     <div className="container mb-20">
-      <div className="toolbar grid grid-cols-5 gap-5 my-5">
+      <div className="toolbar grid grid-cols-5 gap-5 my-5 border">
         <div className="relative col-span-1">
-          <Filter />
+          <FilterMenu />
+          <FilterPanel />
         </div>
         <div className="col-span-4 flex justify-between items-center bg-slate-50 rounded-xl px-4 py-3">
           <p>এখানে {meta?.total} টি প্রডাক্ট আছে</p>

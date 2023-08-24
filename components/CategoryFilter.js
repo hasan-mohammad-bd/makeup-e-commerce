@@ -1,90 +1,180 @@
-'use client'
+"use client";
 
-import { useEffect } from "react";
+import { useGetCategoriesQuery } from "@/store/features/api/categoriesAPI";
+import { usePathname, useRouter } from "next/navigation";
+import { IoChevronBackOutline } from "react-icons/io5";
 
-const CategoryFilter = ({ setFilters, updateProductFilters, checkedElms }) => {
-    
-    const categories = [
-        {   
-            label: "একশন ক্যামেরা (২৩২)",
-            value: "action-camera"},
-        {
-            label: "হেডফোন (১৩১)",
-            value: "headphone"
-        },
-        {
-            label: "স্মার্ট ওয়াচ (৫৩২)",
-            value: "smart-watch"
-        },
-        {
-            label: "স্মার্ট ইলেকট্রনিক্স (৬৭৩)",
-            value: "smart-elec"
-        },
-        {
-            label: "পাওয়ার ব্যাংক (৭৭)",
-            value: "power-bank"
-        },
-    ];
+const CategoryFilter = ({
+  setFilters,
+  selectedCategory,
+  setSelectedCategory,
+  mainCategory,
+  setMainCategory,
+  subCategory,
+  setSubCategory,
+  childCategory,
+  setChildCategory,
+}) => {
+  const { data: categoriesData } = useGetCategoriesQuery();
+  const categories = categoriesData?.data || [];
 
-    const handleChange = (e) => {
+  const router = useRouter();
+  let pathname = usePathname();
 
-        if(e.target.checked){
-            setFilters(prev => (
-                {
-                    ...prev,
-                    [e.target.name]: prev[e.target.name] ? [...prev[e.target.name], e.target.value] : [e.target.value] 
-                }
-            ))
-        } else {
-            setFilters(prev => (
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    router.push(pathname + "?category_id=" + category.id);
+  };
 
-                {
-                    ...prev,
-                    [e.target.name]: prev[e.target.name]?.filter(item => item !== e.target.value)
-                }
-                
-            ))
-        }
-        
-    }
+  const handleMainCategorySelect = (category) => {
+    setMainCategory(category);
+    setSubCategory({});
+    setChildCategory({});
+    handleCategoryChange(category);
+  };
 
-    // const [selectedSizes, setSizes] = useState([]);
-    // const [active, setActive] = useState(0);
+  const handleSubCategorySelect = (category) => {
+    setSubCategory(category);
+    setChildCategory({});
+    handleCategoryChange(category);
+  };
+  const handleChildCategorySelect = (category) => {
+    setChildCategory(category);
+    handleCategoryChange(category);
+  };
 
-    // useEffect(() => {
-    //     const filters = {
-    //         sizes: selectedSizes,
-    //     };
+  const resetCategoriesSelect = () => {
+    setMainCategory({});
+    setSubCategory({});
+    setChildCategory({});
+    setSelectedCategory(null);
+    router.push(pathname);
+  };
 
-    //     updateProductFilters(filters);
-    // }, [selectedSizes]);
-
-    // const handleClick = (i, target) => {
-    //     setSizes(target);
-    //     setActive(active == i ? 0 : i);
-    // };
-
-    useEffect(() => {
-
-    }, [])
-
-    return (
+  const renderCategories = (categoryList) => {
+    if (mainCategory?.id && mainCategory?.child_categories?.length > 0) {
+      return (
         <>
-            <div className="pr-5">
-                <h6 className="text-sm font-bold text-slate-900 border-b border-slate-200 pb-3">ক্যাটাগরি থেকে কেনাকাটা</h6>
-                <div className="category-filter">
-                    {categories?.map((cat, i) => (
-                        <div className="input-grp mt-3" key={i}>
-                            <label className="flex items-center gap-2 text-base text-slate-700 cursor-pointer" htmlFor={`cat-${i}`}>
-                                <input type="checkbox" id={`cat-${i}`} name="category" value={cat.value} ref={element => checkedElms.current.push(element)} onChange={handleChange} />
-                                {cat.label}
-                            </label>
-                        </div>
-                    ))}
-                </div>
-            </div>
+          <button
+            className={`cursor-pointer hover:font-bold`}
+            onClick={() => resetCategoriesSelect()}
+          >
+            <IoChevronBackOutline />
+            All Categories
+          </button>
+          <ul className="space-y-2">
+            <li>
+              <button
+                className={`cursor-pointer pl-4  ${
+                  selectedCategory.id === mainCategory.id ? "font-bold" : ""
+                }`}
+                onClick={() => handleMainCategorySelect(mainCategory)}
+              >
+                <IoChevronBackOutline />
+                {mainCategory.category_name}
+              </button>
+
+              {/* sub categories  */}
+              <ul className="pl-8 space-y-2">
+                {subCategory?.id &&
+                subCategory?.child_categories?.length > 0 ? (
+                  <li>
+                    <button
+                      className={`cursor-pointer  ${
+                        selectedCategory.id === subCategory.id
+                          ? "font-bold"
+                          : ""
+                      }`}
+                      onClick={() => handleSubCategorySelect(subCategory)}
+                    >
+                      <IoChevronBackOutline />
+                      {subCategory.category_name}
+                    </button>
+                    {/* child categories  */}
+                    <ul className="pl-8 space-y-2">
+                      {childCategory?.id ? (
+                        <li>
+                          <button
+                            className={`cursor-pointer  ${
+                              selectedCategory.id === childCategory.id
+                                ? "font-bold"
+                                : ""
+                            }`}
+                            onClick={() =>
+                              handleChildCategorySelect(childCategory)
+                            }
+                          >
+                            {childCategory.category_name}
+                          </button>
+                        </li>
+                      ) : (
+                        subCategory.child_categories.map((child) => (
+                          <li key={child.id}>
+                            <button
+                              className={`cursor-pointer  ${
+                                selectedCategory.id === child.id
+                                  ? "font-bold"
+                                  : ""
+                              }`}
+                              onClick={() => handleChildCategorySelect(child)}
+                            >
+                              {child.category_name}
+                            </button>
+                          </li>
+                        ))
+                      )}
+                    </ul>
+                  </li>
+                ) : (
+                  mainCategory.child_categories.map((subCategory) => (
+                    <li key={subCategory.id} className="pl-4">
+                      <button
+                        className={`cursor-pointer  ${
+                          selectedCategory.id === subCategory.id
+                            ? "font-bold"
+                            : ""
+                        }`}
+                        onClick={() => handleSubCategorySelect(subCategory)}
+                      >
+                        {subCategory.category_name}
+                      </button>
+                    </li>
+                  ))
+                )}
+              </ul>
+            </li>
+          </ul>
         </>
+      );
+    }
+    return (
+      <ul className="space-y-2">
+        {categoryList.map((category) => (
+          <li key={category.id}>
+            <button
+              className={`cursor-pointer ${
+                selectedCategory?.id === category.id ? "font-bold" : ""
+              }`}
+              onClick={() => handleMainCategorySelect(category)}
+            >
+              {category.category_name}
+            </button>
+          </li>
+        ))}
+      </ul>
     );
+  };
+
+  return (
+    <>
+      <div className="pr-5">
+        <h6 className="text-sm font-bold text-slate-900 border-b border-slate-200 pb-3">
+          ক্যাটাগরি থেকে কেনাকাটা
+        </h6>
+        <div className="category-filter">{renderCategories(categories)}</div>
+      </div>
+    </>
+  );
 };
 
 export default CategoryFilter;

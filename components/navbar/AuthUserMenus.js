@@ -60,15 +60,15 @@ export default function AuthUserMenus({ togglePopover }) {
             {navItems.map((item) => (
               <li
                 key={item.path}
-                className={`flex items-center py-3 px-4 rounded-lg w-full font-bold`}
+                className={`flex items-center py-3 px-4 rounded-lg w-full`}
               >
                 <Link
                   href={item.path}
                   onClick={() => togglePopover()}
-                  className="flex items-center space-x-2 group"
+                  className="flex items-center space-x-3 group"
                 >
                   <span
-                    className={`font-bold text-xl text-amber-400 group-hover:text-primary`}
+                    className={`group-hover:font-bold text-xl text-amber-400 group-hover:text-primary`}
                   >
                     {item.icon}
                   </span>
@@ -76,19 +76,19 @@ export default function AuthUserMenus({ togglePopover }) {
                 </Link>
               </li>
             ))}
-            <li
-              className={`flex items-center py-3 px-4 rounded-lg w-full font-bold`}
-            >
+            <li className={`flex items-center py-3 px-4 rounded-lg w-full`}>
               <button
-                className="flex items-center space-x-2 group"
+                className="flex items-center space-x-3 group"
                 onClick={handleLogout}
               >
                 <span
-                  className={`font-bold text-xl text-amber-400 group-hover:text-primary`}
+                  className={`hover:font-bold text-xl text-amber-400 group-hover:text-primary`}
                 >
                   <IoLogOut />
                 </span>
-                <span className="group-hover:text-primary">লগ-আউট</span>
+                <span className="group-hover:text-primary hover:font-bold">
+                  লগ-আউট
+                </span>
               </button>
             </li>
           </ul>

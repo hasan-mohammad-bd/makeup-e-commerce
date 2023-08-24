@@ -58,7 +58,7 @@ function OrderCard({ order }) {
   };
 
   return (
-    <div className="text-slate-900 p-4 rounded-lg bg-slate-100 my-4">
+    <div className="text-slate-900 p-4 rounded-xl bg-slate-100 hover:border hover:border-primary my-4">
       <div className="grid grid-cols-4 justify-between">
         <div>
           <h3 className="text-slate-500 mb-3">তারিখ</h3>
@@ -112,7 +112,7 @@ function OrderCard({ order }) {
         </h3>
         <Link
           href={`/dashboard/my-orders/details/${id}`}
-          className="text-slate-500"
+          className="text-slate-500 hover:text-primary"
         >
           বিস্তারিত দেখুন <HiArrowLongRight />
         </Link>

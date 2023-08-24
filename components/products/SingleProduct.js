@@ -2,10 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getSlicedText } from "@/utils/formatText";
 import Loader from "../elements/loaders/Loader";
+import { addToCart, addToSelected } from "@/store/features/cartSlice";
+import { useAddToWishListMutation } from "@/store/features/api/wishListAPI";
+import { formatLongNumber, getFractionFixed } from "@/utils/formatNumber";
 
 // ** Import Icon
 import { FaStar } from "react-icons/fa";
@@ -14,10 +18,6 @@ import {
   HiOutlineShoppingCart,
   HiArrowLongRight,
 } from "react-icons/hi2";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart, addToSelected } from "@/store/features/cartSlice";
-import { useAddToWishListMutation } from "@/store/features/api/wishListAPI";
-import { toast } from "react-toastify";
 
 const SingleProduct = ({ product, addToCompare }) => {
   const { user } = useSelector((state) => state.auth);
@@ -124,17 +124,19 @@ const SingleProduct = ({ product, addToCompare }) => {
                   href={`/products/${slug}`}
                   className="product-title text-base font-semibold text-slate-900 font-body overflow-text"
                 >
-                  {getSlicedText(product_name, 20)}
+                  {product_name}
                 </Link>
               </h2>
-              <div className="rating-result flex items-center gap-3 mb-4">
-                <div className="font-semibold text-slate-900 inline-flex gap-1 justify-center">
-                  {averate_rating || 0}
-                  <FaStar className="inline text-primary align-middle" />
-                </div>
-                <div className="font-semibold text-slate-900 inline-flex gap-1 justify-center">
-                  {total_rating === 0 ? "No Rating" : total_rating}
-                </div>
+              <div className="rating-result flex items-center gap-2 mb-4">
+                <span className="font-semibold text-slate-900">
+                  {getFractionFixed(averate_rating) || 0}{" "}
+                  <FaStar className="text-primary pb-1" />
+                </span>
+                <span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
+                  {total_rating === 0
+                    ? "No Rating"
+                    : formatLongNumber(total_rating)}
+                </span>
               </div>
               <div className="product-price mb-3 flex gap-2">
                 <span className="text-lg/[24px] font-semibold text-red-500">
@@ -147,7 +149,7 @@ const SingleProduct = ({ product, addToCompare }) => {
                       {old_price}
                     </del>
                     <span className="discount inline-block text-xs text-white bg-red-500 rounded-md py-1 px-1 ml-2">
-                      -{discount_percentage.toFixed(2)}%
+                      -{getFractionFixed(discount_percentage)}%
                     </span>
                   </>
                 ) : null}
