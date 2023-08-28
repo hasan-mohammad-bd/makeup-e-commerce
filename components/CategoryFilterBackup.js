@@ -4,7 +4,7 @@ import { useGetCategoriesQuery } from "@/store/features/api/categoriesAPI";
 import { usePathname, useRouter } from "next/navigation";
 import { IoChevronBackOutline } from "react-icons/io5";
 
-const CategoryFilter = ({
+const CategoryFilterBackup = ({
   setFilters,
   selectedCategory,
   setSelectedCategory,
@@ -22,8 +22,8 @@ const CategoryFilter = ({
   let pathname = usePathname();
 
   const handleCategoryChange = (category) => {
-    // setSelectedCategory(category);
-    router.push(`/categories/${category.slug}`);
+    setSelectedCategory(category);
+    router.push(pathname + "?category_id=" + category.id);
   };
 
   const handleMainCategorySelect = (category) => {
@@ -48,7 +48,7 @@ const CategoryFilter = ({
     setSubCategory({});
     setChildCategory({});
     setSelectedCategory(null);
-    router.push("/products");
+    router.push(pathname);
   };
 
   const renderCategories = (categoryList) => {
@@ -177,4 +177,4 @@ const CategoryFilter = ({
   );
 };
 
-export default CategoryFilter;
+export default CategoryFilterBackup;

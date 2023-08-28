@@ -26,10 +26,15 @@ const page = async ({ params, searchParams }) => {
     ...searchParams,
   };
 
+  // console.log(category);
+
   return (
     <>
       <div
-        className={`breadcrumb bg-[url('/assets/images/banner/pdctpage-banner.png')] bg-no-repeat bg-cover py-20`}
+        className="bg-no-repeat bg-cover w-full h-[240px] breadcrumb py-20"
+        style={{
+          backgroundImage: `url(${category?.image})`,
+        }}
       >
         <div className="container">
           <div className="text-center">
@@ -74,7 +79,7 @@ const page = async ({ params, searchParams }) => {
                 <div className="image flex items-center justify-center w-12 h-12 bg-amber-50 rounded-2xl">
                   <Link href={`/categories/${cat.slug}`}>
                     <Image
-                      src={cat?.image || noImage}
+                      src={cat?.icon || noImage}
                       alt={cat.category_name}
                       width={48}
                       height={31}
@@ -94,7 +99,10 @@ const page = async ({ params, searchParams }) => {
         </div>
       </div>
 
-      <ProductsWithFilter customSearchParams={customSearchParams} />
+      <ProductsWithFilter
+        customSearchParams={customSearchParams}
+        category={category}
+      />
     </>
   );
 };

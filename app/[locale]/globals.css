@@ -136,7 +136,8 @@
 
 /* Header */
 
-.nav-menu a {
+.nav-menu a,
+.nav-menu .menuBtn {
   @apply text-base font-title font-normal text-slate-500  ease-in duration-100 hover:text-primary;
 }
 

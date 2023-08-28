@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DrawerLeft from "../elements/DrawerLeft";
 import { toggleFilterPanel } from "@/store/features/commonSlice";
@@ -14,7 +14,9 @@ import PriceRangeSlider from "../elements/sliders/PriceRangeSlider";
 import ColorFilter from "../ColorFilter";
 import { useGetFilterOptionsByCategoryQuery } from "@/store/features/api/filterOptionsAPI";
 
-const FilterPanel = () => {
+const FilterPanel = ({ category }) => {
+  // console.log(category);
+
   //Drawer logics
   const dispatch = useDispatch();
   const { isFilterPanelOpen } = useSelector((state) => state.common);
@@ -56,6 +58,15 @@ const FilterPanel = () => {
     setBrandIds([]);
     setSelectedColors([]);
   };
+
+  useEffect(() => {
+    if (category) {
+      handleCategorySelect(category);
+      setMainCategory(category);
+      setSubCategory({});
+      setChildCategory({});
+    }
+  }, [category]);
 
   const removeFilter = (key, val) => {
     setProductFilters((prev) => ({

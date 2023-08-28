@@ -70,7 +70,7 @@ const Header = ({ totalCartItems, totalCompareItems, children, locale }) => {
 
   return (
     <>
-      <header className="header border-b border-slate-300 py-4">
+      <header className="relative header border-b border-slate-300 py-4">
         <div className="container">
           <div className="header-wrap flex justify-between items-center">
             {/* Nav Items  */}

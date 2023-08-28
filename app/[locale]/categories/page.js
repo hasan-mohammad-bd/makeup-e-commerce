@@ -37,7 +37,7 @@ const page = async () => {
                 className="category-img flex justify-center items-center w-[164px] h-[164px] bg-amber-50 rounded-full"
               >
                 <Image
-                  src={category?.image || noImage}
+                  src={category?.icon || noImage}
                   alt={category.category_name}
                   width={116}
                   height={78}

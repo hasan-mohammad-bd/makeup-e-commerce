@@ -31,7 +31,7 @@ const CategorySlider = ({ categories }) => {
               className="category-img flex justify-center items-center w-[164px] h-[164px] bg-white rounded-full"
             >
               <Image
-                src={category?.image || noImage}
+                src={category?.icon || noImage}
                 alt={category.category_name}
                 width={116}
                 height={78}
