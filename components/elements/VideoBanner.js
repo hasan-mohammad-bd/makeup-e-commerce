@@ -13,16 +13,12 @@ const VideoBanner = async () => {
   const settings =
     settingsRes.status === "fulfilled" ? settingsRes.value?.data || {} : {};
 
-  //   console.log(settings);
-
   return (
     <>
       <div
         className="bg-no-repeat bg-cover py-12"
         style={{
-          backgroundImage: `url(${
-            process.env.serverBaseUrl + "/" + settings.home_review_banner
-          })`,
+          backgroundImage: `url(${settings.home_review_banner})`,
         }}
       >
         <div className="content text-center">

@@ -3,18 +3,18 @@ import React, { useState } from "react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const slides = [1, 2, 3, 4, 5];
-
-export default function ReviewImageSlider() {
+export default function ReviewImageSlider({ images }) {
+  // console.log(review);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
-    <>
-      <div className="preview-slider grid mx-4 bg-slate-900 rounded-md">
+    <div className="w-[33rem]">
+      <div className="h-[31.25rem] preview-slider bg-slate-900 rounded-md">
         <Swiper
           style={{
             "--swiper-navigation-color": "#fff",
             "--swiper-pagination-color": "#fff",
+            "--swiper-navigation-size": "24px",
           }}
           loop={true}
           spaceBetween={10}
@@ -24,58 +24,48 @@ export default function ReviewImageSlider() {
           className="mySwiper2"
           direction="horizontal"
           slidesPerView={1}
-          breakpoints={{
-            0: {
-              direction: "horizontal",
-            },
-            768: {
-              direction: "horizontal",
-            },
-          }}
         >
-          {slides.map((slide, index) => (
+          {images.map((slide, index) => (
             <SwiperSlide key={index}>
-              <div className="h-[31.25rem] w-auto flex justify-center items-center">
+              <div className="w-full h-full flex justify-center items-center ">
                 <Image
-                  src={`https://picsum.photos/1920/1084`}
-                  alt=""
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  className="w-auto object-cover"
+                  src={slide.image}
+                  alt="slide"
+                  width={400}
+                  height={500}
+                  className="h-[31.25rem] w-[25rem]  object-contain"
                 />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
-      <div className="thumb-slider my-6 px-2">
+      <div className="thumb-slider mt-6">
         <Swiper
           onSwiper={setThumbsSwiper}
           loop={true}
           spaceBetween={10}
-          slidesPerView={4}
-          // freeMode={true}
+          slidesPerView={6}
           watchSlidesProgress={true}
           modules={[FreeMode, Navigation, Thumbs]}
           className="mySwiper"
           direction="horizontal"
         >
-          {slides.map((slide, index) => (
+          {images.map((slide, index) => (
             <SwiperSlide key={index}>
-              <div className="cursor-pointer flex justify-start items-center">
+              <div className="h-20 w-20">
                 <Image
-                  src={`/assets/images/shop/product-${index + 1}.png`}
-                  alt=""
-                  width={64}
-                  height={64}
-                  className="border border-transparent rounded-lg "
+                  src={slide.image}
+                  alt="thumb-slide"
+                  width={80}
+                  height={80}
+                  className="w-full h-full border border-transparent rounded-lg cursor-pointer bg-slate-100"
                 />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
-    </>
+    </div>
   );
 }

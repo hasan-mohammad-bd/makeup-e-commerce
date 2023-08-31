@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { RiCloseCircleFill } from "react-icons/ri";
 
@@ -8,9 +7,9 @@ export default function Modal({ showModal, setShowModal, title, children }) {
       {showModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className="relative w-auto my-6 mx-auto max-w-4xl">
               {/*content*/}
-              <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="border-0 rounded-2xl shadow-md relative flex flex-col w-full bg-white outline-none focus:outline-none overflow-hidden">
                 {/*header*/}
                 <div className="flex items-center justify-between px-5 py-1">
                   <h3 className="text-xl font-semibold text-slate-900">
@@ -24,7 +23,10 @@ export default function Modal({ showModal, setShowModal, title, children }) {
                   </button>
                 </div>
                 {/*body*/}
-                <div className="relative px-6 pb-6 flex-auto">
+                <div
+                  className="relative px-6 pb-6 overflow-y-auto max-h-[80vh] after:content-[attr(data-spacer)] after:block after:h-6"
+                  data-spacer=""
+                >
                   {children ? (
                     children
                   ) : (
@@ -36,7 +38,7 @@ export default function Modal({ showModal, setShowModal, title, children }) {
               </div>
             </div>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          <div className="opacity-40 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
     </>

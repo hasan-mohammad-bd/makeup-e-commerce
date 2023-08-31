@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 /**
  * The function `getBdFormattedDate` takes a date as input and returns the formatted date in the
  * Bengali (Bangladesh) locale.
@@ -7,6 +9,15 @@
  */
 export const getBdFormattedDate = (date) => {
   return new Date(date).toLocaleDateString("bn-BD");
+};
+
+/**
+ * The function `getFormattedDate` takes a date as input and returns it in the format "dd MMM yyyy".
+ * @param date - The `date` parameter is a string representing a date in any valid format.
+ * @returns a formatted date string in the format "dd MMM yyyy".
+ */
+export const getFormattedDate = (date) => {
+  return format(new Date(date), "dd MMM yyyy");
 };
 
 /**

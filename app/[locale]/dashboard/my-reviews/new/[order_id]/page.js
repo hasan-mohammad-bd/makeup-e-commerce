@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { AiFillSmile } from "react-icons/ai";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { HiArrowLongLeft } from "react-icons/hi2";
 import ReviewImagesUpload from "../ReviewImagesUpload";
@@ -16,6 +15,7 @@ import { getBdFormattedDate } from "@/utils/formatDate";
 import { Rating } from "react-simple-star-rating";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import EmojiSmile from "@/components/elements/svg/EmojiSmile";
 
 const AddReview = ({ params }) => {
   const { order_id } = params;
@@ -89,7 +89,11 @@ const AddReview = ({ params }) => {
         formData.append("product_id", product.product_id);
         formData.append("rating", ratings[index]);
         formData.append("comment", reviews[index]);
-        console.log(formData);
+        console.log(product.product_variant_id);
+        //Variant product
+        if (product.product_variant_id) {
+          formData.append("product_variant_id", product.product_variant_id);
+        }
         return createReview(formData);
       });
       await Promise.all(createPromises);
@@ -167,11 +171,12 @@ const AddReview = ({ params }) => {
                             allowFraction
                             onClick={(rating) => updateRating(index, rating)}
                             transition
+                            fillColor="#F59E0B"
                           />
                         </div>
                         <p>অসাধারণ</p>
                         <p className="text-primary">
-                          <AiFillSmile size={24} />
+                          <EmojiSmile />
                         </p>
                       </div>
                       {validationError && !ratings[index] && (

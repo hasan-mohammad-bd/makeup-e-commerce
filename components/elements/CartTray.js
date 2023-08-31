@@ -3,10 +3,12 @@
 import { useDispatch, useSelector } from "react-redux";
 
 // ** Import Icons
+import Image from "next/image";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { toggleCart } from "@/store/features/cartSlice";
 import { getMultipliedColumnTotal } from "@/utils/getTotal";
 import { BsCart3 } from "react-icons/bs";
+import cartImage from "@/public/assets/images/cart.gif";
 
 const CartTray = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -23,7 +25,13 @@ const CartTray = () => {
         onClick={handleCart}
       >
         <div className="icon bg-white border border-r-0 border-primary rounded-ss-lg px-1 text-center">
-          <BsCart3 size={40} className="text-primary m-3" />
+          <Image
+            src={cartImage}
+            width={56}
+            height={56}
+            alt="Cart Icon"
+            className="p-1 h-14 w-14"
+          />
         </div>
         <div className="content rounded-es-lg text-center">
           <p className="text-xs text-white">{cart?.length} আইটেম</p>

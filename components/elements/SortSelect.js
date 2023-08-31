@@ -1,31 +1,8 @@
 "use client";
-
-import { useCallback } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import useSelectURLQuery from "@/hooks/useSelectURLQuery";
 
 const SortSelect = () => {
-  const router = useRouter();
-  let pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  // Get a new searchParams string by merging the current
-  // searchParams with a provided key/value pair
-  const createQueryString = useCallback(
-    (name, value) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
-
-  const handleOptionChange = (e) => {
-    router.push(
-      pathname + "?" + createQueryString("sort_type", e.target.value)
-    );
-  };
-
+  const { handleSelectChange } = useSelectURLQuery();
   return (
     <>
       <div className="sort-by-product-wrap flex items-center gap-x-8 gap-y-4">
@@ -35,7 +12,7 @@ const SortSelect = () => {
         <div className="sort-by-dropdown-wrap">
           <select
             className="select w-72 text-base text-slate-900 bg-white border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-0"
-            onChange={(e) => handleOptionChange(e)}
+            onChange={(e) => handleSelectChange("sort_type", e.target.value)}
           >
             <option value="default">এলোমেলো</option>
             <option value="new">নতুন প্রডাক্ট</option>

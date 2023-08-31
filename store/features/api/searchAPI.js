@@ -7,12 +7,12 @@ const searchAPI = apiSlice.injectEndpoints({
       providesTags: ["popular-search"],
     }),
     getSearchHistories: builder.query({
-      query: (userId) => `search-histories?user_id=${userId}`,
+      query: (userId) => `search-histories?reference_id=${userId}`,
       providesTags: ["search-histories"],
     }),
     removeSearchHistory: builder.mutation({
       query: (payload) => ({
-        url: `search-histories-delete/${payload.historyId}/?user_id=${payload.userId}`,
+        url: `search-histories-delete/${payload.historyId}/?reference_id=${payload.userId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["search-histories"],

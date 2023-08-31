@@ -85,7 +85,7 @@ const SingleProduct = ({ product, addToCompare }) => {
     <>
       {!loading ? (
         <>
-          <div className="product-card-wrap bg-white border border-slate-200 rounded-xl">
+          <div className="product-card-wrap bg-white border border-slate-200 rounded-xl hover:border-primary">
             <div className="product-img-action-wrap relative">
               <div className="product-img p-2 pb-0">
                 <Link href="/products/[slug]" as={`/products/${slug}`}>
@@ -146,7 +146,7 @@ const SingleProduct = ({ product, addToCompare }) => {
                 discount_percentage > 0 ? (
                   <>
                     <del className="old-price text-lg/[24px] font-normal text-slate-400">
-                      {old_price}
+                      ৳{old_price}
                     </del>
                     <span className="discount inline-block text-xs text-white bg-red-500 rounded-md py-1 px-1 ml-2">
                       -{getFractionFixed(discount_percentage)}%

@@ -101,6 +101,7 @@ const ProductDetails = ({ children, product, tabItems }) => {
                     allowFraction
                     readonly
                     size={24}
+                    fillColor="#F59E0B"
                   />
                   <span>{getFractionFixed(product?.averate_rating || 5)}</span>
                 </div>

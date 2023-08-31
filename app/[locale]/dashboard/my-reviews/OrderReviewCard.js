@@ -60,9 +60,14 @@ const OrderReviewCard = ({ sellReview }) => {
                 />
               </div>
               <div className="flex flex-col gap-1 w-full">
-                <h4 className="product-title overflow-text">
-                  {product.product_name}
-                </h4>
+                <h2>
+                  <Link
+                    href={`/products/${product.slug}`}
+                    className="product-title text-base font-semibold text-slate-900 font-body overflow-text"
+                  >
+                    {product.product_name}
+                  </Link>
+                </h2>
                 <div className="flex products-center justify-between text-sm">
                   {product.color && product.size && (
                     <div className="flex items-center gap-3">
@@ -86,6 +91,7 @@ const OrderReviewCard = ({ sellReview }) => {
                           readonly
                           size={24}
                           transition
+                          fillColor="#F59E0B"
                         />
                       </span>
                       {reviewOpen === index && (

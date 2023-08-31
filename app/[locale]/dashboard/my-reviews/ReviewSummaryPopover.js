@@ -17,6 +17,7 @@ export default function ReviewSummaryPopover({ review }) {
                 readonly
                 size={24}
                 transition
+                fillColor="#F59E0B"
               />
             </span>
             <p>অসাধারণ</p>

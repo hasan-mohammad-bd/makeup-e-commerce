@@ -47,7 +47,7 @@ const Search = () => {
 
   const handleSearch = (text) => {
     if (user) {
-      router.push(`/products?text=${text}&user_id=${user.id}`);
+      router.push(`/products?text=${text}&reference_id=${user.id}`);
       return;
     }
     router.push(`/products?text=${text}`);
