@@ -36,7 +36,7 @@ const LastVisitedProducts = ({ visitedProductId }) => {
   return (
     <>
       <div className="container ">
-        <div className="latest-viewed-products bg-slate-50 border border-slate-100 rounded-xl p-6 pt-8 mb-14">
+        <div className="latest-viewed-products bg-slate-50 border border-slate-100 rounded-xl pt-8 mb-14">
           <div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
             <h2 className="sec-title">সর্বশেষ যে প্রোডাক্ট গুলো দেখেছেন</h2>
           </div>

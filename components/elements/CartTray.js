@@ -7,8 +7,11 @@ import Image from "next/image";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { toggleCart } from "@/store/features/cartSlice";
 import { getMultipliedColumnTotal } from "@/utils/getTotal";
-import { BsCart3 } from "react-icons/bs";
 import cartImage from "@/public/assets/images/cart.gif";
+import dynamic from "next/dynamic";
+const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
+  ssr: false,
+});
 
 const CartTray = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -35,10 +38,30 @@ const CartTray = () => {
         </div>
         <div className="content rounded-es-lg text-center">
           <p className="text-xs text-white">{cart?.length} আইটেম</p>
-          <p className="text-xs font-semibold text-white">
-            <TbCurrencyTaka size={14} className="font-semibold" />
-            {getMultipliedColumnTotal(cart, "quantity", "new_price")}
-          </p>
+          <div className="text-xs font-semibold text-white flex items-center justify-center">
+            <TbCurrencyTaka size={16} className="mb-1" />
+            <AnimatedNumbers
+              animateToNumber={getMultipliedColumnTotal(
+                cart,
+                "quantity",
+                "new_price"
+              )}
+              includeComma
+              // fontStyle={{ fontSize: 32 }}
+              locale="en-US"
+              configs={(number, index) => {
+                return { mass: 1, tension: 230 * (index + 1), friction: 140 };
+              }}
+              // configs={[
+              //   { mass: 1, tension: 220, friction: 100 },
+              //   { mass: 1, tension: 180, friction: 130 },
+              //   { mass: 1, tension: 280, friction: 90 },
+              //   { mass: 1, tension: 180, friction: 135 },
+              //   { mass: 1, tension: 260, friction: 100 },
+              //   { mass: 1, tension: 210, friction: 180 },
+              // ]}
+            ></AnimatedNumbers>
+          </div>
         </div>
       </div>
     </>

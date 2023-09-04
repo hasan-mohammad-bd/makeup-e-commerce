@@ -44,7 +44,7 @@ const productReviewAPI = apiSlice.injectEndpoints({
 
     //Product review show
     getReviewDetails: builder.query({
-      query: (reviewId) => `review-details/${reviewId}`,
+      query: (payload) => `review-details/${payload}`,
       providesTags: ["review-details"],
     }),
 
@@ -55,7 +55,7 @@ const productReviewAPI = apiSlice.injectEndpoints({
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["product-reviews"],
+      invalidatesTags: ["product-reviews", "review-details"],
     }),
   }),
 });

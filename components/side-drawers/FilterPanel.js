@@ -7,7 +7,6 @@ import { toggleFilterPanel } from "@/store/features/commonSlice";
 import { useState, useRef } from "react";
 
 // ** Imoprt icons
-import { IoCloseOutline } from "react-icons/io5";
 import CategoryFilter from "../CategoryFilter";
 import BrandFilter from "../BrandFilter";
 import PriceRangeSlider from "../elements/sliders/PriceRangeSlider";
@@ -15,8 +14,6 @@ import ColorFilter from "../ColorFilter";
 import { useGetFilterOptionsByCategoryQuery } from "@/store/features/api/filterOptionsAPI";
 
 const FilterPanel = ({ category }) => {
-  // console.log(category);
-
   //Drawer logics
   const dispatch = useDispatch();
   const { isFilterPanelOpen } = useSelector((state) => state.common);
@@ -25,46 +22,27 @@ const FilterPanel = ({ category }) => {
     dispatch(toggleFilterPanel());
   };
 
-  //Categories Filter logics
-  const [selectedCategory, setSelectedCategory] = useState({});
-  const [mainCategory, setMainCategory] = useState({});
-  const [subCategory, setSubCategory] = useState({});
-  const [childCategory, setChildCategory] = useState({});
-
   //Brands
   const [brandIds, setBrandIds] = useState([]);
 
   //Colors
   const [selectedColors, setSelectedColors] = useState([]);
 
-  const query = selectedCategory?.id
-    ? `category_ids=${selectedCategory?.id}`
-    : "";
+  const query = category?.id ? `category_ids=${category?.id}` : "";
 
   const { data: filterOptions } = useGetFilterOptionsByCategoryQuery(query, {
     skip: !isFilterPanelOpen,
   });
-  // console.log(filterOptions);
 
-  //Filtering logics
   const [productFilters, setProductFilters] = useState({});
-  // console.log(productFilters);
 
   const checkedElms = useRef([]);
 
-  // resetting other filters when category changed
-  const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-    setBrandIds([]);
-    setSelectedColors([]);
-  };
-
+  //Resetting other filters based on category change
   useEffect(() => {
     if (category) {
-      handleCategorySelect(category);
-      setMainCategory(category);
-      setSubCategory({});
-      setChildCategory({});
+      setBrandIds([]);
+      setSelectedColors([]);
     }
   }, [category]);
 
@@ -102,7 +80,7 @@ const FilterPanel = ({ category }) => {
     >
       <div className="p-4 flex flex-col h-[77%]">
         <div className={`pl-4 filter-sidebar flex flex-col gap-y-7`}>
-          {Object.keys(productFilters)
+          {/* {Object.keys(productFilters)
             .filter((key) => key !== "price")
             .some((key) => productFilters[key].length !== 0) && (
             <div className="flex items-center flex-wrap gap-2">
@@ -129,20 +107,9 @@ const FilterPanel = ({ category }) => {
                   ))
                 )}
             </div>
-          )}
+          )} */}
 
-          <CategoryFilter
-            setFilters={setProductFilters}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={handleCategorySelect}
-            mainCategory={mainCategory}
-            setMainCategory={setMainCategory}
-            subCategory={subCategory}
-            setSubCategory={setSubCategory}
-            childCategory={childCategory}
-            setChildCategory={setChildCategory}
-            checkedElms={checkedElms}
-          />
+          <CategoryFilter selectedCategory={category} />
           {filterOptions?.brands?.length ? (
             <BrandFilter
               filteredBrands={filterOptions?.brands}

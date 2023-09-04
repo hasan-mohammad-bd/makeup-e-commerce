@@ -3,8 +3,8 @@ import Link from "next/link";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { HiPlayCircle } from "react-icons/hi2";
 
-import ProductBanner from "@/components/elements/sliders/ProductBanner";
-import ProductReview from "@/components/elements/sliders/ProductReview";
+// import ProductBanner from "@/components/elements/sliders/ProductBanner";
+// import ProductReview from "@/components/elements/sliders/ProductReview";
 import DescriptionViewer from "@/components/DescriptionViewer";
 import { fetchData } from "@/utils/fetchData";
 
@@ -97,7 +97,7 @@ const page = async ({ params }) => {
           />
         </div> */}
       </div>
-      <div className="blogs my-8">
+      {/* <div className="blogs my-8">
         <p className="text-primary mb-1">ফ্লোস্টেট স্টেবিলাইজেশন</p>
         <h4 className="text-2xl font-bold font-title text-slate-900">
           বাটারী মসৃণ ধার্মিকতা
@@ -193,8 +193,8 @@ const page = async ({ params }) => {
             </div>
           </div>
         </div>
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <h4 className="text-2xl font-bold font-title text-slate-900 mb-4">
           পৃথিবী তোমার খেলার মাঠ
         </h4>
@@ -204,7 +204,7 @@ const page = async ({ params }) => {
         <div className="relative bg-slate-100 border-slate-200 rounded-xl p-4 mt-8">
           <ProductReview />
         </div>
-      </div>
+      </div> */}
       <div className="mt-8">
         <h4 className="text-2xl font-bold font-title text-slate-900 mb-4">
           যা যা সাথে থাকবে

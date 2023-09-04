@@ -9,21 +9,21 @@ import { getFormattedDate } from "@/utils/formatDate";
 import { useGetReviewDetailsQuery } from "@/store/features/api/productReviewAPI";
 import ItemsListLoader from "../elements/loaders/ItemsListLoader";
 import useAddReviewReaction from "@/hooks/useAddReviewReaction";
+import { useSelector } from "react-redux";
 
 export default function ReviewViewModal({
   showModal,
   setShowModal,
   review: reviewFromProp,
-  reviewId,
+  reviewId: reviewIdProp,
 }) {
+  const { user } = useSelector((state) => state.auth);
   let review = {};
-  const { data, isLoading } = useGetReviewDetailsQuery(reviewId, {
-    skip: !reviewId,
+  let api = user ? reviewIdProp + `?reference_id=${user.id}` : reviewIdProp;
+  const { data, isLoading } = useGetReviewDetailsQuery(api, {
+    skip: !reviewIdProp,
   });
   const reviewFromId = data?.data || {};
-  // console.log(reviewFromId);
-  // console.log(reviewFromProp);
-  // console.log(isLoading);
 
   if (reviewFromProp) {
     review = { ...reviewFromProp };
@@ -39,7 +39,7 @@ export default function ReviewViewModal({
       setShowModal={setShowModal}
       title={"কাস্টমারের দেয়া রিভিউ ছবি গুলো"}
     >
-      {isLoading && reviewId ? (
+      {isLoading && reviewIdProp ? (
         <ItemsListLoader noImage={true} numItems={4} />
       ) : (
         <div className="flex gap-6">

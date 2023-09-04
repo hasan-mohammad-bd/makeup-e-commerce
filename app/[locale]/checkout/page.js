@@ -9,7 +9,7 @@ import { getMultipliedColumnTotal } from "@/utils/getTotal";
 import {
   getCouponDiscount,
   getOrderFormattedCartItems,
-} from "./checkoutBusinessLogics";
+} from "@/utils/checkoutBusinessLogics";
 
 //components
 import CartCard from "@/components/CartCard";

@@ -13,16 +13,18 @@ import ProductVariantSelect from "@/components/products/ProductVariantSelect";
 import ActiveLink from "@/components/elements/ActiveLink";
 import { Rating } from "react-simple-star-rating";
 import { formatLongNumber, getFractionFixed } from "@/utils/formatNumber";
+import SocialShare from "@/components/elements/SocialShare";
 
 // ** Import Icon
 import {
   HiChatBubbleLeftRight,
-  HiShare,
   HiOutlineShoppingCart,
   HiOutlineArrowLongRight,
 } from "react-icons/hi2";
 import { TbTag } from "react-icons/tb";
 import { IoCall, IoCopy } from "react-icons/io5";
+import CopyToClipboard from "react-copy-to-clipboard";
+import { getCouponDiscount } from "@/utils/checkoutBusinessLogics";
 
 const ProductDetails = ({ children, product, tabItems }) => {
   const [selectedVariant, setSelectedVariant] = useState(null);
@@ -114,9 +116,7 @@ const ProductDetails = ({ children, product, tabItems }) => {
                   {formatLongNumber(product?.toptal_question_answer || 0)}{" "}
                   প্রশ্ন এবং উত্তর
                 </p>
-                <p>
-                  <HiShare size={20} /> শেয়ার করুন
-                </p>
+                <SocialShare />
               </div>
               {/* short description  */}
               <DescriptionViewer
@@ -146,32 +146,49 @@ const ProductDetails = ({ children, product, tabItems }) => {
                   setSelectedVariant={setSelectedVariant}
                 />
               ) : null}
-              <div className="mt-5 mb-8">
-                <p className="font-semibold font-title text-slate-900 mb-2">
-                  সেরা অফার <TbTag size={24} className="text-primary mb-1" />
-                </p>
-                <ul className="coupon-info">
-                  <li className="relative text-slate-900 pl-4">
-                    কুপন ডিসকাউন্ট:{" "}
-                    <span className="font-semibold text-title text-secondary-700">
-                      &#2547;400 ছাড়!
-                    </span>
-                  </li>
-                  <li className="relative text-slate-900 pl-4 my-2 before:!top-3">
-                    কুপন কোড:{" "}
-                    <span className="inline-block text-primary border border-dashed border-primary rounded px-2 py-1 ml-1">
-                      SST2023A{" "}
-                      <IoCopy size={20} className="text-primary mb-1" />
-                    </span>
-                  </li>
-                  <li className="relative text-slate-900 pl-4 mb-3">
-                    প্রযোজ্য: ৳2000 উপরে অর্ডারে (শুধুমাত্র প্রথম কেনাকাটায়)
-                  </li>
-                </ul>
-                <Link href="#" className="text-secondary-700 underline">
-                  অফারের সকল প্রডাক্ট দেখুন
-                </Link>
-              </div>
+
+              {product?.coupons.length ? (
+                <div className="mt-5 mb-8">
+                  <p className="font-semibold font-title text-slate-900 mb-2">
+                    সেরা অফার <TbTag size={24} className="text-primary mb-1" />
+                  </p>
+                  <ul className="coupon-info">
+                    <li className="relative text-slate-900 pl-4">
+                      কুপন ডিসকাউন্ট:{" "}
+                      <span className="font-semibold text-title text-secondary-700">
+                        &#2547;
+                        {getCouponDiscount(
+                          product?.coupons[0],
+                          product.new_price
+                        )}{" "}
+                        ছাড়!
+                      </span>
+                    </li>
+                    <li className="relative text-slate-900 pl-4 my-2 before:!top-3">
+                      কুপন কোড:{" "}
+                      <span className="inline-block text-primary border border-dashed border-primary rounded px-2 py-1 ml-1">
+                        {product.coupons[0].code}{" "}
+                        <CopyToClipboard
+                          text={product.coupons[0].code}
+                          // onCopy={() => alert("copied")}
+                        >
+                          <IoCopy
+                            size={20}
+                            className="text-primary mb-1 active:scale-90"
+                          />
+                        </CopyToClipboard>
+                      </span>
+                    </li>
+                    <li className="relative text-slate-900 pl-4 mb-3">
+                      প্রযোজ্য: ৳{product.coupons[0].max_discount} উপরে অর্ডারে
+                      (শুধুমাত্র প্রথম কেনাকাটায়)
+                    </li>
+                  </ul>
+                  <Link href="#" className="text-secondary-700 underline">
+                    অফারের সকল প্রডাক্ট দেখুন
+                  </Link>
+                </div>
+              ) : null}
               <div className="delivery flex flex-wrap gap-y-7 bg-slate-50 border border-slate-200 rounded-lg py-4">
                 <div className="single-info">
                   <Image
