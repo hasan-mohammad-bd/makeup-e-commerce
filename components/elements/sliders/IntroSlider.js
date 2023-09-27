@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Autoplay, Pagination } from "swiper";
-import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
 
 // ** Import Iocns
 import { HiChevronRight } from "react-icons/hi2";

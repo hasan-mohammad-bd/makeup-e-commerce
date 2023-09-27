@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import { FreeMode, Navigation, Thumbs } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 export default function ReviewImageSlider({ images }) {
   // console.log(review);
@@ -19,7 +19,10 @@ export default function ReviewImageSlider({ images }) {
           loop={true}
           spaceBetween={10}
           navigation={true}
-          thumbs={{ swiper: thumbsSwiper }}
+          thumbs={{
+            swiper:
+              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+          }}
           modules={[FreeMode, Navigation, Thumbs]}
           className="mySwiper2"
           direction="horizontal"

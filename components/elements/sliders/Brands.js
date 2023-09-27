@@ -2,12 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import SwiperCore, { Navigation } from "swiper";
+import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import noImage from "@/public/assets/images/no-image.png";
-import "swiper/css";
-
-SwiperCore.use([Navigation]);
 
 // ** Import Icons
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";

@@ -20,7 +20,7 @@ const productReviewAPI = apiSlice.injectEndpoints({
 
     // Dashboard order review show
     getUserReviewShow: builder.query({
-      query: (orderId) => `sell-product-review/${orderId}`,
+      query: (orderId) => `sell-product-review-show/${orderId}`,
       providesTags: ["user-review-show"],
     }),
 
