@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isGlobalLoading: false,
+  locale: "en",
   isFilterPanelOpen: false,
   settings: null,
-  translations: null,
+  translations: {},
 };
 
 const commonSlice = createSlice({
@@ -23,6 +24,9 @@ const commonSlice = createSlice({
     setTranslations: (state, action) => {
       state.translations = action.payload;
     },
+    setLocale: (state, action) => {
+      state.locale = action.payload;
+    },
   },
 });
 
@@ -31,6 +35,7 @@ export const {
   toggleFilterPanel,
   setSettings,
   setTranslations,
+  setLocale,
 } = commonSlice.actions;
 
 export default commonSlice.reducer;

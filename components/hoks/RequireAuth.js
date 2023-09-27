@@ -1,6 +1,4 @@
-"use client"
-// RequireAuth.js
-
+"use client";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";

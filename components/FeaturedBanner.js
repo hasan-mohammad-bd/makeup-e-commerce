@@ -25,7 +25,7 @@ const FeaturedBanner = async () => {
           </div>
           <div className="content absolute bottom-11 left-[42%] w-2/3">
             <Link
-              href={featuredBanner[0].url}
+              href={featuredBanner[0].url || "/"}
               className="text-center inline-block w-max text-base font-semibold font-title text-white bg-primary px-4 py-3 rounded-lg"
             >
               এখুনি কিনুন <HiArrowLongRight size={20} />
@@ -36,9 +36,12 @@ const FeaturedBanner = async () => {
           <div className="grid grid-cols-3 gap-6">
             <div className="col-span-2">
               <div className="mb-4">
-                <Link href={featuredBanner[1].url} className="banner-img">
+                <Link
+                  href={featuredBanner[1]?.url || "/"}
+                  className="banner-img"
+                >
                   <Image
-                    src={featuredBanner[1].image || noImage}
+                    src={featuredBanner[1]?.image || noImage}
                     alt="Banner"
                     width={80}
                     height={142}
@@ -49,9 +52,12 @@ const FeaturedBanner = async () => {
               </div>
 
               <div>
-                <Link href={featuredBanner[2].url} className="banner-img">
+                <Link
+                  href={featuredBanner[2]?.url || "/"}
+                  className="banner-img"
+                >
                   <Image
-                    src={featuredBanner[2].image || noImage}
+                    src={featuredBanner[2]?.image || noImage}
                     alt="Banner"
                     width={80}
                     height={142}
@@ -62,9 +68,9 @@ const FeaturedBanner = async () => {
               </div>
             </div>
             <div className="col-span-1">
-              <Link href={featuredBanner[3].url} className="banner-img">
+              <Link href={featuredBanner[3]?.url || "/"} className="banner-img">
                 <Image
-                  src={featuredBanner[3].image || noImage}
+                  src={featuredBanner[3]?.image || noImage}
                   alt="Banner"
                   width={0}
                   height={0}
