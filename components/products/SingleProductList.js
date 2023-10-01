@@ -8,6 +8,7 @@ import { formatLongNumber, getFractionFixed } from "@/utils/formatNumber";
 
 // ** Import Icon
 import { FaStar } from "react-icons/fa";
+import { getDaysSinceCreation } from "@/utils/formatDate";
 
 const SingleProductList = ({ product, isHistory }) => {
   const [loading, setLoading] = useState(true);
@@ -22,6 +23,7 @@ const SingleProductList = ({ product, isHistory }) => {
     new_price,
     old_price,
     discount_percentage,
+    created_at,
   } = product;
 
   useEffect(() => {
@@ -33,14 +35,24 @@ const SingleProductList = ({ product, isHistory }) => {
   if (loading) return <Loader />;
 
   return (
-    <div className="product-card-wrap flex items-center gap-x-2 bg-white border border-slate-200 rounded-xl p-2">
+    <div
+      className={`product-card-wrap grid ${
+        isHistory ? "grid-cols-[76px_auto]" : "grid-cols-[116px_auto]"
+      } items-center bg-white border border-slate-200 rounded-xl p-4 gap-4`}
+    >
       <div
-        className="product-img"
+        className="product-img relative"
         style={{
           height: isHistory ? "76px" : "116px",
-          width: isHistory ? "76px" : "116px",
         }}
       >
+        {isHistory && getDaysSinceCreation(created_at) < 8 && (
+          <div className="absolute top-0 left-0 z-20">
+            <span className="bg-secondary-700 text-sm px-2 rounded-full text-white">
+              নতুন
+            </span>
+          </div>
+        )}
         <Link href="/products/[slug]" as={`/products/${slug}`}>
           <Image
             src={image || "/assets/images/no-image.png"}
@@ -80,7 +92,7 @@ const SingleProductList = ({ product, isHistory }) => {
             {total_rating === 0 ? "No Rating" : formatLongNumber(total_rating)}
           </span>
         </div>
-        <div className="product-price mb-3 text-sm flex gap-2">
+        <div className="product-price text-sm flex gap-2">
           <span className="text-lg/[24px] font-semibold text-red-500">
             ৳{new_price}
           </span>

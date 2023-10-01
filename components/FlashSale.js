@@ -17,26 +17,24 @@ const FlashSale = () => {
     return null;
 
   return (
-    <section className="flash-sale mt-28">
-      <div className="container relative">
-        <div className="sec-heading absolute top-[-30px] left-0 w-full flex justify-between items-center px-8">
-          <div className="flex gap-4 bg-white">
-            <div>
-              <h2 className="sec-title">{flashSaleInfo?.title}</h2>
-              <p>অফার চলবে আর মাত্র</p>
-            </div>
-            <Timer targetDate={flashSaleInfo?.expire_time} />
+    <div className="relative">
+      <div className="sec-heading absolute top-[-30px] left-0 w-full flex justify-between items-center px-8">
+        <div className="flex gap-4 bg-white">
+          <div>
+            <h2 className="sec-title">{flashSaleInfo?.title}</h2>
+            <p>অফার চলবে আর মাত্র</p>
           </div>
-          <Link href="/flash-sale" className="all-btn bg-white">
-            সবগুলো দেখুন <HiArrowLongRight size={24} />{" "}
-          </Link>
+          <Timer targetDate={flashSaleInfo?.expire_time} />
         </div>
-
-        <div className="flashSale-slider border border-primary rounded-2xl p-6 pt-16">
-          <FlashSaleSlider saleProducts={saleProducts} />
-        </div>
+        <Link href="/flash-sale" className="all-btn bg-white">
+          সবগুলো দেখুন <HiArrowLongRight size={24} />{" "}
+        </Link>
       </div>
-    </section>
+
+      <div className="flashSale-slider border border-primary rounded-2xl p-6 pt-16">
+        <FlashSaleSlider saleProducts={saleProducts} />
+      </div>
+    </div>
   );
 };
 

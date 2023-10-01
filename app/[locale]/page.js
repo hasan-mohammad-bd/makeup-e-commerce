@@ -30,7 +30,11 @@ export default function Home({ searchParams }) {
         </div>
       </section>
 
-      <FlashSale />
+      <section className="flash-sale mt-28">
+        <div className="container">
+          <FlashSale />
+        </div>
+      </section>
 
       <section
         className="all-category py-14 mt-12"

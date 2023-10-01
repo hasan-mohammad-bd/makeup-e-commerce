@@ -22,7 +22,7 @@ const FlashSale = ({ saleProducts }) => {
       >
         {saleProducts?.map((product, i) => (
           <SwiperSlide key={i}>
-            <SingleProduct product={product} />
+            <SingleProduct product={product} isFlashSale />
           </SwiperSlide>
         ))}
       </Swiper>

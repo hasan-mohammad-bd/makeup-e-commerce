@@ -10,6 +10,8 @@ import Loader from "../elements/loaders/Loader";
 import { addToCart, addToSelected } from "@/store/features/cartSlice";
 import { useAddToWishListMutation } from "@/store/features/api/wishListAPI";
 import { formatLongNumber, getFractionFixed } from "@/utils/formatNumber";
+import { getSalePercent } from "@/utils/getPercent";
+import { getDaysSinceCreation } from "@/utils/formatDate";
 
 // ** Import Icon
 import { FaStar } from "react-icons/fa";
@@ -19,7 +21,7 @@ import {
   HiArrowLongRight,
 } from "react-icons/hi2";
 
-const SingleProduct = ({ product, addToCompare }) => {
+const SingleProduct = ({ product, isFlashSale }) => {
   const { user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [addToWishlist] = useAddToWishListMutation();
@@ -38,6 +40,9 @@ const SingleProduct = ({ product, addToCompare }) => {
     old_price,
     discount_percentage,
     productVariants,
+    stock_qty,
+    total_sale_qty,
+    created_at,
   } = product;
 
   useEffect(() => {
@@ -64,11 +69,6 @@ const SingleProduct = ({ product, addToCompare }) => {
     }
   };
 
-  const handleCompare = (product) => {
-    addToCompare(product);
-    toast.success("Add to Compare !");
-  };
-
   const handleWishlist = async (productId) => {
     if (!user) {
       toast.error("You're not logged in");
@@ -85,8 +85,24 @@ const SingleProduct = ({ product, addToCompare }) => {
     <>
       {!loading ? (
         <>
-          <div className="product-card-wrap bg-white border border-slate-200 rounded-xl hover:border-primary">
+          <div className="product-card-wrap min-w-[236px] bg-white border border-slate-200 rounded-xl hover:border-primary">
             <div className="product-img-action-wrap relative">
+              {getDaysSinceCreation(created_at) < 8 && (
+                <div className="absolute top-3 left-3 z-20">
+                  <span className="bg-secondary-700 text-sm px-2 rounded-full text-white">
+                    নতুন
+                  </span>
+                </div>
+              )}
+              <div className="absolute top-3 right-3 z-20">
+                <button
+                  aria-label="Add To Wishlist"
+                  className="action-btn"
+                  onClick={(e) => handleWishlist(id)}
+                >
+                  <HiOutlineHeart />
+                </button>
+              </div>
               <div className="product-img p-2 pb-0">
                 <Link href="/products/[slug]" as={`/products/${slug}`}>
                   <Image
@@ -98,16 +114,6 @@ const SingleProduct = ({ product, addToCompare }) => {
                     // priority={true}
                   />
                 </Link>
-              </div>
-              <div className="product-action">
-                <button
-                  href={""}
-                  aria-label="Add To Wishlist"
-                  className="action-btn"
-                  onClick={(e) => handleWishlist(id)}
-                >
-                  <HiOutlineHeart />
-                </button>
               </div>
             </div>
             <div className="product-content-wrap p-3">
@@ -172,6 +178,33 @@ const SingleProduct = ({ product, addToCompare }) => {
                   এখনই কিনুন <HiArrowLongRight size={20} />
                 </button>
               </div>
+              {isFlashSale && (
+                <div className="product-flash-counter mt-4">
+                  <div className=" flex items-center gap-3">
+                    <div className="w-full h-[6px] bg-gray-200 rounded">
+                      <div
+                        className="h-[6px] bg-secondary-700 rounded"
+                        style={{
+                          width: `${getSalePercent(
+                            total_sale_qty,
+                            stock_qty
+                          )}%`,
+                        }}
+                      ></div>
+                    </div>
+                    {/* <h3>{getSalePercent(total_sale_qty, stock_qty)}%</h3> */}
+                  </div>
+                  <div className="flex-between mt-3 text-xs">
+                    <h3>
+                      বিক্রি হয়েছে:{" "}
+                      <span className="font-bold">{total_sale_qty}</span>
+                    </h3>
+                    <h3>
+                      বাকি আছে: <span className="font-bold">{stock_qty}</span>
+                    </h3>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </>
