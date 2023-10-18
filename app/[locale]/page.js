@@ -19,7 +19,7 @@ export default function Home({ searchParams }) {
 	return (
 		<main>
 			<section className="banner">
-				<div className="container py-8">
+				<div className="container mt-8 lg:mt-0 py-8">
 					<Intro />
 				</div>
 			</section>
