@@ -36,16 +36,16 @@ export default function MegaMenu({ categories, settings }) {
 
 	return (
 		<>
-			<div className="nav-menu container absolute z-30 left-0 top-full lg:static mt-3 lg:mt-0 gap-2 w-full flex items-center">
+			<div className="nav-menu container absolute z-30 left-0 top-full lg:static mt-3 lg:mt-0 w-full flex items-center gap-2">
 				{!menuOpen ? (
 					<button
 						onClick={() => setMenuOpen(!menuOpen)}
-						className="menuBtn px-3 py-2 lg:px-2 lg:py-3 bg-white rounded-lg lg:rounded-sm flex items-center gap-1"
+						className="menuBtn px-2 sm:px-3 py-2 lg:px-2 lg:py-3 bg-white rounded-lg lg:rounded-sm flex items-center gap-1"
 					>
 						{translations["category"]} <BsChevronDown />
 					</button>
 				) : (
-					<span className="menuBtn px-3 py-2 lg:px-2 lg:py-3 bg-white rounded-lg lg:rounded-sm flex cursor-pointer items-center gap-1">
+					<span className="menuBtn px-2 sm:px-3 py-2 lg:px-2 lg:py-3 bg-white rounded-lg lg:rounded-sm flex cursor-pointer items-center gap-1">
 						{translations["category"]} <BsChevronDown />
 					</span>
 				)}
@@ -53,7 +53,7 @@ export default function MegaMenu({ categories, settings }) {
 					<Link
 						key={key}
 						href={headerPage[key]}
-						className="px-3 py-2 lg:px-2 lg:py-3 bg-white rounded-lg lg:rounded-sm flex items-center"
+						className="px-2 sm:px-3 py-2 lg:px-2 lg:py-3 bg-white rounded-lg lg:rounded-sm flex items-center"
 					>
 						{key}
 					</Link>

@@ -48,7 +48,7 @@ export default function ResponsiveSearch() {
 				<div
 					ref={searchMenuRef}
 					// top-full
-					className="absolute z-30 left-0 top-0 bg-white  shadow-lg w-full h-screen lg:hidden"
+					className="absolute z-30 left-0 top-0 w-full bg-white lg:hidden"
 				>
 					<div className="container flex justify-center gap-4 py-4 border-b border-slate-300">
 						<Search />
