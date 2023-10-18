@@ -128,9 +128,9 @@ export default function MainNav({ children }) {
 									<AuthUserMenus togglePopover={togglePopover} />
 								) : null}
 							</div>
-							<div className="hidden md:block">
-								<LanguageSelector locale={locale} />
-							</div>
+							{/* <div className="hidden md:block"> */}
+							<LanguageSelector locale={locale} />
+							{/* </div> */}
 						</div>
 					</div>
 				</div>
