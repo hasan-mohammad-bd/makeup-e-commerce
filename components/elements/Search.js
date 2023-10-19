@@ -101,7 +101,7 @@ const Search = () => {
 	};
 
 	return (
-		<div className="nav-search relative">
+		<div className="nav-search md:relative">
 			<form>
 				<div className="group">
 					<input
@@ -127,11 +127,11 @@ const Search = () => {
 				</div>
 			</form>
 			{showSuggestionResults && (searchHistory?.length || popular?.length) ? (
-				<div className="z-20 absolute font-title text-slate-600 mt-5 md:mt-2 py-2 w-full overflow-hidden rounded-md bg-white">
+				<div className="z-20 absolute font-title text-slate-600 mt-5 left-0 md:mt-2 py-2 w-full h-screen md:h-auto overflow-hidden rounded-md bg-white">
 					{searchHistory?.length ? (
-						<div className="px-4 mb-4">
+						<div className="px-6 md:px-4 mb-4">
 							<h3 className="mb-2">{translations["recently-searched"]}</h3>
-							{searchHistory.map((keyword) => (
+							{searchHistory?.slice(0, 5)?.map((keyword) => (
 								<div
 									key={keyword.id}
 									className="cursor-pointer py-2 flex gap-4 hover:bg-slate-100"
@@ -177,9 +177,9 @@ const Search = () => {
 						</div>
 					) : null}
 					{popular?.length ? (
-						<div className="px-4">
+						<div className="px-6 md:px-4">
 							<h3 className="mb-2">{translations["popular-keywords"]}</h3>
-							{popular.map((keyword) => (
+							{popular?.slice(0, 5)?.map((keyword) => (
 								<div
 									key={keyword.id}
 									className="cursor-pointer py-2 flex gap-4 hover:bg-slate-100"

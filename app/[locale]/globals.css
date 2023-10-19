@@ -154,7 +154,7 @@
 }
 
 .nav-search {
-	width: 22rem;
+	@apply w-full md:w-[22rem];
 }
 
 .nav-search input {
