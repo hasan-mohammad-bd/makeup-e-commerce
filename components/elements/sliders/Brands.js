@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,46 +9,53 @@ import noImage from "@/public/assets/images/no-image.png";
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
 
 const Brands = ({ brands }) => {
-  return (
-    <>
-      <Swiper
-        modules={[Navigation]}
-        slidesPerView={8}
-        spaceBetween={20}
-        loop={false}
-        navigation={{
-          prevEl: ".custom_prev_br",
-          nextEl: ".custom_next_br",
-        }}
-      >
-        {brands?.map((brand, i) => (
-          <SwiperSlide key={i}>
-            <Link
-              href={`/brands/${brand.id}`}
-              className="barnd-img inline-block border border-slate-300 rounded-xl p-2"
-            >
-              <Image
-                src={brand.brand_image || noImage}
-                alt={brand.title}
-                width={112}
-                height={112}
-                className="w-28 h-28 object-contain"
-              />
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+	return (
+		<>
+			<Swiper
+				modules={[Navigation]}
+				slidesPerView={8}
+				spaceBetween={20}
+				loop={false}
+				navigation={{
+					prevEl: ".custom_prev_br",
+					nextEl: ".custom_next_br",
+				}}
+				breakpoints={{
+					0: {
+						slidesPerView: 3,
+					},
+					768: {
+						slidesPerView: 8,
+					},
+				}}
+			>
+				{brands?.map((brand, i) => (
+					<SwiperSlide key={i}>
+						<div className="barnd-img inline-block border-slate-300 rounded-xl border p-2">
+							<div className="h-[118px] w-[118px] flex items-center justify-center">
+								<Image
+									src={brand.brand_image || noImage}
+									alt={brand.title}
+									width={118}
+									height={118}
+									className="w-full object-contain"
+								/>
+							</div>
+						</div>
+					</SwiperSlide>
+				))}
+			</Swiper>
 
-      <div className="slider-arrow">
-        <span className="slider-btn slider-prev slick-arrow custom_prev_br">
-          <TfiAngleLeft />
-        </span>
-        <span className="slider-btn slider-next slick-arrow custom_next_br">
-          <TfiAngleRight />
-        </span>
-      </div>
-    </>
-  );
+			<div className="slider-arrow hidden lg:block">
+				<span className="slider-btn slider-prev slick-arrow custom_prev_br -mt-5 -ml-5">
+					<TfiAngleLeft />
+				</span>
+				<span className="slider-btn slider-next slick-arrow custom_next_br -mt-5 -mr-5">
+					<TfiAngleRight />
+				</span>
+			</div>
+		</>
+	);
 };
 
 export default Brands;

@@ -119,18 +119,7 @@ export default function Home({ searchParams }) {
 			<VideoBanner />
 
 			<section className="all-brands py-14">
-				<div className="container">
-					<div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
-						<h2 className="sec-title">আমাদের ব্র্যান্ড সমূহ</h2>
-						<Link href="/brands" className="all-btn">
-							সবগুলো দেখুন <HiArrowLongRight size={24} />{" "}
-						</Link>
-					</div>
-
-					<div className="brands-slider mt-6  relative">
-						<Brands />
-					</div>
-				</div>
+				<Brands />
 			</section>
 		</>
 	);

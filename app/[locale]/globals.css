@@ -199,10 +199,6 @@
 	@apply text-center text-base/[16px] font-semibold font-title text-white bg-[#F99104] w-[168px] rounded-md py-2 active:scale-95;
 }
 
-.new-slider .swiper-slide .product-card-wrap:first-of-type {
-	@apply mb-5;
-}
-
 /* From common classes  */
 .form-control input,
 .form-control textarea {
@@ -222,6 +218,11 @@
 
 .errorMsg {
 	@apply text-base text-red-500 mt-2;
+}
+
+/* Swiper Slider Adjustments  */
+.new-slider .swiper-slide .product-card-wrap:first-of-type {
+	@apply mb-5;
 }
 
 /* Product Thumb Slider */
