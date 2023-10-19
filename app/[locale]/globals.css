@@ -176,7 +176,7 @@
 	@apply relative pr-4;
 }
 
-.single-feature:not(:first-of-type)::before {
+.single-feature::before {
 	@apply absolute content-[''] left-[-32px] top-0 w-px h-full bg-slate-300;
 }
 
