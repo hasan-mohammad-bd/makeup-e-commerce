@@ -17,8 +17,8 @@ import { HiArrowLongRight } from "react-icons/hi2";
 
 export default function Home({ searchParams }) {
 	return (
-		<main>
-			<section className="banner">
+		<>
+			<section className="bg-slate-100 lg:bg-white banner pt-12 lg:pt-0">
 				<div className="container py-8">
 					<Intro />
 				</div>
@@ -132,6 +132,6 @@ export default function Home({ searchParams }) {
 					</div>
 				</div>
 			</section>
-		</main>
+		</>
 	);
 }

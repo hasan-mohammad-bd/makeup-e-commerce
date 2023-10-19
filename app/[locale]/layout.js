@@ -41,7 +41,9 @@ export default function RootLayout({ children, params }) {
 			<body>
 				<ReduxProvider>
 					<Header />
-					<CheckConnection>{children}</CheckConnection>
+					<CheckConnection>
+						<main>{children}</main>
+					</CheckConnection>
 					<Footer />
 					<CartTray />
 					<Cart />

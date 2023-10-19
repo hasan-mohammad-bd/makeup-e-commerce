@@ -6,8 +6,20 @@ import { BsArrowRight, BsChevronDown } from "react-icons/bs";
 import noImage from "@/public/assets/images/no-image.png";
 import menuOffer from "@/public/assets/images/banner/category-menu-offer.png";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useParams, usePathname } from "next/navigation";
 
 export default function MegaMenu({ categories, settings }) {
+	const pathname = usePathname();
+	const { locale } = useParams();
+	const matches = useMediaQuery("(max-width: 768px)");
+	const isActiveForMobile = [
+		`/${locale}`,
+		"/",
+		`/${locale}/categories`,
+		"/categories",
+	].includes(pathname);
+
 	const [menuOpen, setMenuOpen] = useState(false);
 	const headerPage = settings?.header_page || {};
 	const { translations } = useSelector((state) => state.common);
@@ -34,32 +46,45 @@ export default function MegaMenu({ categories, settings }) {
 		};
 	}, []);
 
+	const menuClasses =
+		"px-2 sm:px-3 py-2 lg:px-2 lg:py-3 bg-white rounded-lg lg:rounded-sm";
+
 	return (
 		<>
-			<div className="nav-menu container absolute z-30 left-0 top-full lg:static mt-3 lg:mt-0 w-full flex items-center gap-2">
-				{!menuOpen ? (
-					<button
-						onClick={() => setMenuOpen(!menuOpen)}
-						className="menuBtn px-2 sm:px-3 py-2 lg:px-2 lg:py-3 bg-white rounded-lg lg:rounded-sm flex items-center gap-1"
-					>
-						{translations["category"]} <BsChevronDown />
-					</button>
-				) : (
-					<span className="menuBtn px-2 sm:px-3 py-2 lg:px-2 lg:py-3 bg-white rounded-lg lg:rounded-sm flex cursor-pointer items-center gap-1">
-						{translations["category"]} <BsChevronDown />
-					</span>
-				)}
-				{Object.keys(headerPage).map((key) => (
+			{(!matches || (matches && isActiveForMobile)) && (
+				<div className="nav-menu container absolute z-30 left-0 top-full lg:static mt-3 lg:mt-0 w-full flex items-center gap-2">
+					{!menuOpen ? (
+						<button
+							onClick={() => setMenuOpen(!menuOpen)}
+							className={`hidden lg:flex menuBtn ${menuClasses} items-center gap-1`}
+						>
+							{translations["category"]} <BsChevronDown />
+						</button>
+					) : (
+						<span
+							className={`hidden lg:flex menuBtn ${menuClasses} cursor-pointer items-center gap-1`}
+						>
+							{translations["category"]} <BsChevronDown />
+						</span>
+					)}
 					<Link
-						key={key}
-						href={headerPage[key]}
-						className="px-2 sm:px-3 py-2 lg:px-2 lg:py-3 bg-white rounded-lg lg:rounded-sm flex items-center"
+						href={"/categories"}
+						className={`flex lg:hidden ${menuClasses} items-center`}
 					>
-						{key}
+						{translations["category"]}
 					</Link>
-				))}
-			</div>
-			{menuOpen && (
+					{Object.keys(headerPage).map((key) => (
+						<Link
+							key={key}
+							href={headerPage[key]}
+							className={`${menuClasses} flex items-center`}
+						>
+							{key}
+						</Link>
+					))}
+				</div>
+			)}
+			{menuOpen && !matches && (
 				<div
 					ref={megaMenuRef}
 					className="absolute z-30 left-0 top-full bg-white shadow-lg w-full border border-slate-300 border-t-0"

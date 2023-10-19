@@ -11,7 +11,7 @@ const Header = async () => {
 		settingsRes.status === "fulfilled" ? settingsRes.value?.data || {} : {};
 
 	return (
-		<header className="header mb-16 lg:mb-0">
+		<header className="header">
 			<MainNav>
 				<ResponsiveMenu settings={settings} />
 			</MainNav>
