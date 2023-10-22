@@ -18,16 +18,14 @@ import { HiArrowLongRight } from "react-icons/hi2";
 export default function Home({ searchParams }) {
 	return (
 		<>
-			<section className="bg-slate-100 lg:bg-white banner pt-12 lg:pt-0">
-				<div className="container py-8">
+			<section className="bg-slate-100 lg:bg-white banner pt-16 lg:pt-0">
+				<div className="bg-white py-3">
 					<Intro />
 				</div>
 			</section>
 
-			<section className="service-features">
-				<div className="container">
-					<ServiceFeatures />
-				</div>
+			<section className="service-features mt-3">
+				<ServiceFeatures />
 			</section>
 
 			<section className="flash-sale mt-28">
@@ -56,7 +54,7 @@ export default function Home({ searchParams }) {
 				</div>
 			</section>
 
-			<section className="best-sell bg-slate-50 py-14">
+			<section className="best-sell bg-slate-50 mt-8 py-14">
 				<div className="container">
 					<div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
 						<h2 className="sec-title">

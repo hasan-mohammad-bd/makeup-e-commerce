@@ -72,12 +72,12 @@ export default function MainNav({ children }) {
 				<div className="header-wrap flex justify-between items-center">
 					{/* Nav Items  */}
 					{children}
-					<div className="header-right flex justify-between items-center gap-2 md:gap-6">
+					<div className="header-right flex justify-between items-center gap-2 lg:gap-6">
 						<ResponsiveSearch />
 						<div className="header-actions flex gap-4">
 							<Link
 								href="/dashboard/my-wishlist"
-								className="single-action hidden md:block"
+								className="single-action hidden lg:block"
 							>
 								<HiOutlineHeart size={24} />
 							</Link>
@@ -90,7 +90,7 @@ export default function MainNav({ children }) {
 									{cart?.length || 0}
 								</span>
 							</button>
-							<div className="relative hidden md:block" ref={popoverRef}>
+							<div className="relative hidden lg:block" ref={popoverRef}>
 								<button className="single-action" onClick={togglePopover}>
 									{user?.image ? (
 										<Image
@@ -128,7 +128,7 @@ export default function MainNav({ children }) {
 									<AuthUserMenus togglePopover={togglePopover} />
 								) : null}
 							</div>
-							{/* <div className="hidden md:block"> */}
+							{/* <div className="hidden lg:block"> */}
 							<LanguageSelector locale={locale} />
 							{/* </div> */}
 						</div>

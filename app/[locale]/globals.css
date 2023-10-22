@@ -167,17 +167,17 @@
 }
 
 .header-actions .single-action {
-	@apply w-12 py-2.5 text-center text-[#475569] md:border md:border-slate-300 md:rounded-full ease-in duration-100 md:hover:bg-primary md:hover:text-white hover:border-transparent;
+	@apply w-12 py-2.5 text-center text-[#475569] lg:border lg:border-slate-300 lg:rounded-full ease-in duration-100 lg:hover:bg-primary lg:hover:text-white hover:border-transparent;
 }
 
 /* Service Features */
 
 .single-feature {
-	@apply relative pr-4;
+	@apply relative pr-2 md:pr-4;
 }
 
 .single-feature::before {
-	@apply absolute content-[''] left-[-32px] top-0 w-px h-full bg-slate-300;
+	@apply absolute content-[''] left-[-16px] md:left-[-32px] top-0 w-px h-full bg-slate-300;
 }
 
 /* Single Product */

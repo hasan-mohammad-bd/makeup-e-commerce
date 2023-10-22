@@ -14,15 +14,20 @@ const ServicesSlider = () => {
 				breakpoints={{
 					0: {
 						slidesPerView: 2,
-						spaceBetween: "140px",
+						spaceBetween: 150,
 					},
 					768: {
+						slidesPerView: 3,
+						spaceBetween: 150,
+					},
+					1024: {
 						slidesPerView: 4,
+						spaceBetween: 150,
 					},
 				}}
 			>
 				<SwiperSlide>
-					<div className="col-span-3 flex items-center gap-4 w-[236px]">
+					<div className="col-span-3 flex items-center gap-4 w-[200px]">
 						<Image
 							src="/assets/images/icons/parcel.png"
 							alt="Replacement"
@@ -36,7 +41,7 @@ const ServicesSlider = () => {
 					</div>{" "}
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className="single-feature col-span-3 flex items-center gap-4 w-[236px]">
+					<div className="single-feature col-span-3 flex items-center gap-4 w-[200px]">
 						<Image
 							src="/assets/images/icons/delivery.png"
 							alt="Replacement"
@@ -50,7 +55,7 @@ const ServicesSlider = () => {
 					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className="single-feature col-span-3 flex items-center gap-4 w-[236px]">
+					<div className="single-feature col-span-3 flex items-center gap-4 w-[220px]">
 						<Image
 							src="/assets/images/icons/pay.png"
 							alt="Replacement"
@@ -64,7 +69,7 @@ const ServicesSlider = () => {
 					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className="single-feature col-span-3 flex items-center gap-4 w-[236px]">
+					<div className="single-feature col-span-3 flex items-center gap-4 w-[220px]">
 						<Image
 							src="/assets/images/icons/support.png"
 							alt="Replacement"

@@ -26,24 +26,24 @@ const IntroSlider = ({ sliders }) => {
 				{sliders.map((slide) => (
 					<SwiperSlide
 						key={slide?.id}
-						className="bg-black rounded-2xl p-4 md:p-12"
+						className="bg-black rounded-2xl p-4 lg:p-12"
 					>
 						<div className="single-hero-slider">
 							<div className="grid grid-cols-12 items-center justify-between">
 								<div className="col-span-7">
 									<div className="hero-slider-content">
-										<p className="text-xs md:text-lg/[24px] font-normal font-body text-white mb-2 md:mb-4">
+										<p className="text-xs lg:text-lg/[24px] font-normal font-body text-white mb-2 lg:mb-4">
 											{slide?.title}
 										</p>
-										<h1 className="text-lg/5 md:text-5xl font-bold font-title text-white">
+										<h1 className="text-lg/5 lg:text-5xl font-bold font-title text-white">
 											{slide?.title_2}
 										</h1>
-										<h3 className="w-fit rounded-full bg-primary md:bg-transparent px-2 py-1 md:p-0 text-sm md:text-4xl/[48px] font-bold font-title text-white my-5">
+										<h3 className="w-fit rounded-full bg-primary lg:bg-transparent px-2 py-1 lg:p-0 text-sm lg:text-4xl/[48px] font-bold font-title text-white my-5">
 											{slide?.text}
 										</h3>
 										<Link
 											href={slide?.url}
-											className="inline-block w-fit md:px-4 text-sm md:text-lg/[48px] text-white md:bg-primary rounded-lg text-center"
+											className="inline-block w-fit lg:px-4 text-sm lg:text-lg/[48px] text-white lg:bg-primary rounded-lg text-center"
 										>
 											সবগুলো দেখুন{" "}
 											<HiChevronRight
@@ -57,7 +57,7 @@ const IntroSlider = ({ sliders }) => {
 								<div className="col-span-5">
 									<div className="single-slider-img flex justify-end">
 										<Image
-											className="animated slider-1-1 object-cover h-[122px] md:h-[252px] w-[140px] md:w-[472px]"
+											className="animated slider-1-1 object-cover h-[122px] lg:h-[252px] w-[140px] lg:w-[472px]"
 											src={slide?.image || `/assets/images/banner/banner-1.png`}
 											alt="Watch"
 											width={472}

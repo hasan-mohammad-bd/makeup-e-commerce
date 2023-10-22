@@ -28,7 +28,7 @@ const ResponsiveMenu = async ({ settings }) => {
 					alt={settings?.name}
 					width={200}
 					height={48}
-					className="h-[48px] w-full py-2 object-contain object-left"
+					className="h-[48px] min-h-[48px] py-2 object-contain object-left"
 				/>
 			</Link>
 			<MegaMenu categories={categories} settings={settings} />

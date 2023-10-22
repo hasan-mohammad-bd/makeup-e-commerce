@@ -52,7 +52,7 @@ export default function MegaMenu({ categories, settings }) {
 	return (
 		<>
 			{(!matches || (matches && isActiveForMobile)) && (
-				<div className="nav-menu container absolute z-30 left-0 top-full lg:static mt-3 lg:mt-0 w-full flex items-center gap-2">
+				<div className="nav-menu container -ml-4 lg:ml-0 absolute z-30 top-full lg:static mt-3 lg:mt-0 flex items-center gap-2">
 					{!menuOpen ? (
 						<button
 							onClick={() => setMenuOpen(!menuOpen)}
