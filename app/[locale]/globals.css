@@ -294,7 +294,7 @@
 }
 
 .footer-widget h5 {
-	@apply text-base/[16px] font-semibold font-title text-[#00B7C9] mt-5 mb-8;
+	@apply text-base/[16px] font-semibold font-title text-[#00B7C9];
 }
 
 .footer-widget .info-list li {

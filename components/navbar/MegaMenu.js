@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { BsArrowRight, BsChevronDown } from "react-icons/bs";
+import { BsArrowRight, BsChevronDown, BsChevronUp } from "react-icons/bs";
 import noImage from "@/public/assets/images/no-image.png";
 import menuOffer from "@/public/assets/images/banner/category-menu-offer.png";
 import { useSelector } from "react-redux";
@@ -64,7 +64,7 @@ export default function MegaMenu({ categories, settings }) {
 						<span
 							className={`hidden lg:flex menuBtn ${menuClasses} cursor-pointer items-center gap-1`}
 						>
-							{translations["category"]} <BsChevronDown />
+							{translations["category"]} <BsChevronUp />
 						</span>
 					)}
 					<Link
