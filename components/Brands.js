@@ -1,5 +1,5 @@
 import { fetchData } from "@/utils/fetchData";
-import BrandSlider from "./elements/sliders/Brands";
+import BrandsSlider from "./elements/sliders/BrandsSlider";
 const Brands = async () => {
 	const data = await fetchData({ api: "brands" });
 	const brands = data?.data || [];
@@ -10,7 +10,7 @@ const Brands = async () => {
 				আমাদের ব্র্যান্ড সমূহ
 			</h2>
 			<div className="brands-slider mt-6  relative">
-				<BrandSlider brands={brands} />
+				<BrandsSlider brands={brands} />
 			</div>
 		</div>
 	);

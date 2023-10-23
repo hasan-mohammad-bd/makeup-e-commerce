@@ -19,7 +19,7 @@ export default function Home({ searchParams }) {
 	return (
 		<>
 			<section className="bg-slate-100 lg:bg-white banner pt-16 lg:pt-0">
-				<div className="bg-white py-3">
+				<div className="bg-white py-3 lg:pt-5">
 					<Intro />
 				</div>
 			</section>
@@ -100,18 +100,7 @@ export default function Home({ searchParams }) {
 			</section>
 
 			<section className="new-products py-14">
-				<div className="container">
-					<div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
-						<h2 className="sec-title">শপে নতুন এসেছে</h2>
-						<Link href="/products" className="all-btn">
-							সবগুলো দেখুন <HiArrowLongRight size={24} />{" "}
-						</Link>
-					</div>
-
-					<div className="new-slider mt-6  relative">
-						<NewArrival />
-					</div>
-				</div>
+				<NewArrival />
 			</section>
 
 			<VideoBanner />

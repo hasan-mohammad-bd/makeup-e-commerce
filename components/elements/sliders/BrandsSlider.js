@@ -8,7 +8,7 @@ import noImage from "@/public/assets/images/no-image.png";
 // ** Import Icons
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
 
-const Brands = ({ brands }) => {
+const BrandsSlider = ({ brands }) => {
 	return (
 		<>
 			<Swiper
@@ -58,4 +58,4 @@ const Brands = ({ brands }) => {
 	);
 };
 
-export default Brands;
+export default BrandsSlider;

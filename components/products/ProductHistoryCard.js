@@ -10,7 +10,7 @@ import { formatLongNumber, getFractionFixed } from "@/utils/formatNumber";
 import { FaStar } from "react-icons/fa";
 import { getDaysSinceCreation } from "@/utils/formatDate";
 
-const SingleProductList = ({ product, isHistory }) => {
+const ProductHistoryCard = ({ product, isHistory }) => {
 	const [loading, setLoading] = useState(true);
 
 	const {
@@ -113,4 +113,4 @@ const SingleProductList = ({ product, isHistory }) => {
 	);
 };
 
-export default SingleProductList;
+export default ProductHistoryCard;
