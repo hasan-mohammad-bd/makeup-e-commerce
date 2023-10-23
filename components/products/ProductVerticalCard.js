@@ -84,7 +84,7 @@ const ProductVerticalCard = ({ product }) => {
 						{total_rating === 0 ? "No Rating" : formatLongNumber(total_rating)}
 					</span>
 				</div>
-				<div className="product-price text-sm flex gap-2">
+				<div className="product-price text-sm flex items-center gap-2">
 					<span className="text-base/4 lg:text-lg/[24px] font-semibold text-red-500">
 						৳{new_price}
 					</span>

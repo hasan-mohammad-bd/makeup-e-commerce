@@ -77,6 +77,10 @@
 	@apply inline-flex justify-center items-center w-full gap-2 py-2 px-8 rounded-full border border-slate-300;
 }
 
+.border-btn {
+	@apply inline-flex justify-center items-center w-full gap-2 py-2 px-8 font-semibold rounded-lg border bg-white border-secondary-700 text-secondary-700;
+}
+
 .overflow-text {
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
