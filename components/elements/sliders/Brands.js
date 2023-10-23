@@ -47,10 +47,10 @@ const Brands = ({ brands }) => {
 			</Swiper>
 
 			<div className="slider-arrow hidden lg:block">
-				<span className="slider-btn slider-prev slick-arrow custom_prev_br -mt-5 -ml-5">
+				<span className="slider-btn slider-prev slick-arrow custom_prev_br">
 					<TfiAngleLeft />
 				</span>
-				<span className="slider-btn slider-next slick-arrow custom_next_br -mt-5 -mr-5">
+				<span className="slider-btn slider-next slick-arrow custom_next_br">
 					<TfiAngleRight />
 				</span>
 			</div>
