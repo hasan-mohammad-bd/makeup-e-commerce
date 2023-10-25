@@ -174,9 +174,17 @@
 
 /* Single Product */
 
+.product-rating {
+	@apply flex items-center w-fit bg-slate-100 lg:bg-white rounded-lg lg:rounded-none px-2 lg:px-0 py-1 gap-2 mb-2 text-xs/4 lg:text-sm/4;
+}
+
+.discount-badge {
+	@apply inline-block text-xs w-fit text-white bg-red-500 rounded-md py-1 px-1;
+}
+
 .product-title {
 	-webkit-line-clamp: 1;
-	@apply my-1;
+	@apply my-1 text-sm lg:text-base font-semibold text-slate-900 font-body overflow-text;
 }
 
 .product-img-action-wrap .action-btn {

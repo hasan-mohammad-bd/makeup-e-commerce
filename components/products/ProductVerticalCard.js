@@ -68,14 +68,11 @@ const ProductVerticalCard = ({ product }) => {
 				</div>
 
 				<h2>
-					<Link
-						href={`/products/${slug}`}
-						className="product-title text-sm lg:text-base font-semibold text-slate-900 font-body overflow-text"
-					>
+					<Link href={`/products/${slug}`} className="product-title">
 						{product_name}
 					</Link>
 				</h2>
-				<div className="rating-result flex items-center w-fit bg-slate-100 rounded-lg px-2 py-1 gap-2 mb-2 text-xs/4">
+				<div className="product-rating">
 					<span className="font-semibold text-slate-900">
 						{getFractionFixed(averate_rating) || 0}{" "}
 						<FaStar className="text-primary pb-1" />

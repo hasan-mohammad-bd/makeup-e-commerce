@@ -21,7 +21,7 @@ import {
 	HiArrowLongRight,
 } from "react-icons/hi2";
 
-const SingleProduct = ({ product, isFlashSale }) => {
+const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 	const { user } = useSelector((state) => state.auth);
 	const [loading, setLoading] = useState(true);
 	const [addToWishlist] = useAddToWishListMutation();
@@ -85,7 +85,7 @@ const SingleProduct = ({ product, isFlashSale }) => {
 		<>
 			{!loading ? (
 				<>
-					<div className="product-card-wrap min-w-[236px] bg-white border border-slate-200 rounded-xl hover:border-primary">
+					<div className="product-card-wrap min-w-[166px] bg-white border border-slate-200 rounded-xl hover:border-primary">
 						<div className="product-img-action-wrap relative">
 							{getDaysSinceCreation(created_at) < 8 && (
 								<div className="absolute top-3 left-3 z-20">
@@ -106,7 +106,9 @@ const SingleProduct = ({ product, isFlashSale }) => {
 							<div className="product-img p-2 pb-0">
 								<Link href="/products/[slug]" as={`/products/${slug}`}>
 									<Image
-										className="default-img h-56 w-56 rounded-lg"
+										className={`default-img ${
+											isBestSale ? "h-[194px] w-[196px]" : "h-full w-full"
+										} lg:h-56  lg:w-56 rounded-lg`}
 										src={image || "/assets/images/no-image.png"}
 										alt={product_name}
 										width={226}
@@ -126,14 +128,11 @@ const SingleProduct = ({ product, isFlashSale }) => {
 								</span>
 							</div>
 							<h2>
-								<Link
-									href={`/products/${slug}`}
-									className="product-title text-base font-semibold text-slate-900 font-body overflow-text"
-								>
+								<Link href={`/products/${slug}`} className="product-title">
 									{product_name}
 								</Link>
 							</h2>
-							<div className="rating-result flex items-center gap-2 mb-4">
+							<div className="product-rating">
 								<span className="font-semibold text-slate-900">
 									{getFractionFixed(averate_rating) || 0}{" "}
 									<FaStar className="text-primary pb-1" />
@@ -144,20 +143,20 @@ const SingleProduct = ({ product, isFlashSale }) => {
 										: formatLongNumber(total_rating)}
 								</span>
 							</div>
-							<div className="product-price mb-3 flex gap-2">
+							<div className="product-price mb-3 flex flex-col justify-start lg:flex-row gap-2">
 								<span className="text-lg/[24px] font-semibold text-red-500">
 									৳{new_price}
 								</span>
 								{typeof discount_percentage === "number" &&
 								discount_percentage > 0 ? (
-									<>
+									<div className="flex items-center gap-2">
 										<del className="old-price text-lg/[24px] font-normal text-slate-400">
 											৳{old_price}
 										</del>
-										<span className="discount inline-block text-xs text-white bg-red-500 rounded-md py-1 px-1 ml-2">
+										<span className="discount-badge">
 											-{getFractionFixed(discount_percentage)}%
 										</span>
-									</>
+									</div>
 								) : null}
 							</div>
 							<div className="product-actions flex justify-center items-center gap-2">

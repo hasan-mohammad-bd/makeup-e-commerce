@@ -76,14 +76,11 @@ const ProductHistoryCard = ({ product, isHistory }) => {
 					</div>
 				)}
 				<h2>
-					<Link
-						href={`/products/${slug}`}
-						className="product-title text-base font-semibold text-slate-900 font-body overflow-text"
-					>
+					<Link href={`/products/${slug}`} className="product-title">
 						{product_name}
 					</Link>
 				</h2>
-				<div className="rating-result flex items-center gap-2 mb-2">
+				<div className="product-rating">
 					<span className="font-semibold text-slate-900">
 						{getFractionFixed(averate_rating) || 0}{" "}
 						<FaStar className="text-primary pb-1" />
@@ -102,7 +99,7 @@ const ProductHistoryCard = ({ product, isHistory }) => {
 							<del className="old-price text-lg/[24px] font-normal text-slate-400">
 								৳{old_price}
 							</del>
-							<span className="discount inline-block text-xs text-white bg-red-500 rounded-md py-1 px-1 ml-2">
+							<span className="discount-badge">
 								-{getFractionFixed(discount_percentage)}%
 							</span>
 						</>

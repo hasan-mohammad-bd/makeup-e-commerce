@@ -1,10 +1,7 @@
-import Image from "next/image";
-
 import ServiceFeatures from "@/components/ServiceFeatures";
 import Intro from "@/components/Intro";
 import FlashSale from "@/components/FlashSale";
 import BestSell from "@/components/BestSell";
-import AllProducts from "@/components/products/AllProducts";
 import NewArrival from "@/components/NewArrival";
 import Brands from "@/components/Brands";
 import Link from "next/link";
@@ -14,6 +11,7 @@ import PopularCategories from "@/components/PopularCategories";
 
 // ** Import Iocns
 import { HiArrowLongRight } from "react-icons/hi2";
+import HomeAllProducts from "@/components/HomeAllProducts";
 
 export default function Home({ searchParams }) {
 	return (
@@ -55,27 +53,7 @@ export default function Home({ searchParams }) {
 			</section>
 
 			<section className="best-sell bg-slate-50 mt-8 py-14">
-				<div className="container">
-					<div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
-						<h2 className="sec-title">
-							<Image
-								src={`/assets/images/icons/fire-1.png`}
-								alt="Fire"
-								width={32}
-								height={32}
-								className="inline-block mr-1"
-							/>
-							বেস্ট সেলিং প্রডাক্ট
-						</h2>
-						<Link href="/products" className="all-btn">
-							সবগুলো দেখুন <HiArrowLongRight size={24} />{" "}
-						</Link>
-					</div>
-
-					<div className="bestSell-slider mt-6 relative">
-						<BestSell />
-					</div>
-				</div>
+				<BestSell />
 			</section>
 
 			<section className="banners pt-14">
@@ -84,19 +62,8 @@ export default function Home({ searchParams }) {
 				</div>
 			</section>
 
-			<section className="all-products py-14">
-				<div className="container">
-					<div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
-						<h2 className="sec-title">সকল প্রডাক্ট</h2>
-						<Link href="/products" className="all-btn">
-							সবগুলো দেখুন <HiArrowLongRight size={24} />{" "}
-						</Link>
-					</div>
-
-					<div className="bestSell-slider mt-6">
-						<AllProducts customSearchParams={searchParams} pagination={true} />
-					</div>
-				</div>
+			<section className="all-products pt-6 lg:pt-14">
+				<HomeAllProducts />
 			</section>
 
 			<section className="new-products py-14">
