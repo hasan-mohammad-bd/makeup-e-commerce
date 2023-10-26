@@ -5,18 +5,9 @@ import Link from "next/link";
 import { HiPlay } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
 
-const VideoBanner = async () => {
-	const [settingsRes, translationRes] = await Promise.allSettled([
-		fetchData({ api: `info/basic` }),
-		fetchData({ api: `translations` }),
-	]);
-
-	const settings =
-		settingsRes.status === "fulfilled" ? settingsRes.value?.data || {} : {};
-	const translations =
-		translationRes.status === "fulfilled"
-			? translationRes.value?.data || {}
-			: {};
+const VideoBanner = async ({ translations }) => {
+	const data = await fetchData({ api: "info/basic" });
+	const settings = data?.data || {};
 
 	return (
 		<>

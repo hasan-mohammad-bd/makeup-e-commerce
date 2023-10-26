@@ -7,7 +7,7 @@ import SingleProduct from "@/components/products/SingleProduct";
 // ** Import Icons
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
 
-const BestSell = ({ bestProducts }) => {
+const BestSellSlider = ({ bestProducts }) => {
 	return (
 		<>
 			<Swiper
@@ -49,4 +49,4 @@ const BestSell = ({ bestProducts }) => {
 	);
 };
 
-export default BestSell;
+export default BestSellSlider;

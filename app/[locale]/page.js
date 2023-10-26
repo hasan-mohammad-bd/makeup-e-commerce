@@ -1,19 +1,27 @@
-import ServiceFeatures from "@/components/ServiceFeatures";
-import Intro from "@/components/Intro";
-import FlashSale from "@/components/FlashSale";
-import BestSell from "@/components/BestSell";
-import NewArrival from "@/components/NewArrival";
-import Brands from "@/components/Brands";
 import Link from "next/link";
-import VideoBanner from "@/components/elements/VideoBanner";
-import FeaturedBanner from "@/components/FeaturedBanner";
-import PopularCategories from "@/components/PopularCategories";
+import Image from "next/image";
+import { fetchData } from "@/utils/fetchData";
+
+// Components
+import Intro from "./_components/intro";
+import Brands from "./_components/brands";
+import BestSell from "./_components/best-sale";
+import FlashSale from "./_components/flash-sale";
+import NewArrival from "./_components/new-arrival";
+import VideoBanner from "./_components/VideoBanner";
+import FeaturedBanner from "./_components/FeaturedBanner";
+import HomeAllProducts from "./_components/HomeAllProducts";
+import ServiceFeatures from "./_components/service-features";
+import PopularCategories from "./_components/popular-categories";
 
 // ** Import Iocns
 import { HiArrowLongRight } from "react-icons/hi2";
-import HomeAllProducts from "@/components/HomeAllProducts";
 
-export default function Home({ searchParams }) {
+export default async function Home() {
+	const data = await fetchData({ api: "translations" });
+	const translations = data?.data || {};
+	// console.log(translations);
+
 	return (
 		<>
 			<section className="bg-slate-100 lg:bg-white banner pt-16 lg:pt-0">
@@ -53,7 +61,24 @@ export default function Home({ searchParams }) {
 			</section>
 
 			<section className="best-sell bg-slate-50 mt-8 py-14">
-				<BestSell />
+				<div className="container">
+					<div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
+						<h2 className="sec-title">
+							<Image
+								src={`/assets/images/icons/fire-1.png`}
+								alt="Fire"
+								width={32}
+								height={32}
+								className="inline-block mr-1"
+							/>
+							{translations["best-selling-product"]}
+						</h2>
+						<Link href="/products" className="all-btn capitalize">
+							{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
+						</Link>
+					</div>
+					<BestSell />
+				</div>
 			</section>
 
 			<section className="banners pt-14">
@@ -63,17 +88,55 @@ export default function Home({ searchParams }) {
 			</section>
 
 			<section className="all-products pt-6 lg:pt-14">
-				<HomeAllProducts />
+				<div className="container">
+					<div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
+						<h2 className="sec-title capitalize">
+							{translations["all-products"]}
+						</h2>
+						<Link href="/products" className="all-btn capitalize">
+							{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
+						</Link>
+					</div>
+
+					<HomeAllProducts />
+				</div>
 			</section>
 
 			<section className="new-products py-14">
-				<NewArrival />
+				<div className="container">
+					<div className="sec-heading w-full flex justify-between items-center lg:border-b border-slate-200 pb-3">
+						<h2 className="sec-title capitalize">
+							{translations["new-in-shop"]}
+						</h2>
+						<Link
+							href="/products"
+							className="all-btn !hidden lg:!block capitalize"
+						>
+							{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
+						</Link>
+					</div>
+
+					<NewArrival />
+					<Link
+						href="/products"
+						className="border-btn mt-3 lg:hidden capitalize"
+					>
+						{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
+					</Link>
+				</div>
 			</section>
 
-			<VideoBanner />
+			<VideoBanner translations={translations} />
 
 			<section className="all-brands py-14">
-				<Brands />
+				<div className="container">
+					<h2 className="sec-title text-center lg:text-left">
+						{translations["our-brands"]}
+					</h2>
+					<div className="brands-slider mt-6  relative">
+						<Brands />
+					</div>
+				</div>
 			</section>
 		</>
 	);

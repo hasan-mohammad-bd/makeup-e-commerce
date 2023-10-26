@@ -1,5 +1,5 @@
 import { fetchData } from "@/utils/fetchData";
-import IntroSlider from "./elements/sliders/IntroSlider";
+import IntroSlider from "./IntroSlider";
 
 const Intro = async () => {
 	const { data: sliders = [] } = await fetchData({

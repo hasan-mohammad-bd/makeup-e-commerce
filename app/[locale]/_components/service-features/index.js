@@ -1,4 +1,4 @@
-import ServicesSlider from "./elements/sliders/ServicesSlider";
+import ServicesSlider from "./ServicesSlider";
 
 export default function ServiceFeatures() {
 	return (
