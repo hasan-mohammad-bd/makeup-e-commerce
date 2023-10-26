@@ -16,6 +16,7 @@ import PopularCategories from "./_components/popular-categories";
 
 // ** Import Iocns
 import { HiArrowLongRight } from "react-icons/hi2";
+import SectionTitle from "@/components/SectionTitle";
 
 export default async function Home() {
 	const data = await fetchData({ api: "translations" });
@@ -48,9 +49,11 @@ export default async function Home() {
 			>
 				<div className="container">
 					<div className="sec-heading w-full flex justify-between items-center">
-						<h2 className="sec-title !text-white">জনপ্রিয় ক্যাটাগর‍ি</h2>
-						<Link href="/categories" className="all-btn !text-white">
-							সবগুলো দেখুন <HiArrowLongRight size={24} />{" "}
+						<h2 className="sec-title !text-white capitalize">
+							{translations["popular-category"]}
+						</h2>
+						<Link href="/categories" className="all-btn !text-white capitalize">
+							{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
 						</Link>
 					</div>
 
@@ -89,24 +92,9 @@ export default async function Home() {
 
 			<section className="all-products pt-6 lg:pt-14">
 				<div className="container">
-					<div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
-						<h2 className="sec-title capitalize">
-							{translations["all-products"]}
-						</h2>
-						<Link href="/products" className="all-btn capitalize">
-							{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
-						</Link>
-					</div>
-
-					<HomeAllProducts />
-				</div>
-			</section>
-
-			<section className="new-products py-14">
-				<div className="container">
 					<div className="sec-heading w-full flex justify-between items-center lg:border-b border-slate-200 pb-3">
 						<h2 className="sec-title capitalize">
-							{translations["new-in-shop"]}
+							{translations["all-products"]}
 						</h2>
 						<Link
 							href="/products"
@@ -116,6 +104,23 @@ export default async function Home() {
 						</Link>
 					</div>
 
+					<HomeAllProducts />
+					<Link
+						href="/products"
+						className="border-btn mt-3 lg:hidden capitalize"
+					>
+						{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
+					</Link>
+				</div>
+			</section>
+
+			<section className="new-products pt-6 lg:pt-14">
+				<div className="container">
+					<SectionTitle
+						title={translations["new-in-shop"]}
+						href="/products"
+						buttonText={translations["see-all"]}
+					/>
 					<NewArrival />
 					<Link
 						href="/products"

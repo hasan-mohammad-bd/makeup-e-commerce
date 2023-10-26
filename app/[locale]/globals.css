@@ -78,7 +78,7 @@
 }
 
 .border-btn {
-	@apply inline-flex justify-center items-center w-full gap-2 py-2 px-8 font-semibold rounded-lg border bg-white border-secondary-700 text-secondary-700;
+	@apply inline-flex justify-center items-center w-full gap-2 py-[10px] px-3 font-semibold rounded-lg border bg-white border-secondary-700 text-secondary-700;
 }
 
 .overflow-text {
@@ -196,7 +196,7 @@
 }
 
 .buy-btn {
-	@apply text-center text-base/[16px] font-semibold font-title text-white bg-[#F99104] w-[168px] rounded-md py-2 active:scale-95;
+	@apply text-center text-base/[16px] font-semibold font-title text-white bg-[#F99104] w-full rounded-md h-[36px] active:scale-95;
 }
 
 /* From common classes  */

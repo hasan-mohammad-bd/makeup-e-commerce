@@ -172,9 +172,12 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 								</button>
 								<button
 									onClick={() => handleCheckout(product)}
-									className="buy-btn px-2"
+									className="buy-btn flex-center gap-1"
 								>
-									এখনই কিনুন <HiArrowLongRight size={20} />
+									এখনই কিনুন
+									<div className="hidden lg:block">
+										<HiArrowLongRight className="hidden lg:block" size={20} />
+									</div>
 								</button>
 							</div>
 							{isFlashSale && (

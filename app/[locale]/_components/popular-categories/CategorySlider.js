@@ -6,10 +6,6 @@ import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import noImage from "@/public/assets/images/no-image.png";
 
-// ** Import Icons
-import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
-import ContentLoader from "react-content-loader";
-
 const CategorySlider = ({ categories }) => {
 	return (
 		<>
@@ -19,11 +15,6 @@ const CategorySlider = ({ categories }) => {
 				spaceBetween={50}
 				loop={false}
 				pagination={{ clickable: true }}
-				// navigation={{
-				//     prevEl: ".custom_prev_cat",
-				//     nextEl: ".custom_next_cat",
-				// }}
-
 				breakpoints={{
 					0: {
 						// width: 576,
@@ -59,15 +50,6 @@ const CategorySlider = ({ categories }) => {
 					</SwiperSlide>
 				))}
 			</Swiper>
-
-			{/* <div className="slider-arrow">
-                <span className="slider-btn slider-prev slick-arrow custom_prev_cat">
-                    <TfiAngleLeft/>
-                </span>
-                <span className="slider-btn slider-next slick-arrow custom_next_cat">
-                    <TfiAngleRight/>
-                </span>
-            </div> */}
 		</>
 	);
 };
