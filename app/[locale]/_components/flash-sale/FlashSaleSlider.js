@@ -19,6 +19,17 @@ const FlashSaleSlider = ({ saleProducts }) => {
 					prevEl: ".custom_prev_f",
 					nextEl: ".custom_next_f",
 				}}
+				breakpoints={{
+					0: {
+						slidesPerView: 2,
+						spaceBetween: 60,
+						navigation: false,
+					},
+					768: {
+						slidesPerView: 5,
+						spaceBetween: 20,
+					},
+				}}
 			>
 				{saleProducts?.map((product, i) => (
 					<SwiperSlide key={i}>
@@ -27,7 +38,7 @@ const FlashSaleSlider = ({ saleProducts }) => {
 				))}
 			</Swiper>
 
-			<div className="slider-arrow">
+			<div className="slider-arrow hidden lg:block">
 				<span className="slider-btn slider-prev slick-arrow custom_prev_f">
 					<TfiAngleLeft />
 				</span>

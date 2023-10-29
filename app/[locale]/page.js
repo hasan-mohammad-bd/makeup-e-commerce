@@ -37,12 +37,12 @@ export default async function Home() {
 
 			<section className="flash-sale mt-28">
 				<div className="container">
-					<FlashSale />
+					<FlashSale translations={translations} />
 				</div>
 			</section>
 
 			<section
-				className="all-category py-14 mt-12"
+				className="all-category py-6 lg:py-14 mt-6 lg:mt-12"
 				style={{
 					backgroundImage: "linear-gradient(90deg, #00B7C9 0%, #00C999 100%)",
 				}}
@@ -52,7 +52,10 @@ export default async function Home() {
 						<h2 className="sec-title !text-white capitalize">
 							{translations["popular-category"]}
 						</h2>
-						<Link href="/categories" className="all-btn !text-white capitalize">
+						<Link
+							href="/categories"
+							className="all-btn !text-white capitalize !hidden lg:!block"
+						>
 							{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
 						</Link>
 					</div>
@@ -60,31 +63,35 @@ export default async function Home() {
 					<div className="category-slider mt-12  relative">
 						<PopularCategories />
 					</div>
+					<Link
+						href="/products"
+						className="border-btn mt-3 lg:hidden capitalize"
+					>
+						{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
+					</Link>
 				</div>
 			</section>
 
-			<section className="best-sell bg-slate-50 mt-8 py-14">
+			<section className="best-sell bg-slate-50 mt-8 py-6 lg:py-14">
 				<div className="container">
-					<div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
-						<h2 className="sec-title">
-							<Image
-								src={`/assets/images/icons/fire-1.png`}
-								alt="Fire"
-								width={32}
-								height={32}
-								className="inline-block mr-1"
-							/>
-							{translations["best-selling-product"]}
-						</h2>
-						<Link href="/products" className="all-btn capitalize">
-							{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
-						</Link>
-					</div>
+					<SectionTitle
+						title={translations["best-selling-product"]}
+						href="/products"
+						buttonText={translations["see-all"]}
+					>
+						<Image
+							src={`/assets/images/icons/fire-1.png`}
+							alt="Fire"
+							width={32}
+							height={32}
+							className="inline-block mr-1"
+						/>
+					</SectionTitle>
 					<BestSell />
 				</div>
 			</section>
 
-			<section className="banners pt-14">
+			<section className="banners pt-6 lg:pt-14">
 				<div className="container">
 					<FeaturedBanner />
 				</div>
@@ -92,18 +99,11 @@ export default async function Home() {
 
 			<section className="all-products pt-6 lg:pt-14">
 				<div className="container">
-					<div className="sec-heading w-full flex justify-between items-center lg:border-b border-slate-200 pb-3">
-						<h2 className="sec-title capitalize">
-							{translations["all-products"]}
-						</h2>
-						<Link
-							href="/products"
-							className="all-btn !hidden lg:!block capitalize"
-						>
-							{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
-						</Link>
-					</div>
-
+					<SectionTitle
+						title={translations["all-products"]}
+						href="/products"
+						buttonText={translations["see-all"]}
+					/>
 					<HomeAllProducts />
 					<Link
 						href="/products"
@@ -131,13 +131,13 @@ export default async function Home() {
 				</div>
 			</section>
 
-			<VideoBanner translations={translations} />
+			<section className="mt-6 lg:mt-14">
+				<VideoBanner translations={translations} />
+			</section>
 
-			<section className="all-brands py-14">
+			<section className="all-brands py-6 lg:py-14">
 				<div className="container">
-					<h2 className="sec-title text-center lg:text-left">
-						{translations["our-brands"]}
-					</h2>
+					<SectionTitle title={translations["our-brands"]} />
 					<div className="brands-slider mt-6  relative">
 						<Brands />
 					</div>

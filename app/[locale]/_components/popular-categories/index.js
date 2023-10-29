@@ -6,7 +6,7 @@ const PopularCategories = async () => {
 	const popularCategories = data?.data || [];
 	return (
 		<>
-			<CategorySlider categories={popularCategories} />
+			<CategorySlider categoryList={popularCategories} />
 		</>
 	);
 };

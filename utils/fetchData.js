@@ -1,9 +1,9 @@
 import {
-  // getTranslations, // like `useTranslations`
-  // getFormatter, // like `useFormatter`
-  getLocale, // like `useLocale`
-  // getNow, // like `useNow`
-  // getTimeZone // like `useTimeZone`
+	// getTranslations, // like `useTranslations`
+	// getFormatter, // like `useFormatter`
+	getLocale, // like `useLocale`
+	// getNow, // like `useNow`
+	// getTimeZone // like `useTimeZone`
 } from "next-intl/server";
 
 /**
@@ -16,22 +16,22 @@ import {
  * message "Failed to fetch data".
  */
 export async function fetchData(config) {
-  // fetch(`${process.env.server}/products`, { cache: 'force-cache' });
-  const res = await fetch(`${process.env.server}/${config?.api}`, {
-    next: { revalidate: config?.revalidate || 300 },
-    headers: {
-      AmsPublickey: process.env.AMS_PUBLIC_KEY,
-      AmsPrivateKey: process.env.AMS_PRIVATE_KEY,
-      lang: getLocale(),
-    },
-  });
-  const data = await res.json();
+	// fetch(`${process.env.server}/products`, { cache: 'force-cache' });
+	const res = await fetch(`${process.env.server}/${config?.api}`, {
+		next: { revalidate: 59 },
+		headers: {
+			AmsPublickey: process.env.AMS_PUBLIC_KEY,
+			AmsPrivateKey: process.env.AMS_PRIVATE_KEY,
+			lang: getLocale(),
+		},
+	});
+	const data = await res.json();
 
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
+	// Recommendation: handle errors
+	if (!res.ok) {
+		// This will activate the closest `error.js` Error Boundary
+		throw new Error("Failed to fetch data");
+	}
 
-  return data;
+	return data;
 }
