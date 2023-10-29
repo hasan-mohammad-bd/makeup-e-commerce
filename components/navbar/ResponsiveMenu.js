@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { fetchData } from "@/utils/fetchData";
 import dynamic from "next/dynamic";
 const MegaMenu = dynamic(() => import("./MegaMenu"), {
 	ssr: false,
@@ -9,17 +8,7 @@ const MegaMenu = dynamic(() => import("./MegaMenu"), {
 	// ),
 });
 
-const ResponsiveMenu = async ({ settings }) => {
-	// const { data: settings = {} } = await fetchData({ api: "info/basic" });
-	// const { data: categories = [] } = await fetchData({ api: "categories" });
-
-	const [categoriesRes] = await Promise.allSettled([
-		fetchData({ api: "popular-categories?no_child=1" }),
-	]);
-
-	const categories =
-		categoriesRes.status === "fulfilled" ? categoriesRes.value?.data || [] : [];
-
+const ResponsiveMenu = ({ settings }) => {
 	return (
 		<div className="header-left flex items-center gap-4">
 			<Link href="/" className="logo">
@@ -31,7 +20,7 @@ const ResponsiveMenu = async ({ settings }) => {
 					className="h-[48px] min-h-[48px] py-2 object-contain object-left"
 				/>
 			</Link>
-			<MegaMenu categories={categories} settings={settings} />
+			<MegaMenu settings={settings} />
 		</div>
 	);
 };

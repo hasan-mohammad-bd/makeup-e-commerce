@@ -1,20 +1,13 @@
 import { fetchData } from "@/utils/fetchData";
 import MainNav from "./MainNav";
-import ResponsiveMenu from "./ResponsiveMenu";
 
 const Header = async () => {
-	const [settingsRes] = await Promise.allSettled([
-		fetchData({ api: `info/basic` }),
-	]);
-
-	const settings =
-		settingsRes.status === "fulfilled" ? settingsRes.value?.data || {} : {};
+	const data = await fetchData({ api: "info/basic" });
+	const settings = data?.data || {};
 
 	return (
 		<header className="header">
-			<MainNav>
-				<ResponsiveMenu settings={settings} />
-			</MainNav>
+			<MainNav settings={settings} />
 		</header>
 	);
 };

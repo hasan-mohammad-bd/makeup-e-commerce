@@ -20,8 +20,9 @@ import {
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { useParams } from "next/navigation";
 import ResponsiveSearch from "./ResponsiveSearch";
+import ResponsiveMenu from "./ResponsiveMenu";
 
-export default function MainNav({ children }) {
+export default function MainNav({ settings }) {
 	const { locale } = useParams();
 	const [scroll, setScroll] = useState(0);
 	const { cart } = useSelector((state) => state.cart);
@@ -71,7 +72,7 @@ export default function MainNav({ children }) {
 			<div className="container">
 				<div className="header-wrap flex justify-between items-center">
 					{/* Nav Items  */}
-					{children}
+					<ResponsiveMenu settings={settings} />
 					<div className="header-right flex justify-between items-center gap-2 lg:gap-6">
 						<ResponsiveSearch />
 						<div className="header-actions flex gap-4">

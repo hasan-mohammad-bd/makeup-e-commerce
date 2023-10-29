@@ -8,10 +8,13 @@ import menuOffer from "@/public/assets/images/banner/category-menu-offer.png";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useParams, usePathname } from "next/navigation";
+import { useGetPopularCategoriesQuery } from "@/store/features/api/categoriesAPI";
 
-export default function MegaMenu({ categories, settings }) {
+export default function MegaMenu({ settings }) {
 	const pathname = usePathname();
 	const { locale } = useParams();
+	const { data: categoriesData } = useGetPopularCategoriesQuery({ locale });
+	const popularCategories = categoriesData?.data || [];
 	const matches = useMediaQuery("(max-width: 768px)");
 	const isActiveForMobile = [
 		`/${locale}`,
@@ -92,7 +95,7 @@ export default function MegaMenu({ categories, settings }) {
 					<div className="container flex gap-6 py-8 pl-8">
 						<div className="">
 							<div className="grid grid-cols-4 gap-4">
-								{categories?.slice(0, 8)?.map((category, i) => (
+								{popularCategories?.slice(0, 8)?.map((category, i) => (
 									<Link
 										key={i}
 										href={`/categories/${category.slug}`}

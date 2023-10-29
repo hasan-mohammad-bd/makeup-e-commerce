@@ -1,17 +1,27 @@
 import apiSlice from "./apiSlice";
 
 const categoriesAPI = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
-    getCategories: builder.query({
-      query: (payload) => ({
-        url: "categories",
-        headers: {
-          lang: payload?.locale,
-        },
-      }),
-      providesTags: ["categories"],
-    }),
-  }),
+	endpoints: (builder) => ({
+		getCategories: builder.query({
+			query: (payload) => ({
+				url: "categories",
+				headers: {
+					lang: payload?.locale,
+				},
+			}),
+			providesTags: ["categories"],
+		}),
+		getPopularCategories: builder.query({
+			query: (payload) => ({
+				url: "popular-categories?no_child=1",
+				headers: {
+					lang: payload?.locale,
+				},
+			}),
+			providesTags: ["popular-categories"],
+		}),
+	}),
 });
 
-export const { useGetCategoriesQuery } = categoriesAPI;
+export const { useGetCategoriesQuery, useGetPopularCategoriesQuery } =
+	categoriesAPI;

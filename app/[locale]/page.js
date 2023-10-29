@@ -65,7 +65,7 @@ export default async function Home() {
 					</div>
 					<Link
 						href="/products"
-						className="border-btn mt-3 lg:hidden capitalize"
+						className="border-btn mt-10 lg:hidden capitalize"
 					>
 						{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
 					</Link>
