@@ -1,26 +1,25 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 
 // ** Import Icons
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
-import { fetchData } from "@/utils/fetchData";
 import FooterPages from "./FooterPages";
 import SocialIcon from "../elements/SocialIcon";
+import { useSelector } from "react-redux";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { usePathname } from "next/navigation";
 
-const Footer = async () => {
-	const [settingsRes, translationRes] = await Promise.allSettled([
-		fetchData({ api: `info/basic` }),
-		fetchData({ api: `translations` }),
-	]);
+const Footer = () => {
+	const matches = useMediaQuery("(max-width: 768px)");
+	const pathArray = usePathname().split("/");
+	// console.log(pathArray);
+	const { settings, settingsLoading, translationsLoading, translations } =
+		useSelector((state) => state.common);
 
-	const settings =
-		settingsRes.status === "fulfilled" ? settingsRes.value?.data || {} : {};
-	const translations =
-		translationRes.status === "fulfilled"
-			? translationRes.value?.data || {}
-			: {};
-	// console.log(translations);
+	if (matches && pathArray.includes("categories")) return null;
+	if (settingsLoading || translationsLoading) return null;
 
 	const footerPage = settings?.footer_page || {};
 	const helpPage = settings?.help_page || {};

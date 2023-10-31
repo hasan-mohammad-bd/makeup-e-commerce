@@ -4,9 +4,10 @@ const initialState = {
 	isGlobalLoading: false,
 	locale: "en",
 	isFilterPanelOpen: false,
-	settings: null,
+	settings: {},
 	settingsLoading: true,
 	translations: {},
+	translationsLoading: true,
 };
 
 const commonSlice = createSlice({
@@ -25,6 +26,7 @@ const commonSlice = createSlice({
 		},
 		setTranslations: (state, action) => {
 			state.translations = action.payload;
+			state.translationsLoading = false;
 		},
 		setLocale: (state, action) => {
 			state.locale = action.payload;

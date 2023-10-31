@@ -14,6 +14,9 @@ module.exports = {
 				body: ["Noto Sans Bengali", ...defaultTheme.fontFamily.sans],
 				title: ["Hind Siliguri", ...defaultTheme.fontFamily.serif],
 			},
+			boxShadow: {
+				top: "0 2px 4px 0 rgba(0, 0, 0, 0.2)",
+			},
 			screens: {
 				sm: "576px",
 				md: "768px",

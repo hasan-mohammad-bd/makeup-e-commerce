@@ -6,9 +6,8 @@ import { useLocale } from "next-intl";
 import { notFound } from "next/navigation";
 
 // ** Import Components
-import Footer from "@/components/footer/Footer";
+// import Footer from "@/components/footer/Footer";
 import CheckConnection from "@/components/CheckConnection";
-import Header from "@/components/navbar/Header";
 import CartTray from "@/components/elements/CartTray";
 import ReduxProvider from "@/store/ReduxProvider";
 
@@ -23,6 +22,9 @@ import ProductSelect from "@/components/side-drawers/ProductSelect";
 import PersistUser from "@/components/utility/PersistUser";
 import GlobalLoader from "@/components/utility/GlobalLoader";
 import ServerDataProvider from "@/components/utility/ServerDataProvider";
+import BottomNavigation from "@/components/navigation/bottom-navigation";
+import Header from "@/components/navigation/Header";
+import Footer from "@/components/footer";
 
 export const metadata = {
 	title: "Sotota Stall",
@@ -45,6 +47,7 @@ export default function RootLayout({ children, params }) {
 						<main>{children}</main>
 					</CheckConnection>
 					<Footer />
+					<BottomNavigation />
 					<CartTray />
 					<Cart />
 					<ProductSelect />
