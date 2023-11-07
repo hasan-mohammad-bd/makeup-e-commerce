@@ -1,5 +1,10 @@
 import { fetchData } from "@/utils/fetchData";
-import MainNav from "./MainNav";
+import dynamic from "next/dynamic";
+import MainNav from "./main-nav";
+
+const MobileSubMenu = dynamic(() => import("./MobileSubMenu"), {
+	ssr: false,
+});
 
 const Header = async () => {
 	const data = await fetchData({ api: "info/basic" });
@@ -8,6 +13,7 @@ const Header = async () => {
 	return (
 		<header className="header">
 			<MainNav settings={settings} />
+			<MobileSubMenu settings={settings} />
 		</header>
 	);
 };

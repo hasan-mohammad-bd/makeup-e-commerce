@@ -10,7 +10,7 @@ const ServicesSlider = () => {
 				// modules={[Navigation]}
 				slidesPerView={4}
 				spaceBetween={20}
-				loop={false}
+				loop={true}
 				breakpoints={{
 					0: {
 						slidesPerView: 2,
@@ -22,7 +22,7 @@ const ServicesSlider = () => {
 					},
 					1024: {
 						slidesPerView: 4,
-						spaceBetween: 150,
+						spaceBetween: 120,
 					},
 				}}
 			>

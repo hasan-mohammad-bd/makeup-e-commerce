@@ -18,7 +18,7 @@ import Link from "next/link";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function BottomNavigation() {
-	const { translations } = useSelector((state) => state.common);
+	const { translations, settings } = useSelector((state) => state.common);
 	const matches = useMediaQuery("(max-width: 768px)");
 	const pathname = usePathname();
 	if (!matches) return null;
@@ -43,13 +43,13 @@ export default function BottomNavigation() {
 			activeIcon: <ProfileFillIcon />,
 		},
 		{
-			href: "/chat",
+			href: "https://m.me/p.touhid",
 			name: translations["chat"],
 			icon: <MessengerIcon />,
 			activeIcon: <MessengerFillIcon />,
 		},
 		{
-			href: "/call",
+			href: `tel:${settings?.phone}`,
 			name: translations["call"],
 			icon: <CallIcon />,
 			activeIcon: <CallFillIcon />,
@@ -58,7 +58,7 @@ export default function BottomNavigation() {
 
 	return (
 		<div className="h-28 bg-white">
-			<div className="fixed bottom-0 left-0 z-50 w-full h-20 bg-white rounded-t-xl shadow-top">
+			<div className="fixed bottom-0 left-0 z-20 w-full h-20 bg-white rounded-t-xl shadow-top">
 				<div className="grid h-full max-w-lg grid-cols-5 mx-auto font-medium">
 					{menuList.map((menu, index) => (
 						<Link

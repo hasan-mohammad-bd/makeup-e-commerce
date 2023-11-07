@@ -47,7 +47,7 @@ const LanguageSelector = ({ locale }) => {
 		<div className="relative inline-flex" ref={dropdownRef}>
 			<button
 				type="button"
-				className="flex flex-col lg:flex-row items-center justify-center gap-1 font-title bg-transparent box-border px-3 lg:px-3 lg:py-2 border border-gray-300 rounded-full lg:rounded-md shadow-sm text-sm font-medium text-slate-700 bg-slate-100 lg:bg-white hover:bg-gray-50"
+				className="flex h-12 flex-col lg:flex-row items-center justify-center gap-1 font-title bg-transparent box-border px-3.5 lg:px-3 lg:py-2 border border-gray-300 rounded-full lg:rounded-md shadow-sm text-sm font-medium text-slate-700 bg-slate-100 lg:bg-white hover:bg-gray-50"
 				onClick={() => setIsDropdownOpen(!isDropdownOpen)}
 			>
 				<svg

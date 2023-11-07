@@ -14,7 +14,6 @@ const FlashSaleSlider = ({ saleProducts }) => {
 				modules={[Navigation]}
 				slidesPerView={5}
 				spaceBetween={20}
-				loop={false}
 				navigation={{
 					prevEl: ".custom_prev_f",
 					nextEl: ".custom_next_f",
@@ -24,10 +23,12 @@ const FlashSaleSlider = ({ saleProducts }) => {
 						slidesPerView: 2,
 						spaceBetween: 60,
 						navigation: false,
+						loop: true,
 					},
 					768: {
 						slidesPerView: 5,
 						spaceBetween: 20,
+						loop: false,
 					},
 				}}
 			>

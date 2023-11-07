@@ -44,17 +44,28 @@ const Footer = () => {
 										<FaMapMarkerAlt size={24} color="#EF4444" />
 										<p className="pr-4">{settings?.address}</p>
 									</li>
-									<li>
-										<BsFillTelephoneFill size={14} />
-										<Link href={`tel:${settings?.phone[0]}`}>
-											{settings?.phone}
-										</Link>
+									<li className="flex items-center flex-wrap text-white gap-2">
+										<BsFillTelephoneFill ize={16} />
+										{settings?.phone?.map((e, index) => (
+											<Link key={index} href={`tel:${settings?.phone[index]}`}>
+												{`${settings?.phone[index]}${
+													index + 1 < settings.phone.length ? "," : ""
+												}`}
+											</Link>
+										))}
 									</li>
-									<li>
-										<FaEnvelope ize={14} />
-										<Link href={`mailto:${settings?.email[0]}`}>
-											{settings?.email}
-										</Link>
+									<li className="flex items-center flex-wrap text-white gap-2">
+										<FaEnvelope ize={16} />
+										{settings?.email?.map((e, index) => (
+											<Link
+												key={index}
+												href={`mailto:${settings?.email[index]}`}
+											>
+												{`${settings?.email[index]}${
+													index + 1 < settings.email.length ? "," : ""
+												}`}
+											</Link>
+										))}
 									</li>
 								</ul>
 							</div>

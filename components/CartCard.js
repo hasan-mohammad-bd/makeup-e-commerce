@@ -27,9 +27,9 @@ const CartCard = ({ item }) => {
 
 	const dispatch = useDispatch();
 	return (
-		<div className="relative cart-card p-4 bg-white border border-slate-200 rounded-xl mb-3">
+		<div className="relative cart-card p-3 lg:p-4 bg-white border border-slate-200 rounded-xl mb-3">
 			<button
-				className="absolute right-4 top-4 bg-transparent text-red-500"
+				className="absolute right-3 lg:right-4 top-2 lg:top-3 bg-transparent text-red-500"
 				onClick={() => dispatch(cartActions.removeFromCart(cartId))}
 			>
 				<FiTrash2 />
@@ -40,30 +40,34 @@ const CartCard = ({ item }) => {
 					alt="product"
 					height={80}
 					width={80}
-					className="h-20 w-20 rounded-lg"
+					className="h-[72px] lg:h-20 w-[72px] lg:w-20 rounded-lg"
 				/>
 				<div className="flex flex-col justify-between">
-					<h5 className="text-primary">{brand?.brand_name || "No Brand"}</h5>
+					<h5 className="text-primary text-xs">
+						{brand?.brand_name || "No Brand"}
+					</h5>
 					<h2>
 						<Link href={`/products/${slug}`} className="product-title">
 							{product_name}
 						</Link>
 					</h2>
-					<div className="flex gap-3 products-center items-center">
-						<h3 className="text-xl text-red-500">৳ {new_price}</h3>
+					<div className="flex gap-2 lg:gap-3 products-center items-center">
+						<h3 className="text-base/[16px] lg:text-xl text-red-500">
+							৳ {new_price}
+						</h3>
 						{typeof discount_percentage === "number" &&
 						discount_percentage > 0 ? (
 							<>
-								<del className="text-xl text-slate-300">৳ {old_price}</del>
-								<div className="rounded-full px-3 text-sm py-1 text-white bg-red-500">
-									-{getFractionFixed(discount_percentage)}% OFF
+								<del className="text-sm text-slate-300">৳ {old_price}</del>
+								<div className="rounded-md px-1 text-xs py-0.5 text-white bg-red-500">
+									{getFractionFixed(discount_percentage)}% OFF
 								</div>
 							</>
 						) : null}
 					</div>
 				</div>
 			</div>
-			<div className="flex products-center justify-between text-sm mt-4">
+			<div className="flex products-center justify-between text-sm mt-2">
 				<div className="flex products-center gap-3">
 					{variantId ? (
 						<>
@@ -91,16 +95,16 @@ const CartCard = ({ item }) => {
 				<div className="flex items-center products-center gap-3 text-slate-900">
 					<button
 						className="bg-transparent border border-primary rounded px-1"
-						onClick={() => dispatch(cartActions.addQuantity(cartId))}
+						onClick={() => dispatch(cartActions.removeQuantity(cartId))}
 					>
-						<FiPlus />
+						<FiMinus />
 					</button>
 					<div className="mx-1 font-bold">{quantity || 1}</div>
 					<button
 						className="bg-transparent border border-primary rounded px-1"
-						onClick={() => dispatch(cartActions.removeQuantity(cartId))}
+						onClick={() => dispatch(cartActions.addQuantity(cartId))}
 					>
-						<FiMinus />
+						<FiPlus />
 					</button>
 				</div>
 			</div>

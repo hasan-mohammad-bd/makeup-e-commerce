@@ -17,7 +17,8 @@
 		@apply text-base font-title font-normal border border-slate-300  py-3 px-4 focus:outline-0 focus:border-primary;
 	}
 
-	input::placeholder {
+	input::placeholder,
+	textarea::placeholder {
 		@apply text-base font-title font-normal text-slate-300;
 	}
 
@@ -74,7 +75,7 @@
 }
 
 .social-icon-btn {
-	@apply inline-flex justify-center items-center w-full gap-2 py-2 px-8 rounded-full border border-slate-300;
+	@apply inline-flex justify-center items-center w-full gap-2 py-2 px-4 md:px-8 rounded-full border border-slate-300;
 }
 
 .border-btn {
@@ -159,9 +160,8 @@
 }
 
 .header-actions .single-action {
-	@apply w-12 py-2.5 text-center text-[#475569] lg:border lg:border-slate-300 lg:rounded-full ease-in duration-100 lg:hover:bg-primary lg:hover:text-white hover:border-transparent;
+	@apply w-12 h-12 inline-flex items-center justify-center text-[#475569] lg:border lg:border-slate-300 lg:rounded-full ease-in duration-100 lg:hover:bg-primary lg:hover:text-white hover:border-transparent;
 }
-
 /* Service Features */
 
 .single-feature {
@@ -213,14 +213,32 @@
 }
 
 .submit-btn {
-	@apply w-[240px] text-lg font-semibold font-title text-white bg-[#F99104] rounded-lg py-3 active:scale-95;
+	@apply w-full lg:w-[240px] text-lg font-semibold font-title text-white bg-[#F99104] rounded-lg py-3 active:scale-95;
 }
 
 .errorMsg {
 	@apply text-base text-red-500 mt-2;
 }
 
-/* Swiper Slider Adjustments  */
+/* Swiper Slider default Overrides/Adjustments  */
+
+.intro-slider > .swiper-pagination {
+	@apply bg-white px-3 rounded-t-xl max-w-fit !bottom-0 !left-1/2 -translate-x-1/2;
+}
+
+.category-slider > .swiper-pagination {
+	@apply bg-white !bottom-7;
+}
+
+.intro-slider .swiper-pagination-bullet,
+.category-slider .swiper-pagination-bullet {
+	@apply bg-primary;
+}
+.intro-slider .swiper-pagination-bullet-active,
+.category-slider .swiper-pagination-bullet-active {
+	@apply w-6 rounded-lg;
+}
+
 .slider-btn {
 	@apply absolute top-1/2 left-0 -translate-y-[24px] inline-flex justify-center items-center w-12 h-12 bg-[#F8FAFC] rounded-full z-10 cursor-pointer;
 }

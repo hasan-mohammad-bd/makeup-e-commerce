@@ -5,6 +5,7 @@ import Timer from "@/components/elements/Timer";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useGetProductFlashSaleQuery } from "@/store/features/api/productFlashSaleAPI";
 import FlashSaleSlider from "./FlashSaleSlider";
+import { SeeAll } from "@/components/elements/buttons";
 
 const FlashSale = ({ translations }) => {
 	const { locale } = useParams();
@@ -18,27 +19,32 @@ const FlashSale = ({ translations }) => {
 		return null;
 
 	return (
-		<div className="relative">
-			<div className="sec-heading absolute top-[-90px] lg:top-[-30px] left-0 w-full flex justify-center lg:justify-between items-center px-8">
-				<div className="flex flex-col lg:flex-row gap-4 bg-white">
-					<div className="text-center lg:text-left">
-						<h2 className="sec-title">{flashSaleInfo?.title}</h2>
-						<p>অফার চলবে আর মাত্র</p>
+		<section className="flash-sale mt-28">
+			<div className="container">
+				<div className="relative">
+					<div className="sec-heading absolute top-[-95px] lg:top-[-30px] left-0 w-full flex justify-center lg:justify-between items-center px-8">
+						<div className="flex flex-col lg:flex-row gap-4 bg-white px-3 lg:px-0">
+							<div className="text-center lg:text-left">
+								<h2 className="sec-title">{flashSaleInfo?.title}</h2>
+								<p>{translations["the-offer-will-only-last"]}</p>
+							</div>
+							<Timer targetDate={flashSaleInfo?.expire_time} />
+						</div>
+						<Link
+							href="/flash-sale"
+							className="all-btn bg-white !hidden lg:!block"
+						>
+							{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
+						</Link>
 					</div>
-					<Timer targetDate={flashSaleInfo?.expire_time} />
-				</div>
-				<Link href="/flash-sale" className="all-btn bg-white !hidden lg:!block">
-					{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
-				</Link>
-			</div>
 
-			<div className="flashSale-slider border border-primary rounded-2xl p-6 pt-16">
-				<FlashSaleSlider saleProducts={saleProducts} />
+					<div className="flashSale-slider border border-primary rounded-2xl p-6 pt-16">
+						<FlashSaleSlider saleProducts={saleProducts} />
+					</div>
+					<SeeAll href="/flash-sale" buttonText={translations["see-all"]} />
+				</div>
 			</div>
-			<Link href="/flash-sale" className="border-btn mt-3 lg:hidden capitalize">
-				{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
-			</Link>
-		</div>
+		</section>
 	);
 };
 

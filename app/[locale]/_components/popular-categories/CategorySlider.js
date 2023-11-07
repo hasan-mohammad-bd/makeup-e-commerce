@@ -15,6 +15,7 @@ const CategorySlider = ({ categoryList }) => {
 				slidesPerView={6}
 				loop={false}
 				pagination={{ clickable: true }}
+				className="category-slider !static"
 			>
 				{categoryList?.map((category, i) => (
 					<SwiperSlide key={i}>

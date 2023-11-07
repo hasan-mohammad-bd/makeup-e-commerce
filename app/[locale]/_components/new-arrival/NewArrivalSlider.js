@@ -17,7 +17,6 @@ const NewArrivalSlider = ({ newProducts }) => {
 				modules={[Navigation]}
 				slidesPerView={3}
 				spaceBetween={20}
-				loop={false}
 				navigation={{
 					prevEl: ".custom_prev_n",
 					nextEl: ".custom_next_n",
@@ -26,10 +25,12 @@ const NewArrivalSlider = ({ newProducts }) => {
 					0: {
 						slidesPerView: 2,
 						spaceBetween: 260,
+						loop: true,
 					},
 					768: {
 						slidesPerView: 3,
 						spaceBetween: 20,
+						loop: false,
 					},
 				}}
 			>

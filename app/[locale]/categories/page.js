@@ -4,11 +4,20 @@ import { fetchData } from "@/utils/fetchData";
 import noImage from "@/public/assets/images/no-image.png";
 
 const page = async () => {
-	const data = await fetchData({ api: "categories?no_child=1" });
-	const categories = data?.data || [];
+	const [categoriesRes, transRes] = await Promise.allSettled([
+		fetchData({ api: `categories?no_child=1` }),
+		fetchData({ api: `translations` }),
+	]);
+
+	const categories =
+		categoriesRes.status === "fulfilled" ? categoriesRes.value?.data || [] : [];
+	const translations =
+		transRes.status === "fulfilled" ? transRes.value?.data || {} : {};
+
+	// console.log(translations);
 
 	return (
-		<section className="bg-slate-100 lg:bg-white pt-16 lg:pt-0">
+		<section>
 			<div className="breadcrumb breadcrumb-2 py-5 border-b border-slate-200 hidden lg:block">
 				<div className="container">
 					<div>
@@ -16,22 +25,22 @@ const page = async () => {
 							href={`/`}
 							className="text-base text-slate-600 hover:text-primary"
 						>
-							হোম
+							{translations["home"] || "হোম"}
 						</Link>
 						<Link
 							href={`/categories`}
 							className="text-base text-slate-900 hover:text-primary"
 						>
-							ক্যাটাগরি
+							{translations["category"] || "ক্যাটাগরি"}
 						</Link>
 					</div>
 				</div>
 			</div>
 
-			<div className="lg:pt-12 py-3 lg:pb-8 bg-white">
+			<div className="h-screen lg:h-auto lg:pt-12 py-3 lg:pb-8 bg-white">
 				<div className="container">
 					<h3 className="font-title text-center text-lg/7 lg:text-3xl text-slate-900 my-5 lg:my-12 font-bold">
-						সব ক্যাটেগরি
+						{translations["all-categories"] || "সব ক্যাটেগরি"}
 					</h3>
 					<div className="grid grid-cols-4 lg:grid-cols-6 gap-3 lg:gap-5 pt-2">
 						{categories?.map((category, i) => (

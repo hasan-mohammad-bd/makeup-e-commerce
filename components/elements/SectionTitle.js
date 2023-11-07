@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { HiArrowLongRight } from "react-icons/hi2";
 
 export default function SectionTitle({
@@ -10,8 +10,12 @@ export default function SectionTitle({
 	children,
 }) {
 	return (
-		<div className="sec-heading w-full flex justify-between items-center lg:border-b border-slate-200 pb-3">
-			<h2 className="sec-title capitalize">
+		<div
+			className={`sec-heading w-full flex ${
+				!href ? "justify-center lg:justify-start" : "justify-between"
+			} items-center lg:border-b border-slate-200 pb-3`}
+		>
+			<h2 className={`sec-title capitalize`}>
 				{children}
 				{title}
 			</h2>
