@@ -2,7 +2,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DrawerLeft from "../elements/DrawerLeft";
-import { toggleFilterPanel } from "@/store/features/commonSlice";
+import { toggleFilterPanel } from "@/store/slices/commonSlice";
 import Filter from "../filters/Filter";
 
 const FilterPanel = ({ category }) => {

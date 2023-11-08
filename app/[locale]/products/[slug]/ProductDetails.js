@@ -6,15 +6,15 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { getCouponDiscount } from "@/utils/checkoutBusinessLogics";
+import { getCouponDiscount } from "@/lib/checkout";
 import ThumbSlider from "@/components/sliders/ThumbSlider";
-import { getSlicedText } from "@/utils/formatText";
+import { getSlicedText } from "@/utils/format-text";
 import ViewHTML from "@/components/elements/ViewHTML";
-import { addToCart } from "@/store/features/cartSlice";
+import { addToCart } from "@/store/slices/cartSlice";
 import ProductVariantSelect from "@/components/products/ProductVariantSelect";
 import ActiveLink from "@/components/elements/ActiveLink";
 import { Rating } from "react-simple-star-rating";
-import { formatLongNumber, getFractionFixed } from "@/utils/formatNumber";
+import { formatLongNumber, getFractionFixed } from "@/utils/format-number";
 import SocialShare from "@/components/elements/SocialShare";
 
 // ** Import Icon

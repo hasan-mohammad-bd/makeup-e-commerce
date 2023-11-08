@@ -9,12 +9,9 @@ import OtpForm from "./OtpForm";
 import Modal from "@/components/elements/Modal";
 
 //Hooks
-import {
-	useGetCountriesQuery,
-	useOtpLoginMutation,
-} from "@/store/features/api/authAPI";
+import { useGetCountriesQuery, useOtpLoginMutation } from "@/store/api/authAPI";
 import { useDispatch, useSelector } from "react-redux";
-import { setGlobalLoader } from "@/store/features/commonSlice";
+import { setGlobalLoader } from "@/store/slices/commonSlice";
 
 const LoginModal = ({ showModal, setShowModal, title }) => {
 	const { settings, translations } = useSelector((state) => state.common);

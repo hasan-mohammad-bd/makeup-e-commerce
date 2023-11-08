@@ -3,9 +3,9 @@
 import Image from "next/image";
 import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import * as cartActions from "@/store/features/cartSlice";
+import * as cartActions from "@/store/slices/cartSlice";
 import noImage from "@/public/assets/images/no-image.png";
-import { getFractionFixed } from "@/utils/formatNumber";
+import { getFractionFixed } from "@/utils/format-number";
 import Link from "next/link";
 
 const CartCard = ({ item }) => {

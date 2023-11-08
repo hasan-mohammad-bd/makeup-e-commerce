@@ -1,6 +1,6 @@
-import apiSlice from "./apiSlice";
+import api from "./api";
 
-const categoriesAPI = apiSlice.injectEndpoints({
+const categoriesAPI = api.injectEndpoints({
 	endpoints: (builder) => ({
 		getCategories: builder.query({
 			query: (payload) => ({

@@ -1,4 +1,4 @@
-import { fetchData } from "@/utils/fetchData";
+import { fetchData } from "@/lib/fetch-data";
 import ProductList from "../../../components/products/ProductList";
 import PaginationWithSummery from "../../../components/PaginationWithSummery";
 

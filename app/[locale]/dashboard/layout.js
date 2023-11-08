@@ -1,6 +1,6 @@
 "use client";
 
-import { logoutUser } from "@/store/features/authSlice";
+import { logoutUser } from "@/store/slices/authSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";

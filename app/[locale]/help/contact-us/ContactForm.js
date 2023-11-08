@@ -1,6 +1,6 @@
 "use client";
 
-import { useContactNowMutation } from "@/store/features/api/contactAPI";
+import { useContactNowMutation } from "@/store/api/contactAPI";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 

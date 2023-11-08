@@ -1,13 +1,13 @@
 "use client";
 import DrawerRight from "@/components/elements/DrawerRight";
-import { toggleCart } from "@/store/features/cartSlice";
+import { toggleCart } from "@/store/slices/cartSlice";
 import Link from "next/link";
 import React from "react";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import CartCard from "../CartCard";
 import { FiPlus } from "react-icons/fi";
-import { getMultipliedColumnTotal } from "@/utils/getTotal";
+import { getMultipliedColumnTotal } from "@/utils/total";
 
 const Cart = () => {
 	const { isCartOpen, cart } = useSelector((state) => state.cart);

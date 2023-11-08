@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { fetchData } from "@/utils/fetchData";
+import { fetchData } from "@/lib/fetch-data";
 import noImage from "@/public/assets/images/no-image.png";
 
 const page = async () => {

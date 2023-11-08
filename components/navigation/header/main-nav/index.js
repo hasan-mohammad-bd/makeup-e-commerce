@@ -5,10 +5,10 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import LoginModal from "../../../modals/login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleCart } from "@/store/features/cartSlice";
+import { toggleCart } from "@/store/slices/cartSlice";
 import AuthUserMenus from "./AuthUserMenus";
 import LanguageSelector from "./LanguageSelector";
-import { setLoginModalOpen } from "@/store/features/authSlice";
+import { setLoginModalOpen } from "@/store/slices/authSlice";
 
 // ** Import Icons
 import {

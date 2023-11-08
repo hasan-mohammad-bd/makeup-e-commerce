@@ -1,6 +1,6 @@
-import apiSlice from "./apiSlice";
+import api from "./api";
 
-const contactAPI = apiSlice.injectEndpoints({
+const contactAPI = api.injectEndpoints({
 	endpoints: (builder) => ({
 		contactNow: builder.mutation({
 			query: (payload) => ({

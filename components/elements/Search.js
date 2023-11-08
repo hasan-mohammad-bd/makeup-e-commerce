@@ -2,8 +2,8 @@ import {
 	useGetPopularSearchQuery,
 	useGetSearchHistoriesQuery,
 	useRemoveSearchHistoryMutation,
-} from "@/store/features/api/searchAPI";
-import { getSlicedText } from "@/utils/formatText";
+} from "@/store/api/searchAPI";
+import { getSlicedText } from "@/utils/format-text";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";

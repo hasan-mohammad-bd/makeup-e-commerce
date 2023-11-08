@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { useRemoveFromWishListMutation } from "@/store/features/api/wishListAPI";
-import { addToCart, addToSelected } from "@/store/features/cartSlice";
+import { useRemoveFromWishListMutation } from "@/store/api/wishListAPI";
+import { addToCart, addToSelected } from "@/store/slices/cartSlice";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import noImage from "@/public/assets/images/no-image.png";
 

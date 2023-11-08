@@ -3,10 +3,10 @@ import { toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { useVerifyOtpMutation } from "@/store/features/api/authAPI";
+import { useVerifyOtpMutation } from "@/store/api/authAPI";
 import { useDispatch } from "react-redux";
-import { setUser } from "@/store/features/authSlice";
-import { setGlobalLoader } from "@/store/features/commonSlice";
+import { setUser } from "@/store/slices/authSlice";
+import { setGlobalLoader } from "@/store/slices/commonSlice";
 
 const OtpForm = ({
 	selectedCountry,

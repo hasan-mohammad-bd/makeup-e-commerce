@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import {
 	useAddToVisitedMutation,
 	useGetVisitedProductsQuery,
-} from "@/store/features/api/visitedProductsAPI";
+} from "@/store/api/visitedProductsAPI";
 import ProductHistoryCard from "./ProductHistoryCard";
 
 const LastVisitedProducts = ({ visitedProductId }) => {

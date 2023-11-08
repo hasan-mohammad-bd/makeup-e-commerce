@@ -7,7 +7,7 @@ import noImage from "@/public/assets/images/no-image.png";
 import menuOffer from "@/public/assets/images/banner/category-menu-offer.png";
 import { useSelector } from "react-redux";
 import { useParams } from "next/navigation";
-import { useGetPopularCategoriesQuery } from "@/store/features/api/categoriesAPI";
+import { useGetPopularCategoriesQuery } from "@/store/api/categoriesAPI";
 
 export default function MegaMenu({ settings }) {
 	const { locale } = useParams();

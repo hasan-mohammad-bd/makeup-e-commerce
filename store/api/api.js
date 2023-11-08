@@ -1,11 +1,11 @@
 // Need to use the React-specific entry point to allow generating React hooks
 // Important note: if we use /react entry point then we can't able to use redux in server component
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import getToken from "@/utils/getToken";
+import getToken from "@/utils/token";
 
 // Define a service using a base URL and expected endpoints
-export const apiSlice = createApi({
-	reducerPath: "apiSlice",
+export const api = createApi({
+	reducerPath: "api",
 	baseQuery: fetchBaseQuery({
 		baseUrl: process.env.server,
 		prepareHeaders: (headers, { getState }) => {
@@ -54,8 +54,9 @@ export const apiSlice = createApi({
 		"review-images",
 		"review-details",
 		"product-flash-sale",
+		"payment-methods",
 	],
 	endpoints: () => ({}),
 });
 
-export default apiSlice;
+export default api;

@@ -1,4 +1,4 @@
-import { fetchData } from "@/utils/fetchData";
+import { fetchData } from "@/lib/fetch-data";
 import BrandsSlider from "./BrandsSlider";
 const Brands = async () => {
 	const data = await fetchData({ api: "brands" });

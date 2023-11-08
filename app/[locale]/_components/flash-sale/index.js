@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import Timer from "@/components/elements/Timer";
 import { HiArrowLongRight } from "react-icons/hi2";
-import { useGetProductFlashSaleQuery } from "@/store/features/api/productFlashSaleAPI";
+import { useGetProductFlashSaleQuery } from "@/store/api/productFlashSaleAPI";
 import FlashSaleSlider from "./FlashSaleSlider";
 import { SeeAll } from "@/components/elements/buttons";
 

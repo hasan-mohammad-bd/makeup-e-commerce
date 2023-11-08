@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 const CategorySlider = dynamic(() => import("./CategorySlider"));
 const CategoryList = dynamic(() => import("./CategoryList"));
-import { useGetPopularCategoriesQuery } from "@/store/features/api/categoriesAPI";
+import { useGetPopularCategoriesQuery } from "@/store/api/categoriesAPI";
 
 const PopularCategories = () => {
 	const { locale } = useParams();

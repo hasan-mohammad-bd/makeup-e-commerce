@@ -1,4 +1,4 @@
-import { fetchData } from "@/utils/fetchData";
+import { fetchData } from "@/lib/fetch-data";
 import dynamic from "next/dynamic";
 import MainNav from "./main-nav";
 

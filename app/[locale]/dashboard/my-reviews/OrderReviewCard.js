@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
 import ReviewSummaryPopover from "./ReviewSummaryPopover";
-import { getBdFormattedDate } from "@/utils/formatDate";
+import { getBdFormattedDate } from "@/utils/format-date";
 import noImage from "@/public/assets/images/no-image.png";
 import { Rating } from "react-simple-star-rating";
 

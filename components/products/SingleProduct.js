@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Loader from "../elements/loaders/Loader";
-import { addToCart, addToSelected } from "@/store/features/cartSlice";
-import { useAddToWishListMutation } from "@/store/features/api/wishListAPI";
-import { formatLongNumber, getFractionFixed } from "@/utils/formatNumber";
-import { getSalePercent } from "@/utils/getPercent";
-import { getDaysSinceCreation } from "@/utils/formatDate";
+import { addToCart, addToSelected } from "@/store/slices/cartSlice";
+import { useAddToWishListMutation } from "@/store/api/wishListAPI";
+import { formatLongNumber, getFractionFixed } from "@/utils/format-number";
+import { getSalePercent } from "@/utils/percent";
+import { getDaysSinceCreation } from "@/utils/format-date";
 
 // ** Import Icon
 import { FaStar } from "react-icons/fa";

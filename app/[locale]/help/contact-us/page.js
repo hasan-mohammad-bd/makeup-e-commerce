@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ContactForm from "./ContactForm";
-import { fetchData } from "@/utils/fetchData";
+import { fetchData } from "@/lib/fetch-data";
 
 // ** Import Icons
 import { BsFillTelephoneFill } from "react-icons/bs";

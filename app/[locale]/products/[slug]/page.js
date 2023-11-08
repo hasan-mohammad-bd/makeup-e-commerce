@@ -6,31 +6,31 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 // import ProductBanner from "@/components/elements/sliders/ProductBanner";
 // import ProductReview from "@/components/elements/sliders/ProductReview";
 import ViewHTML from "@/components/elements/ViewHTML";
-import { fetchData } from "@/utils/fetchData";
+import { fetchData } from "@/lib/fetch-data";
 
 const page = async ({ params }) => {
-  const { slug } = params;
-  // const response = await fetchData({ api: `products/${slug}` });
-  // const product = response?.data || {};
+	const { slug } = params;
+	// const response = await fetchData({ api: `products/${slug}` });
+	// const product = response?.data || {};
 
-  const [settingsRes, productRes] = await Promise.allSettled([
-    fetchData({ api: `info/basic` }),
-    fetchData({ api: `products/${slug}` }),
-  ]);
+	const [settingsRes, productRes] = await Promise.allSettled([
+		fetchData({ api: `info/basic` }),
+		fetchData({ api: `products/${slug}` }),
+	]);
 
-  const settings =
-    settingsRes.status === "fulfilled" ? settingsRes.value?.data || {} : {};
-  const product =
-    productRes.status === "fulfilled" ? productRes.value?.data || [] : [];
+	const settings =
+		settingsRes.status === "fulfilled" ? settingsRes.value?.data || {} : {};
+	const product =
+		productRes.status === "fulfilled" ? productRes.value?.data || [] : [];
 
-  return (
-    <div className="">
-      <div className="description">
-        <h4 className="text-2xl font-bold font-title text-slate-900">
-          প্রডাক্টের বিবরণ:
-        </h4>
-        <ViewHTML htmlText={product?.details} />
-        {/* <p className="text-slate-700 my-5">
+	return (
+		<div className="">
+			<div className="description">
+				<h4 className="text-2xl font-bold font-title text-slate-900">
+					প্রডাক্টের বিবরণ:
+				</h4>
+				<ViewHTML htmlText={product?.details} />
+				{/* <p className="text-slate-700 my-5">
           Insta360 Go 2 Tiny Mighty Action Camera 1440P 50fps স্পোর্টস ক্যামেরা
           IPX8 4M ওয়াটারপ্রুফ ফ্লোস্টেট স্ট্যাবিলাইজেশন হাইপারল্যাপ্স স্লো মোশন
           রি-মোট কন্ট্রোল অটো এডিটিং WI-FI প্রিভিউ সমর্থন করে
@@ -106,8 +106,8 @@ const page = async ({ params }) => {
             className="w-auto mt-6"
           />
         </div> */}
-      </div>
-      {/* <div className="blogs my-8">
+			</div>
+			{/* <div className="blogs my-8">
         <p className="text-primary mb-1">ফ্লোস্টেট স্টেবিলাইজেশন</p>
         <h4 className="text-2xl font-bold font-title text-slate-900">
           বাটারী মসৃণ ধার্মিকতা
@@ -204,7 +204,7 @@ const page = async ({ params }) => {
           </div>
         </div>
       </div> */}
-      {/* <div>
+			{/* <div>
         <h4 className="text-2xl font-bold font-title text-slate-900 mb-4">
           পৃথিবী তোমার খেলার মাঠ
         </h4>
@@ -216,48 +216,48 @@ const page = async ({ params }) => {
         </div>
       </div> */}
 
-      <div className="mt-8">
-        <h4 className="text-2xl font-bold font-title text-slate-900 mb-4">
-          যা যা সাথে থাকবে
-        </h4>
-        <Image
-          src={
-            product?.product_includes || `/assets/images/shop/accessories.jpg`
-          }
-          alt="Insta 360"
-          width={628}
-          height={510}
-          className="w-full h-[510px] rounded-xl"
-        />
-      </div>
+			<div className="mt-8">
+				<h4 className="text-2xl font-bold font-title text-slate-900 mb-4">
+					যা যা সাথে থাকবে
+				</h4>
+				<Image
+					src={
+						product?.product_includes || `/assets/images/shop/accessories.jpg`
+					}
+					alt="Insta 360"
+					width={628}
+					height={510}
+					className="w-full h-[510px] rounded-xl"
+				/>
+			</div>
 
-      {product?.review_video && (
-        <div className="mt-8">
-          <h4 className="text-2xl font-bold font-title text-slate-900">
-            রিভিউ ভিডিও
-          </h4>
-          <div className="slider-imag [&>div>iframe]:rounded-xl relative mt-4">
-            <ViewHTML htmlText={product?.review_video} />
-          </div>
-        </div>
-      )}
+			{product?.review_video && (
+				<div className="mt-8">
+					<h4 className="text-2xl font-bold font-title text-slate-900">
+						রিভিউ ভিডিও
+					</h4>
+					<div className="slider-imag [&>div>iframe]:rounded-xl relative mt-4">
+						<ViewHTML htmlText={product?.review_video} />
+					</div>
+				</div>
+			)}
 
-      <div className="contact mt-8 bg-amber-200 border border-primary rounded-xl p-5 mb-4 text-center">
-        <h5 className="text-2xl font-bold font-title text-slate-900 mb-3">
-          আরও কিছু জানার থাকলে
-        </h5>
-        <p className="flex justify-center items-center gap-4">
-          <span className="text-base text-slate-900">কল করুন:</span>{" "}
-          <Link
-            href={`tel:${settings?.phone}`}
-            className="text-2xl font-bold font-title text-primary"
-          >
-            <BsFillTelephoneFill /> {settings?.phone}
-          </Link>
-        </p>
-      </div>
-    </div>
-  );
+			<div className="contact mt-8 bg-amber-200 border border-primary rounded-xl p-5 mb-4 text-center">
+				<h5 className="text-2xl font-bold font-title text-slate-900 mb-3">
+					আরও কিছু জানার থাকলে
+				</h5>
+				<p className="flex justify-center items-center gap-4">
+					<span className="text-base text-slate-900">কল করুন:</span>{" "}
+					<Link
+						href={`tel:${settings?.phone}`}
+						className="text-2xl font-bold font-title text-primary"
+					>
+						<BsFillTelephoneFill /> {settings?.phone}
+					</Link>
+				</p>
+			</div>
+		</div>
+	);
 };
 
 export default page;

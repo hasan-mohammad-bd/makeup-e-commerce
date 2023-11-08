@@ -1,5 +1,5 @@
 import NewArrivalSlider from "./NewArrivalSlider";
-import { fetchData } from "@/utils/fetchData";
+import { fetchData } from "@/lib/fetch-data";
 
 const NewArrival = async () => {
 	const data = await fetchData({ api: "product-latest" });

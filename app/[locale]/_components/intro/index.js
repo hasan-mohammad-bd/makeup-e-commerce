@@ -1,4 +1,4 @@
-import { fetchData } from "@/utils/fetchData";
+import { fetchData } from "@/lib/fetch-data";
 import IntroSlider from "./IntroSlider";
 
 const Intro = async () => {

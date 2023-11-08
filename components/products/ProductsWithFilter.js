@@ -2,7 +2,7 @@ import React from "react";
 // import Filter from "@/components/Filter";
 import SortSelect from "@/components/elements/SortSelect";
 import ProductList from "./ProductList";
-import { fetchData } from "@/utils/fetchData";
+import { fetchData } from "@/lib/fetch-data";
 import PaginationWithSummery from "../PaginationWithSummery";
 import NoProducts from "./NoProducts";
 import FilterPanel from "../side-drawers/FilterPanel";

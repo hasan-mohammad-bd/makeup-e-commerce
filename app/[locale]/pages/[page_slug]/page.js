@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { fetchData } from "@/utils/fetchData";
+import { fetchData } from "@/lib/fetch-data";
 
 // ** Imoprt icons
 import ViewHTML from "@/components/elements/ViewHTML";

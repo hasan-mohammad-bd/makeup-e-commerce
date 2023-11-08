@@ -4,13 +4,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import DrawerRight from "@/components/elements/DrawerRight";
-import { addToCart, removeFromSelected } from "@/store/features/cartSlice";
+import { addToCart, removeFromSelected } from "@/store/slices/cartSlice";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import ProductVariantSelect from "../products/ProductVariantSelect";
 import noImage from "@/public/assets/images/no-image.png";
-import { getFractionFixed } from "@/utils/formatNumber";
+import { getFractionFixed } from "@/utils/format-number";
 
 const ProductSelect = () => {
 	const { selectedProduct } = useSelector((state) => state.cart);
