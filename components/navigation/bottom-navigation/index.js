@@ -19,9 +19,11 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function BottomNavigation() {
 	const { translations, settings } = useSelector((state) => state.common);
-	const matches = useMediaQuery("(max-width: 768px)");
+	const pathArray = usePathname().split("/");
+	const isMobile = useMediaQuery("(max-width: 768px)");
 	const pathname = usePathname();
-	if (!matches) return null;
+
+	if (!isMobile || pathArray.includes("checkout")) return null;
 
 	const menuList = [
 		{

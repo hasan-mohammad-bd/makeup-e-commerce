@@ -9,7 +9,7 @@ export default function Modal({ showModal, setShowModal, title, children }) {
 			{showModal ? (
 				<>
 					<div className="flex justify-center items-end md:items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-						<div className="relative w-auto md:my-6 mx-auto max-w-4xl">
+						<div className="relative w-full md:w-auto md:my-6 mx-auto max-w-4xl">
 							{/*content*/}
 							<div className="border-0 rounded-t-2xl md:rounded-2xl shadow-md relative flex flex-col w-full bg-white outline-none focus:outline-none overflow-hidden">
 								{/*header*/}

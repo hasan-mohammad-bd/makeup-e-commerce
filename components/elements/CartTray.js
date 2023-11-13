@@ -1,17 +1,15 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-
-// ** Import Icons
 import Image from "next/image";
-import { TbCurrencyTaka } from "react-icons/tb";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "@/store/slices/cartSlice";
 import { getMultipliedColumnTotal } from "@/utils/total";
+import { siteConfig } from "@/config/site";
 import cartImage from "@/public/assets/images/cart.gif";
-import dynamic from "next/dynamic";
-const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
-	ssr: false,
-});
+// import dynamic from "next/dynamic";
+// const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
+// 	ssr: false,
+// });
 
 const CartTray = () => {
 	const { cart } = useSelector((state) => state.cart);
@@ -39,13 +37,9 @@ const CartTray = () => {
 				<div className="content rounded-es-lg text-center">
 					<p className="text-xs text-white">{cart?.length} আইটেম</p>
 					<div className="text-xs font-semibold text-white flex items-center justify-center">
-						<TbCurrencyTaka size={16} className="mb-1" />
-						<AnimatedNumbers
-							animateToNumber={getMultipliedColumnTotal(
-								cart,
-								"quantity",
-								"new_price"
-							)}
+						<span className="mr-1">{siteConfig.currency.sign}</span>
+						{/* <AnimatedNumbers
+							animateToNumber={20000}
 							includeComma
 							// fontStyle={{ fontSize: 32 }}
 							locale="en-US"
@@ -60,7 +54,8 @@ const CartTray = () => {
 							//   { mass: 1, tension: 260, friction: 100 },
 							//   { mass: 1, tension: 210, friction: 180 },
 							// ]}
-						></AnimatedNumbers>
+						></AnimatedNumbers> */}
+						{getMultipliedColumnTotal(cart, "quantity", "new_price")}
 					</div>
 				</div>
 			</div>

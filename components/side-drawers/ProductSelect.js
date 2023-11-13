@@ -96,7 +96,7 @@ const ProductSelect = () => {
 				) : null}
 				<div className="product-actions mt-6 mb-3 lg:my-6 flex gap-3 lg:gap-4 justify-between items-center">
 					<button
-						className="bg-secondary-700 py-3 w-full px-2 lg:px-6 text-white rounded-lg text-center active:scale-95"
+						className="bg-secondary-700 py-3 w-full px-2 text-white rounded-lg text-center active:scale-95"
 						onClick={handleAddToCart}
 					>
 						<HiOutlineShoppingCart size={24} />
@@ -106,12 +106,12 @@ const ProductSelect = () => {
 					</button>
 					<button
 						onClick={handleBuyNow}
-						className="bg-primary py-3 w-full px-2 lg:px-6 text-white rounded-lg text-center active:scale-95"
+						className="bg-primary py-3 w-full px-2 text-white rounded-lg text-center active:scale-95"
 					>
 						<span className="mr-2">
 							{translations["buy-now"] || "এখনই কিনুন"}
 						</span>
-						<HiArrowLongRight size={20} className="hidden lg:block" />
+						<HiArrowLongRight size={20} className="hidden lg:inline" />
 					</button>
 				</div>
 				<Link

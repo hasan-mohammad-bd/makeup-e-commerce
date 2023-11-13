@@ -349,3 +349,10 @@
 .flex-end {
 	@apply flex justify-end items-center;
 }
+
+.custom-horizontal-scroll {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	/* white-space: nowrap; */
+	max-width: calc(100vw);
+}

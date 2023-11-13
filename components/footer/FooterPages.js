@@ -6,8 +6,8 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 export default function FooterPages({ title, pages }) {
 	const [pagesOpen, setPagesOpen] = useState(false);
-	const matches = useMediaQuery("(max-width: 768px)");
-	// console.log(matches);
+	const isMobile = useMediaQuery("(max-width: 768px)");
+	// console.log(isMobile);
 	return (
 		<div className="footer-widget">
 			<div className="flex justify-between items-center">
@@ -19,7 +19,7 @@ export default function FooterPages({ title, pages }) {
 					{!pagesOpen ? <BsChevronDown size={16} /> : <BsChevronUp size={16} />}
 				</button>
 			</div>
-			{(!matches || pagesOpen) && (
+			{(!isMobile || pagesOpen) && (
 				<ul className="footer-list mt-3 lg:mt-8">
 					{Object.keys(pages).map((key) => (
 						<li key={key}>

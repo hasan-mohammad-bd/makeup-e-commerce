@@ -12,14 +12,19 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { usePathname } from "next/navigation";
 
 const Footer = () => {
-	const matches = useMediaQuery("(max-width: 768px)");
+	const isMobile = useMediaQuery("(max-width: 768px)");
 	const pathArray = usePathname().split("/");
 	// console.log(pathArray);
 	const { settings, settingsLoading, translationsLoading, translations } =
 		useSelector((state) => state.common);
 
-	if (matches && pathArray.includes("categories")) return null;
 	if (settingsLoading || translationsLoading) return null;
+
+	if (
+		(isMobile && pathArray.includes("categories")) ||
+		pathArray.includes("checkout")
+	)
+		return null;
 
 	const footerPage = settings?.footer_page || {};
 	const helpPage = settings?.help_page || {};

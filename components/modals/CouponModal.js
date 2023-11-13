@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import Modal from "../elements/Modal";
@@ -10,6 +10,7 @@ import { addDiscountInfo } from "@/store/slices/cartSlice";
 import { setGlobalLoader } from "@/store/slices/commonSlice";
 
 const CouponModal = ({ showModal, setShowModal, title }) => {
+	const { translations } = useSelector((state) => state.common);
 	const [error, setError] = useState(false);
 	const dispatch = useDispatch();
 	const {
@@ -40,14 +41,14 @@ const CouponModal = ({ showModal, setShowModal, title }) => {
 	};
 	return (
 		<Modal showModal={showModal} setShowModal={setShowModal} title={title}>
-			<div className="w-[27rem] text-slate-500">
+			<div className="md:w-[27rem] text-slate-500">
 				<form className="" onSubmit={handleSubmit(onSubmit)}>
-					<div className="mt-6 mb-8 form-control">
+					<div className="mt-5 mb-6 md:mb-8 form-control">
 						<input
 							type="text"
 							className=""
 							name="coupon_code"
-							placeholder="কুপন কোড লিখুন"
+							placeholder={translations["type-coupon"] || "কুপন কোড লিখুন"}
 							{...register("coupon_code", {
 								required: "Coupon code is required.",
 							})}
@@ -57,14 +58,14 @@ const CouponModal = ({ showModal, setShowModal, title }) => {
 						)}
 						{error && (
 							<p className="errorMsg">
-								এই কোডে ভাউচার পাওয়া যায় নি, সঠিক কোড খুজে আবার চেষ্টা করুন
+								{translations["invalid-coupon-msg"] ||
+									"এই কোডে ভাউচার পাওয়া যায় নি, সঠিক কোড খুজে আবার চেষ্টা করুন"}
 							</p>
 						)}
 					</div>
-					<div className="form-control">
-						<label></label>
+					<div className="form-control mb-2 md:mb-0">
 						<button type="submit" className="primary-btn w-full">
-							যাচাই করুন
+							{translations["verify-coupon"] || "যাচাই করুন"}
 						</button>
 					</div>
 				</form>

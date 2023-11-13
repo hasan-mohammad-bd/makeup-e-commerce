@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CartCard from "../CartCard";
 import { FiPlus } from "react-icons/fi";
 import { getMultipliedColumnTotal } from "@/utils/total";
+import { siteConfig } from "@/config/site";
 
 const Cart = () => {
 	const { isCartOpen, cart } = useSelector((state) => state.cart);
@@ -57,7 +58,11 @@ const Cart = () => {
 				<div className="flex lg:block justify-between items-center lg:text-center">
 					<p className="">{translations["total"]}:</p>
 					<h3 className="text-slate-900 font-bold">
-						{`৳ ${getMultipliedColumnTotal(cart, "quantity", "new_price")}`}
+						{`${siteConfig.currency.sign} ${getMultipliedColumnTotal(
+							cart,
+							"quantity",
+							"new_price"
+						)}`}
 					</h3>
 				</div>
 				<Link

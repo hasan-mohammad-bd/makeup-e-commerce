@@ -7,6 +7,7 @@ import * as cartActions from "@/store/slices/cartSlice";
 import noImage from "@/public/assets/images/no-image.png";
 import { getFractionFixed } from "@/utils/format-number";
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
 
 const CartCard = ({ item }) => {
 	const {
@@ -53,12 +54,14 @@ const CartCard = ({ item }) => {
 					</h2>
 					<div className="flex gap-2 lg:gap-3 products-center items-center">
 						<h3 className="text-base/[16px] lg:text-xl text-red-500">
-							৳ {new_price}
+							{siteConfig.currency.sign} {new_price}
 						</h3>
 						{typeof discount_percentage === "number" &&
 						discount_percentage > 0 ? (
 							<>
-								<del className="text-sm text-slate-300">৳ {old_price}</del>
+								<del className="text-sm text-slate-300">
+									{siteConfig.currency.sign} {old_price}
+								</del>
 								<div className="rounded-md px-1 text-xs py-0.5 text-white bg-red-500">
 									{getFractionFixed(discount_percentage)}% OFF
 								</div>
