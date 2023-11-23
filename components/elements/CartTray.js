@@ -6,13 +6,14 @@ import { toggleCart } from "@/store/slices/cartSlice";
 import { getMultipliedColumnTotal } from "@/utils/total";
 import { siteConfig } from "@/config/site";
 import cartImage from "@/public/assets/images/cart.gif";
-// import dynamic from "next/dynamic";
-// const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
-// 	ssr: false,
-// });
+import dynamic from "next/dynamic";
+const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
+	ssr: false,
+});
 
 const CartTray = () => {
 	const { cart } = useSelector((state) => state.cart);
+	const { translations } = useSelector((state) => state.common);
 	const dispatch = useDispatch();
 
 	const handleCart = () => {
@@ -35,27 +36,25 @@ const CartTray = () => {
 					/>
 				</div>
 				<div className="content rounded-es-lg text-center">
-					<p className="text-xs text-white">{cart?.length} আইটেম</p>
+					<p className="text-xs text-white">
+						{cart?.length} {translations["item" || "আইটেম"]}
+					</p>
 					<div className="text-xs font-semibold text-white flex items-center justify-center">
 						<span className="mr-1">{siteConfig.currency.sign}</span>
-						{/* <AnimatedNumbers
-							animateToNumber={20000}
+						<AnimatedNumbers
+							animateToNumber={getMultipliedColumnTotal(
+								cart,
+								"quantity",
+								"new_price"
+							)}
 							includeComma
-							// fontStyle={{ fontSize: 32 }}
 							locale="en-US"
-							configs={(number, index) => {
-								return { mass: 1, tension: 230 * (index + 1), friction: 140 };
-							}}
-							// configs={[
-							//   { mass: 1, tension: 220, friction: 100 },
-							//   { mass: 1, tension: 180, friction: 130 },
-							//   { mass: 1, tension: 280, friction: 90 },
-							//   { mass: 1, tension: 180, friction: 135 },
-							//   { mass: 1, tension: 260, friction: 100 },
-							//   { mass: 1, tension: 210, friction: 180 },
-							// ]}
-						></AnimatedNumbers> */}
-						{getMultipliedColumnTotal(cart, "quantity", "new_price")}
+							transitions={(index) => ({
+								type: "spring",
+								duration: index + 0.3,
+							})}
+						></AnimatedNumbers>
+						{/* {getMultipliedColumnTotal(cart, "quantity", "new_price")} */}
 					</div>
 				</div>
 			</div>

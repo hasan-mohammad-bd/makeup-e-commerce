@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { FiSearch } from "react-icons/fi";
-import { AnswerIcon, QuestionIcon } from "@/components/elements/svg";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 import { useParams, useSearchParams } from "next/navigation";
 import {
 	useAddToProductQnaMutation,
@@ -10,12 +11,13 @@ import {
 } from "@/store/api/productsQnaAPI";
 import { getBdFormattedDate } from "@/utils/format-date";
 import Paginator from "@/components/elements/Paginator";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import RoundedSearch from "@/components/elements/RoundedSearch";
 import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
+import { AnswerIcon, QuestionIcon } from "@/components/elements/svg";
+import { FiSearch } from "react-icons/fi";
 
 const QuestionAnswer = () => {
+	const { settings, translations } = useSelector((state) => state.common);
 	const [isSearch, setIsSearch] = useState(false);
 	const { product_id } = useParams();
 	const searchParams = useSearchParams();
@@ -55,13 +57,15 @@ const QuestionAnswer = () => {
 
 	return (
 		<>
-			<div className="question-answer mb-8">
+			<div className="question-answer">
 				<div className="flex justify-between items-center">
 					<h2 className="text-2xl font-bold font-title text-slate-900">
-						এই প্রডাক্ট সম্পর্কে প্রশ্ন ও উত্তর ({meta?.total || 0})
+						{translations["product-question-answer"] ||
+							"এই প্রডাক্ট সম্পর্কে প্রশ্ন ও উত্তর"}{" "}
+						({meta?.total || 0})
 					</h2>
 					<button
-						className="w-[48px] h-[48px] bg-white rounded-full border-2 border-[#E2E8F0] flex justify-center items-center"
+						className="w-[48px] h-[48px] bg-white rounded-full border-2 border-[#E2E8F0] hidden lg:flex justify-center items-center"
 						onClick={() => setIsSearch(true)}
 					>
 						<FiSearch size={24} />
@@ -83,62 +87,82 @@ const QuestionAnswer = () => {
 						className="w-[32px] h-[32px] ml-6"
 					/>
 				</div>
-				<form className="my-8" onSubmit={handleSubmit(onSubmit)}>
-					<div className="flex justify-between gap-4">
+				<form className="mt-4 lg:mt-8" onSubmit={handleSubmit(onSubmit)}>
+					<div className="flex flex-col lg:flex-row justify-between gap-4 items-end">
 						<textarea
-							className="h-[3rem] w-[25.75rem] border-2 border-[#E2E8F0] focus:border-primary focus:outline-none rounded-lg py-3 px-4"
+							className="w-full h-24 lg:h-14 lg:w-[25.75rem] border-1 border-[#E2E8F0] focus:border-primary focus:outline-none rounded-lg p-3"
 							type="text"
-							placeholder="প্রডাক্ট সম্পর্কে আপনার প্রশ্ন লিখুন "
+							// rows={1}
+							placeholder={
+								translations["type-product-question"] ||
+								"প্রডাক্ট সম্পর্কে আপনার প্রশ্ন লিখুন"
+							}
 							{...register("question", {
 								required: "Question is required.",
 							})}
 						/>
-
-						<div className="product-actions flex justify-center items-center gap-2">
-							<button type="submit" className="primary-btn w-[12.25rem]">
-								প্রশ্ন জিজ্ঞাস করুন
+						{errors.question && (
+							<p className="errorMsg !m-0 lg:hidden">
+								{errors.question.message}
+							</p>
+						)}
+						<div className="product-actions flex justify-end items-center">
+							<button
+								type="submit"
+								className="primary-btn !h-[2.5rem] w-[12.25rem]"
+							>
+								{translations["ask-question"] || "প্রশ্ন জিজ্ঞাস করুন"}
 							</button>
 						</div>
 					</div>
+
 					{errors.question && (
-						<p className="errorMsg">{errors.question.message}</p>
+						<p className="errorMsg hidden lg:block">
+							{errors.question.message}
+						</p>
 					)}
 				</form>
 				{isLoading ? (
 					<ItemsListLoader noImage={true} numItems={2} />
 				) : (
-					questions.map((question) => (
-						<div key={question.id} className="mb-2 bg-[#F8FAFC] rounded-lg p-6">
-							<div className="flex justify-start">
-								<div className="icon-container">
-									<QuestionIcon />
-								</div>
-								<div className="icon-container pl-5">
-									<p className="font-bold">{question.questions}</p>
-									<p className="text-slate-500">
-										{question?.customer || "Not Available"} |{" "}
-										{getBdFormattedDate(question.created_at)}
-									</p>
-								</div>
-							</div>
-							{question?.answer ? (
-								<div className="flex justify-start mt-3">
+					<div className="mt-4 lg:mt-8">
+						{questions.map((question) => (
+							<div
+								key={question.id}
+								className="mb-2 bg-[#F8FAFC] rounded-lg p-3 lg:p-6"
+							>
+								<div className="flex justify-start">
 									<div className="icon-container">
-										<AnswerIcon />
+										<QuestionIcon />
 									</div>
 									<div className="icon-container pl-5">
-										<p className="font-bold">{question.answer}</p>
+										<p className="font-bold">{question.questions}</p>
 										<p className="text-slate-500">
-											Sototastall | {getBdFormattedDate(question.updated_at)}
+											{question?.customer || "Not Available"} |{" "}
+											{getBdFormattedDate(question.created_at)}
 										</p>
 									</div>
 								</div>
-							) : null}
-						</div>
-					))
+								{question?.answer ? (
+									<div className="flex justify-start mt-3">
+										<div className="icon-container">
+											<AnswerIcon />
+										</div>
+										<div className="icon-container pl-5">
+											<p className="font-bold">{question.answer}</p>
+											<p className="text-slate-500">
+												{settings.name} |{" "}
+												{getBdFormattedDate(question.updated_at)}
+											</p>
+										</div>
+									</div>
+								) : null}
+							</div>
+						))}
+					</div>
 				)}
 			</div>
-			<div className="flex justify-end mb-10">
+			<div className="flex lg:justify-end mt-6 lg:mt-8">
 				<Paginator meta={meta} />
 			</div>
 		</>

@@ -1,5 +1,5 @@
 import React from "react";
-import SingleProduct from "./SingleProduct";
+import SingleProduct from "../cards/SingleProduct";
 
 export default function ProductList({ products, isFlashSale }) {
 	return (

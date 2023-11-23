@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 
 // ** Import Iocns
 import { HiChevronRight } from "react-icons/hi2";
@@ -14,14 +14,15 @@ const IntroSlider = ({ sliders }) => {
 	return (
 		<>
 			<Swiper
-				modules={[Pagination, Autoplay]}
+				modules={[Pagination, Autoplay, EffectFade]}
 				slidesPerView={1}
 				spaceBetween={0}
 				loop={true}
 				pagination={{ clickable: true }}
 				className="intro-slider [&_.swiper-wrapper]:h-[212px] lg:[&_.swiper-wrapper]:h-[366px]"
 				autoplay={{ delay: 3000 }}
-				// height={"100%"}
+				effect="fade"
+				speed={2000}
 			>
 				{sliders.map((slide) => (
 					<SwiperSlide

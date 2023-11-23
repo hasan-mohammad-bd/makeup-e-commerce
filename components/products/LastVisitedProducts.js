@@ -7,9 +7,10 @@ import {
 	useAddToVisitedMutation,
 	useGetVisitedProductsQuery,
 } from "@/store/api/visitedProductsAPI";
-import ProductHistoryCard from "./ProductHistoryCard";
+import ProductHistoryCard from "../cards/ProductHistoryCard";
+import SectionTitle from "../elements/SectionTitle";
 
-const LastVisitedProducts = ({ visitedProductId }) => {
+const LastVisitedProducts = ({ visitedProductId, translations }) => {
 	const { locale } = useParams();
 	const { user } = useSelector((state) => state.auth);
 	const [addToVisited] = useAddToVisitedMutation();
@@ -36,25 +37,32 @@ const LastVisitedProducts = ({ visitedProductId }) => {
 	if (!user) return null;
 
 	return (
-		<>
-			<div className="container ">
-				<div className="latest-viewed-products bg-slate-50 border border-slate-100 rounded-xl pt-8 mb-14">
-					<div className="sec-heading w-full flex justify-between items-center border-b border-slate-200 pb-3">
-						<h2 className="sec-title">সর্বশেষ যে প্রোডাক্ট গুলো দেখেছেন</h2>
-					</div>
-
-					<div className="mt-6 ">
-						<div className="products-wpr grid grid-cols-4 gap-4">
+		<div className="container mb-11 lg:mb-14">
+			<div className="bg-slate-50 border border-slate-100 rounded-xl p-3 lg:p-6">
+				<div className="latest-viewed-products">
+					<SectionTitle
+						className={"border-slate-100 justify-start"}
+						title={
+							translations["recently-viewed"] ||
+							"সর্বশেষ যে প্রোডাক্ট গুলো দেখেছেন"
+						}
+						buttonText={translations["see-all"]}
+					/>
+					<div className="mt-1 lg:mt-6">
+						<div className="products-wpr grid grid-cols-1 lg:grid-cols-4 gap-3 lg:gap-x-5 lg:gap-y-6">
 							{visitedProducts?.map((product, i) => (
 								<div key={i}>
-									<ProductHistoryCard isHistory={true} product={product} />
+									<ProductHistoryCard
+										product={product}
+										status={translations["new"]}
+									/>
 								</div>
 							))}
 						</div>
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

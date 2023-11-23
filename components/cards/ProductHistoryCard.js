@@ -3,21 +3,20 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { siteConfig } from "@/config/site";
 import Loader from "../elements/loaders/Loader";
 import { formatLongNumber, getFractionFixed } from "@/utils/format-number";
+import { getDaysSinceCreation } from "@/utils/format-date";
 
-// ** Import Icon
 import { FaStar } from "react-icons/fa";
-// import { getDaysSinceCreation } from "@/utils/formatDate";
 
-const ProductVerticalCard = ({ product }) => {
+const ProductHistoryCard = ({ product, status }) => {
 	const [loading, setLoading] = useState(true);
 
 	const {
 		slug,
 		image,
 		product_name,
-		brand,
 		averate_rating,
 		total_rating,
 		new_price,
@@ -36,37 +35,33 @@ const ProductVerticalCard = ({ product }) => {
 
 	return (
 		<div
-			className={`product-card-wrap grid grid-cols-[99px_auto] lg:grid-cols-[116px_auto] items-center bg-white border border-slate-200 rounded-xl w-[298px] lg:w-full p-3 lg:p-4 gap-3 lg:gap-4`}
+			className={`grid grid-cols-[76px_auto] items-center bg-white border border-slate-200 rounded-xl p-4 gap-x-3`}
 		>
-			<div className="product-img relative h-[99px] lg:h-[116px]">
-				{/* {getDaysSinceCreation(created_at) < 8 && (
+			<div
+				className="product-img relative"
+				style={{
+					height: "76px",
+				}}
+			>
+				{getDaysSinceCreation(created_at) < 8 && (
 					<div className="absolute top-0 left-0 z-20">
 						<span className="bg-secondary-700 text-sm px-2 rounded-full text-white">
-							নতুন
+							{status || "নতুন"}
 						</span>
 					</div>
-				)} */}
+				)}
 				<Link href="/products/[slug]" as={`/products/${slug}`}>
 					<Image
 						src={image || "/assets/images/no-image.png"}
 						alt={`product`}
-						width={116}
-						height={116}
+						width={76}
+						height={76}
 						// priority={true}
 						className="h-full w-full object-cover"
 					/>
 				</Link>
 			</div>
 			<div className="product-content-wrap">
-				<div className="product-category">
-					<span
-						// href={`/brands/${brand?.id ? brand?.id : ""}`}
-						className="text-xs text-primary capitalize"
-					>
-						{brand?.brand_name || "No Brand"}
-					</span>
-				</div>
-
 				<h2>
 					<Link href={`/products/${slug}`} className="product-title">
 						{product_name}
@@ -81,15 +76,17 @@ const ProductVerticalCard = ({ product }) => {
 						{total_rating === 0 ? "No Rating" : formatLongNumber(total_rating)}
 					</span>
 				</div>
-				<div className="product-price text-sm flex items-center gap-2">
+				<div className="product-price text-sm flex items-center gap-1">
 					<span className="text-base/4 lg:text-lg/[24px] font-semibold text-red-500">
-						৳{new_price}
+						{siteConfig.currency.sign}
+						{new_price}
 					</span>
 					{typeof discount_percentage === "number" &&
 					discount_percentage > 0 ? (
 						<>
-							<del className="old-price text-base/4 lg:text-lg/[24px] font-normal text-slate-400">
-								৳{old_price}
+							<del className="old-price text-sm lg:text-lg/[24px] font-normal text-slate-400">
+								{siteConfig.currency.sign}
+								{old_price}
 							</del>
 							<span className="discount inline-block !text-xs text-white bg-red-500 rounded-md py-0.5 lg:py-1 px-1 ml-2">
 								-{getFractionFixed(discount_percentage)}%
@@ -102,4 +99,4 @@ const ProductVerticalCard = ({ product }) => {
 	);
 };
 
-export default ProductVerticalCard;
+export default ProductHistoryCard;

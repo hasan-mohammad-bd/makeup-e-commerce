@@ -7,12 +7,12 @@ import { getFormattedDate } from "@/utils/format-date";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import useAddReviewReaction from "@/hooks/useAddReviewReaction";
 
-const RatingReviewCard = ({ review }) => {
+const RatingReviewCard = ({ review, translations }) => {
 	const { handleReviewReact } = useAddReviewReaction(); //custom hook for reusing
 	// console.log(review);
 	return (
-		<div className="grid grid-cols-3 border-b border-slate-300 px-4 py-3 mb-4">
-			<div id="user-info" className="col-span-1">
+		<div className="grid lg:grid-cols-3 border-b border-slate-300 px-3 gap-1 lg:px-4 lg:py-3 mt-4">
+			<div id="user-info" className="col-span-1 box-border">
 				<div className="flex items-center mb-4">
 					<Rating
 						initialValue={review.rating}
@@ -24,7 +24,7 @@ const RatingReviewCard = ({ review }) => {
 					/>
 				</div>
 				<div className="flex items-center gap-2">
-					<div className="h-7 min-w-7 rounded-full">
+					<div className="h-7 min-w-7 rounded-full shrink-0">
 						{review.customer.image ? (
 							<Image
 								src={review.customer.image}
@@ -40,7 +40,7 @@ const RatingReviewCard = ({ review }) => {
 						)}
 					</div>
 
-					<span className="font-bold overflow-text line-clamp-2">
+					<span className="text-base/4 font-title text-slate-900 overflow-text line-clamp-2">
 						{review.customer.name}
 					</span>
 				</div>
@@ -53,7 +53,7 @@ const RatingReviewCard = ({ review }) => {
 				id="review"
 				className="col-span-2 flex flex-col gap-3 justify-center"
 			>
-				<p className="text-slate-700">{review.comment}</p>
+				<p className="text-base font-normal text-slate-700">{review.comment}</p>
 				{review?.images?.length ? (
 					<ReviewImages review={review} max={4} />
 				) : null}
@@ -65,8 +65,13 @@ const RatingReviewCard = ({ review }) => {
 				>
 					{review.product_variant && (
 						<>
-							<p>কালার: {review.product_variant?.color}</p>
-							<p>সাইজ: {review.product_variant?.size}</p>
+							<p>
+								{translations["color"] || "কালার"}:{" "}
+								{review.product_variant?.color}
+							</p>
+							<p>
+								{translations["size"] || "সাইজ"}: {review.product_variant?.size}
+							</p>
 						</>
 					)}
 					<div className="like-dislike flex-center gap-4">

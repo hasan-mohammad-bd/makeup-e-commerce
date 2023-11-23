@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import RatingReviewCard from "./RatingReviewCard";
+import RatingReviewCard from "./_components/RatingReviewCard";
 import { Rating } from "react-simple-star-rating";
 import {
 	useGetProductReviewsQuery,
@@ -8,15 +8,18 @@ import {
 	useGetReviewSummaryQuery,
 } from "@/store/api/productReviewAPI";
 import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
-import AllReviewImages from "./AllReviewImages";
+import AllReviewImages from "./_components/AllReviewImages";
 import Paginator from "@/components/elements/Paginator";
-import ReviewSortSelect from "./ReviewSortSelect";
-import ReviewFilterSelect from "./ReviewFilterSelect";
+import ReviewSortSelect from "./_components/ReviewSortSelect";
+import ReviewFilterSelect from "./_components/ReviewFilterSelect";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const RatingReviews = ({ params }) => {
 	const { product_id } = params;
 	const { user } = useSelector((state) => state.auth);
+	const { translations } = useSelector((state) => state.common);
+	const isMobile = useMediaQuery("(max-width: 768px)");
 
 	// Review Summary
 	const { data: summary = {}, isLoading: summaryLoading } =
@@ -61,15 +64,15 @@ const RatingReviews = ({ params }) => {
 	// console.log(allReviews);
 
 	return (
-		<div className="product-rating-reviews mb-8">
+		<div className="product-rating-reviews">
 			<h2 className="text-2xl font-bold font-title text-slate-900">
-				রেটিং ও রিভিউ:
+				{translations["ratings-and-reviews"] || "রেটিং ও রিভিউ"}:
 			</h2>
 			{summaryLoading ? (
 				<ItemsListLoader noImage={true} numItems={1} />
 			) : (
-				<div className="rating grid grid-cols-7 mt-3 mb-5 pb-6 border-b-[1px] border-slate-200">
-					<div className="justify-self-start col-span-2 text-center flex flex-col justify-center items-center">
+				<div className="rating grid grid-cols-1 lg:grid-cols-7 mt-3 mb-5 pb-6 border-b border-slate-200">
+					<div className="justify-self-center lg:justify-self-start lg:col-span-2 text-center flex flex-col justify-center items-center">
 						<h3 className="text-2xl font-bold text-slate-950">
 							{summary?.avarateReview || 0}
 						</h3>
@@ -83,10 +86,12 @@ const RatingReviews = ({ params }) => {
 								fillColor="#F59E0B"
 							/>
 						</div>
-						<p className="text-slate-700">{summary?.totalReview} গুলো রেটিং</p>
+						<p className="text-slate-700">
+							{summary?.totalReview} {translations["ratings"] || "গুলো রেটিং"}
+						</p>
 					</div>
-					<div className="rating-summery col-span-5 grid grid-cols-12 items-center">
-						<div className="h-[88px] w-[1px] bg-slate-200 mr-5 justify-self-start"></div>
+					<div className="rating-summery lg:col-span-5 grid grid-cols-12 items-center">
+						<div className="h-[88px] w-[1px] bg-slate-200 mr-5 justify-self-start hidden lg:block"></div>
 						<div className="col-span-11">
 							{Object.keys(percentages).map((star) => (
 								<div key={star} className="flex items-center gap-2 mt-4">
@@ -109,25 +114,25 @@ const RatingReviews = ({ params }) => {
 				</div>
 			)}
 			<div id="customer-pictures">
-				<h2 className="text-md font-bold font-title text-slate-700">
-					কাস্টমারের দেয়া ছবি গুলো
+				<h2 className="text-base/4 font-semibold font-title text-slate-700">
+					{translations["imgs-from-cstmr"] || "কাস্টমারের দেয়া ছবি গুলো"}
 				</h2>
-				<div className="bg-slate-50 rounded-md mt-3 p-4">
+				<div className="bg-slate-50 rounded-md mt-3 p-3 lg:p-4">
 					{imagesLoading ? (
 						<ItemsListLoader noImage={true} numItems={1} />
 					) : (
-						<AllReviewImages images={reviewImages} max={6} />
+						<AllReviewImages images={reviewImages} max={isMobile ? 8 : 6} />
 					)}
 				</div>
 			</div>
 			<div
 				id="customer-review-header"
-				className="bg-slate-50 rounded-md mt-8 h-16 p-3 flex items-center"
+				className="bg-slate-50 rounded-md mt-8 p-3 flex flex-col gap-3 lg:flex-row lg:items-center"
 			>
-				<h2 className="text-md font-bold font-title text-slate-700">
-					কাস্টমারের রিভিউ গুলো
+				<h2 className="text-base/4 font-semibold font-title text-slate-700">
+					{translations["customer-reviews"] || "কাস্টমারের রিভিউ গুলো"}
 				</h2>
-				<div className="ml-auto flex gap-4 items-center">
+				<div className="lg:ml-auto flex gap-4 lg:items-center">
 					<ReviewSortSelect />
 					<ReviewFilterSelect />
 				</div>
@@ -142,11 +147,12 @@ const RatingReviews = ({ params }) => {
 							key={review.id}
 							review={review}
 							reviewImages={reviewImages}
+							translations={translations}
 						/>
 					))}
 				</div>
 			)}
-			<div className="flex justify-end my-9">
+			<div className="flex lg:justify-end mt-4 lg:mt-9">
 				<Paginator meta={meta} />
 			</div>
 		</div>

@@ -9,7 +9,7 @@ import axiosInstance from "@/lib/axios-instance";
 import { addDiscountInfo } from "@/store/slices/cartSlice";
 import { setGlobalLoader } from "@/store/slices/commonSlice";
 
-const CouponModal = ({ showModal, setShowModal, title }) => {
+const CouponModal = ({ showModal, setShowModal }) => {
 	const { translations } = useSelector((state) => state.common);
 	const [error, setError] = useState(false);
 	const dispatch = useDispatch();
@@ -40,7 +40,11 @@ const CouponModal = ({ showModal, setShowModal, title }) => {
 		}
 	};
 	return (
-		<Modal showModal={showModal} setShowModal={setShowModal} title={title}>
+		<Modal
+			showModal={showModal}
+			setShowModal={setShowModal}
+			title={translations["coupon-code"] || "কুপন কোড"}
+		>
 			<div className="md:w-[27rem] text-slate-500">
 				<form className="" onSubmit={handleSubmit(onSubmit)}>
 					<div className="mt-5 mb-6 md:mb-8 form-control">

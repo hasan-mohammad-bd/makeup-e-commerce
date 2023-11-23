@@ -85,7 +85,7 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 		<>
 			{!loading ? (
 				<>
-					<div className="product-card-wrap min-w-[166px] bg-white border border-slate-200 rounded-xl hover:border-primary">
+					<div className="min-w-[166px] bg-white border border-slate-200 rounded-xl hover:border-primary">
 						<div className="product-img-action-wrap relative">
 							{getDaysSinceCreation(created_at) < 8 && (
 								<div className="absolute top-3 left-3 z-20">

@@ -5,7 +5,7 @@ import { Navigation } from "swiper/modules";
 
 // ** Import Icons
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
-import ProductVerticalCard from "@/components/products/ProductVerticalCard";
+import ProductVerticalCard from "@/components/cards/ProductVerticalCard";
 import { getChunksList } from "@/utils/format-list";
 
 const NewArrivalSlider = ({ newProducts }) => {

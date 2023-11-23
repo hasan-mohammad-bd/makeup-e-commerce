@@ -13,7 +13,7 @@ import { getCouponDiscount, getOrderFormattedCartItems } from "@/lib/checkout";
 import CartCard from "@/components/CartCard";
 import CustomRadio from "@/components/elements/CustomRadio";
 import ArticleLoader from "@/components/elements/loaders/ArticleLoader";
-import HorizontalScrollContainer from "@/components/utility/HorizontalScrollContainer";
+import HorizontalScrollView from "@/components/elements/HorizontalScrollView";
 const CouponModal = dynamic(() => import("@/components/modals/CouponModal"));
 
 //store
@@ -201,7 +201,7 @@ const Checkout = () => {
 									</span>
 								</h3>
 								{/* <div className="flex flex-nowrap space-x-4"> */}
-								<HorizontalScrollContainer>
+								<HorizontalScrollView>
 									{Object.keys(paymentMethods).map((method, index) =>
 										paymentMethods[method].status === 1 ? (
 											<div
@@ -239,12 +239,12 @@ const Checkout = () => {
 											</div>
 										) : null
 									)}
-								</HorizontalScrollContainer>
+								</HorizontalScrollView>
 								{/* </div> */}
 							</div>
 						</div>
 						{/* oder confirm button  */}
-						<div className="form-control md:mt-11 fixed lg:static bottom-0 left-0 z-20 w-full py-4 lg:py-0 px-3 lg:px-0 bg-white shadow-top lg:shadow-none flex lg:block justify-between items-center">
+						<div className="form-control md:mt-11 responsive-action flex lg:block justify-between items-center">
 							<div className="lg:hidden">
 								<p className="">{translations["total"]}:</p>
 								<h3 className="text-slate-900 font-bold">
@@ -369,11 +369,7 @@ const Checkout = () => {
 				</div>
 			</div>
 			{showModal && (
-				<CouponModal
-					showModal={showModal}
-					setShowModal={setShowModal}
-					title={translations["coupon-code"] || "কুপন কোড"}
-				/>
+				<CouponModal showModal={showModal} setShowModal={setShowModal} />
 			)}
 		</section>
 	);

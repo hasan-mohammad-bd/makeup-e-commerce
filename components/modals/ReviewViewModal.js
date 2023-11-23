@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { Rating } from "react-simple-star-rating";
 import Modal from "../elements/Modal";
-import ReviewImageSlider from "../sliders/ReviewImageSlider";
+import ReviewImageSlider from "../../app/[locale]/products/[slug]/reviews/[product_id]/_components/ReviewImageSlider";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { getFormattedDate } from "@/utils/format-date";
 import { useGetReviewDetailsQuery } from "@/store/api/productReviewAPI";
@@ -18,6 +18,8 @@ export default function ReviewViewModal({
 	reviewId: reviewIdProp,
 }) {
 	const { user } = useSelector((state) => state.auth);
+	const { translations } = useSelector((state) => state.common);
+
 	let review = {};
 	let api = user ? reviewIdProp + `?reference_id=${user.id}` : reviewIdProp;
 	const { data, isLoading } = useGetReviewDetailsQuery(api, {
@@ -37,14 +39,17 @@ export default function ReviewViewModal({
 		<Modal
 			showModal={showModal}
 			setShowModal={setShowModal}
-			title={"কাস্টমারের দেয়া রিভিউ ছবি গুলো"}
+			title={
+				translations["customer-review-images"] ||
+				"কাস্টমারের দেয়া রিভিউ ছবি গুলো"
+			}
 		>
 			{isLoading && reviewIdProp ? (
 				<ItemsListLoader noImage={true} numItems={4} />
 			) : (
-				<div className="flex gap-6">
+				<div className="flex flex-col lg:flex-row gap-2 lg:gap-6">
 					<ReviewImageSlider images={review.images} />
-					<div className="w-[245px]">
+					<div className="w-full lg:w-[245px]">
 						<div id="user-info">
 							<div className="flex items-center mb-4">
 								<Rating
@@ -82,35 +87,46 @@ export default function ReviewViewModal({
 								{getFormattedDate(review.created_at)}
 							</p>
 						</div>
-						<div
-							id="review"
-							className="border-b border-slate-200 py-4 flex flex-col gap-8 justify-center"
-						>
-							<p className="text-slate-700">{review.comment}</p>
-							{review.product_variant && (
-								<div className="actions flex-between text-slate-600">
-									<p>কালার: {review.product_variant?.color}</p>
-									<p>সাইজ: {review.product_variant?.size}</p>
-								</div>
-							)}
-						</div>
-						<div className="flex justify-end gap-4">
-							<button
-								onClick={() => handleReviewReact("like", review?.id)}
-								className={`icon-btn hover:text-primary ${
-									review.is_liked ? "text-primary" : "text-slate-700"
-								}`}
+						<p className="text-slate-700 lg:hidden py-3">{review.comment}</p>
+						<div className="border-t lg:border-none flex justify-between lg:block">
+							<div
+								id="review"
+								className="lg:border-b border-slate-200 py-4 flex flex-col gap-8 justify-center"
 							>
-								<AiFillLike /> {review.likes_count}
-							</button>
-							<button
-								onClick={() => handleReviewReact("dislike", review?.id)}
-								className={`icon-btn hover:text-primary ${
-									review.is_disliked ? "text-primary" : "text-slate-700"
-								}`}
-							>
-								<AiFillDislike /> {review.dislikes_count}
-							</button>
+								<p className="text-slate-700 hidden lg:block">
+									{review.comment}
+								</p>
+								{review.product_variant && (
+									<div className="actions flex-between gap-4 text-slate-600">
+										<p>
+											{translations["color"] || "কালার"}:{" "}
+											{review.product_variant?.color}
+										</p>
+										<p>
+											{translations["size"] || "সাইজ"}:{" "}
+											{review.product_variant?.size}
+										</p>
+									</div>
+								)}
+							</div>
+							<div className="flex justify-end gap-4">
+								<button
+									onClick={() => handleReviewReact("like", review?.id)}
+									className={`icon-btn hover:text-primary ${
+										review.is_liked ? "text-primary" : "text-slate-700"
+									}`}
+								>
+									<AiFillLike /> {review.likes_count}
+								</button>
+								<button
+									onClick={() => handleReviewReact("dislike", review?.id)}
+									className={`icon-btn hover:text-primary ${
+										review.is_disliked ? "text-primary" : "text-slate-700"
+									}`}
+								>
+									<AiFillDislike /> {review.dislikes_count}
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>

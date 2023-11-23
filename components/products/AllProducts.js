@@ -1,5 +1,5 @@
 import { fetchData } from "@/lib/fetch-data";
-import SingleProduct from "./SingleProduct";
+import SingleProduct from "../cards/SingleProduct";
 import PaginationWithSummery from "../PaginationWithSummery";
 
 const AllProducts = async ({ customSearchParams = {}, pagination }) => {
@@ -10,7 +10,7 @@ const AllProducts = async ({ customSearchParams = {}, pagination }) => {
 
 	return (
 		<>
-			<div className="products-wpr grid grid-cols-5 gap-x-5 gap-y-12 mb-12">
+			<div className="products-wpr grid grid-cols-2 lg:grid-cols-5 gap-3 lg:gap-x-6 lg:gap-y-12">
 				{products?.map((product, i) => (
 					<div className="col-span-1" key={i}>
 						<SingleProduct product={product} />

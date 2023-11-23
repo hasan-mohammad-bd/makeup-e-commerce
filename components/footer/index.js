@@ -9,11 +9,12 @@ import FooterPages from "./FooterPages";
 import SocialIcon from "../elements/SocialIcon";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 const Footer = () => {
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const pathArray = usePathname().split("/");
+	const params = useParams();
 	// console.log(pathArray);
 	const { settings, settingsLoading, translationsLoading, translations } =
 		useSelector((state) => state.common);
@@ -22,7 +23,8 @@ const Footer = () => {
 
 	if (
 		(isMobile && pathArray.includes("categories")) ||
-		pathArray.includes("checkout")
+		(isMobile && pathArray.includes("checkout")) ||
+		(isMobile && pathArray.includes("products") && params.slug)
 	)
 		return null;
 

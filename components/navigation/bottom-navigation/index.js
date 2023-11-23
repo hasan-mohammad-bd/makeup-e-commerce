@@ -13,7 +13,7 @@ import {
 	ProfileIcon,
 } from "@/components/elements/svg";
 import { useSelector } from "react-redux";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
@@ -22,8 +22,15 @@ export default function BottomNavigation() {
 	const pathArray = usePathname().split("/");
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const pathname = usePathname();
+	const params = useParams();
+	// console.log(params);
 
-	if (!isMobile || pathArray.includes("checkout")) return null;
+	if (
+		!isMobile ||
+		pathArray.includes("checkout") ||
+		(pathArray.includes("products") && params.slug)
+	)
+		return null;
 
 	const menuList = [
 		{
@@ -60,7 +67,7 @@ export default function BottomNavigation() {
 
 	return (
 		<div className="h-28 bg-white">
-			<div className="fixed bottom-0 left-0 z-20 w-full h-20 bg-white rounded-t-xl shadow-top">
+			<div className="fixed bottom-0 left-0 z-20 w-screen h-20 bg-white rounded-t-xl shadow-top">
 				<div className="grid h-full max-w-lg grid-cols-5 mx-auto font-medium">
 					{menuList.map((menu, index) => (
 						<Link

@@ -25,7 +25,7 @@ module.exports = {
 			},
 			container: {
 				center: true,
-				padding: "1rem",
+				padding: "0.75rem",
 			},
 			colors: {
 				primary: "#F99104",
@@ -53,5 +53,8 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [require("@tailwindcss/container-queries")],
+	plugins: [
+		require("@tailwindcss/container-queries"),
+		require("./config/tailwind-custom-plugin"),
+	],
 };
