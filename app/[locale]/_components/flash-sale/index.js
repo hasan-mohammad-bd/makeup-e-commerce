@@ -26,7 +26,10 @@ const FlashSale = ({ translations }) => {
 						<div className="flex flex-col lg:flex-row gap-4 bg-white px-3 lg:px-0">
 							<div className="text-center lg:text-left">
 								<h2 className="sec-title">{flashSaleInfo?.title}</h2>
-								<p>{translations["the-offer-will-only-last"]}</p>
+								<p>
+									{translations["the-offer-will-only-last"] ||
+										"অফার চলবে আর মাত্র"}
+								</p>
 							</div>
 							<Timer targetDate={flashSaleInfo?.expire_time} />
 						</div>

@@ -5,7 +5,7 @@ export default function loading() {
 	return (
 		<div className="flex h-screen w-screen justify-center items-center">
 			<Image
-				className={`h-[300px] w-[300px]`}
+				className={`h-[200px] lg:h-[300px] w-[200px] lg:w-[300px]`}
 				src={"/assets/images/logo.svg"}
 				alt={"loader"}
 				width={226}
