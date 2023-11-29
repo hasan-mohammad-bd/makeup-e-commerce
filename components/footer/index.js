@@ -22,7 +22,7 @@ const Footer = () => {
 	if (settingsLoading || translationsLoading) return null;
 
 	if (
-		(isMobile && pathArray.includes("categories")) ||
+		(isMobile && pathArray.includes("categories") && !params.slug) ||
 		(isMobile && pathArray.includes("checkout")) ||
 		(isMobile && pathArray.includes("products") && params.slug)
 	)

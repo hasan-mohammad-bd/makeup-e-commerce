@@ -5,12 +5,14 @@ import ProductsWithFilter from "@/components/products/ProductsWithFilter";
 
 // ** Imoprt icons
 import noImage from "@/public/assets/images/no-image.png";
+import HorizontalScrollView from "@/components/elements/HorizontalScrollView";
 
 const page = async ({ params, searchParams }) => {
 	const { slug } = params;
-	const [categoryResponse, dataResponse] = await Promise.allSettled([
+	const [categoryResponse, dataResponse, tranRes] = await Promise.allSettled([
 		fetchData({ api: `category/${slug}` }),
 		fetchData({ api: "popular-categories" }),
+		fetchData({ api: `translations` }),
 	]);
 
 	const category =
@@ -19,6 +21,9 @@ const page = async ({ params, searchParams }) => {
 			: {};
 	const popularCategories =
 		dataResponse.status === "fulfilled" ? dataResponse.value?.data || [] : [];
+
+	const translations =
+		tranRes.status === "fulfilled" ? tranRes.value?.data || {} : {};
 
 	//forming search params
 	const customSearchParams = {
@@ -31,7 +36,7 @@ const page = async ({ params, searchParams }) => {
 	return (
 		<>
 			<div
-				className="bg-no-repeat bg-cover w-full h-[240px] breadcrumb py-20"
+				className="hidden lg:block bg-no-repeat bg-cover w-full h-[240px] breadcrumb py-20"
 				style={{
 					backgroundImage: `url(${category?.image})`,
 				}}
@@ -46,13 +51,13 @@ const page = async ({ params, searchParams }) => {
 								href={`/`}
 								className="text-base text-white hover:text-primary"
 							>
-								হোম
+								{translations["home"] || "হোম"}
 							</Link>
 							<Link
 								href={`/categories`}
 								className="text-base text-white hover:text-primary"
 							>
-								ক্যাটাগরি
+								{translations["category"] || "ক্যাটাগরি"}
 							</Link>
 							<Link
 								href={`/categories/${category.slug}`}
@@ -65,18 +70,18 @@ const page = async ({ params, searchParams }) => {
 				</div>
 			</div>
 
-			<div className="border-b border-slate-300 py-8">
-				<div className="container">
-					<h6 className="text-base font-semibold font-title text-slate-900 mb-4">
-						সেরা ৫টি ক্যাটাগরি
-					</h6>
-					<div className="flex items-center gap-5">
+			<div className="border-b border-slate-200 pt-3 lg:py-8">
+				<h6 className="container text-base font-semibold font-title text-slate-900 lg:mb-4">
+					{translations["top-5-categories"] || "সেরা ৫টি ক্যাটাগরি"}
+				</h6>
+				<div className="lg:container">
+					<HorizontalScrollView className={"space-x-2 lg:space-x-4 py-3"}>
 						{popularCategories?.slice(0, 5)?.map((cat, i) => (
 							<div
-								className="category flex flex-1 items-center gap-4 border border-slate-300 rounded-xl p-3.5"
+								className="category flex flex-1 items-center gap-2 lg:gap-4 border border-slate-100 rounded-xl py-1 px-2 lg:p-3.5 lg:min-w-[237px]"
 								key={i}
 							>
-								<div className="image flex items-center justify-center w-12 h-12 bg-amber-50 rounded-2xl">
+								<div className="image flex items-center justify-center w-10 lg:w-12 h-10 lg:h-12 bg-amber-50 rounded-xl lg:rounded-2xl">
 									<Link href={`/categories/${cat.slug}`}>
 										<Image
 											src={cat?.icon || noImage}
@@ -95,13 +100,14 @@ const page = async ({ params, searchParams }) => {
 								</Link>
 							</div>
 						))}
-					</div>
+					</HorizontalScrollView>
 				</div>
 			</div>
 
 			<ProductsWithFilter
 				customSearchParams={customSearchParams}
 				category={category}
+				translations={translations}
 			/>
 		</>
 	);

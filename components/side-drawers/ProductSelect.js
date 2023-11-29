@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import DrawerRight from "@/components/elements/DrawerRight";
 import { addToCart, removeFromSelected } from "@/store/slices/cartSlice";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
@@ -11,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductVariantSelect from "../products/ProductVariantSelect";
 import noImage from "@/public/assets/images/no-image.png";
 import { getFractionFixed } from "@/utils/format-number";
+import Drawer from "../elements/Drawer";
+import { siteConfig } from "@/config/site";
 
 const ProductSelect = () => {
 	const { selectedProduct } = useSelector((state) => state.cart);
@@ -41,7 +42,7 @@ const ProductSelect = () => {
 	};
 
 	return (
-		<DrawerRight
+		<Drawer
 			title={translations["select-variant"] || "নির্বাচন করুন"}
 			show={selectedProduct}
 			setShow={closeDrawer}
@@ -69,13 +70,13 @@ const ProductSelect = () => {
 						</h2>
 						<div className="flex gap-2 lg:gap-3 products-center items-center">
 							<h3 className="text-base/[16px] lg:text-xl text-red-500">
-								৳ {selectedProduct?.new_price}
+								{siteConfig.currency.sign} {selectedProduct?.new_price}
 							</h3>
 							{typeof selectedProduct?.discount_percentage === "number" &&
 							selectedProduct?.discount_percentage > 0 ? (
 								<>
 									<del className="text-sm text-slate-300">
-										৳ {selectedProduct?.old_price}
+										{siteConfig.currency.sign} {selectedProduct?.old_price}
 									</del>
 									<div className="rounded-md px-1 text-xs py-0.5 text-white bg-red-500">
 										{getFractionFixed(selectedProduct?.discount_percentage)}%
@@ -124,7 +125,7 @@ const ProductSelect = () => {
 					</p>
 				</Link>
 			</div>
-		</DrawerRight>
+		</Drawer>
 	);
 };
 

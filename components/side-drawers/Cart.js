@@ -1,5 +1,4 @@
 "use client";
-import DrawerRight from "@/components/elements/DrawerRight";
 import { toggleCart } from "@/store/slices/cartSlice";
 import Link from "next/link";
 import React from "react";
@@ -9,6 +8,7 @@ import CartCard from "../CartCard";
 import { FiPlus } from "react-icons/fi";
 import { getMultipliedColumnTotal } from "@/utils/total";
 import { siteConfig } from "@/config/site";
+import Drawer from "../elements/Drawer";
 
 const Cart = () => {
 	const { isCartOpen, cart } = useSelector((state) => state.cart);
@@ -20,7 +20,7 @@ const Cart = () => {
 	};
 
 	return (
-		<DrawerRight
+		<Drawer
 			title={`${translations["cart-list"]} (${cart.length} ${translations["items"]})`}
 			show={isCartOpen}
 			setShow={closeCart}
@@ -36,22 +36,20 @@ const Cart = () => {
 					ডেলিভারি চার্জ ফ্রী! সারাদেশে ক্যাশ অন ডেলিভারি।
 				</div>
 			) : null}
-			<div className="px-3 py-4 lg:p-8 flex flex-col h-[77%]">
-				<div className="overflow-y-auto">
-					{cart.map((item) => (
-						<CartCard key={item.id} item={item} />
-					))}
+			<div className="cart-items px-3 py-4 lg:p-8">
+				{cart.map((item) => (
+					<CartCard key={item.id} item={item} />
+				))}
 
-					<div className="my-5 lg:my-8 text-center">
-						<Link
-							href="/products"
-							onClick={closeCart}
-							className="text-secondary-700 text-sm lg:text-lg/[26px] font-semibold text-center"
-						>
-							<FiPlus size={20} className="mr-1" />
-							{translations["shop-more"] || "আরো শপিং করুন"}
-						</Link>
-					</div>
+				<div className="my-5 lg:my-8 text-center">
+					<Link
+						href="/products"
+						onClick={closeCart}
+						className="text-secondary-700 text-sm lg:text-lg/[26px] font-semibold text-center"
+					>
+						<FiPlus size={20} className="mr-1" />
+						{translations["shop-more"] || "আরো শপিং করুন"}
+					</Link>
 				</div>
 			</div>
 			<div className="fixed left-0 bottom-0 w-full px-3 py-4 lg:px-8 lg:py-4 bg-slate-50 border-t border-slate-200 flex flex-col lg:flex-row gap-2 lg:gap-12 justify-between lg:items-center">
@@ -74,7 +72,7 @@ const Cart = () => {
 					<HiArrowLongRight size={20} />
 				</Link>
 			</div>
-		</DrawerRight>
+		</Drawer>
 	);
 };
 

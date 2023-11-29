@@ -8,6 +8,11 @@ export default function Modal({ showModal, setShowModal, title, children }) {
 		<>
 			{showModal ? (
 				<>
+					{/* Backdrop */}
+					{/* <div className="fixed top-0 left-0 z-50 w-full h-screen bg-black opacity-30" /> */}
+					<div className="opacity-40 fixed inset-0 z-40 bg-black"></div>
+
+					{/* Modal  */}
 					<div className="flex justify-center items-end md:items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
 						<div className="relative w-full md:w-auto md:my-6 mx-auto max-w-4xl">
 							{/*content*/}
@@ -40,7 +45,6 @@ export default function Modal({ showModal, setShowModal, title, children }) {
 							</div>
 						</div>
 					</div>
-					<div className="opacity-40 fixed inset-0 z-40 bg-black"></div>
 				</>
 			) : null}
 		</>

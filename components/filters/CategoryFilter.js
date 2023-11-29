@@ -1,5 +1,6 @@
 "use client";
 
+import { useSelector } from "react-redux";
 import { useParams, useRouter } from "next/navigation";
 import { useGetCategoriesQuery } from "@/store/api/categoriesAPI";
 import { IoChevronBackOutline } from "react-icons/io5";
@@ -7,6 +8,7 @@ import { IoChevronBackOutline } from "react-icons/io5";
 const CategoryFilter = ({ selectedCategory }) => {
 	const { locale } = useParams();
 	const router = useRouter();
+	const { translations } = useSelector((state) => state.common);
 	const { data: categoriesData } = useGetCategoriesQuery({ locale }); // we can use server fetched data instead
 	const categories = categoriesData?.data || [];
 
@@ -50,9 +52,9 @@ const CategoryFilter = ({ selectedCategory }) => {
 	return (
 		<div className="pr-5">
 			<h6 className="text-sm font-bold text-slate-900 border-b border-slate-200 pb-3">
-				ক্যাটাগরি থেকে কেনাকাটা
+				{translations["shop-by-category"] || "ক্যাটাগরি থেকে কেনাকাটা"}
 			</h6>
-			<div className="category-filter">
+			<div className="category-filter pt-2">
 				{selectedCategory?.id &&
 				(selectedCategory?.parent_id ||
 					selectedCategory?.child_categories?.length > 0) ? (

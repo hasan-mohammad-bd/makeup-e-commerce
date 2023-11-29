@@ -16,6 +16,8 @@ import { useSelector } from "react-redux";
 import { useParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import FilterMenu from "@/components/elements/FilterMenu";
+import SortMenu from "./SortMenu";
 
 export default function BottomNavigation() {
 	const { translations, settings } = useSelector((state) => state.common);
@@ -31,6 +33,15 @@ export default function BottomNavigation() {
 		(pathArray.includes("products") && params.slug)
 	)
 		return null;
+
+	//Required to show sorting and filtering menus in bottom navigation
+	// for products and category products page
+	const isSortFilter =
+		isMobile &&
+		((pathArray.includes("categories") && !!params.slug) ||
+			(pathArray.includes("products") && !params.slug));
+
+	// console.log(isSortFilter);
 
 	const menuList = [
 		{
@@ -66,9 +77,15 @@ export default function BottomNavigation() {
 	];
 
 	return (
-		<div className="h-28 bg-white">
-			<div className="fixed bottom-0 left-0 z-20 w-screen h-20 bg-white rounded-t-xl shadow-top">
-				<div className="grid h-full max-w-lg grid-cols-5 mx-auto font-medium">
+		<div className={`${isSortFilter ? "pb-40" : "pb-24"} bg-white`}>
+			<div className="fixed bottom-0 left-0 z-20 w-screen h-fit bg-white">
+				{isSortFilter && (
+					<div className="sort-filter-actions rounded-t-xl shadow-top flex gap-3 items-center p-3">
+						<SortMenu />
+						<FilterMenu />
+					</div>
+				)}
+				<div className="rounded-t-xl shadow-top grid h-full max-w-lg items-center grid-cols-5 mx-auto font-medium pb-3 pt-5">
 					{menuList.map((menu, index) => (
 						<Link
 							key={index}

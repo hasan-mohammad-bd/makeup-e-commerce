@@ -2,8 +2,9 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import useLockedBody from "../../hooks/useLockedBody";
 import { RiCloseCircleFill } from "react-icons/ri";
+import { twMerge } from "tailwind-merge";
 
-const DrawerRight = ({ title, children, show, setShow }) => {
+const Drawer = ({ title, children, show, setShow, position, className }) => {
 	useLockedBody(show, "root"); // to lock body scroll
 	return (
 		<>
@@ -17,12 +18,21 @@ const DrawerRight = ({ title, children, show, setShow }) => {
 
 			{/* Drawer */}
 			<div
-				className={`fixed top-0 right-0 z-50 w-[85vw] lg:w-[31rem] h-[100dvh] overflow-y-auto transition-transform ease-in-out duration-300 transform ${
-					show ? "translate-x-0" : "translate-x-full"
-				} bg-white`}
+				className={twMerge(
+					`fixed top-0 ${
+						position === "left" ? "left-0" : "right-0"
+					} z-50 w-[85vw] lg:max-w-[31rem] h-[100dvh] transition-transform ease-in-out duration-300 transform ${
+						show
+							? "translate-x-0"
+							: position === "left"
+							? "-translate-x-full"
+							: "translate-x-full"
+					} bg-white`,
+					className
+				)}
 				tabIndex="-1"
 			>
-				<div className="relative h-full">
+				<div className="relative flex flex-col h-full">
 					{/*header*/}
 					<div className="flex items-center justify-between px-5 py-1 lg:py-2 text-slate-900 border-b-[1px] border-slate-300">
 						<h3 className="text-lg lg:text-2xl font-title font-semibold">
@@ -37,17 +47,19 @@ const DrawerRight = ({ title, children, show, setShow }) => {
 						</button>
 					</div>
 					{/*body*/}
-					{children && show ? (
-						children
-					) : (
-						<p className="text-slate-500 text-lg leading-relaxed">
-							This is a regular side drawer
-						</p>
-					)}
+					<div className="overflow-y-auto">
+						{children && show ? (
+							children
+						) : (
+							<p className="text-slate-500 text-lg leading-relaxed">
+								This is a regular drawer
+							</p>
+						)}
+					</div>
 				</div>
 			</div>
 		</>
 	);
 };
 
-export default DrawerRight;
+export default Drawer;

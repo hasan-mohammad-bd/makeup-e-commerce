@@ -1,5 +1,4 @@
 import React from "react";
-// import Filter from "@/components/Filter";
 import SortSelect from "@/components/elements/SortSelect";
 import ProductList from "./ProductList";
 import { fetchData } from "@/lib/fetch-data";
@@ -8,38 +7,65 @@ import NoProducts from "./NoProducts";
 import FilterPanel from "../side-drawers/FilterPanel";
 import FilterMenu from "../elements/FilterMenu";
 
-const ProductsWithFilter = async ({ customSearchParams = {}, category }) => {
+const ProductsWithFilter = async ({
+	customSearchParams = {},
+	category,
+	translations = {},
+}) => {
 	const params = new URLSearchParams(customSearchParams);
 	const productResponse = await fetchData({
-		api: `products?${params.toString()}`,
+		api: `products?per_page=20&${params.toString()}`,
 	});
 	const products = productResponse?.data || [];
 	const meta = productResponse?.meta || {};
 
 	return (
-		<div className="container mb-20">
-			<div className="toolbar grid grid-cols-5 gap-5 my-5 border">
-				<div className="relative col-span-1">
-					<FilterMenu />
-					<FilterPanel category={category} />
+		<>
+			<div className="lg:mb-20">
+				<div className="lg:container toolbar lg:grid grid-cols-5 gap-5 my-5">
+					<div className="relative col-span-1 hidden lg:block">
+						<FilterMenu />
+					</div>
+
+					{/* only for mobile view category products  */}
+					{category && (
+						<h3 className="lg:hidden font-title font-bold text-2xl px-4">
+							{category?.category_name}
+						</h3>
+					)}
+
+					<div
+						className={`${
+							category ? "hidden lg:block" : ""
+						} col-span-4 lg:flex justify-between items-center lg:bg-slate-50 lg:rounded-xl px-4 py-3 border-b lg:border-b-0 border-slate-200`}
+					>
+						<p>
+							{params.get("text") ? `"${params.get("text")}" ` : ""}
+							{`${products?.length} ${translations["items"]}` ||
+								`এখানে ${products?.length} টি প্রডাক্ট আছে`}
+						</p>
+
+						<div className="hidden lg:block">
+							<SortSelect />
+						</div>
+					</div>
 				</div>
-				<div className="col-span-4 flex justify-between items-center bg-slate-50 rounded-xl px-4 py-3">
-					<p>এখানে {meta?.total} টি প্রডাক্ট আছে</p>
-					<SortSelect />
+				<div className="container">
+					{products?.length ? (
+						<>
+							<ProductList products={products} />
+							<PaginationWithSummery
+								meta={meta}
+								totalItemsShowing={products?.length}
+							/>
+						</>
+					) : (
+						<NoProducts />
+					)}
 				</div>
 			</div>
-			{products?.length ? (
-				<>
-					<ProductList products={products} />
-					<PaginationWithSummery
-						meta={meta}
-						totalItemsShowing={products?.length}
-					/>
-				</>
-			) : (
-				<NoProducts />
-			)}
-		</div>
+			<FilterPanel category={category} />
+		</>
 	);
 };
 export default ProductsWithFilter;

@@ -66,7 +66,7 @@ const FlashSellingProducts = async ({ searchParams }) => {
 			<div className="container lg:mb-20 pt-5 lg:pt-0">
 				<div className="toolbar hidden lg:flex justify-between items-center bg-slate-50 rounded-xl px-4 py-3 my-5">
 					<p>
-						{`${translations["total"]} ${products?.length} ${translations["items"]}` ||
+						{`${products?.length} ${translations["items"]}` ||
 							`এখানে ${products?.length} টি প্রডাক্ট আছে`}
 					</p>
 					<Suspense fallback={<SearchBarFallback />}>

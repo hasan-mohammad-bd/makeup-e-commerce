@@ -102,7 +102,7 @@ const Search = () => {
 
 	return (
 		<div className="nav-search md:relative">
-			<form>
+			<div>
 				<div className="group">
 					<input
 						value={searchTerm}
@@ -112,11 +112,11 @@ const Search = () => {
 						onBlur={handleBlur}
 						type="text"
 						placeholder={translations["search-for-your-desired-product"]}
-						className=""
+						className="group-focus-within:border-primary"
 					/>
 
 					<button
-						type="submit"
+						onClick={() => handleSearch(searchTerm)}
 						className="search-btn group-focus-within:border-primary"
 					>
 						<HiMagnifyingGlass
@@ -125,7 +125,7 @@ const Search = () => {
 						/>
 					</button>
 				</div>
-			</form>
+			</div>
 			{showSuggestionResults && (searchHistory?.length || popular?.length) ? (
 				<div className="z-20 absolute font-title text-slate-600 mt-5 left-0 md:mt-2 py-2 w-full h-screen md:h-auto overflow-hidden rounded-md bg-white">
 					{searchHistory?.length ? (
