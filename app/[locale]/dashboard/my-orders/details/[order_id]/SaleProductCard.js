@@ -2,6 +2,7 @@
 import Image from "next/image";
 import noImage from "@/public/assets/images/no-image.png";
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
 
 const SaleProductCard = ({ saleProduct }) => {
 	return (
@@ -25,24 +26,29 @@ const SaleProductCard = ({ saleProduct }) => {
 							{saleProduct.product.product_name}
 						</Link>
 					</h2>
-					{saleProduct?.product_variant && (
-						<div className="flex text-sm items-center gap-3">
+
+					<div className="flex text-sm items-center gap-3">
+						{saleProduct.barcode?.color && (
 							<div className="px-2 border border-slate-300 rounded-md">
-								{saleProduct?.product_variant.color}
+								{saleProduct?.barcode?.color}
 							</div>
+						)}
+						{saleProduct.barcode?.size && (
 							<div className="px-2 border border-slate-300 rounded-md">
-								{saleProduct?.product_variant.size}
+								{saleProduct?.barcode?.size}
 							</div>
-						</div>
-					)}
+						)}
+					</div>
+
 					<div className="flex products-center justify-between text-sm">
 						<h3 className="text-lg font-bold">
-							৳ {saleProduct.price} x {saleProduct.qty} পিস
+							{siteConfig.currency.sign} {saleProduct.price} x {saleProduct.qty}{" "}
+							পিস
 						</h3>
 						<div className="flex items-center gap-1 text-primary cursor-pointer">
-							{/* <del className="text-lg text-slate-300">৳2,984</del> */}
+							{/* <del className="text-lg text-slate-300">{siteConfig.currency.sign}2,984</del> */}
 							<h3 className="text-lg text-red-500">
-								৳ {saleProduct.price * saleProduct.qty}
+								{siteConfig.currency.sign} {saleProduct.price * saleProduct.qty}
 							</h3>
 						</div>
 					</div>

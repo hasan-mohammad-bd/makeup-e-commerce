@@ -1,44 +1,27 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { addToCart, removeFromSelected } from "@/store/slices/cartSlice";
+import { removeFromSelected } from "@/store/slices/cartSlice";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import ProductVariantSelect from "../products/ProductVariantSelect";
 import noImage from "@/public/assets/images/no-image.png";
-import { getFractionFixed } from "@/utils/format-number";
 import Drawer from "../elements/Drawer";
 import { siteConfig } from "@/config/site";
+import useCart from "@/hooks/useCart";
+import { getDiscountPercent } from "@/utils/percent";
 
 const ProductSelect = () => {
+	const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
 	const { selectedProduct } = useSelector((state) => state.cart);
 	const { translations } = useSelector((state) => state.common);
-	const [selectedVariant, setSelectedVariant] = useState(null);
+	const [selectedVariants, setSelectedVariants] = useState([]);
 	const dispatch = useDispatch();
-	const router = useRouter();
-
-	const handleAddToCart = () => {
-		const variantProduct = {
-			...selectedProduct,
-			variantId: selectedVariant?.id,
-			selectedVariant,
-			// sizes: colors[selectedColor],
-		};
-		// console.log(variantProduct);
-		dispatch(addToCart(variantProduct));
-	};
 
 	const closeDrawer = (param) => {
 		dispatch(removeFromSelected());
-	};
-
-	const handleBuyNow = () => {
-		handleAddToCart();
-		closeDrawer();
-		router.push("/checkout");
 	};
 
 	return (
@@ -72,33 +55,34 @@ const ProductSelect = () => {
 							<h3 className="text-base/[16px] lg:text-xl text-red-500">
 								{siteConfig.currency.sign} {selectedProduct?.new_price}
 							</h3>
-							{typeof selectedProduct?.discount_percentage === "number" &&
-							selectedProduct?.discount_percentage > 0 ? (
+							{selectedProduct?.old_price > selectedProduct?.new_price ? (
 								<>
 									<del className="text-sm text-slate-300">
 										{siteConfig.currency.sign} {selectedProduct?.old_price}
 									</del>
 									<div className="rounded-md px-1 text-xs py-0.5 text-white bg-red-500">
-										{getFractionFixed(selectedProduct?.discount_percentage)}%
-										OFF
+										{getDiscountPercent(
+											selectedProduct?.old_price,
+											selectedProduct?.new_price
+										)}
+										% OFF
 									</div>
 								</>
 							) : null}
 						</div>
 					</div>
 				</div>
-				{selectedProduct?.productVariants?.length ? (
-					<ProductVariantSelect
-						productVariants={selectedProduct?.productVariants}
-						selectedVariant={selectedVariant}
-						setSelectedVariant={setSelectedVariant}
-						translations={translations}
-					/>
-				) : null}
+				<ProductVariantSelect
+					photos={selectedProduct?.photos}
+					productBarCodes={selectedProduct?.barcodes}
+					selectedVariants={selectedVariants}
+					setSelectedVariants={setSelectedVariants}
+					translations={translations}
+				/>
 				<div className="product-actions mt-6 mb-3 lg:my-6 flex gap-3 lg:gap-4 justify-between items-center">
 					<button
 						className="bg-secondary-700 py-3 w-full px-2 text-white rounded-lg text-center active:scale-95"
-						onClick={handleAddToCart}
+						onClick={() => handleAddToCart(selectedProduct, selectedVariants)}
 					>
 						<HiOutlineShoppingCart size={24} />
 						<span className="ml-2">
@@ -106,7 +90,9 @@ const ProductSelect = () => {
 						</span>
 					</button>
 					<button
-						onClick={handleBuyNow}
+						onClick={() =>
+							handleAddAndCheckout(selectedProduct, selectedVariants, true)
+						}
 						className="bg-primary py-3 w-full px-2 text-white rounded-lg text-center active:scale-95"
 					>
 						<span className="mr-2">

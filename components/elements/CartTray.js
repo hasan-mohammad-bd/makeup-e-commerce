@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "@/store/slices/cartSlice";
-import { getMultipliedColumnTotal } from "@/utils/total";
 import { siteConfig } from "@/config/site";
 import cartImage from "@/public/assets/images/cart.gif";
 import dynamic from "next/dynamic";
+import { getCartTotal } from "@/lib/checkout";
 const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
 	ssr: false,
 });
@@ -42,11 +42,7 @@ const CartTray = () => {
 					<div className="text-xs font-semibold text-white flex items-center justify-center">
 						<span className="mr-1">{siteConfig.currency.sign}</span>
 						<AnimatedNumbers
-							animateToNumber={getMultipliedColumnTotal(
-								cart,
-								"quantity",
-								"new_price"
-							)}
+							animateToNumber={getCartTotal(cart)}
 							includeComma
 							locale="en-US"
 							transitions={(index) => ({

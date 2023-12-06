@@ -1,55 +1,27 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
 import { FiTrash2 } from "react-icons/fi";
-import { toast } from "react-toastify";
-import { useRemoveFromWishListMutation } from "@/store/api/wishListAPI";
-import { addToCart, addToSelected } from "@/store/slices/cartSlice";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import noImage from "@/public/assets/images/no-image.png";
+import useCart from "@/hooks/useCart";
+import useWishList from "@/hooks/useWishList";
+import { siteConfig } from "@/config/site";
+import { getDiscountPercent } from "@/utils/percent";
 
 const WishListCard = ({ product }) => {
-	const [deleteFromWishlist] = useRemoveFromWishListMutation();
-	const dispatch = useDispatch();
-
-	const {
-		id,
-		slug,
-		brand,
-		product_name,
-		new_price,
-		old_price,
-		productVariants,
-		discount_percentage,
-		stock_qty,
-	} = product;
+	const { handleAddToCart } = useCart(); //custom hook for reusing
+	const { handleRemoveFromWishlist } = useWishList(); //custom hook for reusing
+	const { id, slug, brand, product_name, new_price, old_price, stock_qty } =
+		product;
 
 	const stockOut = stock_qty <= 0 ? true : false;
 
-	const handleDelete = async (productId) => {
-		try {
-			await deleteFromWishlist(productId);
-			toast.success("Product removed successfully!");
-		} catch (error) {
-			toast.error("Failed to delete from wishlist");
-		}
-	};
-
-	const handleAddToCart = (product) => {
-		if (productVariants?.length) {
-			dispatch(addToSelected(product));
-		} else {
-			dispatch(addToCart(product));
-		}
-	};
-
-	// console.log(product);
 	return (
 		<div className="relative px-3 py-4 bg-white border border-slate-200 rounded-xl mb-3">
 			<button
 				className="absolute right-1.5 top-1 bg-transparent text-red-500"
-				onClick={() => handleDelete(id)}
+				onClick={() => handleRemoveFromWishlist(id)}
 			>
 				<FiTrash2 />
 			</button>
@@ -91,13 +63,16 @@ const WishListCard = ({ product }) => {
 								stockOut ? "opacity-50" : ""
 							}`}
 						>
-							<h3 className="text-xl text-red-500">৳ {new_price}</h3>
-							{typeof discount_percentage === "number" &&
-							discount_percentage > 0 ? (
+							<h3 className="text-xl text-red-500">
+								{siteConfig.currency.sign} {new_price}
+							</h3>
+							{old_price > new_price ? (
 								<>
-									<del className="text-xl text-slate-300">৳ {old_price}</del>
+									<del className="text-xl text-slate-300">
+										{siteConfig.currency.sign} {old_price}
+									</del>
 									<div className="rounded-md px-2 py-1 text-sm text-white bg-red-500">
-										{Math.round(discount_percentage)}% OFF
+										{getDiscountPercent(old_price, new_price)}% OFF
 									</div>
 								</>
 							) : null}

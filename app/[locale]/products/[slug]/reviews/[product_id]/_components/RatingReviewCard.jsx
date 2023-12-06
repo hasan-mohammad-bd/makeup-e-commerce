@@ -46,7 +46,7 @@ const RatingReviewCard = ({ review, translations }) => {
 				</div>
 
 				<p className="text-slate-600 mt-3">
-					{getFormattedDate(review.created_at)}
+					{getFormattedDate(review?.created_at)}
 				</p>
 			</div>
 			<div

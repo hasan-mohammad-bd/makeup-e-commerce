@@ -8,7 +8,8 @@ import { differenceInDays, format } from "date-fns";
  * (Bengali-Bangladesh) locale.
  */
 export const getBdFormattedDate = (date) => {
-  return new Date(date).toLocaleDateString("bn-BD");
+	if (!date) return "Invalid Date";
+	return new Date(date).toLocaleDateString("bn-BD");
 };
 
 /**
@@ -17,7 +18,8 @@ export const getBdFormattedDate = (date) => {
  * @returns a formatted date string in the format "dd MMM yyyy".
  */
 export const getFormattedDate = (date) => {
-  return format(new Date(date), "dd MMM yyyy");
+	if (!date) return "Invalid Date";
+	return format(new Date(date), "dd MMM yyyy");
 };
 
 /**
@@ -29,23 +31,23 @@ export const getFormattedDate = (date) => {
  * format "formattedDate - formattedTime".
  */
 export const getBdFormattedDateTime = (date) => {
-  const optionsDate = {
-    timeZone: "Asia/Dhaka", // Set the time zone to Bangladeshi time zone
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    numberingSystem: "beng",
-  };
+	const optionsDate = {
+		timeZone: "Asia/Dhaka", // Set the time zone to Bangladeshi time zone
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+		numberingSystem: "beng",
+	};
 
-  const optionsTime = {
-    timeZone: "Asia/Dhaka", // Set the time zone to Bangladeshi time zone
-    hour: "2-digit",
-    minute: "2-digit",
-  };
-  const formattedDate = new Date(date).toLocaleString("bn-BD", optionsDate);
-  const formattedTime = new Date(date).toLocaleString("bn-BD", optionsTime);
+	const optionsTime = {
+		timeZone: "Asia/Dhaka", // Set the time zone to Bangladeshi time zone
+		hour: "2-digit",
+		minute: "2-digit",
+	};
+	const formattedDate = new Date(date).toLocaleString("bn-BD", optionsDate);
+	const formattedTime = new Date(date).toLocaleString("bn-BD", optionsTime);
 
-  return `${formattedDate} - ${formattedTime}`;
+	return `${formattedDate} - ${formattedTime}`;
 };
 
 /**
@@ -56,6 +58,6 @@ export const getBdFormattedDateTime = (date) => {
  * `createdAt` date.
  */
 export const getDaysSinceCreation = (createdAt) => {
-  const days = differenceInDays(new Date(), new Date(createdAt));
-  return days;
+	const days = differenceInDays(new Date(), new Date(createdAt));
+	return days;
 };

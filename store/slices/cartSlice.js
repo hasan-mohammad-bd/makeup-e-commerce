@@ -39,51 +39,31 @@ const cartSlice = createSlice({
 
 		//Adding new item to the cart
 		addToCart: (state, action) => {
-			const product = { ...action.payload };
+			const { product, selectedVariants = [] } = action.payload;
+			selectedVariants.forEach((variant) => {
+				const index = state.cart
+					.map((item) => item.barcodeId)
+					.indexOf(variant.id);
 
-			const findProductWithVariant = (cart, product) => {
-				return cart.find(
-					(item) =>
-						item.id === product.id && item.variantId === product.variantId
-				);
-			};
-
-			if (product.variantId) {
-				// Variant Item
-				const variantProduct = findProductWithVariant(state.cart, product);
-				if (variantProduct) {
-					const cartId = variantProduct.cartId;
-					const index = state.cart.map((item) => item.cartId).indexOf(cartId);
-
-					//Updating item
-					const item = state.cart[index];
-					item.quantity++;
-					state.cart.splice(index, 1, item);
-				} else {
-					product.cartId = generateUniqueId();
-					product.quantity = 1;
-					state.cart.push(product);
-				}
-			} else {
-				// Non Variant Item
-				const index = state.cart.map((item) => item.id).indexOf(product.id);
 				if (index === -1) {
-					product.cartId = generateUniqueId();
-					product.quantity = 1;
-					state.cart.push(product);
+					const newCartItem = { ...product }; //creating new item for each variant
+					newCartItem.barcodeId = variant.id;
+					newCartItem.selectedBarCode = variant;
+					newCartItem.quantity = 1;
+					state.cart.push(newCartItem);
 				} else {
 					//Incrementing quantity for existing items
 					const existingProduct = state.cart[index];
 					existingProduct.quantity++;
 					state.cart.splice(index, 1, existingProduct);
 				}
-			}
+			});
 		},
 
 		// Increasing Item Quantity
 		addQuantity: (state, action) => {
-			const cartId = action.payload;
-			const index = state.cart.map((item) => item.cartId).indexOf(cartId);
+			const barcodeId = action.payload;
+			const index = state.cart.map((item) => item.barcodeId).indexOf(barcodeId);
 
 			//Updating item
 			const item = state.cart[index];
@@ -93,8 +73,8 @@ const cartSlice = createSlice({
 
 		// Decreasing Item Quantity
 		removeQuantity: (state, action) => {
-			const cartId = action.payload;
-			const index = state.cart.map((item) => item.cartId).indexOf(cartId);
+			const barcodeId = action.payload;
+			const index = state.cart.map((item) => item.barcodeId).indexOf(barcodeId);
 
 			//Updating item
 			const item = state.cart[index];
@@ -108,8 +88,8 @@ const cartSlice = createSlice({
 
 		//Removing item from cart
 		removeFromCart: (state, action) => {
-			const cartId = action.payload;
-			const index = state.cart.map((item) => item.cartId).indexOf(cartId);
+			const barcodeId = action.payload;
+			const index = state.cart.map((item) => item.barcodeId).indexOf(barcodeId);
 			state.cart.splice(index, 1);
 		},
 

@@ -5,12 +5,15 @@ import { useForm } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { siteConfig } from "@/config/site";
-import { getMultipliedColumnTotal } from "@/utils/total";
 import RequireAuth from "@/components/hoks/RequireAuth";
-import { getCouponDiscount, getOrderFormattedCartItems } from "@/lib/checkout";
+import {
+	getCartTotal,
+	getCouponDiscount,
+	getOrderFormattedCartItems,
+} from "@/lib/checkout";
 
 //components
-import CartCard from "@/components/CartCard";
+import CartCard from "@/components/cards/CartCard";
 import CustomRadio from "@/components/elements/CustomRadio";
 import ArticleLoader from "@/components/elements/loaders/ArticleLoader";
 import HorizontalScrollView from "@/components/elements/HorizontalScrollView";
@@ -71,7 +74,7 @@ const Checkout = () => {
 	}, [user, reset]);
 
 	//Summary calculation
-	const total = getMultipliedColumnTotal(cart, "quantity", "new_price");
+	const total = getCartTotal(cart);
 	const discountedPrice = getCouponDiscount(discountCoupon, total);
 	const totalWithDiscount = total - discountedPrice;
 	//Handling free delivery

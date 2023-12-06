@@ -9,6 +9,7 @@ import { formatLongNumber, getFractionFixed } from "@/utils/format-number";
 import { getDaysSinceCreation } from "@/utils/format-date";
 
 import { FaStar } from "react-icons/fa";
+import { getDiscountPercent } from "@/utils/percent";
 
 const ProductHistoryCard = ({ product, status }) => {
 	const [loading, setLoading] = useState(true);
@@ -17,11 +18,10 @@ const ProductHistoryCard = ({ product, status }) => {
 		slug,
 		image,
 		product_name,
-		averate_rating,
+		average_rating,
 		total_rating,
 		new_price,
 		old_price,
-		discount_percentage,
 		created_at,
 	} = product;
 
@@ -69,7 +69,7 @@ const ProductHistoryCard = ({ product, status }) => {
 				</h2>
 				<div className="product-rating">
 					<span className="font-semibold text-slate-900">
-						{getFractionFixed(averate_rating) || 0}{" "}
+						{getFractionFixed(average_rating) || 0}{" "}
 						<FaStar className="text-primary pb-1" />
 					</span>
 					<span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
@@ -81,15 +81,14 @@ const ProductHistoryCard = ({ product, status }) => {
 						{siteConfig.currency.sign}
 						{new_price}
 					</span>
-					{typeof discount_percentage === "number" &&
-					discount_percentage > 0 ? (
+					{old_price > new_price ? (
 						<>
 							<del className="old-price text-sm lg:text-lg/[24px] font-normal text-slate-400">
 								{siteConfig.currency.sign}
 								{old_price}
 							</del>
 							<span className="discount inline-block !text-xs text-white bg-red-500 rounded-md py-0.5 lg:py-1 px-1 ml-2">
-								-{getFractionFixed(discount_percentage)}%
+								-{getDiscountPercent(old_price, new_price)}%
 							</span>
 						</>
 					) : null}

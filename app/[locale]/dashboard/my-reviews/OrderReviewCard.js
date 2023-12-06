@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
 import ReviewSummaryPopover from "./ReviewSummaryPopover";
-import { getBdFormattedDate } from "@/utils/format-date";
+import { getFormattedDate } from "@/utils/format-date";
 import noImage from "@/public/assets/images/no-image.png";
 import { Rating } from "react-simple-star-rating";
 
@@ -38,12 +38,11 @@ const OrderReviewCard = ({ sellReview }) => {
 		};
 	}, []);
 	//end of popover
-
 	return (
 		<div className="relative mb-8">
 			<div className="sec-heading absolute top-[-10px] left-0 w-full px-8">
 				<span className="bg-white text-secondary-700 px-2">
-					ডেলিভারি সম্পন্ন হয়েছে: {getBdFormattedDate(delivered_at)}
+					ডেলিভারি সম্পন্ন হয়েছে: {getFormattedDate(delivered_at)}
 				</span>
 			</div>
 			<div className="p-4 bg-white rounded-2xl border-2 border-slate-200 mb-3">

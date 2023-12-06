@@ -2,16 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Loader from "../elements/loaders/Loader";
-import { addToCart, addToSelected } from "@/store/slices/cartSlice";
-import { useAddToWishListMutation } from "@/store/api/wishListAPI";
-import { formatLongNumber, getFractionFixed } from "@/utils/format-number";
-import { getSalePercent } from "@/utils/percent";
+import { siteConfig } from "@/config/site";
+import { getDiscountPercent, getSalePercent } from "@/utils/percent";
 import { getDaysSinceCreation } from "@/utils/format-date";
+import { formatLongNumber, getFractionFixed } from "@/utils/format-number";
+import useCart from "@/hooks/useCart";
+import useWishList from "@/hooks/useWishList";
 
 // ** Import Icon
 import { FaStar } from "react-icons/fa";
@@ -22,11 +20,9 @@ import {
 } from "react-icons/hi2";
 
 const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
-	const { user } = useSelector((state) => state.auth);
+	const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
+	const { handleAddToWishlist } = useWishList(); //custom hook for reusing
 	const [loading, setLoading] = useState(true);
-	const [addToWishlist] = useAddToWishListMutation();
-	const dispatch = useDispatch();
-	const router = useRouter();
 
 	const {
 		id,
@@ -34,12 +30,10 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 		image,
 		product_name,
 		brand,
-		averate_rating,
+		average_rating,
 		total_rating,
 		new_price,
 		old_price,
-		discount_percentage,
-		productVariants,
 		stock_qty,
 		total_sale_qty,
 		created_at,
@@ -51,36 +45,6 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 		}
 	}, [product]);
 
-	const handleAddToCart = (product) => {
-		if (productVariants?.length) {
-			dispatch(addToSelected(product));
-		} else {
-			dispatch(addToCart(product));
-		}
-	};
-
-	// Buy Now action
-	const handleCheckout = (product) => {
-		if (productVariants.length) {
-			dispatch(addToSelected(product));
-		} else {
-			dispatch(addToCart(product));
-			router.push("/checkout");
-		}
-	};
-
-	const handleWishlist = async (productId) => {
-		if (!user) {
-			toast.error("You're not logged in");
-			return;
-		}
-		try {
-			await addToWishlist({ product_id: productId });
-			toast.success("Product added to Wishlist!");
-		} catch (error) {
-			toast.error("Failed to add to wishlist");
-		}
-	};
 	return (
 		<>
 			{!loading ? (
@@ -98,7 +62,7 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 								<button
 									aria-label="Add To Wishlist"
 									className="action-btn"
-									onClick={(e) => handleWishlist(id)}
+									onClick={(e) => handleAddToWishlist(id)}
 								>
 									<HiOutlineHeart />
 								</button>
@@ -134,7 +98,7 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 							</h2>
 							<div className="product-rating">
 								<span className="font-semibold text-slate-900">
-									{getFractionFixed(averate_rating) || 0}{" "}
+									{getFractionFixed(average_rating) || 0}{" "}
 									<FaStar className="text-primary pb-1" />
 								</span>
 								<span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
@@ -145,16 +109,17 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 							</div>
 							<div className="product-price mb-3 flex flex-col justify-start lg:flex-row gap-2">
 								<span className="text-lg/[24px] font-semibold text-red-500">
-									৳{new_price}
+									{siteConfig.currency.sign}
+									{new_price}
 								</span>
-								{typeof discount_percentage === "number" &&
-								discount_percentage > 0 ? (
+								{old_price > new_price ? (
 									<div className="flex items-center gap-2">
 										<del className="old-price text-lg/[24px] font-normal text-slate-400">
-											৳{old_price}
+											{siteConfig.currency.sign}
+											{old_price}
 										</del>
 										<span className="discount-badge">
-											-{getFractionFixed(discount_percentage)}%
+											-{getDiscountPercent(old_price, new_price)}%
 										</span>
 									</div>
 								) : null}
@@ -171,7 +136,7 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 									/>
 								</button>
 								<button
-									onClick={() => handleCheckout(product)}
+									onClick={() => handleAddAndCheckout(product)}
 									className="buy-btn flex-center gap-1"
 								>
 									এখনই কিনুন

@@ -19,3 +19,24 @@ export const getChunksList = (list, chunk_size = 2) => {
 	}
 	return [list];
 };
+
+/**
+ * The `groupByKey` function takes a list of objects and a key, and returns an object where the keys
+ * are unique values of the specified key and the values are arrays of objects with that key value.
+ * @param list - An array of objects that you want to group by a specific key.
+ * @param key - The "key" parameter is a string that represents the property key by which the list
+ * should be grouped.
+ * @returns The function `groupByKey` returns an object where the keys are unique values of the
+ * specified `key` in the `list` array, and the values are arrays of items from the `list` array that
+ * have the same value for the specified `key`.
+ */
+export const groupByKey = (list, key) => {
+	return list.reduce((result, item) => {
+		const groupKey = item[key];
+		if (!result[groupKey]) {
+			result[groupKey] = [];
+		}
+		result[groupKey].push(item);
+		return result;
+	}, {});
+};

@@ -9,7 +9,7 @@ import {
 	useAddToProductQnaMutation,
 	useGetProductQnaListQuery,
 } from "@/store/api/productsQnaAPI";
-import { getBdFormattedDate } from "@/utils/format-date";
+import { getFormattedDate } from "@/utils/format-date";
 import Paginator from "@/components/elements/Paginator";
 import RoundedSearch from "@/components/elements/RoundedSearch";
 import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
@@ -139,7 +139,7 @@ const QuestionAnswer = () => {
 										<p className="font-bold">{question.questions}</p>
 										<p className="text-slate-500">
 											{question?.customer || "Not Available"} |{" "}
-											{getBdFormattedDate(question.created_at)}
+											{getFormattedDate(question.created_at)}
 										</p>
 									</div>
 								</div>
@@ -152,7 +152,7 @@ const QuestionAnswer = () => {
 											<p className="font-bold">{question.answer}</p>
 											<p className="text-slate-500">
 												{settings.name} |{" "}
-												{getBdFormattedDate(question.updated_at)}
+												{getFormattedDate(question.updated_at)}
 											</p>
 										</div>
 									</div>

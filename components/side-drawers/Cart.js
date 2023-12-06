@@ -4,16 +4,15 @@ import Link from "next/link";
 import React from "react";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
-import CartCard from "../CartCard";
+import CartCard from "../cards/CartCard";
 import { FiPlus } from "react-icons/fi";
-import { getMultipliedColumnTotal } from "@/utils/total";
 import { siteConfig } from "@/config/site";
 import Drawer from "../elements/Drawer";
+import { getCartTotal } from "@/lib/checkout";
 
 const Cart = () => {
 	const { isCartOpen, cart } = useSelector((state) => state.cart);
 	const { settings, translations } = useSelector((state) => state.common);
-	// console.log(settings);
 	const dispatch = useDispatch();
 	const closeCart = () => {
 		dispatch(toggleCart());
@@ -56,11 +55,7 @@ const Cart = () => {
 				<div className="flex lg:block justify-between items-center lg:text-center">
 					<p className="">{translations["total"]}:</p>
 					<h3 className="text-slate-900 font-bold">
-						{`${siteConfig.currency.sign} ${getMultipliedColumnTotal(
-							cart,
-							"quantity",
-							"new_price"
-						)}`}
+						{`${siteConfig.currency.sign} ${getCartTotal(cart)}`}
 					</h3>
 				</div>
 				<Link

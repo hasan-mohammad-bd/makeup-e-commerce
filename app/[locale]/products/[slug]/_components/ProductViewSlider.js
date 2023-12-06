@@ -1,40 +1,30 @@
 "use client";
-
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Thumbs, Autoplay, Pagination } from "swiper/modules";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { useAddToWishListMutation } from "@/store/api/wishListAPI";
+import useWishList from "@/hooks/useWishList";
 import noImage from "@/public/assets/images/no-image.png";
 
 // ** Import Icon
-import { HiOutlineHeart, HiPlayCircle } from "react-icons/hi2";
+import { HiOutlineHeart } from "react-icons/hi2";
 
-const ProductViewSlider = ({ product }) => {
+const ProductViewSlider = forwardRef(({ product }, ref) => {
 	const [thumbsSwiper, setThumbsSwiper] = useState(null);
-	const { user } = useSelector((state) => state.auth);
-	const [addToWishlist] = useAddToWishListMutation();
-
-	const handleWishlist = async (productId) => {
-		if (!user) {
-			toast.error("You're not logged in");
-			return;
-		}
-		try {
-			await addToWishlist({ product_id: productId });
-			toast.success("Product added to Wishlist!");
-		} catch (error) {
-			toast.error("Failed to add to wishlist");
-		}
-	};
+	const { handleAddToWishlist } = useWishList(); //custom hook for reusing
 
 	//setting default image if no image is provided
-	const photos = product?.photos?.length ? product?.photos : [noImage];
+	const slides = product?.photos?.length
+		? product?.photos
+		: [
+				{
+					image: noImage,
+				},
+		  ];
+	// console.log(slides);
 
 	return (
-		<div className="lg:grid grid-cols-[64px_1fr] items-start">
+		<div className="lg:grid grid-cols-[64px_1fr] lg:gap-4 items-start">
 			<div className="thumb-slider hidden lg:block">
 				<Swiper
 					onSwiper={setThumbsSwiper}
@@ -54,11 +44,11 @@ const ProductViewSlider = ({ product }) => {
 					}}
 					modules={[Thumbs, Autoplay]}
 				>
-					{photos.map((slide, index) => (
+					{slides.map((slide, index) => (
 						<SwiperSlide key={index}>
 							<div className="slider-image cursor-pointer">
 								<Image
-									src={slide}
+									src={slide?.image}
 									alt=""
 									width={64}
 									height={64}
@@ -70,9 +60,10 @@ const ProductViewSlider = ({ product }) => {
 				</Swiper>
 			</div>
 
-			<div className="h-[20.25rem] lg:h-[32.75rem] lg:w-[32.75rem] preview-slider lg:mx-4 grid border">
+			<div className="lg:w-[32.75rem] preview-slider grid">
 				<Swiper
-					className="product-preview-slider"
+					ref={ref}
+					className="product-preview-slider [&_.swiper-wrapper]:pb-3 lg:[&_.swiper-wrapper]:pb-0"
 					thumbs={{
 						swiper:
 							thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
@@ -96,22 +87,22 @@ const ProductViewSlider = ({ product }) => {
 					}}
 					modules={[Thumbs, Autoplay, Pagination]}
 				>
-					{photos.map((slide, index) => (
-						<SwiperSlide key={index}>
-							<div className="slider-imag relative">
+					{slides.map((slide, index) => (
+						<SwiperSlide key={index} className="!h-[20.25rem] lg:!h-[32.75rem]">
+							<div className="slider-imag relative h-full">
 								<Image
-									src={slide}
+									src={slide?.image}
 									alt=""
 									width={524}
 									height={524}
 									// sizes="100vw"
-									className="object-cover lg:object-contain lg:rounded-lg"
+									className="object-cover object-top h-full lg:object-contain lg:rounded-xl"
 								/>
 								<div className="product-action absolute top-4 right-4">
 									<button
 										aria-label="Add To Wishlist"
 										className="action-btn inline-flex justify-center items-center w-11 h-11 bg-white border-slate-300 rounded-lg hover:bg-primary hover:text-white"
-										onClick={(e) => handleWishlist(product.id)}
+										onClick={(e) => handleAddToWishlist(product.id)}
 									>
 										<HiOutlineHeart size={18} />
 									</button>
@@ -123,6 +114,8 @@ const ProductViewSlider = ({ product }) => {
 			</div>
 		</div>
 	);
-};
+});
+
+ProductViewSlider.displayName = "ProductViewSlider";
 
 export default ProductViewSlider;

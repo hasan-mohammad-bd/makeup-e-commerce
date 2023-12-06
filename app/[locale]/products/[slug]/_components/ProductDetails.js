@@ -2,20 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import useCart from "@/hooks/useCart";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { getCouponDiscount } from "@/lib/checkout";
-import ProductViewSlider from "@/app/[locale]/products/[slug]/_components/ProductViewSlider";
 import { getSlicedText } from "@/utils/format-text";
 import ViewHTML from "@/components/elements/ViewHTML";
-import { addToCart } from "@/store/slices/cartSlice";
 import ProductVariantSelect from "@/components/products/ProductVariantSelect";
 import ActiveLink from "@/components/elements/ActiveLink";
 import { Rating } from "react-simple-star-rating";
 import { formatLongNumber, getFractionFixed } from "@/utils/format-number";
 import SocialShare from "@/components/elements/SocialShare";
+import ProductViewSlider from "./ProductViewSlider";
 
 // ** Import Icon
 import { HiChatBubbleLeftRight, HiOutlineShoppingCart } from "react-icons/hi2";
@@ -23,6 +21,7 @@ import { TbTag } from "react-icons/tb";
 import { IoCall, IoCopy } from "react-icons/io5";
 import { siteConfig } from "@/config/site";
 import HorizontalScrollView from "@/components/elements/HorizontalScrollView";
+import { getDiscountPercent } from "@/utils/percent";
 
 const ProductDetails = ({
 	children,
@@ -31,41 +30,21 @@ const ProductDetails = ({
 	settings,
 	translations,
 }) => {
-	const [selectedVariant, setSelectedVariant] = useState(null);
-	const dispatch = useDispatch();
-	const router = useRouter();
-
-	const handleAddToCart = () => {
-		if (product?.productVariants?.length) {
-			const variantProduct = {
-				...product,
-				variantId: selectedVariant?.id,
-				selectedVariant,
-				// sizes: colors[selectedColor],
-			};
-			// console.log(variantProduct);
-			dispatch(addToCart(variantProduct));
-		} else {
-			dispatch(addToCart(product));
-		}
-	};
-
-	const handleBuyNow = () => {
-		handleAddToCart();
-		router.push("/checkout");
-	};
+	const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
+	const [selectedVariants, setSelectedVariants] = useState([]);
+	const productViewSwiperRef = useRef(null);
 
 	return (
 		<div className="relative product-details">
 			<div className="flex flex-col lg:flex-row lg:gap-10">
 				<div className="lg:w-1/2">
 					<div className="lg:sticky top-4">
-						<ProductViewSlider product={product} />
-						<div className="px-3 lg:px-0 responsive-action">
+						<ProductViewSlider product={product} ref={productViewSwiperRef} />
+						<div className="px-3 responsive-action">
 							<div className="product-actions pb-3 lg:py-6 flex gap-4 justify-between items-center">
 								<button
 									className="bg-secondary-700 py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
-									onClick={handleAddToCart}
+									onClick={() => handleAddToCart(product, selectedVariants)}
 								>
 									<HiOutlineShoppingCart size={24} />
 									<span className="ml-2">
@@ -73,7 +52,9 @@ const ProductDetails = ({
 									</span>
 								</button>
 								<button
-									onClick={handleBuyNow}
+									onClick={() =>
+										handleAddAndCheckout(product, selectedVariants)
+									}
 									className="bg-primary py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
 								>
 									<svg
@@ -129,13 +110,13 @@ const ProductDetails = ({
 							<div className="product-summary grid grid-cols-2 lg:flex gap-y-3 lg:gap-3 items-center mt-2">
 								<div className="flex gap-1 items-center">
 									<Rating
-										initialValue={product?.averate_rating || 5}
+										initialValue={product?.average_rating || 5}
 										allowFraction
 										readonly
 										size={24}
 										fillColor="#F59E0B"
 									/>
-									<span>{getFractionFixed(product?.averate_rating || 5)}</span>
+									<span>{getFractionFixed(product?.average_rating || 5)}</span>
 								</div>
 								<p className="border-l pl-3 border-slate-300 leading-4">
 									{formatLongNumber(product?.total_rating)}{" "}
@@ -146,7 +127,7 @@ const ProductDetails = ({
 										size={20}
 										className="text-secondary-700"
 									/>{" "}
-									{formatLongNumber(product?.toptal_question_answer || 0)}{" "}
+									{formatLongNumber(product?.total_question_answer || 0)}{" "}
 									{translations["questions-and-answers"] || "প্রশ্ন ও উত্তর"}
 								</p>
 
@@ -161,14 +142,19 @@ const ProductDetails = ({
 								<span className="text-2xl lg:text-3xl/[48px] font-bold font-title text-slate-900">
 									{siteConfig.currency.sign} {product?.new_price || "0.00"}{" "}
 								</span>
-								{product?.discount_percentage > 0 ? (
+								{product?.old_price > product?.new_price ? (
 									<>
 										<del className="old-price text-base lg:text-lg/[24px] font-normal text-slate-400">
 											{siteConfig.currency.sign}{" "}
 											{product?.old_price ? `$ ${product?.old_price}` : "0.00"}
 										</del>
 										<span className="discount inline-block text-base/[22px] font-semibold font-title text-white bg-red-500 rounded-md py-1 px-2">
-											- {getFractionFixed(product?.discount_percentage)}%
+											-
+											{getDiscountPercent(
+												product?.old_price,
+												product?.new_price
+											)}
+											%
 										</span>
 									</>
 								) : null}
@@ -176,12 +162,19 @@ const ProductDetails = ({
 						</div>
 						<div className="h-2 w-full bg-slate-200 lg:hidden"></div>
 						<div className="px-3 lg:px-0">
-							{product?.productVariants?.length ? (
+							{!(
+								product.barcodes?.length === 1 &&
+								product.barcodes[0].size === "" &&
+								product.barcodes[0].color === ""
+							) ? (
 								<ProductVariantSelect
-									productVariants={product?.productVariants}
-									selectedVariant={selectedVariant}
-									setSelectedVariant={setSelectedVariant}
+									photos={product?.photos}
+									productBarCodes={product?.barcodes}
+									selectedVariants={selectedVariants}
+									setSelectedVariants={setSelectedVariants}
 									sizeChart={product?.size_chart}
+									translations={translations}
+									ref={productViewSwiperRef}
 								/>
 							) : null}
 						</div>

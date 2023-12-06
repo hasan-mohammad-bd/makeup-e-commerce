@@ -12,7 +12,7 @@ import { MdRateReview } from "react-icons/md";
 import { RiQuestionAnswerFill } from "react-icons/ri";
 
 const navItems = [
-	{ text: "আমার প্রফাইল", icon: <FaUser />, path: "/dashboard" },
+	{ text: "আমার প্রফাইল", icon: <FaUser />, path: "/dashboard/profile" },
 	{
 		text: "আমার অর্ডার",
 		icon: <FaClipboardList />,

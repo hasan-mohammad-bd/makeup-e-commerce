@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import SingleProduct from "@/components/cards/SingleProduct";
+import ProductCard from "@/components/cards/ProductCard";
 
 // ** Import Icons
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
@@ -34,7 +34,7 @@ const FlashSaleSlider = ({ saleProducts }) => {
 			>
 				{saleProducts?.map((product, i) => (
 					<SwiperSlide key={i}>
-						<SingleProduct product={product} isFlashSale />
+						<ProductCard product={product} isFlashSale />
 					</SwiperSlide>
 				))}
 			</Swiper>
