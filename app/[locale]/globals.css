@@ -82,6 +82,14 @@
 	@apply inline-flex justify-center items-center w-full gap-2 py-[10px] px-3 font-semibold rounded-lg border bg-white border-secondary-700 text-secondary-700;
 }
 
+.buy-btn {
+	@apply text-center text-base/[16px] font-semibold font-title text-white bg-[#F99104] w-full rounded-md h-[36px] active:scale-95;
+}
+
+.submit-btn {
+	@apply w-full lg:max-w-[240px] px-3 py-[10px]  text-lg font-semibold font-title text-white bg-[#F99104] rounded-lg active:scale-95;
+}
+
 .overflow-text {
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
@@ -195,10 +203,6 @@
 	@apply inline-flex justify-center items-center w-9 h-9 text-primary border border-primary rounded-lg cursor-pointer ease-in duration-100 hover:bg-primary hover:text-white hover:border-primary;
 }
 
-.buy-btn {
-	@apply text-center text-base/[16px] font-semibold font-title text-white bg-[#F99104] w-full rounded-md h-[36px] active:scale-95;
-}
-
 /* From common classes  */
 .form-control input,
 .form-control textarea {
@@ -210,10 +214,6 @@
 .contact-wpr input,
 .contact-wpr textarea {
 	@apply w-full border border-white rounded-lg py-3 px-4 focus:bg-white focus:border-primary focus:outline-none;
-}
-
-.submit-btn {
-	@apply w-full lg:w-[240px] text-lg font-semibold font-title text-white bg-[#F99104] rounded-lg py-3 active:scale-95;
 }
 
 .errorMsg {

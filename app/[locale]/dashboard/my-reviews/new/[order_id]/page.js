@@ -26,7 +26,7 @@ const AddReview = ({ params }) => {
 
 	const { data } = useGetUserReviewShowQuery(order_id);
 	const reviewShow = data?.data || {};
-	const totalItemsCount = reviewShow?.products?.length || 0;
+	const totalItemsCount = reviewShow?.saleProducts?.length || 0;
 
 	const [createReview] = useAddReviewMutation();
 	const router = useRouter();
@@ -76,26 +76,23 @@ const AddReview = ({ params }) => {
 			setValidationError(true);
 			return;
 		}
-
 		try {
-			const createPromises = reviewShow?.products?.map((product, index) => {
-				const formData = new FormData();
-				if (imageFiles[index] && imageFiles[index].length) {
-					imageFiles[index].forEach((image) => {
-						formData.append("image[]", image);
-					});
+			const createPromises = reviewShow?.saleProducts?.map(
+				({ barcode, product }, index) => {
+					const formData = new FormData();
+					if (imageFiles[index] && imageFiles[index].length) {
+						imageFiles[index].forEach((image) => {
+							formData.append("image[]", image);
+						});
+					}
+					formData.append("sale_id", reviewShow?.id);
+					formData.append("product_id", product.id);
+					formData.append("rating", ratings[index]);
+					formData.append("comment", reviews[index]);
+					formData.append("barcode_id", barcode.id);
+					return createReview(formData);
 				}
-				formData.append("sele_id", reviewShow?.id);
-				formData.append("product_id", product.product_id);
-				formData.append("rating", ratings[index]);
-				formData.append("comment", reviews[index]);
-				console.log(product.product_variant_id);
-				//Variant product
-				if (product.product_variant_id) {
-					formData.append("product_variant_id", product.product_variant_id);
-				}
-				return createReview(formData);
-			});
+			);
 			await Promise.all(createPromises);
 			toast.success("Review Added Successfully");
 			router.push("/dashboard/my-reviews");
@@ -126,7 +123,7 @@ const AddReview = ({ params }) => {
 					</div>
 					<div className="p-4 bg-white rounded-2xl border-2 border-slate-200 mb-3">
 						<div className="ordered-items">
-							{reviewShow?.products?.map((product, index) => (
+							{reviewShow?.saleProducts?.map(({ barcode, product }, index) => (
 								<div key={index}>
 									<div className={`flex gap-4 my-4`}>
 										<div className="">
@@ -140,16 +137,18 @@ const AddReview = ({ params }) => {
 										</div>
 										<div className="flex flex-col gap-1 w-full">
 											<h4 className="font-semibold">{product.product_name}</h4>
-											{product.color && product.size && (
-												<div className="flex items-center gap-3">
+											<div className="flex items-center gap-3">
+												{barcode?.color && (
 													<div className="px-2 border border-slate-300 rounded-md">
-														{product.color}
+														{barcode.color}
 													</div>
+												)}
+												{barcode?.size && (
 													<div className="px-2 border border-slate-300 rounded-md">
 														{product.size}
 													</div>
-												</div>
-											)}
+												)}
+											</div>
 										</div>
 									</div>
 									{/* Rating Area */}
@@ -234,8 +233,8 @@ const AddReview = ({ params }) => {
 											</li>
 										</ul>
 									</div>
-									{reviewShow?.products?.length > 1 &&
-										index < reviewShow?.products?.length - 1 && (
+									{reviewShow?.saleProducts?.length > 1 &&
+										index < reviewShow?.saleProducts?.length - 1 && (
 											<div className="border-b-2 border-dashed border-slate-300 mb-8"></div>
 										)}
 								</div>

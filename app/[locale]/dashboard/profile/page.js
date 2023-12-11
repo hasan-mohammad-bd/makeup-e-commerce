@@ -12,11 +12,15 @@ import { toast } from "react-toastify";
 import { getBdFormattedDate } from "@/utils/format-date";
 import axiosInstance from "@/lib/axios-instance";
 import { setUser } from "@/store/slices/authSlice";
+import { HiArrowLongLeft } from "react-icons/hi2";
+import Link from "next/link";
 // import { useSelector } from "react-redux";
 
 const MyProfile = () => {
 	const dispatch = useDispatch();
 	const { user, isLoading } = useSelector((state) => state.auth);
+	const { translations } = useSelector((state) => state.common);
+
 	const [editMode, setEditMode] = useState(false);
 	const [profileImageFile, setProfileImageFile] = useState(null);
 	const [selectedCountry, setSelectedCountry] = useState({
@@ -75,17 +79,27 @@ const MyProfile = () => {
 	// if (isLoading) return <p className="text-2xl text-red-500">Loading.....</p>;
 
 	return (
-		<div className="px-10 py-6">
-			<h2 className="text-slate-900 font-bold text-2xl">আমার প্রফাইল</h2>
-			<form className="basis-3/5" onSubmit={handleSubmit(handleUserUpdate)}>
+		<div className="py-3 lg:py-6 mb-20 lg:mb-0">
+			<div className="flex items-center gap-2 pb-3 px-3 lg:px-10  border-b border-slate-200 lg:border-none">
+				<Link href={"/dashboard"} className="lg:hidden">
+					<HiArrowLongLeft size={24} />
+				</Link>
+				<h2 className="text-slate-900 font-semibold lg:font-bold text-base/4 lg:text-2xl">
+					{translations["my-profile"] || "আমার প্রফাইল"}
+				</h2>
+			</div>
+			<form
+				className="basis-3/5 px-3 lg:px-10"
+				onSubmit={handleSubmit(handleUserUpdate)}
+			>
 				<ProfileImageUpload
 					profileImageFile={profileImageFile}
 					setProfileImageFile={setProfileImageFile}
 					editMode={editMode}
 					user={user}
 				/>
-				<div className="grid grid-cols-2 gap-8">
-					<div className="form-control">
+				<div className="grid grid-cols-2 gap-8 border border-slate-200 rounded-lg lg:border-none p-3 lg:p-0">
+					<div className="form-control col-span-2 lg:col-span-1">
 						<label className="block text-base text-slate-500 mb-2">
 							আপনার নাম
 						</label>
@@ -116,7 +130,8 @@ const MyProfile = () => {
 							</>
 						)}
 					</div>
-					<div className="form-control ">
+
+					<div className="form-control col-span-1">
 						<label className="block text-base text-slate-500 mb-2">
 							জন্ম তারিখ
 						</label>
@@ -142,7 +157,7 @@ const MyProfile = () => {
 							</>
 						)}
 					</div>
-					<div className="form-control ">
+					<div className="form-control col-span-1">
 						<label className="block text-base text-slate-500 mb-2">লিঙ্গ</label>
 						{!editMode ? (
 							<p className="text-slate-800">
@@ -176,7 +191,7 @@ const MyProfile = () => {
 							</>
 						)}
 					</div>
-					<div className="form-control ">
+					<div className="form-control col-span-2 lg:col-span-1">
 						<label className="block text-base text-slate-500 mb-2">
 							আপনার ইমেইল (যদি থাকে)
 						</label>
@@ -206,7 +221,7 @@ const MyProfile = () => {
 							</>
 						)}
 					</div>
-					<div className="">
+					<div className="col-span-2 lg:col-span-1">
 						<label className="block text-slate-500 mb-2">ফোন নাম্বার</label>
 						{!editMode ? (
 							<p className="text-slate-800">
@@ -245,7 +260,7 @@ const MyProfile = () => {
 							</>
 						)}
 					</div>
-					<div className="">
+					<div className="col-span-2 lg:col-span-1">
 						<label className="block text-slate-500 mb-2">
 							বিকল্প ফোন নাম্বার
 						</label>
@@ -291,24 +306,19 @@ const MyProfile = () => {
 						)}
 					</div>
 				</div>
-				<div className="flex items-center gap-4 mt-10">
-					<div className="form-control">
-						<label></label>
+				<div className="flex items-center gap-4 mt-10 responsive-action">
+					<div className="form-control w-full lg:w-fit">
 						<button
 							type="button"
 							onClick={() => setEditMode((prevMode) => !prevMode)}
-							className="text-secondary-700 font-bold border border-secondary-700 py-3 px-4 rounded-lg active:scale-95"
+							className="border-btn"
 						>
 							{editMode ? "বাতিল করুন" : "সম্পাদন করুন"}
 						</button>
 					</div>
 					{editMode ? (
-						<div className="form-control">
-							<label></label>
-							<button
-								type="submit"
-								className="font-bold bg-primary py-3 text-white px-4 rounded-lg active:scale-95"
-							>
+						<div className="form-control w-full lg:w-auto">
+							<button type="submit" className="submit-btn">
 								সংরক্ষন করুন
 							</button>
 						</div>

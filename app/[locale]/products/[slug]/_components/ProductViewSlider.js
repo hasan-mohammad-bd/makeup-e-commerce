@@ -96,7 +96,7 @@ const ProductViewSlider = forwardRef(({ product }, ref) => {
 									width={524}
 									height={524}
 									// sizes="100vw"
-									className="object-cover object-top h-full lg:object-contain lg:rounded-xl"
+									className="object-cover object-top lg:object-center h-full  lg:rounded-xl"
 								/>
 								<div className="product-action absolute top-4 right-4">
 									<button

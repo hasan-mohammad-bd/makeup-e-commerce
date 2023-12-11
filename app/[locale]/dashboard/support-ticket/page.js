@@ -2,17 +2,19 @@
 import { useState } from "react";
 import { HiPlus } from "react-icons/hi2";
 import SupportTicketCard from "./SupportTicketCard";
-import NoItems from "../NoItems";
+import NoItems from "../_components/NoItems";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useGetSupportTicketQuery } from "@/store/api/supportTicketAPI";
 import { getCountByKeyNotValue, getCountByKeyValue } from "@/utils/items-count";
 import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
+import { useSelector } from "react-redux";
 
 export default function SupportTicket() {
 	const { locale } = useParams();
 	const [selectedTab, setSelectedTab] = useState("running");
 	const { data, isLoading } = useGetSupportTicketQuery({ locale });
+	const { translations } = useSelector((state) => state.common);
 	const supportTickets = data?.data || [];
 	let filteredTickets = [];
 	if (selectedTab === "Completed") {
@@ -28,7 +30,7 @@ export default function SupportTicket() {
 		<div className="px-10 py-6">
 			<div className="mb-6 flex justify-between items-center">
 				<h2 className="text-slate-900 font-title font-bold text-2xl">
-					সাপোর্ট টিকিট
+					{translations["support-ticket"] || "সাপোর্ট টিকিট"}
 				</h2>
 				<Link
 					href={"/dashboard/support-ticket/new"}

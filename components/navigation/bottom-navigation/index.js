@@ -25,12 +25,13 @@ export default function BottomNavigation() {
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const pathname = usePathname();
 	const params = useParams();
-	// console.log(params);
 
 	if (
 		!isMobile ||
 		pathArray.includes("checkout") ||
-		(pathArray.includes("products") && params.slug)
+		(pathArray.includes("products") && params.slug) ||
+		(pathArray.includes("dashboard") &&
+			pathArray[pathArray.length - 1] !== "dashboard")
 	)
 		return null;
 
@@ -57,7 +58,7 @@ export default function BottomNavigation() {
 			activeIcon: <CategoryFillIcon />,
 		},
 		{
-			href: "/profile",
+			href: "/mobile-login",
 			name: translations["profile"],
 			icon: <ProfileIcon />,
 			activeIcon: <ProfileFillIcon />,

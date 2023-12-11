@@ -54,7 +54,7 @@ const ProductVerticalCard = ({ product }) => {
 						width={116}
 						height={116}
 						// priority={true}
-						className="h-full w-full object-cover"
+						className="h-full w-full object-cover object-top"
 					/>
 				</Link>
 			</div>

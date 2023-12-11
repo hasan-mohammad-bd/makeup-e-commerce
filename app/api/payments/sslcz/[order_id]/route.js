@@ -12,7 +12,7 @@ export async function GET(request, { params }) {
 		const res = await fetch(`${process.env.server}/order/show/${order_id}`, {
 			headers: {
 				AmsPublickey: process.env.AMS_PUBLIC_KEY,
-				AmsPrivateKey: process.env.AMS_PRIVATE_KEY,
+				// AmsPrivateKey: process.env.AMS_PRIVATE_KEY,
 				authorization: bearerToken,
 			},
 		});

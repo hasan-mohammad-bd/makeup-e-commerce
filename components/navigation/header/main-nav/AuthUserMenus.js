@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "@/store/slices/authSlice";
 
 //icons
@@ -11,39 +11,47 @@ import { IoLogOut } from "react-icons/io5";
 import { MdRateReview } from "react-icons/md";
 import { RiQuestionAnswerFill } from "react-icons/ri";
 
-const navItems = [
-	{ text: "আমার প্রফাইল", icon: <FaUser />, path: "/dashboard/profile" },
-	{
-		text: "আমার অর্ডার",
-		icon: <FaClipboardList />,
-		path: "/dashboard/my-orders",
-	},
-	{ text: "আমার উইশ লিষ্ট", icon: <HiHeart />, path: "/dashboard/my-wishlist" },
-	{
-		text: "আমার রিভিউ",
-		icon: <MdRateReview />,
-		path: "/dashboard/my-reviews",
-	},
-	{
-		text: "ভাউচার",
-		icon: <HiReceiptPercent />,
-		path: "/dashboard/my-voucher",
-	},
-	{
-		text: "প্রশ্ন ও উত্তর",
-		icon: <RiQuestionAnswerFill />,
-		path: "/dashboard/qna",
-	},
-	{
-		text: "সাপোর্ট টিকিট",
-		icon: <HiTicket />,
-		path: "/dashboard/support-ticket",
-	},
-	// Add more items as needed
-];
-
 export default function AuthUserMenus({ togglePopover }) {
+	const { translations } = useSelector((state) => state.common);
 	const dispatch = useDispatch();
+	const navItems = [
+		{
+			text: translations["my-profile"] || "আমার প্রফাইল",
+			icon: <FaUser />,
+			path: "/dashboard/profile",
+		},
+		{
+			text: translations["my-order"] || "আমার অর্ডার",
+			icon: <FaClipboardList />,
+			path: "/dashboard/my-orders",
+		},
+		{
+			text: translations["my-wish-list"] || "আমার উইশ লিষ্ট",
+			icon: <HiHeart />,
+			path: "/dashboard/my-wishlist",
+		},
+		{
+			text: translations["my-review"] || "আমার রিভিউ",
+			icon: <MdRateReview />,
+			path: "/dashboard/my-reviews",
+		},
+		{
+			text: translations["voucher"] || "ভাউচার",
+			icon: <HiReceiptPercent />,
+			path: "/dashboard/my-voucher",
+		},
+		{
+			text: translations["questions-and-answers"] || "প্রশ্ন ও উত্তর",
+			icon: <RiQuestionAnswerFill />,
+			path: "/dashboard/qna",
+		},
+		{
+			text: translations["support-ticket"] || "সাপোর্ট টিকিট",
+			icon: <HiTicket />,
+			path: "/dashboard/support-ticket",
+		},
+		// Add more items as needed
+	];
 
 	const handleLogout = () => {
 		dispatch(logoutUser());
@@ -85,7 +93,7 @@ export default function AuthUserMenus({ togglePopover }) {
 									<IoLogOut />
 								</span>
 								<span className="group-hover:text-primary hover:font-bold">
-									লগ-আউট
+									{translations["log-out"] || "লগ-আউট"}
 								</span>
 							</button>
 						</li>

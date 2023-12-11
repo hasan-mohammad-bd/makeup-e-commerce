@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import NoItems from "../NoItems";
+import { useSelector } from "react-redux";
+import NoItems from "../_components/NoItems";
 import OrderReviewCard from "./OrderReviewCard";
 import { useGetUserReviewsQuery } from "@/store/api/productReviewAPI";
 import {
@@ -12,8 +13,9 @@ import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
 
 export default function MyReview() {
 	const { data, isLoading } = useGetUserReviewsQuery();
+	const { translations } = useSelector((state) => state.common);
+
 	const myReviews = data?.data || [];
-	// console.log(myReviews);
 	const [isReviewed, setIsReviewed] = useState(false);
 
 	let filteredReviews = [];
@@ -26,7 +28,9 @@ export default function MyReview() {
 	return (
 		<div className="px-10 py-6">
 			<div className="mb-6">
-				<h2 className="text-slate-900 font-bold text-2xl">আমার রিভিউ</h2>
+				<h2 className="text-slate-900 font-bold text-2xl">
+					{translations["my-review"] || "আমার রিভিউ"}
+				</h2>
 			</div>
 			<div className="flex items-center mt-4 gap-4 border-b border-slate-300">
 				<button

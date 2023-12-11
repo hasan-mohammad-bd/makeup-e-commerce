@@ -3,8 +3,10 @@ import Image from "next/image";
 import noImage from "@/public/assets/images/no-image.png";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+// import { useSelector } from "react-redux";
 
 const SaleProductCard = ({ saleProduct }) => {
+	// const { translations } = useSelector((state) => state.common);
 	return (
 		<div className="px-3 py-2 bg-white border-b border-slate-200">
 			<div className={`flex gap-4`}>
@@ -43,7 +45,7 @@ const SaleProductCard = ({ saleProduct }) => {
 					<div className="flex products-center justify-between text-sm">
 						<h3 className="text-lg font-bold">
 							{siteConfig.currency.sign} {saleProduct.price} x {saleProduct.qty}{" "}
-							পিস
+							Piece
 						</h3>
 						<div className="flex items-center gap-1 text-primary cursor-pointer">
 							{/* <del className="text-lg text-slate-300">{siteConfig.currency.sign}2,984</del> */}

@@ -35,10 +35,10 @@ export default function ResponsiveSearch() {
 			<span className="hidden lg:block">
 				<Search />
 			</span>
-			<div className="header-actions">
+			<div className="header-actions lg:hidden">
 				<button
 					onClick={() => setSearchOpen(!searchOpen)}
-					className="single-action md:hidden"
+					className="single-action"
 				>
 					<HiMagnifyingGlass size={24} />
 				</button>

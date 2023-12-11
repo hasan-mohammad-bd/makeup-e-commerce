@@ -3,7 +3,7 @@
 import { logoutUser } from "@/store/slices/authSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RequireAuth from "@/components/hoks/RequireAuth";
 
 //icons
@@ -12,46 +12,56 @@ import { HiHeart, HiReceiptPercent, HiTicket } from "react-icons/hi2";
 import { IoLogOut } from "react-icons/io5";
 import { MdRateReview } from "react-icons/md";
 import { RiQuestionAnswerFill } from "react-icons/ri";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const DashboardLayout = ({ children, params }) => {
+	const isMobile = useMediaQuery("(max-width: 768px)");
+	const { translations } = useSelector((state) => state.common);
+
 	const { locale } = params;
 	const dispatch = useDispatch();
 	const pathname = usePathname();
 	const navItems = [
-		{ text: "আমার প্রফাইল", icon: <FaUser />, path: "/dashboard/profile" },
 		{
-			text: "আমার অর্ডার",
+			text: translations["my-profile"] || "আমার প্রফাইল",
+			icon: <FaUser />,
+			path: "/dashboard/profile",
+		},
+		{
+			text: translations["my-order"] || "আমার অর্ডার",
 			icon: <FaClipboardList />,
 			path: "/dashboard/my-orders",
 		},
 		{
-			text: "আমার উইশ লিষ্ট",
+			text: translations["my-wish-list"] || "আমার উইশ লিষ্ট",
 			icon: <HiHeart />,
 			path: "/dashboard/my-wishlist",
 		},
 		{
-			text: "আমার রিভিউ",
+			text: translations["my-review"] || "আমার রিভিউ",
 			icon: <MdRateReview />,
 			path: "/dashboard/my-reviews",
 		},
 		{
-			text: "ভাউচার",
+			text: translations["voucher"] || "ভাউচার",
 			icon: <HiReceiptPercent />,
 			path: "/dashboard/my-voucher",
 		},
 		{
-			text: "প্রশ্ন ও উত্তর",
+			text: translations["questions-and-answers"] || "প্রশ্ন ও উত্তর",
 			icon: <RiQuestionAnswerFill />,
 			path: "/dashboard/qna",
 		},
 		{
-			text: "সাপোর্ট টিকিট",
+			text: translations["support-ticket"] || "সাপোর্ট টিকিট",
 			icon: <HiTicket />,
 			path: "/dashboard/support-ticket",
 		},
 	];
 
-	return (
+	return isMobile ? (
+		children
+	) : (
 		<div className="bg-slate-100">
 			<div className="container">
 				<div className="bg-white grid grid-cols-[max-content_1fr] min-h-screen">
@@ -61,7 +71,7 @@ const DashboardLayout = ({ children, params }) => {
 								{navItems.map((item) => (
 									<li
 										key={item.path}
-										className={`flex items-center py-3 px-4 rounded-lg w-full font-bold ${
+										className={`flex items-center py-3 px-4 rounded-lg w-full text-base font-normal ${
 											pathname === item.path ||
 											pathname.split(locale)[1] === item.path
 												? "bg-amber-200 border-b-2 border-primary text-primary"
@@ -75,7 +85,7 @@ const DashboardLayout = ({ children, params }) => {
 											<span
 												className={`${
 													pathname === item.path ? "" : "text-amber-400"
-												} font-bold text-xl`}
+												} text-base font-normal`}
 											>
 												{item.icon}
 											</span>
@@ -87,13 +97,13 @@ const DashboardLayout = ({ children, params }) => {
 									className={`flex items-center py-3 px-4 rounded-lg w-full font-bold`}
 								>
 									<button
-										className="flex items-center space-x-2"
+										className="flex items-center space-x-2 text-base font-normal"
 										onClick={() => dispatch(logoutUser())}
 									>
-										<span className={`text-amber-400 font-bold text-xl`}>
+										<span className={`text-amber-400`}>
 											<IoLogOut />
 										</span>
-										<span>লগ-আউট</span>
+										<span>{translations["log-out"] || "লগ-আউট"}</span>
 									</button>
 								</li>
 							</ul>

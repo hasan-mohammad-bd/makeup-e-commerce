@@ -24,6 +24,8 @@ const Footer = () => {
 	if (
 		(isMobile && pathArray.includes("categories") && !params.slug) ||
 		(isMobile && pathArray.includes("checkout")) ||
+		(isMobile && pathArray.includes("dashboard")) ||
+		(isMobile && pathArray.includes("mobile-login")) ||
 		(isMobile && pathArray.includes("products") && params.slug)
 	)
 		return null;

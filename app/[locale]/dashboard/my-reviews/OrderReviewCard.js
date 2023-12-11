@@ -9,9 +9,8 @@ import noImage from "@/public/assets/images/no-image.png";
 import { Rating } from "react-simple-star-rating";
 
 const OrderReviewCard = ({ sellReview }) => {
-	const { id, total_review, delivered_at, products } = sellReview;
-	// console.log(sellReview);
 	const [reviewOpen, setReviewOpen] = useState(null);
+	const { id, total_review, delivered_at, saleProducts } = sellReview;
 
 	//Popover
 	const popoverRef = useRef(null);
@@ -47,11 +46,11 @@ const OrderReviewCard = ({ sellReview }) => {
 			</div>
 			<div className="p-4 bg-white rounded-2xl border-2 border-slate-200 mb-3">
 				<div className="ordered-items">
-					{products.map((product, index) => (
+					{saleProducts.map(({ barcode, product }, index) => (
 						<div key={index + Date.now()} className={`flex gap-4 my-4`}>
 							<div className="">
 								<Image
-									src={product.image || noImage}
+									src={product?.image || noImage}
 									alt="product"
 									height={80}
 									width={80}
@@ -61,23 +60,26 @@ const OrderReviewCard = ({ sellReview }) => {
 							<div className="flex flex-col gap-1 w-full">
 								<h2>
 									<Link
-										href={`/products/${product.slug}`}
+										href={`/products/${product?.slug}`}
 										className="product-title"
 									>
-										{product.product_name}
+										{product?.product_name}
 									</Link>
 								</h2>
 								<div className="flex products-center justify-between text-sm">
-									{product.color && product.size && (
-										<div className="flex items-center gap-3">
+									<div className="flex items-center gap-3">
+										{barcode?.color && (
 											<div className="px-2 border border-slate-300 rounded-md">
-												{product.color}
+												{barcode?.color}
 											</div>
+										)}
+										{barcode?.size && (
 											<div className="px-2 border border-slate-300 rounded-md">
 												{product.size}
 											</div>
-										</div>
-									)}
+										)}
+									</div>
+
 									{total_review ? (
 										<div className="ml-auto relative" ref={popoverRef}>
 											<span
