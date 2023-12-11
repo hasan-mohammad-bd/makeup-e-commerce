@@ -1,8 +1,9 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import NoItems from "../_components/NoItems";
-import OrderReviewCard from "./OrderReviewCard";
+import OrderReviewCard from "./_components/OrderReviewCard";
 import { useGetUserReviewsQuery } from "@/store/api/productReviewAPI";
 import {
 	getFilteredByKeyNotValue,
@@ -10,6 +11,7 @@ import {
 } from "@/utils/filter-items";
 import { getCountByKeyNotValue, getCountByKeyValue } from "@/utils/items-count";
 import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
+import { HiArrowLongLeft } from "react-icons/hi2";
 
 export default function MyReview() {
 	const { data, isLoading } = useGetUserReviewsQuery();
@@ -26,46 +28,59 @@ export default function MyReview() {
 	}
 
 	return (
-		<div className="px-10 py-6">
-			<div className="mb-6">
-				<h2 className="text-slate-900 font-bold text-2xl">
+		<div className="py-3 lg:py-6 mb-20 lg:mb-0">
+			<div className="flex items-center gap-2 pb-3 px-3 lg:px-10  border-b border-slate-200 lg:border-none">
+				<Link href={"/dashboard"} className="lg:hidden">
+					<HiArrowLongLeft size={24} />
+				</Link>
+				<h2 className="text-slate-900 font-semibold lg:font-bold text-base/4 lg:text-2xl">
 					{translations["my-review"] || "আমার রিভিউ"}
 				</h2>
 			</div>
-			<div className="flex items-center mt-4 gap-4 border-b border-slate-300">
+			<div className="px-3 lg:px-0 lg:mx-10 flex items-center lg:mt-4 gap-4 border-b border-slate-200">
 				<button
 					className={`font-title bg-transparent box-border py-2 border-b-2 ${
-						!isReviewed ? "border-primary" : "border-transparent"
+						!isReviewed
+							? "border-primary text-slate-900"
+							: "border-transparent text-slate-500"
 					}`}
 					onClick={() => setIsReviewed((preRevState) => !preRevState)}
 				>
 					<span>
-						রিভিউ পেন্ডিং ({getCountByKeyValue(myReviews, "total_review", 0)})
+						{translations["review-pending"] || "রিভিউ পেন্ডিং"} (
+						{getCountByKeyValue(myReviews, "total_review", 0)})
 					</span>
 				</button>
 				<button
 					className={`font-title bg-transparent box-border py-2 border-b-2 ${
-						isReviewed ? "border-primary" : "border-transparent"
+						isReviewed
+							? "border-primary text-slate-900"
+							: "border-transparent text-slate-500"
 					}`}
 					onClick={() => setIsReviewed((preRevState) => !preRevState)}
 				>
 					<span>
-						রিভিউ হয়েছে ({getCountByKeyNotValue(myReviews, "total_review", 0)})
+						{translations["reviewed"] || "রিভিউ হয়েছে "} (
+						{getCountByKeyNotValue(myReviews, "total_review", 0)})
 					</span>
 				</button>
 			</div>
 			{isLoading ? (
-				<div className="py-8">
+				<div className="py-8 px-3 lg:px-10">
 					<ItemsListLoader itemHeight={110} noImage={true} viewBoxWidth={900} />
 				</div>
 			) : (
-				<div className="my-reviews mt-8">
+				<div className="my-reviews mt-6 lg:mt-8 px-3 lg:px-10">
 					{filteredReviews.length ? (
 						filteredReviews.map((sellReview, index) => (
-							<OrderReviewCard key={index} sellReview={sellReview} />
+							<OrderReviewCard
+								key={index}
+								sellReview={sellReview}
+								translations={translations}
+							/>
 						))
 					) : (
-						<NoItems title={"কোন রিভিউ নেই"} />
+						<NoItems title={translations["no-reviews"] || "কোন রিভিউ নেই"} />
 					)}
 				</div>
 			)}

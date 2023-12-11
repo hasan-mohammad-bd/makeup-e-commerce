@@ -34,7 +34,7 @@ const OrderDetail = ({ params }) => {
 						<HiArrowLongLeft size={24} />
 					</Link>
 					<h2 className="text-slate-900 font-semibold lg:font-bold text-base/4 lg:text-2xl">
-						{translations["order-details"] || "আমারের বিস্তারিত"}
+						{translations["order-details"] || "অর্ডারের বিস্তারিত"}
 					</h2>
 				</div>
 				<div className="hidden lg:block px-10">

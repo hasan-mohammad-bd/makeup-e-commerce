@@ -14,13 +14,13 @@ const productReviewAPI = api.injectEndpoints({
 
 		// Dashboard Orders reviews
 		getUserReviews: builder.query({
-			query: () => `sell-product-review`,
+			query: () => `sale-product-review`,
 			providesTags: ["user-reviews"],
 		}),
 
 		// Dashboard order review show
 		getUserReviewShow: builder.query({
-			query: (orderId) => `sell-product-review-show/${orderId}`,
+			query: (orderId) => `sale-product-review-show/${orderId}`,
 			providesTags: ["user-review-show"],
 		}),
 

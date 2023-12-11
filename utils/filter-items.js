@@ -8,10 +8,10 @@
  * key-value pair.
  */
 export const getFilteredByKeyValue = (items, key, value) => {
-  if (Array.isArray(items) && items.length > 1) {
-    return items.filter((item) => item[key] === value);
-  }
-  return items;
+	if (Array.isArray(items) && items.length >= 1) {
+		return items.filter((item) => item[key] === value);
+	}
+	return items;
 };
 
 /**
@@ -25,8 +25,8 @@ export const getFilteredByKeyValue = (items, key, value) => {
  * specified value for the given key.
  */
 export const getFilteredByKeyNotValue = (items, key, value) => {
-  if (Array.isArray(items) && items.length > 1) {
-    return items.filter((item) => item[key] !== value);
-  }
-  return items;
+	if (Array.isArray(items) && items.length >= 1) {
+		return items.filter((item) => item[key] !== value);
+	}
+	return items;
 };
