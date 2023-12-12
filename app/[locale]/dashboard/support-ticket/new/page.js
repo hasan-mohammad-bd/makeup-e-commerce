@@ -13,8 +13,11 @@ import {
 } from "@/store/api/supportTicketAPI";
 import { useGetOrdersQuery } from "@/store/api/orderAPI";
 import { useParams, useRouter } from "next/navigation";
+import NestedPageTitle from "../../_components/NestedPageTitle";
+import { useSelector } from "react-redux";
 
 export default function AddSupportTicket() {
+	const { translations } = useSelector((state) => state.common);
 	const { locale } = useParams();
 	const router = useRouter();
 	const [imageFiles, setImageFiles] = useState([]);
@@ -32,6 +35,7 @@ export default function AddSupportTicket() {
 	} = useForm();
 
 	const handleUserUpdate = (data) => {
+
 		const { orderNumber, problemType, subject, msg } = data;
 		const formData = new FormData();
 		if (imageFiles.length) {
@@ -60,24 +64,19 @@ export default function AddSupportTicket() {
 	};
 
 	return (
-		<div className="px-10 py-6">
-			<div className="heading">
-				<h2 className="text-slate-900 font-bold text-2xl">
-					সাপোর্ট টিকিট তৈরি করুন
-				</h2>
-				<Link
-					href={"/dashboard/support-ticket"}
-					className="icon-btn my-4 hover:text-primary"
-				>
-					<HiArrowLongLeft size={24} /> ফিরে যান
-				</Link>
-			</div>
-			<div className="content">
+		<div className="md:px-10 md:py-6">
+						<NestedPageTitle
+				title={translations["create-support-ticket"] || "সাপোর্ট টিকিট তৈরি করুন"}
+				href={"/dashboard/support-ticket"}
+				buttonText={translations["go-back"] || "ফিরে যান"}
+			/>
+
+			<div className="content py-3 px-3 md:px-10 md:py-6">
 				<form className="basis-3/5" onSubmit={handleSubmit(handleUserUpdate)}>
 					<div className="grid lg:grid-cols-2 lg:gap-8">
 						<div className="form-control mb-4">
-							<label className="block text-base text-slate-500 mb-2">
-								অর্ডার নাম্বার
+							<label className="block text-base text-slate-900 mb-2 mt-3">
+							{translations["order-number"] || "অর্ডার নাম্বার"}
 							</label>
 
 							<select
@@ -87,7 +86,7 @@ export default function AddSupportTicket() {
 								})}
 							>
 								<option disabled selected>
-									অর্ডার নাম্বার নির্বাচন করুন
+								{translations["select-order-number"] || "অর্ডার নাম্বার নির্বাচন করুন"}
 								</option>
 								{myOrders.map((order) => (
 									<option key={order.id} value={order.id}>
@@ -100,8 +99,8 @@ export default function AddSupportTicket() {
 							)}
 						</div>
 						<div className="form-control mb-4">
-							<label className="block text-base text-slate-500 mb-2">
-								সমস্যার ধরণ
+							<label className="block text-base text-slate-900 capitalize mb-2">
+							{translations["type-of-problem"] || "সমস্যার ধরণ"}
 							</label>
 
 							<select
@@ -110,8 +109,8 @@ export default function AddSupportTicket() {
 									required: "Problem type is Required",
 								})}
 							>
-								<option disabled selected>
-									সমস্যার ধরণ নির্বাচন করুন
+								<option disabled selected className="">
+								{translations["select-problem-type"] || "সমস্যার ধরণ নির্বাচন করুন"}
 								</option>
 								{ticketTypes.map((type) => (
 									<option key={type.id} value={type.id}>
@@ -125,13 +124,13 @@ export default function AddSupportTicket() {
 						</div>
 					</div>
 					<div className="form-control mb-4">
-						<label className="block text-base text-slate-500 mb-2">
-							সাবজেক্ট
+						<label className="block text-base text-slate-900 mb-2">
+						{translations["subject"] || "সাবজেক্ট"}
 						</label>
 						<input
 							type="text"
 							name="subject"
-							placeholder="সাবজেক্ট লিখুন"
+							placeholder=	{translations["enter-subject"] || "সাবজেক্ট লিখুন"}
 							{...register("subject", {
 								required: "Subject is required.",
 							})}
@@ -142,14 +141,14 @@ export default function AddSupportTicket() {
 					</div>
 					<div className="grid lg:grid-cols-2 lg:gap-8">
 						<div className="form-control mb-4">
-							<label className="block text-base text-slate-900 mb-2">
-								মেসেজ
+							<label className="block text-base text-slate-900 mb-2 capitalize">
+							{translations["message"] || "মেসেজ"}
 							</label>
 							<textarea
 								className="h-[148px]"
 								type="text"
 								name="msg"
-								placeholder="আপনার মেসেজ লিখুন"
+								placeholder=	{translations["enter-your-message"] || "আপনার মেসেজ লিখুন"}
 								{...register("msg", {
 									required: "Message is required.",
 								})}
@@ -157,8 +156,8 @@ export default function AddSupportTicket() {
 							{errors.msg && <p className="errorMsg">{errors.msg.message}</p>}
 						</div>
 						<div className="form-control mb-4">
-							<label className="block text-base text-slate-900 mb-2">
-								সংযুক্তি ফাইল (jpg, jpeg, png and max-size: 2MB)
+							<label className="block text-base text-slate-900 mb-2 capitalize">
+							{translations["attachment-file"] || "সংযুক্তি ফাইল"} (jpg, jpeg, png and max-size: 2MB)
 							</label>
 							<TicketImagesUpload setImageFiles={setImageFiles} />
 						</div>
@@ -167,9 +166,9 @@ export default function AddSupportTicket() {
 						<label></label>
 						<button
 							type="submit"
-							className="font-bold bg-primary py-3 text-white px-4 rounded-lg active:scale-95"
+							className="font-bold bg-primary py-3 w-full md:w-fit text-white px-4 rounded-lg active:scale-95"
 						>
-							সংরক্ষন করুন
+							{translations["submit-ticket"] || "টিকিটি সাবমিট করুন"}
 						</button>
 					</div>
 				</form>

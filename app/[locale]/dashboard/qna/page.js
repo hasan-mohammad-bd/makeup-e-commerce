@@ -1,13 +1,17 @@
+"use client";
 import QNAItems from "@/components/QNAItems";
+import { useSelector } from "react-redux";
+import NestedPageTitle from "../_components/NestedPageTitle";
 
-export default function page() {
+export default function QNAPage() {
+  const { translations } = useSelector((state) => state.common);
+
   return (
-    <div className="px-10 py-6">
-      <div className="mb-6">
-        <h2 className="text-slate-900 font-title font-bold text-2xl">
-          প্রশ্ন ও উত্তর
-        </h2>
-      </div>
+    <div className=" md:py-6">
+      <NestedPageTitle
+        title={translations["questions-and-answers"] || "প্রশ্ন ও উত্তর"}
+        href={"/dashboard"}
+      />
       <QNAItems />
     </div>
   );

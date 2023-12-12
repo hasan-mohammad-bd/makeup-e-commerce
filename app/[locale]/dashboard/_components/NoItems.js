@@ -5,7 +5,7 @@ import empty from "@/public/assets/lottie/empty.json";
 
 function NoItems({ title }) {
   return (
-    <div className="flex-center mt-28">
+    <div className="flex-center md:mt-28">
       <div className="flex-center flex-col h-[25rem] w-[25rem] rounded-2xl border border-slate-300 mb-5">
         <div className="h-[216px] w-[216px]">
           <Lottie animationData={empty} loop={false} />

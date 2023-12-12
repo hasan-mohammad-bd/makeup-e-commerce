@@ -351,3 +351,4 @@
 .responsive-action {
 	@apply fixed lg:static bottom-0 left-0 bg-white w-full py-3 lg:py-0 px-3 lg:px-0 z-30 shadow-top lg:shadow-none;
 }
+
