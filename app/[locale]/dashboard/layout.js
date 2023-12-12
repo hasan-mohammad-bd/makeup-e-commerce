@@ -80,7 +80,7 @@ const DashboardLayout = ({ children, params }) => {
 									>
 										<Link
 											href={item.path}
-											className="flex items-center space-x-2"
+											className="flex items-center space-x-2 capitalize"
 										>
 											<span
 												className={`${

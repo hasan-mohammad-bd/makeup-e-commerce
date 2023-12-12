@@ -37,7 +37,7 @@ const ProfileImageUpload = ({
 	};
 
 	return (
-		<div className="mb-12 lg:mb-14 mt-3 lg:mt-6">
+		<div className="mb-12 lg:mb-14">
 			<div className="w-[5rem] lg:w-[6.5rem] h-[5rem] lg:h-[6.5rem] relative rounded-full bg-gray-200">
 				<Image
 					src={

@@ -29,7 +29,7 @@ export default function MyReview() {
 
 	return (
 		<div className="py-3 lg:py-6 mb-20 lg:mb-0">
-			<div className="flex items-center gap-2 pb-3 px-3 lg:px-10  border-b border-slate-200 lg:border-none">
+			<div className="flex items-center gap-2 pb-4 pt-1 px-3 lg:px-10  border-b border-slate-200 lg:border-none">
 				<Link href={"/dashboard"} className="lg:hidden">
 					<HiArrowLongLeft size={24} />
 				</Link>
@@ -39,7 +39,7 @@ export default function MyReview() {
 			</div>
 			<div className="px-3 lg:px-0 lg:mx-10 flex items-center lg:mt-4 gap-4 border-b border-slate-200">
 				<button
-					className={`font-title bg-transparent box-border py-2 border-b-2 ${
+					className={`font-title bg-transparent box-border py-3 border-b-2 ${
 						!isReviewed
 							? "border-primary text-slate-900"
 							: "border-transparent text-slate-500"
@@ -52,7 +52,7 @@ export default function MyReview() {
 					</span>
 				</button>
 				<button
-					className={`font-title bg-transparent box-border py-2 border-b-2 ${
+					className={`font-title bg-transparent box-border py-3 border-b-2 ${
 						isReviewed
 							? "border-primary text-slate-900"
 							: "border-transparent text-slate-500"
@@ -70,7 +70,7 @@ export default function MyReview() {
 					<ItemsListLoader itemHeight={110} noImage={true} viewBoxWidth={900} />
 				</div>
 			) : (
-				<div className="my-reviews mt-6 lg:mt-8 px-3 lg:px-10">
+				<div className="my-reviews  mt-8 px-3 lg:px-10">
 					{filteredReviews.length ? (
 						filteredReviews.map((sellReview, index) => (
 							<OrderReviewCard

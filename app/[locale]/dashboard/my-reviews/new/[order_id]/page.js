@@ -1,10 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import { BsInfoCircleFill } from "react-icons/bs";
-import { HiArrowLongLeft } from "react-icons/hi2";
 import ReviewImagesUpload from "./ReviewImagesUpload";
 import {
 	useAddReviewMutation,
@@ -17,6 +15,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import EmojiSmile from "@/components/elements/svg/EmojiSmile";
+import NestedPageTitle from "../../../_components/NestedPageTitle";
 
 const AddReview = ({ params }) => {
 	const { order_id } = params;
@@ -105,27 +104,13 @@ const AddReview = ({ params }) => {
 	};
 
 	return (
-		<div className="py-3 lg:py-6">
-			<div className="heading">
-				<div className="flex items-center pb-3 lg:pb-0 px-3 lg:px-10 gap-2 border-b border-slate-200 lg:border-none">
-					<Link href={"/dashboard/my-reviews"} className="lg:hidden">
-						<HiArrowLongLeft size={24} />
-					</Link>
-					<h2 className="text-slate-900 font-semibold lg:font-bold text-base/4 lg:text-2xl">
-						{translations["my-review"] || "আমার রিভিউ"}
-					</h2>
-				</div>
-				<div className="hidden lg:block px-10">
-					<Link
-						href={"/dashboard/my-reviews"}
-						className="icon-btn my-4 hover:text-primary capitalize"
-					>
-						<HiArrowLongLeft size={24} />
-						{translations["go-back"] || "ফিরে যান"}
-					</Link>
-				</div>
-			</div>
-			<div className="content mt-7 lg:mt-3 px-3 lg:px-10">
+		<div className="mb-4 lg:mb-14">
+			<NestedPageTitle
+				title={translations["my-review"] || "আমার রিভিউ"}
+				href={"/dashboard/my-reviews"}
+				buttonText={translations["go-back"] || "ফিরে যান"}
+			/>
+			<div className="content mt-7 lg:mt-6 px-3 lg:px-10">
 				<div className="relative">
 					<div className="sec-heading absolute top-[-10px] left-0 w-full px-3 lg:px-8">
 						<span className="bg-white text-secondary-700 px-2">

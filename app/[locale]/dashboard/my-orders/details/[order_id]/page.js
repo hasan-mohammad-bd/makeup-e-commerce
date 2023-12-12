@@ -14,6 +14,7 @@ import handleSSLOrderPayLater from "@/lib/ssl-pay";
 import { HiArrowLongLeft } from "react-icons/hi2";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import { siteConfig } from "@/config/site";
+import NestedPageTitle from "../../../_components/NestedPageTitle";
 
 const OrderDetail = ({ params }) => {
 	const { order_id, locale } = params;
@@ -27,26 +28,12 @@ const OrderDetail = ({ params }) => {
 	const saleProducts = orderData?.saleProducts || [];
 
 	return (
-		<div className="py-3 lg:py-6 mb-4 lg:mb-0">
-			<div className="heading">
-				<div className="flex items-center pb-3 lg:pb-0 px-3 lg:px-10 gap-2 border-b border-slate-200 lg:border-none">
-					<Link href={"/dashboard/my-orders"} className="lg:hidden">
-						<HiArrowLongLeft size={24} />
-					</Link>
-					<h2 className="text-slate-900 font-semibold lg:font-bold text-base/4 lg:text-2xl">
-						{translations["order-details"] || "অর্ডারের বিস্তারিত"}
-					</h2>
-				</div>
-				<div className="hidden lg:block px-10">
-					<Link
-						href={"/dashboard/my-orders"}
-						className="icon-btn my-4 hover:text-primary capitalize"
-					>
-						<HiArrowLongLeft size={24} />
-						{translations["go-back"] || "ফিরে যান"}
-					</Link>
-				</div>
-			</div>
+		<div className="mb-4 lg:mb-14">
+			<NestedPageTitle
+				title={translations["order-details"] || "অর্ডারের বিস্তারিত"}
+				href={"/dashboard/my-orders"}
+				buttonText={translations["go-back"] || "ফিরে যান"}
+			/>
 			<div className="content lg:mx-10 bg-slate-200 text-slate-700 mt-3 rounded-lg p-3 lg:p-5">
 				<OrderTracking
 					orderData={orderData}

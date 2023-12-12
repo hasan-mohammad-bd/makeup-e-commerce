@@ -12,9 +12,7 @@ import { toast } from "react-toastify";
 import { getBdFormattedDate } from "@/utils/format-date";
 import axiosInstance from "@/lib/axios-instance";
 import { setUser } from "@/store/slices/authSlice";
-import { HiArrowLongLeft } from "react-icons/hi2";
-import Link from "next/link";
-// import { useSelector } from "react-redux";
+import NestedPageTitle from "../_components/NestedPageTitle";
 
 const MyProfile = () => {
 	const dispatch = useDispatch();
@@ -79,17 +77,13 @@ const MyProfile = () => {
 	// if (isLoading) return <p className="text-2xl text-red-500">Loading.....</p>;
 
 	return (
-		<div className="py-3 lg:py-6 mb-20 lg:mb-0">
-			<div className="flex items-center gap-2 pb-3 px-3 lg:px-10  border-b border-slate-200 lg:border-none">
-				<Link href={"/dashboard"} className="lg:hidden">
-					<HiArrowLongLeft size={24} />
-				</Link>
-				<h2 className="text-slate-900 font-semibold lg:font-bold text-base/4 lg:text-2xl">
-					{translations["my-profile"] || "আমার প্রফাইল"}
-				</h2>
-			</div>
+		<div className="mb-24 lg:mb-14">
+			<NestedPageTitle
+				title={translations["my-profile"] || "আমার প্রফাইল"}
+				href={"/dashboard"}
+			/>
 			<form
-				className="basis-3/5 px-3 lg:px-10"
+				className="basis-3/5 px-3 lg:px-10 mt-3 lg:mt-2"
 				onSubmit={handleSubmit(handleUserUpdate)}
 			>
 				<ProfileImageUpload
