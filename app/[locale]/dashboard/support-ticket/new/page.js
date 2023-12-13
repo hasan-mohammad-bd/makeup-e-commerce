@@ -75,7 +75,7 @@ export default function AddSupportTicket() {
 				<form className="basis-3/5" onSubmit={handleSubmit(handleUserUpdate)}>
 					<div className="grid lg:grid-cols-2 lg:gap-8">
 						<div className="form-control mb-4">
-							<label className="block text-base text-slate-900 mb-2 mt-3">
+							<label className="block text-base text-slate-900 mb-2 mt-3 md:mt-0">
 							{translations["order-number"] || "অর্ডার নাম্বার"}
 							</label>
 

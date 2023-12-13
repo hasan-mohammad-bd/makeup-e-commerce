@@ -18,7 +18,7 @@ export default function QNAItems() {
     setOpen(index);
   };
   return (
-    <div className="qna-wpr px-4 py-4 md:px-10">
+    <div className="qna-wpr mt-4 md:mt-4">
       {isLoading ? (
         <ItemsListLoader numItems={3} noImage={true} viewBoxWidth={900} />
       ) : (

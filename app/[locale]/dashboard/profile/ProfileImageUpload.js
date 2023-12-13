@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { BsCameraFill } from "react-icons/bs";
 import profileAvatar from "@/public/assets/images/profile_avatar.png";
+import { useSelector } from "react-redux";
 
 const ProfileImageUpload = ({
 	profileImageFile,
@@ -10,8 +11,9 @@ const ProfileImageUpload = ({
 	user,
 }) => {
 	const [validationError, setValidationError] = useState("");
+	const { translations } = useSelector((state) => state.common);
+	const ValidateImage = (file) => {
 
-	const validateImage = (file) => {
 		const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
 		const maxSize = 5 * 1024 * 1024; // 5MB
 
@@ -65,7 +67,7 @@ const ProfileImageUpload = ({
 						/>
 					</label>
 				)}
-				<h3 className="text-center my-3 text-sm text-slate-500">প্রফাইল ফটো</h3>
+				<h3 className="text-center my-3 text-sm text-slate-500 whitespace-nowrap">{translations["profile-photo"] || "প্রফাইল ফটো"}</h3>
 			</div>
 			{validationError && editMode && (
 				<div className="text-red-500 mt-12">{validationError}</div>

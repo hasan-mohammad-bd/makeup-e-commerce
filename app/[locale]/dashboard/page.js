@@ -38,7 +38,7 @@ export default function MobileDashboardLayout({ params }) {
 			path: "/dashboard/my-orders",
 		},
 		{
-			text: "উইশ লিষ্ট",
+			text: translations["wishlist"] || "উইশ লিষ্ট",
 			icon: <HiHeart />,
 			path: "/dashboard/my-wishlist",
 		},
@@ -66,22 +66,22 @@ export default function MobileDashboardLayout({ params }) {
 
 	const companyLinks = [
 		{
-			text: "আমাদের সম্পর্কে",
+			text: translations["about-us"] || "আমাদের সম্পর্কে",
 			icon: <BsInfoCircleFill />,
 			path: "/pages/about-us",
 		},
 		{
-			text: "বুকিং পলিসি",
+			text: translations["booking-policy"] || "বুকিং পলিসি",
 			icon: <MdLibraryBooks />,
 			path: "/pages/booking-policy",
 		},
 		{
-			text: "ট্রামস এন্ড কন্ডিশন",
+			text: translations["trams-and-conditions"] || "ট্রামস এন্ড কন্ডিশন",
 			icon: <IoIosWarning />,
 			path: "/pages/terms-and-conditions",
 		},
 		{
-			text: "প্রাইভেসি পলিসি",
+			text: translations["privacy-policy"] || "প্রাইভেসি পলিসি",
 			icon: <SiSpringsecurity />,
 			path: "/pages/privacy-policy",
 		},
@@ -134,9 +134,9 @@ export default function MobileDashboardLayout({ params }) {
 				</div>
 			</div>
 			<div id="user-additional-menu" className="my-4 p-3">
-				<MenuCard title={"অফার"} menuItems={navItems.slice(4, 5)} />
-				<MenuCard title={"হেল্প"} menuItems={navItems.slice(5, 7)} />
-				<MenuCard title={"কোম্পানি"} menuItems={companyLinks} />
+				<MenuCard title={translations["offer"] || "অফার"} menuItems={navItems.slice(4, 5)} />
+				<MenuCard title={translations["help"] || "হেল্প"} menuItems={navItems.slice(5, 7)} />
+				<MenuCard title={translations["company"] || "কোম্পানি"} menuItems={companyLinks} />
 			</div>
 		</section>
 	);

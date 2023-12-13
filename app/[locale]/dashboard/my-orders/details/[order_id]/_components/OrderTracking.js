@@ -13,48 +13,47 @@ export default function OrderTracking({ orderData, isLoading, translations }) {
 				{isLoading ? (
 					<ItemsListLoader numItems={3} noImage={true} viewBoxWidth={900} />
 				) : (
-					<ol class="relative text-slate-600">
+					<ol class="relative text-slate-600 capitalize">
 						<OrderStep
 							date={saleStatus?.Complete?.created_at}
-							title={"সম্পন্ন হয়েছে"}
-							message={`আপনি আপনার প্রডাক্ট হাতে পেয়েছেন`}
+							title={translations["done"] || "সম্পন্ন হয়েছে"}
+							message={translations["received-product"] || "You have received your product"}
 							isComplete={saleStatus?.Complete}
 						/>
 						<OrderStep
 							date={saleStatus?.Delivery?.created_at}
-							title={"ডেলিভারিতে"}
-							message={`আপনার পণ্য ডেলিভারির জন্য দেওয়া হয়েছে`}
+							title={translations["on-delivery"] || "ডেলিভারিতে"}
+							message={translations["product-for-delivery"] || "আপনার পণ্য ডেলিভারির জন্য দেওয়া হয়েছে"}
 							isComplete={saleStatus?.Delivery}
 						/>
 						<OrderStep
 							date={saleStatus?.PackingCompleat?.created_at}
-							title={"প্যাকি সম্পন্ন"}
-							message={`আপনার প্রডাক্টি প্যাক করা হয়েছে`}
+							title={translations["packing-done"] || "প্যাকিং সম্পন্ন"}
+							message={translations["packing-done"] || "আপনার প্রডাক্টি প্যাক করা হয়েছে"}
 							isComplete={saleStatus?.PackingCompleat}
 						/>
 						<OrderStep
 							date={saleStatus?.Packing?.created_at}
-							title={"প্যাকিং"}
-							message={`আমরা আপনার প্রডাক্টি প্যাক করছি`}
+							title={translations["packing"] || "প্যাকিং"}
+							message={translations["product-packing"] || "আমরা আপনার প্রডাক্টি প্যাক করছি"}
 							isComplete={saleStatus?.Packing}
 						/>
 						<OrderStep
 							date={saleStatus?.Confirm?.created_at}
-							title={"নিশ্চিত"}
-							message={`আপনার অর্ডার নিশ্চিত করা হয়েছে`}
+							title={translations["confirmed"] || "নিশ্চিত"}
+							message={translations["order-confirmed"] || "আপনার অর্ডার নিশ্চিত করা হয়েছে"}
 							isComplete={saleStatus?.Confirm}
 						/>
 						<OrderStep
 							date={saleStatus?.Processing?.created_at}
-							title={"প্রসেসিং"}
-							message={`আপনার অর্ডার পেয়েছি, আমাদের প্রতিনিধি শিঘ্রই অর্ডার নিশ্চিত করবে`}
+							title={translations["processing"] || "প্রসেসিং"}
+							message={translations["order-received"] || "আপনার অর্ডার পেয়েছি, আমাদের প্রতিনিধি শীঘ্রই অর্ডার নিশ্চিত করবে"}
 							isComplete={saleStatus?.Processing}
 						/>
 						<OrderStep
 							date={saleStatus?.Pending?.created_at}
-							title={"অর্ডার প্লেসড"}
-							message={`আপনার অর্ডার সফলভাবে সততা স্টোরে এ প্লেসড হয়েছে৷ আপনার অর্ডার
-            আইডি #${orderData?.sale?.invoice_no}`}
+							title={translations["order-placed"] || "অর্ডার প্লেসড"}
+							message={`${translations["order-successfully-placed"] || "আপনার অর্ডার সফলভাবে সততা স্টোরে এ প্লেসড হয়েছে৷ আপনার অর্ডার আইডি"} #${orderData?.sale?.invoice_no}`}
 							isComplete={saleStatus?.Pending}
 						/>
 					</ol>

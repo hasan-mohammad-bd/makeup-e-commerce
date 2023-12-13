@@ -9,7 +9,7 @@ import {
 } from "@/store/api/authAPI";
 import ProfileImageUpload from "./ProfileImageUpload";
 import { toast } from "react-toastify";
-import { getBdFormattedDate } from "@/utils/format-date";
+import { getBdFormattedDate, getFormattedDate } from "@/utils/format-date";
 import axiosInstance from "@/lib/axios-instance";
 import { setUser } from "@/store/slices/authSlice";
 import NestedPageTitle from "../_components/NestedPageTitle";
@@ -94,13 +94,13 @@ const MyProfile = () => {
 				/>
 				<div className="grid grid-cols-2 gap-8 border border-slate-200 rounded-lg lg:border-none p-3 lg:p-0">
 					<div className="form-control col-span-2 lg:col-span-1">
-						<label className="block text-base text-slate-500 mb-2">
-							আপনার নাম
+						<label className="block text-base text-slate-500 mb-2 capitalize">
+						{translations["your-name"] || "আপনার নাম"}
 						</label>
 						{!editMode ? (
 							<p className="text-slate-800">
 								{user?.name || (
-									<span className="text-slate-300">আপনার নাম লিখুন</span>
+									<span className="text-slate-300">{translations["enter-your-name"] || "আপনার নাম লিখুন"}</span>
 								)}
 							</p>
 						) : (
@@ -109,7 +109,7 @@ const MyProfile = () => {
 									type="text"
 									name="name"
 									defaultValue={user?.name}
-									placeholder="আপনার নাম লিখুন"
+									placeholder={translations["enter-your-name"] || "আপনার নাম লিখুন"}
 									{...register("name", {
 										required: "Name is required.",
 										maxLength: {
@@ -126,15 +126,15 @@ const MyProfile = () => {
 					</div>
 
 					<div className="form-control col-span-1">
-						<label className="block text-base text-slate-500 mb-2">
-							জন্ম তারিখ
+						<label className="block text-base text-slate-500 mb-2 capitalize">
+						{translations["date-of-birth"] || "জন্ম তারিখ"}
 						</label>
 						{!editMode ? (
 							<p>
 								{user?.birth_date ? (
-									getBdFormattedDate(user?.birth_date)
+									getFormattedDate(user?.birth_date)
 								) : (
-									<span className="text-slate-300">দিন/মাস/বছর</span>
+									<span className="text-slate-300">{translations["day-month-year"] || "দিন/মাস/বছর"}</span>
 								)}
 							</p>
 						) : (
@@ -152,13 +152,13 @@ const MyProfile = () => {
 						)}
 					</div>
 					<div className="form-control col-span-1">
-						<label className="block text-base text-slate-500 mb-2">লিঙ্গ</label>
+						<label className="block text-base text-slate-500 capitalize mb-2">{translations["gender"] || "লিঙ্গ"}</label>
 						{!editMode ? (
 							<p className="text-slate-800">
 								{user?.gender && user?.gender !== "Unknown" ? (
 									user?.gender
 								) : (
-									<span className="text-slate-300">লিঙ্গ নির্বাচন করুন</span>
+									<span className="text-slate-300">{translations["select-gender"] || "লিঙ্গ নির্বাচন করুন"}</span>
 								)}
 							</p>
 						) : (
@@ -168,7 +168,7 @@ const MyProfile = () => {
 									{...register("gender", { required: "Gender is Required" })}
 									defaultValue={user?.gender}
 								>
-									<option disabled>লিঙ্গ নির্বাচন করুন</option>
+									<option disabled>{translations["select-gender"] || "লিঙ্গ নির্বাচন করুন"}</option>
 									<option key="Male" value="Male">
 										Male
 									</option>
@@ -186,13 +186,13 @@ const MyProfile = () => {
 						)}
 					</div>
 					<div className="form-control col-span-2 lg:col-span-1">
-						<label className="block text-base text-slate-500 mb-2">
-							আপনার ইমেইল (যদি থাকে)
+						<label className="block text-base text-slate-500 mb-2 capitalize">
+						{translations["your-email-(if-any)"] || "আপনার ইমেইল (যদি থাকে)"}
 						</label>
 						{!editMode ? (
 							<p className="text-slate-800">
 								{user?.email || (
-									<span className="text-slate-300">ইমেইল এড্রেস লিখুন</span>
+									<span className="text-slate-300">{translations["enter-email-address"] || "ইমেইল এড্রেস লিখুন"}</span>
 								)}
 							</p>
 						) : (
@@ -201,7 +201,7 @@ const MyProfile = () => {
 									type="email"
 									name="email"
 									defaultValue={user?.email}
-									placeholder="ইমেইল এড্রেস লিখুন"
+									placeholder={translations["enter-email-address"] || "ইমেইল এড্রেস লিখুন"}
 									{...register("email", {
 										pattern: {
 											value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
@@ -216,11 +216,11 @@ const MyProfile = () => {
 						)}
 					</div>
 					<div className="col-span-2 lg:col-span-1">
-						<label className="block text-slate-500 mb-2">ফোন নাম্বার</label>
+						<label className="block text-slate-500 mb-2">{translations["phone-number"] || "ফোন নাম্বার"}</label>
 						{!editMode ? (
 							<p className="text-slate-800">
 								{(user?.phone && user?.country_code + user.phone) || (
-									<span className="text-slate-300">ফোন নাম্বার লিখুন</span>
+									<span className="text-slate-300">{translations["enter-the-phone-number"] || "ফোন নাম্বার লিখুন"}</span>
 								)}
 							</p>
 						) : (
@@ -256,14 +256,14 @@ const MyProfile = () => {
 					</div>
 					<div className="col-span-2 lg:col-span-1">
 						<label className="block text-slate-500 mb-2">
-							বিকল্প ফোন নাম্বার
+						{translations["alternate-phone-number"] || "বিকল্প ফোন নাম্বার"}
 						</label>
 						{!editMode ? (
 							<p className="text-slate-800">
 								{(user?.alt_phone_no &&
 									user?.country_code + user.alt_phone_no) || (
 									<span className="text-slate-300">
-										বিকল্প ফোন নাম্বার লিখুন
+										{translations["enter-alternate-phone-number"] || "বিকল্প ফোন নাম্বার লিখুন"}
 									</span>
 								)}
 							</p>
@@ -288,7 +288,7 @@ const MyProfile = () => {
 										type="number"
 										className="w-full rounded-s-none rounded-e-lg border border-l-0 border-gray-300 focus:outline-none focus:border-primary"
 										name="alt_phone_no"
-										placeholder="বিকল্প ফোন নাম্বার লিখুন"
+										placeholder={translations["enter-alternate-phone-number"] || "বিকল্প ফোন নাম্বার লিখুন"}
 										defaultValue={user?.alt_phone_no}
 										{...register("alt_phone_no")}
 									/>
@@ -307,13 +307,13 @@ const MyProfile = () => {
 							onClick={() => setEditMode((prevMode) => !prevMode)}
 							className="border-btn"
 						>
-							{editMode ? "বাতিল করুন" : "সম্পাদন করুন"}
+							{editMode ? <>{translations["cancel"] || "বাতিল করুন"}</> : <>{translations["edit"] || "সম্পাদন করুন"}</>}
 						</button>
 					</div>
 					{editMode ? (
 						<div className="form-control w-full lg:w-auto">
 							<button type="submit" className="submit-btn">
-								সংরক্ষন করুন
+							{translations["save"] || "সংরক্ষন করুন"}
 							</button>
 						</div>
 					) : null}

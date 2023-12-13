@@ -19,21 +19,21 @@ function SupportTicketCard({ ticket }) {
       </div>
       <div className="border-b border-slate-300 my-3"></div>
 
-      <div className="flex flex-col md:flex-row justify-between items-center">
-        <div className="grid grid-cols-2 justify-between mb-4 md:mb-0">
+      <div className="flex flex-col md:flex-row justify-between items-start">
+        <div className="flex flex-1 justify-between w-full items-start">
           <div className="">
             <h3 className="text-slate-500 mb-2">{translations["order-number"] || "অর্ডার নাম্বার"}:</h3>
             <h3>{ticket.order.invoice_no}</h3>
           </div>
 
-          <div className="md:ml-10">
-            <h3 className="text-slate-500 mb-2 capitalize">{translations["type-of-problem"] || "সমস্যার ধরণ"}:</h3>
+          <div className="md:mr-16">
+            <h3 className="text-slate-500 mb-2  capitalize">{translations["type-of-problem"] || "সমস্যার ধরণ"}:</h3>
             <h3>{ticket.ticketType.name}</h3>
           </div>
         </div>
-        <div className="flex flex-1 justify-between items-center">
-          <div className="col-span-2">
-            <h3 className="text-slate-500 mb-2">{translations["subject"] || "সাবজেক্ট"}:</h3>
+        <div className="flex mt-2 md:mt-0 pr-6 md:pr-10 flex-1 justify-between w-full items-center md:items-start">
+          <div className="col-span-2 md:ml-16  justify-between items-baseline">
+            <h3 className="text-slate-500  mb-2">{translations["subject"] || "সাবজেক্ট"}:</h3>
             <h3>{ticket.title}</h3>
           </div>
 
