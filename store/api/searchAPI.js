@@ -11,8 +11,8 @@ const searchAPI = api.injectEndpoints({
 			providesTags: ["search-histories"],
 		}),
 		removeSearchHistory: builder.mutation({
-			query: (payload) => ({
-				url: `search-histories-delete/${payload.historyId}/?reference_id=${payload.userId}`,
+			query: ({ historyId, userId }) => ({
+				url: `search-histories-delete/${historyId}?reference_id=${userId}`,
 				method: "DELETE",
 			}),
 			invalidatesTags: ["search-histories"],

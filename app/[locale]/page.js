@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { fetchData } from "@/lib/fetch-data";
+import dynamic from "next/dynamic";
 
 // Components
 import Intro from "./_components/intro";
 import Brands from "./_components/brands";
 import BestSell from "./_components/best-sale";
-import FlashSale from "./_components/flash-sale";
 import NewArrival from "./_components/new-arrival";
 import VideoBanner from "./_components/VideoBanner";
 import FeaturedBanner from "./_components/FeaturedBanner";
@@ -14,6 +14,9 @@ import HomeAllProducts from "./_components/HomeAllProducts";
 import ServiceFeatures from "./_components/service-features";
 import PopularCategories from "./_components/popular-categories";
 import SectionTitle from "@/components/elements/SectionTitle";
+const FlashSale = dynamic(() => import("./_components/flash-sale"), {
+	ssr: false,
+});
 
 // ** Import Iocns
 import { HiArrowLongRight } from "react-icons/hi2";
@@ -71,7 +74,7 @@ export default async function Home() {
 				</div>
 			</section>
 
-			<section className="best-sell bg-slate-50 mt-8 lg:mt-0 py-6 lg:pb-14">
+			<section className="best-sell bg-slate-50 mt-8 lg:mt-0 py-4 md:py-14 lg:pb-14">
 				<div className="container">
 					<SectionTitle
 						title={translations["best-selling-product"]}
@@ -86,7 +89,10 @@ export default async function Home() {
 							className="inline-block mr-1"
 						/>
 					</SectionTitle>
-					<BestSell />
+				</div>
+				<BestSell translations={translations} />
+				<div className="container">
+					<SeeAll href="/products" buttonText={translations["see-all"]} />
 				</div>
 			</section>
 
@@ -96,14 +102,14 @@ export default async function Home() {
 				</div>
 			</section>
 
-			<section className="all-products pt-6 lg:pt-14">
+			<section className="all-products mt-6 lg:mt-14">
 				<div className="container">
 					<SectionTitle
 						title={translations["all-products"]}
 						href="/products"
 						buttonText={translations["see-all"]}
 					/>
-					<HomeAllProducts />
+					<HomeAllProducts translations={translations} />
 					<SeeAll href="/products" buttonText={translations["see-all"]} />
 				</div>
 			</section>
@@ -124,10 +130,10 @@ export default async function Home() {
 				<VideoBanner translations={translations} />
 			</section>
 
-			<section className="all-brands py-6 lg:py-14">
-				<div className="container">
+			<section className="all-brands pt-6 pb-8 lg:py-14">
+				<div className="lg:container">
 					<SectionTitle title={translations["our-brands"]} />
-					<div className="brands-slider mt-6  relative">
+					<div className="brands-slider mt-1 lg:mt-6  relative">
 						<Brands />
 					</div>
 				</div>

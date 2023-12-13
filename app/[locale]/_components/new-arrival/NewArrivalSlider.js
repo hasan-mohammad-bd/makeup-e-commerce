@@ -6,11 +6,8 @@ import { Navigation } from "swiper/modules";
 // ** Import Icons
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
 import ProductVerticalCard from "@/components/cards/ProductVerticalCard";
-import { getChunksList } from "@/utils/format-list";
 
-const NewArrivalSlider = ({ newProducts }) => {
-	const productsChunks = getChunksList(newProducts, 2);
-
+const NewArrivalSlider = ({ productsChunks }) => {
 	return (
 		<>
 			<Swiper
@@ -20,18 +17,6 @@ const NewArrivalSlider = ({ newProducts }) => {
 				navigation={{
 					prevEl: ".custom_prev_n",
 					nextEl: ".custom_next_n",
-				}}
-				breakpoints={{
-					0: {
-						slidesPerView: 2,
-						spaceBetween: 260,
-						loop: true,
-					},
-					768: {
-						slidesPerView: 3,
-						spaceBetween: 20,
-						loop: false,
-					},
 				}}
 			>
 				{productsChunks?.map((product, i) => (

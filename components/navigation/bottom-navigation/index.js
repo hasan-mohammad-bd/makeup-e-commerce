@@ -86,7 +86,7 @@ export default function BottomNavigation() {
 						<FilterMenu />
 					</div>
 				)}
-				<div className="rounded-t-xl shadow-top grid h-full max-w-lg items-center grid-cols-5 mx-auto font-medium pb-3 pt-5">
+				<div className="rounded-t-xl shadow-top grid h-full max-w-lg items-center grid-cols-5 mx-auto font-medium py-3">
 					{menuList.map((menu, index) => (
 						<Link
 							key={index}

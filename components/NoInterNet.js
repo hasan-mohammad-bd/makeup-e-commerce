@@ -12,7 +12,7 @@ export const metadata = {
 	title: "No Internet Connection",
 };
 
-export default function NoInterNet({ image }) {
+export default function NoInterNet() {
 	const { translations } = useSelector((state) => state.common);
 
 	const router = useRouter();

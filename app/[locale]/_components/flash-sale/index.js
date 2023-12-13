@@ -6,13 +6,18 @@ import { HiArrowLongRight } from "react-icons/hi2";
 import { useGetProductFlashSaleQuery } from "@/store/api/productFlashSaleAPI";
 import FlashSaleSlider from "./FlashSaleSlider";
 import { SeeAll } from "@/components/elements/buttons";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import ProductCard from "@/components/cards/ProductCard";
+import HorizontalScrollView from "@/components/elements/HorizontalScrollView";
 
 const FlashSale = ({ translations }) => {
 	const { locale } = useParams();
-	// const { translations } = useSelector((state) => state.common);
+	const isMobile = useMediaQuery("(max-width: 768px)");
+
 	const { data: flashSaleData, isLoading } = useGetProductFlashSaleQuery({
 		locale,
 	});
+
 	const flashSaleInfo = flashSaleData?.flashSale || {};
 	const saleProducts = flashSaleData?.data || [];
 	if (flashSaleData?.status === false || isLoading || !flashSaleData)
@@ -41,8 +46,25 @@ const FlashSale = ({ translations }) => {
 						</Link>
 					</div>
 
-					<div className="flashSale-slider border border-primary rounded-2xl p-6 pt-16">
-						<FlashSaleSlider saleProducts={saleProducts} />
+					<div className="flashSale-slider border border-primary rounded-2xl lg:p-6 pt-8 lg:pt-16">
+						{isMobile ? (
+							<HorizontalScrollView className={"space-x-2 p-2"}>
+								{saleProducts.map((product, index) => (
+									<ProductCard
+										key={index}
+										product={product}
+										isFlashSale
+										isLarge
+										translations={translations}
+									/>
+								))}
+							</HorizontalScrollView>
+						) : (
+							<FlashSaleSlider
+								saleProducts={saleProducts}
+								translations={translations}
+							/>
+						)}
 					</div>
 					<SeeAll href="/flash-sale" buttonText={translations["see-all"]} />
 				</div>

@@ -187,12 +187,11 @@
 }
 
 .discount-badge {
-	@apply inline-block text-xs w-fit text-white bg-red-500 rounded-md py-1 px-1;
+	@apply inline-block text-xs w-fit text-white bg-red-500 rounded-md py-0.5 px-1;
 }
 
 .product-title {
-	-webkit-line-clamp: 1;
-	@apply my-1 text-sm lg:text-base font-semibold text-slate-900 font-body overflow-text;
+	@apply my-1 text-sm lg:text-base font-semibold text-slate-900 font-body overflow-text line-clamp-1;
 }
 
 .product-img-action-wrap .action-btn {
@@ -351,4 +350,3 @@
 .responsive-action {
 	@apply fixed lg:static bottom-0 left-0 bg-white w-full py-3 lg:py-0 px-3 lg:px-0 z-30 shadow-top lg:shadow-none;
 }
-

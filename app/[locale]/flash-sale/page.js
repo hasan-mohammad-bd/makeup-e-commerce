@@ -73,7 +73,11 @@ const FlashSellingProducts = async ({ searchParams }) => {
 						<SortSelect />
 					</Suspense>
 				</div>
-				<ProductList products={products} isFlashSale />
+				<ProductList
+					products={products}
+					isFlashSale
+					translations={translations}
+				/>
 				<PaginationWithSummery
 					meta={meta}
 					totalItemsShowing={products?.length}

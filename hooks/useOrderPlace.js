@@ -11,7 +11,7 @@ const useOrderPlace = () => {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const handleOrderPlace = async (newOrder) => {
-		// console.log(newOrder);
+		console.log(newOrder);
 		// "Online Payment"
 		if (newOrder.payment_type !== "COD") {
 			//currently getting payment_type "Online Payment" but checkout accepts "Online"

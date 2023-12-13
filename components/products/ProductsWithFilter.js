@@ -53,7 +53,7 @@ const ProductsWithFilter = async ({
 				<div className="container">
 					{products?.length ? (
 						<>
-							<ProductList products={products} />
+							<ProductList products={products} translations={translations} />
 							<PaginationWithSummery
 								meta={meta}
 								totalItemsShowing={products?.length}

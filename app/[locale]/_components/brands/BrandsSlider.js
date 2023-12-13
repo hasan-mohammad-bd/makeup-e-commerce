@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import noImage from "@/public/assets/images/no-image.png";
+import BrandCard from "./BrandCard";
 
 // ** Import Icons
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
@@ -31,17 +30,7 @@ const BrandsSlider = ({ brands }) => {
 			>
 				{brands?.map((brand, i) => (
 					<SwiperSlide key={i}>
-						<div className="barnd-img inline-block border-slate-300 rounded-xl border p-2">
-							<div className="h-[96px] lg:h-[118px] w-[96px] lg:w-[118px] flex items-center justify-center">
-								<Image
-									src={brand.brand_image || noImage}
-									alt={brand.title}
-									width={118}
-									height={118}
-									className="w-full object-contain"
-								/>
-							</div>
-						</div>
+						<BrandCard brand={brand} />
 					</SwiperSlide>
 				))}
 			</Swiper>

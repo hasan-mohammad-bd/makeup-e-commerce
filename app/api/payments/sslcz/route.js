@@ -16,7 +16,7 @@ export async function POST(request) {
 			newOrder
 		);
 		if (order?.status === false) {
-			console.log(order, "order creation response in ssl");
+			// console.log(order, "order creation response in ssl");
 			return NextResponse.error(
 				{ message: "Order Creation failed" },
 				{ status: 500 }

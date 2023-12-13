@@ -17,45 +17,44 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 const DashboardLayout = ({ children, params }) => {
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const { translations } = useSelector((state) => state.common);
-
-	const { locale } = params;
 	const dispatch = useDispatch();
-	const pathname = usePathname();
+	const pathArray = usePathname().split("/");
+
 	const navItems = [
 		{
 			text: translations["my-profile"] || "আমার প্রফাইল",
 			icon: <FaUser />,
-			path: "/dashboard/profile",
+			path: "profile",
 		},
 		{
 			text: translations["my-order"] || "আমার অর্ডার",
 			icon: <FaClipboardList />,
-			path: "/dashboard/my-orders",
+			path: "my-orders",
 		},
 		{
 			text: translations["my-wish-list"] || "আমার উইশ লিষ্ট",
 			icon: <HiHeart />,
-			path: "/dashboard/my-wishlist",
+			path: "my-wishlist",
 		},
 		{
 			text: translations["my-review"] || "আমার রিভিউ",
 			icon: <MdRateReview />,
-			path: "/dashboard/my-reviews",
+			path: "my-reviews",
 		},
 		{
 			text: translations["voucher"] || "ভাউচার",
 			icon: <HiReceiptPercent />,
-			path: "/dashboard/my-voucher",
+			path: "my-voucher",
 		},
 		{
 			text: translations["questions-and-answers"] || "প্রশ্ন ও উত্তর",
 			icon: <RiQuestionAnswerFill />,
-			path: "/dashboard/qna",
+			path: "qna",
 		},
 		{
 			text: translations["support-ticket"] || "সাপোর্ট টিকিট",
 			icon: <HiTicket />,
-			path: "/dashboard/support-ticket",
+			path: "support-ticket",
 		},
 	];
 
@@ -72,19 +71,18 @@ const DashboardLayout = ({ children, params }) => {
 									<li
 										key={item.path}
 										className={`flex items-center py-3 px-4 rounded-lg w-full text-base font-normal ${
-											pathname === item.path ||
-											pathname.split(locale)[1] === item.path
+											pathArray.includes(item.path)
 												? "bg-amber-200 border-b-2 border-primary text-primary"
 												: ""
 										}`}
 									>
 										<Link
-											href={item.path}
+											href={`/dashboard/${item.path}`}
 											className="flex items-center space-x-2 capitalize"
 										>
 											<span
 												className={`${
-													pathname === item.path ? "" : "text-amber-400"
+													pathArray.includes(item.path) ? "" : "text-amber-400"
 												} text-base font-normal`}
 											>
 												{item.icon}

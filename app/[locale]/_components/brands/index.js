@@ -1,10 +1,13 @@
+import dynamic from "next/dynamic";
 import { fetchData } from "@/lib/fetch-data";
-import BrandsSlider from "./BrandsSlider";
+const BrandsViewSelector = dynamic(() => import("./BrandsViewSelector"), {
+	ssr: false,
+});
+
 const Brands = async () => {
 	const data = await fetchData({ api: "brands" });
 	const brands = data?.data || [];
 
-	return <BrandsSlider brands={brands} />;
+	return <BrandsViewSelector brands={brands} />;
 };
-
 export default Brands;

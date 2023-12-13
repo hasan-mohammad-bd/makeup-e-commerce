@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { twMerge } from "tailwind-merge";
 import React, { useEffect, useState } from "react";
 import Loader from "../elements/loaders/Loader";
 import { siteConfig } from "@/config/site";
@@ -19,7 +20,7 @@ import {
 	HiArrowLongRight,
 } from "react-icons/hi2";
 
-const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
+const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 	const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
 	const { handleAddToWishlist } = useWishList(); //custom hook for reusing
 	const [loading, setLoading] = useState(true);
@@ -49,12 +50,18 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 		<>
 			{!loading ? (
 				<>
-					<div className="min-w-[166px] bg-white border border-slate-200 rounded-xl hover:border-primary">
+					<div
+						className={twMerge(
+							`min-w-[166px] bg-white border border-slate-200 rounded-xl hover:border-primary md:w-auto relative`,
+							isLarge ? "w-[200px]" : "w-auto h-full",
+							isFlashSale ? "pb-[84px]" : "pb-8"
+						)}
+					>
 						<div className="product-img-action-wrap relative">
 							{getDaysSinceCreation(created_at) < 8 && (
 								<div className="absolute top-3 left-3 z-20">
 									<span className="bg-secondary-700 text-sm px-2 rounded-full text-white">
-										নতুন
+										{translations["new"] || "নতুন"}
 									</span>
 								</div>
 							)}
@@ -71,8 +78,8 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 								<Link href="/products/[slug]" as={`/products/${slug}`}>
 									<Image
 										className={`default-img ${
-											isBestSale ? "h-[194px] w-[196px]" : "h-full w-full"
-										} lg:h-56  lg:w-56 rounded-lg`}
+											isLarge ? "h-[196px] w-[192px]" : "h-[158px] w-full"
+										} md:h-[220px]  md:w-[220px] rounded-lg`}
 										src={image || "/assets/images/no-image.png"}
 										alt={product_name}
 										width={226}
@@ -107,23 +114,29 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 										: formatLongNumber(total_rating)}
 								</span>
 							</div>
-							<div className="product-price mb-3 flex flex-col justify-start lg:flex-row gap-2">
-								<span className="text-lg/[24px] font-semibold text-red-500">
+							<div
+								className={`product-price mb-3 flex  justify-start ${
+									isLarge ? "items-center" : "flex-col items-start"
+								} lg:flex-row gap-1`}
+							>
+								<span className="text-base/4 lg:text-lg/[24px] font-semibold text-red-500">
 									{siteConfig.currency.sign}
 									{new_price}
 								</span>
 								{old_price > new_price ? (
 									<div className="flex items-center gap-2">
-										<del className="old-price text-lg/[24px] font-normal text-slate-400">
+										<del className="old-price text-sm lg:text-lg/[24px] font-normal text-slate-400">
 											{siteConfig.currency.sign}
 											{old_price}
 										</del>
-										<span className="discount-badge">
+										<span className="discount-badge ml-1">
 											-{getDiscountPercent(old_price, new_price)}%
 										</span>
 									</div>
 								) : null}
 							</div>
+						</div>
+						<div className="actions absolute bottom-3 w-full px-3">
 							<div className="product-actions flex justify-center items-center gap-2">
 								<button
 									aria-label="Add To Cart"
@@ -139,7 +152,7 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 									onClick={() => handleAddAndCheckout(product)}
 									className="buy-btn flex-center gap-1"
 								>
-									এখনই কিনুন
+									{translations["buy-now"] || "এখনই কিনুন"}
 									<div className="hidden lg:block">
 										<HiArrowLongRight className="hidden lg:block" size={20} />
 									</div>
@@ -163,11 +176,12 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 									</div>
 									<div className="flex-between mt-3 text-xs">
 										<h3>
-											বিক্রি হয়েছে:{" "}
+											{translations["sold"] || "বিক্রি"}:{" "}
 											<span className="font-bold">{total_sale_qty}</span>
 										</h3>
 										<h3>
-											বাকি আছে: <span className="font-bold">{stock_qty}</span>
+											{translations["in-stock"] || "বাকি"}:{" "}
+											<span className="font-bold">{stock_qty}</span>
 										</h3>
 									</div>
 								</div>
@@ -182,4 +196,4 @@ const SingleProduct = ({ product, isFlashSale, isBestSale }) => {
 	);
 };
 
-export default SingleProduct;
+export default ProductCard;

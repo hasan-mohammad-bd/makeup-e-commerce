@@ -6,7 +6,7 @@ import noImage from "@/public/assets/images/no-image.png";
 
 const CategoryList = ({ categories }) => {
 	return (
-		<div className="grid grid-cols-3 justify-center items-center gap-4">
+		<div className="grid grid-cols-3 justify-center items-start gap-4">
 			{categories?.slice(0, 6)?.map((category) => (
 				<div key={category?.id} className="w-[96px] justify-self-center">
 					<Link

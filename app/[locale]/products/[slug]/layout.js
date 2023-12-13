@@ -109,7 +109,10 @@ export default async function ProductDetailsLayout({ children, params }) {
 						buttonText={translations["see-all"]}
 					/>
 					<div className="category-products mt-1 lg:mt-6">
-						<AllProducts customSearchParams={customSearchParams} />
+						<AllProducts
+							customSearchParams={customSearchParams}
+							translations={translations}
+						/>
 						<SeeAll
 							href={`/categories/${product?.category?.slug}`}
 							buttonText={translations["see-all"]}

@@ -7,32 +7,26 @@ import ProductCard from "@/components/cards/ProductCard";
 // ** Import Icons
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
 
-const BestSellSlider = ({ bestProducts }) => {
+const BestSellSlider = ({ bestProducts, translations }) => {
 	return (
 		<>
 			<Swiper
 				modules={[Navigation]}
 				slidesPerView={5}
-				spaceBetween={20}
+				spaceBetween={24}
 				loop={false}
 				navigation={{
 					prevEl: ".custom_prev_b",
 					nextEl: ".custom_next_b",
 				}}
-				breakpoints={{
-					0: {
-						slidesPerView: 2,
-						// spaceBetween: 260,
-					},
-					768: {
-						slidesPerView: 5,
-						spaceBetween: 20,
-					},
-				}}
 			>
 				{bestProducts?.map((product, i) => (
 					<SwiperSlide key={i}>
-						<ProductCard product={product} isBestSale={true} />
+						<ProductCard
+							product={product}
+							isBestSale={true}
+							translations={translations}
+						/>
 					</SwiperSlide>
 				))}
 			</Swiper>

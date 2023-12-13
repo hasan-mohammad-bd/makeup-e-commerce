@@ -81,23 +81,14 @@ const Search = () => {
 		setShowSuggestionResults(true);
 	};
 
-	const handleDeleteHistoryItem = (itemId) => {
-		const payload = {
-			historyId: itemId,
-			userId: user.id,
-		};
-		removeHistory(payload)
-			.unwrap()
-			.then((response) => {
-				// Handle the successful response if necessary
-				console.log(response);
-				toast.success("Search history removed!");
-			})
-			.catch((error) => {
-				// Handle the error if necessary
-				toast.error("Failed to remove search history");
-				console.log(error);
-			});
+	const handleDeleteHistoryItem = async (itemId) => {
+		try {
+			await removeHistory({ historyId: itemId, userId: user.id });
+			toast.success("Search history removed!");
+		} catch (error) {
+			toast.error("Failed to remove search history");
+			console.log(error);
+		}
 	};
 
 	return (
@@ -129,12 +120,12 @@ const Search = () => {
 			{showSuggestionResults && (searchHistory?.length || popular?.length) ? (
 				<div className="z-20 absolute font-title text-slate-600 mt-5 left-0 md:mt-2 py-2 w-full h-screen md:h-auto overflow-hidden rounded-md bg-white">
 					{searchHistory?.length ? (
-						<div className="px-6 md:px-4 mb-4">
-							<h3 className="mb-2">{translations["recently-searched"]}</h3>
+						<div className="mx-2 mb-4">
+							<h3 className="mb-2 mx-2">{translations["recently-searched"]}</h3>
 							{searchHistory?.slice(0, 5)?.map((keyword) => (
 								<div
 									key={keyword.id}
-									className="cursor-pointer py-2 flex gap-4 hover:bg-slate-100"
+									className="cursor-pointer group px-2 py-2 flex gap-4 hover:bg-slate-100 rounded-lg"
 								>
 									<svg
 										width="20"
@@ -164,10 +155,10 @@ const Search = () => {
 									>
 										{getSlicedText(keyword.search_name, 30)}
 									</p>
-									<div className="flex-1 text-right">
+									<div className="flex-1 text-right hidden group-hover:block">
 										<span
 											onClick={() => handleDeleteHistoryItem(keyword.id)}
-											className="text-slate-600"
+											className="text-slate-600 hover:text-primary"
 										>
 											X
 										</span>
@@ -177,12 +168,12 @@ const Search = () => {
 						</div>
 					) : null}
 					{popular?.length ? (
-						<div className="px-6 md:px-4">
-							<h3 className="mb-2">{translations["popular-keywords"]}</h3>
+						<div className="mx-2">
+							<h3 className="mb-2 mx-2">{translations["popular-keywords"]}</h3>
 							{popular?.slice(0, 5)?.map((keyword) => (
 								<div
 									key={keyword.id}
-									className="cursor-pointer py-2 flex gap-4 hover:bg-slate-100"
+									className="cursor-pointer px-2 py-2 flex gap-4 hover:bg-slate-100 rounded-lg"
 									onClick={() => handleSuggestionsSelect(keyword.search_name)}
 								>
 									<FiSearch />

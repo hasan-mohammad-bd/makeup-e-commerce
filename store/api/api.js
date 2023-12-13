@@ -54,6 +54,7 @@ export const api = createApi({
 		"review-images",
 		"review-details",
 		"product-flash-sale",
+		"best-sale-products",
 		"payment-methods",
 	],
 	endpoints: () => ({}),

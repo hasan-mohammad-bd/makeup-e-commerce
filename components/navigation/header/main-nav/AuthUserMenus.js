@@ -71,7 +71,7 @@ export default function AuthUserMenus({ togglePopover }) {
 								<Link
 									href={item.path}
 									onClick={() => togglePopover()}
-									className="flex items-center space-x-3 group"
+									className="flex items-center space-x-3 group capitalize"
 								>
 									<span
 										className={`group-hover:font-bold text-xl text-amber-400 group-hover:text-primary`}

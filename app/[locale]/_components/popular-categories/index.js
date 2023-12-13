@@ -10,10 +10,10 @@ const PopularCategories = () => {
 	const { locale } = useParams();
 	const { data: categoriesData } = useGetPopularCategoriesQuery({ locale });
 	const popularCategories = categoriesData?.data || [];
-	const matches = useMediaQuery("(max-width: 768px)");
+	const isMobile = useMediaQuery("(max-width: 768px)");
 	return (
 		<>
-			{!matches ? (
+			{!isMobile ? (
 				<CategorySlider categoryList={popularCategories} />
 			) : (
 				<CategoryList categories={popularCategories} />
