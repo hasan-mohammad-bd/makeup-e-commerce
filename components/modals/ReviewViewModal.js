@@ -88,28 +88,31 @@ export default function ReviewViewModal({
 							</p>
 						</div>
 						<p className="text-slate-700 lg:hidden py-3">{review.comment}</p>
-						<div className="border-t lg:border-none flex justify-between lg:block">
+						<div className="border-t lg:border-none flex lg:block">
 							<div
 								id="review"
-								className="lg:border-b border-slate-200 py-4 flex flex-col gap-8 justify-center"
+								className="lg:border-b border-slate-200 py-4 flex flex-col gap-8 w-full"
 							>
 								<p className="text-slate-700 hidden lg:block">
 									{review.comment}
 								</p>
-								{review.product_variant && (
-									<div className="actions flex-between gap-4 text-slate-600">
+
+								<div className="actions flex items-center justify-between text-slate-600">
+									{review.barcode.color && (
 										<p>
 											{translations["color"] || "কালার"}:{" "}
-											{review.product_variant?.color}
+											{review.barcode?.color}
 										</p>
+									)}
+									{review.barcode.size && (
 										<p>
-											{translations["size"] || "সাইজ"}:{" "}
-											{review.product_variant?.size}
+											{translations["size"] || "সাইজ"}: {review.barcode?.size}
 										</p>
-									</div>
-								)}
+									)}
+									<p className="lg:hidden"></p>
+								</div>
 							</div>
-							<div className="flex justify-end gap-4">
+							<div className="ml-auto flex items-center gap-4">
 								<button
 									onClick={() => handleReviewReact("like", review?.id)}
 									className={`icon-btn hover:text-primary ${

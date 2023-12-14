@@ -9,7 +9,7 @@ import useAddReviewReaction from "@/hooks/useAddReviewReaction";
 
 const RatingReviewCard = ({ review, translations }) => {
 	const { handleReviewReact } = useAddReviewReaction(); //custom hook for reusing
-	// console.log(review);
+	console.log(review);
 	return (
 		<div className="grid lg:grid-cols-3 border-b border-slate-300 px-3 gap-1 lg:px-4 lg:py-3 mt-4">
 			<div id="user-info" className="col-span-1 box-border">
@@ -51,7 +51,7 @@ const RatingReviewCard = ({ review, translations }) => {
 			</div>
 			<div
 				id="review"
-				className="col-span-2 flex flex-col gap-3 justify-center"
+				className="col-span-2 flex flex-col gap-3 justify-between"
 			>
 				<p className="text-base font-normal text-slate-700">{review.comment}</p>
 				{review?.images?.length ? (
@@ -59,25 +59,23 @@ const RatingReviewCard = ({ review, translations }) => {
 				) : null}
 
 				<div
-					className={`actions ${
-						review.product_variant ? "flex-between" : "flex-end"
-					} text-slate-600`}
+					className={`actions flex items-center justify-between  text-slate-600`}
 				>
-					{review.product_variant && (
-						<>
-							<p>
-								{translations["color"] || "কালার"}:{" "}
-								{review.product_variant?.color}
-							</p>
-							<p>
-								{translations["size"] || "সাইজ"}: {review.product_variant?.size}
-							</p>
-						</>
+					{review.barcode.color && (
+						<p>
+							{translations["color"] || "কালার"}: {review.barcode?.color}
+						</p>
 					)}
-					<div className="like-dislike flex-center gap-4">
+					{review.barcode.size && (
+						<p>
+							{translations["size"] || "সাইজ"}: {review.barcode?.size}
+						</p>
+					)}
+
+					<div className="justify-self-end like-dislike flex-center gap-4">
 						<button
 							onClick={() => handleReviewReact("like", review?.id)}
-							className={`icon-btn hover:text-primary ${
+							className={`icon-btn !py-0 hover:text-primary ${
 								review.is_liked ? "text-primary" : "text-slate-700"
 							}`}
 						>
@@ -85,7 +83,7 @@ const RatingReviewCard = ({ review, translations }) => {
 						</button>
 						<button
 							onClick={() => handleReviewReact("dislike", review?.id)}
-							className={`icon-btn hover:text-primary ${
+							className={`icon-btn !py-0 hover:text-primary ${
 								review.is_disliked ? "text-primary" : "text-slate-700"
 							}`}
 						>

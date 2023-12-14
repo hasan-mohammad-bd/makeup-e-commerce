@@ -104,7 +104,7 @@ const ProductVariantSelect = forwardRef(
 						<h4 className="text-slate-900 text-sm lg:text-base font-normal">
 							{translations["select-color"] || "কালার নির্বাচন করুন"}:
 						</h4>
-						<div className="flex gap-2 flex-wrap mt-2 lg:mt-3">
+						<div className="flex gap-[10px] lg:gap-3 flex-wrap mt-2 lg:mt-3">
 							{colors.map((color) => {
 								let colorImgInfo = photos.find(
 									(photo) => photo.color_name === color
@@ -113,7 +113,7 @@ const ProductVariantSelect = forwardRef(
 								return (
 									<div
 										key={color}
-										className={`p-2 h-[60px] min-w-[60px] w-fit rounded-md border ${
+										className={`p-2 h-[52px] lg:h-[58px] min-w-[52px] lg:min-w-[58px] w-fit rounded-md border ${
 											selectedVariants.find((v) => v.color === color) ||
 											(selectedColor === color && colorsGroup[color].length > 1)
 												? "border-primary"
@@ -132,7 +132,7 @@ const ProductVariantSelect = forwardRef(
 											/>
 										) : (
 											<span
-												className={`h-full w-full flex items-center`}
+												className={`h-full w-full flex items-center text-sm lg:text-base text-slate-700`}
 												// style={{ backgroundColor: colorImgInfo?.color_code }}
 											>
 												{color}
@@ -163,11 +163,11 @@ const ProductVariantSelect = forwardRef(
 								</button>
 							)}
 						</div>
-						<div className="flex gap-2 flex-wrap mt-2 lg:mt-3">
+						<div className="flex gap-2 lg:gap-3 flex-wrap mt-2 lg:mt-3">
 							{colorsGroup[selectedColor]?.map((variant) => (
 								<div
 									key={variant.id}
-									className={`py-3 px-4 rounded-lg border ${
+									className={`py-2 lg:py-3 px-4 rounded-lg border text-sm lg:text-base ${
 										selectedVariants.find((v) => v.id === variant.id)
 											? "border-primary"
 											: "border-slate-300"

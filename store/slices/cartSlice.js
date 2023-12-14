@@ -1,5 +1,5 @@
-import { generateUniqueId } from "@/utils/get-unique";
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 // Helper function to load cart items from local storage
 const loadCartItemsFromLocalStorage = () => {
@@ -40,6 +40,7 @@ const cartSlice = createSlice({
 		//Adding new item to the cart
 		addToCart: (state, action) => {
 			const { product, selectedVariants = [] } = action.payload;
+			let flag = 0;
 			selectedVariants.forEach((variant) => {
 				const index = state.cart
 					.map((item) => item.barcodeId)
@@ -51,11 +52,30 @@ const cartSlice = createSlice({
 					newCartItem.selectedBarCode = variant;
 					newCartItem.quantity = 1;
 					state.cart.push(newCartItem);
+					!flag && toast.success("Product added");
+					flag++;
 				} else {
-					//Incrementing quantity for existing items
 					const existingProduct = state.cart[index];
+
+					//checking available stock
+					if (
+						existingProduct.quantity >=
+						existingProduct?.selectedBarCode?.stock_qty
+					) {
+						const { color, size } = existingProduct.selectedBarCode;
+						let message =
+							color || size
+								? `No more stock for ${color} ${size}`
+								: "No more stock";
+						toast.error(message);
+						return;
+					}
+
+					//Incrementing quantity for existing items
 					existingProduct.quantity++;
 					state.cart.splice(index, 1, existingProduct);
+					!flag && toast.success("Product added");
+					flag++;
 				}
 			});
 		},
@@ -64,9 +84,15 @@ const cartSlice = createSlice({
 		addQuantity: (state, action) => {
 			const barcodeId = action.payload;
 			const index = state.cart.map((item) => item.barcodeId).indexOf(barcodeId);
+			const item = state.cart[index];
+
+			//checking available stock
+			if (item.quantity >= item?.selectedBarCode?.stock_qty) {
+				toast.error("No more stock");
+				return;
+			}
 
 			//Updating item
-			const item = state.cart[index];
 			item.quantity++;
 			state.cart.splice(index, 1, item);
 		},

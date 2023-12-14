@@ -121,7 +121,9 @@ export default async function Home() {
 						href="/products"
 						buttonText={translations["see-all"]}
 					/>
-					<NewArrival />
+				</div>
+				<NewArrival />
+				<div className="container">
 					<SeeAll href="/products" buttonText={translations["see-all"]} />
 				</div>
 			</section>

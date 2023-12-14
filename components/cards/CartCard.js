@@ -97,7 +97,12 @@ const CartCard = ({ item }) => {
 				</div>
 				<div className="flex items-center products-center gap-3 text-slate-900">
 					<button
-						className="bg-transparent border border-primary rounded px-1"
+						disabled={quantity <= 1}
+						className={`bg-transparent border ${
+							quantity <= 1
+								? "border-slate-300 cursor-not-allowed text-slate-300"
+								: "border-primary"
+						} rounded px-1`}
 						onClick={() => dispatch(cartActions.removeQuantity(barcodeId))}
 					>
 						<FiMinus />

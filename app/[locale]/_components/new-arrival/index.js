@@ -15,7 +15,7 @@ const NewArrival = async () => {
 	const productsChunks = getChunksList(newProducts, 2);
 
 	return (
-		<div className="new-slider mt-4 lg:mt-6  relative">
+		<div className="new-slider mt-1 lg:mt-6">
 			<NewArrivalViewSelector productsChunks={productsChunks} />
 		</div>
 	);

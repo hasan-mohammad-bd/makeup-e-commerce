@@ -8,7 +8,7 @@ export default function BrandCard({ brand }) {
 			<div className="h-[96px] lg:h-[118px] w-[96px] lg:w-[118px] flex items-center justify-center">
 				<Image
 					src={brand.brand_image || noImage}
-					alt={brand.title}
+					alt={brand.brand_name}
 					width={118}
 					height={118}
 					className="w-full object-contain"

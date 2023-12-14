@@ -44,7 +44,6 @@ const useCart = () => {
 					selectedVariants: product.barcodes,
 				})
 			);
-			toast.success("Product added");
 			return true;
 		}
 		if (!selectedVariants) {
@@ -61,7 +60,7 @@ const useCart = () => {
 				selectedVariants: selectedVariants,
 			})
 		);
-		toast.success("Product added");
+
 		return true;
 	};
 

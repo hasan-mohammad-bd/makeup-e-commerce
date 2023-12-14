@@ -37,9 +37,9 @@ const ProductVerticalCard = ({ product }) => {
 
 	return (
 		<div
-			className={`product-card-wrap grid grid-cols-[99px_auto] lg:grid-cols-[116px_auto] items-center bg-white border border-slate-200 rounded-xl w-[298px] lg:w-full p-3 lg:p-4 gap-3 lg:gap-4`}
+			className={`product-card-wrap grid grid-cols-[104px_180px] lg:grid-cols-[116px_auto] items-center bg-white border border-slate-200 rounded-xl w-[322px] lg:w-full p-3 lg:p-4 gap-3 lg:gap-4`}
 		>
-			<div className="product-img relative h-[99px] lg:h-[116px]">
+			<div className="product-img relative h-[104px] lg:h-[116px]">
 				{/* {getDaysSinceCreation(created_at) < 8 && (
 					<div className="absolute top-0 left-0 z-20">
 						<span className="bg-secondary-700 text-sm px-2 rounded-full text-white">
@@ -68,7 +68,7 @@ const ProductVerticalCard = ({ product }) => {
 					</span>
 				</div>
 
-				<h2>
+				<h2 className="w-full">
 					<Link href={`/products/${slug}`} className="product-title">
 						{product_name}
 					</Link>
@@ -89,7 +89,7 @@ const ProductVerticalCard = ({ product }) => {
 					</span>
 					{old_price > new_price ? (
 						<>
-							<del className="old-price text-base/4 lg:text-lg/[24px] font-normal text-slate-400">
+							<del className="old-price text-sm lg:text-lg/[24px] font-normal text-slate-400">
 								{siteConfig.currency.sign}
 								{old_price}
 							</del>
