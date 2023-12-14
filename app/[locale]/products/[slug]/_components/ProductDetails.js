@@ -21,7 +21,11 @@ import { TbTag } from "react-icons/tb";
 import { IoCall, IoCopy } from "react-icons/io5";
 import { siteConfig } from "@/config/site";
 import HorizontalScrollView from "@/components/elements/HorizontalScrollView";
-import { getDiscountPercent } from "@/utils/percent";
+import { getDiscountPercent, getSalePercent } from "@/utils/percent";
+import FlashSellCorner from "@/components/elements/svg/FlashSellCorner";
+import Timer from "@/components/elements/Timer";
+import FlashSellTimer from "@/components/elements/FlashSellTimer";
+import { useSelector } from "react-redux";
 
 const ProductDetails = ({
 	children,
@@ -100,6 +104,50 @@ const ProductDetails = ({
 				</div>
 				<div className="lg:w-1/2">
 					<div className="product-content-wrap">
+						<div className="mx-3 md:mx-0">
+							{product.flashSale && (
+								<div className="overflow-hidden mb-0 md:mb-3 flesh-sell-bar w-full h-12 rounded-3xl border border-primary flex justify-between items-center">
+									<FlashSellCorner className="" />
+
+									<div className="md:ml-[-90px] text-start md:text-end text-slate-600 grid grid-cols-1 md:grid-cols-2 md:gap-1 items-center justify-center">
+										<p className="whitespace-nowrap text-[12px] md:text-[16px]">
+											{" "}
+											{translations["will-end"] || "শেষ হবে"}:
+										</p>
+
+										<p className="text-[12px] md:text-[16px]">
+											{" "}
+											<FlashSellTimer
+												targetDate={product?.flashSale?.expire_time}
+											/>
+										</p>
+									</div>
+									<div className="text-slate-600 grid md:gap-1 grid-cols-1 md:grid-cols-2 pr-8">
+										<h3 className="whitespace-nowrap text-[12px] md:text-[16px]">
+											{translations["remaining"] || "বাকি আছে"}:{" "}
+											<span className="font-bold text-[12px] md:text-[14px] mx-1">
+												{product.stock_qty}
+											</span>
+										</h3>
+
+										<div className=" flex items-center gap-3">
+											<div className="w-full h-[6px] bg-gray-200 rounded">
+												<div
+													className="h-[6px] bg-secondary-700 rounded"
+													style={{
+														width: `${getSalePercent(
+															product?.total_sale_qty,
+															product?.stock_qty
+														)}%`,
+													}}
+												></div>
+											</div>
+											{/* <h3>{getSalePercent(total_sale_qty, stock_qty)}%</h3> */}
+										</div>
+									</div>
+								</div>
+							)}
+						</div>
 						<div className="px-3 lg:px-0 pt-3 lg:pt-0">
 							<p className="text-sm font-bold text-primary capitalize mb-2">
 								{product?.brand?.brand_name || "No Brand"}
