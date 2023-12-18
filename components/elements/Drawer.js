@@ -1,8 +1,8 @@
 import React from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import useLockedBody from "../../hooks/useLockedBody";
 import { RiCloseCircleFill } from "react-icons/ri";
 import { twMerge } from "tailwind-merge";
+import CloseIcon from "./svg/CloseIcon";
 
 const Drawer = ({ title, children, show, setShow, position, className }) => {
 	useLockedBody(show, "root"); // to lock body scroll
@@ -34,7 +34,7 @@ const Drawer = ({ title, children, show, setShow, position, className }) => {
 			>
 				<div className="relative flex flex-col h-full">
 					{/*header*/}
-					<div className="flex items-center justify-between px-5 py-1 lg:py-2 text-slate-900 border-b-[1px] border-slate-300">
+					<div className="flex items-center justify-between px-3 lg:px-5 py-1 lg:py-2 text-slate-900 border-b-[1px] border-slate-300">
 						<h3 className="text-lg lg:text-2xl font-title font-semibold">
 							{title ? title : null}
 						</h3>
@@ -42,8 +42,8 @@ const Drawer = ({ title, children, show, setShow, position, className }) => {
 							className="icon-btn text-2xl text-slate-500"
 							onClick={() => setShow(false)}
 						>
-							<AiOutlineClose className="hidden lg:block" />
-							<RiCloseCircleFill className="lg:hidden" />
+							<CloseIcon className="hidden lg:block" />
+							<RiCloseCircleFill className="lg:hidden" size={33.611} />
 						</button>
 					</div>
 					{/*body*/}

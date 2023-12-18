@@ -49,7 +49,7 @@ const Footer = () => {
 									/>
 								</Link>
 								<ul className="info-list">
-									<li>
+									<li className="!items-start">
 										<FaMapMarkerAlt size={24} color="#EF4444" />
 										<p className="pr-4">{settings?.address}</p>
 									</li>
@@ -129,7 +129,10 @@ const Footer = () => {
 											width={52}
 											height={23}
 										/>
-										<Link href="/" className="!text-xs/3 !mb-0 text-white">
+										<Link
+											href="/"
+											className="!text-xs/[100%] !mb-0 text-white w-1/5"
+										>
 											{translations["many-more"]}
 										</Link>
 									</div>

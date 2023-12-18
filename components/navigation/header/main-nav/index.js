@@ -67,8 +67,8 @@ export default function MainNav({ settings }) {
 	}, [scroll]);
 
 	return (
-		<div className="mt-20 lg:mt-0">
-			<div className="fixed left-0 top-0 w-full z-30 lg:relative bg-white border-b border-slate-300 py-4">
+		<div className="mt-20">
+			<div className="fixed left-0 top-0 w-full z-30 bg-white border-b border-slate-300 py-4">
 				<div className="container">
 					<div className="header-wrap flex justify-between items-center">
 						{/* Nav Items  */}
@@ -98,9 +98,11 @@ export default function MainNav({ settings }) {
 									className="single-action relative"
 								>
 									<HiOutlineShoppingCart size={24} />
-									<span className="absolute -right-2 -top-2 bg-red-500 text-white px-2 text-center rounded-full">
-										{cart?.length || 0}
-									</span>
+									{cart?.length ? (
+										<span className="absolute -right-2 -top-2 bg-red-500 text-white px-2 text-center rounded-full">
+											{cart?.length}
+										</span>
+									) : null}
 								</button>
 								<div
 									ref={popoverRef}

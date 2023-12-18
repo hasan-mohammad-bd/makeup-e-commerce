@@ -36,8 +36,9 @@ const ProductVerticalCard = ({ product }) => {
 	if (loading) return <Loader />;
 
 	return (
-		<div
-			className={`product-card-wrap grid grid-cols-[104px_180px] lg:grid-cols-[116px_auto] items-center bg-white border border-slate-200 rounded-xl w-[322px] lg:w-full p-3 lg:p-4 gap-3 lg:gap-4`}
+		<Link
+			href={`/products/${slug}`}
+			className={`product-card-wrap grid grid-cols-[104px_180px] lg:grid-cols-[116px_auto] items-center bg-white border border-slate-200 rounded-xl hover:border-primary w-[322px] lg:w-full p-3 lg:p-4 gap-3 lg:gap-4`}
 		>
 			<div className="product-img relative h-[104px] lg:h-[116px]">
 				{/* {getDaysSinceCreation(created_at) < 8 && (
@@ -47,16 +48,14 @@ const ProductVerticalCard = ({ product }) => {
 						</span>
 					</div>
 				)} */}
-				<Link href="/products/[slug]" as={`/products/${slug}`}>
-					<Image
-						src={image || "/assets/images/no-image.png"}
-						alt={`product`}
-						width={116}
-						height={116}
-						// priority={true}
-						className="h-full w-full object-cover object-top"
-					/>
-				</Link>
+				<Image
+					src={image || "/assets/images/no-image.png"}
+					alt={`product`}
+					width={116}
+					height={116}
+					// priority={true}
+					className="h-full w-full rounded-lg object-cover object-top"
+				/>
 			</div>
 			<div className="product-content-wrap">
 				<div className="product-category">
@@ -68,18 +67,14 @@ const ProductVerticalCard = ({ product }) => {
 					</span>
 				</div>
 
-				<h2 className="w-full">
-					<Link href={`/products/${slug}`} className="product-title">
-						{product_name}
-					</Link>
-				</h2>
+				<h2 className="w-full product-title">{product_name}</h2>
 				<div className="product-rating">
 					<span className="font-semibold text-slate-900">
-						{getFractionFixed(average_rating) || 0}{" "}
+						{getFractionFixed(average_rating) || 5}{" "}
 						<FaStar className="text-primary pb-1" />
 					</span>
 					<span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
-						{total_rating === 0 ? "No Rating" : formatLongNumber(total_rating)}
+						{total_rating === 0 ? 0 : formatLongNumber(total_rating)}
 					</span>
 				</div>
 				<div className="product-price text-sm flex items-center gap-2">
@@ -94,13 +89,13 @@ const ProductVerticalCard = ({ product }) => {
 								{old_price}
 							</del>
 							<span className="discount inline-block !text-xs text-white bg-red-500 rounded-md py-0.5 lg:py-1 px-1 ml-2">
-								-{getDiscountPercent(old_price, new_price)}%
+								{getDiscountPercent(old_price, new_price)}% OFF
 							</span>
 						</>
 					) : null}
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 };
 

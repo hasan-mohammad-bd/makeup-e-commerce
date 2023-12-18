@@ -3,7 +3,7 @@ import ProductList from "../../../components/products/ProductList";
 import PaginationWithSummery from "../../../components/PaginationWithSummery";
 
 const HomeAllProducts = async ({ translations }) => {
-	const data = await fetchData({ api: "products" });
+	const data = await fetchData({ api: "products?per_page=20" });
 	const products = data?.data || [];
 	const meta = data?.meta || {};
 	return (

@@ -26,7 +26,7 @@ export default function Modal({ showModal, setShowModal, title, children }) {
 										className="icon-btn text-2xl md:text-4xl text-slate-500"
 										onClick={() => setShowModal(false)}
 									>
-										<RiCloseCircleFill />
+										<RiCloseCircleFill size={33.611} />
 									</button>
 								</div>
 								{/*body*/}

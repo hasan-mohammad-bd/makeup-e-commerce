@@ -69,11 +69,11 @@ const ProductHistoryCard = ({ product, status }) => {
 				</h2>
 				<div className="product-rating">
 					<span className="font-semibold text-slate-900">
-						{getFractionFixed(average_rating) || 0}{" "}
+						{getFractionFixed(average_rating) || 5}{" "}
 						<FaStar className="text-primary pb-1" />
 					</span>
 					<span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
-						{total_rating === 0 ? "No Rating" : formatLongNumber(total_rating)}
+						{total_rating === 0 ? 0 : formatLongNumber(total_rating)}
 					</span>
 				</div>
 				<div className="product-price text-sm flex items-center gap-1">
@@ -88,7 +88,7 @@ const ProductHistoryCard = ({ product, status }) => {
 								{old_price}
 							</del>
 							<span className="discount inline-block !text-xs text-white bg-red-500 rounded-md py-0.5 lg:py-1 px-1 ml-2">
-								-{getDiscountPercent(old_price, new_price)}%
+								{getDiscountPercent(old_price, new_price)}% OFF
 							</span>
 						</>
 					) : null}

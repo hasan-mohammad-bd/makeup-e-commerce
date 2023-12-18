@@ -31,10 +31,10 @@ const FlashSaleSlider = ({ saleProducts, translations }) => {
 			</Swiper>
 
 			<div className="slider-arrow hidden lg:block">
-				<span className="slider-btn slider-prev slick-arrow custom_prev_f">
+				<span className="slider-btn slider-prev slick-arrow custom_prev_f !left-0.5">
 					<TfiAngleLeft />
 				</span>
-				<span className="slider-btn slider-next slick-arrow custom_next_f">
+				<span className="slider-btn slider-next slick-arrow custom_next_f !right-0.5">
 					<TfiAngleRight />
 				</span>
 			</div>

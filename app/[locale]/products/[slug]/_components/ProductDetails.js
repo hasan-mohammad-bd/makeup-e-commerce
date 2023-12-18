@@ -187,7 +187,6 @@ const ProductDetails = ({
               </div>
 
               {/* short description  */}
-              {console.log(product?.product_short_description)}
               <ViewHTML
                 htmlText={product?.product_short_description}
 
@@ -205,12 +204,11 @@ const ProductDetails = ({
                       {product?.old_price ? `$ ${product?.old_price}` : "0.00"}
                     </del>
                     <span className="discount inline-block text-base/[22px] font-semibold font-title text-white bg-red-500 rounded-md py-1 px-2">
-                      -
                       {getDiscountPercent(
                         product?.old_price,
                         product?.new_price
                       )}
-                      %
+                     	% OFF
                     </span>
                   </>
                 ) : null}

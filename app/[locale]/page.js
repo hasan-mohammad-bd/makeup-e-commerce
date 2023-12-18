@@ -75,25 +75,7 @@ export default async function Home() {
 			</section>
 
 			<section className="best-sell bg-slate-50 mt-8 lg:mt-0 py-4 md:py-14 lg:pb-14">
-				<div className="container">
-					<SectionTitle
-						title={translations["best-selling-product"]}
-						href="/products"
-						buttonText={translations["see-all"]}
-					>
-						<Image
-							src={`/assets/images/icons/fire-1.png`}
-							alt="Fire"
-							width={32}
-							height={32}
-							className="inline-block mr-1"
-						/>
-					</SectionTitle>
-				</div>
 				<BestSell translations={translations} />
-				<div className="container">
-					<SeeAll href="/products" buttonText={translations["see-all"]} />
-				</div>
 			</section>
 
 			<section className="banners pt-6 lg:pt-14">

@@ -12,7 +12,7 @@ const visitedProductsAPI = api.injectEndpoints({
 		}),
 		getVisitedProducts: builder.query({
 			query: (payload) => ({
-				url: "visit-history/index",
+				url: "visit-history/index?per_page=",
 				headers: {
 					lang: payload?.locale,
 				},

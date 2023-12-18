@@ -14,11 +14,8 @@ import useWishList from "@/hooks/useWishList";
 
 // ** Import Icon
 import { FaStar } from "react-icons/fa";
-import {
-	HiOutlineHeart,
-	HiOutlineShoppingCart,
-	HiArrowLongRight,
-} from "react-icons/hi2";
+import { HiOutlineHeart, HiOutlineShoppingCart } from "react-icons/hi2";
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 
 const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 	const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
@@ -52,7 +49,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 				<>
 					<div
 						className={twMerge(
-							`min-w-[166px] bg-white border border-slate-200 rounded-xl hover:border-primary md:w-auto relative`,
+							`min-w-[166px] bg-white border border-slate-200 rounded-xl hover:border-primary hover:shadow-md md:w-auto relative`,
 							isLarge ? "w-[200px]" : "w-auto h-full",
 							isFlashSale ? "pb-[84px]" : "pb-8"
 						)}
@@ -98,20 +95,16 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 									{brand?.brand_name || "No Brand"}
 								</span>
 							</div>
-							<h2>
-								<Link href={`/products/${slug}`} className="product-title">
-									{product_name}
-								</Link>
+							<h2 className="product-title !line-clamp-2 lg:!line-clamp-1">
+								<Link href={`/products/${slug}`}>{product_name}</Link>
 							</h2>
 							<div className="product-rating">
 								<span className="font-semibold text-slate-900">
-									{getFractionFixed(average_rating) || 0}{" "}
+									{getFractionFixed(average_rating) || 5}{" "}
 									<FaStar className="text-primary pb-1" />
 								</span>
 								<span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
-									{total_rating === 0
-										? "No Rating"
-										: formatLongNumber(total_rating)}
+									{total_rating === 0 ? 0 : formatLongNumber(total_rating)}
 								</span>
 							</div>
 							<div
@@ -130,14 +123,17 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 											{old_price}
 										</del>
 										<span className="discount-badge ml-1">
-											-{getDiscountPercent(old_price, new_price)}%
+											{getDiscountPercent(old_price, new_price)}% OFF
 										</span>
 									</div>
 								) : null}
 							</div>
 						</div>
 						<div className="actions absolute bottom-3 w-full px-3">
-							<div className="product-actions flex justify-center items-center gap-2">
+							<div
+								className="product-actions flex items-center gap-2"
+								onClick={(e) => e.stopPropagation()}
+							>
 								<button
 									aria-label="Add To Cart"
 									className="action-btn"
@@ -154,7 +150,10 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 								>
 									{translations["buy-now"] || "এখনই কিনুন"}
 									<div className="hidden lg:block">
-										<HiArrowLongRight className="hidden lg:block" size={20} />
+										<HiOutlineArrowNarrowRight
+											className="hidden lg:block"
+											size={20}
+										/>
 									</div>
 								</button>
 							</div>

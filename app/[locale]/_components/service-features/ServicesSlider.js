@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const ServicesSlider = () => {
+	const { translations } = useSelector((state) => state.common);
 	return (
 		<>
 			<Swiper
@@ -35,8 +37,8 @@ const ServicesSlider = () => {
 							height={48}
 						/>
 						<p className="text-base/[22px] font-semibold font-title">
-							<span className="text-primary">৭ দিনের মধ্যে</span> বিনামূল্যে
-							পরিবর্তনযোগ্য
+							{translations["free-exchange"] ||
+								"৭ দিনের মধ্যে বিনামূল্যে পরিবর্তনযোগ্য"}
 						</p>
 					</div>{" "}
 				</SwiperSlide>
@@ -49,8 +51,8 @@ const ServicesSlider = () => {
 							height={48}
 						/>
 						<p className="text-base/[22px] font-semibold font-title">
-							ঢাকার মধ্যে{" "}
-							<span className="text-primary">ফ্রি হোম ডেলিভারি</span>
+							{translations["free-delivery-offer"] ||
+								"ঢাকার মধ্যে ফ্রি হোম ডেলিভারি"}
 						</p>
 					</div>
 				</SwiperSlide>
@@ -63,8 +65,8 @@ const ServicesSlider = () => {
 							height={48}
 						/>
 						<p className="text-base/[22px] font-semibold font-title">
-							<span className="text-primary">নিরাপদে পেমেন্ট</span> করার সহজ
-							মাধ্যম
+							{translations["easy-secure-payment"] ||
+								"নিরাপদে পেমেন্ট করার সহজ মাধ্যম"}
 						</p>
 					</div>
 				</SwiperSlide>
@@ -77,8 +79,8 @@ const ServicesSlider = () => {
 							height={48}
 						/>
 						<p className="text-base/[22px] font-semibold font-title">
-							<span className="text-primary">সর্বাক্ষনিক</span> ও দ্রুত গ্রাহক
-							সেবা{" "}
+							{translations["fast-service"] ||
+								"সর্বাক্ষনিক ও দ্রুত গ্রাহক সেবা"}
 						</p>
 					</div>
 				</SwiperSlide>

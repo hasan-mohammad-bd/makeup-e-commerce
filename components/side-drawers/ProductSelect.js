@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
-import { removeFromSelected } from "@/store/slices/cartSlice";
+import { removeFromSelected, toggleCart } from "@/store/slices/cartSlice";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,15 +28,21 @@ const ProductSelect = () => {
 		dispatch(removeFromSelected());
 	};
 
+	const handleAddAndClose = () => {
+		handleAddToCart(selectedProduct, selectedVariants);
+		closeDrawer();
+		dispatch(toggleCart()); //opening cart
+	};
+
 	const pageContent = (
 		<div className="lg:p-6">
-			<div className="product-info flex gap-4 items-center">
+			<div className="product-info grid grid-cols-[72px_auto] lg:grid-cols-[84px_auto] gap-3 lg:gap-4 items-center">
 				<Image
 					src={selectedProduct?.image || noImage}
 					alt="product"
 					height={84}
 					width={84}
-					className="h-[72px] lg:h-20 w-[72px] lg:w-20 rounded-lg"
+					className="h-[72px] w-[72px] lg:w-[84px] lg:h-[84px] rounded-lg"
 				/>
 				<div className="">
 					<h5 className="text-primary text-xs font-semibold">
@@ -81,7 +87,7 @@ const ProductSelect = () => {
 			<div className="product-actions mt-8 lg:mt-10 mb-3 lg:my-6 flex gap-3 lg:gap-4 justify-between items-center">
 				<button
 					className="bg-secondary-700 py-3 w-full px-2 text-white rounded-lg text-center active:scale-95"
-					onClick={() => handleAddToCart(selectedProduct, selectedVariants)}
+					onClick={() => handleAddAndClose()}
 				>
 					<HiOutlineShoppingCart size={24} />
 					<span className="ml-2">

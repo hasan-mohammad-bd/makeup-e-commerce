@@ -27,8 +27,8 @@ const FlashSale = ({ translations }) => {
 		<section className="flash-sale mt-28">
 			<div className="container">
 				<div className="relative">
-					<div className="sec-heading absolute top-[-95px] lg:top-[-30px] left-0 w-full flex justify-center lg:justify-between items-center px-8">
-						<div className="flex flex-col lg:flex-row gap-4 bg-white px-3 lg:px-0">
+					<div className="sec-heading absolute top-[-95px] lg:top-[-30px] left-0 w-full flex justify-center lg:justify-between items-center px-4">
+						<div className="flex flex-col lg:flex-row gap-4 bg-white px-3">
 							<div className="text-center lg:text-left">
 								<h2 className="sec-title">{flashSaleInfo?.title}</h2>
 								<p>
@@ -40,7 +40,7 @@ const FlashSale = ({ translations }) => {
 						</div>
 						<Link
 							href="/flash-sale"
-							className="all-btn bg-white !hidden lg:!block"
+							className="all-btn bg-white !hidden lg:!block px-3"
 						>
 							{translations["see-all"]} <HiArrowLongRight size={24} />{" "}
 						</Link>
