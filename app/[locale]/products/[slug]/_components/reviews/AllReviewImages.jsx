@@ -20,13 +20,16 @@ const AllReviewImages = ({ images, max }) => {
 		<>
 			<div className="grid grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-4">
 				{images.slice(0, max).map((image, index) => (
-					<span key={index} className="relative cursor-pointer">
+					<span
+						key={index}
+						className="relative cursor-pointer h-[74px] lg:h-[86px] w-[74px] lg:w-[86px] border border-slate-200 rounded-lg box-content"
+					>
 						<Image
 							src={image.image}
 							alt={`review-image-${index}`}
 							width={86}
 							height={86}
-							className={`h-[74px] lg:h-[86px] w-[74px] lg:w-[86px] rounded-lg`}
+							className={`h-full w-full object-contain rounded-lg`}
 							onClick={() => handleReviewView(image.product_review_id)}
 						/>
 						{index === max - 1 ? (

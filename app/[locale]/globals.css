@@ -242,11 +242,11 @@
 }
 
 .slider-btn {
-	@apply absolute top-1/2 left-3 -translate-y-[24px] inline-flex justify-center items-center w-12 h-12 bg-[#F8FAFC] rounded-full z-10 cursor-pointer;
+	@apply absolute top-1/2 left-0 -translate-y-[24px] inline-flex justify-center items-center w-12 h-12 bg-[#F8FAFC] rounded-full z-10 cursor-pointer;
 }
 
 .slider-next {
-	@apply left-auto right-3;
+	@apply left-auto right-0;
 }
 
 .swiper-button-disabled {

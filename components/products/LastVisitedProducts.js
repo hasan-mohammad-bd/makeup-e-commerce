@@ -16,21 +16,12 @@ const LastVisitedProducts = ({ visitedProductId, translations }) => {
 	const [addToVisited] = useAddToVisitedMutation();
 	const { data, isLoading } = useGetVisitedProductsQuery({ locale });
 	const visitedProducts = data?.data || [];
-	// console.log(visitedProducts);
+	// console.log(data);
 
 	// Adding product to visited list
 	useEffect(() => {
 		if (visitedProductId && user) {
 			addToVisited({ product_id: visitedProductId, date: new Date() });
-			// .unwrap()
-			// .then((response) => {
-			//   // Handle the successful response if necessary
-			//   console.log(response);
-			// })
-			// .catch((error) => {
-			//   // Handle the error if necessary
-			//   console.log(error);
-			// });
 		}
 	}, [visitedProductId, user, addToVisited]);
 

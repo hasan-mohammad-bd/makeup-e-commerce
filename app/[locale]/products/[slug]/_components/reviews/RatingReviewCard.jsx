@@ -9,7 +9,6 @@ import useAddReviewReaction from "@/hooks/useAddReviewReaction";
 
 const RatingReviewCard = ({ review, translations }) => {
 	const { handleReviewReact } = useAddReviewReaction(); //custom hook for reusing
-	console.log(review);
 	return (
 		<div className="grid lg:grid-cols-3 border-b border-slate-300 px-3 gap-1 lg:px-4 lg:py-3 mt-4">
 			<div id="user-info" className="col-span-1 box-border">

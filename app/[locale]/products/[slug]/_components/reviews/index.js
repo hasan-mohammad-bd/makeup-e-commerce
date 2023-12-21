@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import RatingReviewCard from "./_components/RatingReviewCard";
+import RatingReviewCard from "./RatingReviewCard";
 import { Rating } from "react-simple-star-rating";
 import {
 	useGetProductReviewsQuery,
@@ -8,15 +8,15 @@ import {
 	useGetReviewSummaryQuery,
 } from "@/store/api/productReviewAPI";
 import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
-import AllReviewImages from "./_components/AllReviewImages";
+import AllReviewImages from "./AllReviewImages";
 import Paginator from "@/components/elements/Paginator";
-import ReviewSortSelect from "./_components/ReviewSortSelect";
-import ReviewFilterSelect from "./_components/ReviewFilterSelect";
+import ReviewSortSelect from "./ReviewSortSelect";
+import ReviewFilterSelect from "./ReviewFilterSelect";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
-const RatingReviews = ({ params }) => {
-	const { product_id } = params;
+const RatingReviews = ({ product_id }) => {
+	// const { product_id } = params;
 	const { user } = useSelector((state) => state.auth);
 	const { translations } = useSelector((state) => state.common);
 	const isMobile = useMediaQuery("(max-width: 768px)");
@@ -61,10 +61,10 @@ const RatingReviews = ({ params }) => {
 	);
 	const allReviews = data?.data || [];
 	const meta = data?.meta || {};
-	// console.log(allReviews);
+	// console.log(data);
 
 	return (
-		<div className="product-rating-reviews">
+		<section id="product-rating-reviews">
 			<h2 className="text-2xl font-bold font-title text-slate-900">
 				{translations["ratings-and-reviews"] || "রেটিং ও রিভিউ"}:
 			</h2>
@@ -113,30 +113,34 @@ const RatingReviews = ({ params }) => {
 					</div>
 				</div>
 			)}
-			<div id="customer-pictures">
-				<h2 className="text-base/4 font-semibold font-title text-slate-700">
-					{translations["imgs-from-cstmr"] || "কাস্টমারের দেয়া ছবি গুলো"}
-				</h2>
-				<div className="bg-slate-50 rounded-md mt-3 p-3 lg:p-4">
-					{imagesLoading ? (
-						<ItemsListLoader noImage={true} numItems={1} />
-					) : (
-						<AllReviewImages images={reviewImages} max={isMobile ? 8 : 6} />
-					)}
-				</div>
-			</div>
-			<div
-				id="customer-review-header"
-				className="bg-slate-50 rounded-md mt-8 p-3 flex flex-col gap-3 lg:flex-row lg:items-center"
-			>
-				<h2 className="text-base/4 font-semibold font-title text-slate-700">
-					{translations["customer-reviews"] || "কাস্টমারের রিভিউ গুলো"}
-				</h2>
-				<div className="lg:ml-auto flex gap-4 lg:items-center">
-					<ReviewSortSelect />
-					<ReviewFilterSelect />
-				</div>
-			</div>
+
+			{/* ALL Review Images and sorting and filter */}
+			{imagesLoading && <ItemsListLoader noImage={true} numItems={1} />}
+			{reviewImages.length > 0 && (
+				<>
+					<div id="customer-pictures">
+						<h2 className="text-base/4 font-semibold font-title text-slate-700">
+							{translations["imgs-from-cstmr"] || "কাস্টমারের দেয়া ছবি গুলো"}
+						</h2>
+						<div className="bg-slate-50 rounded-md mt-3 p-3 lg:p-4">
+							<AllReviewImages images={reviewImages} max={isMobile ? 8 : 6} />
+						</div>
+					</div>
+					<div
+						id="customer-review-header"
+						className="bg-slate-50 rounded-md mt-8 p-3 flex flex-col gap-3 lg:flex-row lg:items-center"
+					>
+						<h2 className="text-base/4 font-semibold font-title text-slate-700">
+							{translations["customer-reviews"] || "কাস্টমারের রিভিউ গুলো"}
+						</h2>
+						<div className="lg:ml-auto flex gap-4 lg:items-center">
+							<ReviewSortSelect />
+							<ReviewFilterSelect />
+						</div>
+					</div>
+				</>
+			)}
+
 			{/* Rating Review Cards */}
 			{isLoading ? (
 				<ItemsListLoader noImage={true} numItems={3} />
@@ -152,10 +156,12 @@ const RatingReviews = ({ params }) => {
 					))}
 				</div>
 			)}
-			<div className="flex lg:justify-end mt-4 lg:mt-9">
-				<Paginator meta={meta} />
-			</div>
-		</div>
+			{allReviews.length >= 6 && (
+				<div className="flex lg:justify-end mt-4 lg:mt-9">
+					<Paginator meta={meta} />
+				</div>
+			)}
+		</section>
 	);
 };
 

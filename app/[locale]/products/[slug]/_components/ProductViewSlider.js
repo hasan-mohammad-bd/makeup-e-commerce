@@ -60,7 +60,7 @@ const ProductViewSlider = forwardRef(({ product }, ref) => {
 				</Swiper>
 			</div>
 
-			<div className="lg:w-[32.75rem] preview-slider grid">
+			<div className="lg:w-[32.75rem] preview-slider grid relative">
 				<Swiper
 					ref={ref}
 					className="product-preview-slider [&_.swiper-wrapper]:pb-3 lg:[&_.swiper-wrapper]:pb-0"
@@ -88,29 +88,28 @@ const ProductViewSlider = forwardRef(({ product }, ref) => {
 					modules={[Thumbs, Autoplay, Pagination]}
 				>
 					{slides.map((slide, index) => (
-						<SwiperSlide key={index} className="!h-[20.25rem] lg:!h-[32.75rem]">
-							<div className="slider-imag relative h-full">
+						<SwiperSlide key={index} className="!h-[100vw] md:!h-[32.75rem]">
+							<div className="slider-imag h-full lg:rounded-xl lg:border border-slate-300">
 								<Image
 									src={slide?.image}
 									alt=""
 									width={524}
 									height={524}
-									// sizes="100vw"
-									className="object-cover object-top lg:object-center h-full  lg:rounded-xl"
+									className="object-contain h-full"
 								/>
-								<div className="product-action absolute top-4 right-4">
-									<button
-										aria-label="Add To Wishlist"
-										className="action-btn inline-flex justify-center items-center w-11 h-11 bg-white border-slate-300 rounded-lg hover:bg-primary hover:text-white"
-										onClick={(e) => handleAddToWishlist(product.id)}
-									>
-										<HiOutlineHeart size={18} />
-									</button>
-								</div>
 							</div>
 						</SwiperSlide>
 					))}
 				</Swiper>
+				<div className="product-action top-2 md:top-4 right-2 lg:right-4 absolute z-10 ">
+					<button
+						aria-label="Add To Wishlist"
+						className="action-btn inline-flex justify-center items-center w-11 h-11 bg-white border border-slate-300 hover:border-primary rounded-lg hover:text-primary"
+						onClick={(e) => handleAddToWishlist(product.id)}
+					>
+						<HiOutlineHeart size={18} />
+					</button>
+				</div>
 			</div>
 		</div>
 	);

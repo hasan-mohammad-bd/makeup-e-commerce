@@ -10,9 +10,10 @@ const visitedProductsAPI = api.injectEndpoints({
 			}),
 			invalidatesTags: ["visited"],
 		}),
+		// Getting all visited products
 		getVisitedProducts: builder.query({
 			query: (payload) => ({
-				url: "visit-history/index?per_page=",
+				url: "visit-history/index?per_page=12",
 				headers: {
 					lang: payload?.locale,
 				},

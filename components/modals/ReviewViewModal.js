@@ -1,15 +1,15 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { Rating } from "react-simple-star-rating";
+import { useSelector } from "react-redux";
 import Modal from "../elements/Modal";
-import ReviewImageSlider from "../../app/[locale]/products/[slug]/reviews/[product_id]/_components/ReviewImageSlider";
+import { Rating } from "react-simple-star-rating";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { getFormattedDate } from "@/utils/format-date";
 import { useGetReviewDetailsQuery } from "@/store/api/productReviewAPI";
 import ItemsListLoader from "../elements/loaders/ItemsListLoader";
 import useAddReviewReaction from "@/hooks/useAddReviewReaction";
-import { useSelector } from "react-redux";
+import ReviewImageSlider from "@/app/[locale]/products/[slug]/_components/reviews/ReviewImageSlider";
 
 export default function ReviewViewModal({
 	showModal,

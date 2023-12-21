@@ -35,29 +35,7 @@ export default function ReviewGalleryModal({
 							width={122}
 							height={122}
 							onClick={() => handleReviewView(image.product_review_id)}
-							className={`h-[74px] lg:h-[122px] w-[74px] lg:w-[122px] rounded-lg cursor-pointer`}
-						/>
-					))}
-					{images.map((image, index) => (
-						<Image
-							key={index}
-							src={image.image}
-							alt={`review-image-${index}`}
-							width={122}
-							height={122}
-							onClick={() => handleReviewView(image.product_review_id)}
-							className={`h-[74px] lg:h-[122px] w-[74px] lg:w-[122px] rounded-lg cursor-pointer`}
-						/>
-					))}
-					{images.map((image, index) => (
-						<Image
-							key={index}
-							src={image.image}
-							alt={`review-image-${index}`}
-							width={122}
-							height={122}
-							onClick={() => handleReviewView(image.product_review_id)}
-							className={`h-[74px] lg:h-[122px] w-[74px] lg:w-[122px] rounded-lg cursor-pointer`}
+							className={`h-[74px] lg:h-[122px] w-[74px] lg:w-[122px] object-contain border border-slate-200 rounded-lg cursor-pointer`}
 						/>
 					))}
 				</div>

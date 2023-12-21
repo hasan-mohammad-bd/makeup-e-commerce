@@ -78,17 +78,17 @@ const ProductVerticalCard = ({ product }) => {
 					</span>
 				</div>
 				<div className="product-price text-sm flex items-center gap-2">
-					<span className="text-base/4 lg:text-lg/[24px] font-semibold text-red-500">
+					<span className="text-base/4 lg:text-lg font-semibold text-red-500">
 						{siteConfig.currency.sign}
 						{new_price}
 					</span>
 					{old_price > new_price ? (
 						<>
-							<del className="old-price text-sm lg:text-lg/[24px] font-normal text-slate-400">
+							<del className="old-price text-sm font-normal text-slate-400">
 								{siteConfig.currency.sign}
 								{old_price}
 							</del>
-							<span className="discount inline-block !text-xs text-white bg-red-500 rounded-md py-0.5 lg:py-1 px-1 ml-2">
+							<span className="discount inline-block !text-xs text-white bg-red-500 rounded-md py-0.5 px-1 ml-2">
 								{getDiscountPercent(old_price, new_price)}% OFF
 							</span>
 						</>

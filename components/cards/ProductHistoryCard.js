@@ -35,7 +35,7 @@ const ProductHistoryCard = ({ product, status }) => {
 
 	return (
 		<div
-			className={`grid grid-cols-[76px_auto] items-center bg-white border border-slate-200 rounded-xl p-4 gap-x-3`}
+			className={`grid grid-cols-[76px_auto] items-center bg-white border border-slate-200 rounded-xl p-4 gap-x-3 h-full`}
 		>
 			<div
 				className="product-img relative"
@@ -57,7 +57,7 @@ const ProductHistoryCard = ({ product, status }) => {
 						width={76}
 						height={76}
 						// priority={true}
-						className="h-full w-full object-cover"
+						className="h-full w-full object-contain rounded-lg"
 					/>
 				</Link>
 			</div>
@@ -77,17 +77,17 @@ const ProductHistoryCard = ({ product, status }) => {
 					</span>
 				</div>
 				<div className="product-price text-sm flex items-center gap-1">
-					<span className="text-base/4 lg:text-lg/[24px] font-semibold text-red-500">
+					<span className="text-base/4 font-semibold text-red-500">
 						{siteConfig.currency.sign}
 						{new_price}
 					</span>
 					{old_price > new_price ? (
 						<>
-							<del className="old-price text-sm lg:text-lg/[24px] font-normal text-slate-400">
+							<del className="old-price text-sm font-normal text-slate-400">
 								{siteConfig.currency.sign}
 								{old_price}
 							</del>
-							<span className="discount inline-block !text-xs text-white bg-red-500 rounded-md py-0.5 lg:py-1 px-1 ml-2">
+							<span className="discount inline-block !text-xs text-white bg-red-500 rounded-md py-0.5 px-1 ml-2">
 								{getDiscountPercent(old_price, new_price)}% OFF
 							</span>
 						</>

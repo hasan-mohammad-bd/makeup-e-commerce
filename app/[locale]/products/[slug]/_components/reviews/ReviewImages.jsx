@@ -13,7 +13,7 @@ const ReviewImages = ({ review, max }) => {
 			{review.images.slice(0, max).map((item, index) => (
 				<div
 					key={item.image}
-					className="relative cursor-pointer h-[74px] lg:h-[90px] w-[74px] lg:w-[90px]"
+					className="relative cursor-pointer h-[74px] lg:h-[90px] w-[74px] lg:w-[90px] rounded-lg border border-slate-200 box-content"
 				>
 					<Image
 						key={item.image}
@@ -21,7 +21,7 @@ const ReviewImages = ({ review, max }) => {
 						alt={`review-image-` + index}
 						width={90}
 						height={90}
-						className="h-full w-full rounded-lg"
+						className="h-full w-full rounded-lg object-contain"
 						onClick={() => setShowModal(true)}
 					/>
 					{index === max - 1 ? (

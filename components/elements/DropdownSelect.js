@@ -13,7 +13,7 @@ export default function DropdownSelect({
 	const dropdownRef = useRef(null);
 
 	const [isOpen, setIsOpen] = useState(false);
-	const [selectedOption, setSelectedOption] = useState(null);
+	const [selectedOption, setSelectedOption] = useState(options[0]);
 
 	const handle = () => {
 		setIsOpen(!isOpen);
@@ -49,7 +49,7 @@ export default function DropdownSelect({
 				)}
 			>
 				{children}
-				<h2 className={`text-base font-normal`}>
+				<h2 className={`text-base font-normal line-clamp-1`}>
 					{selectedOption ? selectedOption.value : title}
 				</h2>
 				<div className="ml-auto">

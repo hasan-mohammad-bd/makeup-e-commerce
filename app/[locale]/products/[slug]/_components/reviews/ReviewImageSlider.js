@@ -8,7 +8,7 @@ export default function ReviewImageSlider({ images }) {
 	const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
 	return (
-		<div className="w-full lg:w-[33rem]">
+		<div className="w-full lg:w-[531px]">
 			<div className="h-[20.25rem] lg:h-[31.25rem] preview-slider bg-slate-900 rounded-md">
 				<Swiper
 					style={{
@@ -36,7 +36,7 @@ export default function ReviewImageSlider({ images }) {
 									alt="slide"
 									width={400}
 									height={500}
-									className="h-[20.25rem] lg:h-[31.25rem] w-[15rem] lg:w-[25rem]  object-cover"
+									className="h-[20.25rem] lg:h-[31.25rem] w-[15rem] lg:w-[25rem]  object-contain"
 								/>
 							</div>
 						</SwiperSlide>
@@ -47,8 +47,8 @@ export default function ReviewImageSlider({ images }) {
 				<Swiper
 					onSwiper={setThumbsSwiper}
 					loop={true}
-					spaceBetween={10}
-					slidesPerView={6}
+					spaceBetween={12}
+					slidesPerView={5}
 					watchSlidesProgress={true}
 					modules={[FreeMode, Navigation, Thumbs]}
 					className="mySwiper"
@@ -56,13 +56,13 @@ export default function ReviewImageSlider({ images }) {
 				>
 					{images.map((slide, index) => (
 						<SwiperSlide key={index}>
-							<div className="h-20 w-20">
+							<div className=" h-[74px] lg:h-[90px] w-[74px] lg:w-[90px] box-content">
 								<Image
 									src={slide.image}
 									alt="thumb-slide"
-									width={80}
-									height={80}
-									className="w-full h-full border border-transparent rounded-lg cursor-pointer bg-slate-100"
+									width={90}
+									height={90}
+									className="w-full h-full object-contain border border-transparent rounded-lg cursor-pointer bg-slate-100"
 								/>
 							</div>
 						</SwiperSlide>

@@ -1,10 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
-import { BsFillTelephoneFill } from "react-icons/bs";
-import ViewHTML from "@/components/elements/ViewHTML";
 import { fetchData } from "@/lib/fetch-data";
+import ProductDetails from "./_components/ProductDetails";
+import Link from "next/link";
+import SectionTitle from "@/components/elements/SectionTitle";
+import AllProducts from "@/components/products/AllProducts";
+import { SeeAll } from "@/components/elements/buttons";
+import LastVisitedProducts from "@/components/products/LastVisitedProducts";
+import { getSlicedText } from "@/utils/format-text";
 
-const ProductDescription = async ({ params }) => {
+const ProductDetailsView = async ({ params }) => {
 	const { slug } = params;
 	const [settingsRes, productRes, tranRes] = await Promise.allSettled([
 		fetchData({ api: `info/basic` }),
@@ -19,61 +22,75 @@ const ProductDescription = async ({ params }) => {
 	const translations =
 		tranRes.status === "fulfilled" ? tranRes.value?.data || {} : {};
 
+	//Category Filter
+	const customSearchParams = {
+		category_id: product?.category?.id,
+		per_page: 20,
+	};
+
 	return (
-		<>
-			<div className="description">
-				<h4 className="text-2xl font-bold font-title text-slate-900 mb-3">
-					{translations["product-description"] || "প্রডাক্টের বিবরণ"}:
-				</h4>
-				<ViewHTML htmlText={product?.details} />
-			</div>
-			{/* {product.includedProducts?.length ? ( */}
-			<div className="mt-6 lg:mt-8">
-				<h4 className="text-2xl font-bold font-title text-slate-900">
-					{translations["product-includes"] || "যা যা সাথে থাকবে"}
-				</h4>
-				<Image
-					src={
-						product.includedProducts[0]?.image ||
-						`/assets/images/product-includes.png`
-					}
-					alt="Product Includes"
-					width={628}
-					height={510}
-					className="w-full h-[17.5rem] lg:h-[31.875rem] rounded-xl mt-3"
-				/>
-			</div>
-			{/* ) : null} */}
-			{product?.review_video && (
-				<div className="mt-6 lg:mt-8">
-					<h4 className="text-2xl font-bold font-title text-slate-900">
-						{translations["review-video"] || "রিভিউ ভিডিও"}
-					</h4>
-					<div className="slider-imag [&>div>iframe]:rounded-xl [&>div>iframe]:h-[12rem] lg:[&>div>iframe]:h-[21.875rem] relative mt-3">
-						<ViewHTML htmlText={product?.review_video} />
+		<div className="mb-32 lg:mb-0">
+			<div className="container hidden lg:block">
+				<div className="breadcrumb breadcrumb-2 py-5">
+					<div>
+						<Link
+							href={`/`}
+							className="text-base text-slate-600 hover:text-primary"
+						>
+							{translations["home"] || "হোম"}
+						</Link>
+						<Link
+							href={`/products`}
+							className="text-base text-slate-600 hover:text-primary"
+						>
+							{translations["products"] || "প্রডাক্টস"}
+						</Link>
+						<Link
+							href={`/products/${slug}`}
+							aria-disabled="true"
+							className={`text-base text-slate-900 pointer-events-none`}
+						>
+							{getSlicedText(slug, 50)}
+						</Link>
 					</div>
 				</div>
-			)}
-			{settings?.phone?.length && (
-				<div className="contact mt-8 bg-amber-200 border border-primary rounded-xl p-5 text-center">
-					<h5 className="text-2xl font-bold font-title text-slate-900 mb-3">
-						{translations["know-more"] || "আরও কিছু জানার থাকলে"}
-					</h5>
-					<p className="flex justify-center items-center gap-4">
-						<span className="text-base text-slate-900">
-							{translations["call-us"] || "কল করুন"}:
-						</span>{" "}
-						<Link
-							href={`tel:${settings?.phone[0]}`}
-							className="text-2xl font-bold font-title text-primary"
-						>
-							<BsFillTelephoneFill /> {settings?.phone[0]}
-						</Link>
-					</p>
+			</div>
+			<div className="lg:container">
+				<ProductDetails
+					product={product}
+					settings={settings}
+					translations={translations}
+				/>
+			</div>
+			<section>
+				<div className="h-2 w-full bg-slate-200 lg:hidden"></div>
+				<div className="container mt-4 lg:mt-12 mb-6 lg:mb-12">
+					<SectionTitle
+						className={"justify-start"}
+						title={
+							translations["same-category-products"] ||
+							"একই ক্যাটাগরির আরও প্রোডাক্ট"
+						}
+						buttonText={translations["see-all"]}
+					/>
+					<div className="category-products mt-1 lg:mt-6">
+						<AllProducts
+							customSearchParams={customSearchParams}
+							translations={translations}
+						/>
+						<SeeAll
+							href={`/categories/${product?.category?.slug}`}
+							buttonText={translations["see-all"]}
+						/>
+					</div>
 				</div>
-			)}
-		</>
+			</section>
+			<LastVisitedProducts
+				visitedProductId={product?.id}
+				translations={translations}
+			/>
+		</div>
 	);
 };
 
-export default ProductDescription;
+export default ProductDetailsView;

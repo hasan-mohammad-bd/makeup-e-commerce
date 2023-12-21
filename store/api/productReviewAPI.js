@@ -26,7 +26,8 @@ const productReviewAPI = api.injectEndpoints({
 
 		//Get Product all reviews
 		getProductReviews: builder.query({
-			query: (productId) => `product-review/index?product_id=${productId}`,
+			query: (productId) =>
+				`product-review/index?product_id=${productId}&per_page=6`,
 			providesTags: ["product-reviews"],
 		}),
 

@@ -25,7 +25,15 @@ module.exports = {
 			},
 			container: {
 				center: true,
-				padding: "0.75rem",
+				// padding: "0.75rem",
+				padding: {
+					DEFAULT: "0.75rem",
+					xl: "0", // Set padding to 0 for xl screen size (desktop)
+				},
+				margin: {
+					DEFAULT: "0",
+					xl: "0.75rem",
+				},
 			},
 			colors: {
 				primary: "#F99104",

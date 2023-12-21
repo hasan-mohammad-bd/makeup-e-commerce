@@ -18,6 +18,8 @@ export default function MyReview() {
 	const { translations } = useSelector((state) => state.common);
 
 	const myReviews = data?.data || [];
+
+	// console.log(myReviews);
 	const [isReviewed, setIsReviewed] = useState(false);
 
 	let filteredReviews = [];

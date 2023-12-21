@@ -10,8 +10,10 @@ const productsQnaAPI = api.injectEndpoints({
 			}),
 			invalidatesTags: ["product-qna"],
 		}),
+		//Getting product question list
 		getProductQnaList: builder.query({
-			query: (productId) => `products-questions/${productId}`,
+			query: (payload) =>
+				`products-questions/${payload?.productId}?per_page=6&${payload?.params}`,
 			providesTags: ["product-qna"],
 		}),
 	}),

@@ -31,7 +31,7 @@ export default function Modal({ showModal, setShowModal, title, children }) {
 								</div>
 								{/*body*/}
 								<div
-									className="relative px-3 md:px-6 md:pb-6 overflow-y-auto max-h-[80vh] after:content-[attr(data-spacer)] after:block after:h-3 md:after:h-6"
+									className="relative px-3 md:px-6 md:pb-6 overflow-y-auto max-h-[80vh] after:content-[attr(data-spacer)] after:block after:h-3 md:after:h-0"
 									data-spacer=""
 								>
 									{children ? (

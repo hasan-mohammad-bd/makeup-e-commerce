@@ -3,22 +3,22 @@ import {
 	useGetSearchHistoriesQuery,
 	useRemoveSearchHistoryMutation,
 } from "@/store/api/searchAPI";
+import { toast } from "react-toastify";
 import { getSlicedText } from "@/utils/format-text";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
 // ** Import Icons
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
 
 const Search = () => {
 	const [showSuggestionResults, setShowSuggestionResults] = useState(false);
+	const [searchTerm, setSearchTerm] = useState("");
 	const { user } = useSelector((state) => state.auth);
 	const { translations } = useSelector((state) => state.common);
 
-	const [searchTerm, setSearchTerm] = useState("");
 	const { data: popularSearch } = useGetPopularSearchQuery(null, {
 		skip: !showSuggestionResults,
 	});
@@ -45,6 +45,15 @@ const Search = () => {
 	const [removeHistory] = useRemoveSearchHistoryMutation();
 
 	const router = useRouter();
+	const pathname = usePathname();
+
+	// Clear search term when route changes
+	useEffect(() => {
+		const pathArray = pathname.split("/");
+		if (pathArray[pathArray.length - 1] !== "products") {
+			setSearchTerm("");
+		}
+	}, [pathname]);
 
 	const handleSearch = (text) => {
 		if (user) {

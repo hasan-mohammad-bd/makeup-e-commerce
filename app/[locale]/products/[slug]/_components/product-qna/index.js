@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import { useParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import {
 	useAddToProductQnaMutation,
 	useGetProductQnaListQuery,
@@ -15,11 +15,13 @@ import RoundedSearch from "@/components/elements/RoundedSearch";
 import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
 import { AnswerIcon, QuestionIcon } from "@/components/elements/svg";
 import { FiSearch } from "react-icons/fi";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
-const QuestionAnswer = () => {
+const ProductQNA = ({ product_id }) => {
+	// const { product_id } = params;
 	const { settings, translations } = useSelector((state) => state.common);
+	const isMobile = useMediaQuery("(max-width: 768px)");
 	const [isSearch, setIsSearch] = useState(false);
-	const { product_id } = useParams();
 	const searchParams = useSearchParams();
 	const params = new URLSearchParams(searchParams);
 	const {
@@ -28,9 +30,10 @@ const QuestionAnswer = () => {
 		formState: { errors },
 	} = useForm();
 
-	const { data, isLoading } = useGetProductQnaListQuery(
-		product_id + "?" + params.toString()
-	);
+	const { data, isLoading } = useGetProductQnaListQuery({
+		productId: product_id,
+		params: params.toString(),
+	});
 	const [addQuestion] = useAddToProductQnaMutation();
 	const questions = data?.data || [];
 	const meta = data?.meta || {};
@@ -56,41 +59,49 @@ const QuestionAnswer = () => {
 	};
 
 	return (
-		<>
-			<div className="question-answer">
-				<div className="flex justify-between items-center">
-					<h2 className="text-2xl font-bold font-title text-slate-900">
-						{translations["product-question-answer"] ||
-							"এই প্রডাক্ট সম্পর্কে প্রশ্ন ও উত্তর"}{" "}
-						({meta?.total || 0})
-					</h2>
-					<button
-						className="w-[48px] h-[48px] bg-white rounded-full border-2 border-[#E2E8F0] hidden lg:flex justify-center items-center"
-						onClick={() => setIsSearch(true)}
-					>
-						<FiSearch size={24} />
-					</button>
+		<section id="product-questions-and-answers">
+			<div className="">
+				<div className="w-full qna-search">
+					{!isSearch && (
+						<div className="flex justify-between items-center">
+							<h2 className="text-2xl font-bold font-title text-slate-900">
+								{translations["product-question-answer"] ||
+									"এই প্রডাক্ট সম্পর্কে প্রশ্ন ও উত্তর"}{" "}
+								({meta?.total || 0})
+							</h2>
+							<button
+								className="w-[48px] h-[48px] bg-white rounded-full border-2 border-[#E2E8F0] hidden lg:flex justify-center items-center"
+								onClick={() => setIsSearch(true)}
+							>
+								<FiSearch size={24} />
+							</button>
+						</div>
+					)}
+					{(isSearch || isMobile) && (
+						<div
+							className={`w-full question-search flex items-center relative mt-3 lg:mt-0`}
+						>
+							<RoundedSearch
+								placeholder={"এই প্রডাক্ট সম্পর্কে সার্চ করুন"}
+								isSearch={isSearch}
+							/>
+							<Image
+								onClick={() => setIsSearch(false)}
+								src={`/assets/images/icons/close-icon.png`}
+								alt="close icon"
+								width={0}
+								height={0}
+								sizes="32px"
+								className="w-[32px] h-[32px] ml-6 hidden lg:block"
+							/>
+						</div>
+					)}
 				</div>
-				<div
-					className={`w-full question-search my-12 flex items-center relative ${
-						isSearch ? "block" : "hidden"
-					}`}
-				>
-					<RoundedSearch placeholder={"এই প্রডাক্ট সম্পর্কে সার্চ করুন"} />
-					<Image
-						onClick={() => setIsSearch(false)}
-						src={`/assets/images/icons/close-icon.png`}
-						alt="close icon"
-						width={0}
-						height={0}
-						sizes="32px"
-						className="w-[32px] h-[32px] ml-6"
-					/>
-				</div>
-				<form className="mt-4 lg:mt-8" onSubmit={handleSubmit(onSubmit)}>
+
+				<form className="mt-6 lg:mt-8" onSubmit={handleSubmit(onSubmit)}>
 					<div className="flex flex-col lg:flex-row justify-between gap-4 items-end">
 						<textarea
-							className="w-full h-24 lg:h-14 lg:w-[25.75rem] border-1 border-[#E2E8F0] focus:border-primary focus:outline-none rounded-lg p-3"
+							className="w-full h-24 lg:h-[50px] lg:w-[25.75rem] border-1 border-[#E2E8F0] focus:border-primary text-base focus:outline-none rounded-lg p-3"
 							type="text"
 							// rows={1}
 							placeholder={
@@ -162,11 +173,13 @@ const QuestionAnswer = () => {
 					</div>
 				)}
 			</div>
-			<div className="flex lg:justify-end mt-6 lg:mt-8">
-				<Paginator meta={meta} />
-			</div>
-		</>
+			{questions.length >= 6 && (
+				<div className="flex lg:justify-end mt-6 lg:mt-8">
+					<Paginator meta={meta} />
+				</div>
+			)}
+		</section>
 	);
 };
 
-export default QuestionAnswer;
+export default ProductQNA;
