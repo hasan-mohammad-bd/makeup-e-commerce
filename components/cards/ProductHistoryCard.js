@@ -34,8 +34,9 @@ const ProductHistoryCard = ({ product, status }) => {
 	if (loading) return <Loader />;
 
 	return (
-		<div
-			className={`grid grid-cols-[76px_auto] items-center bg-white border border-slate-200 rounded-xl p-4 gap-x-3 h-full`}
+		<Link
+			href={`/products/${slug}`}
+			className={`grid grid-cols-[76px_auto] items-center bg-white border border-slate-200 hover:border-primary rounded-xl p-4 gap-x-3 h-full`}
 		>
 			<div
 				className="product-img relative"
@@ -50,23 +51,17 @@ const ProductHistoryCard = ({ product, status }) => {
 						</span>
 					</div>
 				)}
-				<Link href="/products/[slug]" as={`/products/${slug}`}>
-					<Image
-						src={image || "/assets/images/no-image.png"}
-						alt={`product`}
-						width={76}
-						height={76}
-						// priority={true}
-						className="h-full w-full object-contain rounded-lg"
-					/>
-				</Link>
+				<Image
+					src={image || "/assets/images/no-image.png"}
+					alt={`product`}
+					width={76}
+					height={76}
+					// priority={true}
+					className="h-full w-full object-contain rounded-lg"
+				/>
 			</div>
 			<div className="product-content-wrap">
-				<h2>
-					<Link href={`/products/${slug}`} className="product-title">
-						{product_name}
-					</Link>
-				</h2>
+				<h2 className="product-title">{product_name}</h2>
 				<div className="product-rating">
 					<span className="font-semibold text-slate-900">
 						{getFractionFixed(average_rating) || 5}{" "}
@@ -94,7 +89,7 @@ const ProductHistoryCard = ({ product, status }) => {
 					) : null}
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 };
 

@@ -1,12 +1,12 @@
 "use client";
 
 import { useSelector } from "react-redux";
-import useSelectURLQuery from "@/hooks/useSelectURLQuery";
+// import useSelectURLQuery from "@/hooks/useSelectURLQuery";
 import DropdownSelect from "@/components/elements/DropdownSelect";
 import SortIcon from "@/components/elements/svg/SortIcon";
 
-const ReviewSortSelect = () => {
-	const { handleSelectChange } = useSelectURLQuery();
+const ReviewSortSelect = ({ onSelectChange }) => {
+	// const { handleSelectChange } = useSelectURLQuery();
 	const { translations } = useSelector((state) => state.common);
 
 	const sortItems = [
@@ -27,7 +27,8 @@ const ReviewSortSelect = () => {
 			<DropdownSelect
 				className={"w-[154px] lg:w-[192px] max-w-[192px]"}
 				options={sortItems}
-				onSelectChange={(item) => handleSelectChange("sort_type", item.key)}
+				// onSelectChange={(item) => handleSelectChange("sort_type", item.key)}
+				onSelectChange={onSelectChange}
 			>
 				<SortIcon />
 			</DropdownSelect>

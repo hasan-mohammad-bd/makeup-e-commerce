@@ -195,7 +195,7 @@ const ProductDetails = ({ product, settings, translations }) => {
 									<>
 										<del className="old-price text-base lg:text-lg/[24px] font-normal text-slate-400">
 											{siteConfig.currency.sign}{" "}
-											{product?.old_price ? `$ ${product?.old_price}` : "0.00"}
+											{product?.old_price ? `${product?.old_price}` : "0.00"}
 										</del>
 										<span className="discount inline-block text-base/[22px] font-semibold font-title text-white bg-red-500 rounded-md py-1 px-2">
 											{getDiscountPercent(

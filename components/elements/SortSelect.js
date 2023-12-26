@@ -43,29 +43,6 @@ const SortSelect = () => {
 						options={sortItems}
 						onSelectChange={(item) => handleSelectChange("sort_type", item.key)}
 					/>
-					{/* <select
-						className="select w-72 text-base text-slate-900 bg-white border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-0"
-						onChange={(e) => handleSelectChange("sort_type", e.target.value)}
-					>
-						<option value="default">
-							{translations["random"] || "এলোমেলো"}
-						</option>
-						<option value="new">
-							{translations["new-product"] || "নতুন প্রডাক্ট"}
-						</option>
-						<option value="low_high">
-							{translations["price-(low-to-high)"] || "দাম (কম থেকে বেশি)"}
-						</option>
-						<option value="high_low">
-							{translations["price-(high-to-low)"] || "দাম (বেশি থেকে কম)"}
-						</option>
-						<option value="rating_low_high">
-							{translations["rating-(low-to-high)"] || "রেটিং (কম থেকে বেশি)"}
-						</option>
-						<option value="rating_high_low">
-							{translations["rating-(high-to-low)"] || "রেটিং (বেশি থেকে কম)"}
-						</option>
-					</select> */}
 				</div>
 			</div>
 		</>

@@ -4,7 +4,7 @@ const supportTicketAPI = api.injectEndpoints({
 	endpoints: (builder) => ({
 		addSupportTicket: builder.mutation({
 			query: (ticketInfo) => ({
-				url: "support-ticket/store",
+				url: "support-ticket",
 				method: "POST",
 				body: ticketInfo,
 			}),
@@ -12,7 +12,7 @@ const supportTicketAPI = api.injectEndpoints({
 		}),
 		getSupportTicket: builder.query({
 			query: (payload) => ({
-				url: "support-ticket/index",
+				url: "support-ticket",
 				headers: {
 					lang: payload?.locale,
 				},

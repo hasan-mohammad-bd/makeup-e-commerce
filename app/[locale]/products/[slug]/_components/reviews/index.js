@@ -1,5 +1,5 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 import RatingReviewCard from "./RatingReviewCard";
 import { Rating } from "react-simple-star-rating";
 import {
@@ -16,8 +16,13 @@ import { useSelector } from "react-redux";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const RatingReviews = ({ product_id }) => {
-	// const { product_id } = params;
 	const { user } = useSelector((state) => state.auth);
+	const [customSearchParams, setCustomSearchParams] = useState({
+		per_page: 6,
+		sort_type: "default",
+		rating: "all-star",
+		page: 1,
+	});
 	const { translations } = useSelector((state) => state.common);
 	const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -49,8 +54,8 @@ const RatingReviews = ({ product_id }) => {
 	const reviewImages = reviewImageData?.data || [];
 
 	//ALL Reviews
-	const searchParams = useSearchParams();
-	const queryParams = new URLSearchParams(searchParams);
+	// const searchParams = useSearchParams();
+	const queryParams = new URLSearchParams(customSearchParams);
 
 	if (user) {
 		queryParams.set("reference_id", user?.id);
@@ -61,7 +66,6 @@ const RatingReviews = ({ product_id }) => {
 	);
 	const allReviews = data?.data || [];
 	const meta = data?.meta || {};
-	// console.log(data);
 
 	return (
 		<section id="product-rating-reviews">
@@ -74,11 +78,11 @@ const RatingReviews = ({ product_id }) => {
 				<div className="rating grid grid-cols-1 lg:grid-cols-7 mt-3 mb-5 pb-6 border-b border-slate-200">
 					<div className="justify-self-center lg:justify-self-start lg:col-span-2 text-center flex flex-col justify-center items-center">
 						<h3 className="text-2xl font-bold text-slate-950">
-							{summary?.avarateReview || 0}
+							{summary?.averageRating || 0}
 						</h3>
 						<div className="my-3">
 							<Rating
-								initialValue={summary?.avarateReview}
+								initialValue={summary?.averageRating}
 								allowFraction
 								readonly
 								size={24}
@@ -134,8 +138,22 @@ const RatingReviews = ({ product_id }) => {
 							{translations["customer-reviews"] || "কাস্টমারের রিভিউ গুলো"}
 						</h2>
 						<div className="lg:ml-auto flex gap-4 lg:items-center">
-							<ReviewSortSelect />
-							<ReviewFilterSelect />
+							<ReviewSortSelect
+								onSelectChange={(item) =>
+									setCustomSearchParams((prevParams) => ({
+										...prevParams,
+										sort_type: item.key,
+									}))
+								}
+							/>
+							<ReviewFilterSelect
+								onSelectChange={(item) =>
+									setCustomSearchParams((prevParams) => ({
+										...prevParams,
+										rating: item.key,
+									}))
+								}
+							/>
 						</div>
 					</div>
 				</>
@@ -158,7 +176,16 @@ const RatingReviews = ({ product_id }) => {
 			)}
 			{allReviews.length >= 6 && (
 				<div className="flex lg:justify-end mt-4 lg:mt-9">
-					<Paginator meta={meta} />
+					<Paginator
+						meta={meta}
+						isOnPage={true}
+						onPageChange={(page) =>
+							setCustomSearchParams((prevParams) => ({
+								...prevParams,
+								page: page,
+							}))
+						}
+					/>
 				</div>
 			)}
 		</section>

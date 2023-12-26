@@ -5,7 +5,7 @@ const productReviewAPI = api.injectEndpoints({
 		//Creating new ordered products review
 		addReview: builder.mutation({
 			query: (payload) => ({
-				url: "product-review/store",
+				url: "product-review",
 				method: "POST",
 				body: payload,
 			}),
@@ -26,8 +26,7 @@ const productReviewAPI = api.injectEndpoints({
 
 		//Get Product all reviews
 		getProductReviews: builder.query({
-			query: (productId) =>
-				`product-review/index?product_id=${productId}&per_page=6`,
+			query: (productId) => `product-review?product_id=${productId}`,
 			providesTags: ["product-reviews"],
 		}),
 

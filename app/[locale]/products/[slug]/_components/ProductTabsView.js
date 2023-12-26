@@ -1,35 +1,82 @@
 "use client";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import RatingReviews from "./reviews";
 import ProductQNA from "./product-qna";
 import Descriptions from "./descriptions";
 import Specifications from "./specifications";
-import ActiveLink from "@/components/elements/ActiveLink";
 import HorizontalScrollView from "@/components/elements/HorizontalScrollView";
-import Link from "next/link";
 
 const ProductTabsView = ({ product, settings, translations }) => {
+	const [activeSection, setActiveSection] = useState(null);
+	const observer = useRef(null);
+
+	useEffect(() => {
+		//create new instance and pass a callback function
+		observer.current = new IntersectionObserver((entries) => {
+			const visibleSection = entries.find(
+				(entry) => entry.isIntersecting
+			)?.target;
+			//Update state with the visible section ID
+			if (visibleSection) {
+				setActiveSection(visibleSection.id);
+			}
+		});
+
+		//Get custom attribute data-section from all sections
+		const sections = document.querySelectorAll("[data-section]");
+
+		sections.forEach((section) => {
+			observer.current.observe(section);
+		});
+		//Cleanup function to remove observer
+		return () => {
+			sections.forEach((section) => {
+				observer.current.unobserve(section);
+			});
+		};
+	}, []);
+
+	const handleTabClick = (e, sectionId) => {
+		e.preventDefault();
+
+		const targetElement = document.getElementById(sectionId);
+
+		if (targetElement) {
+			const offset = 48; // Adjust this value based on your design
+			const targetOffset = targetElement.offsetTop - offset;
+
+			window.scroll({
+				top: targetOffset,
+				behavior: "smooth",
+			});
+		}
+	};
+
 	const tabItems = [
 		{
 			id: 1,
 			title: translations["product-description"] || "প্রডাক্টের বিবরণ",
-			key: `#product-descriptions`,
+			key: `p-descriptions`,
 		},
 		{
 			id: 2,
 			title: translations["specifications"] || "স্পেসিফিকেশন",
-			key: `#product-specifications`,
+			key: `p-specifications`,
 		},
 		{
 			id: 3,
 			title: translations["ratings-and-reviews"] || "রেটিং ও রিভিউ",
-			key: `#product-rating-reviews`,
+			key: `p-rating-reviews`,
 		},
 		{
 			id: 4,
 			title: translations["questions-and-answers"] || "প্রশ্ন ও উত্তর",
-			key: `#product-questions-and-answers`,
+			key: `p-qna`,
 		},
 	];
+
+	// console.log(activeSection, "activeSection");
 
 	return (
 		<div className="tabs-view">
@@ -42,14 +89,24 @@ const ProductTabsView = ({ product, settings, translations }) => {
 				>
 					{tabItems.map((item) => (
 						<div key={item.id}>
-							<Link href={item.key}>{item.title}</Link>
+							<Link
+								className={activeSection === item.key ? "active" : ""}
+								href={`#${item.key}`}
+								onClick={(e) => handleTabClick(e, item.key)}
+							>
+								{item.title}
+							</Link>
 						</div>
 					))}
 				</HorizontalScrollView>
 			</div>
 			{/* tabs content  */}
 			<div className="product-tab-content">
-				<div className="px-3 lg:px-0 mt-7 lg:mt-8 pb-7 lg:border-b-4 lg:border-slate-200">
+				<div
+					data-section
+					id="p-descriptions"
+					className="px-3 lg:px-0 mt-7 lg:mt-8 pb-7 lg:border-b-4 lg:border-slate-200"
+				>
 					<Descriptions
 						product={product}
 						settings={settings}
@@ -58,17 +115,25 @@ const ProductTabsView = ({ product, settings, translations }) => {
 				</div>
 
 				<div className="h-2 w-full bg-slate-200 lg:hidden"></div>
-				<div className="px-3 lg:px-0 mt-7 lg:mt-8 pb-7 lg:border-b-4 lg:border-slate-200">
+				<div
+					data-section
+					id="p-specifications"
+					className="px-3 lg:px-0 mt-7 lg:mt-8 pb-7 lg:border-b-4 lg:border-slate-200"
+				>
 					<Specifications product={product} translations={translations} />
 				</div>
 
 				<div className="h-2 w-full bg-slate-200 lg:hidden"></div>
-				<div className="px-3 lg:px-0 mt-7 lg:mt-8 pb-7 lg:border-b-4 lg:border-slate-200">
+				<div
+					data-section
+					id="p-rating-reviews"
+					className="px-3 lg:px-0 mt-7 lg:mt-8 pb-7 lg:border-b-4 lg:border-slate-200"
+				>
 					<RatingReviews product_id={product?.id} />
 				</div>
 
 				<div className="h-2 w-full bg-slate-200 lg:hidden"></div>
-				<div className="px-3 lg:px-0 mt-7 lg:mt-8 pb-7">
+				<div data-section id="p-qna" className="px-3 lg:px-0 mt-7 lg:mt-8 pb-7">
 					<ProductQNA product_id={product?.id} />
 				</div>
 			</div>

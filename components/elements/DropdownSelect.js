@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+// import useLockedBody from "@/hooks/useLockedBody";
 
 export default function DropdownSelect({
 	title,
@@ -14,6 +15,7 @@ export default function DropdownSelect({
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedOption, setSelectedOption] = useState(options[0]);
+	// useLockedBody(isOpen, "root"); // Activate to lock body scroll
 
 	const handle = () => {
 		setIsOpen(!isOpen);

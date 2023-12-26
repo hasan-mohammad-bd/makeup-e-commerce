@@ -4,7 +4,7 @@ const filterOptionsAPI = api.injectEndpoints({
 	endpoints: (builder) => ({
 		getFilterOptionsByCategory: builder.query({
 			query: (payload) => ({
-				url: `search-summery?${payload.searchQuery}`,
+				url: `search-summary?${payload.searchQuery}`,
 				headers: {
 					lang: payload?.locale,
 				},

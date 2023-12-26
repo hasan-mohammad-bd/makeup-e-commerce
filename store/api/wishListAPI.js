@@ -4,7 +4,7 @@ const wishListAPI = api.injectEndpoints({
 	endpoints: (builder) => ({
 		addToWishList: builder.mutation({
 			query: (productInfo) => ({
-				url: "wishlist/store",
+				url: "wishlist",
 				method: "POST",
 				body: productInfo,
 			}),
@@ -12,7 +12,7 @@ const wishListAPI = api.injectEndpoints({
 		}),
 		getWishList: builder.query({
 			query: (payload) => ({
-				url: `wishlist/index`,
+				url: `wishlist`,
 				headers: {
 					lang: payload.locale || "en",
 				},
@@ -21,7 +21,7 @@ const wishListAPI = api.injectEndpoints({
 		}),
 		removeFromWishList: builder.mutation({
 			query: (productId) => ({
-				url: `wishlist/destroy/${productId}`,
+				url: `wishlist/${productId}`,
 				method: "DELETE",
 			}),
 			invalidatesTags: ["wishlist"],

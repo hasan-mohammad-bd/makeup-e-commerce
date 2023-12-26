@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import { useSearchParams } from "next/navigation";
 import {
 	useAddToProductQnaMutation,
 	useGetProductQnaListQuery,
@@ -18,12 +17,15 @@ import { FiSearch } from "react-icons/fi";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const ProductQNA = ({ product_id }) => {
-	// const { product_id } = params;
 	const { settings, translations } = useSelector((state) => state.common);
+	const [customSearchParams, setCustomSearchParams] = useState({
+		per_page: 6,
+		page: 1,
+	});
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const [isSearch, setIsSearch] = useState(false);
-	const searchParams = useSearchParams();
-	const params = new URLSearchParams(searchParams);
+	// const searchParams = useSearchParams();
+	const params = new URLSearchParams(customSearchParams);
 	const {
 		register,
 		handleSubmit,
@@ -175,7 +177,16 @@ const ProductQNA = ({ product_id }) => {
 			</div>
 			{questions.length >= 6 && (
 				<div className="flex lg:justify-end mt-6 lg:mt-8">
-					<Paginator meta={meta} />
+					<Paginator
+						meta={meta}
+						isOnPage={true}
+						onPageChange={(page) =>
+							setCustomSearchParams((prevParams) => ({
+								...prevParams,
+								page: page,
+							}))
+						}
+					/>
 				</div>
 			)}
 		</section>

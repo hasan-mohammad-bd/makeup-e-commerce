@@ -1,11 +1,11 @@
 "use client";
 import { useSelector } from "react-redux";
-import useSelectURLQuery from "@/hooks/useSelectURLQuery";
+// import useSelectURLQuery from "@/hooks/useSelectURLQuery";
 import DropdownSelect from "@/components/elements/DropdownSelect";
 import { HiOutlineFilter } from "react-icons/hi";
 
-const ReviewFilterSelect = () => {
-	const { handleSelectChange } = useSelectURLQuery();
+const ReviewFilterSelect = ({ onSelectChange }) => {
+	// const { handleSelectChange } = useSelectURLQuery();
 	const { translations } = useSelector((state) => state.common);
 
 	const sortItems = [
@@ -21,7 +21,8 @@ const ReviewFilterSelect = () => {
 			<DropdownSelect
 				className={"w-[154px] lg:w-[192px] max-w-[192px]"}
 				options={sortItems}
-				onSelectChange={(item) => handleSelectChange("rating", item.key)}
+				// onSelectChange={(item) => handleSelectChange("rating", item.key)}
+				onSelectChange={onSelectChange}
 			>
 				<HiOutlineFilter size={20} className="text-slate-900" />
 			</DropdownSelect>
