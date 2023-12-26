@@ -5,6 +5,7 @@ const initialState = {
 	user: null,
 	isLoading: true,
 	isLoginModalOpen: false,
+	isLogoutModalOpen: false,
 };
 
 export const logoutUser = createAsyncThunk(
@@ -12,7 +13,9 @@ export const logoutUser = createAsyncThunk(
 	async (user, thunkAPI) => {
 		try {
 			const response = await axiosInstance.get(`logout`);
+			
 			return response.data;
+	
 		} catch (error) {
 			console.log(error);
 			return thunkAPI.rejectWithValue(error);
@@ -34,6 +37,9 @@ const authSlice = createSlice({
 		setLoginModalOpen: (state, action) => {
 			state.isLoginModalOpen = action.payload;
 		},
+		setLogoutModalOpen: (state, action) => {
+			state.isLogoutModalOpen = action.payload;
+		},
 	},
 	extraReducers(builder) {
 		builder
@@ -51,6 +57,6 @@ const authSlice = createSlice({
 	},
 });
 
-export const { setUserLoading, setUser, setLoginModalOpen } = authSlice.actions;
+export const { setUserLoading, setUser, setLoginModalOpen , setLogoutModalOpen } = authSlice.actions;
 
 export default authSlice.reducer;

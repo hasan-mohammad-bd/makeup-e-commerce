@@ -1,6 +1,6 @@
 "use client";
 
-import { logoutUser } from "@/store/slices/authSlice";
+import { logoutUser, setLogoutModalOpen } from "@/store/slices/authSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,11 +15,16 @@ import { RiQuestionAnswerFill } from "react-icons/ri";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const DashboardLayout = ({ children, params }) => {
+
+
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const { translations } = useSelector((state) => state.common);
 	const dispatch = useDispatch();
 	const pathArray = usePathname().split("/");
 
+	const handleModalOpen = () => {
+    dispatch(setLogoutModalOpen(true));
+  };
 	const navItems = [
 		{
 			text: translations["my-profile"] || "আমার প্রফাইল",
@@ -96,12 +101,12 @@ const DashboardLayout = ({ children, params }) => {
 								>
 									<button
 										className="flex items-center space-x-2 text-base font-normal"
-										onClick={() => dispatch(logoutUser())}
+										onClick={handleModalOpen}
 									>
 										<span className={`text-amber-400`}>
 											<IoLogOut />
 										</span>
-										<span>{translations["log-out"] || "লগ-আউট"}</span>
+										<span >{translations["log-out"] || "লগ-আউট"}</span>
 									</button>
 								</li>
 							</ul>

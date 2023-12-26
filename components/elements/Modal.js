@@ -10,7 +10,7 @@ export default function Modal({ showModal, setShowModal, title, children }) {
 				<>
 					{/* Backdrop */}
 					{/* <div className="fixed top-0 left-0 z-50 w-full h-screen bg-black opacity-30" /> */}
-					<div className="opacity-40 fixed inset-0 z-40 bg-black"></div>
+					<div className="opacity-40 fixed inset-0  bg-black"></div>
 
 					{/* Modal  */}
 					<div className="flex justify-center items-end md:items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
