@@ -26,7 +26,7 @@ const Cart = () => {
       setShow={closeCart}
     >
       <div className="content mb-24 lg:mb-16 ">
-        <div onClick={closeCart} className="w-6 h-[112px] rounded-l-lg bg-slate-300 fixed text-5 flex top-1/2 left-[-24px] justify-center items-center">
+        <div onClick={closeCart} className="w-6 h-[112px] cursor-pointer rounded-l-lg bg-slate-300 fixed text-5 flex top-1/2 left-[-24px] justify-center items-center">
           <MdOutlineKeyboardArrowRight size={70} />
         </div>
         {settings?.free_delivery_charges_limit ? (
@@ -46,7 +46,7 @@ const Cart = () => {
             <CartCard key={item.id} item={item} />
           ))}
 
-          <div className="my-5 lg:my-8 text-center">
+          <div className="my-5 lg:my-8 text-center ">
             <Link
               href="/products"
               onClick={closeCart}

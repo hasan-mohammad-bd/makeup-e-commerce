@@ -7,6 +7,7 @@ import { FiSearch } from "react-icons/fi";
 import SearchCloseIcon from "../elements/svg/SearchCloseIcon";
 import { GoPlus } from "react-icons/go";
 import { FiMinus } from "react-icons/fi";
+import { RxCross1 } from "react-icons/rx";
 
 const BrandFilter = ({ filteredBrands, selectedBrandIds }) => {
   const [isSearch, setIsSearch] = useState(false);
@@ -61,15 +62,15 @@ const BrandFilter = ({ filteredBrands, selectedBrandIds }) => {
       <div className="pr-5">
         <div className={`w-full qna-search pt border-b border-slate-200 pb-2 `}>
           {!isSearch ? (
-            <div className="flex justify-between items-center pt-2 pr-2">
-              <h6 className="text-sm font-bold text-slate-900">
+            <div className="flex justify-between items-center pt-1 pr-2">
+              <h6 className="text-[16px] font-bold text-slate-900">
                 {translations["brands"] || "ব্র্যান্ড সমূহ"}
               </h6>
               <button
-                className="w-[30px] h-[30px] bg-white rounded-full border-2 border-[#E2E8F0] flex justify-center items-center  mt-[-4px]"
+                className="p-2 bg-white rounded-full border-2 border-[#E2E8F0] flex justify-center items-center  mt-[-4px]"
                 onClick={() => setIsSearch(true)}
               >
-                <FiSearch size={18} />
+                <FiSearch size={20} />
               </button>
             </div>
           ) : (
@@ -85,14 +86,14 @@ const BrandFilter = ({ filteredBrands, selectedBrandIds }) => {
                   placeholder={
                     translations["search-for-brands"] || "ব্রান্ড সার্চ করুন"
                   }
-                  className="h-[2.1rem] w-full border border-[#E2E8F0] bg-slate-100 lg:bg-white focus:bg-white focus:border-primary focus:outline-none rounded-full"
+                  className="h-[40px] w-full border border-[#E2E8F0] bg-slate-100  focus:bg-white focus:border-primary focus:outline-none rounded-full"
                 />
               </div>
               <button
                 onClick={handleSearchClose}
-                className=" ml-6  absolute  right-[11px] top-[6px]"
+                className=" ml-6  absolute  right-[15px] top-[7px]"
               >
-                <SearchCloseIcon className="" />
+                <RxCross1 />
               </button>
             </div>
           )}
@@ -144,7 +145,7 @@ const BrandFilter = ({ filteredBrands, selectedBrandIds }) => {
                 className="inline-flex items-center text-primary cursor-pointer"
               >
                 <span className="mr-1">
-                  <FiMinus />
+                  <FiMinus size={20} />
                 </span>
                 {translations["see-less"] || "কমান"}
               </span>

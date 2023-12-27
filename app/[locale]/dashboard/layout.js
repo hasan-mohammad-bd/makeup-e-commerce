@@ -15,108 +15,111 @@ import { RiQuestionAnswerFill } from "react-icons/ri";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const DashboardLayout = ({ children, params }) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const { translations } = useSelector((state) => state.common);
+  const dispatch = useDispatch();
+  const pathArray = usePathname().split("/");
 
-
-	const isMobile = useMediaQuery("(max-width: 768px)");
-	const { translations } = useSelector((state) => state.common);
-	const dispatch = useDispatch();
-	const pathArray = usePathname().split("/");
-
-	const handleModalOpen = () => {
+  const handleModalOpen = () => {
     dispatch(setLogoutModalOpen(true));
   };
-	const navItems = [
-		{
-			text: translations["my-profile"] || "আমার প্রফাইল",
-			icon: <FaUser />,
-			path: "profile",
-		},
-		{
-			text: translations["my-order"] || "আমার অর্ডার",
-			icon: <FaClipboardList />,
-			path: "my-orders",
-		},
-		{
-			text: translations["my-wish-list"] || "আমার উইশ লিষ্ট",
-			icon: <HiHeart />,
-			path: "my-wishlist",
-		},
-		{
-			text: translations["my-review"] || "আমার রিভিউ",
-			icon: <MdRateReview />,
-			path: "my-reviews",
-		},
-		{
-			text: translations["voucher"] || "ভাউচার",
-			icon: <HiReceiptPercent />,
-			path: "my-voucher",
-		},
-		{
-			text: translations["questions-and-answers"] || "প্রশ্ন ও উত্তর",
-			icon: <RiQuestionAnswerFill />,
-			path: "qna",
-		},
-		{
-			text: translations["support-ticket"] || "সাপোর্ট টিকিট",
-			icon: <HiTicket />,
-			path: "support-ticket",
-		},
-	];
+  const navItems = [
+    {
+      text: translations["my-profile"] || "আমার প্রফাইল",
+      icon: <FaUser />,
+      path: "profile",
+    },
+    {
+      text: translations["my-order"] || "আমার অর্ডার",
+      icon: <FaClipboardList />,
+      path: "my-orders",
+    },
+    {
+      text: translations["my-wish-list"] || "আমার উইশ লিষ্ট",
+      icon: <HiHeart />,
+      path: "my-wishlist",
+    },
+    {
+      text: translations["my-review"] || "আমার রিভিউ",
+      icon: <MdRateReview />,
+      path: "my-reviews",
+    },
+    {
+      text: translations["voucher"] || "ভাউচার",
+      icon: <HiReceiptPercent />,
+      path: "my-voucher",
+    },
+    {
+      text: translations["questions-and-answers"] || "প্রশ্ন ও উত্তর",
+      icon: <RiQuestionAnswerFill />,
+      path: "qna",
+    },
+    {
+      text: translations["support-ticket"] || "সাপোর্ট টিকিট",
+      icon: <HiTicket />,
+      path: "support-ticket",
+    },
+  ];
 
-	return isMobile ? (
-		children
-	) : (
-		<div className="bg-slate-100">
-			<div className="container">
-				<div className="bg-white grid grid-cols-[max-content_1fr] min-h-screen">
-					<div className="border-r border-slate-300 px-6 py-12">
-						<nav className="text-slate-500">
-							<ul className="w-[15.25rem]">
-								{navItems.map((item) => (
-									<li
-										key={item.path}
-										className={`flex items-center py-3 px-4 rounded-lg w-full text-base font-normal ${
-											pathArray.includes(item.path)
-												? "bg-amber-200 border-b-2 border-primary text-primary"
-												: ""
-										}`}
-									>
+  return isMobile ? (
+    children
+  ) : (
+    <div className="bg-slate-100">
+      <div className="container">
+        <div className="bg-white grid grid-cols-[max-content_1fr] min-h-screen">
+          <div className="border-r border-slate-300 px-6 py-12">
+            <nav className="text-slate-500">
+              <ul className="w-[15.25rem]">
+                <div className="fixed min-h-[800px] w-[15.25rem]">
+                  {navItems.map((item) => (
 										<Link
+											key={item.path}
 											href={`/dashboard/${item.path}`}
-											className="flex items-center space-x-2 capitalize"
+											className="flex items-center capitalize mb-3"
 										>
-											<span
-												className={`${
-													pathArray.includes(item.path) ? "" : "text-amber-400"
-												} text-base font-normal`}
-											>
-												{item.icon}
-											</span>
-											<span>{item.text}</span>
-										</Link>
-									</li>
-								))}
-								<li
-									className={`flex items-center py-3 px-4 rounded-lg w-full font-bold`}
-								>
-									<button
-										className="flex items-center space-x-2 text-base font-normal"
-										onClick={handleModalOpen}
-									>
-										<span className={`text-amber-400`}>
-											<IoLogOut />
-										</span>
-										<span >{translations["log-out"] || "লগ-আউট"}</span>
-									</button>
-								</li>
-							</ul>
-						</nav>
-					</div>
-					<div className="">{children}</div>
-				</div>
-			</div>
-		</div>
-	);
+                    <li
+                      key={item.path}
+                      className={`flex items-center space-x-2 py-3 px-4 rounded-lg w-full text-base font-normal ${
+                        pathArray.includes(item.path)
+                          ? "bg-amber-200 border-b-2 border-primary text-primary"
+                          : ""
+                      }`}
+                    >
+                        <span
+                          className={`${
+                            pathArray.includes(item.path)
+                              ? ""
+                              : "text-amber-400"
+                          } text-base font-normal`}
+                        >
+                          {item.icon}
+                        </span>
+                        <span>{item.text}</span>
+                    </li>
+                      </Link>
+                  ))}
+                  <li
+                    className={`flex items-center py-3 px-4 rounded-lg w-full font-bold`}
+                  >
+                    <button
+                      className="flex items-center space-x-2 text-base font-normal"
+                      onClick={handleModalOpen}
+                    >
+                      <span className={`text-amber-400`}>
+                        <IoLogOut />
+                      </span>
+                      <span>{translations["log-out"] || "লগ-আউট"}</span>
+                    </button>
+                  </li>
+                </div>
+              </ul>
+            </nav>
+          </div>
+          <div className="">{children}</div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default RequireAuth(DashboardLayout);

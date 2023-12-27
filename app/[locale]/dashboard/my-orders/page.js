@@ -44,7 +44,7 @@ const MyOrders = () => {
 		},
 		{
 			key: orderFilterKeys.cancelled,
-			title: translations["cancel"] || "বাতিল",
+			title: translations["cancel-my-order"] || "বাতিল",
 			count: getCountByKeyValue(myOrders, "status", orderFilterKeys.cancelled),
 		},
 	];
