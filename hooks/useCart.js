@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	addToCart,
 	addToSelected,
+	removeFromCart,
 	removeFromSelected,
 } from "@/store/slices/cartSlice";
 
@@ -82,9 +83,20 @@ const useCart = () => {
 		}
 	};
 
+	const handleSizeChange = (cartItem, selectedVariant) => {
+		dispatch(removeFromCart(cartItem.barcodeId));
+		dispatch(
+			addToCart({
+				product: cartItem,
+				selectedBarCode: selectedVariant,
+			})
+		);
+	};
+
 	return {
 		handleAddToCart,
 		handleAddAndCheckout,
+		handleSizeChange,
 	};
 };
 

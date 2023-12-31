@@ -1,3 +1,4 @@
+import { getFilteredByKeyValue } from "@/utils/filter-items";
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
@@ -19,6 +20,7 @@ const loadCartItemsFromLocalStorage = () => {
 const initialState = {
 	isCartOpen: false,
 	selectedProduct: null,
+	sizeChangeProduct: null,
 	cart: loadCartItemsFromLocalStorage() || [], // Initialize with local storage data or an empty array
 	discountCoupon: null,
 };
@@ -36,6 +38,12 @@ const cartSlice = createSlice({
 		removeFromSelected: (state) => {
 			state.selectedProduct = null;
 		},
+		addToSizeChange: (state, action) => {
+			state.sizeChangeProduct = action.payload;
+		},
+		removeFromSizeChange: (state) => {
+			state.sizeChangeProduct = null;
+		},
 
 		//Adding new item to the cart
 		addToCart: (state, action) => {
@@ -48,6 +56,12 @@ const cartSlice = createSlice({
 				const newCartItem = { ...product }; //creating new item for each variant
 				newCartItem.barcodeId = selectedBarCode.id;
 				newCartItem.selectedBarCode = selectedBarCode;
+				//filtering available sizes for selected color
+				newCartItem.availableSizes = getFilteredByKeyValue(
+					product.barcodes,
+					"color",
+					selectedBarCode.color
+				);
 				newCartItem.quantity = 1;
 				state.cart.push(newCartItem);
 				toast.success("Product added");
@@ -137,6 +151,8 @@ export const {
 	toggleCart,
 	addToSelected,
 	removeFromSelected,
+	addToSizeChange,
+	removeFromSizeChange,
 	addToCart,
 	addQuantity,
 	removeQuantity,

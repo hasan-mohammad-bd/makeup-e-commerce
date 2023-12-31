@@ -20,6 +20,7 @@ import "swiper/css/grid";
 
 import Cart from "@/components/side-drawers/Cart";
 import ProductSelect from "@/components/side-drawers/ProductSelect";
+import SizeChangeModal from "@/components/modals/SizeChangeModal";
 import PersistUser from "@/components/utility/PersistUser";
 import GlobalLoader from "@/components/utility/GlobalLoader";
 import ServerDataProvider from "@/components/utility/ServerDataProvider";
@@ -62,6 +63,7 @@ export default function RootLayout({ children, params }) {
 					<CartTray />
 					<Cart />
 					<ProductSelect />
+					<SizeChangeModal />
 					<PersistUser />
 					<GlobalLoader />
 					<ServerDataProvider />

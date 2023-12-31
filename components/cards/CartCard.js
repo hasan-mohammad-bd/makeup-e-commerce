@@ -8,6 +8,8 @@ import noImage from "@/public/assets/images/no-image.png";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { getDiscountPercent } from "@/utils/percent";
+import { BsChevronDown } from "react-icons/bs";
+import { getAppropriatePhoto } from "@/lib/cart";
 
 const CartCard = ({ item }) => {
 	const dispatch = useDispatch();
@@ -17,16 +19,11 @@ const CartCard = ({ item }) => {
 		product_name,
 		image,
 		quantity,
+		// barcodes,
 		barcodeId,
 		selectedBarCode,
-		photos,
-		// sizes,
+		availableSizes,
 	} = item;
-
-	const getAppropriatePhoto = () =>
-		photos.find((photo) => photo.color_name === selectedBarCode.color) || {
-			image: image,
-		};
 
 	return (
 		<div className="relative cart-card p-3 lg:p-4 bg-white border border-slate-200 rounded-xl mb-3">
@@ -38,7 +35,7 @@ const CartCard = ({ item }) => {
 			</button>
 			<div className="grid grid-cols-[72px_auto] lg:grid-cols-[84px_auto] gap-3 lg:gap-4">
 				<Image
-					src={getAppropriatePhoto().image || noImage}
+					src={getAppropriatePhoto(item, selectedBarCode.color) || noImage}
 					alt="product"
 					height={84}
 					width={84}
@@ -83,11 +80,22 @@ const CartCard = ({ item }) => {
 							{selectedBarCode?.color}
 						</p>
 					)}
-					{selectedBarCode.size && (
-						<p className="px-2 py-[1px] text-sm h-6 border border-slate-300 rounded-md">
-							{selectedBarCode?.size}
-						</p>
-					)}
+
+					{availableSizes.length > 1
+						? selectedBarCode.size && (
+								<button
+									className="px-2 py-[1px] text-sm h-6 border border-slate-300 rounded-md cursor-pointer"
+									onClick={() => dispatch(cartActions.addToSizeChange(item))}
+								>
+									{selectedBarCode?.size}
+									<BsChevronDown className="ml-1 text-slate-900" />
+								</button>
+						  )
+						: selectedBarCode.size && (
+								<p className="px-2 py-[1px] text-sm h-6 border border-slate-300 rounded-md">
+									{selectedBarCode?.size}
+								</p>
+						  )}
 					{/* <div className="px-2 border border-slate-300 rounded">
                 {sizes[0]?.color}
               </div>
