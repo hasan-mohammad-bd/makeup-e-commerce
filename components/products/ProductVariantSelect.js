@@ -11,8 +11,8 @@ const ProductVariantSelect = forwardRef(
 		{
 			productBarCodes,
 			photos = [],
-			selectedVariants,
-			setSelectedVariants,
+			selectedVariant,
+			setSelectedVariant,
 			sizeChart,
 			translations,
 		},
@@ -23,35 +23,13 @@ const ProductVariantSelect = forwardRef(
 		const [showSizeChart, setShowSizeChart] = useState(false);
 		const colors = Object.keys(colorsGroup);
 
-		/**
-		 * The function `handleVariantToggle` is used to add or remove a variant from the `selectedVariants`
-		 * array based on its availability and stock quantity.
-		 * @param variantProp - The variantProp parameter is an object that represents a variant. It likely has
-		 * properties such as id, stock_qty, and possibly others.
-		 * @returns The function `handleVariantToggle` returns nothing (`undefined`).
-		 */
-		const handleVariantToggle = (variantProp) => {
-			// activate this following blocks if you want to prevent deselecting last Item
-			// if (
-			// 	selectedVariants.length <= 1 &&
-			// 	selectedVariants[0].id === variantProp.id
-			// ) {
-			// 	toast.error("You must select one variant at least");
-			// 	return;
-			// }
-			let filteredVariants = selectedVariants.filter(
-				(variant) => variant.id !== variantProp.id
-			);
-			if (filteredVariants.length === selectedVariants.length) {
-				// checking available stock quantity before adding;
-				if (variantProp.stock_qty <= 0) {
-					toast.error("Oops! this variant isn't available");
-					return;
-				}
-				setSelectedVariants([...selectedVariants, variantProp]);
+		const handleVariantSelect = (variantProp) => {
+			if (variantProp.stock_qty <= 0) {
+				setSelectedVariant(null); // clear selected variant when out of stock
+				toast.error("Oops! this variant isn't available");
 				return;
 			}
-			setSelectedVariants(filteredVariants);
+			setSelectedVariant(variantProp);
 		};
 
 		/**
@@ -78,7 +56,17 @@ const ProductVariantSelect = forwardRef(
 			// will try to add/remove this variant when color gets selected
 			if (colorsGroup[colorProp].length === 1) {
 				let firstVariantOfColor = colorsGroup[colorProp][0];
-				handleVariantToggle(firstVariantOfColor);
+				handleVariantSelect(firstVariantOfColor);
+			} else {
+				// if size available for new selected color it keeps the current size otherwise clear the selected variant
+				const isSizeAvailable = colorsGroup[colorProp].find(
+					(variant) =>
+						variant.size === selectedVariant?.size && variant.stock_qty > 0
+				);
+
+				isSizeAvailable
+					? setSelectedVariant(isSizeAvailable)
+					: setSelectedVariant(null);
 			}
 			triggerColorImgToView(colorProp);
 		};
@@ -93,7 +81,7 @@ const ProductVariantSelect = forwardRef(
 				// Activate this block to auto variant select onload
 				// const firstColor = Object.keys(colorVariantsGroup)[0];
 				// setSelectedColor(firstColor);
-				// setSelectedVariants([colorVariantsGroup[firstColor][0]]);
+				// setSelectedVariant([colorVariantsGroup[firstColor][0]]);
 			}
 		}, [productBarCodes]);
 
@@ -114,8 +102,7 @@ const ProductVariantSelect = forwardRef(
 									<div
 										key={color}
 										className={`p-2 h-[52px] lg:h-[58px] min-w-[52px] lg:min-w-[58px] w-fit rounded-md border ${
-											selectedVariants.find((v) => v.color === color) ||
-											(selectedColor === color && colorsGroup[color].length > 1)
+											selectedColor === color
 												? "border-primary"
 												: "border-slate-300"
 										} cursor-pointer`}
@@ -168,7 +155,7 @@ const ProductVariantSelect = forwardRef(
 								<div
 									key={variant.id}
 									className={`py-2 lg:py-3 px-4 rounded-lg border text-sm lg:text-base ${
-										selectedVariants.find((v) => v.id === variant.id)
+										selectedVariant?.id === variant.id
 											? "border-primary"
 											: "border-slate-300"
 									} cursor-pointer  ${
@@ -176,7 +163,7 @@ const ProductVariantSelect = forwardRef(
 											? "bg-slate-300 text-slate-400 cursor-not-allowed"
 											: "text-slate-700"
 									}`}
-									onClick={() => handleVariantToggle(variant)}
+									onClick={() => handleVariantSelect(variant)}
 								>
 									{variant.size}
 								</div>

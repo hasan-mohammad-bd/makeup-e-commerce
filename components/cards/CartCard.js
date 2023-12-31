@@ -10,6 +10,7 @@ import { siteConfig } from "@/config/site";
 import { getDiscountPercent } from "@/utils/percent";
 
 const CartCard = ({ item }) => {
+	const dispatch = useDispatch();
 	const {
 		slug,
 		brand,
@@ -18,10 +19,15 @@ const CartCard = ({ item }) => {
 		quantity,
 		barcodeId,
 		selectedBarCode,
+		photos,
 		// sizes,
 	} = item;
 
-	const dispatch = useDispatch();
+	const getAppropriatePhoto = () =>
+		photos.find((photo) => photo.color_name === selectedBarCode.color) || {
+			image: image,
+		};
+
 	return (
 		<div className="relative cart-card p-3 lg:p-4 bg-white border border-slate-200 rounded-xl mb-3">
 			<button
@@ -32,7 +38,7 @@ const CartCard = ({ item }) => {
 			</button>
 			<div className="grid grid-cols-[72px_auto] lg:grid-cols-[84px_auto] gap-3 lg:gap-4">
 				<Image
-					src={image || noImage}
+					src={getAppropriatePhoto().image || noImage}
 					alt="product"
 					height={84}
 					width={84}

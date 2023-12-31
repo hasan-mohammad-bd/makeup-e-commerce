@@ -27,7 +27,7 @@ import ProductTabsView from "./ProductTabsView";
 
 const ProductDetails = ({ product, settings, translations }) => {
 	const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
-	const [selectedVariants, setSelectedVariants] = useState([]);
+	const [selectedVariant, setSelectedVariant] = useState(null);
 	const productViewSwiperRef = useRef(null);
 
 	return (
@@ -40,7 +40,7 @@ const ProductDetails = ({ product, settings, translations }) => {
 							<div className="product-actions pb-3 lg:py-6 flex gap-4 justify-between items-center">
 								<button
 									className="bg-secondary-700 py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
-									onClick={() => handleAddToCart(product, selectedVariants)}
+									onClick={() => handleAddToCart(product, selectedVariant)}
 								>
 									<HiOutlineShoppingCart size={24} />
 									<span className="ml-2">
@@ -48,9 +48,7 @@ const ProductDetails = ({ product, settings, translations }) => {
 									</span>
 								</button>
 								<button
-									onClick={() =>
-										handleAddAndCheckout(product, selectedVariants)
-									}
+									onClick={() => handleAddAndCheckout(product, selectedVariant)}
 									className="bg-primary py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
 								>
 									<svg
@@ -218,8 +216,8 @@ const ProductDetails = ({ product, settings, translations }) => {
 								<ProductVariantSelect
 									photos={product?.photos}
 									productBarCodes={product?.barcodes}
-									selectedVariants={selectedVariants}
-									setSelectedVariants={setSelectedVariants}
+									selectedVariant={selectedVariant}
+									setSelectedVariant={setSelectedVariant}
 									sizeChart={product?.size_chart}
 									translations={translations}
 									ref={productViewSwiperRef}

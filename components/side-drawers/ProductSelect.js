@@ -19,19 +19,21 @@ const ProductSelect = () => {
 	const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
 	const { selectedProduct } = useSelector((state) => state.cart);
 	const { translations } = useSelector((state) => state.common);
-	const [selectedVariants, setSelectedVariants] = useState([]);
+	const [selectedVariant, setSelectedVariant] = useState(null);
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const dispatch = useDispatch();
 
 	const closeDrawer = (param) => {
-		setSelectedVariants([]); // clearing selected variants on close
+		setSelectedVariant(null); // clearing selected variants on close
 		dispatch(removeFromSelected());
 	};
 
 	const handleAddAndClose = () => {
-		handleAddToCart(selectedProduct, selectedVariants);
-		closeDrawer();
-		dispatch(toggleCart()); //opening cart
+		const isSuccess = handleAddToCart(selectedProduct, selectedVariant);
+		if (isSuccess) {
+			closeDrawer();
+			dispatch(toggleCart()); //opening cart
+		}
 	};
 
 	const pageContent = (
@@ -80,8 +82,8 @@ const ProductSelect = () => {
 			<ProductVariantSelect
 				photos={selectedProduct?.photos}
 				productBarCodes={selectedProduct?.barcodes}
-				selectedVariants={selectedVariants}
-				setSelectedVariants={setSelectedVariants}
+				selectedVariant={selectedVariant}
+				setSelectedVariant={setSelectedVariant}
 				translations={translations}
 			/>
 			<div className="product-actions mt-8 lg:mt-10 mb-3 lg:my-6 flex gap-3 lg:gap-4 justify-between items-center">
@@ -96,7 +98,7 @@ const ProductSelect = () => {
 				</button>
 				<button
 					onClick={() =>
-						handleAddAndCheckout(selectedProduct, selectedVariants, true)
+						handleAddAndCheckout(selectedProduct, selectedVariant, true)
 					}
 					className="bg-primary py-3 w-full px-2 text-white rounded-lg text-center active:scale-95"
 				>

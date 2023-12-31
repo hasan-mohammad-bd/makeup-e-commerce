@@ -39,45 +39,40 @@ const cartSlice = createSlice({
 
 		//Adding new item to the cart
 		addToCart: (state, action) => {
-			const { product, selectedVariants = [] } = action.payload;
-			let flag = 0;
-			selectedVariants.forEach((variant) => {
-				const index = state.cart
-					.map((item) => item.barcodeId)
-					.indexOf(variant.id);
+			const { product, selectedBarCode } = action.payload;
+			const index = state.cart
+				.map((item) => item.barcodeId)
+				.indexOf(selectedBarCode.id);
 
-				if (index === -1) {
-					const newCartItem = { ...product }; //creating new item for each variant
-					newCartItem.barcodeId = variant.id;
-					newCartItem.selectedBarCode = variant;
-					newCartItem.quantity = 1;
-					state.cart.push(newCartItem);
-					!flag && toast.success("Product added");
-					flag++;
-				} else {
-					const existingProduct = state.cart[index];
+			if (index === -1) {
+				const newCartItem = { ...product }; //creating new item for each variant
+				newCartItem.barcodeId = selectedBarCode.id;
+				newCartItem.selectedBarCode = selectedBarCode;
+				newCartItem.quantity = 1;
+				state.cart.push(newCartItem);
+				toast.success("Product added");
+			} else {
+				const existingProduct = state.cart[index];
 
-					//checking available stock
-					if (
-						existingProduct.quantity >=
-						existingProduct?.selectedBarCode?.stock_qty
-					) {
-						const { color, size } = existingProduct.selectedBarCode;
-						let message =
-							color || size
-								? `No more stock for ${color} ${size}`
-								: "No more stock";
-						toast.error(message);
-						return;
-					}
-
-					//Incrementing quantity for existing items
-					existingProduct.quantity++;
-					state.cart.splice(index, 1, existingProduct);
-					!flag && toast.success("Product added");
-					flag++;
+				//checking available stock
+				if (
+					existingProduct.quantity >=
+					existingProduct?.selectedBarCode?.stock_qty
+				) {
+					const { color, size } = existingProduct.selectedBarCode;
+					let message =
+						color || size
+							? `No more stock for ${color} ${size}`
+							: "No more stock";
+					toast.error(message);
+					return;
 				}
-			});
+
+				//Incrementing quantity for existing items
+				existingProduct.quantity++;
+				state.cart.splice(index, 1, existingProduct);
+				toast.success("Product added");
+			}
 		},
 
 		// Increasing Item Quantity
