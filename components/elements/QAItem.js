@@ -1,6 +1,4 @@
 import { Collapse } from "react-collapse";
-
-// ** Imoprt icons
 import { HiOutlinePlusSm, HiOutlineMinusSm } from "react-icons/hi";
 import ViewHTML from "./ViewHTML";
 
@@ -9,8 +7,8 @@ const QAItem = ({ item, open, toggleOpen }) => {
     <>
       <div
         className={`single-qna border ${
-          open ? "border-primary transition-all" : "border-slate-200"
-        }  rounded-xl p-3 mb-4`}
+          open ? "border-primary" : "border-slate-200"
+        } rounded-xl p-3 mb-4`}
       >
         <div
           className="flex justify-between items-center cursor-pointer"
@@ -25,7 +23,7 @@ const QAItem = ({ item, open, toggleOpen }) => {
             <HiOutlinePlusSm size={24} className="text-primary" />
           )}
         </div>
-        <Collapse isOpened={open}>
+        <Collapse isOpened={open} theme={{ collapse: "qa-collapse" }}>
           <div className="mt-4">
             <ViewHTML htmlText={item.answer} />
           </div>

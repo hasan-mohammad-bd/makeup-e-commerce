@@ -50,7 +50,7 @@ const page = async () => {
 							>
 								<Link
 									href={`/categories/${category.slug}`}
-									className="category-img flex justify-center items-center py-[18px] border border-slate-300 px-2 h-[74px] lg:h-[78px] rounded-lg"
+									className="category-img flex justify-center items-center py-[18px] border border-slate-300 px-2 h-[74px] lg:h-[78px] rounded-2xl"
 								>
 									<Image
 										src={category?.icon || noImage}

@@ -1,5 +1,4 @@
 "use client";
-
 import { logoutUser, setLogoutModalOpen } from "@/store/slices/authSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -72,21 +71,21 @@ const DashboardLayout = ({ children, params }) => {
               <ul className="w-[15.25rem]">
                 <div className="fixed min-h-[800px] w-[15.25rem]">
                   {navItems.map((item) => (
-										<Link
-											key={item.path}
-											href={`/dashboard/${item.path}`}
-											className="flex items-center capitalize mb-3"
-										>
-                    <li
+                    <Link
                       key={item.path}
-                      className={`flex items-center space-x-2 py-3 px-4 rounded-lg w-full text-base font-normal ${
-                        pathArray.includes(item.path)
-                          ? "bg-amber-200 border-b-2 border-primary text-primary"
-                          : ""
-                      }`}
+                      href={`/dashboard/${item.path}`}
+                      className="flex items-center capitalize mb-3 hover:bg-amber-200 rounded-lg"
                     >
+                      <li
+                        key={item.path}
+                        className={`flex items-center space-x-2 py-3 px-4 rounded-lg w-full text-base font-normal ${
+                          pathArray.includes(item.path)
+                            ? "bg-amber-200 border-b-2 border-primary  text-primary"
+                            : ""
+                        }`}
+                      >
                         <span
-                          className={`${
+                          className={` ${
                             pathArray.includes(item.path)
                               ? ""
                               : "text-amber-400"
@@ -95,11 +94,11 @@ const DashboardLayout = ({ children, params }) => {
                           {item.icon}
                         </span>
                         <span>{item.text}</span>
-                    </li>
-                      </Link>
+                      </li>
+                    </Link>
                   ))}
                   <li
-                    className={`flex items-center py-3 px-4 rounded-lg w-full font-bold`}
+                    className={`flex items-center py-3 px-4 hover:bg-amber-200 rounded-lg w-full font-bold`}
                   >
                     <button
                       className="flex items-center space-x-2 text-base font-normal"

@@ -166,7 +166,7 @@ const OrderDetail = ({ params }) => {
 								<a
 									target="_blank"
 									href={`${process.env.serverBaseUrl}/in/${sale.customer.id}/${sale.id}/sale`}
-									className="bg-slate-200 p-3 block text-center hover:text-primary w-full  mt-3 lg:mt-5 rounded-lg"
+									className="bg-slate-200 p-3 block text-center w-full  mt-3 lg:mt-5 rounded-lg"
 								>
 									<FaCloudDownloadAlt size={24} className="mr-2" />
 									{translations["download-invoice"] || "ইনভয়েস ডাউনলোড করুন"}

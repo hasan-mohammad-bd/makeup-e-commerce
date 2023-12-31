@@ -306,7 +306,7 @@ const Checkout = () => {
             )} */}
 						</div>
 						{isDeliveryCharge ? (
-							<div className="p-4 mt-4 lg:mt-8 bg-amber-200 shadow border border-primary rounded-lg">
+							<div className="p-4 mt-4 lg:mt-8 bg-amber-200 shadow border border-primary-200 rounded-lg">
 								<h4 className="text-slate-700">
 									{translations["select-delivery-method"] ||
 										"ডেলিভারি মেথড নির্বাচন করুন"}

@@ -15,8 +15,11 @@ import { useGetOrdersQuery } from "@/store/api/orderAPI";
 import { useParams, useRouter } from "next/navigation";
 import NestedPageTitle from "../../_components/NestedPageTitle";
 import { useSelector } from "react-redux";
+import TicketImagesUploadMobile from "./TicketImagesUpdoadMobile";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function AddSupportTicket() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const { translations } = useSelector((state) => state.common);
   const { locale } = useParams();
   const router = useRouter();
@@ -161,11 +164,15 @@ export default function AddSupportTicket() {
               {errors.msg && <p className="errorMsg">{errors.msg.message}</p>}
             </div>
             <div className="form-control mb-4">
-              <label className="block text-base text-slate-900 mb-2 capitalize">
+              <label className="block text-base text-slate-900 mb-2">
                 {translations["attachment-file"] || "সংযুক্তি ফাইল"} (jpg, jpeg,
                 png and max-size: 2MB)
               </label>
-              <TicketImagesUpload setImageFiles={setImageFiles} />
+              {isMobile ? (
+                <TicketImagesUploadMobile setImageFiles={setImageFiles} />
+              ) : (
+                <TicketImagesUpload setImageFiles={setImageFiles} />
+              )}
             </div>
           </div>
           <div className="form-control my-5">

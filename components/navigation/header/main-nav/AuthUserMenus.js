@@ -15,13 +15,12 @@ import { RiQuestionAnswerFill } from "react-icons/ri";
 import { setLogoutModalOpen } from "@/store/slices/authSlice";
 
 export default function AuthUserMenus({ togglePopover }) {
-  const [showModal, setShowModal] = useState(false);
   const { translations } = useSelector((state) => state.common);
-  const { isLogoutModalOpen } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleModalOpen = () => {
     dispatch(setLogoutModalOpen(true));
+    togglePopover();
   };
   const navItems = [
     {
@@ -62,10 +61,6 @@ export default function AuthUserMenus({ togglePopover }) {
     // Add more items as needed
   ];
 
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    togglePopover();
-  };
   return (
     <div className="absolute right-0 top-0 z-10 mt-14">
       <div className="relative bg-white pl-2 py-6 w-52 border border-slate-300 rounded-lg">

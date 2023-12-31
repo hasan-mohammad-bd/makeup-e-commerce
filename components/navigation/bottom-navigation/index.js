@@ -25,6 +25,8 @@ export default function BottomNavigation() {
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const pathname = usePathname();
 	const params = useParams();
+	const { user } = useSelector((state) => state.auth);
+	console.log(user, "sssssss")
 
 	if (
 		!isMobile ||
@@ -58,7 +60,7 @@ export default function BottomNavigation() {
 			activeIcon: <CategoryFillIcon />,
 		},
 		{
-			href: "/mobile-login",
+			href:`${user ? "/dashboard" : "/mobile-login"}`,
 			name: translations["profile"],
 			icon: <ProfileIcon />,
 			activeIcon: <ProfileFillIcon />,
