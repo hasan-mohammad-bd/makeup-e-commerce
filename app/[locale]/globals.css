@@ -202,6 +202,10 @@
   @apply p-[5px] w-9 h-9 text-primary border border-primary rounded-lg cursor-pointer ease-in duration-100 hover:bg-primary hover:text-white hover:border-primary;
 }
 
+.wishlist-action-btn {
+  @apply p-[5px] w-7 h-7 inline-flex justify-center items-center border border-slate-300 hover:border-red-100 rounded-full cursor-pointer ease-in duration-100 bg-white hover:text-red-500;
+}
+
 /* From common classes  */
 .form-control input,
 .form-control textarea {
@@ -355,4 +359,3 @@
 .qa-collapse {
   transition: height 0.3s ease;
 }
-

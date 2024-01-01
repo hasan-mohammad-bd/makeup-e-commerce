@@ -16,10 +16,15 @@ import useWishList from "@/hooks/useWishList";
 import { FaStar } from "react-icons/fa";
 import { HiOutlineHeart, HiOutlineShoppingCart } from "react-icons/hi2";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import HeartRedIcon from "../elements/svg/HeartRedIcon";
 
 const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
   const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
-  const { handleAddToWishlist } = useWishList(); //custom hook for reusing
+  const {
+    handleAddToWishlist,
+    handleWishListProductStatus,
+    handleRemoveFromWishlist,
+  } = useWishList(); //custom hook for reusing
   const [loading, setLoading] = useState(true);
 
   const {
@@ -37,6 +42,8 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
     created_at,
   } = product;
 
+  const isInWishList = handleWishListProductStatus(id);
+  console.log(isInWishList)
   const stockOut = stock_qty <= 0 ? true : false;
 
   useEffect(() => {
@@ -59,7 +66,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 
           <div
             className={twMerge(
-              `min-w-[166px] bg-white border border-slate-200 rounded-xl hover:border-primary hover:shadow-md md:w-auto relative`,
+              `min-w-[166px] bg-white border border-slate-200 rounded-xl hover:shadow-md md:w-auto relative`,
               isLarge ? "w-[200px] !h-full" : "w-auto h-full",
               isFlashSale ? "pb-[84px]" : "pb-8",
               stockOut ? "opacity-50" : ""
@@ -76,10 +83,25 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
               <div className="absolute top-3 right-3 z-20">
                 <button
                   aria-label="Add To Wishlist"
-                  className="action-btn"
-                  onClick={(e) => handleAddToWishlist(id)}
+                  className={`wishlist-action-btn`}
+                  onClick={(e) =>
+                    isInWishList
+                      ? handleRemoveFromWishlist(id)
+                      : handleAddToWishlist(id)
+                  }
                 >
-                  <HiOutlineHeart />
+                  {isInWishList ? (
+                    <HeartRedIcon />
+                  ) : (
+                    <>
+                      <span className="">
+                        <HiOutlineHeart />
+                      </span>
+                      {/*                       <span className="hidden hover:block">
+                        <HiOutlineHeart className="text-red-500" />
+                      </span> */}
+                    </>
+                  )}
                 </button>
               </div>
               <div className="product-img p-2 pb-0">
