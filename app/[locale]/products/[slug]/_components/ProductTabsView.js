@@ -87,17 +87,20 @@ const ProductTabsView = ({ product, settings, translations }) => {
 						"product-tab-links  border-b border-slate-200 py-0 justify-evenly lg:w-full lg:pb-4"
 					}
 				>
-					{tabItems.map((item) => (
-						<div key={item.id}>
-							<Link
-								className={activeSection === item.key ? "active" : ""}
-								href={`#${item.key}`}
-								onClick={(e) => handleTabClick(e, item.key)}
-							>
-								{item.title}
-							</Link>
-						</div>
-					))}
+					{tabItems.map((item) =>
+						item.key === "p-specifications" &&
+						!product?.specification ? null : (
+							<div key={item.id}>
+								<Link
+									className={activeSection === item.key ? "active" : ""}
+									href={`#${item.key}`}
+									onClick={(e) => handleTabClick(e, item.key)}
+								>
+									{item.title}
+								</Link>
+							</div>
+						)
+					)}
 				</HorizontalScrollView>
 			</div>
 			{/* tabs content  */}
@@ -113,15 +116,18 @@ const ProductTabsView = ({ product, settings, translations }) => {
 						translations={translations}
 					/>
 				</div>
-
-				<div className="h-2 w-full bg-slate-200 lg:hidden"></div>
-				<div
-					data-section
-					id="p-specifications"
-					className="px-3 lg:px-0 mt-7 lg:mt-8 pb-7 lg:border-b-4 lg:border-slate-200"
-				>
-					<Specifications product={product} translations={translations} />
-				</div>
+				{product?.specification && (
+					<>
+						<div className="h-2 w-full bg-slate-200 lg:hidden"></div>
+						<div
+							data-section
+							id="p-specifications"
+							className="px-3 lg:px-0 mt-7 lg:mt-8 pb-7 lg:border-b-4 lg:border-slate-200 overflow-hidden"
+						>
+							<Specifications product={product} translations={translations} />
+						</div>
+					</>
+				)}
 
 				<div className="h-2 w-full bg-slate-200 lg:hidden"></div>
 				<div

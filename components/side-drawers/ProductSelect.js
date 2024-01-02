@@ -20,6 +20,7 @@ const ProductSelect = () => {
 	const { selectedProduct } = useSelector((state) => state.cart);
 	const { translations } = useSelector((state) => state.common);
 	const [selectedVariant, setSelectedVariant] = useState(null);
+	const [selectedColor, setSelectedColor] = useState("");
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const dispatch = useDispatch();
 
@@ -85,6 +86,8 @@ const ProductSelect = () => {
 				selectedVariant={selectedVariant}
 				setSelectedVariant={setSelectedVariant}
 				translations={translations}
+				selectedColor={selectedColor}
+				setSelectedColor={setSelectedColor}
 			/>
 			<div className="product-actions mt-8 lg:mt-10 mb-3 lg:my-6 flex gap-3 lg:gap-4 justify-between items-center">
 				<button

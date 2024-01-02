@@ -27,6 +27,7 @@ import ServerDataProvider from "@/components/utility/ServerDataProvider";
 import BottomNavigation from "@/components/navigation/bottom-navigation";
 import Header from "@/components/navigation/header";
 import Footer from "@/components/footer";
+import VideoPlayerModal from "@/components/modals/VideoPlayerModal";
 
 export const metadata = {
 	title: "Sotota Stall",
@@ -64,6 +65,7 @@ export default function RootLayout({ children, params }) {
 					<Cart />
 					<ProductSelect />
 					<SizeChangeModal />
+					<VideoPlayerModal />
 					<PersistUser />
 					<GlobalLoader />
 					<ServerDataProvider />

@@ -15,11 +15,12 @@ const ProductVariantSelect = forwardRef(
 			setSelectedVariant,
 			sizeChart,
 			translations,
+			selectedColor,
+			setSelectedColor,
 		},
 		ref
 	) => {
 		const [colorsGroup, setColorsGroup] = useState({});
-		const [selectedColor, setSelectedColor] = useState("");
 		const [showSizeChart, setShowSizeChart] = useState(false);
 		const colors = Object.keys(colorsGroup);
 
@@ -33,20 +34,29 @@ const ProductVariantSelect = forwardRef(
 		};
 
 		/**
-		 * The function `triggerColorImgToView` takes a color name as input and finds the corresponding photo
-		 * in an array, then slides to that photo in a swiper and stops the autoplay.
-		 * @param colorName - The color name that you want to trigger the image to view.
+		 * The function `triggerColorImgToView` filters an array of photos based on a given color name and
+		 * selects the first image as the active slide in a slider.
+		 * @param colorName - The color name parameter is a string that represents the name of a color.
 		 */
 		const triggerColorImgToView = (colorName) => {
 			if (ref) {
-				photos.some((photo, index) => {
-					if (photo.color_name === colorName) {
-						ref.current.swiper.slideTo(index);
-						ref.current.swiper.autoplay.stop();
-						return true;
-					}
-					return false;
-				});
+				//added for color wise image filtering and selecting first image as active slide in slider
+				let filteredSlides = photos.filter(
+					(slide) => slide.color_name === colorName
+				);
+				!filteredSlides.length && (filteredSlides = photos);
+				ref.current.swiper.slideTo(0);
+				// ref.current.swiper.autoplay.stop();
+
+				//selecting first image as active slide in slider
+				// filteredSlides.some((photo, index) => {
+				// 	if (photo.color_name === colorName) {
+				// 		ref.current.swiper.slideTo(index);
+				// 		ref.current.swiper.autoplay.stop();
+				// 		return true;
+				// 	}
+				// 	return false;
+				// });
 			}
 		};
 
@@ -101,9 +111,9 @@ const ProductVariantSelect = forwardRef(
 								return (
 									<div
 										key={color}
-										className={`p-2 h-[52px] lg:h-[58px] min-w-[52px] lg:min-w-[58px] w-fit rounded-md border ${
+										className={`md:p-1.5 h-[48px] lg:h-[52px] min-w-[48px] lg:min-w-[52px] box-content rounded border ${
 											selectedColor === color
-												? "border-primary"
+												? "border-2 border-primary"
 												: "border-slate-300"
 										} cursor-pointer`}
 										onClick={() => handleColorSelect(color)}
@@ -156,7 +166,7 @@ const ProductVariantSelect = forwardRef(
 									key={variant.id}
 									className={`py-2 lg:py-3 px-4 rounded-lg border text-sm lg:text-base ${
 										selectedVariant?.id === variant.id
-											? "border-primary"
+											? "border-2 border-primary"
 											: "border-slate-300"
 									} cursor-pointer  ${
 										variant.stock_qty <= 0

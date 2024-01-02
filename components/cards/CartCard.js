@@ -17,7 +17,6 @@ const CartCard = ({ item }) => {
 		slug,
 		brand,
 		product_name,
-		image,
 		quantity,
 		// barcodes,
 		barcodeId,
@@ -81,7 +80,7 @@ const CartCard = ({ item }) => {
 						</p>
 					)}
 
-					{availableSizes.length > 1
+					{availableSizes?.length > 1
 						? selectedBarCode.size && (
 								<button
 									className="px-2 py-[1px] text-sm h-6 border border-slate-300 rounded-md cursor-pointer"
@@ -96,18 +95,6 @@ const CartCard = ({ item }) => {
 									{selectedBarCode?.size}
 								</p>
 						  )}
-					{/* <div className="px-2 border border-slate-300 rounded">
-                {sizes[0]?.color}
-              </div>
-              <div>
-                <select className="bg-slate-50 bg-transparent border border-slate-300 text-slate-900 rounded focus:ring-primary focus:border-primary">
-                  {sizes.map((s) => (
-                    <option key={s.size} selected={s.id === variantId}>
-                      {s.size}
-                    </option>
-                  ))}
-                </select>
-              </div> */}
 				</div>
 				<div className="flex items-center products-center gap-3 text-slate-900">
 					<button

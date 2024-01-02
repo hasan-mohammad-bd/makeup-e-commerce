@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ViewHTML from "@/components/elements/ViewHTML";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import VideoPlayer from "@/components/elements/VideoPlayer";
 
 const Descriptions = ({ settings, product, translations }) => {
 	return (
@@ -34,8 +35,15 @@ const Descriptions = ({ settings, product, translations }) => {
 					<h4 className="text-2xl font-bold font-title text-slate-900">
 						{translations["review-video"] || "রিভিউ ভিডিও"}
 					</h4>
-					<div className="slider-imag [&>div>iframe]:rounded-xl [&>div>iframe]:h-[12rem] lg:[&>div>iframe]:h-[21.875rem] relative mt-3">
-						<ViewHTML htmlText={product?.review_video} />
+					<div className="mt-3">
+						<VideoPlayer
+							url={product?.review_video}
+							loop={true}
+							muted={true}
+							// playing={true}
+							controls={true}
+							className={"h-[12rem] md:h-[21.875rem]"}
+						/>
 					</div>
 				</div>
 			)}

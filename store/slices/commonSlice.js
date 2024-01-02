@@ -8,7 +8,7 @@ const initialState = {
 	settingsLoading: true,
 	translations: {},
 	translationsLoading: true,
-	redirectRoute:null
+	videoPlayerConfig: { url: "", className: "" }, //All react player config is supported
 };
 
 const commonSlice = createSlice({
@@ -35,6 +35,12 @@ const commonSlice = createSlice({
 		setLocale: (state, action) => {
 			state.locale = action.payload;
 		},
+		startVideoPlayer: (state, action) => {
+			state.videoPlayerConfig = action.payload;
+		},
+		closeVideoPlayer: (state, action) => {
+			state.videoPlayerConfig = action.payload;
+		},
 	},
 });
 
@@ -44,7 +50,8 @@ export const {
 	setSettings,
 	setTranslations,
 	setLocale,
-	setRedirectRoute
+	startVideoPlayer,
+	closeVideoPlayer,
 } = commonSlice.actions;
 
 export default commonSlice.reducer;

@@ -28,6 +28,7 @@ import ProductTabsView from "./ProductTabsView";
 const ProductDetails = ({ product, settings, translations }) => {
 	const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
 	const [selectedVariant, setSelectedVariant] = useState(null);
+	const [selectedColor, setSelectedColor] = useState("");
 	const productViewSwiperRef = useRef(null);
 
 	return (
@@ -35,7 +36,11 @@ const ProductDetails = ({ product, settings, translations }) => {
 			<div className="flex flex-col lg:flex-row lg:gap-10">
 				<div className="lg:w-1/2">
 					<div className="lg:sticky top-28">
-						<ProductViewSlider product={product} ref={productViewSwiperRef} />
+						<ProductViewSlider
+							product={product}
+							ref={productViewSwiperRef}
+							selectedColor={selectedColor}
+						/>
 						<div className="px-3 responsive-action">
 							<div className="product-actions pb-3 lg:py-6 flex gap-4 justify-between items-center">
 								<button
@@ -221,6 +226,8 @@ const ProductDetails = ({ product, settings, translations }) => {
 									sizeChart={product?.size_chart}
 									translations={translations}
 									ref={productViewSwiperRef}
+									setSelectedColor={setSelectedColor}
+									selectedColor={selectedColor}
 								/>
 							) : null}
 						</div>
