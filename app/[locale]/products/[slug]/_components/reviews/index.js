@@ -98,8 +98,8 @@ const RatingReviews = ({ product_id }) => {
 						<div className="h-[88px] w-[1px] bg-slate-200 mr-5 justify-self-start hidden lg:block"></div>
 						<div className="col-span-11">
 							{Object.keys(percentages).map((star) => (
-								<div key={star} className="flex items-center gap-2 mt-4">
-									<span className="text-sm font-medium text-slate-700">
+								<div key={star} className="flex items-center gap-2 mt-3">
+									<span className="text-sm font-semibold text-slate-700">
 										{starLabelToValue[star]}
 									</span>
 									<div className="w-5/6 h-[6px] bg-gray-200 rounded">
