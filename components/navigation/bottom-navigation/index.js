@@ -26,7 +26,7 @@ export default function BottomNavigation() {
 	const pathname = usePathname();
 	const params = useParams();
 	const { user } = useSelector((state) => state.auth);
-	console.log(user, "sssssss")
+
 
 	if (
 		!isMobile ||

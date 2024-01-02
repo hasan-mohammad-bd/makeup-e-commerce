@@ -8,6 +8,7 @@ const initialState = {
 	settingsLoading: true,
 	translations: {},
 	translationsLoading: true,
+	redirectRoute:null
 };
 
 const commonSlice = createSlice({
@@ -28,6 +29,9 @@ const commonSlice = createSlice({
 			state.translations = action.payload;
 			state.translationsLoading = false;
 		},
+		setRedirectRoute: (state, action) => {
+			state.redirectRoute = action.payload;
+		},
 		setLocale: (state, action) => {
 			state.locale = action.payload;
 		},
@@ -40,6 +44,7 @@ export const {
 	setSettings,
 	setTranslations,
 	setLocale,
+	setRedirectRoute
 } = commonSlice.actions;
 
 export default commonSlice.reducer;
