@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BsInfoCircleFill } from "react-icons/bs";
-import ReviewImagesUpload from "./ReviewImagesUpload";
+import ReviewImagesUpload from "./_components/ReviewImagesUpload";
 import {
   useAddReviewMutation,
   useGetUserReviewShowQuery,
@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import EmojiSmile from "@/components/elements/svg/EmojiSmile";
 import NestedPageTitle from "../../../_components/NestedPageTitle";
-import ReviewInstruction from "../../_components/ReviewInstruction";
+import ReviewInstruction from "./_components/ReviewInstruction";
 
 const AddReview = ({ params }) => {
   const { order_id } = params;

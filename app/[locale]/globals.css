@@ -114,10 +114,6 @@
   @apply content-[url('/assets/images/icons/chv-right.svg')];
 }
 
-.list-stl li {
-  @apply list-disc ms-6;
-}
-
 .price-range .rc-slider-track {
   @apply h-[6px] bg-primary rounded-none;
 }
@@ -203,7 +199,7 @@
 }
 
 .wishlist-action-btn {
-  @apply p-[5px] w-7 h-7 inline-flex justify-center items-center border border-slate-300 hover:border-red-100 rounded-full cursor-pointer ease-in duration-100 bg-white hover:text-red-500;
+	@apply p-[5px] w-7 h-7 inline-flex justify-center items-center border border-slate-300 hover:border-red-100 rounded-full cursor-pointer ease-in duration-100 bg-white hover:text-red-500;
 }
 
 /* From common classes  */
@@ -354,6 +350,53 @@
 .responsive-action {
   @apply fixed md:static bottom-0 left-0 bg-white w-full py-3 md:py-0 px-3 md:px-0 z-[25] shadow-top md:shadow-none;
 }
+
+/*Dynamic View HTML Adjustments*/
+.view-html {
+	@apply overflow-hidden;
+}
+.view-html h1,
+.view-html h2,
+.view-html h3,
+.view-html h4,
+.view-html h5,
+.view-html h6,
+.view-html p,
+.view-html ul,
+.view-html ol {
+	all: revert;
+}
+.view-html table {
+	@apply table-auto border-slate-100 border-spacing-0 border border-separate min-w-full leading-normal;
+}
+.view-html thead {
+	@apply bg-slate-200 text-slate-900;
+}
+.view-html th {
+	@apply px-5 text-left font-bold text-xl uppercase tracking-wider;
+}
+.view-html td {
+	@apply px-5 border-b border-gray-200 bg-white text-sm;
+}
+
+/* .view-html ul,
+.view-html ol {
+	@apply list-disc list-outside ms-6;
+}
+.view-html ol {
+	@apply list-decimal;
+}
+
+.view-html ul li,
+.view-html ol li {
+	@apply mb-2;
+}
+
+.view-html ul li:last-child,
+.view-html ol li:last-child {
+	@apply mb-0;
+}
+*/
 
 /* QNA Page transition */
 .qa-collapse {

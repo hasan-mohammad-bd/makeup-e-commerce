@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 const ViewHTML = ({ htmlText, className, ...props }) => {
 	return htmlText ? (
 		<div
-			className={twMerge("prose max-w-none !font-title", className)}
+			className={twMerge("view-html prose max-w-none", className)}
 			dangerouslySetInnerHTML={{ __html: htmlText }}
 			{...props}
 		/>

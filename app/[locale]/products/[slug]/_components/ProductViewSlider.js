@@ -33,6 +33,15 @@ const ProductViewSlider = forwardRef(({ product, selectedColor }, ref) => {
 		filteredSlides.length && (slides = filteredSlides);
 	}
 
+	let colorFlag = "";
+	const isFirstItem = (colorName) => {
+		if (colorFlag !== colorName) {
+			colorFlag = colorName;
+			return true;
+		}
+		return false;
+	};
+
 	return (
 		<>
 			<div className="lg:grid grid-cols-[64px_1fr] lg:gap-4 items-start">
@@ -101,7 +110,7 @@ const ProductViewSlider = forwardRef(({ product, selectedColor }, ref) => {
 										className="object-contain h-full"
 									/>
 								</div>
-								{slide.video_link && (
+								{slide.video_link && isFirstItem(slide.color_name) && (
 									<button
 										onClick={() =>
 											dispatch(
@@ -109,6 +118,7 @@ const ProductViewSlider = forwardRef(({ product, selectedColor }, ref) => {
 													url: slide?.video_link,
 													playing: true,
 													title: product.product_name,
+													controls: true,
 													// className: "md:h-[480px] md:w-[854px]",
 												})
 											)

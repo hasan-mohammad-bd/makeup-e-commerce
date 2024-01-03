@@ -1,9 +1,9 @@
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import {
-  useAddToWishListMutation,
-  useGetWishListQuery,
-  useRemoveFromWishListMutation,
+	useAddToWishListMutation,
+	useGetWishListQuery,
+	useRemoveFromWishListMutation,
 } from "@/store/api/wishListAPI";
 import { useParams } from "next/navigation";
 
@@ -14,63 +14,74 @@ import { useParams } from "next/navigation";
  * `handleRemoveFromWishlist`.
  */
 const useWishList = () => {
-  const { locale } = useParams();
-  const { data, isLoading } = useGetWishListQuery({ locale });
-  const { user } = useSelector((state) => state.auth);
-  const [addToWishlist] = useAddToWishListMutation();
-  const [deleteFromWishlist] = useRemoveFromWishListMutation();
+	const { locale } = useParams();
+	const { data, isLoading } = useGetWishListQuery({ locale });
+	const { user } = useSelector((state) => state.auth);
+	const [addToWishlist] = useAddToWishListMutation();
+	const [deleteFromWishlist] = useRemoveFromWishListMutation();
 
-  const wishedProducts = data?.data || [];
+	const wishedProducts = data?.data || [];
 
-	
-  
-  /**
-   * The function `handleAddToWishlist` adds a product to the user's wishlist and displays a success or
-   * error message using the `toast` library.
-   * @param productId - The productId parameter is the unique identifier of the product that the user
-   * wants to add to their wishlist.
-   * @returns nothing (undefined).
+	/**
+	 * The function `handleAddToWishlist` adds a product to the user's wishlist and displays a success or
+	 * error message using the `toast` library.
+	 * @param productId - The productId parameter is the unique identifier of the product that the user
+	 * wants to add to their wishlist.
+	 * @returns nothing (undefined).
+	 */
+	const handleAddToWishlist = async (productId) => {
+		if (!user) {
+			toast.error("You're not logged in");
+			return;
+		}
+		try {
+			await addToWishlist({ product_id: productId });
+			toast.success("Product added to Wishlist!");
+		} catch (error) {
+			toast.error("Failed to add to wishlist");
+		}
+	};
+
+	/**
+	 * The function `handleRemoveFromWishlist` removes a product from a wishlist and displays a success
+	 * message if successful, or an error message if unsuccessful.
+	 * @param productId - The ID of the product that needs to be removed from the wishlist.
+	 */
+	const handleRemoveFromWishlist = async (productId) => {
+		try {
+			await deleteFromWishlist(productId);
+			toast.success("Product removed successfully!");
+		} catch (error) {
+			toast.error("Failed to delete from wishlist");
+		}
+	};
+
+	/**
+   * The function checks if a product with a given ID exists in the user's wishlist.
+   * @param productId - The productId parameter is the unique identifier of a product in the wish list.
+   * @returns a boolean value.
    */
-  const handleAddToWishlist = async (productId) => {
-    if (!user) {
-      toast.error("You're not logged in");
-      return;
-    }
-    try {
-      await addToWishlist({ product_id: productId });
-      toast.success("Product added to Wishlist!");
-    } catch (error) {
-      toast.error("Failed to add to wishlist");
-    }
-  };
-
-  /**
-   * The function `handleRemoveFromWishlist` removes a product from a wishlist and displays a success
-   * message if successful, or an error message if unsuccessful.
-   * @param productId - The ID of the product that needs to be removed from the wishlist.
-   */
-  const handleRemoveFromWishlist = async (productId) => {
-    try {
-      await deleteFromWishlist(productId);
-      toast.success("Product removed successfully!");
-    } catch (error) {
-      toast.error("Failed to delete from wishlist");
-    }
-  };
-
   const handleWishListProductStatus = (productId) => {
-    const product = wishedProducts.find((product) => product.id === productId);
-    if (product) {
-      return true;
-    }
-    return false;
-  };
+		if (!user) return false;
+		return !!wishedProducts.find((product) => product.id === productId);
+	};
 
-  return {
-    handleAddToWishlist,
-    handleRemoveFromWishlist,
-		handleWishListProductStatus
-  };
+/**
+ * The function `getWishlistCount` returns the number of products in the user's wishlist, or 0 if the
+ * user is not defined.
+ * @returns The number of products in the user's wishlist.
+ */
+	const getWishlistCount = () => {
+		if (!user) return 0;
+		return wishedProducts.length;
+	};
+
+	return {
+		handleAddToWishlist,
+		handleRemoveFromWishlist,
+		handleWishListProductStatus,
+		getWishlistCount,
+	};
 };
 
 export default useWishList;
