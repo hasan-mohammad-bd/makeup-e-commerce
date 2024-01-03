@@ -43,7 +43,6 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
   } = product;
 
   const isInWishList = handleWishListProductStatus(id);
-  console.log(isInWishList)
   const stockOut = stock_qty <= 0 ? true : false;
 
   useEffect(() => {
@@ -56,6 +55,27 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
     <>
       {!loading ? (
         <div className="relative">
+          <div className="absolute top-4 right-4 z-20">
+            <button
+              aria-label="Add To Wishlist"
+              className={`wishlist-action-btn`}
+              onClick={(e) =>
+                isInWishList
+                  ? handleRemoveFromWishlist(id)
+                  : handleAddToWishlist(id)
+              }
+            >
+              {isInWishList ? (
+                <HeartRedIcon />
+              ) : (
+                <>
+                  <span className="">
+                    <HiOutlineHeart />
+                  </span>
+                </>
+              )}
+            </button>
+          </div>
           {stockOut ? (
             <div className="rounded z-10 absolute right-1/2 w-full translate-x-1/2 top-1/4 flex items-center justify-center ">
               <span className="text-red-500  text-[14px] md:[18px] leading-6 rounded-lg whitespace-nowrap capitalize border-solid border bg-white border-red-500 px-3 py-1">
@@ -80,30 +100,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                   </span>
                 </div>
               )}
-              <div className="absolute top-3 right-3 z-20">
-                <button
-                  aria-label="Add To Wishlist"
-                  className={`wishlist-action-btn`}
-                  onClick={(e) =>
-                    isInWishList
-                      ? handleRemoveFromWishlist(id)
-                      : handleAddToWishlist(id)
-                  }
-                >
-                  {isInWishList ? (
-                    <HeartRedIcon />
-                  ) : (
-                    <>
-                      <span className="">
-                        <HiOutlineHeart />
-                      </span>
-                      {/*                       <span className="hidden hover:block">
-                        <HiOutlineHeart className="text-red-500" />
-                      </span> */}
-                    </>
-                  )}
-                </button>
-              </div>
+
               <div className="product-img p-2 pb-0">
                 <Link
                   className={`${stockOut ? "pointer-events-none" : ""}`}

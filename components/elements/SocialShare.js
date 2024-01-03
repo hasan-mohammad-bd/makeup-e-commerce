@@ -20,7 +20,7 @@ export default function SocialShare({ translations = {} }) {
   const socialShareRef = useRef(null);
   const pageContent = (
     <>
-      <h3 className="md:hidden text-center mb-5 font-bold text-[18px]">
+      <h3 className="md:hidden text-center mb-5 mt-2 font-bold text-[18px]">
         {translations["share"] || "শেয়ার করুন"}
       </h3>
       <div
