@@ -1,5 +1,4 @@
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	addToCart,
@@ -7,6 +6,7 @@ import {
 	removeFromCart,
 	removeFromSelected,
 } from "@/store/slices/cartSlice";
+import { useRouter } from "@/navigation";
 
 /**
  * The `useCart` function is a custom hook in JavaScript that provides methods for adding products to

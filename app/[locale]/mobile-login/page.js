@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setLoginModalOpen } from "@/store/slices/authSlice";
+import { useRouter } from "@/navigation";
+import MenuCard from "@/components/cards/MenuCard";
 
 //icons
 import { RiQuestionAnswerFill } from "react-icons/ri";
-import MenuCard from "@/components/cards/MenuCard";
-import { useRouter } from "next/navigation";
-import { setLoginModalOpen } from "@/store/slices/authSlice";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { SiSpringsecurity } from "react-icons/si";
@@ -30,7 +30,7 @@ export default function MobileLogin({ params }) {
 	];
 	const companyLinks = [
 		{
-			text:translations["about-us"] || "আমাদের সম্পর্কে",
+			text: translations["about-us"] || "আমাদের সম্পর্কে",
 			icon: <BsInfoCircleFill />,
 			path: "/pages/about-us",
 		},
@@ -40,7 +40,7 @@ export default function MobileLogin({ params }) {
 			path: "/pages/booking-policy",
 		},
 		{
-			text:  translations["trams-and-conditions"] || "ট্রামস এন্ড কন্ডিশন",
+			text: translations["trams-and-conditions"] || "ট্রামস এন্ড কন্ডিশন",
 			icon: <IoIosWarning />,
 			path: "/pages/terms-and-conditions",
 		},
@@ -72,8 +72,14 @@ export default function MobileLogin({ params }) {
 				</div>
 			</div>
 			<div id="user-additional-menu" className="my-4 p-3">
-				<MenuCard title={translations["help"] || "হেল্প"} menuItems={helpLink} />
-				<MenuCard title={translations["company"] || "কোম্পানি"} menuItems={companyLinks} />
+				<MenuCard
+					title={translations["help"] || "হেল্প"}
+					menuItems={helpLink}
+				/>
+				<MenuCard
+					title={translations["company"] || "কোম্পানি"}
+					menuItems={companyLinks}
+				/>
 			</div>
 		</section>
 	);

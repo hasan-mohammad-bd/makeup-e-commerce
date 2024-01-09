@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 import ProductsWithFilter from "@/components/products/ProductsWithFilter";
 import { fetchData } from "@/lib/fetch-data";
 

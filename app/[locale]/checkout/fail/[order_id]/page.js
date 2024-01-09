@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import ArticleLoader from "@/components/elements/loaders/ArticleLoader";
 import { useGetOrderByIdQuery } from "@/store/api/orderAPI";

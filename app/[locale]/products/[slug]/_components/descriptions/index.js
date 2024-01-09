@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 import Image from "next/image";
 import ViewHTML from "@/components/elements/ViewHTML";
 import { BsFillTelephoneFill } from "react-icons/bs";

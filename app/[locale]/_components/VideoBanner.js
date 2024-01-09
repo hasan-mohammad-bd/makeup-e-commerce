@@ -1,5 +1,5 @@
 import { fetchData } from "@/lib/fetch-data";
-import Link from "next/link";
+import { Link } from "@/navigation";
 
 // ** Import Icons
 import { HiPlay } from "react-icons/hi";

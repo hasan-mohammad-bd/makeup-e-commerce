@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 import React from "react";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";

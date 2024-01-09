@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { fetchData } from "@/lib/fetch-data";
 
 // ** Imoprt icons

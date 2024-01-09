@@ -14,7 +14,7 @@ import {
 } from "@/components/elements/svg";
 import { useSelector } from "react-redux";
 import { useParams, usePathname } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import FilterMenu from "@/components/elements/FilterMenu";
 import SortMenu from "./SortMenu";
@@ -26,7 +26,6 @@ export default function BottomNavigation() {
 	const pathname = usePathname();
 	const params = useParams();
 	const { user } = useSelector((state) => state.auth);
-
 
 	if (
 		!isMobile ||
@@ -60,7 +59,7 @@ export default function BottomNavigation() {
 			activeIcon: <CategoryFillIcon />,
 		},
 		{
-			href:`${user ? "/dashboard" : "/mobile-login"}`,
+			href: `${user ? "/dashboard" : "/mobile-login"}`,
 			name: translations["profile"],
 			icon: <ProfileIcon />,
 			activeIcon: <ProfileFillIcon />,

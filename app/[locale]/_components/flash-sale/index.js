@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { useParams } from "next/navigation";
 import Timer from "@/components/elements/Timer";
 import { HiArrowLongRight } from "react-icons/hi2";

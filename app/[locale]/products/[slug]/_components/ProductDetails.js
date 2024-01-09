@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { useRef, useState } from "react";
 import useCart from "@/hooks/useCart";
 import CopyToClipboard from "react-copy-to-clipboard";

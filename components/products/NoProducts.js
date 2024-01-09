@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import dynamic from "next/dynamic";
 import { useSelector } from "react-redux";
 const Lottie = dynamic(() => import("lottie-react"));

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useParams, usePathname } from "next/navigation";

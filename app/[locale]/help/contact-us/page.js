@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 import ContactForm from "./ContactForm";
 import { fetchData } from "@/lib/fetch-data";
 

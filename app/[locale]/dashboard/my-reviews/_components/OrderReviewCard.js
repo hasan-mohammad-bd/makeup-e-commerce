@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { BsArrowRight } from "react-icons/bs";
 import ReviewSummaryPopover from "./ReviewSummaryPopover";
 import { getFormattedDate } from "@/utils/format-date";

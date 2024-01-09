@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import React from "react";
 import dynamic from "next/dynamic";
 import { FaCheck } from "react-icons/fa";

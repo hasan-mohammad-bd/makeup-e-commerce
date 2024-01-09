@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import NoItems from "../_components/NoItems";

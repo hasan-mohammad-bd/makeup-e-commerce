@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { useEffect, useRef, useState } from "react";
 import RatingReviews from "./reviews";
 import ProductQNA from "./product-qna";

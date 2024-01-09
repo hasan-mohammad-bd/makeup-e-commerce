@@ -1,6 +1,6 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
+import { Link } from "@/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { BsArrowRight, BsChevronDown, BsChevronUp } from "react-icons/bs";
 import noImage from "@/public/assets/images/no-image.png";

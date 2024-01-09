@@ -5,7 +5,7 @@ import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import * as cartActions from "@/store/slices/cartSlice";
 import noImage from "@/public/assets/images/no-image.png";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { siteConfig } from "@/config/site";
 import { getDiscountPercent } from "@/utils/percent";
 import { BsChevronDown } from "react-icons/bs";

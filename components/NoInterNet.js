@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { Link, useRouter } from "@/navigation";
 import { useSelector } from "react-redux";
-
-import NoInternetImg from "../public/assets/images/banner/no-internet.png";
 import CallInquiry from "./elements/CallInquiry";
+import NoInternetImg from "../public/assets/images/banner/no-internet.png";
 
 export const metadata = {
 	title: "No Internet Connection",

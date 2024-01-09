@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import profileAvatar from "@/public/assets/images/profile_avatar.png";
-import Link from "next/link";
+import { Link, useRouter } from "@/navigation";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 //icons
@@ -20,12 +20,9 @@ import { MdLibraryBooks } from "react-icons/md";
 import MenuCard from "@/components/cards/MenuCard";
 
 export default function MobileDashboardLayout({ params }) {
-	const { user, isLoading } = useSelector((state) => state.auth);
+	const { user } = useSelector((state) => state.auth);
 	const { translations } = useSelector((state) => state.common);
 	const isMobile = useMediaQuery("(max-width: 768px)");
-	const { locale } = params;
-	const dispatch = useDispatch();
-	const pathname = usePathname();
 	const router = useRouter();
 
 	if (!isMobile) router.push("/dashboard/profile"); //redirecting user to profile for desktop
@@ -134,9 +131,18 @@ export default function MobileDashboardLayout({ params }) {
 				</div>
 			</div>
 			<div id="user-additional-menu" className="my-4 p-3">
-				<MenuCard title={translations["offer"] || "অফার"} menuItems={navItems.slice(4, 5)} />
-				<MenuCard title={translations["help"] || "হেল্প"} menuItems={navItems.slice(5, 7)} />
-				<MenuCard title={translations["company"] || "কোম্পানি"} menuItems={companyLinks} />
+				<MenuCard
+					title={translations["offer"] || "অফার"}
+					menuItems={navItems.slice(4, 5)}
+				/>
+				<MenuCard
+					title={translations["help"] || "হেল্প"}
+					menuItems={navItems.slice(5, 7)}
+				/>
+				<MenuCard
+					title={translations["company"] || "কোম্পানি"}
+					menuItems={companyLinks}
+				/>
 			</div>
 		</section>
 	);

@@ -1,8 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { FiChevronDown } from "react-icons/fi";
-import Link from "next-intl/link";
-import { usePathname } from "next-intl/client";
+import { Link, usePathname } from "@/navigation";
 
 const languages = [
 	{

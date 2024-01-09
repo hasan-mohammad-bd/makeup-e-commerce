@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/navigation";
 
 // ** Imoprt icons
 import { BsFillTelephoneFill } from "react-icons/bs";

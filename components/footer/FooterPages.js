@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 

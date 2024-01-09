@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import noImage from "@/public/assets/images/no-image.png";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { siteConfig } from "@/config/site";
 // import { useSelector } from "react-redux";
 

@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback } from "react";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 

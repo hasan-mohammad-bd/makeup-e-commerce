@@ -1,6 +1,6 @@
 import { fetchData } from "@/lib/fetch-data";
 import ProductDetails from "./_components/ProductDetails";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import SectionTitle from "@/components/elements/SectionTitle";
 import AllProducts from "@/components/products/AllProducts";
 import { SeeAll } from "@/components/elements/buttons";

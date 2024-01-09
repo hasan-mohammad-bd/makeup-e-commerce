@@ -1,9 +1,9 @@
+import { useRouter } from "@/navigation";
 import { usePlaceAnOrderMutation } from "@/store/api/orderAPI";
 import { toast } from "react-toastify";
 import getToken from "@/utils/token";
 import { clearCart, clearDiscountInfo } from "@/store/slices/cartSlice";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/navigation";
 import { setGlobalLoader } from "@/store/slices/commonSlice";
 
 const useOrderPlace = () => {
@@ -11,7 +11,7 @@ const useOrderPlace = () => {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const handleOrderPlace = async (newOrder) => {
-		console.log(newOrder);
+		// console.log(newOrder);
 		// "Online Payment"
 		if (newOrder.payment_type !== "COD") {
 			//currently getting payment_type "Online Payment" but checkout accepts "Online"
