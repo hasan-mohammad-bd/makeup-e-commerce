@@ -1,5 +1,6 @@
 import axiosInstance from "@/lib/axios-instance";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { signOut } from "next-auth/react"
 
 const initialState = {
 	user: null,
@@ -13,7 +14,7 @@ export const logoutUser = createAsyncThunk(
 	async (user, thunkAPI) => {
 		try {
 			const response = await axiosInstance.get(`logout`);
-			
+			signOut()
 			return response.data;
 	
 		} catch (error) {

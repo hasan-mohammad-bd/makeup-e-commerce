@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { logoutUser } from "@/store/slices/authSlice";
 import LogoutIcon from "../elements/svg/LogoutIcon";
 
+
 const LogoutModal = ({ showModal, setShowModal }) => {
   const { translations } = useSelector((state) => state.common);
 
@@ -19,6 +20,7 @@ const LogoutModal = ({ showModal, setShowModal }) => {
     dispatch(logoutUser());
 		toast.success("Logout successfully");
     setShowModal(false);
+
 
   };
 
