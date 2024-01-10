@@ -6,6 +6,7 @@ import Modal from "../elements/Modal";
 import { useForm } from "react-hook-form";
 import { logoutUser } from "@/store/slices/authSlice";
 import LogoutIcon from "../elements/svg/LogoutIcon";
+import { signOut } from "next-auth/react";
 
 
 const LogoutModal = ({ showModal, setShowModal }) => {
@@ -18,10 +19,10 @@ const LogoutModal = ({ showModal, setShowModal }) => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
-		toast.success("Logout successfully");
+    toast.success("Logout successfully");
+    signOut({ redirect: false });
+    logoutUser();
     setShowModal(false);
-
-
   };
 
   return (

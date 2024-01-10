@@ -150,7 +150,7 @@ const LoginModal = ({ showModal, setShowModal, title }) => {
 						translations={translations}
 					/>
 				)}
-				<SocialLogin />
+				<SocialLogin setShowModal={setShowModal} />
 			</div>
 		</Modal>
 	);
