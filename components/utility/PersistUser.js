@@ -8,39 +8,42 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 // The purpose of this component to get the logged user again after page load
 const PersistUser = () => {
-  const { data: session, status } = useSession();
-  const { user, isLoading } = useSelector((state) => state.auth);
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const getUser = async () => {
-      dispatch(setUserLoading(true));
-      try {
-        const response = await axiosInstance.get(`user`);
-        dispatch(setUser(response.data.data));
-        dispatch(setUserLoading(false));
-      } catch (error) {
-        // console.log(error);
-        dispatch(setUser(null));
-        dispatch(setUserLoading(false));
-      }
-    };
-    getUser();
-  }, [dispatch]);
+	const { data: session, status } = useSession();
+	const { user, isLoading } = useSelector((state) => state.auth);
+	const router = useRouter();
+	const searchParams = useSearchParams();
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!user && session) {
-      dispatch(setUser(session.data));
-      dispatch(setUserLoading(false));
+	useEffect(() => {
+		const getUser = async () => {
+			if (!user && !session) {
+				try {
+					const response = await axiosInstance.get(`user`);
+					dispatch(setUser(response.data.data));
+					dispatch(setUserLoading(false));
+				} catch (error) {
+					// console.log(error);
+					// dispatch(setUser(null));
+					dispatch(setUserLoading(false));
+				}
+			}
+		};
+		getUser();
+	}, [dispatch, session, user]);
 
-      const redirect = searchParams.get("redirect");
-      router.push(redirect || "/dashboard");
-      localStorage.setItem("token", session.token);
-    }
-  }, [session, dispatch, router, searchParams]);
+	// Persist social logged in / next-auth  user
+	useEffect(() => {
+		if (!user && session) {
+			dispatch(setUser(session.data));
+			dispatch(setUserLoading(false));
 
-  return null;
+			const redirect = searchParams.get("redirect");
+			router.push(redirect || "/dashboard");
+			localStorage.setItem("token", session.token);
+		}
+	}, [session, dispatch, router, searchParams, user]);
+
+	return null;
 };
 
 export default PersistUser;

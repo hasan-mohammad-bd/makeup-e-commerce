@@ -1,67 +1,69 @@
 import axiosInstance from "@/lib/axios-instance";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const initialState = {
-  user: null,
-  isLoading: true,
-  isLoginModalOpen: false,
-  isLogoutModalOpen: false,
+	user: null,
+	isLoading: true,
+	isLoginModalOpen: false,
+	isLogoutModalOpen: false,
 };
 
 export const logoutUser = createAsyncThunk(
-  "auth/logoutUser",
-  async (user, thunkAPI) => {
-    try {
-      const response = await axiosInstance.get(`logout`);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
+	"auth/logoutUser",
+	async (user, thunkAPI) => {
+		try {
+			const response = await axiosInstance.get(`logout`);
+			return response.data;
+		} catch (error) {
+			console.log(error);
+			return thunkAPI.rejectWithValue(error);
+		}
+	}
 );
 
 const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {
-    setUserLoading: (state, action) => {
-      state.isLoading = action.payload;
-    },
-    setUser: (state, action) => {
-      state.user = action.payload;
-      state.isLoading = false;
-    },
-    setLoginModalOpen: (state, action) => {
-      state.isLoginModalOpen = action.payload;
-    },
-    setLogoutModalOpen: (state, action) => {
-      state.isLogoutModalOpen = action.payload;
-    },
-  },
-  extraReducers(builder) {
-    builder
-      .addCase(logoutUser.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(logoutUser.fulfilled, (state) => {
-        localStorage.removeItem("token");
-
-        state.user = null;
-        state.isLoading = false;
-        window.location.replace("/");
-      })
-      .addCase(logoutUser.rejected, (state) => {
-        state.isLoading = false;
-      });
-  },
+	name: "auth",
+	initialState,
+	reducers: {
+		setUserLoading: (state, action) => {
+			state.isLoading = action.payload;
+		},
+		setUser: (state, action) => {
+			state.user = action.payload;
+			state.isLoading = false;
+		},
+		setLoginModalOpen: (state, action) => {
+			state.isLoginModalOpen = action.payload;
+		},
+		setLogoutModalOpen: (state, action) => {
+			state.isLogoutModalOpen = action.payload;
+		},
+	},
+	extraReducers(builder) {
+		builder
+			.addCase(logoutUser.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(logoutUser.fulfilled, (state) => {
+				localStorage.removeItem("token");
+				toast.success("Logout successfully");
+				state.user = null;
+				state.isLoading = false;
+				window.location.replace("/");
+			})
+			.addCase(logoutUser.rejected, (state) => {
+				state.isLoading = false;
+				toast.error("Logout Failed");
+			});
+	},
 });
 
 export const {
-  setUserLoading,
-  setUser,
-  setLoginModalOpen,
-  setLogoutModalOpen,
+	setUserLoading,
+	setUser,
+	setLoginModalOpen,
+	setLogoutModalOpen,
 } = authSlice.actions;
 
 export default authSlice.reducer;
