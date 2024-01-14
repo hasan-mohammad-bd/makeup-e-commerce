@@ -7,6 +7,7 @@ import ItemsListLoader from "@/components/elements/loaders/ItemsListLoader";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import { handleTabItemToView } from "./ProductTabsView";
 
 const RatingReviewPopover = ({ product_id }) => {
 	const { translations } = useSelector((state) => state.common);
@@ -88,7 +89,8 @@ const RatingReviewPopover = ({ product_id }) => {
 
 						<div className="pt-4">
 							<Link
-								href={"#customer-review-header"}
+								href={"#p-rating-reviews"}
+								onClick={(e) => handleTabItemToView(e, "p-rating-reviews")}
 								className="w-full text-secondary-700 text-center inline-flex items-center gap-2 text-sm justify-center"
 							>
 								{translations["see-all-customer-reviews"] ||

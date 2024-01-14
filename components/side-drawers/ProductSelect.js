@@ -37,6 +37,10 @@ const ProductSelect = () => {
 		}
 	};
 
+	const newPrice =
+		selectedVariant?.discount_selling_price || selectedProduct?.new_price;
+	const oldPrice = selectedVariant?.selling_price || selectedProduct?.old_price;
+
 	const pageContent = (
 		<div className="lg:p-6">
 			<div className="product-info grid grid-cols-[72px_auto] lg:grid-cols-[84px_auto] gap-3 lg:gap-4 items-center">
@@ -61,19 +65,15 @@ const ProductSelect = () => {
 					</h2>
 					<div className="flex gap-2 lg:gap-3 products-center items-center">
 						<h3 className="text-base/[16px] lg:text-xl text-red-500">
-							{siteConfig.currency.sign} {selectedProduct?.new_price}
+							{siteConfig.currency.sign} {newPrice}
 						</h3>
-						{selectedProduct?.old_price > selectedProduct?.new_price ? (
+						{oldPrice > newPrice ? (
 							<>
 								<del className="text-sm text-slate-300">
-									{siteConfig.currency.sign} {selectedProduct?.old_price}
+									{siteConfig.currency.sign} {oldPrice}
 								</del>
 								<div className="rounded-md px-1 text-xs py-0.5 text-white bg-red-500">
-									{getDiscountPercent(
-										selectedProduct?.old_price,
-										selectedProduct?.new_price
-									)}
-									% OFF
+									{getDiscountPercent(oldPrice, newPrice)}% OFF
 								</div>
 							</>
 						) : null}

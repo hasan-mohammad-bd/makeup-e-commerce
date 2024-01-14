@@ -149,7 +149,9 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 							</div>
 							<div
 								className={`product-price mb-3 flex  justify-start ${
-									isLarge ? "items-center" : "flex-col items-start"
+									isLarge
+										? "items-center"
+										: "flex-col items-start lg:items-center"
 								} lg:flex-row gap-1`}
 							>
 								<span className="text-base/4 lg:text-lg/[24px] font-semibold text-red-500">
@@ -158,7 +160,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 								</span>
 								{old_price > new_price ? (
 									<div className="flex items-center gap-2">
-										<del className="old-price text-sm lg:text-lg/[24px] font-normal text-slate-400">
+										<del className="old-price text-sm font-normal text-slate-400">
 											{siteConfig.currency.sign}
 											{old_price}
 										</del>

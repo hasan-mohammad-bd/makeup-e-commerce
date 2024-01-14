@@ -52,6 +52,10 @@ const SizeChangeModal = () => {
 		}
 	}, [product]);
 
+	const newPrice =
+		selectedVariant?.discount_selling_price || product?.new_price;
+	const oldPrice = selectedVariant?.selling_price || product?.old_price;
+
 	return (
 		product && (
 			<Modal
@@ -86,19 +90,15 @@ const SizeChangeModal = () => {
 							</h2>
 							<div className="flex gap-2 lg:gap-3 products-center items-center">
 								<h3 className="text-base/[16px] lg:text-xl text-red-500">
-									{siteConfig.currency.sign} {product?.new_price}
+									{siteConfig.currency.sign} {newPrice}
 								</h3>
-								{product?.old_price > product?.new_price ? (
+								{oldPrice > newPrice ? (
 									<>
 										<del className="text-sm text-slate-300">
-											{siteConfig.currency.sign} {product?.old_price}
+											{siteConfig.currency.sign} {oldPrice}
 										</del>
 										<div className="rounded-md px-1 text-xs py-0.5 text-white bg-red-500">
-											{getDiscountPercent(
-												product?.old_price,
-												product?.new_price
-											)}
-											% OFF
+											{getDiscountPercent(oldPrice, newPrice)}% OFF
 										</div>
 									</>
 								) : null}

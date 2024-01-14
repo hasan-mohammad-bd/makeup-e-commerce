@@ -23,13 +23,16 @@ import RatingReviewPopover from "./RatingReviewPopover";
 import { HiChatBubbleLeftRight, HiOutlineShoppingCart } from "react-icons/hi2";
 import { TbTag } from "react-icons/tb";
 import { IoCall, IoCopy } from "react-icons/io5";
-import ProductTabsView from "./ProductTabsView";
+import ProductTabsView, { handleTabItemToView } from "./ProductTabsView";
 
 const ProductDetails = ({ product, settings, translations }) => {
 	const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
 	const [selectedVariant, setSelectedVariant] = useState(null);
 	const [selectedColor, setSelectedColor] = useState("");
 	const productViewSwiperRef = useRef(null);
+	const newPrice =
+		selectedVariant?.discount_selling_price || product?.new_price;
+	const oldPrice = selectedVariant?.selling_price || product?.old_price;
 
 	return (
 		<div className="relative product-details">
@@ -174,7 +177,8 @@ const ProductDetails = ({ product, settings, translations }) => {
 										className="text-secondary-700"
 									/>{" "}
 									<Link
-										href={"#product-details-qna"}
+										href={"#p-qna"}
+										onClick={(e) => handleTabItemToView(e, "p-qna")}
 										className="hover:text-primary"
 									>
 										{formatLongNumber(product?.total_question_answer || 0)}{" "}
@@ -190,22 +194,18 @@ const ProductDetails = ({ product, settings, translations }) => {
 								htmlText={product?.product_short_description}
 								className={"desc text-sm lg:text-base text-slate-600 mt-3"}
 							/>
+							{/* Product Dynamic Pricing Area  */}
 							<div className="product-price flex items-center gap-4 lg:border-b border-slate-200 py-4 lg:py-5">
 								<span className="text-2xl lg:text-3xl/[48px] font-bold font-title text-slate-900">
-									{siteConfig.currency.sign} {product?.new_price || "0.00"}{" "}
+									{siteConfig.currency.sign} {newPrice || "0.00"}{" "}
 								</span>
-								{product?.old_price > product?.new_price ? (
+								{oldPrice > newPrice ? (
 									<>
 										<del className="old-price text-base lg:text-lg/[24px] font-normal text-slate-400">
-											{siteConfig.currency.sign}{" "}
-											{product?.old_price ? `${product?.old_price}` : "0.00"}
+											{siteConfig.currency.sign} {oldPrice ? oldPrice : "0.00"}
 										</del>
 										<span className="discount inline-block text-base/[22px] font-semibold font-title text-white bg-red-500 rounded-md py-1 px-2">
-											{getDiscountPercent(
-												product?.old_price,
-												product?.new_price
-											)}
-											% OFF
+											{getDiscountPercent(oldPrice, newPrice)}% OFF
 										</span>
 									</>
 								) : null}
