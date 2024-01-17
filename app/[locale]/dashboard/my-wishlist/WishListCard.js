@@ -22,7 +22,7 @@ const WishListCard = ({ product }) => {
 	return (
 		<div className="relative px-3 py-4 bg-white border border-slate-200 rounded-xl mb-3">
 			<button
-				className="absolute  right-3 top-3 bg-transparent text-red-500"
+				className="absolute z-10 right-3 top-3 bg-transparent text-red-500"
 				onClick={() => handleRemoveFromWishlist(id)}
 			>
 				<FiTrash2 size={20} />
@@ -59,7 +59,7 @@ const WishListCard = ({ product }) => {
 						href={`/products/${slug}`}
 						className={`${
 							stockOut ? "opacity-50 font-normal text-[14px]" : ""
-						} product-title overflow-text font-semibold`}
+						} product-title overflow-text font-semibold max-w-fit`}
 					>
 						{product_name}
 					</Link>

@@ -30,8 +30,8 @@ const FlashSellCorner = () => {
 						y2="24"
 						gradientUnits="userSpaceOnUse"
 					>
-						<stop stopColor="#EF4444" />
-						<stop offset="1" stopColor="#F99104" />
+						<stop stop-color="#EF4444" />
+						<stop offset="1" stop-color="#F99104" />
 					</linearGradient>
 				</defs>
 			</svg>

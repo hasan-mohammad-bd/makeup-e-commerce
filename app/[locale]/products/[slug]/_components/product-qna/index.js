@@ -30,6 +30,7 @@ const ProductQNA = ({ product_id }) => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm();
 
@@ -57,6 +58,7 @@ const ProductQNA = ({ product_id }) => {
 				// Handle the successful response if necessary
 				// console.log(response);
 				toast.success("Question added, You'll get a reply soon");
+				reset();
 			})
 			.catch((error) => {
 				// Handle the error if necessary

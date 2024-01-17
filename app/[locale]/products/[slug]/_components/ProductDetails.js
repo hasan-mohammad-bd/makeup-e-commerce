@@ -45,9 +45,9 @@ const ProductDetails = ({ product, settings, translations }) => {
 							selectedColor={selectedColor}
 						/>
 						<div className="px-3 responsive-action">
-							<div className="product-actions pb-3 lg:py-6 flex gap-4 justify-between items-center">
+							<div className="product-actions pb-3 lg:py-6 flex gap-3 md:gap-4 justify-between items-center">
 								<button
-									className="bg-secondary-700 py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
+									className="bg-secondary-700 py-3.5 md:py-3 w-full px-3 md:px-6 text-white rounded-lg text-center active:scale-95"
 									onClick={() => handleAddToCart(product, selectedVariant)}
 								>
 									<HiOutlineShoppingCart size={24} />
@@ -57,7 +57,7 @@ const ProductDetails = ({ product, settings, translations }) => {
 								</button>
 								<button
 									onClick={() => handleAddAndCheckout(product, selectedVariant)}
-									className="bg-primary py-3 w-full px-6 text-white rounded-lg text-center active:scale-95"
+									className="bg-primary py-3.5 md:py-3 w-full px-3 md:px-6 text-white rounded-lg text-center active:scale-95"
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@ const ProductDetails = ({ product, settings, translations }) => {
 									</span>
 								</button>
 							</div>
-							<div className="lg:border-t border-slate-200 flex gap-4 justify-center lg:justify-between items-center flex-wrap pt-1 lg:py-4 font-bold">
+							<div className="lg:border-t border-slate-200 flex gap-3 md:gap-4 justify-center lg:justify-between items-center flex-wrap pt-1 lg:py-4 font-bold">
 								<p className="text-slate-900">
 									{translations["call-for-details"] ||
 										"বিস্তারিত জানতে কল করুন"}
@@ -102,7 +102,7 @@ const ProductDetails = ({ product, settings, translations }) => {
 				</div>
 				<div className="lg:w-1/2">
 					<div className="product-content-wrap">
-						<div className="mx-3 md:mx-0">
+						<div className="mx-3 md:mx-0 mt-2">
 							{product.flashSale && (
 								<div className="overflow-hidden flesh-sell-bar w-full h-12 rounded-3xl border border-primary flex justify-between items-center">
 									<FlashSellCorner className="" />
