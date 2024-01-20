@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { FreeMode, Navigation, Pagination, Thumbs } from "swiper/modules";
 
 export default function ReviewImageSlider({ images }) {
 	// console.log(review);
@@ -9,7 +9,7 @@ export default function ReviewImageSlider({ images }) {
 
 	return (
 		<div className="w-full lg:w-[531px]">
-			<div className="h-[20.25rem] lg:h-[31.25rem] preview-slider bg-slate-900 rounded-md">
+			<div className="h-[20.25rem] lg:h-[31.25rem]  bg-slate-900 rounded-md">
 				<Swiper
 					style={{
 						"--swiper-navigation-color": "#fff",
@@ -23,10 +23,15 @@ export default function ReviewImageSlider({ images }) {
 						swiper:
 							thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
 					}}
-					modules={[FreeMode, Navigation, Thumbs]}
-					className="mySwiper2"
+					modules={[FreeMode, Navigation, Thumbs, Pagination]}
+					className="review-preview-slider"
 					direction="horizontal"
 					slidesPerView={1}
+					pagination={{
+						clickable: true,
+						dynamicMainBullets: 3,
+						dynamicBullets: true,
+					}}
 				>
 					{images.map((slide, index) => (
 						<SwiperSlide key={index}>

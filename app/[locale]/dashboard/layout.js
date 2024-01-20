@@ -1,5 +1,5 @@
 "use client";
-import { logoutUser, setLogoutModalOpen } from "@/store/slices/authSlice";
+import { setLogoutModalOpen } from "@/store/slices/authSlice";
 import { Link } from "@/navigation";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,9 +19,6 @@ const DashboardLayout = ({ children, params }) => {
 	const dispatch = useDispatch();
 	const pathArray = usePathname().split("/");
 
-	const handleModalOpen = () => {
-		dispatch(setLogoutModalOpen(true));
-	};
 	const navItems = [
 		{
 			text: translations["my-profile"] || "আমার প্রফাইল",
@@ -102,7 +99,7 @@ const DashboardLayout = ({ children, params }) => {
 									>
 										<button
 											className="flex items-center space-x-2 text-base font-normal"
-											onClick={handleModalOpen}
+											onClick={() => setLogoutModalOpen(true)}
 										>
 											<span className={`text-amber-400`}>
 												<IoLogOut />

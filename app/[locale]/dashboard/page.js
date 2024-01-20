@@ -16,6 +16,7 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { SiSpringsecurity } from "react-icons/si";
 import { IoIosWarning } from "react-icons/io";
+import { IoLogOut } from "react-icons/io5";
 import { MdLibraryBooks } from "react-icons/md";
 import MenuCard from "@/components/cards/MenuCard";
 
@@ -81,6 +82,11 @@ export default function MobileDashboardLayout({ params }) {
 			text: translations["privacy-policy"] || "প্রাইভেসি পলিসি",
 			icon: <SiSpringsecurity />,
 			path: "/pages/privacy-policy",
+		},
+		{
+			text: translations["log-out"] || "লগ-আউট",
+			icon: <IoLogOut />,
+			path: "logout",
 		},
 	];
 

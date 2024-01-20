@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { handleTabItemToView } from "./ProductTabsView";
+import { getFractionFixed } from "@/utils/format-number";
 
 const RatingReviewPopover = ({ product_id }) => {
 	const { translations } = useSelector((state) => state.common);
@@ -47,7 +48,7 @@ const RatingReviewPopover = ({ product_id }) => {
 							<div className="rating grid grid-cols-1 lg:grid-cols-7 mt-3 pb-6 border-b border-slate-200">
 								<div className="justify-self-center lg:justify-self-start lg:col-span-3 text-center flex flex-col justify-center items-center">
 									<h3 className="text-2xl font-bold text-slate-950">
-										{summary?.averageRating || 5}
+										{getFractionFixed(summary?.averageRating || 5)}
 									</h3>
 									<div className="my-3">
 										<Rating

@@ -1,8 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../elements/Modal";
-import { useForm } from "react-hook-form";
 import { logoutUser } from "@/store/slices/authSlice";
 import LogoutIcon from "../elements/svg/LogoutIcon";
 import { signOut } from "next-auth/react";
@@ -11,10 +10,6 @@ const LogoutModal = ({ showModal, setShowModal }) => {
 	const { translations } = useSelector((state) => state.common);
 
 	const dispatch = useDispatch();
-	const {
-		formState: { errors },
-	} = useForm();
-
 	const handleLogout = () => {
 		dispatch(logoutUser());
 		signOut({ redirect: false });
@@ -23,33 +18,40 @@ const LogoutModal = ({ showModal, setShowModal }) => {
 	};
 
 	return (
-		<Modal showModal={showModal} setShowModal={setShowModal} title={""}>
-			<div className="md:w-[27rem] ">
+		<Modal
+			showModal={showModal}
+			setShowModal={setShowModal}
+			bodyOnly={true}
+			bottomSheet={false}
+		>
+			<div className="md:w-[27rem] pt-6 md:pt-12">
 				<div className="text-center">
-					<div className="w-[96px] h-[96px] rounded-full bg-red-200 mx-auto flex justify-center items-center">
-						<LogoutIcon />
+					<div className="w-[64px] md:w-[96px] h-[64px] md:h-[96px] rounded-full bg-red-200 mx-auto flex justify-center items-center">
+						<div className="w-[36px] md:w-[48px] h-[36px] md:h-[48px]">
+							<LogoutIcon height={"100%"} width={"100%"} />
+						</div>
 					</div>
 				</div>
 				<div className="text text-center">
-					<h4 className="mt-5 text-[30px] font-extrabold text-red-500">
+					<h4 className="mt-3 md:mt-5 text-2xl md:text-3xl/[38px] font-extrabold text-red-500">
 						{translations["log-out"] || "লগ-আউট"}
 					</h4>
-					<p className="mx-auto text-[18px] mt-5 text-slate-800 max-w-[350px]">
+					<p className="mx-auto text-base md:text-[18px]/[24px] mt-4 md:mt-5 text-slate-800 max-w-[350px]">
 						{" "}
 						{translations["are-you-sure"] ||
 							"আপনি কি নিশ্চিত সততা স্টল থেকে লগ আউট করতে চাচ্ছেন?"}
 					</p>
 				</div>
-				<div className="flex justify-center items-center gap-6 mt-12 font-semibold text-[18px] mb-2">
+				<div className="flex justify-center items-center gap-4 lg:gap-6 mt-4 md:mt-12 font-semibold text-[18px]/[26px] md:mb-2">
 					<button
 						onClick={() => setShowModal(false)}
-						className="w-[169px] h-[54px] rounded-[8px] bg-slate-200"
+						className="w-full py-3.5 rounded-lg bg-slate-200"
 					>
 						{translations["no"] || "না"}
 					</button>
 					<button
 						onClick={handleLogout}
-						className="w-[169px] h-[54px] rounded-[8px] bg-primary text-white"
+						className="w-full py-3.5 rounded-lg bg-primary text-white"
 					>
 						{translations["yes"] || "হ্যাঁ"}
 					</button>

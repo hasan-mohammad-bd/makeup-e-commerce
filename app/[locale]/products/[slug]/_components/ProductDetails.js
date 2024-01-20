@@ -24,6 +24,7 @@ import { HiChatBubbleLeftRight, HiOutlineShoppingCart } from "react-icons/hi2";
 import { TbTag } from "react-icons/tb";
 import { IoCall, IoCopy } from "react-icons/io5";
 import ProductTabsView, { handleTabItemToView } from "./ProductTabsView";
+import { toast } from "react-toastify";
 
 const ProductDetails = ({ product, settings, translations }) => {
 	const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
@@ -154,7 +155,10 @@ const ProductDetails = ({ product, settings, translations }) => {
 								{getSlicedText(product?.product_name, 100)}
 							</h5>
 							<div className="product-summary grid grid-cols-2 lg:flex gap-y-3 lg:gap-3 items-center mt-3">
-								<div className="group flex gap-1 items-center relative">
+								<div
+									onClick={(e) => handleTabItemToView(e, "p-rating-reviews")}
+									className="group flex gap-1 items-center relative cursor-pointer"
+								>
 									<Rating
 										initialValue={product?.average_rating || 5}
 										allowFraction
@@ -167,7 +171,10 @@ const ProductDetails = ({ product, settings, translations }) => {
 
 									<span>{getFractionFixed(product?.average_rating || 5)}</span>
 								</div>
-								<p className="border-l pl-3 border-slate-300 leading-4">
+								<p
+									onClick={(e) => handleTabItemToView(e, "p-rating-reviews")}
+									className="border-l pl-3 border-slate-300 leading-4 cursor-pointer"
+								>
 									{formatLongNumber(product?.total_rating)}{" "}
 									{translations["rating"] || "রেটিং"}
 								</p>
@@ -257,7 +264,7 @@ const ProductDetails = ({ product, settings, translations }) => {
 												{product.coupons[0].code}{" "}
 												<CopyToClipboard
 													text={product.coupons[0].code}
-													// onCopy={() => alert("copied")}
+													onCopy={() => toast.success("copied")}
 												>
 													<IoCopy
 														size={20}

@@ -72,7 +72,7 @@ export default function ReviewViewModal({
 											className="h-7 min-w-7 rounded-full"
 										/>
 									) : (
-										<div className="h-7 min-w-7 rounded-full bg-slate-200 flex justify-center items-center font-semibold">
+										<div className="!h-7 !w-7 min-w-7 rounded-full bg-slate-200 flex justify-center items-center font-semibold">
 											{review.customer?.name.slice(0, 1)}
 										</div>
 									)}

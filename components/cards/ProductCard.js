@@ -87,7 +87,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 					<div
 						className={twMerge(
 							`min-w-[166px] bg-white border border-slate-200 rounded-xl hover:shadow-md md:w-auto relative`,
-							isLarge ? "w-[200px] !h-full" : "w-auto h-full",
+							isLarge ? "w-[202px] !h-full" : "w-auto h-full",
 							isFlashSale ? "pb-[84px]" : "pb-8",
 							stockOut ? "opacity-50" : ""
 						)}
@@ -101,7 +101,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 								</div>
 							)}
 
-							<div className="product-img p-2 pb-0">
+							<div className="product-img p-1 md:p-1.5 pb-0">
 								<Link
 									className={`${stockOut ? "pointer-events-none" : ""}`}
 									disabled={stockOut}

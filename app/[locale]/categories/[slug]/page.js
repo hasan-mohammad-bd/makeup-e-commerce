@@ -35,40 +35,70 @@ const page = async ({ params, searchParams }) => {
 
 	return (
 		<>
-			<div
-				className="hidden lg:block bg-no-repeat bg-cover w-full h-[240px] breadcrumb py-20"
-				style={{
-					backgroundImage: `url(${category?.image})`,
-				}}
-			>
-				<div className="container">
-					<div className="text-center">
-						<h3 className="text-2xl font-bold font-title text-white mb-4">
-							{category?.category_name}
-						</h3>
+			{/* breadcrumb */}
+			{category?.image ? (
+				<div
+					className="hidden lg:block bg-no-repeat bg-cover w-full h-[240px] breadcrumb py-20"
+					style={{
+						backgroundImage: `url(${category?.image})`,
+					}}
+				>
+					<div className="container">
+						<div className="text-center capitalize">
+							<h3 className="text-2xl font-bold font-title text-white mb-4">
+								{category?.category_name}
+							</h3>
+							<div>
+								<Link
+									href={`/`}
+									className="text-base text-white hover:text-primary"
+								>
+									{translations["home"] || "হোম"}
+								</Link>
+								<Link
+									href={`/categories`}
+									className="text-base text-white hover:text-primary"
+								>
+									{translations["category"] || "ক্যাটাগরি"}
+								</Link>
+								<Link
+									href={`/categories/${category.slug}`}
+									aria-disabled="true"
+									className="text-base text-white pointer-events-none"
+								>
+									{category?.category_name}
+								</Link>
+							</div>
+						</div>
+					</div>
+				</div>
+			) : (
+				<div className="breadcrumb breadcrumb-2 py-5 border-b border-slate-200 hidden lg:block">
+					<div className="container capitalize">
 						<div>
 							<Link
 								href={`/`}
-								className="text-base text-white hover:text-primary"
+								className="text-base text-slate-600 hover:text-primary"
 							>
 								{translations["home"] || "হোম"}
 							</Link>
 							<Link
 								href={`/categories`}
-								className="text-base text-white hover:text-primary"
+								className="text-base text-slate-900 hover:text-primary"
 							>
 								{translations["category"] || "ক্যাটাগরি"}
 							</Link>
 							<Link
 								href={`/categories/${category.slug}`}
-								className="text-base text-white hover:text-primary"
+								aria-disabled="true"
+								className="text-base text-slate-900 pointer-events-none"
 							>
 								{category?.category_name}
 							</Link>
 						</div>
 					</div>
 				</div>
-			</div>
+			)}
 
 			<div className="border-b border-slate-200 pt-3 lg:py-8">
 				<h6 className="container text-base font-semibold font-title text-slate-900 lg:mb-4">

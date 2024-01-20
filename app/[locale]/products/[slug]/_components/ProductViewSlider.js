@@ -88,7 +88,11 @@ const ProductViewSlider = forwardRef(({ product, selectedColor }, ref) => {
 						}}
 						direction="horizontal"
 						slidesPerView={1}
-						pagination={{ clickable: true }}
+						pagination={{
+							clickable: true,
+							dynamicMainBullets: 3,
+							dynamicBullets: true,
+						}}
 						breakpoints={{
 							0: {
 								direction: "horizontal",
@@ -102,8 +106,11 @@ const ProductViewSlider = forwardRef(({ product, selectedColor }, ref) => {
 						modules={[Thumbs, Pagination]}
 					>
 						{slides.map((slide, index) => (
-							<SwiperSlide key={index} className="!h-[100vw] md:!h-[32.75rem]">
-								<div className="slider-imag h-full">
+							<SwiperSlide
+								key={index}
+								className="!h-[100vw] md:!h-[32.75rem] md:!w-[32.75rem]"
+							>
+								<div className="slider-imag h-full w-full">
 									{/*                   <Image
                     src={slide?.image}
                     alt=""
@@ -120,7 +127,7 @@ const ProductViewSlider = forwardRef(({ product, selectedColor }, ref) => {
 												alt=""
 												width={524}
 												height={524}
-												className="object-contain h-full"
+												className="object-contain h-full w-full"
 											/>
 
 											<button

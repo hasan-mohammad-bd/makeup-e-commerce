@@ -224,9 +224,15 @@
 }
 
 /* Swiper Slider default Overrides/Adjustments  */
-.product-preview-slider > .swiper-pagination,
 .intro-slider > .swiper-pagination {
 	@apply bg-white px-3 rounded-t-xl max-w-fit !bottom-0 !left-1/2 -translate-x-1/2;
+}
+
+.product-preview-slider > .swiper-pagination {
+	@apply bg-white px-4 rounded-t-xl !py-1.5 !bottom-0 !left-1/2 -translate-x-1/2 lg:hidden;
+}
+.review-preview-slider > .swiper-pagination {
+	@apply bg-white px-2 rounded-xl !py-1.5 !bottom-3 !left-1/2 -translate-x-1/2 lg:hidden;
 }
 
 .category-slider > .swiper-pagination {
@@ -235,13 +241,15 @@
 
 .product-preview-slider .swiper-pagination-bullet,
 .intro-slider .swiper-pagination-bullet,
-.category-slider .swiper-pagination-bullet {
+.category-slider .swiper-pagination-bullet,
+.review-preview-slider .swiper-pagination-bullet {
 	@apply bg-primary;
 }
 
 .product-preview-slider .swiper-pagination-bullet-active,
 .intro-slider .swiper-pagination-bullet-active,
-.category-slider .swiper-pagination-bullet-active {
+.category-slider .swiper-pagination-bullet-active,
+.review-preview-slider .swiper-pagination-bullet-active {
 	@apply w-6 rounded-lg;
 }
 

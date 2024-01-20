@@ -14,6 +14,7 @@ import ReviewSortSelect from "./ReviewSortSelect";
 import ReviewFilterSelect from "./ReviewFilterSelect";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { getFractionFixed } from "@/utils/format-number";
 
 const RatingReviews = ({ product_id }) => {
 	const { user } = useSelector((state) => state.auth);
@@ -78,7 +79,7 @@ const RatingReviews = ({ product_id }) => {
 				<div className="rating grid grid-cols-1 lg:grid-cols-7 mt-3 mb-5 pb-6 border-b border-slate-200">
 					<div className="justify-self-center lg:justify-self-start lg:col-span-2 text-center flex flex-col justify-center items-center">
 						<h3 className="text-2xl font-bold text-slate-950">
-							{summary?.averageRating || 0}
+							{getFractionFixed(summary?.averageRating || 0)}
 						</h3>
 						<div className="my-3">
 							<Rating
