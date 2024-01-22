@@ -42,7 +42,7 @@ export default function MegaMenu({ settings }) {
 	return (
 		<>
 			<div className="nav-menu container flex items-center gap-2">
-				{!menuOpen ? (
+				{!menuOpen ? ( 
 					<button
 						onClick={() => setMenuOpen(!menuOpen)}
 						className={`menuBtn ${className}`}
@@ -54,11 +54,11 @@ export default function MegaMenu({ settings }) {
 						{translations["category"]} <BsChevronUp />
 					</span>
 				)}
-				{Object.keys(headerPage).map((key) => (
+{/* 				{Object.keys(headerPage).map((key) => (
 					<Link key={key} href={headerPage[key]} className={`${className}`}>
 						{key}
 					</Link>
-				))}
+				))} */}
 			</div>
 
 			{menuOpen && (

@@ -11,8 +11,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: ["Noto Sans Bengali", ...defaultTheme.fontFamily.sans],
-        title: ["Hind Siliguri", ...defaultTheme.fontFamily.serif],
+        body: ["var(--font-jost)", ...defaultTheme.fontFamily.sans],
+        title: ["var(--font-jost)", ...defaultTheme.fontFamily.serif],
       },
       boxShadow: {
         top: "0 -4px 16px 0 rgba(0, 0, 0, 0.08)",
@@ -37,7 +37,7 @@ module.exports = {
       },
       colors: {
         primary: {
-          DEFAULT: "#F99104",
+          DEFAULT: "#EE2761",
           200: "#FDD39B",
         },
         secondary: {

@@ -34,7 +34,7 @@ const CartCard = ({ item }) => {
 			</button>
 			<div className="grid grid-cols-[72px_auto] lg:grid-cols-[84px_auto] gap-3 lg:gap-4">
 				<Image
-					src={getAppropriatePhoto(item, selectedBarCode.color) || noImage}
+					src={getAppropriatePhoto(item, selectedBarCode?.color) || noImage}
 					alt="product"
 					height={84}
 					width={84}
