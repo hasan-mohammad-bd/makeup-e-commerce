@@ -11,7 +11,7 @@ const CategoryList = ({ categories }) => {
 				<div key={category?.id} className="w-[96px] justify-self-center">
 					<Link
 						href={`/categories/${category.slug}`}
-						className="category-img flex justify-center items-center h-[96px] bg-white rounded-full"
+						className="category-img flex justify-center items-center h-[96px] bg-primary-50 rounded-full"
 					>
 						<Image
 							src={category?.icon || noImage}

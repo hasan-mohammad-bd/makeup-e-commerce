@@ -9,9 +9,9 @@ import axiosInstance from "@/lib/axios-instance";
 import { addDiscountInfo } from "@/store/slices/cartSlice";
 import { setGlobalLoader } from "@/store/slices/commonSlice";
 
-const CouponModal = ({ showModal, setShowModal }) => {
+const CouponModal = ({ showModal, setShowModal, total }) => {
 	const { translations } = useSelector((state) => state.common);
-	const [error, setError] = useState(false);
+	const [error, setError] = useState("");
 	const dispatch = useDispatch();
 	const {
 		register,
@@ -19,23 +19,26 @@ const CouponModal = ({ showModal, setShowModal }) => {
 		formState: { errors },
 	} = useForm();
 
+	// console.log(total, "total");
 	const onSubmit = async (data, event) => {
 		event.preventDefault();
-		setError(false);
+		setError("");
 		dispatch(setGlobalLoader(true));
 		try {
 			const coupon = data.coupon_code;
 			const response = await axiosInstance.get(`coupons/${coupon}`);
 			dispatch(setGlobalLoader(false));
 			if (response.status === 200) {
-				toast.success("coupon discount applied");
 				dispatch(addDiscountInfo(response.data.data));
+				toast.success(
+					`Coupon added, Applicable for minimum order amount ${response.data.data.minimum_order_amount}`
+				);
 				setShowModal(false); //closing coupon modal
 			} else {
-				setError(true);
+				setError("Invalid coupon code");
 			}
 		} catch (error) {
-			setError(true);
+			setError(error?.response?.data?.message || "Invalid coupon code");
 			dispatch(setGlobalLoader(false));
 		}
 	};

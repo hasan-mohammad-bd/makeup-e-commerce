@@ -114,8 +114,8 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 										} md:h-[220px]  md:w-[220px] rounded-lg`}
 										src={image || "/assets/images/no-image.png"}
 										alt={product_name}
-										width={226}
-										height={226}
+										width={220}
+										height={220}
 
 										// priority={true}
 									/>
