@@ -9,30 +9,16 @@ import OtpForm from "./OtpForm";
 import Modal from "@/components/elements/Modal";
 
 //Hooks
-import { useGetCountriesQuery, useOtpLoginMutation } from "@/store/api/authAPI";
+import { useOtpLoginMutation } from "@/store/api/authAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalLoader } from "@/store/slices/commonSlice";
+import { siteConfig } from "@/config/site";
 
 const LoginModal = ({ showModal, setShowModal, title }) => {
 	const { settings, translations } = useSelector((state) => state.common);
 	const dispatch = useDispatch();
 	const [otpSent, setOtpSent] = useState(false);
 	const [phone, setPhone] = useState("");
-	const [selectedCountry, setSelectedCountry] = useState({
-		name: "Bangladesh",
-		flag: "🇧🇩",
-		code: "BD",
-		dial_code: "+880",
-	});
-	const { data } = useGetCountriesQuery();
-
-	const getCountryName = (dialCode) => {
-		const country = countries.find((country) => country.dial_code === dialCode);
-		return country || selectedCountry;
-	};
-
-	const countries = data?.data || [];
-
 	const [sendOTP, { isSuccess, isLoading, data: otpResponse, isError }] =
 		useOtpLoginMutation();
 
@@ -64,14 +50,12 @@ const LoginModal = ({ showModal, setShowModal, title }) => {
 	} = useForm();
 
 	const onSubmit = async (data) => {
-		const country = getCountryName(data.dial_code);
+		const phone = data?.phone?.slice(1); // removing (first digit / 0) from phone number
 		const loginData = {
-			phone_no: data.phone,
-			country: country?.name,
+			phone_no: phone,
+			country: siteConfig.phone.country,
 		};
-		// console.log(loginData, "loginData");
-		setPhone(data.phone);
-		setSelectedCountry(country);
+		setPhone(phone);
 		sendOTP(loginData);
 	};
 
@@ -92,7 +76,7 @@ const LoginModal = ({ showModal, setShowModal, title }) => {
 						? `${
 								translations["otp-sent-message"] ||
 								"এইমাত্র আমরা আপনার মোবাইল নাম্বারে একটি ৬ সংখ্যার OTP  কোড পাঠিয়েছি"
-						  } (${selectedCountry.dial_code + phone})`
+						  } (${"+88" + phone})`
 						: translations["verify-mobile-message"] ||
 						  "শুধুমাত্র মোবাইল নাম্বার যাচাই করে সততা স্টলের একজন আদর্শ মেম্বার হয়ে যান"}
 				</p>
@@ -102,30 +86,23 @@ const LoginModal = ({ showModal, setShowModal, title }) => {
 							<label className="block text-base mb-2">
 								{translations["mobile"] || "মোবাইল"}
 							</label>
-							<div className="flex items-center">
-								<select
-									className="h-12 text-base font-title font-normal px-2 rounded-s-lg border border-gray-300 focus:outline-none focus:border-primary"
-									{...register("dial_code")}
-								>
-									{countries.map((country) => (
-										<option
-											selected={country.name === selectedCountry.name}
-											key={country.name}
-											value={country.dial_code}
-										>
-											{country.code} ({country.dial_code})
-										</option>
-									))}
-								</select>
+							<div className="flex items-center group">
+								<div className="h-12 py-3 min-w-fit text-base font-title font-normal px-2 rounded-s-lg border bg-slate-100 border-gray-300 group-focus-within:border-primary group-focus-within:border-r-gray-300">
+									<p>{siteConfig.phone.prefix}</p>
+								</div>
 								<input
 									type="number"
-									className="w-full rounded-s-none rounded-e-lg border border-l-0 border-gray-300 focus:outline-none focus:border-primary"
+									className="w-full !pl-2 rounded-s-none rounded-e-lg border border-l-0 border-gray-300 focus:outline-none group-focus:border-primary"
 									name="phone"
 									placeholder={
 										translations["your-mobile-number"] || "আপনার মোবাইল নাম্বার"
 									}
 									{...register("phone", {
 										required: "Phone number is required.",
+										pattern: {
+											value: siteConfig.phone.pattern,
+											message: "Please enter a valid phone number",
+										},
 									})}
 								/>
 							</div>
@@ -144,7 +121,6 @@ const LoginModal = ({ showModal, setShowModal, title }) => {
 				) : (
 					<OtpForm
 						phone={phone}
-						selectedCountry={selectedCountry}
 						setShowModal={setShowModal}
 						setOtpSent={setOtpSent}
 						translations={translations}
