@@ -271,7 +271,7 @@ const MyProfile = () => {
 											translations["enter-alternate-phone-number"] ||
 											"বিকল্প ফোন নাম্বার লিখুন"
 										}
-										defaultValue={user?.alt_phone_no}
+										defaultValue={`0${user?.alt_phone_no}`}
 										{...register("alt_phone_no", {
 											pattern: {
 												value: siteConfig.phone.pattern,

@@ -36,6 +36,13 @@ function OrderCard({ order, translations = {} }) {
 					</span>
 				);
 				break;
+			case orderFilterKeys.processing:
+				statusElement = (
+					<span className="rounded-lg px-1 py-[2px] bg-lime-500">
+						{translations["processing"] || "প্রসেসিং"}
+					</span>
+				);
+				break;
 			case orderFilterKeys.confirmed:
 				statusElement = (
 					<span className="rounded-lg px-1 py-[2px] bg-secondary-700">
