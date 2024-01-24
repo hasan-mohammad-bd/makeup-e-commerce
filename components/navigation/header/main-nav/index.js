@@ -80,7 +80,7 @@ export default function MainNav({ settings }) {
   return (
     <div className="">
       <TopHeaderBanner locale={locale} />
-      <div className=" w-full z-30 bg-white border-b border-slate-300 py-4">
+      <div className=" w-full z-30 bg-white border-b border-slate-300 py-6">
         <div className="container">
           <div className="header-wrap flex justify-between items-center">
             {/* Nav Items  */}
@@ -95,14 +95,30 @@ export default function MainNav({ settings }) {
                 />
               </Link>
             </div>
-            <div className="flex justify-center items-center border border-slate-300">
-              <MenuItems settings={settings} />
+            <div className="flex justify-center items-center ">
+              {/* <MenuItems settings={settings} /> */}
               <ResponsiveSearch />
             </div>
             <div className="header-right flex justify-between items-center ml-4 gap-2 lg:gap-6">
               <div className="header-actions flex items-center gap-4">
-                <div className="text-center">
-                  <Link href="/dashboard/my-wishlist" className="">
+                <div className="text-center font-normal">
+                  <button className="" onClick={togglePopover}>
+                    {user?.image ? (
+                      <Image
+                        src={user.image}
+                        alt="Profile"
+                        height={0}
+                        width={0}
+                        className="rounded-full w-[32px] h-[32px] object-cover"
+                      />
+                    ) : (
+                      <HiOutlineUser className="" size={28} />
+                    )}
+                  </button>
+                  <p>Profile</p>
+                </div>
+                <div className="text-center ml-4">
+                  <Link href="/dashboard/my-wishlist" className="relative">
                     <HiOutlineHeart size={28} />
                     {wishlistCount ? (
                       <span className="text-xs absolute -right-2 -top-1 bg-red-500 text-white px-[6px] text-center rounded-full">
@@ -132,22 +148,6 @@ export default function MainNav({ settings }) {
                   ref={popoverRef}
                   className="relative hidden lg:flex items-center"
                 >
-                  <div className="text-center ml-4">
-                    <button className="" onClick={togglePopover}>
-                      {user?.image ? (
-                        <Image
-                          src={user.image}
-                          alt="Profile"
-                          height={32}
-                          width={32}
-                          className="h-full w-full rounded-full"
-                        />
-                      ) : (
-                        <HiOutlineUser size={28} />
-                      )}
-                    </button>
-                    <p>Profile</p>
-                  </div>
                   {userOpen && !user ? (
                     <div className="absolute right-0 top-0 z-10 mt-14">
                       <div className="relative bg-white px-6 py-8 w-52 border border-slate-300 rounded-lg">

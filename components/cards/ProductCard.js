@@ -17,226 +17,234 @@ import { FaStar } from "react-icons/fa";
 import { HiOutlineHeart, HiOutlineShoppingCart } from "react-icons/hi2";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import HeartRedIcon from "../elements/svg/HeartRedIcon";
+import { MdOutlineMinimize, MdOutlineRemoveRedEye } from "react-icons/md";
+import { FiMinus } from "react-icons/fi";
 
 const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
-	const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
-	const {
-		handleAddToWishlist,
-		handleWishListProductStatus,
-		handleRemoveFromWishlist,
-	} = useWishList(); //custom hook for reusing
-	const [loading, setLoading] = useState(true);
+  const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
+  const {
+    handleAddToWishlist,
+    handleWishListProductStatus,
+    handleRemoveFromWishlist,
+  } = useWishList(); //custom hook for reusing
+  const [loading, setLoading] = useState(true);
 
-	const {
-		id,
-		slug,
-		image,
-		product_name,
-		brand,
-		average_rating,
-		total_rating,
-		new_price,
-		old_price,
-		stock_qty,
-		total_sale_qty,
-		created_at,
-	} = product;
+  const {
+    id,
+    slug,
+    image,
+    product_name,
+    brand,
+    average_rating,
+    total_rating,
+    new_price,
+    old_price,
+    stock_qty,
+    total_sale_qty,
+    created_at,
+  } = product;
 
-	const isInWishList = handleWishListProductStatus(id);
-	const stockOut = stock_qty <= 0 ? true : false;
+  const isInWishList = handleWishListProductStatus(id);
+  const stockOut = stock_qty <= 0 ? true : false;
 
-	useEffect(() => {
-		if (Object.keys(product).length !== 0) {
-			setLoading(false);
-		}
-	}, [product]);
+  useEffect(() => {
+    if (Object.keys(product).length !== 0) {
+      setLoading(false);
+    }
+  }, [product]);
 
-	return (
-		<>
-			{!loading ? (
-				<div className="relative">
-					<div className="absolute top-4 right-4 z-20">
-						<button
-							aria-label="Add To Wishlist"
-							className={`wishlist-action-btn`}
-							onClick={(e) =>
-								isInWishList
-									? handleRemoveFromWishlist(id)
-									: handleAddToWishlist(id)
-							}
-						>
-							{isInWishList ? (
-								<HeartRedIcon />
-							) : (
-								<>
-									<span className="">
-										<HiOutlineHeart />
-									</span>
-								</>
-							)}
-						</button>
-					</div>
-					{stockOut ? (
-						<div className="rounded z-10 absolute right-1/2 w-full translate-x-1/2 top-1/4 flex items-center justify-center ">
-							<span className="text-red-500  text-[14px] md:[18px] leading-6 rounded-lg whitespace-nowrap capitalize border-solid border bg-white border-red-500 px-3 py-1">
-								{translations["out-of-stock"] || "স্টক শেষ"}
-							</span>
-						</div>
-					) : null}
+  return (
+    <>
+      {!loading ? (
+        <div className="relative">
+          <div className="absolute top-4 right-4 z-20"></div>
+          {stockOut ? (
+            <div className="rounded z-10 absolute right-1/2 w-full translate-x-1/2 top-1/4 flex items-center justify-center ">
+              <span className="text-red-500  text-[14px] md:[18px] leading-6 rounded-lg whitespace-nowrap capitalize bg-white border-red-500 px-3 py-1">
+                {translations["out-of-stock"] || "স্টক শেষ"}
+              </span>
+            </div>
+          ) : null}
 
-					<div
-						className={twMerge(
-							`min-w-[166px] bg-white border border-slate-200 rounded-xl hover:shadow-md md:w-auto relative`,
-							isLarge ? "w-[202px] !h-full" : "w-auto h-full",
-							isFlashSale ? "pb-[84px]" : "pb-8",
-							stockOut ? "opacity-50" : ""
-						)}
-					>
-						<div className="product-img-action-wrap relative">
-							{getDaysSinceCreation(created_at) < 8 && (
-								<div className="absolute top-3 left-3 z-20">
-									<span className="bg-secondary-700 text-sm px-2 rounded-full text-white">
-										{translations["new"] || "নতুন"}
-									</span>
-								</div>
-							)}
+          <div
+            className={twMerge(
+              `min-w-[166px] bg-white md:w-auto relative w-auto h-full pb-8`,
+              stockOut ? "opacity-50" : ""
+            )}
+          >
+            <div className="product-img-action-wrap relative">
+              {getDaysSinceCreation(created_at) < 8 && (
+                <div className="absolute top-3 left-3 z-20">
+                  <span className="bg-primary text-sm px-2 rounded-tl-lg rounded-br-lg text-white">
+                    {translations["new"] || "নতুন"}
+                  </span>
+                </div>
+              )}
 
-							<div className="product-img p-1 md:p-1.5 pb-0">
-								<Link
-									className={`${stockOut ? "pointer-events-none" : ""}`}
-									disabled={stockOut}
-									href="/products/[slug]"
-									as={`/products/${slug}`}
-								>
-									<Image
-										className={`default-img ${
-											isLarge ? "h-[196px] w-[192px]" : "h-[158px] w-full"
-										} md:h-[220px]  md:w-[220px] rounded-lg`}
-										src={image || "/assets/images/no-image.png"}
-										alt={product_name}
-										width={226}
-										height={226}
+              <div className="product-img p-1 md:p-1.5 pb-0">
+                <Link
+                  className={`${stockOut ? "pointer-events-none" : ""}`}
+                  disabled={stockOut}
+                  href="/products/[slug]"
+                  as={`/products/${slug}`}
+                >
+                  <Image
+                    className={`default-img w-full bg-[#DCDDDF]`}
+                    src={image || "/assets/images/no-image.png"}
+                    alt={product_name}
+                    width={0}
+                    height={0}
 
-										// priority={true}
-									/>
-								</Link>
-							</div>
-						</div>
-						<div className="product-content-wrap p-3">
-							<div className="product-category">
-								<span
-									// href={`/brands/${brand?.id ? brand?.id : ""}`}
-									className="text-xs text-primary capitalize"
-								>
-									{brand?.brand_name || "No Brand"}
-								</span>
-							</div>
-							<h2
-								className={`product-title !line-clamp-2 lg:!line-clamp-1 ${
-									stockOut ? "pointer-events-none" : ""
-								}`}
-							>
-								<Link href={`/products/${slug}`}>{product_name}</Link>
-							</h2>
-							<div className="product-rating">
-								<span className="font-semibold text-slate-900">
-									{getFractionFixed(average_rating) || 5}{" "}
-									<FaStar className="text-primary pb-1" />
-								</span>
-								<span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
-									{total_rating === 0 ? 0 : formatLongNumber(total_rating)}
-								</span>
-							</div>
-							<div
-								className={`product-price mb-3 flex  justify-start ${
-									isLarge
-										? "items-center"
-										: "flex-col items-start lg:items-center"
-								} lg:flex-row gap-1`}
-							>
-								<span className="text-base/4 lg:text-lg/[24px] font-semibold text-red-500">
-									{siteConfig.currency.sign}
-									{new_price}
-								</span>
-								{old_price > new_price ? (
-									<div className="flex items-center gap-2">
-										<del className="old-price text-sm font-normal text-slate-400">
-											{siteConfig.currency.sign}
-											{old_price}
-										</del>
-										<span className="discount-badge ml-1 !text-[12px]">
-											{getDiscountPercent(old_price, new_price)}% OFF
-										</span>
-									</div>
-								) : null}
-							</div>
-						</div>
-						<div className="actions absolute bottom-3 w-full px-3">
-							<div
-								className="product-actions flex items-center gap-2"
-								onClick={(e) => e.stopPropagation()}
-							>
-								<button
-									disabled={stockOut}
-									aria-label="Add To Cart"
-									className="action-btn"
-									onClick={(e) => handleAddToCart(product)}
-								>
-									<HiOutlineShoppingCart
-										size={24}
-										className="active:scale-90"
-									/>
-								</button>
-								<button
-									disabled={stockOut}
-									onClick={() => handleAddAndCheckout(product)}
-									className="buy-btn flex-center gap-1"
-								>
-									{translations["buy-now"] || "এখনই কিনুন"}
-									<div className="hidden lg:block">
-										<HiOutlineArrowNarrowRight
-											className="hidden lg:block"
-											size={20}
-										/>
-									</div>
-								</button>
-							</div>
-							{isFlashSale && (
-								<div className="product-flash-counter mt-4">
-									<div className=" flex items-center gap-3">
-										<div className="w-full h-[6px] bg-gray-200 rounded">
-											<div
-												className="h-[6px] bg-secondary-700 rounded"
-												style={{
-													width: `${getSalePercent(
-														total_sale_qty,
-														stock_qty
-													)}%`,
-												}}
-											></div>
-										</div>
-										{/* <h3>{getSalePercent(total_sale_qty, stock_qty)}%</h3> */}
-									</div>
-									<div className="flex-between mt-3 text-xs">
-										<h3>
-											{translations["sold"] || "বিক্রি"}:{" "}
-											<span className="font-bold">{total_sale_qty}</span>
-										</h3>
-										<h3>
-											{translations["in-stock"] || "বাকি"}:{" "}
-											<span className="font-bold">{stock_qty}</span>
-										</h3>
-									</div>
-								</div>
-							)}
-						</div>
-					</div>
-				</div>
-			) : (
-				<Loader />
-			)}
-		</>
-	);
+                    // priority={true}
+                  />
+                </Link>
+              </div>
+            </div>
+            <div className="product-content-wrap p-3">
+              <div className="product-category">
+                <span
+                  // href={`/brands/${brand?.id ? brand?.id : ""}`}
+                  className="text-xs capitalize"
+                >
+                  {brand?.brand_name || "No Brand"}
+                </span>
+              </div>
+              <h2
+                className={`product-title !line-clamp-2 lg:!line-clamp-1 ${
+                  stockOut ? "pointer-events-none" : ""
+                }`}
+              >
+                <Link href={`/products/${slug}`}>{product_name}</Link>
+              </h2>
+              <div className="product-rating">
+                <span className="font-semibold text-slate-900">
+                  {getFractionFixed(average_rating) || 5}{" "}
+                  <FaStar className="text-primary pb-1" />
+                </span>
+                <span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
+                  {total_rating === 0 ? 0 : formatLongNumber(total_rating)}
+                </span>
+              </div>
+              <div
+                className={`product-price mb-3 flex justify-start ${
+                  isLarge
+                    ? "items-center"
+                    : "flex-col items-start lg:items-center"
+                } lg:flex-row gap-1`}
+              >
+                <span className="text-slate-500">
+                  {siteConfig.currency.sign}
+                  {new_price}
+                </span>
+
+                {old_price > new_price ? (
+                  <div className="flex items-center gap-2">
+                    <span>
+                      <FiMinus className="text-slate-500 mx-1 my-2" />
+                    </span>
+                    <del className="old-price text-sm font-normal text-slate-500">
+                      {siteConfig.currency.sign}
+                      {old_price}
+                    </del>
+
+                    {/*                     <span className="discount-badge ml-1 !text-[12px]">
+                      {getDiscountPercent(old_price, new_price)}% OFF
+                    </span> */}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+            <div className="actions absolute bottom-3 w-full px-3">
+              <div
+                className="product-actions flex gap-2"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  disabled={stockOut}
+                  aria-label="Add To Cart"
+                  className="border border-slate-300 px-[10px] py-2"
+                  onClick={(e) => handleAddToCart(product)}
+                >
+                  <HiOutlineShoppingCart
+                    size={24}
+                    className="active:scale-90 text-slate-500"
+                  />{" "}
+                  <span className="text-slate-500">+ Add to card</span>
+                </button>
+                <button
+                  aria-label="Add To Wishlist"
+                  className={`border border-slate-300 px-3 text-slate-500`}
+                  onClick={(e) =>
+                    isInWishList
+                      ? handleRemoveFromWishlist(id)
+                      : handleAddToWishlist(id)
+                  }
+                >
+                  {isInWishList ? (
+                    <HeartRedIcon size={20} />
+                  ) : (
+                    <>
+                      <span className="">
+                        <HiOutlineHeart size={20} />
+                      </span>
+                    </>
+                  )}
+                </button>
+                <button
+                  className={`border border-slate-300 px-3 text-slate-500`}
+                >
+                  <MdOutlineRemoveRedEye size={20} />
+                </button>
+                {/*                 <button
+                  disabled={stockOut}
+                  onClick={() => handleAddAndCheckout(product)}
+                  className="buy-btn flex-center gap-1"
+                >
+                  {translations["buy-now"] || "এখনই কিনুন"}
+                  <div className="hidden lg:block">
+                    <HiOutlineArrowNarrowRight
+                      className="hidden lg:block"
+                      size={20}
+                    />
+                  </div>
+                </button> */}
+              </div>
+              {isFlashSale && (
+                <div className="product-flash-counter mt-4">
+                  <div className=" flex items-center gap-3">
+                    <div className="w-full h-[6px] bg-gray-200 rounded">
+                      <div
+                        className="h-[6px] bg-secondary-700 rounded"
+                        style={{
+                          width: `${getSalePercent(
+                            total_sale_qty,
+                            stock_qty
+                          )}%`,
+                        }}
+                      ></div>
+                    </div>
+                    {/* <h3>{getSalePercent(total_sale_qty, stock_qty)}%</h3> */}
+                  </div>
+                  <div className="flex-between mt-3 text-xs">
+                    <h3>
+                      {translations["sold"] || "বিক্রি"}:{" "}
+                      <span className="font-bold">{total_sale_qty}</span>
+                    </h3>
+                    <h3>
+                      {translations["in-stock"] || "বাকি"}:{" "}
+                      <span className="font-bold">{stock_qty}</span>
+                    </h3>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Loader />
+      )}
+    </>
+  );
 };
 
 export default ProductCard;

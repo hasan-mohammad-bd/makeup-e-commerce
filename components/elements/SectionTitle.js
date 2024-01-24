@@ -5,30 +5,28 @@ import { HiArrowLongRight } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
 export default function SectionTitle({
-	title,
-	href,
-	buttonText = "See All",
-	children,
-	className,
+  title,
+  href,
+  buttonText = "See All",
+  children,
+  className,
 }) {
-	return (
-		<div
-			className={twMerge(
-				`sec-heading w-full flex ${
-					!href ? "justify-center lg:justify-start" : "justify-between"
-				} items-center lg:border-b border-slate-200 pb-3`,
-				className
-			)}
-		>
-			<div className="flex gap-2 items-center">
-				{children}
-				<h2 className={`sec-title capitalize`}>{title}</h2>
-			</div>
-			{href && (
-				<Link href={href} className="all-btn !hidden lg:!block capitalize">
-					{buttonText} <HiArrowLongRight size={24} />{" "}
-				</Link>
-			)}
-		</div>
-	);
+  return (
+    <div
+      className={twMerge(
+        `sec-heading w-full flex justify-center items-center pb-3`,
+        className
+      )}
+    >
+      <div className="flex gap-2 items-center">
+        {children}
+        <h2 className={`sec-title capitalize`}>{title}</h2>
+      </div>
+      {href && (
+        <Link href={href} className="all-btn !hidden lg:!block capitalize">
+          {buttonText} <HiArrowLongRight size={24} />{" "}
+        </Link>
+      )}
+    </div>
+  );
 }

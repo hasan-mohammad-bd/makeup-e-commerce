@@ -50,7 +50,7 @@ export default function ResponsiveSearch() {
 					// top-full
 					className="absolute z-30 left-0 top-0 w-full bg-white lg:hidden"
 				>
-					<div className="container flex justify-center gap-4 py-4 border-b border-slate-300">
+					<div className="container flex justify-center gap-4 py-4">
 						<Search />
 						<button
 							onClick={() => setSearchOpen(!searchOpen)}

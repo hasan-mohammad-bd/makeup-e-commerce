@@ -56,7 +56,8 @@
 /* Global Css */
 
 .sec-title {
-  @apply text-2xl font-bold font-title text-slate-900;
+
+  @apply text-4xl font-bold font-title text-slate-900;
 }
 
 .all-btn {
@@ -156,7 +157,7 @@
 
 .nav-search input {
   width: calc(100% - 48px);
-  /* @apply rounded-l-full md:rounded-l-lg border-r-0; */
+  @apply rounded-l-full md:rounded-l-none border-r-0;
 }
 
 .nav-search button {
