@@ -11,6 +11,7 @@ import { getDaysSinceCreation } from "@/utils/format-date";
 import { formatLongNumber, getFractionFixed } from "@/utils/format-number";
 import useCart from "@/hooks/useCart";
 import useWishList from "@/hooks/useWishList";
+import { Rating } from "react-simple-star-rating";
 
 // ** Import Icon
 import { FaStar } from "react-icons/fa";
@@ -118,8 +119,13 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
               </h2>
               <div className="product-rating">
                 <span className="font-semibold text-slate-900">
-                  {getFractionFixed(average_rating) || 5}{" "}
-                  <FaStar className="text-primary pb-1" />
+                  <Rating
+                    initialValue={product?.average_rating || 5}
+                    allowFraction
+                    readonly
+                    size={18}
+                    fillColor="#FFC107"
+                  />{" "}
                 </span>
                 <span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
                   {total_rating === 0 ? 0 : formatLongNumber(total_rating)}
