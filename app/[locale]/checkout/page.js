@@ -44,7 +44,7 @@ const Checkout = () => {
 	];
 
 	const [selectedPayMethod, setSelectedPayMethod] = useState(null);
-	const [deliveryMethod, setDeliveryMethod] = useState(deliveryMethods[0]);
+	const [deliveryMethod, setDeliveryMethod] = useState(deliveryMethods[1]);
 	const [orderCollapsed, setOrderCollapsed] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const { cart, discountCoupon } = useSelector((state) => state.cart);
