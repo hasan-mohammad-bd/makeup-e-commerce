@@ -27,6 +27,7 @@ import { useGetPaymentMethodsQuery } from "@/store/api/paymentMethodsAPI";
 import PayOptionIcon from "@/components/elements/svg/PayOptionIcon";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import useOrderPlace from "@/hooks/useOrderPlace";
+import useProfileUpdate from "@/hooks/useProfileUpdate";
 
 const Checkout = () => {
 	const { settings, translations } = useSelector((state) => state.common);
@@ -51,6 +52,7 @@ const Checkout = () => {
 	const { user, isLoading } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 	const { handleOrderPlace } = useOrderPlace(); //custom hook for separating order place business logics
+	const { handleUserUpdate } = useProfileUpdate(); //custom hook for separating profile update business logics
 
 	const { data: paymentMethodsData } = useGetPaymentMethodsQuery();
 	const paymentMethods = paymentMethodsData?.data || {};
@@ -87,12 +89,13 @@ const Checkout = () => {
 		: totalWithDiscount;
 
 	const handleCheckoutSubmit = async (data, event) => {
-		dispatch(setGlobalLoader(true));
+		// dispatch(setGlobalLoader(true));
 		const newOrder = {
 			name: data.name,
 			alt_name: data.name,
-			phone: user?.country_code + user?.phone,
-			alt_phone: user?.country_code + user?.alt_phone_no,
+			phone: siteConfig.phone.countryCode + data?.phone,
+			alt_phone:
+				siteConfig.phone.countryCode + user?.phone || user?.alt_phone_no,
 			address: data.address,
 			alt_address: data.address,
 			order_items: getOrderFormattedCartItems(cart),
@@ -110,6 +113,15 @@ const Checkout = () => {
 		};
 		// console.log(newOrder);
 		handleOrderPlace(newOrder);
+		// updating user for the first time only
+		if ((!user?.phone && !user?.alt_phone_no) || !user?.address) {
+			handleUserUpdate({
+				...user,
+				alt_phone_no: data?.phone,
+				address: user.address || data.address,
+			});
+		}
+		// else alert("user not updated");
 	};
 
 	return (
@@ -153,18 +165,28 @@ const Checkout = () => {
 										<label className="block text-base text-slate-900 mb-2">
 											{translations["phone-number"] || "মোবাইল নাম্বার"}
 										</label>
-										<input
-											type="phone"
-											name="phone"
-											defaultValue={user?.country_code + user?.phone}
-											placeholder={
-												translations["your-mobile-number"] ||
-												"মোবাইল নাম্বার লিখুন"
-											}
-											{...register("phone", {})}
-											disabled={true}
-											className="cursor-not-allowed"
-										/>
+										<div className="flex items-center group">
+											<div className="h-12 py-3 min-w-fit text-base font-title font-normal px-2 rounded-s-lg border bg-slate-100 border-gray-300 group-focus-within:border-primary group-focus-within:border-r-gray-300">
+												<p>{siteConfig.phone.prefix}</p>
+											</div>
+											<input
+												type="number"
+												className="w-full !pl-2 !rounded-s-none rounded-e-lg border border-l-0 border-gray-300 focus:outline-none group-focus:border-primary"
+												name="phone"
+												defaultValue={user?.phone || user?.alt_phone_no}
+												placeholder={
+													translations["your-mobile-number"] ||
+													"আপনার মোবাইল নাম্বার"
+												}
+												{...register("phone", {
+													required: "Phone number is required.",
+													pattern: {
+														value: siteConfig.phone.pattern,
+														message: "Please enter a valid phone number",
+													},
+												})}
+											/>
+										</div>
 										{errors.phone && (
 											<p className="errorMsg">{errors.phone.message}</p>
 										)}
@@ -178,6 +200,7 @@ const Checkout = () => {
 										className="h-[148px] border border-slate-300 p-4"
 										type="text"
 										name="address"
+										defaultValue={user?.address}
 										placeholder={
 											translations["type-your-address"] ||
 											"আপনার সম্পূর্ণ ঠিকানা লিখুন"

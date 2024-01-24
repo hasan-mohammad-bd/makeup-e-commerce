@@ -1,25 +1,19 @@
 "use client";
-import { toast } from "react-toastify";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { useUpdateProfileMutation } from "@/store/api/authAPI";
+import { useSelector } from "react-redux";
 import ProfileImageUpload from "./ProfileImageUpload";
 import { getFormattedDate } from "@/utils/format-date";
-import axiosInstance from "@/lib/axios-instance";
-import { setUser } from "@/store/slices/authSlice";
 import NestedPageTitle from "../_components/NestedPageTitle";
 import { siteConfig } from "@/config/site";
+import useProfileUpdate from "@/hooks/useProfileUpdate";
 
 const MyProfile = () => {
-	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
 	const { translations } = useSelector((state) => state.common);
-
+	const { handleUserUpdate } = useProfileUpdate();
 	const [editMode, setEditMode] = useState(false);
 	const [profileImageFile, setProfileImageFile] = useState(null);
-
-	const [updateProfile] = useUpdateProfileMutation();
 
 	const {
 		register,
@@ -27,33 +21,15 @@ const MyProfile = () => {
 		formState: { errors },
 	} = useForm();
 
-	const handleUserUpdate = async (data, event) => {
-		const formData = new FormData();
-		formData.append("image", profileImageFile || user?.image);
-		formData.append("name", data.name);
-		formData.append("birth_date", data.birth_date);
-		formData.append("gender", data.gender);
-		formData.append("email", data.email);
-		formData.append("phone", user?.phone);
-		formData.append("alt_phone_no", data?.alt_phone_no?.slice(1));
-		formData.append("country", siteConfig.phone.country);
-
-		updateProfile(formData)
-			.unwrap()
-			.then((response) => {
-				// Handle the successful response if necessary
-				axiosInstance.get(`user`).then((res) => {
-					dispatch(setUser(res.data.data));
-				});
-				// console.log(response.data.data);
-				toast.success("Profile updated successfully!");
-				setEditMode(false);
-			})
-			.catch((error) => {
-				// Handle the error if necessary
-				toast.error("Failed to update profile");
-				// console.log(error);
-			});
+	const updateUser = async (data) => {
+		const updatedProfileData = {
+			...data,
+			profileImageFile,
+		};
+		const isSuccess = await handleUserUpdate(updatedProfileData);
+		if (isSuccess) {
+			setEditMode(false);
+		}
 	};
 
 	// if (isLoading) return <p className="text-2xl text-red-500">Loading.....</p>;
@@ -66,7 +42,7 @@ const MyProfile = () => {
 			/>
 			<form
 				className="basis-3/5 px-3 lg:px-10 mt-3 lg:mt-2"
-				onSubmit={handleSubmit(handleUserUpdate)}
+				onSubmit={handleSubmit(updateUser)}
 			>
 				<ProfileImageUpload
 					profileImageFile={profileImageFile}
@@ -117,7 +93,7 @@ const MyProfile = () => {
 						</label>
 						{!editMode ? (
 							<p>
-								{user?.birth_date ? (
+								{user?.birth_date && user?.birth_date !== "0000-00-00" ? (
 									getFormattedDate(user?.birth_date)
 								) : (
 									<span className="text-slate-300">
@@ -220,7 +196,7 @@ const MyProfile = () => {
 						</label>
 						{!editMode ? (
 							<p className="text-slate-800">
-								{(user?.phone && user?.country_code + user.phone) || (
+								{(user?.phone && siteConfig.phone.countryCode + user.phone) || (
 									<span className="text-slate-300">
 										{translations["enter-the-phone-number"] ||
 											"ফোন নাম্বার লিখুন"}
@@ -234,7 +210,7 @@ const MyProfile = () => {
 									className="w-full rounded-lg border bg-slate-100 border-gray-300 focus:outline-none cursor-not-allowed"
 									name="phone"
 									disabled={true}
-									defaultValue={user?.country_code + user?.phone}
+									defaultValue={siteConfig.phone.countryCode + user?.phone}
 								/>
 								{/* </div> */}
 								{errors.phone && (
@@ -250,7 +226,7 @@ const MyProfile = () => {
 						{!editMode ? (
 							<p className="text-slate-800">
 								{(user?.alt_phone_no &&
-									user?.country_code + user.alt_phone_no) || (
+									siteConfig.phone.countryCode + user.alt_phone_no) || (
 									<span className="text-slate-300">
 										{translations["enter-alternate-phone-number"] ||
 											"বিকল্প ফোন নাম্বার লিখুন"}
@@ -271,7 +247,7 @@ const MyProfile = () => {
 											translations["enter-alternate-phone-number"] ||
 											"বিকল্প ফোন নাম্বার লিখুন"
 										}
-										defaultValue={`0${user?.alt_phone_no}`}
+										defaultValue={user?.alt_phone_no}
 										{...register("alt_phone_no", {
 											pattern: {
 												value: siteConfig.phone.pattern,
@@ -282,6 +258,38 @@ const MyProfile = () => {
 								</div>
 								{errors.alt_phone_no && (
 									<p className="errorMsg">{errors.alt_phone_no.message}</p>
+								)}
+							</>
+						)}
+					</div>
+					<div className="form-control col-span-2 lg:col-span-1">
+						<label className="block text-base text-slate-500 mb-2 capitalize">
+							{translations["your-address"] || "আপনার ঠিকানা"}
+						</label>
+						{!editMode ? (
+							<p className="text-slate-800">
+								{user?.address || (
+									<span className="text-slate-300">
+										{translations["type-your-address"] ||
+											"আপনার সম্পূর্ণ ঠিকানা লিখুন"}
+									</span>
+								)}
+							</p>
+						) : (
+							<>
+								<textarea
+									className="h-[100px] border border-slate-300 p-4"
+									type="text"
+									defaultValue={user?.address}
+									name="address"
+									placeholder={
+										translations["type-your-address"] ||
+										"আপনার সম্পূর্ণ ঠিকানা লিখুন"
+									}
+									{...register("address")}
+								/>
+								{errors.address && (
+									<p className="errorMsg">{errors.address.message}</p>
 								)}
 							</>
 						)}
