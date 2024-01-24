@@ -120,7 +120,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
               <div className="product-rating">
                 <span className="font-semibold text-slate-900">
                   <Rating
-                    initialValue={product?.average_rating || 5}
+                    initialValue={average_rating || 5}
                     allowFraction
                     readonly
                     size={18}

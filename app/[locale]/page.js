@@ -40,13 +40,13 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 			<section className="service-features mt-3 lg:mt-5">
-				<ServiceFeatures />
-			</section> */}
+      {/*       <section className="service-features mt-3 lg:mt-5">
+        <ServiceFeatures />
+      </section> */}
 
-      {/* <FlashSale translations={translations} /> */}
+      {/* 
 
-      {/*       <section className="lg:pb-14 mt-6 lg:mt-12 relative">
+          <section className="lg:pb-14 mt-6 lg:mt-12 relative">
         <div
           className="all-category py-4 lg:py-14"
           style={{
@@ -77,17 +77,20 @@ export default async function Home() {
             />
           </div>
         </div>
-      </section> */}
+      </section>  */}
 
       <section className="all-products mt-6 lg:mt-14">
         <div className="container">
-          <SectionTitle
+{/*           <SectionTitle
             title={translations["new-in-shop"]}
             buttonText={translations["see-all"]}
-          />
+          /> */}
           <HomeAllProducts translations={translations} />
           <SeeAll href="/products" buttonText={translations["see-all"]} />
         </div>
+      </section>
+      <section className="mt-6 lg:mt-14">
+        <FlashSale translations={translations} />
       </section>
 
       <section className="best-sell bg-slate-50 mt-8 lg:mt-0 py-4 md:py-14 lg:pb-14">
