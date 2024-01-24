@@ -33,6 +33,9 @@ export default function MobileSubMenu({ settings }) {
 						{key}
 					</Link>
 				))}
+				<Link href={"/products"} className={`${className}`}>
+					{translations["products"] || "প্রডাক্টস"}
+				</Link>
 			</div>
 		)
 	);

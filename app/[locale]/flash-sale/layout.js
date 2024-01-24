@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Sotota Stall || Flash selling products",
-  description: "All flash selling products Of Sotota Stall",
+	title: "Flash selling products",
+	description: "All flash selling products",
 };
 export default function FlashSellingProductsLayout({ children }) {
-  return <div>{children}</div>;
+	return <div>{children}</div>;
 }

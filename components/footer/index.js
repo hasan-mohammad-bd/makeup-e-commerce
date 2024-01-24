@@ -146,7 +146,8 @@ const Footer = () => {
 						<div className="grid grid-cols-12">
 							<div className="col-span-12">
 								<p className="text-sm font-normal font-body text-slate-400 text-center">
-									{translations["copyright"]}
+									{translations["copyright"]} {new Date().getFullYear()}{" "}
+									{translations["copyright-msg"]}.
 								</p>
 							</div>
 						</div>

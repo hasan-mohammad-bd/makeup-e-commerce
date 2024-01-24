@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Sotota Stall || All Categories",
-  description: "All Categories Of Sotota Stall",
+	title: "All Categories",
+	description: "All Categories",
 };
 export default function CategoriesLayout({ children }) {
-  return <div>{children}</div>;
+	return <div>{children}</div>;
 }

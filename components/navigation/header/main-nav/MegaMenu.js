@@ -92,11 +92,11 @@ export default function MegaMenu({ settings }) {
 							</div>
 							<div className="mt-6">
 								<Link
-									href={"/products"}
+									href={"/categories"}
 									onClick={closeMenu}
 									className="border border-primary rounded-lg py-2 px-3 text-primary active:scale-95"
 								>
-									{translations["view-all-products"]} <BsArrowRight />
+									{translations["all-categories"]} <BsArrowRight />
 								</Link>
 							</div>
 						</div>

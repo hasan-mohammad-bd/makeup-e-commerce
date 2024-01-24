@@ -9,13 +9,7 @@ import { setGlobalLoader } from "@/store/slices/commonSlice";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/navigation";
 
-const OtpForm = ({
-	selectedCountry,
-	phone,
-	setShowModal,
-	setOtpSent,
-	translations,
-}) => {
+const OtpForm = ({ phone, setShowModal, setOtpSent, translations }) => {
 	const [otp, setOtp] = useState(Array(6).fill(""));
 	const [verifyOTP, { isSuccess, isLoading, data: user, isError }] =
 		useVerifyOtpMutation();
@@ -64,7 +58,7 @@ const OtpForm = ({
 		} else {
 			const optData = {
 				phone_no: phone,
-				country: selectedCountry?.name,
+				country: "Bangladesh",
 				code: jointedOtp,
 			};
 			// console.log(optData, "Otp data");

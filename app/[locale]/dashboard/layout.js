@@ -14,9 +14,9 @@ import { RiQuestionAnswerFill } from "react-icons/ri";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const DashboardLayout = ({ children, params }) => {
+	const dispatch = useDispatch();
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const { translations } = useSelector((state) => state.common);
-	const dispatch = useDispatch();
 	const pathArray = usePathname().split("/");
 
 	const navItems = [
@@ -99,7 +99,7 @@ const DashboardLayout = ({ children, params }) => {
 									>
 										<button
 											className="flex items-center space-x-2 text-base font-normal"
-											onClick={() => setLogoutModalOpen(true)}
+											onClick={() => dispatch(setLogoutModalOpen(true))}
 										>
 											<span className={`text-amber-400`}>
 												<IoLogOut />
