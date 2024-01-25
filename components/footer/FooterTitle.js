@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function FooterTitle({ title, children, className }) {
   return (
     <div className={twMerge(`sec-heading w-full items-center`, className)}>
-      <div className="items-center">
+      <div className="items-center text-white">
         {children}
         <h2 className={`text-2xl`}>{title}</h2>
       </div>

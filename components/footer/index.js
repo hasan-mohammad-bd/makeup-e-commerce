@@ -4,7 +4,14 @@ import Image from "next/image";
 
 // ** Import Icons
 import { BsFillTelephoneFill } from "react-icons/bs";
-import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
+import {
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaFacebookF,
+  FaYoutube,
+  FaWhatsapp,
+  FaLinkedin,
+} from "react-icons/fa";
 import FooterPages from "./FooterPages";
 import SocialIcon from "../elements/SocialIcon";
 import { useSelector } from "react-redux";
@@ -12,6 +19,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useParams, usePathname } from "next/navigation";
 import FooterTitle from "./FooterTitle";
 import SubscriptionForm from "./SubscriptionForm";
+import { RiTwitterXLine } from "react-icons/ri";
 
 const Footer = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -34,13 +42,17 @@ const Footer = () => {
 
   const footerPage = settings?.footer_page || {};
   const helpPage = settings?.help_page || {};
-  console.log(settings);
+
+  const facebook = () => {
+    <FaFacebookF />;
+  };
+
   return (
     <>
       <footer className="footer relative bg-black rounded-t-2xl lg:rounded-none pt-6 lg:pt-14 overflow-hidden z-10">
         <div className="footer-top pb-5">
           <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-4 justify-between items-center gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-4 justify-between gap-4 lg:gap-6">
               <div className="text-white ">
                 {/* 								<Link href="/" className="logo inline-block mb-3">
 									<Image
@@ -82,27 +94,39 @@ const Footer = () => {
                   </li>
                   <li className="mt-6">
                     <p className="mb-3">{translations["social-link"]}</p>
-                    <div className="social-links flex items-center gap-5">
+                    <div className="social-links flex items-center gap-3">
                       <SocialIcon
                         href={settings.facebook_link}
-                        icon={"/assets/icons/social/fb.svg"}
+                        icon={
+                          <FaFacebookF color="white" className="text-white" />
+                        }
                       />
                       <SocialIcon
                         href={settings.youtube_link}
-                        icon={"/assets/icons/social/YouTube.svg"}
+                        icon={
+                          <FaYoutube color="white" className="text-white" />
+                        }
                       />
                       <SocialIcon
                         href={settings.whatsapp_link}
-                        icon={"/assets/icons/social/whatsapp.svg"}
-                        // iconClass={"h-7 w-7"}
+                        icon={
+                          <FaWhatsapp color="white" className="text-white" />
+                        }
                       />
                       <SocialIcon
                         href={settings.twitter_link}
-                        icon={"/assets/icons/social/twitter.svg"}
+                        icon={
+                          <RiTwitterXLine
+                            color="white"
+                            className="text-white"
+                          />
+                        }
                       />
                       <SocialIcon
                         href={settings.linkedin_link}
-                        icon={"/assets/icons/social/linkedin.svg"}
+                        icon={
+                          <FaLinkedin color="white" className="text-white" />
+                        }
                       />
                     </div>
                   </li>
@@ -112,7 +136,7 @@ const Footer = () => {
               <FooterPages title={translations.help} pages={helpPage} />
 
               <div className="footer-widget mt-2 lg:mt-0">
-                <div className="footer-links mb-6">
+                {/*                 <div className="footer-links mb-6">
                   <p>{translations["social-link"]}</p>
                   <div className="social-links flex items-center gap-5">
                     <SocialIcon
@@ -137,37 +161,14 @@ const Footer = () => {
                       icon={"/assets/icons/social/linkedin.svg"}
                     />
                   </div>
-                </div>
+                </div> */}
                 <div>
-                <SubscriptionForm settings={settings} />
-                </div>
-                <div className="footer-links">
-                  <p>{translations["payment-method"]}</p>
-                  <div className="payment-methods flex items-center gap-6 h-6">
-                    <Image
-                      src="/assets/icons/payments/payment.png"
-                      alt="Payment"
-                      width={32}
-                      height={23}
-                    />
-                    <Image
-                      src="/assets/icons/payments/bkash.png"
-                      alt="Bkash"
-                      width={32}
-                      height={23}
-                    />
-                    <Image
-                      src="/assets/icons/payments/visa.png"
-                      alt="visa"
-                      width={52}
-                      height={23}
-                    />
-                    <Link
-                      href="/"
-                      className="!text-xs/[100%] !mb-0 text-white w-1/5"
-                    >
-                      {translations["many-more"]}
-                    </Link>
+                  <div>
+                    <FooterTitle title={"News Letter"} />
+                    <p className="text-white mb-4">
+                      Stay Informed, Stay Inspired
+                    </p>
+                    <SubscriptionForm settings={settings} />
                   </div>
                 </div>
               </div>
@@ -176,12 +177,48 @@ const Footer = () => {
         </div>
         <div className="footer-bottom border-t border-slate-700 py-5">
           <div className="container">
-            <div className="grid grid-cols-12">
+            <div className="flex items-center justify-between">
               <div className="col-span-12">
                 <p className="text-sm font-normal font-body text-slate-400 text-center">
                   {translations["copyright"]} {new Date().getFullYear()}{" "}
                   {translations["copyright-msg"]}.
                 </p>
+              </div>
+              <div className="footer-links">
+                {/* <p>{translations["payment-method"]}</p> */}
+                <div className="payment-methods flex items-center gap-6 h-6">
+                  <span className="py-2 px-3 rounded-md bg-white">
+                    <Image
+                      src="/assets/icons/payments/payment.png"
+                      alt="Payment"
+                      width={32}
+                      height={23}
+                    />
+                  </span>
+                  <span className="py-2 px-3 rounded-md bg-white">
+                    <Image
+                      src="/assets/icons/payments/bkash.png"
+                      alt="Bkash"
+                      width={32}
+                      height={23}
+                    />
+                  </span>
+                  <span className="py-2 px-3 rounded-md bg-white">
+                    <Image
+                      src="/assets/icons/payments/visa.png"
+                      alt="visa"
+                      width={52}
+                      height={23}
+                    />
+                  </span>
+
+                  <Link
+                    href="/"
+                    className="!text-base/[100%] !mb-0 text-white w-1/5"
+                  >
+                    {translations["many-more"]}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

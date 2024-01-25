@@ -43,10 +43,10 @@ const SubscriptionForm = ({ settings }) => {
             style={{
               border: `1px solid ${settings?.colors?.primary}`,
             }}
-            className="rounded-none w-full"
+            className="rounded-none w-full placeholder:text-lg placeholder:text-slate-400 placeholder:font-bold"
             type="email"
             name="email"
-            placeholder="example@email.com"
+            placeholder="Email Address"
             {...register("email", {
               pattern: {
                 value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
@@ -56,14 +56,14 @@ const SubscriptionForm = ({ settings }) => {
             })}
           />
           <button
-            className="inline-block px-4 py-1 border-none text-center bg-primary text-white w-full leading-[40px] mt-3"
+            className="inline-block px-4 py-1 border-none text-center bg-primary text-xl font-bold text-white w-full leading-[40px] mt-3"
             type="submit"
             style={{
               backgroundColor: settings?.colors?.primary,
               color: settings?.colors?.primary_text,
             }}
           >
-            {translations["submit"] || "Submit"}
+            Subscribe
           </button>
         </div>
       </div>
