@@ -18,8 +18,11 @@ export const getBdFormattedDate = (date) => {
  * @returns a formatted date string in the format "dd MMM yyyy".
  */
 export const getFormattedDate = (date) => {
-	if (!date) return "Invalid Date";
-	return format(new Date(date), "dd MMM yyyy");
+	try {
+		return format(new Date(date), "dd MMM yyyy");
+	} catch (error) {
+		return "Invalid Date";
+	}
 };
 
 /**

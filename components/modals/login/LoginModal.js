@@ -50,7 +50,7 @@ const LoginModal = ({ showModal, setShowModal, title }) => {
 	} = useForm();
 
 	const onSubmit = async (data) => {
-		const phone = data?.phone?.slice(1); // removing (first digit / 0) from phone number
+		const phone = data?.phone;
 		const loginData = {
 			phone_no: phone,
 			country: siteConfig.phone.country,
@@ -76,7 +76,7 @@ const LoginModal = ({ showModal, setShowModal, title }) => {
 						? `${
 								translations["otp-sent-message"] ||
 								"এইমাত্র আমরা আপনার মোবাইল নাম্বারে একটি ৬ সংখ্যার OTP  কোড পাঠিয়েছি"
-						  } (${"+88" + phone})`
+						  } (${siteConfig.phone.countryCode + phone})`
 						: translations["verify-mobile-message"] ||
 						  "শুধুমাত্র মোবাইল নাম্বার যাচাই করে সততা স্টলের একজন আদর্শ মেম্বার হয়ে যান"}
 				</p>

@@ -13,7 +13,6 @@ const ProfileImageUpload = ({
 	const [validationError, setValidationError] = useState("");
 	const { translations } = useSelector((state) => state.common);
 	const ValidateImage = (file) => {
-
 		const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
 		const maxSize = 5 * 1024 * 1024; // 5MB
 
@@ -29,7 +28,7 @@ const ProfileImageUpload = ({
 
 	const handleImageUpload = (e) => {
 		const file = e.target.files[0];
-		const validationError = validateImage(file);
+		const validationError = ValidateImage(file);
 		if (validationError) {
 			setValidationError(validationError);
 			return;
@@ -67,7 +66,9 @@ const ProfileImageUpload = ({
 						/>
 					</label>
 				)}
-				<h3 className="text-center my-3 text-sm text-slate-500 whitespace-nowrap">{translations["profile-photo"] || "প্রফাইল ফটো"}</h3>
+				<h3 className="text-center my-3 text-sm text-slate-500 whitespace-nowrap">
+					{translations["profile-photo"] || "প্রফাইল ফটো"}
+				</h3>
 			</div>
 			{validationError && editMode && (
 				<div className="text-red-500 mt-12">{validationError}</div>
