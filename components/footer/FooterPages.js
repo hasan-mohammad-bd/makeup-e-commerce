@@ -11,9 +11,8 @@ export default function FooterPages({ title, pages }) {
   // console.log(isMobile);
   return (
     <div className="text-white ">
-            <FooterTitle title={title} />
-      <div className="flex justify-between items-center">
-
+      <FooterTitle title={title} />
+      <div className="flex items-center">
         <button
           onClick={() => setPagesOpen(!pagesOpen)}
           className={`text-slate-400 lg:hidden`}
@@ -22,7 +21,7 @@ export default function FooterPages({ title, pages }) {
         </button>
       </div>
       {(!isMobile || pagesOpen) && (
-        <ul className="footer-list mt-3 lg:mt-8">
+        <ul className="footer-list">
           {Object.keys(pages).map((key) => (
             <li key={key}>
               <Link href={pages[key]}>{key}</Link>
