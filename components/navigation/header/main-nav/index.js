@@ -96,7 +96,6 @@ export default function MainNav({ settings }) {
               </Link>
             </div>
             <div className="flex justify-center items-center ">
-              {/* <MenuItems settings={settings} /> */}
               <ResponsiveSearch />
             </div>
             <div className="header-right flex justify-between items-center ml-4 gap-2 lg:gap-6">
@@ -193,6 +192,9 @@ export default function MainNav({ settings }) {
             title={translations["log-out"]}
           />
         )}
+      </div>
+      <div className="h-16 w-full border border-t-slate-100 bg-white flex item-center">
+        <MenuItems settings={settings} />
       </div>
     </div>
   );

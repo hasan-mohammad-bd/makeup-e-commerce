@@ -56,7 +56,6 @@
 /* Global Css */
 
 .sec-title {
-
   @apply text-4xl font-bold font-title text-slate-900;
 }
 
@@ -133,6 +132,13 @@
 .nav-menu a,
 .nav-menu .menuBtn {
   @apply text-base font-title font-normal text-slate-500  ease-in duration-100 hover:text-primary;
+}
+
+.sub-item {
+  display: none;
+}
+.sub-menu:hover .sub-item {
+  display: block;
 }
 
 /* since nested groupes are not supported we have to use 

@@ -81,7 +81,7 @@ export default async function Home() {
 
       <section className="all-products mt-6 lg:mt-14">
         <div className="container">
-{/*           <SectionTitle
+          {/*           <SectionTitle
             title={translations["new-in-shop"]}
             buttonText={translations["see-all"]}
           /> */}
@@ -98,14 +98,14 @@ export default async function Home() {
       </section>
 
       <section className="new-products pt-6 lg:pt-14">
-        <div className="container">
+        {/*         <div className="container">
           <SectionTitle
             title={translations["new-in-shop"]}
             href="/products"
             buttonText={translations["see-all"]}
           />
         </div>
-        <NewArrival />
+        <NewArrival /> */}
         <div className="container">
           <SeeAll href="/products" buttonText={translations["see-all"]} />
         </div>
