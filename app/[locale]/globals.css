@@ -134,10 +134,17 @@
   @apply text-base font-title font-normal text-slate-500  ease-in duration-100 hover:text-primary;
 }
 
-.sub-item {
+.sub-item,
+.second-sub-item {
   display: none;
+  transition: opacity 0.3s ease-in-out;
 }
 .sub-menu:hover .sub-item {
+  display: block;
+  opacity: 1;
+}
+
+.second-sub-menu:hover .second-sub-item {
   display: block;
 }
 
