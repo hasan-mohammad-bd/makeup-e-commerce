@@ -30,8 +30,8 @@ const Footer = () => {
 	)
 		return null;
 
-	const footerPage = settings?.footer_page || {};
-	const helpPage = settings?.help_page || {};
+	const footerPage = settings?.footer_page || [];
+	const helpPage = settings?.help_page || [];
 	return (
 		<>
 			<footer className="footer relative bg-slate-900 rounded-t-2xl lg:rounded-none pt-6 lg:pt-14 overflow-hidden z-10">

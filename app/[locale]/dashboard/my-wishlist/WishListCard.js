@@ -95,7 +95,7 @@ const WishListCard = ({ product }) => {
 							</button>
 						) : (
 							<Link
-								href={"/products"}
+								href={`/categories/${product.category?.slug}`}
 								className="text-secondary-700 font-bold border whitespace-nowrap border-secondary-700 py-2 px-3 rounded-lg active:scale-95 cursor-pointer"
 							>
 								<span className="hidden md:inline">

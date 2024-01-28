@@ -31,15 +31,14 @@ import VideoPlayerModal from "@/components/modals/VideoPlayerModal";
 import AuthProvider from "@/provider/AuthProvider";
 import { fetchData } from "@/lib/fetch-data";
 
-export const generateMetadata = async () => {
+export const generateMetadata = async ({ params }) => {
 	let settings = {};
 	let appName = "E-commerce app";
 	let favicon = "/favicon.ico";
 	try {
-		settings = await fetchData({ api: `info/basic` });
+		settings = await fetchData({ api: `info/basic`, locale: params?.locale });
 		appName = settings?.data?.name;
 		// favicon = settings?.data?.favicon;
-		// console.log(favicon);
 	} catch (error) {
 		console.log(error);
 		return {
@@ -73,7 +72,7 @@ export const generateMetadata = async () => {
 
 const locales = ["bn", "en"];
 // export function generateStaticParams() {
-//   return locales.map((locale) => ({locale}));
+// 	return locales.map((locale) => ({ locale }));
 // }
 
 export default function RootLayout({ children, params }) {

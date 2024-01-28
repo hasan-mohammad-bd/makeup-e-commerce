@@ -1,14 +1,7 @@
-export async function generateMetadata({ params }) {
-    
-    return {
-      title: 'Sotota Stall || QnA'
-    };
+export const metadata = {
+	title: "Questions and Answers",
+};
 
-}
-
-export default function HelpLayout({children}) {
-
-    return (
-        <div>{children}</div>
-    )
+export default function HelpLayout({ children }) {
+	return <div>{children}</div>;
 }

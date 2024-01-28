@@ -100,13 +100,16 @@ export default async function Home() {
 				<div className="container">
 					<SectionTitle
 						title={translations["new-in-shop"]}
-						href="/products"
+						href="/products?sort_type=new"
 						buttonText={translations["see-all"]}
 					/>
 				</div>
 				<NewArrival />
 				<div className="container">
-					<SeeAll href="/products" buttonText={translations["see-all"]} />
+					<SeeAll
+						href="/products?sort_type=new"
+						buttonText={translations["see-all"]}
+					/>
 				</div>
 			</section>
 

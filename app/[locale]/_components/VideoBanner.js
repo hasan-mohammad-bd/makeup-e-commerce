@@ -1,13 +1,15 @@
-import { fetchData } from "@/lib/fetch-data";
-import { Link } from "@/navigation";
+"use client";
+import Link from "next/link";
+import { startVideoPlayer } from "@/store/slices/commonSlice";
 
 // ** Import Icons
 import { HiPlay } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
+import { useDispatch, useSelector } from "react-redux";
 
-const VideoBanner = async ({ translations }) => {
-	const data = await fetchData({ api: "info/basic" });
-	const settings = data?.data || {};
+const VideoBanner = ({ translations }) => {
+	const dispatch = useDispatch();
+	const { settings } = useSelector((state) => state.common);
 
 	return (
 		<>
@@ -24,18 +26,27 @@ const VideoBanner = async ({ translations }) => {
 					<p className="max-w-sm text-sm lg:text-lg font-normal text-white mt-3 lg:mt-5 mx-auto">
 						{translations["review_banner_subtitle"]}
 					</p>
-					<Link
-						href={settings?.review_video_link || "https://youtube.com"}
-						target="_blank"
+					<button
+						onClick={() =>
+							dispatch(
+								startVideoPlayer({
+									url: settings?.review_video_link || "https://youtube.com",
+									playing: true,
+									title: translations["review-video"] || "রিভিউ ভিডিও",
+									controls: true,
+									// className: "md:h-[480px] md:w-[854px]",
+								})
+							)
+						}
 						className="inline-block text-lg/[26px] font-semibold text-white bg-primary p-3 rounded-lg mt-4 lg:mt-8"
 					>
 						<HiPlay className="mr-1" />
 						{translations["watch-video"]}
-					</Link>
+					</button>
 				</div>
 				<div className="text-center">
 					<Link
-						href={settings.youtube_link}
+						href={settings?.youtube_link || "https://youtube.com"}
 						target="_blank"
 						className="inline-block text-sm text-red-500 mt-9 lg:mt-14"
 					>

@@ -15,7 +15,7 @@ export default function MegaMenu({ settings }) {
 	const popularCategories = categoriesData?.data || [];
 
 	const [menuOpen, setMenuOpen] = useState(false);
-	const headerPage = settings?.header_page || {};
+	const headerPage = settings?.header_page || [];
 	const { translations } = useSelector((state) => state.common);
 	const megaMenuRef = useRef(null);
 
@@ -54,14 +54,11 @@ export default function MegaMenu({ settings }) {
 						{translations["category"]} <BsChevronUp />
 					</span>
 				)}
-				{Object.keys(headerPage).map((key) => (
-					<Link key={key} href={headerPage[key]} className={`${className}`}>
-						{key}
+				{headerPage.map((page, index) => (
+					<Link key={index} href={page?.path} className={`${className}`}>
+						{page?.name}
 					</Link>
 				))}
-				<Link href={"/products"} className={`${className}`}>
-					{translations["products"] || "প্রডাক্টস"}
-				</Link>
 			</div>
 
 			{menuOpen && (
