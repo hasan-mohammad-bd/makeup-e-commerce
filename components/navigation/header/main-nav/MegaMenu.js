@@ -15,7 +15,7 @@ export default function MegaMenu({ settings }) {
 	const popularCategories = categoriesData?.data || [];
 
 	const [menuOpen, setMenuOpen] = useState(false);
-	const headerPage = settings?.header_page || {};
+	const headerPage = settings?.header_page || [];
 	const { translations } = useSelector((state) => state.common);
 	const megaMenuRef = useRef(null);
 

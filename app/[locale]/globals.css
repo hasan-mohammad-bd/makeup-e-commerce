@@ -31,6 +31,14 @@
   }
 
   /* input[type="checkbox"]::after {
+	input[type="number"]::-webkit-inner-spin-button,
+	input[type="number"]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+		-moz-appearance: textfield !important;
+	}
+
+	/* input[type="checkbox"]::after {
     @apply absolute top-0 left-[1/2] hidden text-sm text-white translate-x-[-50%]
   } */
 

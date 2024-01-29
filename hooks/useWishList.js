@@ -1,11 +1,12 @@
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	useAddToWishListMutation,
 	useGetWishListQuery,
 	useRemoveFromWishListMutation,
 } from "@/store/api/wishListAPI";
 import { useParams } from "next/navigation";
+import { setLoginModalOpen } from "@/store/slices/authSlice";
 
 /**
  * The `useWishList` function is a custom hook that provides methods for adding and removing products
@@ -15,6 +16,7 @@ import { useParams } from "next/navigation";
  */
 const useWishList = () => {
 	const { locale } = useParams();
+	const dispatch = useDispatch();
 	const { data, isLoading } = useGetWishListQuery({ locale });
 	const { user } = useSelector((state) => state.auth);
 	const [addToWishlist] = useAddToWishListMutation();
@@ -31,7 +33,8 @@ const useWishList = () => {
 	 */
 	const handleAddToWishlist = async (productId) => {
 		if (!user) {
-			toast.error("You're not logged in");
+			// toast.error("You're not logged in");
+			dispatch(setLoginModalOpen(true));
 			return;
 		}
 		try {
@@ -57,20 +60,20 @@ const useWishList = () => {
 	};
 
 	/**
-   * The function checks if a product with a given ID exists in the user's wishlist.
-   * @param productId - The productId parameter is the unique identifier of a product in the wish list.
-   * @returns a boolean value.
-   */
-  const handleWishListProductStatus = (productId) => {
+	 * The function checks if a product with a given ID exists in the user's wishlist.
+	 * @param productId - The productId parameter is the unique identifier of a product in the wish list.
+	 * @returns a boolean value.
+	 */
+	const handleWishListProductStatus = (productId) => {
 		if (!user) return false;
 		return !!wishedProducts.find((product) => product.id === productId);
 	};
 
-/**
- * The function `getWishlistCount` returns the number of products in the user's wishlist, or 0 if the
- * user is not defined.
- * @returns The number of products in the user's wishlist.
- */
+	/**
+	 * The function `getWishlistCount` returns the number of products in the user's wishlist, or 0 if the
+	 * user is not defined.
+	 * @returns The number of products in the user's wishlist.
+	 */
 	const getWishlistCount = () => {
 		if (!user) return 0;
 		return wishedProducts.length;

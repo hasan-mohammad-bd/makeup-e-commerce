@@ -6,10 +6,6 @@ import ViewHTML from "@/components/elements/ViewHTML";
 import { notFound } from "next/navigation";
 import CallInquiry from "@/components/elements/CallInquiry";
 
-export const metadata = {
-	title: "Sotota Stall || Booking Policy",
-};
-
 const DynamicPage = async ({ params }) => {
 	const { page_slug } = params;
 

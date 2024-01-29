@@ -100,7 +100,7 @@ const OtpForm = ({ phone, setShowModal, setOtpSent, translations }) => {
 					{[...Array(6)].map((_, index) => (
 						<React.Fragment key={index}>
 							<input
-								type="text"
+								type="number"
 								maxLength={1}
 								value={otp[index]}
 								onChange={(e) => handleChange(e, index)}

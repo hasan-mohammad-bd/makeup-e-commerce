@@ -19,7 +19,7 @@ export default function MobileSubMenu({ settings }) {
 
 	const isMobile = useMediaQuery("(max-width: 768px)");
 
-	const headerPage = settings?.header_page || {};
+	const headerPage = settings?.header_page || [];
 	const className = "px-2 py-2 bg-white rounded-lg flex items-center";
 	return (
 		isMobile &&
@@ -28,14 +28,11 @@ export default function MobileSubMenu({ settings }) {
 				<Link href={"/categories"} className={`${className}`}>
 					{translations["category"]}
 				</Link>
-				{Object.keys(headerPage).map((key) => (
-					<Link key={key} href={headerPage[key]} className={`${className}`}>
-						{key}
+				{headerPage.map((page, index) => (
+					<Link key={index} href={page?.path} className={`${className}`}>
+						{page?.name}
 					</Link>
 				))}
-				<Link href={"/products"} className={`${className}`}>
-					{translations["products"] || "প্রডাক্টস"}
-				</Link>
 			</div>
 		)
 	);
