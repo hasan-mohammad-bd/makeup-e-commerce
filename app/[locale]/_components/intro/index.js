@@ -64,6 +64,7 @@ const Intro = async () => {
                             {subItem?.child_categories?.length >= 1 &&
                               subItem.child_categories.map((subItem2) => (
                                 <div key={subItem2.id}>
+                                  {console.log(subItem2)}
                                   <Link
                                     className={` pl-3 hover:text-primary py-2 flex items-center justify-between  shadow text-lg mb-2rounded-full bg-gray-200 w-full ${
                                       subItem2.child_categories?.length >= 1 &&
@@ -75,14 +76,11 @@ const Intro = async () => {
                                     <div className="p-4 rounded-full bg-gray-200 w-full">
                                       <span>
                                         <Image
-                                          src={
-                                            subItem?.Icon ||
-                                            "../../../../public/assets/images/banner/lamp.png"
-                                          }
-                                          alt={subItem?.categories_name}
+                                          src={subItem2?.icon}
+                                          alt={subItem2?.categories_name}
                                           width={0}
                                           height={0}
-                                          className="h-[48px] min-h-[48px] py-2 object-contain object-left"
+                                          className="h-[48px] min-h-[48px] object-contain object-left"
                                         />
                                       </span>
                                       <span>{subItem2.category_name}</span>
