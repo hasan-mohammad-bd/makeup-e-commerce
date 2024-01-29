@@ -1,4 +1,4 @@
-# Sotota Stall - Project
+# Suruchi Ecom - Project
 
 ## Getting Started
 

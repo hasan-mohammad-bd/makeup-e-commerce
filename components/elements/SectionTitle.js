@@ -3,32 +3,35 @@ import { Link } from "@/navigation";
 // import Image from "next/image";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
+import Image from "next/image";
 
 export default function SectionTitle({
-	title,
-	href,
-	buttonText = "See All",
-	children,
-	className,
+  title,
+  href,
+  buttonText = "See All",
+  children,
+  className,
 }) {
-	return (
-		<div
-			className={twMerge(
-				`sec-heading w-full flex ${
-					!href ? "justify-center lg:justify-start" : "justify-between"
-				} items-center lg:border-b border-slate-200 pb-3`,
-				className
-			)}
-		>
-			<div className="flex gap-2 items-center">
-				{children}
-				<h2 className={`sec-title capitalize`}>{title}</h2>
-			</div>
-			{href && (
-				<Link href={href} className="all-btn !hidden lg:!block capitalize">
-					{buttonText} <HiArrowLongRight size={24} />{" "}
-				</Link>
-			)}
-		</div>
-	);
+  return (
+    <div
+      className={twMerge(
+        `sec-heading w-full items-center text-center`,
+        className
+      )}
+    >
+      <div className="items-center">
+        {children}
+        <h2 className={`sec-title capitalize`}>{title}</h2>
+      </div>
+      <span className="w-full text-center">
+        <Image
+          src={`/assets/images/banner/heading-shape.png`}
+          width={0}
+          height={0}
+          alt="Not Found"
+          className="my-6 mx-auto h-auto w-[160px]"
+        />
+      </span>
+    </div>
+  );
 }

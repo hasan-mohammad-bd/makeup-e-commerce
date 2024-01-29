@@ -5,7 +5,7 @@ import noImage from "@/public/assets/images/no-image.png";
 
 const page = async () => {
 	const [categoriesRes, transRes] = await Promise.allSettled([
-		fetchData({ api: `categories?no_child=1` }),
+		fetchData({ api: `categories` }),
 		fetchData({ api: `translations` }),
 	]);
 

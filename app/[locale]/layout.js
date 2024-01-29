@@ -29,6 +29,7 @@ import Header from "@/components/navigation/header";
 import Footer from "@/components/footer";
 import VideoPlayerModal from "@/components/modals/VideoPlayerModal";
 import AuthProvider from "@/provider/AuthProvider";
+import { Jost } from "next/font/google";
 import { fetchData } from "@/lib/fetch-data";
 
 export const generateMetadata = async ({ params }) => {
@@ -70,6 +71,14 @@ export const generateMetadata = async ({ params }) => {
 	};
 };
 
+const jost = Jost({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jost",
+});
+
 const locales = ["bn", "en"];
 // export function generateStaticParams() {
 // 	return locales.map((locale) => ({ locale }));
@@ -85,30 +94,30 @@ export default function RootLayout({ children, params }) {
 	const isValidLocale = locales.some((cur) => cur === params.locale);
 	if (!isValidLocale) notFound();
 
-	// unstable_setRequestLocale(params.locale);
+  // unstable_setRequestLocale(params.locale);
 
-	return (
-		<html lang={params.locale}>
-			<body>
-				<AuthProvider>
-					<ReduxProvider>
-						<Header />
-						<CheckConnection>
-							<main>{children}</main>
-						</CheckConnection>
-						<Footer />
-						<BottomNavigation />
-						<CartTray />
-						<Cart />
-						<ProductSelect />
-						<SizeChangeModal />
-						<VideoPlayerModal />
-						<PersistUser />
-						<GlobalLoader />
-						<ServerDataProvider />
-					</ReduxProvider>
-				</AuthProvider>
-			</body>
-		</html>
-	);
+  return (
+    <html lang={params.locale}>
+      <body className={jost.variable}>
+        <AuthProvider>
+          <ReduxProvider>
+            <Header />
+            <CheckConnection>
+              <main>{children}</main>
+            </CheckConnection>
+            <Footer />
+            <BottomNavigation />
+            <CartTray />
+            <Cart />
+            <ProductSelect />
+            <SizeChangeModal />
+            <VideoPlayerModal />
+            <PersistUser />
+            <GlobalLoader />
+            <ServerDataProvider />
+          </ReduxProvider>
+        </AuthProvider>
+      </body>
+    </html>
+  );
 }
