@@ -40,8 +40,8 @@ const Footer = () => {
   )
     return null;
 
-  const footerPage = settings?.footer_page || {};
-  const helpPage = settings?.help_page || {};
+  const footerPage = settings?.footer_page || [];
+  const helpPage = settings?.help_page || [];
 
   const facebook = () => {
     <FaFacebookF />;

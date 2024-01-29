@@ -22,9 +22,9 @@ export default function FooterPages({ title, pages }) {
       </div>
       {(!isMobile || pagesOpen) && (
         <ul className="footer-list">
-          {Object.keys(pages).map((key) => (
-            <li key={key}>
-              <Link href={pages[key]}>{key}</Link>
+          {pages.map((page) => (
+            <li key={page?.path}>
+              <Link href={page?.path}>{page?.name}</Link>
             </li>
           ))}
         </ul>
