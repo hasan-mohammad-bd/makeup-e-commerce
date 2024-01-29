@@ -20,6 +20,7 @@ import { useParams, usePathname } from "next/navigation";
 import FooterTitle from "./FooterTitle";
 import SubscriptionForm from "./SubscriptionForm";
 import { RiTwitterXLine } from "react-icons/ri";
+import ScrollToTopButton from "../utility/ScrollToTopButton";
 
 const Footer = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -223,6 +224,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        <ScrollToTopButton />
       </footer>
     </>
   );
