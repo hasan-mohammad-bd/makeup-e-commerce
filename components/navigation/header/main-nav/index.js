@@ -148,7 +148,7 @@ export default function MainNav({ settings }) {
                   className="relative hidden lg:flex items-center"
                 >
                   {userOpen && !user ? (
-                    <div className="absolute right-0 top-0 z-10 mt-14">
+                    <div className="absolute right-[13.5rem] top-0 z-10 mt-14">
                       <div className="relative bg-white px-6 py-8 w-52 border border-slate-300 rounded-lg">
                         <div className="absolute top-0 right-0 transform -translate-x-1/2 -translate-y-1/2 rotate-45 w-4 h-4 bg-white border-l border-t border-slate-300"></div>
                         <p className="text-slate-500 text-base font-bold text-center">
@@ -156,7 +156,7 @@ export default function MainNav({ settings }) {
                         </p>
                         <div className="flex justify-center mt-4">
                           <button
-                            className="primary-btn px-6"
+                            className="primary-btn px-3"
                             onClick={handleModalOpen}
                           >
                             {translations["log-in"]}

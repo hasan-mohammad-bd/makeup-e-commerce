@@ -73,6 +73,7 @@ const FlashSale = ({ translations }) => {
               <>
                 <DynamicBackgroundComponent
                   imageUrl={flashSaleInfo?.banner_image}
+                  height={"50vh"}
                 />
               </>
               /*               <FlashSaleSlider

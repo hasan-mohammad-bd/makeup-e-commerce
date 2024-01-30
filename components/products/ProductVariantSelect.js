@@ -111,7 +111,7 @@ const ProductVariantSelect = forwardRef(
                 return (
                   <div
                     key={color}
-                    className={`md:p-1.5 h-[48px] lg:h-[52px] min-w-[48px] lg:min-w-[52px] box-content rounded border ${
+                    className={` h-[28px] w-[28px] rounded-full box-content border object-cover ${
                       selectedColor === color
                         ? "border-2 border-primary"
                         : "border-slate-300"
@@ -125,7 +125,7 @@ const ProductVariantSelect = forwardRef(
                         height={52}
                         width={52}
                         title={color}
-                        className={`h-full w-full rounded-md`}
+                        className={`h-full w-full rounded-full`}
                       />
                     ) : (
                       <span
@@ -164,7 +164,7 @@ const ProductVariantSelect = forwardRef(
               {colorsGroup[selectedColor]?.map((variant) => (
                 <div
                   key={variant.id}
-                  className={`py-2 lg:py-3 px-4 rounded-lg border text-sm lg:text-base ${
+                  className={`py-1 lg:py-1 px-2 rounded-md border text-sm lg:text-base ${
                     selectedVariant?.id === variant.id
                       ? "border-2 border-primary"
                       : "border-slate-300"

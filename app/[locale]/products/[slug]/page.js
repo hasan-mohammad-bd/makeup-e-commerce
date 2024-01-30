@@ -6,91 +6,105 @@ import AllProducts from "@/components/products/AllProducts";
 import { SeeAll } from "@/components/elements/buttons";
 import LastVisitedProducts from "@/components/products/LastVisitedProducts";
 import { getSlicedText } from "@/utils/format-text";
+import DynamicBackgroundComponent from "@/components/utility/BackgroundImage";
+import ProductTabsView from "./_components/ProductTabsView";
+import ServiceFeatures from "../../_components/service-features";
 
 const ProductDetailsView = async ({ params }) => {
-	const { slug } = params;
-	const [settingsRes, productRes, tranRes] = await Promise.allSettled([
-		fetchData({ api: `info/basic` }),
-		fetchData({ api: `products/${slug}` }),
-		fetchData({ api: `translations` }),
-	]);
+  const { slug } = params;
+  const [settingsRes, productRes, tranRes] = await Promise.allSettled([
+    fetchData({ api: `info/basic` }),
+    fetchData({ api: `products/${slug}` }),
+    fetchData({ api: `translations` }),
+  ]);
 
-	const settings =
-		settingsRes.status === "fulfilled" ? settingsRes.value?.data || {} : {};
-	const product =
-		productRes.status === "fulfilled" ? productRes.value?.data || [] : [];
-	const translations =
-		tranRes.status === "fulfilled" ? tranRes.value?.data || {} : {};
+  const settings =
+    settingsRes.status === "fulfilled" ? settingsRes.value?.data || {} : {};
+  const product =
+    productRes.status === "fulfilled" ? productRes.value?.data || [] : [];
+  const translations =
+    tranRes.status === "fulfilled" ? tranRes.value?.data || {} : {};
 
-	//Category Filter
-	const customSearchParams = {
-		category_id: product?.category?.id,
-		per_page: 20,
-	};
+  //Category Filter
+  const customSearchParams = {
+    category_id: product?.category?.id,
+    per_page: 20,
+  };
 
-	return (
-		<div className="mb-32 lg:mb-0">
-			<div className="container hidden lg:block">
-				<div className="breadcrumb breadcrumb-2 py-5">
-					<div>
-						<Link
-							href={`/`}
-							className="text-base text-slate-600 hover:text-primary"
-						>
-							{translations["home"] || "হোম"}
-						</Link>
-						<Link
-							href={`/products`}
-							className="text-base text-slate-600 hover:text-primary"
-						>
-							{translations["products"] || "প্রডাক্টস"}
-						</Link>
-						<Link
-							href={`/products/${slug}`}
-							aria-disabled="true"
-							className={`text-base text-slate-900 pointer-events-none`}
-						>
-							{getSlicedText(slug, 50)}
-						</Link>
-					</div>
-				</div>
-			</div>
-			<div className="lg:container">
-				<ProductDetails
-					product={product}
-					settings={settings}
-					translations={translations}
-				/>
-			</div>
-			<section>
-				<div className="h-2 w-full bg-slate-200 lg:hidden"></div>
-				<div className="container mt-4 lg:mt-12 mb-6 lg:mb-12">
-					<SectionTitle
-						className={"justify-start"}
-						title={
-							translations["same-category-products"] ||
-							"একই ক্যাটাগরির আরও প্রোডাক্ট"
-						}
-						buttonText={translations["see-all"]}
-					/>
-					<div className="category-products mt-1 lg:mt-6">
-						<AllProducts
-							customSearchParams={customSearchParams}
-							translations={translations}
-						/>
-						<SeeAll
-							href={`/categories/${product?.category?.slug}`}
-							buttonText={translations["see-all"]}
-						/>
-					</div>
-				</div>
-			</section>
-			<LastVisitedProducts
-				visitedProductId={product?.id}
-				translations={translations}
-			/>
-		</div>
-	);
+  return (
+    <div className="mb-32 lg:mb-0  mx-auto">
+      <div className="hidden lg:block">
+        <div className="">
+          <DynamicBackgroundComponent
+            heading={"Product Details"}
+            imageUrl={product.image}
+            height={"30vh"}
+          >
+            <div className="text-lg">
+              <Link href={`/`} className=" hover:text-primary">
+                {translations["home"] || "হোম"}
+              </Link>
+              <span className="text-primary mx-3 font-extrabold">/</span>{" "}
+              <Link href={`/products`} className=" hover:text-primary">
+                {translations["products"] || "প্রডাক্টস"}
+              </Link>
+              {/*               <Link
+                href={`/products/${slug}`}
+                aria-disabled="true"
+                className={`text-base text-slate-900 pointer-events-none`}
+              >
+                {getSlicedText(slug, 50)}
+              </Link> */}
+            </div>
+          </DynamicBackgroundComponent>
+        </div>
+      </div>
+      <div className="small-container mx-auto md:mt-20">
+        <ProductDetails
+          product={product}
+          settings={settings}
+          translations={translations}
+        />
+      </div>
+      <div>
+        <ProductTabsView
+          product={product}
+          settings={settings}
+          translations={translations}
+        />
+      </div>
+      <section>
+        <div className="h-2 w-full bg-slate-200 lg:hidden"></div>
+        <div className="small-container mx-auto mt-4 lg:mt-12 mb-6 lg:mb-12">
+          <SectionTitle
+            className={"justify-start"}
+            title={
+              translations["same-category-products"] ||
+              "একই ক্যাটাগরির আরও প্রোডাক্ট"
+            }
+            buttonText={translations["see-all"]}
+          />
+          <div className="category-products mt-1 lg:mt-6">
+            <AllProducts
+              customSearchParams={customSearchParams}
+              translations={translations}
+            />
+            <SeeAll
+              href={`/categories/${product?.category?.slug}`}
+              buttonText={translations["see-all"]}
+            />
+          </div>
+        </div>
+      </section>
+      <LastVisitedProducts
+        visitedProductId={product?.id}
+        translations={translations}
+      />
+      <section className="service-features small-container mx-auto mt-3 lg:mt-5">
+        <ServiceFeatures />
+      </section>
+    </div>
+  );
 };
 
 export default ProductDetailsView;
