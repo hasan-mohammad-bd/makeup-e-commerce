@@ -31,12 +31,12 @@ const SaleProductCard = ({ saleProduct }) => {
 
 					<div className="flex text-sm items-center gap-3">
 						{saleProduct.barcode?.color && (
-							<div className="px-2 border border-slate-300 rounded-md">
+							<div className="px-2 border border-slate-300 ">
 								{saleProduct?.barcode?.color}
 							</div>
 						)}
 						{saleProduct.barcode?.size && (
-							<div className="px-2 border border-slate-300 rounded-md">
+							<div className="px-2 border border-slate-300 ">
 								{saleProduct?.barcode?.size}
 							</div>
 						)}

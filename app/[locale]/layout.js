@@ -33,42 +33,42 @@ import { Jost } from "next/font/google";
 import { fetchData } from "@/lib/fetch-data";
 
 export const generateMetadata = async ({ params }) => {
-	let settings = {};
-	let appName = "E-commerce app";
-	let favicon = "/favicon.ico";
-	try {
-		settings = await fetchData({ api: `info/basic`, locale: params?.locale });
-		appName = settings?.data?.name;
-		// favicon = settings?.data?.favicon;
-	} catch (error) {
-		console.log(error);
-		return {
-			title: appName,
-			applicationName: appName,
-		};
-	}
+  let settings = {};
+  let appName = "E-commerce app";
+  let favicon = "/favicon.ico";
+  try {
+    settings = await fetchData({ api: `info/basic`, locale: params?.locale });
+    appName = settings?.data?.name;
+    // favicon = settings?.data?.favicon;
+  } catch (error) {
+    console.log(error);
+    return {
+      title: appName,
+      applicationName: appName,
+    };
+  }
 
-	return {
-		title: {
-			default: `${appName}`,
-			template: `%s || ${appName}`,
-		},
-		description: {
-			default: `${settings?.data?.motto}`,
-			template: `%s of ${appName}`,
-		},
-		applicationName: appName,
-		// icons: {
-		// 	icon: [
-		// 		{
-		// 			type: "image/x-icon",
-		// 			sizes: "64x73",
-		// 			url: favicon || `/favicon.ico`,
-		// 		},
-		// 	],
-		// 	// apple: [],
-		// },
-	};
+  return {
+    title: {
+      default: `${appName}`,
+      template: `%s || ${appName}`,
+    },
+    description: {
+      default: `${settings?.data?.motto}`,
+      template: `%s of ${appName}`,
+    },
+    applicationName: appName,
+    // icons: {
+    // 	icon: [
+    // 		{
+    // 			type: "image/x-icon",
+    // 			sizes: "64x73",
+    // 			url: favicon || `/favicon.ico`,
+    // 		},
+    // 	],
+    // 	// apple: [],
+    // },
+  };
 };
 
 const jost = Jost({
@@ -85,14 +85,14 @@ const locales = ["bn", "en"];
 // }
 
 export default function RootLayout({ children, params }) {
-	// const locale = useLocale();
-	// // Show a 404 error if the user requests an unknown locale
-	// if (params.locale !== locale) {
-	// 	notFound();
-	// }
+  // const locale = useLocale();
+  // // Show a 404 error if the user requests an unknown locale
+  // if (params.locale !== locale) {
+  // 	notFound();
+  // }
 
-	const isValidLocale = locales.some((cur) => cur === params.locale);
-	if (!isValidLocale) notFound();
+  const isValidLocale = locales.some((cur) => cur === params.locale);
+  if (!isValidLocale) notFound();
 
   // unstable_setRequestLocale(params.locale);
 

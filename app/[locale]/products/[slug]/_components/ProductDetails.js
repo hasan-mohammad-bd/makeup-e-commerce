@@ -258,31 +258,28 @@ const ProductDetails = ({ product, settings, translations }) => {
               ) : null}
             </div>
             <div className="flex justify-start items-center mt-5">
-              <div className="flex w-fit rounded-full border border-slate-200 py-1 items-center products-center gap-3 text-slate-900 ">
-                <div></div>
-                <button
-                  disabled={quantity <= 1}
-                  className={`bg-transparent border-r bg-slate-200 flex justify-center items-center ${
-                    quantity <= 1
-                      ? "border-slate-200 cursor-not-allowed text-slate-300 "
-                      : ""
-                  }  w-7 h-7`}
-                  onClick={() =>
-                    dispatch(cartActions.removeQuantity(barcodeId))
-                  }
-                >
-                  <FiMinus size={20} />
-                </button>
-                <div className="mx-1 text-base font-normal text-slate-900 font-title">
-                  {quantity || 1}
-                </div>
-                <button
-                  className="bg-transparent border-l bg-slate-200 border-slate-200 w-7 h-7 flex justify-center items-center"
-                  onClick={() => dispatch(cartActions.addQuantity(barcodeId))}
-                >
-                  <FiPlus size={20} />
-                </button>
+            <div className="flex w-fit rounded-full border border-slate-200 items-center products-center gap-2 text-slate-900 ">
+              <button
+                disabled={quantity <= 1}
+                className={`rounded-l-full border-r bg-slate-200 w-7 h-7 flex justify-center items-center ${
+                  quantity <= 1
+                    ? "border-slate-200 cursor-not-allowed text-slate-300 "
+                    : ""
+                }  w-7 h-7`}
+                onClick={() => dispatch(cartActions.removeQuantity(barcodeId))}
+              >
+                <FiMinus size={16} />
+              </button>
+              <div className="mx-1 text-base font-normal text-slate-900 font-title">
+                {quantity || 1}
               </div>
+              <button
+                className=" border-l rounded-r-full bg-slate-200 border-slate-200 w-7 h-7 flex justify-center items-center"
+                onClick={() => dispatch(cartActions.addQuantity(barcodeId))}
+              >
+                <FiPlus size={16} />
+              </button>
+            </div>
               <button
                 className="bg-primary rounded-sm py-2 md:py-2 w-fit px-3 md:px-6 text-white ml-3 text-center active:scale-95"
                 onClick={() => handleAddToCart(product, selectedVariant)}

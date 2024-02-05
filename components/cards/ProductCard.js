@@ -90,7 +90,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                   as={`/products/${slug}`}
                 >
                   <Image
-                    className={`default-img  h-[17.188rem] w-full bg-[#DCDDDF]`}
+                    className={`default-img object-cover h-[17.188rem] w-full bg-[#DCDDDF]`}
                     src={image || "/assets/images/no-image.png"}
                     alt={product_name}
                     width={0}
@@ -179,7 +179,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                 </button>
                 <button
                   aria-label="Add To Wishlist"
-                  className={`border border-slate-300 px-3 text-slate-500`}
+                  className={`border border-slate-300 px-3 @  text-slate-500`}
                   onClick={(e) =>
                     isInWishList
                       ? handleRemoveFromWishlist(id)

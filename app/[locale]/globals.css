@@ -246,7 +246,7 @@
 /* From common classes  */
 .form-control input,
 .form-control textarea {
-  @apply w-full rounded-lg;
+  @apply w-full rounded-md;
 }
 
 /* Contact Form */
