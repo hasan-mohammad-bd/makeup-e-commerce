@@ -116,7 +116,7 @@ const DashboardLayout = ({ children, params }) => {
                         </span>
                         <span className="font-bold">{item.text}</span>
                       </li>
-                    </Link>
+                    </Link>  
                   ))}
                   <li
                     className={`flex items-center py-3 px-4 hover:bg-amber-200 rounded-lg w-full font-bold`}

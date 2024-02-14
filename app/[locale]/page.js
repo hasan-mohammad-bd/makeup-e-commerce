@@ -40,7 +40,7 @@ export default async function Home() {
         </div>
       </section>
 
-{/*             <section className="service-features mt-3 lg:mt-5">
+      {/*             <section className="service-features mt-3 lg:mt-5">
         <ServiceFeatures />
       </section> */}
 
@@ -81,10 +81,10 @@ export default async function Home() {
 
       <section className="all-products mt-6 lg:mt-14">
         <div className="container">
-          {/*           <SectionTitle
+          <SectionTitle
             title={translations["new-in-shop"]}
             buttonText={translations["see-all"]}
-          /> */}
+          />
           <HomeAllProducts translations={translations} />
           <SeeAll href="/products" buttonText={translations["see-all"]} />
         </div>
@@ -106,9 +106,9 @@ export default async function Home() {
           />
         </div>
         <NewArrival /> */}
-        <div className="container">
+{/*         <div className="container">
           <SeeAll href="/products" buttonText={translations["see-all"]} />
-        </div>
+        </div> */}
       </section>
 
       <section className="mt-6 lg:mt-14">

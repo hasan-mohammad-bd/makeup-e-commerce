@@ -33,19 +33,23 @@ const ProductDetailsView = async ({ params }) => {
 
   return (
     <div className="mb-32 lg:mb-0  mx-auto">
-      <div className="hidden lg:block">
+      <div className="">
         <div className="">
           <DynamicBackgroundComponent
             heading={"Product Details"}
             imageUrl={product.image}
             height={"30vh"}
+            mobileHeight={"15vh"}
           >
             <div className="text-lg">
-              <Link href={`/`} className=" hover:text-primary">
+              <Link href={`/`} className=" hover:text-primary text-white">
                 {translations["home"] || "হোম"}
               </Link>
               <span className="text-primary mx-3 font-extrabold">/</span>{" "}
-              <Link href={`/products`} className=" hover:text-primary">
+              <Link
+                href={`/products`}
+                className=" hover:text-primary text-white"
+              >
                 {translations["products"] || "প্রডাক্টস"}
               </Link>
               {/*               <Link

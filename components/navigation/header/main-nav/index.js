@@ -26,8 +26,11 @@ import MenuItems from "./MenuItems";
 import LogoutModal from "@/components/modals/logoutModal";
 import useWishList from "@/hooks/useWishList";
 import TopHeaderBanner from "../TopHeaderBanner";
+import { IoMdMenu } from "react-icons/io";
+import SidebarMenu from "@/components/side-drawers/SidebarMenu";
 
 export default function MainNav({ settings }) {
+  const [isSideBarOpen, setIsSidebarOpen] = useState(false);
   const { locale } = useParams();
   const [scroll, setScroll] = useState(0);
   const { cart } = useSelector((state) => state.cart);
@@ -50,6 +53,10 @@ export default function MainNav({ settings }) {
     setUserOpen(false);
     // setShowModal(true);
     dispatch(setLoginModalOpen(true));
+  };
+
+  const sidebarToggle = () => {
+    setIsSidebarOpen((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -80,22 +87,25 @@ export default function MainNav({ settings }) {
   return (
     <div className="">
       <TopHeaderBanner locale={locale} />
-      <div className=" w-full z-30 bg-white border-b border-slate-300 py-6">
+      <div className="w-full z-30 bg-white border-b border-slate-300 py-3 md:py-6">
         <div className="container">
           <div className="header-wrap flex justify-between items-center">
             {/* Nav Items  */}
-            <div className="header-left flex items-center gap-4">
-              <Link href="/" className="logo">
+            <button onClick={sidebarToggle} className="md:hidden">
+              <IoMdMenu size={28} />
+            </button>
+            <div className="header-left  gap-4">
+              <Link href="/" className="logo w-full ">
                 <Image
                   src={settings?.logo}
                   alt={settings?.name}
-                  width={200}
+                  width={0}
                   height={48}
-                  className="h-[48px] min-h-[48px] py-2 object-contain object-left"
+                  className="h-[48px] min-w-[150px]  min-h-[48px] mr-[-70px] md:mr-0 py-2 object-contain object-left"
                 />
               </Link>
             </div>
-            <div className="flex justify-center items-center ">
+            <div className=" justify-center items-center hidden md:flex">
               <ResponsiveSearch />
             </div>
             <div className="header-right flex justify-between items-center ml-4 gap-2 lg:gap-6">
@@ -114,18 +124,18 @@ export default function MainNav({ settings }) {
                       <HiOutlineUser className="" size={28} />
                     )}
                   </button>
-                  <p>Profile</p>
+                  <p className="hidden md:block">Profile</p>
                 </div>
-                <div className="text-center ml-4">
+                <div className="text-center ml-4 hidden md:flex flex-col">
                   <Link href="/dashboard/my-wishlist" className="relative">
                     <HiOutlineHeart size={28} />
                     {wishlistCount ? (
-                      <span className="text-xs absolute -right-2 -top-1 bg-red-500 text-white px-[6px] text-center rounded-full">
+                      <span className="text-xs absolute right-4 -top-1 bg-red-500 text-white px-[6px] text-center rounded-full">
                         {wishlistCount > 9 ? "9+" : wishlistCount}
                       </span>
                     ) : null}
                   </Link>
-                  <p>My Wishlist</p>
+                  <p className="">My Wishlist</p>
                 </div>
 
                 <div className="text-center ml-4">
@@ -141,7 +151,7 @@ export default function MainNav({ settings }) {
                       </span>
                     ) : null}
                   </button>
-                  <p>My Cart</p>
+                  <p className="hidden md:block">My Cart</p>
                 </div>
                 <div
                   ref={popoverRef}
@@ -193,9 +203,13 @@ export default function MainNav({ settings }) {
           />
         )}
       </div>
-      <div className="h-16 w-full border border-t-slate-100 bg-white flex item-center">
+      <div className="h-16 w-full border border-t-slate-100 bg-white hidden md:flex item-center">
         <MenuItems settings={settings} />
       </div>
+      <SidebarMenu
+        sidebarToggle={sidebarToggle}
+        isSideBarOpen={isSideBarOpen}
+      />
     </div>
   );
 }

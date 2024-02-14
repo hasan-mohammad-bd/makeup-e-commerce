@@ -16,7 +16,7 @@ import HeartRedIcon from "@/components/elements/svg/HeartRedIcon";
 const ProductViewSlider = forwardRef(({ product, selectedColor }, ref) => {
   const dispatch = useDispatch();
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-/*   const {
+  /*   const {
     handleAddToWishlist,
     handleWishListProductStatus,
     handleRemoveFromWishlist,
@@ -52,7 +52,7 @@ const ProductViewSlider = forwardRef(({ product, selectedColor }, ref) => {
 
   return (
     <>
-      <div className="">
+      <div className="px-3 md:px-0">
         <div className=" preview-slider grid relative">
           <Swiper
             ref={ref}
@@ -139,7 +139,7 @@ const ProductViewSlider = forwardRef(({ product, selectedColor }, ref) => {
               </SwiperSlide>
             ))}
           </Swiper>
-{/*           <div className="product-action top-2 md:top-4 right-2 lg:right-4 absolute z-10 ">
+          {/*           <div className="product-action top-2 md:top-4 right-2 lg:right-4 absolute z-10 ">
             <button
               aria-label="Add To Wishlist"
               className="wishlist-action-btn-product-details inline-flex justify-center items-center"
@@ -161,14 +161,14 @@ const ProductViewSlider = forwardRef(({ product, selectedColor }, ref) => {
             </button>
           </div> */}
         </div>
-        <div className="thumb-slider !w-[38.75rem] hidden lg:block">
+        <div className="thumb-slider !w-[100vw] md:!w-[38.75rem] ">
           <Swiper
             onSwiper={setThumbsSwiper}
             direction="horizontal"
             slidesPerView={7}
             mousewheel={true}
             modules={[Thumbs, Mousewheel]}
-            className="!w-full"
+            className="!w-full "
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
@@ -176,9 +176,9 @@ const ProductViewSlider = forwardRef(({ product, selectedColor }, ref) => {
                   <Image
                     src={slide?.image}
                     alt=""
-                    width={64}
-                    height={64}
-                    className="border border-slate-300 h-24 w-24 cursor-pointer p-2 object-cover"
+                    width={0}
+                    height={0}
+                    className="border border-slate-300 !w-24 !h-24 !shrink cursor-pointer p-2 mr-2 object-cover "
                   />
                 </div>
               </SwiperSlide>

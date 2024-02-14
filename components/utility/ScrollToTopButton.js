@@ -28,7 +28,7 @@ const ScrollToTopButton = () => {
     <>
       {isVisible && (
         <div
-          className="scroll-to-top-button z-50 fixed right-5 bottom-5 rounded-full shadow-lg p-4 bg-primary text-white cursor-pointer"
+          className="scroll-to-top-button z-50 fixed right-5 bottom-5 rounded-full shadow-lg p-4 bg-primary text-white cursor-pointer hidden md:inline-block"
           onClick={scrollToTop}
         >
           <BiArrowToTop size={20} />

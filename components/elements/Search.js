@@ -114,12 +114,12 @@ const Search = () => {
             onBlur={handleBlur}
             type="text"
             placeholder={translations["search-for-your-desired-product"]}
-            className="group-focus-within:border-primary"
+            className="group-focus-within:border-primary pr-5"
           />
 
           <button
             onClick={() => handleSearch(searchTerm)}
-            className="search-btn group-focus-within:border-primary"
+            className="search-btn group-focus-within:border-primary hidden md:inline-block"
           >
             <HiMagnifyingGlass
               size={24}

@@ -56,7 +56,7 @@ const SubscriptionForm = ({ settings }) => {
             })}
           />
           <button
-            className="inline-block px-4 py-1 border-none text-center bg-primary text-xl font-bold text-white w-full leading-[40px] mt-3"
+            className="inline-block px-4 py-1 border-none text-center !bg-primary text-xl font-bold text-white w-full leading-[40px] mt-3"
             type="submit"
             style={{
               backgroundColor: settings?.colors?.primary,

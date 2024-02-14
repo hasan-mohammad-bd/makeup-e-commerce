@@ -3,8 +3,18 @@ import useLockedBody from "../../hooks/useLockedBody";
 import { RiCloseCircleFill } from "react-icons/ri";
 import { twMerge } from "tailwind-merge";
 import CloseIcon from "./svg/CloseIcon";
+import { Link } from "@/navigation";
+import Image from "next/image";
 
-const Drawer = ({ title, children, show, setShow, position, className }) => {
+const Drawer = ({
+  title,
+  children,
+  show,
+  setShow,
+  position,
+  className,
+  image,
+}) => {
   useLockedBody(show, "root"); // to lock body scroll
   return (
     <>
@@ -36,7 +46,18 @@ const Drawer = ({ title, children, show, setShow, position, className }) => {
           {/*header*/}
           <div className="flex items-center justify-between px-3 lg:px-3 py-1 lg:py-2 text-slate-900">
             <h3 className="text-lg lg:text-2xl font-title font-semibold line-clamp-1">
-              {title ? title : null}
+              {image && (
+                <Link href="/" className="logo w-full ">
+                  <Image
+                    src={image}
+                    alt={"logo"}
+                    width={0}
+                    height={48}
+                    className="h-[48px] min-w-[200px]  min-h-[48px] mr-[-70px] md:mr-0 py-2 object-contain object-left"
+                  />
+                </Link>
+              )}
+              {!image && title ? title : null}
             </h3>
             <button
               className="icon-btn text-2xl text-slate-500"

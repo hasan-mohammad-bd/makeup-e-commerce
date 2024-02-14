@@ -90,7 +90,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                   as={`/products/${slug}`}
                 >
                   <Image
-                    className={`default-img object-cover h-[17.188rem] w-full bg-[#DCDDDF]`}
+                    className={`default-img object-cover md:h-[17.188rem] h-[12rem] w-full bg-[#DCDDDF]`}
                     src={image || "/assets/images/no-image.png"}
                     alt={product_name}
                     width={0}
@@ -132,10 +132,8 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                 </span>
               </div>
               <div
-                className={`product-price mb-3 flex justify-start ${
-                  isLarge
-                    ? "items-center"
-                    : "flex-col items-start lg:items-center"
+                className={`product-price mb-3 flex justify-start whitespace-nowrap ${
+                  isLarge ? "items-center" : "items-start lg:items-center"
                 } lg:flex-row gap-1`}
               >
                 <span className="text-slate-500">
@@ -160,7 +158,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                 ) : null}
               </div>
             </div>
-            <div className="actions absolute bottom-3 w-full px-3">
+            <div className="actions bottom-3 w-full px-3">
               <div
                 className="product-actions flex gap-2"
                 onClick={(e) => e.stopPropagation()}
@@ -168,18 +166,20 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                 <button
                   disabled={stockOut}
                   aria-label="Add To Cart"
-                  className="border border-slate-300 px-[10px] py-2"
+                  className="border border-slate-300 flex h-fit px-[10px] py-2"
                   onClick={(e) => handleAddToCart(product)}
                 >
                   <HiOutlineShoppingCart
                     size={24}
                     className="active:scale-90 text-slate-500"
                   />{" "}
-                  <span className="text-slate-500">+ Add to card</span>
+                  <span className="text-slate-500 whitespace-nowrap hidden md:block">
+                    + Add to card
+                  </span>
                 </button>
                 <button
                   aria-label="Add To Wishlist"
-                  className={`border border-slate-300 px-3 @  text-slate-500`}
+                  className={`border border-slate-300 px-3  @  text-slate-500`}
                   onClick={(e) =>
                     isInWishList
                       ? handleRemoveFromWishlist(id)

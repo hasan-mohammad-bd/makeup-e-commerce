@@ -40,8 +40,8 @@ const WishListCard = ({ product }) => {
             } w-[72px] h-[72px] rounded-lg  md:w-[84px] md:h-[84px] `}
           />
           {stockOut ? (
-            <div className="w-full h-full rounded absolute left-0 top-0 flex items-center justify-center">
-              <span className="text-red-500 !text-4 rounded-lg whitespace-nowrap capitalize border-solid border bg-white border-red-200 px-1 py-[2px]">
+            <div className="w-full h-full rounded absolute left-5 top-0 flex items-center justify-center">
+              <span className="text-red-500 !text-4 rounded-lg whitespace-nowrap capitalize border-solid border bg-white  px-1 py-[2px]">
                 {translations["out-of-stock"] || "স্টক শেষ"}
               </span>
             </div>

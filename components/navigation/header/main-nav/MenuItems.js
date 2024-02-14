@@ -49,7 +49,7 @@ const MenuItems = ({ setting }) => {
     },
   ];
   return (
-    <div className="container flex items-center justify-between">
+    <div className="container md:flex items-center justify-between hidden">
       <div>
         {navItems.map((item) => (
           <Link

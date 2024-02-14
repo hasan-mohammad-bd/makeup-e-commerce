@@ -1,7 +1,15 @@
 "use client";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import React from "react";
 
-const DynamicBackgroundComponent = ({ imageUrl, children, heading, height }) => {
+const DynamicBackgroundComponent = ({
+  imageUrl,
+  children,
+  heading,
+  height,
+  mobileHeight,
+}) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const containerStyle = {
     background: `url(${imageUrl})`,
     backgroundSize: "cover",
@@ -9,16 +17,20 @@ const DynamicBackgroundComponent = ({ imageUrl, children, heading, height }) => 
 
     // Add any other styles you want for the container
     width: "100%",
-    height: height, // Adjust the height as needed
+    height: isMobile ? mobileHeight : height, // Adjust the height as needed
   };
 
   return (
-    <div
-      className="flex items-center justify-center text-white font-bold text-5xl"
-      style={containerStyle}
-    >
-      <div className="flex-col text-center">
-        <h2>{heading}</h2>
+    <div className="" style={containerStyle}>
+      <div className="flex flex-col h-full justify-center items-center text-center">
+        <h2
+          className={`${
+            heading == "Product Details" &&
+            "md:text-5xl text-3xl text-white font-bold"
+          }`}
+        >
+          {heading}
+        </h2>
         {children}
       </div>
     </div>

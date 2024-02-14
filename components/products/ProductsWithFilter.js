@@ -52,14 +52,14 @@ const ProductsWithFilter = async ({
           </div>
         </div>
 
-        <div className="container gap-3 grid grid-cols-10">
+        <div className="container gap-3 grid grid-cols-1 md:grid-cols-10">
           <div className="col-span-2">
             <Filter category={category} />
           </div>
 
           {products?.length ? (
             <div className="col-span-8">
-              <ProductList products={products} translations={translations} />
+              <ProductList products={products} translations={translations} isWithFilter={true}/>
               <PaginationWithSummery
                 meta={meta}
                 totalItemsShowing={products?.length}
@@ -70,7 +70,7 @@ const ProductsWithFilter = async ({
           )}
         </div>
       </div>
-      <FilterPanel category={category} />
+      <FilterPanel  category={category} />
     </>
   );
 };

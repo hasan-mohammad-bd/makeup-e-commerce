@@ -20,7 +20,7 @@ const languages = [
   // },
 ];
 
-const LanguageSelector = ({ locale }) => {
+const LanguageSelector = ({ locale, sideBarMenu }) => {
   // const [selectedLanguage, setSelectedLanguage] = useState(locale); // Default language
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Dropdown visibility state
   const dropdownRef = useRef(null);
@@ -48,7 +48,7 @@ const LanguageSelector = ({ locale }) => {
     <div className="relative inline-flex" ref={dropdownRef}>
       <button
         type="button"
-        className="flex !group-hover:text-black h-12 flex-col lg:flex-row items-center justify-center gap-1 font-title  box-border px-3.5 lg:px-3  font-medium text-slate-700"
+        className="flex !group-hover:text-black h-12 items-center justify-center gap-1 font-title  box-border px-3.5 lg:px-3  font-medium text-slate-700"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         {/*         <svg
@@ -72,16 +72,16 @@ const LanguageSelector = ({ locale }) => {
           {locale === "en" ? (
             <span className="flex justify-center items-center">
               <UnitedKindomFlag />{" "}
-              <p className="ml-2 text-white  !font-normal">English</p>
+              <p className={`ml-2  !font-normal ${sideBarMenu ? "text-black" : "text-white"}`}>English</p>
             </span>
           ) : (
             <span className="flex justify-center items-center">
               <BangladeshiFlag />{" "}
-              <p className="ml-2 text-white !font-normal">Bengali</p>
+              <p className={`ml-2  !font-normal ${sideBarMenu ? "text-black" : "text-white"}`}>Bengali</p>
             </span>
           )}
         </span>
-        <FiChevronDown className="hidden lg:block text-white" />
+        <FiChevronDown className={`${sideBarMenu ? "text-black" : "text-white"}`} />
       </button>
       {isDropdownOpen && (
         <ul className="absolute w-fit lg:w-full z-10 right-0 mt-1 lg:left-0 top-full bg-white border border-gray-300 rounded-md shadow-lg divide-y divide-gray-200">

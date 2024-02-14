@@ -51,8 +51,6 @@ const ProductDetails = ({ product, settings, translations }) => {
   //demo
   const quantity = 1;
 
-  console.log(product);
-
   return (
     <div className="product-details">
       <div className="flex small-container flex-col lg:flex-row lg:gap-10 pb-3">
@@ -120,8 +118,8 @@ const ProductDetails = ({ product, settings, translations }) => {
           </div>
         </div>
         <div className="lg:w-1/2">
-          <div className="">
-            <div className="mx-3 md:mx-0 mt-2">
+          <div className="mx-3 md:mx-0">
+            <div className="mt-2">
               {product.flashSale && (
                 <div className="flesh-sell-bar w-full h-12 rounded-3xl border border-primary flex justify-between items-center">
                   <FlashSellCorner className="" />
@@ -165,11 +163,11 @@ const ProductDetails = ({ product, settings, translations }) => {
                 </div>
               )}
             </div>
-            <div className="px-3 lg:px-0 pt-3 lg:pt-0">
+            <div className=" pt-3 lg:pt-0">
               {/*               <p className="text-sm font-bold text-primary capitalize  leading-none">
                 {product?.brand?.brand_name || "No Brand"}
               </p> */}
-              <h5 className="text-2xl font-bold font-title text-slate-900">
+              <h5 className="text-xl md:text-2xl font-bold font-title text-slate-900">
                 {getSlicedText(product?.product_name, 100)}
               </h5>
               <div className="product-price flex items-center gap-4 lg:border-b border-slate-200 py-4 lg:py-5">
@@ -237,8 +235,8 @@ const ProductDetails = ({ product, settings, translations }) => {
               />
               {/* Product Dynamic Pricing Area  */}
             </div>
-            <div className="h-2 w-full bg-slate-200 lg:hidden"></div>
-            <div className="px-3 lg:px-0">
+            {/* <div className="h-2 w-full bg-slate-200 lg:hidden"></div> */}
+            <div className="">
               {!(
                 product.barcodes?.length === 1 &&
                 product.barcodes[0].size === "" &&
@@ -257,29 +255,31 @@ const ProductDetails = ({ product, settings, translations }) => {
                 />
               ) : null}
             </div>
-            <div className="flex justify-start items-center mt-5">
-            <div className="flex w-fit rounded-full border border-slate-200 items-center products-center gap-2 text-slate-900 ">
-              <button
-                disabled={quantity <= 1}
-                className={`rounded-l-full border-r bg-slate-200 w-7 h-7 flex justify-center items-center ${
-                  quantity <= 1
-                    ? "border-slate-200 cursor-not-allowed text-slate-300 "
-                    : ""
-                }  w-7 h-7`}
-                onClick={() => dispatch(cartActions.removeQuantity(barcodeId))}
-              >
-                <FiMinus size={16} />
-              </button>
-              <div className="mx-1 text-base font-normal text-slate-900 font-title">
-                {quantity || 1}
+            <div className="flex justify-start items-center mt-5 px-3 md:px-0">
+              <div className="flex w-fit rounded-full border border-slate-200 items-center products-center gap-2 text-slate-900 ">
+                <button
+                  disabled={quantity <= 1}
+                  className={`rounded-l-full border-r bg-slate-200 w-7 h-7 flex justify-center items-center ${
+                    quantity <= 1
+                      ? "border-slate-200 cursor-not-allowed text-slate-300 "
+                      : ""
+                  }  w-7 h-7`}
+                  onClick={() =>
+                    dispatch(cartActions.removeQuantity(barcodeId))
+                  }
+                >
+                  <FiMinus size={16} />
+                </button>
+                <div className="mx-1 text-base font-normal text-slate-900 font-title">
+                  {quantity || 1}
+                </div>
+                <button
+                  className=" border-l rounded-r-full bg-slate-200 border-slate-200 w-7 h-7 flex justify-center items-center"
+                  onClick={() => dispatch(cartActions.addQuantity(barcodeId))}
+                >
+                  <FiPlus size={16} />
+                </button>
               </div>
-              <button
-                className=" border-l rounded-r-full bg-slate-200 border-slate-200 w-7 h-7 flex justify-center items-center"
-                onClick={() => dispatch(cartActions.addQuantity(barcodeId))}
-              >
-                <FiPlus size={16} />
-              </button>
-            </div>
               <button
                 className="bg-primary rounded-sm py-2 md:py-2 w-fit px-3 md:px-6 text-white ml-3 text-center active:scale-95"
                 onClick={() => handleAddToCart(product, selectedVariant)}
@@ -292,7 +292,7 @@ const ProductDetails = ({ product, settings, translations }) => {
             </div>
 
             {/* wishlist button */}
-            <div className="product-action mt-6  z-10 flex justify-start items-center ">
+            <div className="product-action mt-6 z-10 flex justify-start items-center">
               <button
                 aria-label="Add To Wishlist"
                 className=" inline-flex justify-center items-center mr-2"
@@ -317,7 +317,7 @@ const ProductDetails = ({ product, settings, translations }) => {
             {/* buy now button */}
             <button
               onClick={() => handleAddAndCheckout(product, selectedVariant)}
-              className="bg-primary py-3.5 md:py-3 w-full px-3 md:px-6 text-white rounded-sm text-center active:scale-95 mt-5"
+              className="bg-primary py-3.5 md:py-3 w-full md:mx-0 px-3 md:px-6 text-white rounded-sm text-center active:scale-95 mt-5"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -337,8 +337,8 @@ const ProductDetails = ({ product, settings, translations }) => {
                 {translations["buy-now"] || "এখনই কিনুন"}
               </span>
             </button>
-            <div className="h-2 w-full mt-4 bg-slate-200 lg:hidden"></div>
-            <div className="px-3 lg:px-0">
+            {/* <div className="h-2 w-full mt-4 bg-slate-200 lg:hidden"></div> */}
+            <div className="">
               {product?.coupons.length ? (
                 <div className="mt-5 mb-8">
                   <p className="font-semibold font-title text-slate-900 mb-2">

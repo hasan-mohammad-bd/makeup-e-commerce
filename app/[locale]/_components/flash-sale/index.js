@@ -29,64 +29,83 @@ const FlashSale = ({ translations }) => {
   return (
     <section className="flash-sale my-24">
       <div className="container">
-        <div className="relative">
-          <div className="sec-heading absolute z-20 top-1/2 translate-y-[-50%] left-5 w-full flex justify-center lg:justify-between items-center pl-6">
-            <div className="flex flex-col gap-4 bg-transparent px-3">
-              <div className="text-center lg:text-left">
-                <h3 className="text-primary font-semibold">
-                  Hurry up and Get 25% Discount
-                </h3>
-                <h2 className="sec-title my-5">{flashSaleInfo?.title}</h2>
-                <p className="max-w-[300px]">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Soluta
-                </p>
-                {/* 								<p>
+        {isMobile ? (
+          <>
+            <DynamicBackgroundComponent
+              imageUrl={flashSaleInfo?.banner_image}
+              height={"50vh"}
+            >
+              <div className="flex flex-col gap-4 bg-transparent px-3 justify-center items-center">
+                <div className="text-center lg:text-left">
+                  <h3 className="text-primary font-semibold">
+                    Hurry up and Get 25% Discount
+                  </h3>
+                  <h2 className="sec-title my-5">{flashSaleInfo?.title}</h2>
+                  <p className="max-w-[300px]">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Soluta
+                  </p>
+                  {/* 								<p>
 									{translations["the-offer-will-only-last"] ||
 										"অফার চলবে আর মাত্র"}
 								</p> */}
+                </div>
+                <Timer targetDate={flashSaleInfo?.expire_time} />
+                <Link
+                  href="/flash-sale"
+                  className=" bg-primary py-3 px-2 pl-4 !text-white lg:!block !inline-block !text-center"
+                >
+                  Show Collection <HiArrowLongRight size={24} />{" "}
+                </Link>
+                <div className="flashSale-slider"></div>
+                {/*                 <a href="https://www.youtube.com/watch?v=J2X5mJ3HDYE">
+                  <VideoPlayerIcon />
+                </a> */}
               </div>
-              <Timer targetDate={flashSaleInfo?.expire_time} />
-              <Link
-                href="/flash-sale"
-                className=" bg-primary py-3 max-w-[170px] pl-4 !text-white lg:!block !inline-block"
-              >
-                Show Collection <HiArrowLongRight size={24} />{" "}
-              </Link>
+            </DynamicBackgroundComponent>
+          </>
+        ) : (
+          <div className="relative">
+            <div className="sec-heading absolute z-20 top-1/2 translate-y-[-50%] left-5 w-full flex justify-center lg:justify-between items-center pl-6">
+              <div className="flex flex-col gap-4 bg-transparent px-3">
+                <div className="text-center lg:text-left">
+                  <h3 className="text-primary font-semibold">
+                    Hurry up and Get 25% Discount
+                  </h3>
+                  <h2 className="sec-title my-5">{flashSaleInfo?.title}</h2>
+                  <p className="max-w-[300px]">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Soluta
+                  </p>
+                  {/* 								<p>
+									{translations["the-offer-will-only-last"] ||
+										"অফার চলবে আর মাত্র"}
+								</p> */}
+                </div>
+                <Timer targetDate={flashSaleInfo?.expire_time} />
+                <Link
+                  href="/flash-sale"
+                  className=" bg-primary py-3 max-w-[170px] pl-4 !text-white lg:!block !inline-block"
+                >
+                  Show Collection <HiArrowLongRight size={24} />{" "}
+                </Link>
+              </div>
             </div>
-          </div>
 
-          <div className="flashSale-slider">
-            {isMobile ? (
-              <HorizontalScrollView className={"space-x-2 p-2"}>
-                {saleProducts.map((product, index) => (
-                  <ProductCard
-                    key={index}
-                    product={product}
-                    isFlashSale
-                    isLarge
-                    translations={translations}
-                  />
-                ))}
-              </HorizontalScrollView>
-            ) : (
+            <div className="flashSale-slider">
               <>
                 <DynamicBackgroundComponent
                   imageUrl={flashSaleInfo?.banner_image}
                   height={"50vh"}
                 />
               </>
-              /*               <FlashSaleSlider
-                saleProducts={saleProducts}
-                translations={translations}
-              /> */
-            )}
+            </div>
+            {/* <SeeAll href="/flash-sale" buttonText={translations["see-all"]} /> */}
+            <a href="https://www.youtube.com/watch?v=J2X5mJ3HDYE">
+              <VideoPlayerIcon />
+            </a>
           </div>
-          <SeeAll href="/flash-sale" buttonText={translations["see-all"]} />
-          <a href="https://www.youtube.com/watch?v=J2X5mJ3HDYE">
-            <VideoPlayerIcon />
-          </a>
-        </div>
+        )}
       </div>
     </section>
   );

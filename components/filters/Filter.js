@@ -38,13 +38,13 @@ const Filter = ({ category }) => {
   }
 
   return (
-    <div className={`pl-4 filter-sidebar flex flex-col gap-y-7 `}>
+    <div className={`pl-4 filter-sidebar flex-col gap-y-7 hidden md:flex `}>
       <div className="p-5 rounded shadow-lg">
         {category || selectedBrandIds.length || selectedColors.length ? (
           <div className="flex items-center flex-wrap gap-2">
             {/* selected category  */}
             {category && (
-              <div className="flex items-center gap-1 bg-slate-100 border-slate-200 rounded px-2 py-1">
+              <div className="flex items-center gap-1 bg-slate-100 border-slate-200 rounded px-2 py-1 mb-3">
                 <p className="text-sm text-slate-900">
                   {category.category_name}
                 </p>
@@ -113,31 +113,32 @@ const Filter = ({ category }) => {
         <CategoryFilter selectedCategory={category} />
       </div>
 
-      <div className="p-5 rounded shadow-lg">
-        {filterOptions?.brands?.length ? (
+      {filterOptions?.brands?.length ? (
+        <div className="p-5 rounded shadow-lg">
           <BrandFilter
             filteredBrands={filterOptions?.brands}
             selectedBrandIds={selectedBrandIds}
           />
-        ) : null}
-      </div>
+        </div>
+      ) : null}
 
-      <div className="p-5 rounded shadow-lg">
-        {filterOptions?.max_price ? (
+      {filterOptions?.max_price ? (
+        <div className="p-5 rounded shadow-lg">
           <PriceRangeFilter
             min_price={filterOptions?.min_price}
             max_price={filterOptions?.max_price}
           />
-        ) : null}
-      </div>
-      <div className="p-5 rounded shadow-lg">
-        {filterOptions?.colors?.length ? (
+        </div>
+      ) : null}
+
+      {filterOptions?.colors?.length ? (
+        <div className="p-5 rounded shadow-lg">
           <ColorFilter
             colors={filterOptions?.colors}
             selectedColors={selectedColors}
           />
-        ) : null}
-      </div>
+        </div>
+      ) : null}
     </div>
   );
 };
