@@ -10,7 +10,7 @@ import { GoMoveToBottom } from "react-icons/go";
 import { FiPlus } from "react-icons/fi";
 import { LuMinus } from "react-icons/lu";
 
-const CategoryItems = ({closeFilterPanel}) => {
+const CategoryItems = ({ closeFilterPanel }) => {
   const { locale } = useParams();
   const { data: categoriesRes } = useGetCategoriesQuery({ locale });
 
@@ -150,21 +150,21 @@ const CategoryItems = ({closeFilterPanel}) => {
                                 subItem.child_categories.map((subItem2) => (
                                   <div key={subItem2.id}>
                                     <Link
-                                      className={` pl-2 md:pl-3 hover:text-primary py-2 flex items-center justify-between  shadow text-lg mb-2  bg-gray-200 w-full ${
+                                      className={` pl-2 md:pl-3 hover:text-primary py-2 flex items-center justify-between  shadow text-lg mb-2  bg-gray-100 w-full ${
                                         subItem2.child_categories?.length >=
                                           1 && "third-sub-menu"
                                       }`}
                                       href={`/categories/${subItem2.slug}`}
                                       key={subItem2.id}
                                     >
-                                      <div className="p-0 md:p-4 rounded-full bg-gray-200 w-full">
-                                        <span className="hidden md:inline-block">
+                                      <div className="p-0 md:p-4 bg-gray-100 w-full flex flex-col justify-center items-center">
+                                        <span className="hidden md:inline-block mb-3">
                                           <Image
                                             src={subItem2?.icon}
                                             alt={subItem2?.categories_name}
-                                            width={0}
-                                            height={0}
-                                            className="h-[48px] min-h-[48px] object-contain object-left"
+                                            width={50}
+                                            height={50}
+                                            className=" rounded-full mb-3  object-contain"
                                           />
                                         </span>
                                         <span>{subItem2.category_name}</span>
