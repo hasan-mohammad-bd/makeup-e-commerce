@@ -142,7 +142,7 @@ const CategoryItems = ({ closeFilterPanel }) => {
                             className={` ${
                               isMobile
                                 ? "pl-3 hover:text-primary py-2  flex items-center justify-between px-3 rounded shadow text-lg mb-2 w-full"
-                                : "absolute  top-0 right-0 translate-x-full bg-white second-sub-item z-40 shadow  bg-blue rounded-lg !w-[1050px]  !h-full"
+                                : "absolute  top-0 right-0 translate-x-full bg-white second-sub-item z-40 shadow  bg-blue rounded-lg md:!w-[800px] lg:!w-[1050px]  !h-full"
                             }`}
                           >
                             <div className="grid grid-cols-3 gap-3">
