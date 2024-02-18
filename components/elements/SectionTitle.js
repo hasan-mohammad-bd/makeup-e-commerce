@@ -21,7 +21,11 @@ export default function SectionTitle({
     >
       <div className="items-center">
         {children}
-        <h2 className={`sec-title capitalize`}>{title}</h2>
+        <h2
+          className={`text-xl md:text-4xl font-bold font-title text-slate-900 capitalize`}
+        >
+          {title}
+        </h2>
       </div>
       <span className="w-full text-center">
         <Image
