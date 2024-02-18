@@ -88,7 +88,7 @@ export default function MainNav({ settings }) {
     <div className="">
       <TopHeaderBanner locale={locale} />
       <div className="w-full z-30 bg-white border-b border-slate-300 py-3 md:py-6">
-        <div className="container">
+        <div className="container lg:px-5  2xl:px-0 ">
           <div className="header-wrap flex justify-between items-center">
             {/* Nav Items  */}
             <button onClick={sidebarToggle} className="md:hidden">

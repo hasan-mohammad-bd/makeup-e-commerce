@@ -35,7 +35,7 @@ export default async function Home() {
         </div>
       </section>
       <section className="banners py-6 lg:py-14">
-        <div className="container">
+        <div className="container lg:px-5  2xl:px-0">
           <FeaturedBanner />
         </div>
       </section>
@@ -80,7 +80,7 @@ export default async function Home() {
       </section>  */}
 
       <section className="all-products mt-6 lg:mt-14">
-        <div className="container">
+        <div className="container lg:px-5 2xl:px-0">
           <SectionTitle
             title={translations["new-in-shop"]}
             buttonText={translations["see-all"]}
@@ -106,7 +106,7 @@ export default async function Home() {
           />
         </div>
         <NewArrival /> */}
-{/*         <div className="container">
+        {/*         <div className="container">
           <SeeAll href="/products" buttonText={translations["see-all"]} />
         </div> */}
       </section>
@@ -116,7 +116,7 @@ export default async function Home() {
       </section>
 
       <section className="all-brands pt-6 pb-8 lg:py-14">
-        <div className="lg:container">
+        <div className="lg:container lg:px-5 2xl:px-0">
           <SectionTitle title={translations["our-brands"]} />
           <div className="brands-slider mt-1 lg:mt-6  relative">
             <Brands />

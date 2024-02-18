@@ -9,39 +9,40 @@ const MegaMenu = dynamic(() => import("./MegaMenu"), {
 import React from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
-const MenuItems = ({ setting }) => {
-  const navItems = [
+const MenuItems = ({ settings }) => {
+  console.log(settings);
+  const navItems = settings?.header_page || [
     {
-      title: "Home",
-      link: "/",
+      name: "Home",
+      path: "/",
       id: "home",
     },
     {
-      title: "About us",
-      link: "/pages/about-us",
+      name: "About us",
+      path: "/pages/about-us",
       id: "about",
     },
     {
-      title: "Categories",
-      link: "/categories",
+      name: "Categories",
+      path: "/categories",
       id: "categories",
     },
     {
-      title: "Pages",
+      name: "Pages",
       id: "pages",
       subLink: [
         {
-          title: "Wishlist",
-          link: "/dashboard/my-wishlist",
+          name: "Wishlist",
+          path: "/dashboard/my-wishlist",
           id: "wishlist",
         },
         {
-          title: "Q&A",
-          link: "/help/qna",
+          name: "Q&A",
+          path: "/help/qna",
           id: "qna",
         },
         {
-          title: "Privacy policy",
+          name: "Privacy policy",
           link: "/pages/privacy-policy",
           id: "privacy",
         },
@@ -49,17 +50,17 @@ const MenuItems = ({ setting }) => {
     },
   ];
   return (
-    <div className="container md:flex items-center justify-between hidden">
+    <div className="container lg:px-5 2xl:px-0 md:flex items-center justify-between hidden">
       <div>
-        {navItems.map((item) => (
+        {navItems.map((item, index) => (
           <Link
+            key={index}
             className={`mr-10 hover:text-primary text-lg ${
-              item.subLink && "relative sub-menu"
+              item.path && "relative sub-menu"
             }`}
-            key={item.id}
-            href={item.subLink ? "/" : item.link}
+            href={item.subLink ? "/" : item.path}
           >
-            {item.title}
+            {item.name}
             {item.subLink && (
               <span className="ml-1">
                 <MdOutlineKeyboardArrowDown size={20} />
@@ -71,7 +72,7 @@ const MenuItems = ({ setting }) => {
                 {item.subLink.map((subItem) => (
                   <div className="" key={subItem.id}>
                     <Link className="" href={subItem.link} key={subItem.id}>
-                      {subItem.title}
+                      {subItem.name}
                     </Link>
                   </div>
                 ))}

@@ -71,13 +71,16 @@ const DashboardLayout = ({ children, params }) => {
           imageUrl={settings?.all_product_banner}
           height={"30vh"}
         >
-          <div className="text-lg">
-            <Link href={`/`} className=" hover:text-primary">
+          <div className="text-lg mt-2 md:mt-5">
+            <Link href={`/`} className=" hover:text-primary !text-white">
               {translations["home"] || "হোম"}
             </Link>
             <span className="text-primary mx-3 font-extrabold">/</span>{" "}
-            <Link href={`/dashboard/my-orders`} className=" hover:text-primary">
-              {translations["profile"] || "প্রডাক্টস"}
+            <Link
+              href={`/dashboard/my-orders`}
+              className=" hover:text-primary !text-white"
+            >
+              My Account
             </Link>
             {/*               <Link
                 href={`/products/${slug}`}
@@ -116,7 +119,7 @@ const DashboardLayout = ({ children, params }) => {
                         </span>
                         <span className="font-bold">{item.text}</span>
                       </li>
-                    </Link>  
+                    </Link>
                   ))}
                   <li
                     className={`flex items-center py-3 px-4 hover:bg-amber-200 rounded-lg w-full font-bold`}

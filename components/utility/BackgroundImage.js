@@ -25,8 +25,9 @@ const DynamicBackgroundComponent = ({
       <div className="flex flex-col h-full justify-center items-center text-center">
         <h2
           className={`${
-            heading == "Product Details" &&
-            "md:text-5xl text-3xl text-white font-bold"
+           ( heading === "Product Details" || heading === "My Account")
+           &&
+              " md:text-5xl text-3xl text-white font-bold"
           }`}
         >
           {heading}

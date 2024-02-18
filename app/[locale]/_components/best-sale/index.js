@@ -50,7 +50,7 @@ const BestSell = ({ translations }) => {
           />
         )}
       </div>
-      <div className="container">
+      <div className="container lg:px-5 2xl:px-0">
         <SeeAll href="/products" buttonText={translations["see-all"]} />
       </div>
     </>

@@ -9,6 +9,7 @@ const MobileSubMenu = dynamic(() => import("./MobileSubMenu"), {
 const Header = async () => {
 	const data = await fetchData({ api: "info/basic" });
 	const settings = data?.data || {};
+	console.log(settings)
 
 	return (
 		<header className="header">
