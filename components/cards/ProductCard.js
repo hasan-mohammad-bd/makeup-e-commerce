@@ -20,8 +20,12 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import HeartRedIcon from "../elements/svg/HeartRedIcon";
 import { MdOutlineMinimize, MdOutlineRemoveRedEye } from "react-icons/md";
 import { FiMinus } from "react-icons/fi";
+import ProductDetailsModal from "../modals/ProductDetailsModal";
+import { useSelector } from "react-redux";
 
 const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
+  const { settings } = useSelector((state) => state.common);
+  const [showModal, setShowModal] = useState(false);
   const { handleAddToCart, handleAddAndCheckout } = useCart(); //custom hook for reusing
   const {
     handleAddToWishlist,
@@ -45,6 +49,8 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
     created_at,
   } = product;
 
+  
+
   const isInWishList = handleWishListProductStatus(id);
   const stockOut = stock_qty <= 0 ? true : false;
 
@@ -53,6 +59,10 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
       setLoading(false);
     }
   }, [product]);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   return (
     <>
@@ -198,6 +208,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                 </button>
                 <button
                   className={`border border-slate-300 px-3 text-slate-500`}
+                  onClick={() => toggleModal()}
                 >
                   <MdOutlineRemoveRedEye size={20} />
                 </button>
@@ -248,6 +259,16 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
         </div>
       ) : (
         <Loader />
+      )}
+      {showModal && (
+        <ProductDetailsModal
+          product={product}
+          showModal={showModal}
+          setShowModal={setShowModal}
+          settings={settings}
+          translations={translations}
+
+        />
       )}
     </>
   );

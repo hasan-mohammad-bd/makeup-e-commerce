@@ -45,7 +45,9 @@ export default function SocialShare({ translations = {} }) {
 
   const pageContent = (
     <div className="flex items-center">
-      <h3 className="font-semibold">{translations["share"] || "শেয়ার করুন"}:</h3>
+      <h3 className="font-semibold whitespace-nowrap">
+        {translations["share"] || "শেয়ার করুন"}:
+      </h3>
       <div
         className={` flex items-center justify-start w-full  lg:px-4 text-slate-500`}
       >

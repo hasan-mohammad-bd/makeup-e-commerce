@@ -33,7 +33,7 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 import HeartRedIcon from "@/components/elements/svg/HeartRedIcon";
 import useWishList from "@/hooks/useWishList";
 
-const ProductDetails = ({ product, settings, translations }) => {
+const ProductDetails = ({ product, settings, translations, shortDetails, demoShortDetails }) => {
   const {
     handleAddToWishlist,
     handleWishListProductStatus,
@@ -60,6 +60,7 @@ const ProductDetails = ({ product, settings, translations }) => {
               product={product}
               ref={productViewSwiperRef}
               selectedColor={selectedColor}
+              shortDetails={shortDetails}
             />
             <div className="px-3 responsive-action">
               <div className="product-actions pb-3 lg:py-6 flex gap-3 md:gap-4 justify-between items-center">
@@ -230,7 +231,7 @@ const ProductDetails = ({ product, settings, translations }) => {
               {/* short description  */}
 
               <ViewHTML
-                htmlText={product?.product_short_description}
+                htmlText={ shortDetails? demoShortDetails : product?.product_short_description}
                 className={"desc text-sm lg:text-base text-slate-600 mt-3"}
               />
               {/* Product Dynamic Pricing Area  */}
@@ -339,7 +340,7 @@ const ProductDetails = ({ product, settings, translations }) => {
             </button>
             {/* <div className="h-2 w-full mt-4 bg-slate-200 lg:hidden"></div> */}
             <div className="">
-              {product?.coupons.length ? (
+              {product?.coupons?.length ? (
                 <div className="mt-5 mb-8">
                   <p className="font-semibold font-title text-slate-900 mb-2">
                     {translations["best-offer"] || "সেরা অফার"}{" "}
@@ -429,80 +430,82 @@ const ProductDetails = ({ product, settings, translations }) => {
                 </div>
               </div>
 
-              <div className="delivery flex flex-col lg:flex-row lg:flex-wrap gap-y-4 lg:gap-y-7 bg-slate-50 border border-slate-200 rounded-lg py-4 mt-7 lg:mt-12">
-                <div className="single-info">
-                  <Image
-                    src={`/assets/images/icons/inside.png`}
-                    alt=""
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    className="w-full"
-                  />
-                  <div className="info">
-                    <p className="text-slate-600">
-                      {translations["delivery-charge"] || "ডেলিভারি চার্জ"}:{" "}
-                    </p>
-                    <p className="text-slate-600">
-                      {translations["inside-dhaka"] || "ঢাকার ভিতরে"} -{" "}
-                      {settings?.inside_dhaka_delivery_charges}{" "}
-                      {translations["currency-locale"] || "টাকা"}
-                    </p>
+              {!shortDetails && (
+                <div className="delivery flex flex-col lg:flex-row lg:flex-wrap gap-y-4 lg:gap-y-7 bg-slate-50 border border-slate-200 rounded-lg py-4 mt-7 lg:mt-12">
+                  <div className="single-info">
+                    <Image
+                      src={`/assets/images/icons/inside.png`}
+                      alt=""
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      className="w-full"
+                    />
+                    <div className="info">
+                      <p className="text-slate-600">
+                        {translations["delivery-charge"] || "ডেলিভারি চার্জ"}:{" "}
+                      </p>
+                      <p className="text-slate-600">
+                        {translations["inside-dhaka"] || "ঢাকার ভিতরে"} -{" "}
+                        {settings?.inside_dhaka_delivery_charges}{" "}
+                        {translations["currency-locale"] || "টাকা"}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="single-info border-l border-slate-200">
+                    <Image
+                      src={`/assets/images/icons/outside.png`}
+                      alt=""
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      className="w-full"
+                    />
+                    <div className="info">
+                      <p className="text-slate-600">
+                        {translations["delivery-charge"] || "ডেলিভারি চার্জ"}:{" "}
+                      </p>
+                      <p className="text-slate-600">
+                        {translations["outside-dhaka"] || "ঢাকার বাইরে"} -{" "}
+                        {settings?.outside_dhaka_delivery_charges}{" "}
+                        {translations["currency-locale"] || "টাকা"}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="single-info">
+                    <Image
+                      src={`/assets/images/icons/COD.png`}
+                      alt=""
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      className="w-full"
+                    />
+                    <div className="info">
+                      <p className="text-slate-600">
+                        {translations["cash-on-delivery-nationwide"] ||
+                          "সারাদেশ এ ক্যাশ অন ডেলিভারি"}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="single-info lg:py-2 border-l border-slate-200">
+                    <Image
+                      src={`/assets/images/icons/paymnt.png`}
+                      alt=""
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      className="w-full"
+                    />
+                    <div className="info">
+                      <p className="text-slate-600">
+                        {translations["easy-way-to-make-secure-payments"] ||
+                          "নিরাপদ পেমেন্ট করার সহজ মাধ্যম"}
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div className="single-info border-l border-slate-200">
-                  <Image
-                    src={`/assets/images/icons/outside.png`}
-                    alt=""
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    className="w-full"
-                  />
-                  <div className="info">
-                    <p className="text-slate-600">
-                      {translations["delivery-charge"] || "ডেলিভারি চার্জ"}:{" "}
-                    </p>
-                    <p className="text-slate-600">
-                      {translations["outside-dhaka"] || "ঢাকার বাইরে"} -{" "}
-                      {settings?.outside_dhaka_delivery_charges}{" "}
-                      {translations["currency-locale"] || "টাকা"}
-                    </p>
-                  </div>
-                </div>
-                <div className="single-info">
-                  <Image
-                    src={`/assets/images/icons/COD.png`}
-                    alt=""
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    className="w-full"
-                  />
-                  <div className="info">
-                    <p className="text-slate-600">
-                      {translations["cash-on-delivery-nationwide"] ||
-                        "সারাদেশ এ ক্যাশ অন ডেলিভারি"}
-                    </p>
-                  </div>
-                </div>
-                <div className="single-info lg:py-2 border-l border-slate-200">
-                  <Image
-                    src={`/assets/images/icons/paymnt.png`}
-                    alt=""
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    className="w-full"
-                  />
-                  <div className="info">
-                    <p className="text-slate-600">
-                      {translations["easy-way-to-make-secure-payments"] ||
-                        "নিরাপদ পেমেন্ট করার সহজ মাধ্যম"}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
