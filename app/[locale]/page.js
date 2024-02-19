@@ -93,7 +93,7 @@ export default async function Home() {
         <FlashSale translations={translations} />
       </section>
 
-      <section className="best-sell bg-slate-50 mt-8 lg:mt-0 py-4 md:py-14 lg:pb-14">
+      <section className="best-sell mt-8 lg:mt-0 py-4 md:py-14 lg:pb-14">
         <BestSell translations={translations} />
       </section>
 

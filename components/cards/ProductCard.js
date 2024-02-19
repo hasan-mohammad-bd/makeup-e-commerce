@@ -49,8 +49,6 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
     created_at,
   } = product;
 
-  
-
   const isInWishList = handleWishListProductStatus(id);
   const stockOut = stock_qty <= 0 ? true : false;
 
@@ -92,7 +90,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                 </div>
               )}
 
-              <div className="product-img p-1 md:p-1.5 pb-0">
+              <div className="product-img pb-0">
                 <Link
                   className={`${stockOut ? "pointer-events-none" : ""}`}
                   disabled={stockOut}
@@ -111,11 +109,11 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                 </Link>
               </div>
             </div>
-            <div className="product-content-wrap p-3">
+            <div className="product-content-wrap my-3">
               <div className="product-category">
                 <span
                   // href={`/brands/${brand?.id ? brand?.id : ""}`}
-                  className="text-xs capitalize"
+                  className="text-xs capitalize text-slate-500"
                 >
                   {brand?.brand_name || "No Brand"}
                 </span>
@@ -127,22 +125,9 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
               >
                 <Link href={`/products/${slug}`}>{product_name}</Link>
               </h2>
-              <div className="product-rating">
-                <span className="font-semibold text-slate-900">
-                  <Rating
-                    initialValue={average_rating || 5}
-                    allowFraction
-                    readonly
-                    size={18}
-                    fillColor="#FFC107"
-                  />{" "}
-                </span>
-                <span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
-                  {total_rating === 0 ? 0 : formatLongNumber(total_rating)}
-                </span>
-              </div>
+
               <div
-                className={`product-price mb-3 flex justify-start whitespace-nowrap ${
+                className={`product-price flex justify-start whitespace-nowrap ${
                   isLarge ? "items-center" : "items-start lg:items-center"
                 } lg:flex-row gap-1`}
               >
@@ -167,8 +152,22 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                   </div>
                 ) : null}
               </div>
+              <div className="product-rating">
+                <span className="font-semibold text-slate-900">
+                  <Rating
+                    initialValue={average_rating || 5}
+                    allowFraction
+                    readonly
+                    size={18}
+                    fillColor="#FFC107"
+                  />{" "}
+                </span>
+                <span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
+                  {total_rating === 0 ? 0 : formatLongNumber(total_rating)}
+                </span>
+              </div>
             </div>
-            <div className="actions bottom-3 w-full px-3">
+            <div className="actions bottom-3 w-full">
               <div
                 className="product-actions flex gap-2"
                 onClick={(e) => e.stopPropagation()}
@@ -183,7 +182,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                     size={24}
                     className="active:scale-90 text-slate-500"
                   />{" "}
-                  <span className="text-slate-500 whitespace-nowrap hidden md:block">
+                  <span className="text-slate-500 whitespace-nowrap hidden xl:block">
                     + Add to card
                   </span>
                 </button>
@@ -267,7 +266,6 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
           setShowModal={setShowModal}
           settings={settings}
           translations={translations}
-
         />
       )}
     </>

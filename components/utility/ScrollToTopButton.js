@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { BiArrowToTop } from "react-icons/bi";
+import { FiArrowUp } from "react-icons/fi";
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,10 +29,10 @@ const ScrollToTopButton = () => {
     <>
       {isVisible && (
         <div
-          className="scroll-to-top-button z-50 fixed right-5 bottom-5 rounded-full shadow-lg p-4 bg-primary text-white cursor-pointer hidden md:inline-block"
+          className="scroll-to-top-button z-50 fixed right-5 bottom-5 rounded-full  justify-center items-center shadow-lg w-12 h-12 bg-primary text-white cursor-pointer hidden md:flex"
           onClick={scrollToTop}
         >
-          <BiArrowToTop size={20} />
+          <FiArrowUp size={20} />
         </div>
       )}
     </>

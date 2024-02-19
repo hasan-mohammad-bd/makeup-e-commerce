@@ -44,10 +44,12 @@ const CategoryItems = ({ closeFilterPanel }) => {
     <div>
       <div className="category-section flex flex-col h-auto">
         <div className="!h-full relative">
+          {categoryItems.length > 7 &&
+            setCategoryItems((prevItems) => prevItems.slice(0, 7))}
           {categoryItems.map((item) => (
             <div className="!w-full sub-menu" key={item.id}>
               <Link
-                className={` hover:text-primary flex items-center justify-between px-3 !w-full py-2 rounded shadow mb-2 text-lg ${
+                className={` hover:text-primary flex items-center justify-between px-3 !w-full py-2 shadow mb-2 text-lg ${
                   item.child_categories.length >= 1 && "sub-menu"
                 }`}
                 key={item.id}
@@ -80,7 +82,7 @@ const CategoryItems = ({ closeFilterPanel }) => {
                   className={`${
                     !isMobile &&
                     "absolute top-0 right-0 translate-x-full sub-item z-40"
-                  } shadow  bg-white rounded-lg !w-full !h-full`}
+                  } shadow  bg-white !w-full !h-full`}
                 >
                   {item.child_categories.length >= 1 &&
                     item.child_categories.map((subItem) => (
@@ -89,7 +91,7 @@ const CategoryItems = ({ closeFilterPanel }) => {
                           <>
                             {item.status === "active" && (
                               <Link
-                                className={` pl-7 hover:text-primary py-2  flex items-center justify-between px-3 rounded shadow text-lg mb-2 w-full ${
+                                className={` pl-7 hover:text-primary py-2  flex items-center justify-between px-3 shadow text-lg mb-2 w-full ${
                                   subItem.child_categories?.length >= 1 &&
                                   "second-sub-menu"
                                 }`}
@@ -118,7 +120,7 @@ const CategoryItems = ({ closeFilterPanel }) => {
                         ) : (
                           <>
                             <Link
-                              className={` pl-3 hover:text-primary py-2 flex flex-col md:flex-row items-center justify-between px-3 rounded shadow text-lg mb-2 w-full ${
+                              className={` pl-3 hover:text-primary py-2 flex flex-col md:flex-row items-center justify-between px-3 shadow text-lg mb-2 w-full ${
                                 subItem.child_categories?.length >= 1 &&
                                 "second-sub-menu"
                               }`}
@@ -142,7 +144,7 @@ const CategoryItems = ({ closeFilterPanel }) => {
                             className={` ${
                               isMobile
                                 ? "pl-3 hover:text-primary py-2  flex items-center justify-between px-3 rounded shadow text-lg mb-2 w-full"
-                                : "absolute  top-0 right-0 translate-x-full bg-white second-sub-item z-40 shadow  bg-blue rounded-lg md:!w-[800px] lg:!w-[1050px]  !h-full"
+                                : "absolute  top-0 right-0 translate-x-full bg-white second-sub-item z-40 shadow  bg-blue rounded-lg md:!w-[500px] lg:!w-[640px] xl:!w-[800px] 2xl:!w-[1040px] !h-full"
                             }`}
                           >
                             <div className="grid grid-cols-3 gap-3">
@@ -194,6 +196,14 @@ const CategoryItems = ({ closeFilterPanel }) => {
               )}
             </div>
           ))}
+          {/*           <Link
+                className={` hover:text-primary flex items-center justify-between px-3 !w-full py-2 rounded shadow mb-2 text-lg`}
+                href={
+                  "/all-categories"
+                }
+              >
+               All Categories 
+              </Link> */}
         </div>
       </div>
     </div>

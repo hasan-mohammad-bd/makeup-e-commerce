@@ -88,11 +88,11 @@ const IntroSlider = ({ sliders }) => {
         ))}
       </Swiper>
       <div className="slider-arrow hidden lg:block">
-        <span className="slider-btn slider-prev slick-arrow intro_prev_b">
-          <TfiAngleLeft />
+        <span className="slider-btn slider-prev slick-arrow intro_prev_b !bg-primary">
+          <TfiAngleLeft className=" text-white !font-bold" />
         </span>
-        <span className="slider-btn slider-next slick-arrow intro_next_b">
-          <TfiAngleRight />
+        <span className="slider-btn slider-next slick-arrow intro_prev_b !bg-primary">
+          <TfiAngleRight className=" text-white !font-bold" />
         </span>
       </div>
     </div>

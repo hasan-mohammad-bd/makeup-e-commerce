@@ -216,7 +216,7 @@
 /* Single Product */
 
 .product-rating {
-  @apply flex items-center w-fit bg-slate-100 lg:bg-white rounded-lg lg:rounded-none px-2 lg:px-0 py-1 gap-2 mb-2 text-xs/4 lg:text-sm/4;
+  @apply flex items-center w-fit bg-slate-100 lg:bg-white rounded-lg lg:rounded-none px-2 lg:px-0 py-1 gap-2 text-xs/4 lg:text-sm/4;
 }
 
 .discount-badge {

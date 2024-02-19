@@ -6,6 +6,7 @@ import { startVideoPlayer } from "@/store/slices/commonSlice";
 import { HiPlay } from "react-icons/hi";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
+import DynamicBackgroundComponent from "@/components/utility/BackgroundImage";
 
 const VideoBanner = ({ translations }) => {
 	const dispatch = useDispatch();
@@ -13,11 +14,11 @@ const VideoBanner = ({ translations }) => {
 
 	return (
 		<>
-			<div
-				className="bg-no-repeat bg-cover bg-center py-8 lg:py-12"
-				style={{
-					backgroundImage: `url(${settings.home_review_banner})`,
-				}}
+			<DynamicBackgroundComponent
+
+				imageUrl={settings?.home_review_banner}
+				height={"30vh"}
+				mobileHeight={"40vh"}
 			>
 				<div className="content text-center container">
 					<h3 className="text-2xl lg:text-4xl/[48px] font-bold font-title text-white">
@@ -54,7 +55,7 @@ const VideoBanner = ({ translations }) => {
 						<HiArrowLongRight className="text-lg ml-1" />
 					</Link>
 				</div>
-			</div>
+			</DynamicBackgroundComponent>
 		</>
 	);
 };

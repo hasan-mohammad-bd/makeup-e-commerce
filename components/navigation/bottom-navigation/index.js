@@ -124,7 +124,7 @@ export default function BottomNavigation() {
           ))}
           <Link
             href="/dashboard/my-wishlist"
-            className="relative inline-flex flex-col items-center justify-center px-5 group text-slate-400"
+            className="relative inline-flex flex-col mt-[-7px]  justify-center px-5 group text-slate-400"
           >
             <HiOutlineHeart size={24} />
             <span className="whitespace-nowrap text-[12px]">

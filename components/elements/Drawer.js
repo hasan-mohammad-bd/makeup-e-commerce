@@ -68,7 +68,7 @@ const Drawer = ({
             </button>
           </div>
           {/*body*/}
-          <div className="overflow-y-auto">
+          <div className="overflow-y-auto h-full">
             {children && show ? (
               children
             ) : (

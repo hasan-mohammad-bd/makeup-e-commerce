@@ -10,8 +10,10 @@ import { getDaysSinceCreation } from "@/utils/format-date";
 
 import { FaStar } from "react-icons/fa";
 import { getDiscountPercent } from "@/utils/percent";
+import { useSelector } from "react-redux";
 
 const ProductHistoryCard = ({ product, status }) => {
+  const { translations } = useSelector((state) => state.common);
   const [loading, setLoading] = useState(true);
 
   const {
@@ -45,9 +47,9 @@ const ProductHistoryCard = ({ product, status }) => {
         }}
       >
         {getDaysSinceCreation(created_at) < 8 && (
-          <div className="absolute top-0 left-0 z-20">
-            <span className="bg-secondary-700 text-sm px-2 rounded-full text-white">
-              {status || "নতুন"}
+          <div className="absolute top-[-3px] left-0 z-20">
+            <span className="bg-primary text-xs px-2 rounded-tl-lg rounded-br-lg text-white">
+              {translations["new"] || "নতুন"}
             </span>
           </div>
         )}
@@ -57,7 +59,7 @@ const ProductHistoryCard = ({ product, status }) => {
           width={76}
           height={76}
           // priority={true}
-          className="h-full w-full object-contain"
+          className="h-full w-full object-cover"
         />
       </div>
       <div className="product-content-wrap">
