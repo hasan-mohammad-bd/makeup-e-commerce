@@ -19,6 +19,7 @@ const IntroSlider = ({ sliders }) => {
         modules={[Pagination, Autoplay, EffectFade, Navigation]}
         slidesPerView={1}
         spaceBetween={0}
+        effect={"fade"}
         loop={true}
         navigation={{
           prevEl: ".intro_prev_b",
@@ -88,10 +89,10 @@ const IntroSlider = ({ sliders }) => {
         ))}
       </Swiper>
       <div className="slider-arrow hidden lg:block">
-        <span className="slider-btn slider-prev slick-arrow intro_prev_b !bg-primary">
+        <span className="slider-btn slider-prev slick-arrow intro_prev_b !bg-primary ml-2">
           <TfiAngleLeft className=" text-white !font-bold" />
         </span>
-        <span className="slider-btn slider-next slick-arrow intro_prev_b !bg-primary">
+        <span className="slider-btn slider-next slick-arrow intro_prev_b !bg-primary mr-2">
           <TfiAngleRight className=" text-white !font-bold" />
         </span>
       </div>

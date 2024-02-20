@@ -6,7 +6,7 @@ const HorizontalScrollView = ({ children, className }) => {
     <div className="custom-horizontal-scroll scrollbar-hide">
       <div
         className={twMerge(
-          "flex small-container mx-auto justify-around gap-3 w-fit p-4 md:px-0",
+          "flex small-container justify-around gap-3 w-fit p-4 md:px-0",
           className
         )}
       >

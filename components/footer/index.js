@@ -182,7 +182,7 @@ const Footer = () => {
               <div className="col-span-12">
                 <p className="text-sm font-normal font-body text-slate-400 text-center">
                   {translations["copyright"]} {new Date().getFullYear()}{" "}
-                  {translations["copyright-msg"]}.
+                  {translations["copyright-msg"] || "All Rights Reserved"}.
                 </p>
               </div>
               <div className="footer-links">
