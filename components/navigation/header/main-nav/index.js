@@ -87,7 +87,7 @@ export default function MainNav({ settings }) {
   return (
     <div className="">
       <TopHeaderBanner locale={locale} />
-      <div className="w-full z-30 bg-white border-b border-slate-300 py-3 md:py-6">
+      <div className="sticky top-0 w-full z-30 bg-white border-b border-slate-300 py-3 md:py-6">
         <div className="container lg:px-5  2xl:px-0 ">
           <div className="header-wrap flex justify-between items-center">
             {/* Nav Items  */}
@@ -111,7 +111,7 @@ export default function MainNav({ settings }) {
             <div className="header-right flex justify-between items-center ml-4 gap-2 lg:gap-6">
               <div className="header-actions flex items-center gap-4">
                 <div className="text-center font-normal">
-                  <button className="" onClick={togglePopover}>
+                  <Link className="" href="/dashboard/profile">
                     {user?.image ? (
                       <Image
                         src={user.image}
@@ -123,8 +123,8 @@ export default function MainNav({ settings }) {
                     ) : (
                       <HiOutlineUser className="" size={28} />
                     )}
-                  </button>
-                  <p className="hidden md:block">Profile</p>
+                    <p className="hidden md:block">Profile</p>
+                  </Link>
                 </div>
                 <div className="text-center ml-4 hidden md:flex flex-col">
                   <Link href="/dashboard/my-wishlist" className="relative">
@@ -134,8 +134,8 @@ export default function MainNav({ settings }) {
                         {wishlistCount > 9 ? "9+" : wishlistCount}
                       </span>
                     ) : null}
+                    <p className="">My Wishlist</p>
                   </Link>
-                  <p className="">My Wishlist</p>
                 </div>
 
                 <div className="text-center ml-4">
@@ -150,8 +150,8 @@ export default function MainNav({ settings }) {
                         {cart?.length > 9 ? "9+" : cart?.length}
                       </span>
                     ) : null}
+                    <p className="hidden md:block">My Cart</p>
                   </button>
-                  <p className="hidden md:block">My Cart</p>
                 </div>
                 <div
                   ref={popoverRef}
