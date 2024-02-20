@@ -42,7 +42,7 @@ const ProductsWithFilter = async ({
           >
             <p>
               {params.get("text") ? `"${params.get("text")}" ` : ""}
-              {`${products?.length} ${translations["items"]}` ||
+              {`${products?.length} ${translations["items"] || "Products"}` ||
                 `এখানে ${products?.length} টি প্রডাক্ট আছে`}
             </p>
 
@@ -59,18 +59,24 @@ const ProductsWithFilter = async ({
 
           {products?.length ? (
             <div className="col-span-8">
-              <ProductList products={products} translations={translations} isWithFilter={true}/>
+              <ProductList
+                products={products}
+                translations={translations}
+                isWithFilter={true}
+              />
               <PaginationWithSummery
                 meta={meta}
                 totalItemsShowing={products?.length}
               />
             </div>
           ) : (
-            <NoProducts />
+            <div className="col-span-8">
+              <NoProducts />
+            </div>
           )}
         </div>
       </div>
-      <FilterPanel  category={category} />
+      <FilterPanel category={category} />
     </>
   );
 };

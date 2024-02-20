@@ -39,7 +39,7 @@ const Filter = ({ category }) => {
 
   return (
     <div className={`pl-4 filter-sidebar flex-col gap-y-7 hidden md:flex `}>
-      <div className="p-5 rounded shadow-lg">
+      <div className="p-5 rounded shadow">
         {category || selectedBrandIds.length || selectedColors.length ? (
           <div className="flex items-center flex-wrap gap-2">
             {/* selected category  */}
@@ -114,7 +114,7 @@ const Filter = ({ category }) => {
       </div>
 
       {filterOptions?.brands?.length ? (
-        <div className="p-5 rounded shadow-lg">
+        <div className="p-5 rounded shadow">
           <BrandFilter
             filteredBrands={filterOptions?.brands}
             selectedBrandIds={selectedBrandIds}
@@ -123,7 +123,7 @@ const Filter = ({ category }) => {
       ) : null}
 
       {filterOptions?.max_price ? (
-        <div className="p-5 rounded shadow-lg">
+        <div className="p-5 rounded shadow">
           <PriceRangeFilter
             min_price={filterOptions?.min_price}
             max_price={filterOptions?.max_price}
@@ -132,7 +132,7 @@ const Filter = ({ category }) => {
       ) : null}
 
       {filterOptions?.colors?.length ? (
-        <div className="p-5 rounded shadow-lg">
+        <div className="p-5 rounded shadow">
           <ColorFilter
             colors={filterOptions?.colors}
             selectedColors={selectedColors}

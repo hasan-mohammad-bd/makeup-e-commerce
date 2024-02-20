@@ -1,5 +1,4 @@
-import { Link } from "@/navigation";
-import Image from "next/image";
+
 import { fetchData } from "@/lib/fetch-data";
 import dynamic from "next/dynamic";
 
@@ -7,19 +6,15 @@ import dynamic from "next/dynamic";
 import Intro from "./_components/intro";
 import Brands from "./_components/brands";
 import BestSell from "./_components/best-sale";
-import NewArrival from "./_components/new-arrival";
 import VideoBanner from "./_components/VideoBanner";
 import FeaturedBanner from "./_components/FeaturedBanner";
 import HomeAllProducts from "./_components/HomeAllProducts";
-import ServiceFeatures from "./_components/service-features";
-import PopularCategories from "./_components/popular-categories";
 import SectionTitle from "@/components/elements/SectionTitle";
 const FlashSale = dynamic(() => import("./_components/flash-sale"), {
   ssr: false,
 });
 
 // ** Import Iocns
-import { HiArrowLongRight } from "react-icons/hi2";
 import { SeeAll } from "@/components/elements/buttons";
 
 export default async function Home() {
