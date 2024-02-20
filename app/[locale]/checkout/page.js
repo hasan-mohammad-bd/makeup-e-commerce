@@ -127,7 +127,7 @@ const Checkout = () => {
 
   return (
     <section className="md:container py-3 lg:py-8 mb-14 lg:mb-0">
-      <div className="grid lg:grid-cols-5 mb-8 gap-4 lg:gap-8">
+      <div className="grid lg:grid-cols-6 mb-8 gap-4 lg:gap-8">
         <div className="md:col-span-3">
           <h3 className="text-slate-700 text-lg/[26px] font-semibold mx-3 pb-4 md:mx-0">
             {translations["checkout-info-msg"] ||
@@ -290,7 +290,7 @@ const Checkout = () => {
             </div>
           </form>
         </div>
-        <div className="md:col-span-2 p-3 lg:p-6 pl-8 mx-3 md:mx-0 border-l border-slate-200">
+        <div className="md:col-span-3 p-3 lg:p-6 pl-8 mx-3 md:mx-0 border-l border-slate-200">
           <h3 className="text-lg/[26px] text-slate-700 font-semibold">
             {translations["your-order"] || "আপনার অর্ডার"}
           </h3>
