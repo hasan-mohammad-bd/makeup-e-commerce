@@ -67,9 +67,9 @@
 }
 
 @layer components {
-  /* .container {
-    @apply xl:max-w-[1276px];
-  } */
+  .container {
+    @apply xl:max-w-[1376px];
+  }
 }
 
 .small-container {
@@ -339,7 +339,7 @@
 }
 
 .product-tab-links a.active {
-  @apply text-secondary-700 border-secondary-700;
+  @apply text-primary border-primary;
 }
 
 /* .product-tab-links div:not(:first-of-type) a::before {

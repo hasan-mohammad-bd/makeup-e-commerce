@@ -92,8 +92,8 @@ const DashboardLayout = ({ children, params }) => {
           </div>
         </DynamicBackgroundComponent>
       </div>
-      <div className="small-container mx-auto md:mt-20 shadow-xl">
-        <div className="bg-white grid grid-cols-[max-content_1fr] min-h-screen rounded-xl">
+      <div className="small-container mx-auto md:px-10 2xl:px-0 md:mt-20 shadow-xl">
+        <div className="bg-white grid grid-cols-[max-content_1fr] min-h-screen  rounded-xl">
           <div className="border-r border-slate-300 px-6 py-12">
             <nav className="text-slate-500">
               <ul className="w-[15.25rem]">

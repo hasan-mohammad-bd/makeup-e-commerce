@@ -9,7 +9,7 @@ const MegaMenu = dynamic(() => import("./MegaMenu"), {
 import React from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
-const MenuItems = ({ settings }) => {
+const MenuItems = ({ settings , noAds }) => {
   console.log(settings);
   const navItems = settings?.header_page || [
     {
@@ -50,7 +50,7 @@ const MenuItems = ({ settings }) => {
     },
   ];
   return (
-    <div className="container lg:px-5 2xl:px-0 md:flex items-center justify-between hidden">
+    <div className="container lg:px-10 2xl:px-0 md:flex items-center justify-between hidden">
       <div>
         {navItems.map((item, index) => (
           <Link
@@ -83,18 +83,20 @@ const MenuItems = ({ settings }) => {
         ))}
       </div>
 
-      <div className="flex items-center justify-center">
-        <Image
-          src={`/assets/images/banner/lamp.png`}
-          width={0}
-          height={0}
-          alt="Not Found"
-          className="my-6 mx-auto h-auto w-[28px]"
-        />
-        <span className="text-lg ml-3 text-slate-500">
-          Special up to 60% Off all item
-        </span>
-      </div>
+      {!noAds && (
+        <div className="flex items-center justify-center">
+          <Image
+            src={`/assets/images/banner/lamp.png`}
+            width={0}
+            height={0}
+            alt="Not Found"
+            className="my-6 mx-auto h-auto w-[28px]"
+          />
+          <span className="text-lg ml-3 text-slate-500">
+            Special up to 60% Off all item
+          </span>
+        </div>
+      )}
     </div>
   );
 };

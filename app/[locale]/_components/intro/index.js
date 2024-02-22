@@ -17,7 +17,7 @@ const Intro = async () => {
     api: "sliders",
   });
   return (
-    <div className="container mx-auto lg:px-5  2xl:px-0 grid grid-cols-1 md:grid-cols-6">
+    <div className="container mx-auto lg:px-10  2xl:px-0 grid grid-cols-1 md:grid-cols-6">
       <div className="md:col-span-1 hidden md:block">
         <CategoryItems />
       </div>

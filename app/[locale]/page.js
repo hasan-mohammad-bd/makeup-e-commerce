@@ -1,4 +1,3 @@
-
 import { fetchData } from "@/lib/fetch-data";
 import dynamic from "next/dynamic";
 
@@ -30,7 +29,7 @@ export default async function Home() {
         </div>
       </section>
       <section className="banners py-6 lg:py-14">
-        <div className="container lg:px-5  2xl:px-0">
+        <div className="container lg:px-10  2xl:px-0">
           <FeaturedBanner />
         </div>
       </section>
@@ -75,7 +74,7 @@ export default async function Home() {
       </section>  */}
 
       <section className="all-products mt-6 lg:mt-14">
-        <div className="container lg:px-5 2xl:px-0">
+        <div className="container lg:px-10 2xl:px-0">
           <SectionTitle
             title={translations["new-in-shop"]}
             buttonText={translations["see-all"]}
@@ -88,30 +87,30 @@ export default async function Home() {
         <FlashSale translations={translations} />
       </section>
 
-      <section className="best-sell mt-8 lg:mt-0 py-4 md:py-14 lg:pb-14">
+      <section className="best-sell mt-8 lg:mt-0 py-4 lg:pb-14">
         <BestSell translations={translations} />
       </section>
 
-      <section className="new-products pt-6 lg:pt-14">
-        {/*         <div className="container">
+      {/*       <section className="new-products pt-6 lg:pt-14">
+                <div className="container">
           <SectionTitle
             title={translations["new-in-shop"]}
             href="/products"
             buttonText={translations["see-all"]}
           />
         </div>
-        <NewArrival /> */}
-        {/*         <div className="container">
+        <NewArrival />
+                <div className="container">
           <SeeAll href="/products" buttonText={translations["see-all"]} />
-        </div> */}
-      </section>
+        </div>
+      </section> */}
 
       <section className="mt-6 lg:mt-14">
         <VideoBanner translations={translations} />
       </section>
 
       <section className="all-brands pt-6 pb-8 lg:py-14">
-        <div className="lg:container lg:px-5 2xl:px-0">
+        <div className="lg:container lg:px-10 2xl:px-0">
           <SectionTitle title={translations["our-brands"]} />
           <div className="brands-slider mt-1 lg:mt-6  relative">
             <Brands />

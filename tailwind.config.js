@@ -41,6 +41,9 @@ module.exports = {
           50: "#FFF6EB",
           200: "#FDD39B",
         },
+        hovercolor: {
+          DEFAULT: "#061738",
+        },
         secondary: {
           DEFAULT: "#EFEFF1",
           700: "#00B7C9",

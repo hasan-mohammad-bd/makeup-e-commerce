@@ -33,7 +33,13 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 import HeartRedIcon from "@/components/elements/svg/HeartRedIcon";
 import useWishList from "@/hooks/useWishList";
 
-const ProductDetails = ({ product, settings, translations, shortDetails, demoShortDetails }) => {
+const ProductDetails = ({
+  product,
+  settings,
+  translations,
+  shortDetails,
+  demoShortDetails,
+}) => {
   const {
     handleAddToWishlist,
     handleWishListProductStatus,
@@ -53,9 +59,9 @@ const ProductDetails = ({ product, settings, translations, shortDetails, demoSho
 
   return (
     <div className="product-details">
-      <div className="flex small-container flex-col lg:flex-row lg:gap-10 pb-3">
+      <div className="flex container flex-col lg:flex-row lg:gap-10 pb-3 lg:px-10  2xl:px-0 ">
         <div className="lg:w-1/2">
-          <div className="lg:sticky top-28">
+          <div className=" top-28">
             <ProductViewSlider
               product={product}
               ref={productViewSwiperRef}
@@ -171,7 +177,7 @@ const ProductDetails = ({ product, settings, translations, shortDetails, demoSho
               <h5 className="text-xl md:text-2xl font-bold font-title text-slate-900">
                 {getSlicedText(product?.product_name, 100)}
               </h5>
-              <div className="product-price flex items-center gap-4 lg:border-b border-slate-200 py-4 lg:py-5">
+              <div className="product-price flex items-center gap-4 mt-2 md:mt-3">
                 <span className="text-lg font-title text-slate-900">
                   {siteConfig.currency.sign} {newPrice || "0.00"}{" "}
                 </span>
@@ -231,7 +237,11 @@ const ProductDetails = ({ product, settings, translations, shortDetails, demoSho
               {/* short description  */}
 
               <ViewHTML
-                htmlText={ shortDetails? demoShortDetails : product?.product_short_description}
+                htmlText={
+                  shortDetails
+                    ? demoShortDetails
+                    : product?.product_short_description
+                }
                 className={"desc text-sm lg:text-base text-slate-600 mt-3"}
               />
               {/* Product Dynamic Pricing Area  */}
@@ -256,7 +266,7 @@ const ProductDetails = ({ product, settings, translations, shortDetails, demoSho
                 />
               ) : null}
             </div>
-            <div className="flex justify-start items-center mt-5 px-3 md:px-0">
+            <div className="flex justify-start items-center mt-3 px-3 md:px-0">
               <div className="flex w-fit rounded-full border border-slate-200 items-center products-center gap-2 text-slate-900 ">
                 <button
                   disabled={quantity <= 1}
@@ -282,10 +292,10 @@ const ProductDetails = ({ product, settings, translations, shortDetails, demoSho
                 </button>
               </div>
               <button
-                className="bg-primary rounded-sm py-2 md:py-2 w-fit px-3 md:px-6 text-white ml-3 text-center active:scale-95"
+                className="bg-primary py-1 rounded-[0.2rem]  md:py-[6px] w-fit px-3 md:px-5 hover:bg-hovercolor text-white ml-3 text-center active:scale-95"
                 onClick={() => handleAddToCart(product, selectedVariant)}
               >
-                <HiOutlineShoppingCart size={24} />
+                {/* <HiOutlineShoppingCart size={24} /> */}
                 <span className="ml-2">
                   {translations["add-to-cart"] || "কার্টে রাখুন"}
                 </span>
@@ -318,7 +328,7 @@ const ProductDetails = ({ product, settings, translations, shortDetails, demoSho
             {/* buy now button */}
             <button
               onClick={() => handleAddAndCheckout(product, selectedVariant)}
-              className="bg-primary py-3.5 md:py-3 w-full md:mx-0 px-3 md:px-6 text-white rounded-sm text-center active:scale-95 mt-5"
+              className="bg-primary py-3.5 md:py-3 w-full md:mx-0 px-3 md:px-6  text-white hover:bg-hovercolor  !rounded-[0.2rem] text-center active:scale-95 mt-5"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
