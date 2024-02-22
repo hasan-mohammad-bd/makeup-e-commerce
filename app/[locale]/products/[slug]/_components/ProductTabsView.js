@@ -85,11 +85,13 @@ const ProductTabsView = ({ product, settings, translations }) => {
   // console.log(activeSection, "activeSection");
 
   return (
-    <div className="tabs-view bg-[#FCFCFC] py-3">
+    <div className="tabs-view bg-[#FCFCFC] py-3 container mx-auto">
       {/* tabs view */}
-      <div className="sticky bg-white top-0 z-20 mt-7 lg:mt-0 lg:pt-6">
+      <div className="sticky bg-white top-20 z-20 mt-7 lg:mt-0 lg:pt-6 ">
         <HorizontalScrollView
-          className={"product-tab-links  py-0 justify-evenly lg:w-full lg:pb-4"}
+          className={
+            "product-tab-links py-0 justify-evenly lg:w-full lg:pb-4 !w-fit"
+          }
         >
           {tabItems.map((item) =>
             item.key === "p-specifications" &&

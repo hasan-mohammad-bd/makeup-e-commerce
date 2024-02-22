@@ -30,6 +30,8 @@ import { IoMdMenu } from "react-icons/io";
 import SidebarMenu from "@/components/side-drawers/SidebarMenu";
 
 export default function MainNav({ settings }) {
+  const [isVisible, setIsVisible] = useState(false);
+
   const [isSideBarOpen, setIsSidebarOpen] = useState(false);
   const { locale } = useParams();
   const [scroll, setScroll] = useState(0);
@@ -84,11 +86,27 @@ export default function MainNav({ settings }) {
 
   const wishlistCount = getWishlistCount();
 
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    setIsVisible(scrollY > 100);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div className="">
       <TopHeaderBanner locale={locale} />
-      <div className="sticky top-0 w-full z-30 bg-white border-b border-slate-300 py-3 md:py-6">
-        <div className="container lg:px-5  2xl:px-0 ">
+      <div
+        className={`${
+          isVisible ? "fixed top-0" : ""
+        }  w-full z-30 bg-white border-b border-slate-300 py-3 md:py-4`}
+      >
+        <div className="container lg:px-10  2xl:px-0 ">
           <div className="header-wrap flex justify-between items-center">
             {/* Nav Items  */}
             <button onClick={sidebarToggle} className="md:hidden">
@@ -101,12 +119,16 @@ export default function MainNav({ settings }) {
                   alt={settings?.name}
                   width={0}
                   height={48}
-                  className="h-[48px] min-w-[150px]  min-h-[48px] mr-[-70px] md:mr-0 py-2 object-contain object-left"
+                  className="h-[48px] min-w-[150px]  min-h-[48px] mr-[-50px] md:mr-0 py-2 object-contain object-left"
                 />
               </Link>
             </div>
             <div className=" justify-center items-center hidden md:flex">
-              <ResponsiveSearch />
+              {!isVisible ? (
+                <ResponsiveSearch />
+              ) : (
+                <MenuItems noAds={true} settings={settings} />
+              )}
             </div>
             <div className="header-right flex justify-between items-center ml-4 gap-2 lg:gap-6">
               <div className="header-actions flex items-center gap-4">

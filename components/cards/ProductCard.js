@@ -77,7 +77,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 
           <div
             className={twMerge(
-              `min-w-[166px] bg-white md:w-auto relative w-auto h-full pb-8`,
+              `min-w-[166px] bg-white md:w-auto relative w-auto h-full pb-8 flex flex-col justify-between`,
               stockOut ? "opacity-50" : ""
             )}
           >
@@ -98,7 +98,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                   as={`/products/${slug}`}
                 >
                   <Image
-                    className={`default-img object-cover md:h-[17.188rem] h-[12rem] w-full bg-[#DCDDDF]`}
+                    className={`default-img object-cover lg:!h-[18.188rem] !h-[12rem] md:!h-[15rem] w-full bg-[#DCDDDF]`}
                     src={image || "/assets/images/no-image.png"}
                     alt={product_name}
                     width={0}
@@ -139,7 +139,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                 {old_price > new_price ? (
                   <div className="flex items-center gap-2">
                     <span>
-                      <FiMinus className="text-slate-500 mx-1 my-2" />
+                      <FiMinus className="text-slate-500 mx-1" />
                     </span>
                     <del className="old-price text-sm font-normal text-slate-500">
                       {siteConfig.currency.sign}
@@ -175,20 +175,21 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                 <button
                   disabled={stockOut}
                   aria-label="Add To Cart"
-                  className="border border-slate-300 flex h-fit px-[10px] py-2"
+                  className="border border-slate-200 flex items-center h-fit px-[0.625rem] py-2 rounded-[0.2rem] group  hover:text-white hover:bg-primary"
                   onClick={(e) => handleAddToCart(product)}
                 >
                   <HiOutlineShoppingCart
                     size={24}
-                    className="active:scale-90 text-slate-500"
-                  />{" "}
-                  <span className="text-slate-500 whitespace-nowrap hidden xl:block">
-                    + Add to card
+                    className="active:scale-90 text-slate-500 mr-1 group-hover:text-white"
+                  />
+                  {"  "}
+                  <span className="whitespace-nowrap  justify-center items-center hidden lg:flex">
+                    <p className="text-[14px] leading-none"> + Add to card</p>
                   </span>
                 </button>
                 <button
-                  aria-label="Add To Wishlist"
-                  className={`border border-slate-300 px-3  @  text-slate-500`}
+                  aria-label="Add To Wishlist group hover:bg-primary"
+                  className={`border border-slate-300 px-3 rounded-[0.2rem] group hover:bg-primary  @  text-slate-500`}
                   onClick={(e) =>
                     isInWishList
                       ? handleRemoveFromWishlist(id)
@@ -196,20 +197,29 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                   }
                 >
                   {isInWishList ? (
-                    <HeartRedIcon size={20} />
+                    <HeartRedIcon
+                      className="text-red-500 border group-hover:border-white"
+                      size={20}
+                    />
                   ) : (
                     <>
                       <span className="">
-                        <HiOutlineHeart size={20} />
+                        <HiOutlineHeart
+                          className="group-hover:text-white"
+                          size={20}
+                        />
                       </span>
                     </>
                   )}
                 </button>
                 <button
-                  className={`border border-slate-300 px-3 text-slate-500`}
+                  className={`border border-slate-300 px-3 group hover:bg-primary rounded-[0.2rem] text-slate-500`}
                   onClick={() => toggleModal()}
                 >
-                  <MdOutlineRemoveRedEye size={20} />
+                  <MdOutlineRemoveRedEye
+                    className="group-hover:text-white"
+                    size={20}
+                  />
                 </button>
                 {/*                 <button
                   disabled={stockOut}

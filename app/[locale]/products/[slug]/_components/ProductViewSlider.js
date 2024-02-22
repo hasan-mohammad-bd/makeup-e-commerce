@@ -107,7 +107,7 @@ const ProductViewSlider = forwardRef(
                           alt=""
                           width={524}
                           height={524}
-                          className="object-contain h-full w-full"
+                          className="object-cover h-full w-full"
                         />
 
                         <button
@@ -137,7 +137,7 @@ const ProductViewSlider = forwardRef(
                         alt=""
                         width={524}
                         height={524}
-                        className="object-contain h-full w-full"
+                        className="object-cover h-full w-full"
                       />
                     )}
                   </div>

@@ -43,13 +43,19 @@ const CategoryItems = ({ closeFilterPanel }) => {
   return (
     <div>
       <div className="category-section flex flex-col h-auto">
-        <div className="!h-full relative">
-          {categoryItems.length > 7 &&
-            setCategoryItems((prevItems) => prevItems.slice(0, 7))}
+        <div
+          className={`!h-full relative ${
+            !isMobile ? "shadow rounded-lg pl-3 py-3" : ""
+          }`}
+        >
+          {categoryItems.length > 8 &&
+            setCategoryItems((prevItems) => prevItems.slice(0, 8))}
           {categoryItems.map((item) => (
-            <div className="!w-full sub-menu" key={item.id}>
+            <div className={`!w-full sub-menu`} key={item.id}>
               <Link
-                className={` hover:text-primary flex items-center justify-between px-3 !w-full py-2 shadow mb-2 text-lg ${
+                className={` hover:text-primary flex items-center justify-between px-3 !w-full py-2 ${
+                  isMobile && "shadow"
+                } mb-2 text-lg ${
                   item.child_categories.length >= 1 && "sub-menu"
                 }`}
                 key={item.id}
@@ -81,7 +87,7 @@ const CategoryItems = ({ closeFilterPanel }) => {
                 <div
                   className={`${
                     !isMobile &&
-                    "absolute top-0 right-0 translate-x-full sub-item z-40"
+                    "absolute p-3 top-0 right-0 translate-x-full sub-item z-40"
                   } shadow  bg-white !w-full !h-full`}
                 >
                   {item.child_categories.length >= 1 &&
@@ -91,7 +97,9 @@ const CategoryItems = ({ closeFilterPanel }) => {
                           <>
                             {item.status === "active" && (
                               <Link
-                                className={` pl-7 hover:text-primary py-2  flex items-center justify-between px-3 shadow text-lg mb-2 w-full ${
+                                className={` pl-7 hover:text-primary py-2  flex items-center justify-between px-3  ${
+                                  isMobile && "shadow"
+                                } text-lg mb-2 w-full ${
                                   subItem.child_categories?.length >= 1 &&
                                   "second-sub-menu"
                                 }`}
@@ -120,7 +128,9 @@ const CategoryItems = ({ closeFilterPanel }) => {
                         ) : (
                           <>
                             <Link
-                              className={` pl-3 hover:text-primary py-2 flex flex-col md:flex-row items-center justify-between px-3 shadow text-lg mb-2 w-full ${
+                              className={` pl-3 hover:text-primary py-2 flex flex-col md:flex-row items-center justify-between px-3 ${
+                                isMobile && "shadow rounded-r-lg"
+                              } text-lg mb-2 w-full ${
                                 subItem.child_categories?.length >= 1 &&
                                 "second-sub-menu"
                               }`}
