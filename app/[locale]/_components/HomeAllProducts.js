@@ -9,6 +9,9 @@ const HomeAllProducts = async ({ translations }) => {
   return (
     <div className="bestSell-slider mt-1 lg:mt-6">
       <ProductList products={products} translations={translations} />
+      <div>
+        
+      </div>
       <PaginationWithSummery meta={meta} totalItemsShowing={products?.length} />
     </div>
   );

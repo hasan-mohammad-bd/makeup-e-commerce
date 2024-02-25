@@ -15,6 +15,7 @@ import {
 
 // ** Import Icons
 import {
+  HiMagnifyingGlass,
   HiOutlineHeart,
   HiOutlineShoppingCart,
   HiOutlineUser,
@@ -28,10 +29,13 @@ import useWishList from "@/hooks/useWishList";
 import TopHeaderBanner from "../TopHeaderBanner";
 import { IoMdMenu } from "react-icons/io";
 import SidebarMenu from "@/components/side-drawers/SidebarMenu";
+import Search from "@/components/elements/Search";
+import { AiOutlineClose } from "react-icons/ai";
+import { setSearchModalOpen } from "@/store/slices/commonSlice";
 
 export default function MainNav({ settings }) {
   const [isVisible, setIsVisible] = useState(false);
-
+  const searchMenuRef = useRef(null);
   const [isSideBarOpen, setIsSidebarOpen] = useState(false);
   const { locale } = useParams();
   const [scroll, setScroll] = useState(0);
@@ -39,7 +43,9 @@ export default function MainNav({ settings }) {
   const { user, isLoginModalOpen, isLogoutModalOpen } = useSelector(
     (state) => state.auth
   );
-  const { translations } = useSelector((state) => state.common);
+  const { translations, isSearchModalOpen } = useSelector(
+    (state) => state.common
+  );
   const { getWishlistCount } = useWishList();
   const dispatch = useDispatch();
 
@@ -100,7 +106,7 @@ export default function MainNav({ settings }) {
 
   return (
     <div className="">
-      <TopHeaderBanner locale={locale} />
+      <TopHeaderBanner settings={settings} locale={locale} />
       <div
         className={`${
           isVisible ? "fixed top-0" : ""
@@ -109,6 +115,7 @@ export default function MainNav({ settings }) {
         <div className="container lg:px-10  2xl:px-0 ">
           <div className="header-wrap flex justify-between items-center">
             {/* Nav Items  */}
+
             <button onClick={sidebarToggle} className="md:hidden">
               <IoMdMenu size={28} />
             </button>
@@ -133,6 +140,7 @@ export default function MainNav({ settings }) {
             <div className="header-right flex justify-between items-center ml-4 gap-2 lg:gap-6">
               <div className="header-actions flex items-center gap-4">
                 <div className="text-center font-normal">
+
                   <Link className="" href="/dashboard/profile">
                     {user?.image ? (
                       <Image
@@ -232,6 +240,30 @@ export default function MainNav({ settings }) {
         sidebarToggle={sidebarToggle}
         isSideBarOpen={isSideBarOpen}
       />
+          {  console.log(isSearchModalOpen)}
+      {isSearchModalOpen && (
+  
+        <div
+          ref={searchMenuRef}
+          // top-full
+          className="absolute top-0 right-0 z-30 w-full bg-white lg:hidden"
+        >
+          <div className="container flex flex-col justify-center gap-6 py-5 shadow">
+            <h3 className="text-xl md:text-2xl font-bold text-center">
+              Product Search
+            </h3>
+            <div className="flex items-center gap-2">
+              <Search />
+              <button
+                onClick={() => dispatch(setSearchModalOpen(false))}
+                className="text-[#475569] md:hidden"
+              >
+                <AiOutlineClose size={24} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

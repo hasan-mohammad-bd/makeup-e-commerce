@@ -5,6 +5,7 @@ import { twMerge } from "tailwind-merge";
 import CloseIcon from "./svg/CloseIcon";
 import { Link } from "@/navigation";
 import Image from "next/image";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const Drawer = ({
   title,
@@ -14,8 +15,11 @@ const Drawer = ({
   position,
   className,
   image,
+  width,
 }) => {
   useLockedBody(show, "root"); // to lock body scroll
+  const { isMobile } = useMediaQuery("(max-width: 768px)");
+
   return (
     <>
       {/* Backdrop */}
@@ -31,7 +35,9 @@ const Drawer = ({
         className={twMerge(
           `fixed top-0 ${
             position === "left" ? "left-0" : "right-0"
-          } z-40 w-[85vw] lg:max-w-[31rem] h-[100dvh] transition-transform ease-in-out duration-300 transform ${
+          } z-40 lg:max-w-[${width ? width : "31rem"}] ${
+            isMobile && "w-[85vw]"
+          }   h-[100dvh] transition-transform ease-in-out duration-300 transform ${
             show
               ? "translate-x-0"
               : position === "left"

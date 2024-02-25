@@ -1,6 +1,7 @@
 import { Link } from "@/navigation";
 import ProductsWithFilter from "@/components/products/ProductsWithFilter";
 import { fetchData } from "@/lib/fetch-data";
+import DynamicBackgroundComponent from "@/components/utility/BackgroundImage";
 
 const page = async ({ params, searchParams }) => {
   const [settingsRes, tranRes] = await Promise.allSettled([
@@ -15,7 +16,23 @@ const page = async ({ params, searchParams }) => {
 
   return (
     <>
-      <div
+      <DynamicBackgroundComponent
+        imageUrl={settings?.all_product_banner}
+        height={"240px"}
+        mobileHeight={"100px"}
+        heading={"All Products"}
+      >
+        <div className="flex items-center justify-center mt-3">
+          <Link href={`/`} className=" hover:text-primary text-white">
+            {translations["home"] || "হোম"}
+          </Link>
+          <span className="text-primary mx-3 font-extrabold">/</span>{" "}
+          <Link href={`/products`} className=" hover:text-primary text-white">
+            {translations["products"] || "প্রডাক্টস"}
+          </Link>
+        </div>
+      </DynamicBackgroundComponent>
+      {/*       <div
         className="hidden lg:block bg-no-repeat bg-cover w-full h-[240px] breadcrumb py-20"
         style={{
           backgroundImage: `url(${settings?.all_product_banner})`,
@@ -42,7 +59,7 @@ const page = async ({ params, searchParams }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <ProductsWithFilter
         customSearchParams={searchParams}

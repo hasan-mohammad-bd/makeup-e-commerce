@@ -44,12 +44,10 @@ const CategoryItems = ({ closeFilterPanel }) => {
     <div>
       <div className="category-section flex flex-col h-auto">
         <div
-          className={`!h-full relative ${
-            !isMobile ? "shadow rounded-lg pl-3 py-3" : ""
-          }`}
+          className={`!h-full relative ${!isMobile ? "shadow pl-3 py-3" : ""}`}
         >
-          {categoryItems.length > 8 &&
-            setCategoryItems((prevItems) => prevItems.slice(0, 8))}
+          {categoryItems.length > 7 &&
+            setCategoryItems((prevItems) => prevItems.slice(0, 7))}
           {categoryItems.map((item) => (
             <div className={`!w-full sub-menu`} key={item.id}>
               <Link
@@ -153,8 +151,8 @@ const CategoryItems = ({ closeFilterPanel }) => {
                           <div
                             className={` ${
                               isMobile
-                                ? "pl-3 hover:text-primary py-2  flex items-center justify-between px-3 rounded shadow text-lg mb-2 w-full"
-                                : "absolute  top-0 right-0 translate-x-full bg-white second-sub-item z-40 shadow  bg-blue rounded-lg md:!w-[400px] lg:!w-[540px] xl:!w-[700px] 2xl:!w-[940px] !h-full"
+                                ? "pl-3 hover:text-primary py-2  flex items-center justify-between px-3 shadow text-lg mb-2 w-full"
+                                : "absolute  top-0 right-0 translate-x-full bg-white second-sub-item z-40 shadow  bg-blue  md:!w-[400px] lg:!w-[540px] xl:!w-[700px] 2xl:!w-[840px] !h-full"
                             }`}
                           >
                             <div className="grid grid-cols-3 gap-3">

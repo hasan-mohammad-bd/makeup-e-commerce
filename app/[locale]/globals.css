@@ -191,10 +191,10 @@
   @apply w-full md:w-[22rem];
 }
 
-.nav-search input {
-  width: calc(100% - 48px);
-  @apply rounded-l-full md:rounded-l-none border-r-0;
-}
+/* .nav-search input {
+  width: 100%;
+  @apply  
+} */
 
 .nav-search button {
   @apply absolute w-12 h-12 md:bg-primary outline-none text-center;
@@ -220,7 +220,7 @@
 }
 
 .discount-badge {
-  @apply inline-block text-xs w-fit text-white bg-red-500 rounded-md py-0.5 px-1;
+  @apply inline-block text-xs w-fit text-white bg-red-500 rounded-sm py-0.5 px-1;
 }
 
 .product-title {

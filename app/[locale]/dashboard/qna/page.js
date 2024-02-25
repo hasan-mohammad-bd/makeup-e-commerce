@@ -12,6 +12,7 @@ export default function QNAPage() {
 				title={translations["questions-and-answers"] || "প্রশ্ন ও উত্তর"}
 				href={"/dashboard"}
 			/>
+			
 			<div className="px-3 lg:px-10">
 				<QNAItems />
 			</div>

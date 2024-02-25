@@ -131,24 +131,24 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                   isLarge ? "items-center" : "items-start lg:items-center"
                 } lg:flex-row gap-1`}
               >
-                <span className="text-slate-500">
+                <span className="text-slate-800">
                   {siteConfig.currency.sign}
                   {new_price}
                 </span>
 
                 {old_price > new_price ? (
                   <div className="flex items-center gap-2">
-                    <span>
-                      <FiMinus className="text-slate-500 mx-1" />
-                    </span>
-                    <del className="old-price text-sm font-normal text-slate-500">
+                    {/*                    <span>
+                      <FiMinus className="text-slate-800 mx-1" />
+                    </span> */}
+                    <del className="old-price text-sm font-normal text-slate-800">
                       {siteConfig.currency.sign}
                       {old_price}
                     </del>
 
-                    {/*                     <span className="discount-badge ml-1 !text-[12px]">
+                    <span className="discount-badge ml-1 !text-[12px]">
                       {getDiscountPercent(old_price, new_price)}% OFF
-                    </span> */}
+                    </span>
                   </div>
                 ) : null}
               </div>

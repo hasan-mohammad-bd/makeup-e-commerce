@@ -44,16 +44,16 @@ const DashboardLayout = ({ children, params }) => {
       icon: <MdRateReview />,
       path: "my-reviews",
     },
-    {
+/*     {
       text: translations["voucher"] || "ভাউচার",
       icon: <HiReceiptPercent />,
       path: "my-voucher",
-    },
-    {
+    }, */
+/*     {
       text: translations["questions-and-answers"] || "প্রশ্ন ও উত্তর",
       icon: <RiQuestionAnswerFill />,
       path: "qna",
-    },
+    }, */
     {
       text: translations["support-ticket"] || "সাপোর্ট টিকিট",
       icon: <HiTicket />,
@@ -64,7 +64,7 @@ const DashboardLayout = ({ children, params }) => {
   return isMobile ? (
     children
   ) : (
-    <div className="bg-slate-100 md:pb-20">
+    <div className=" md:pb-20">
       <div className="">
         <DynamicBackgroundComponent
           heading={"My Account"}
@@ -92,7 +92,7 @@ const DashboardLayout = ({ children, params }) => {
           </div>
         </DynamicBackgroundComponent>
       </div>
-      <div className="small-container mx-auto md:px-10 2xl:px-0 md:mt-20 shadow-xl">
+      <div style={{ boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px" }} className="small-container mx-auto md:px-10 2xl:px-0 md:mt-20">
         <div className="bg-white grid grid-cols-[max-content_1fr] min-h-screen  rounded-xl">
           <div className="border-r border-slate-300 px-6 py-12">
             <nav className="text-slate-500">

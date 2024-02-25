@@ -4,9 +4,11 @@ import { AiOutlineMail } from "react-icons/ai";
 import { TfiCar } from "react-icons/tfi";
 import LanguageSelector from "./main-nav/LanguageSelector";
 
-const TopHeaderBanner = ({ locale }) => {
+const TopHeaderBanner = ({ locale, settings }) => {
+
+  
   return (
-    <div className="top-header-banner bg-primary w-full py-2">
+    <div className="top-header-banner bg-primary w-full py-1">
       <div className="container mx-auto">
         <div className="md:flex justify-between ">
           <div className="text-area md:flex justify-center items-center">
@@ -17,10 +19,11 @@ const TopHeaderBanner = ({ locale }) => {
               href="#"
               className="text-white hidden md:flex font-normal text-4 border-l border-white text-4 pl-3 ml-3 justify-center"
             >
-              <TfiCar size={20} /> <p className="ml-2 whitespace-nowrap"> Track your order</p>
+              <TfiCar size={20} />{" "}
+              <Link href="/dashboard/my-orders" className="ml-2 whitespace-nowrap"> Track your order</Link>
             </Link>
             <span className="text-white font-normal border-l border-white text-4 pl-3 ml-3 hidden md:flex justify-center items-center">
-              <AiOutlineMail size={20} /> <p className="ml-2">demo@gmail.com</p>
+              <AiOutlineMail size={20} /> <p className="ml-2">{settings?.email}</p>
             </span>
           </div>
           <div className="language-select-area hidden md:flex">

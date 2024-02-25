@@ -12,17 +12,19 @@ import {
   ProfileFillIcon,
   ProfileIcon,
 } from "@/components/elements/svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, usePathname } from "next/navigation";
 import { Link } from "@/navigation";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import FilterMenu from "@/components/elements/FilterMenu";
 import SortMenu from "./SortMenu";
 import ResponsiveSearch from "../header/main-nav/ResponsiveSearch";
-import { HiOutlineHeart } from "react-icons/hi2";
+import { HiMagnifyingGlass, HiOutlineHeart } from "react-icons/hi2";
 import useWishList from "@/hooks/useWishList";
+import { setSearchModalOpen } from "@/store/slices/commonSlice";
 
 export default function BottomNavigation() {
+  const dispatch = useDispatch();
   const { translations, settings } = useSelector((state) => state.common);
   const pathArray = usePathname().split("/");
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -94,7 +96,14 @@ export default function BottomNavigation() {
           </div>
         )}
         <div className="rounded-t-xl shadow-top grid h-full max-w-lg items-center grid-cols-5 mx-auto font-medium py-3">
-          <ResponsiveSearch />
+          <button
+            onClick={() => dispatch(setSearchModalOpen(true))}
+            className="single-action flex-col mb-[-3px] ml-4 text-slate-400"
+          >
+            <HiMagnifyingGlass className="text-slate-400" size={24} />
+            <p className="md:hidden text-slate-400">Search</p>
+            {/* <span>Search</span> */}
+          </button>
           {menuList.map((menu, index) => (
             <Link
               key={index}
