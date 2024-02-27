@@ -17,7 +17,7 @@ const Search = () => {
   const [showSuggestionResults, setShowSuggestionResults] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const { user } = useSelector((state) => state.auth);
-  const { translations } = useSelector((state) => state.common);
+  const { translations, isSearchModalOpen } = useSelector((state) => state.common);
 
   const { data: popularSearch } = useGetPopularSearchQuery(null, {
     skip: !showSuggestionResults,
@@ -104,8 +104,9 @@ const Search = () => {
 
   return (
     <div className="nav-search md:relative">
+
       <div>
-        <div className="group">
+        <div className="group !w-full">
           <input
             value={searchTerm}
             onKeyDown={handleInput}
@@ -114,12 +115,12 @@ const Search = () => {
             onBlur={handleBlur}
             type="text"
             placeholder={translations["search-for-your-desired-product"]}
-            className="group-focus-within:border-primary pr-5"
+            className="group-focus-within:border-primary pr-5 w-full"
           />
 
           <button
             onClick={() => handleSearch(searchTerm)}
-            className="search-btn group-focus-within:border-primary hidden md:inline-block"
+            className={`search-btn group-focus-within:border-primary ${isSearchModalOpen ? "hidden" : ""}  inline-block`}
           >
             <HiMagnifyingGlass
               size={24}
@@ -166,7 +167,7 @@ const Search = () => {
                   >
                     {getSlicedText(keyword.search_name, 30)}
                   </p>
-                  <div className="flex-1 text-right hidden group-hover:block">
+                  <div className="flex-1 text-right group-hover:block">
                     <span
                       onClick={() => handleDeleteHistoryItem(keyword.id)}
                       className="text-slate-600 hover:text-primary"

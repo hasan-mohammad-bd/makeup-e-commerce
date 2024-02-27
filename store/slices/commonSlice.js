@@ -9,6 +9,7 @@ const initialState = {
 	translations: {},
 	translationsLoading: true,
 	videoPlayerConfig: { url: "", className: "" }, //All react player config is supported
+	isSearchModalOpen : false,
 };
 
 const commonSlice = createSlice({
@@ -41,6 +42,9 @@ const commonSlice = createSlice({
 		closeVideoPlayer: (state, action) => {
 			state.videoPlayerConfig = action.payload;
 		},
+		setSearchModalOpen: (state, action) => {
+			state.isSearchModalOpen = action.payload;
+		}
 	},
 });
 
@@ -52,6 +56,7 @@ export const {
 	setLocale,
 	startVideoPlayer,
 	closeVideoPlayer,
+	setSearchModalOpen
 } = commonSlice.actions;
 
 export default commonSlice.reducer;

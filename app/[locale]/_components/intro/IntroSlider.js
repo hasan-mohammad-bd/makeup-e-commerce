@@ -35,7 +35,7 @@ const IntroSlider = ({ sliders }) => {
           <SwiperSlide key={slide?.id} className="">
             <DynamicBackgroundComponent
               imageUrl={slide?.image}
-              height={"50vh"}
+              height={"388px"}
               mobileHeight={"40vh"}
             >
               <div

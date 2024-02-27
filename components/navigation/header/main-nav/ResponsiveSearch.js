@@ -4,13 +4,17 @@ import React, { useEffect, useRef, useState } from "react";
 import Search from "../../../elements/Search";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { AiOutlineClose } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchModalOpen } from "@/store/slices/commonSlice";
 
 export default function ResponsiveSearch() {
+  const {isSearchModalOpen} = useSelector((state) => state.common);
   const [searchOpen, setSearchOpen] = useState(false);
   const searchMenuRef = useRef(null);
-
+  const dispatch = useDispatch();
+ console.log(isSearchModalOpen, "hello")
   const closeMenu = () => {
-    setSearchOpen(false);
+    setSearchModalOpen(false);
   };
 
   useEffect(() => {
@@ -32,21 +36,14 @@ export default function ResponsiveSearch() {
 
   return (
     <>
-      <span className="hidden lg:block">
+      <span className="">
         <Search />
       </span>
-      <div className="header-actions lg:hidden text-center">
-        <button
-          onClick={() => setSearchOpen(!searchOpen)}
-          className="single-action flex-col mb-[-3px] text-slate-400"
-        >
-          <HiMagnifyingGlass className="text-slate-400" size={24} />
-          <p className="md:hidden text-slate-400">Search</p>
-          {/* <span>Search</span> */}
-        </button>
+      <div className="header-actions text-center">
+
       </div>
 
-      {searchOpen && (
+{/*       {isSearchModalOpen && (
         <div
           ref={searchMenuRef}
           // top-full
@@ -55,14 +52,14 @@ export default function ResponsiveSearch() {
           <div className="container flex justify-center gap-6 py-4">
             <Search />
             <button
-              onClick={() => setSearchOpen(!searchOpen)}
+              onClick={() => dispatch(setSearchModalOpen(false))}
               className="text-[#475569] md:hidden"
             >
               <AiOutlineClose size={24} />
             </button>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 }

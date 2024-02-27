@@ -80,7 +80,7 @@ export default async function Home() {
             buttonText={translations["see-all"]}
           />
           <HomeAllProducts translations={translations} />
-          <SeeAll href="/products" buttonText={translations["see-all"]} />
+          {/* <SeeAll href="/products" buttonText={translations["see-all"]} /> */}
         </div>
       </section>
       <section className="mt-6 lg:mt-14">

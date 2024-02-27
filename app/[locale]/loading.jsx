@@ -3,15 +3,18 @@ import Image from "next/image";
 import loading from "@/public/assets/images/loading.gif";
 
 export default function Loading() {
-	return (
-		<div className="flex h-screen w-screen justify-center items-center -mt-16">
-			<Image
-				className={`h-[200px] w-[200px]`}
-				src={"https://akaarserver.xyz/loading.gif" || loading}
-				alt={"loader"}
-				width={200}
-				height={200}
-			/>
-		</div>
-	);
+  return (
+    <div className="flex flex-col h-screen w-screen justify-center items-center -mt-16">
+      <Image
+        className={`h-[200px] w-[200px]`}
+        src={"https://i.ibb.co/1THxscd/Rolling-1s-200px-1.gif" || loading}
+        alt={"loader"}
+        width={200}
+        height={200}
+      />
+      <span className="text-black font-bold text:[1.5rem]  md:text-[2rem]">
+        LOADING
+      </span>
+    </div>
+  );
 }
