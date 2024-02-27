@@ -240,13 +240,13 @@ export default function MainNav({ settings }) {
         sidebarToggle={sidebarToggle}
         isSideBarOpen={isSideBarOpen}
       />
-          {  console.log(isSearchModalOpen)}
+         
       {isSearchModalOpen && (
   
         <div
           ref={searchMenuRef}
           // top-full
-          className="absolute top-0 right-0 z-30 w-full bg-white lg:hidden"
+          className="fixed top-0 right-0 z-30 w-full bg-white lg:hidden"
         >
           <div className="container flex flex-col justify-center gap-6 py-5 shadow">
             <h3 className="text-xl md:text-2xl font-bold text-center">

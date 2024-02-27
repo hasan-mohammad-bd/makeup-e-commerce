@@ -191,10 +191,10 @@
   @apply w-full md:w-[22rem];
 }
 
-/* .nav-search input {
+.nav-search input {
   width: 100%;
-  @apply  
-} */
+  /* @apply   */
+}
 
 .nav-search button {
   @apply absolute w-12 h-12 md:bg-primary outline-none text-center;
