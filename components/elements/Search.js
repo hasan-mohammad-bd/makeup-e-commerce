@@ -106,7 +106,7 @@ const Search = () => {
     <div className="nav-search md:relative">
 
       <div>
-        <div className="group !w-full">
+        <div className="group !w-full ">
           <input
             value={searchTerm}
             onKeyDown={handleInput}
@@ -115,7 +115,7 @@ const Search = () => {
             onBlur={handleBlur}
             type="text"
             placeholder={translations["search-for-your-desired-product"]}
-            className="group-focus-within:border-primary pr-5 w-full"
+            className="group-focus-within:border-primary pr-5 w-full !rounded-l-none"
           />
 
           <button

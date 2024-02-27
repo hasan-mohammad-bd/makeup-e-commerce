@@ -130,7 +130,7 @@ export default function MainNav({ settings }) {
                 />
               </Link>
             </div>
-            <div className=" justify-center items-center hidden md:flex">
+            <div className=" justify-center md:!w-[500px] items-center hidden md:flex">
               {!isVisible ? (
                 <ResponsiveSearch />
               ) : (
@@ -139,8 +139,23 @@ export default function MainNav({ settings }) {
             </div>
             <div className="header-right flex justify-between items-center ml-4 gap-2 lg:gap-6">
               <div className="header-actions flex items-center gap-4">
-                <div className="text-center font-normal">
+                {
+                  isVisible && (
 
+                  <button
+                    onClick={() => dispatch(setSearchModalOpen(true))}
+                    className={` hidden md:black flex-col ${
+                      isSearchModalOpen ? "!text-primary" : "text-black"
+                    }`}
+                  >
+                    <HiMagnifyingGlass className="" size={24} />
+                    <p className="">Search</p>
+                    {/* <span>Search</span> */}
+                  </button>
+
+                  )
+                }
+                <div className="text-center ml-4 font-normal">
                   <Link className="" href="/dashboard/profile">
                     {user?.image ? (
                       <Image
@@ -176,7 +191,7 @@ export default function MainNav({ settings }) {
                     <HiOutlineShoppingCart size={28} />
 
                     {cart?.length ? (
-                      <span className="text-xs absolute -right-2 -top-1 bg-red-500 text-white px-[6px] text-center rounded-full">
+                      <span className="text-xs absolute right-0 -top-1 bg-red-500 text-white px-[6px] text-center rounded-full">
                         {cart?.length > 9 ? "9+" : cart?.length}
                       </span>
                     ) : null}
@@ -240,23 +255,22 @@ export default function MainNav({ settings }) {
         sidebarToggle={sidebarToggle}
         isSideBarOpen={isSideBarOpen}
       />
-         
+
       {isSearchModalOpen && (
-  
         <div
           ref={searchMenuRef}
           // top-full
-          className="fixed top-0 right-0 z-30 w-full bg-white lg:hidden"
+          className="fixed top-0 right-0 z-30 w-full bg-white"
         >
-          <div className="container flex flex-col justify-center gap-6 py-5 shadow">
+          <div className=" flex flex-col justify-center gap-6 py-5 shadow">
             <h3 className="text-xl md:text-2xl font-bold text-center">
               Product Search
             </h3>
-            <div className="flex items-center gap-2">
+            <div className="flex justify-center items-center gap-2 mx-3 md:mx-0">
               <Search />
               <button
                 onClick={() => dispatch(setSearchModalOpen(false))}
-                className="text-[#475569] md:hidden"
+                className="text-white bg-primary rounded-full p-2 mx-2"
               >
                 <AiOutlineClose size={24} />
               </button>

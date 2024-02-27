@@ -38,7 +38,7 @@ const VideoBanner = ({ translations }) => {
                 })
               )
             }
-            className="inline-block text-lg/[26px] font-semibold text-white bg-primary p-3 rounded-lg mt-4 lg:mt-8"
+            className="inline-block text-lg/[26px] font-semibold text-white bg-primary p-3 rounded-sm mt-4 lg:mt-8"
           >
             <HiPlay className="mr-1" />
             {translations["watch-video"]}

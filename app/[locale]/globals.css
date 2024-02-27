@@ -1,8 +1,17 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* body {
+  font-family: "Noto Sans Bengali", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+} */
 
 @layer base {
   body {
@@ -188,7 +197,7 @@
 }
 
 .nav-search {
-  @apply w-full md:w-[22rem];
+  @apply w-full md:w-[26rem];
 }
 
 .nav-search input {
@@ -397,7 +406,7 @@
 }
 
 .responsive-action {
-  @apply fixed md:static bottom-0 left-0 bg-white w-full py-3 md:py-0 px-3 md:px-0 z-[25] shadow-top md:shadow-none;
+  @apply fixed md:static bottom-0 left-0 right-0 bg-white w-full py-3 md:py-0 px-3 md:px-0 z-[25] shadow-top md:shadow-none;
 }
 
 /*Dynamic View HTML Adjustments*/

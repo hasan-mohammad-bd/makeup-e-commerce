@@ -25,7 +25,9 @@ import { setSearchModalOpen } from "@/store/slices/commonSlice";
 
 export default function BottomNavigation() {
   const dispatch = useDispatch();
-  const { translations, settings } = useSelector((state) => state.common);
+  const { translations, settings, isSearchModalOpen } = useSelector(
+    (state) => state.common
+  );
   const pathArray = usePathname().split("/");
   const isMobile = useMediaQuery("(max-width: 768px)");
   const pathname = usePathname();
@@ -86,6 +88,7 @@ export default function BottomNavigation() {
     }, */
   ];
 
+
   return (
     <div className={`${isSortFilter ? "pb-40" : "pb-24"} bg-white`}>
       <div className="fixed bottom-0 left-0 z-20 w-screen h-fit bg-white">
@@ -95,13 +98,15 @@ export default function BottomNavigation() {
             <FilterMenu />
           </div>
         )}
-        <div className="rounded-t-xl shadow-top grid h-full max-w-lg items-center grid-cols-5 mx-auto font-medium py-3">
+        <div className=" shadow-top grid h-full max-w-lg items-center grid-cols-5 mx-auto font-medium py-3">
           <button
             onClick={() => dispatch(setSearchModalOpen(true))}
-            className="single-action flex-col mb-[-3px] ml-4 text-slate-400"
+            className={`single-action flex-col mb-[-3px] ml-6 ${
+              isSearchModalOpen ? "!text-primary" : "text-slate-400"
+            }`}
           >
-            <HiMagnifyingGlass className="text-slate-400" size={24} />
-            <p className="md:hidden text-slate-400">Search</p>
+            <HiMagnifyingGlass className="" size={24} />
+            <p className="md:hidden  text-[12px]">Search</p>
             {/* <span>Search</span> */}
           </button>
           {menuList.map((menu, index) => (
@@ -133,11 +138,15 @@ export default function BottomNavigation() {
           ))}
           <Link
             href="/dashboard/my-wishlist"
-            className="relative inline-flex flex-col mt-[-7px]  justify-center px-5 group text-slate-400"
+            className={`relative inline-flex flex-col ml-[-20px] justify-center items-center px-5 group  ${
+              pathname === "/dashboard/my-wishlist"
+                ? "text-primary"
+                : "text-slate-400"
+            }`}
           >
             <HiOutlineHeart size={24} />
             <span className="whitespace-nowrap text-[12px]">
-              {translations["wishlist"]}
+              {translations["wishlist"] || "Wishlist"}
             </span>
             {wishlistCount ? (
               <span className="text-xs absolute right-7 top-[-8px] bg-red-500 text-white px-[6px] text-center rounded-full">

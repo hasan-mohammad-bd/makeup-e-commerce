@@ -33,11 +33,9 @@ const Drawer = ({
       {/* Drawer */}
       <div
         className={twMerge(
-          `fixed top-0 ${
-            position === "left" ? "left-0" : "right-0"
-          } z-40 lg:max-w-[${width ? width : "31rem"}] ${
+          `fixed top-0 ${position === "left" ? "left-0" : "right-0"} z-40 ${
             isMobile && "w-[85vw]"
-          }   h-[100dvh] transition-transform ease-in-out duration-300 transform ${
+          } lg:max-w-[23rem] h-[100dvh] transition-transform ease-in-out duration-300 transform ${
             show
               ? "translate-x-0"
               : position === "left"
@@ -59,7 +57,7 @@ const Drawer = ({
                     alt={"logo"}
                     width={0}
                     height={48}
-                    className="h-[48px] min-w-[200px]  min-h-[48px] mr-[-70px] md:mr-0 py-2 object-contain object-left"
+                    className="h-[48px] w-full  min-h-[48px] mr-[-70px] md:mr-0 py-2 object-contain object-left"
                   />
                 </Link>
               )}
