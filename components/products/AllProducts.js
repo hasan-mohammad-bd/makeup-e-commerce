@@ -14,7 +14,7 @@ const AllProducts = async ({
 
   return (
     <>
-      <div className="products-wpr grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-x-6 lg:gap-y-12">
+      <div className="products-wpr grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-x-6 lg:gap-y-12 px-3 md:px-0">
         {products?.map((product, i) => (
           <div className="col-span-1" key={i}>
             <ProductCard product={product} translations={translations} />

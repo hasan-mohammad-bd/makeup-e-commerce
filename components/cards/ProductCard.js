@@ -8,18 +8,18 @@ import Loader from "../elements/loaders/Loader";
 import { siteConfig } from "@/config/site";
 import { getDiscountPercent, getSalePercent } from "@/utils/percent";
 import { getDaysSinceCreation } from "@/utils/format-date";
-import { formatLongNumber, getFractionFixed } from "@/utils/format-number";
+import { formatLongNumber } from "@/utils/format-number";
 import useCart from "@/hooks/useCart";
 import useWishList from "@/hooks/useWishList";
 import { Rating } from "react-simple-star-rating";
 
 // ** Import Icon
-import { FaStar } from "react-icons/fa";
+
 import { HiOutlineHeart, HiOutlineShoppingCart } from "react-icons/hi2";
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+
 import HeartRedIcon from "../elements/svg/HeartRedIcon";
-import { MdOutlineMinimize, MdOutlineRemoveRedEye } from "react-icons/md";
-import { FiMinus } from "react-icons/fi";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+
 import ProductDetailsModal from "../modals/ProductDetailsModal";
 import { useSelector } from "react-redux";
 
@@ -141,7 +141,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                     {/*                    <span>
                       <FiMinus className="text-slate-800 mx-1" />
                     </span> */}
-                    <del className="old-price text-sm font-normal text-slate-800">
+                    <del className="old-price mx-1 font-normal text-slate-800">
                       {siteConfig.currency.sign}
                       {old_price}
                     </del>
@@ -152,7 +152,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                   </div>
                 ) : null}
               </div>
-              <div className="product-rating">
+              <div className="product-rating mt-2 md:mt-0">
                 <span className="font-semibold text-slate-900">
                   <Rating
                     initialValue={average_rating || 5}

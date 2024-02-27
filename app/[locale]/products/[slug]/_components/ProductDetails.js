@@ -18,6 +18,7 @@ import { getDiscountPercent, getSalePercent } from "@/utils/percent";
 import FlashSellCorner from "@/components/elements/svg/FlashSellCorner";
 import FlashSellTimer from "@/components/elements/FlashSellTimer";
 import RatingReviewPopover from "./RatingReviewPopover";
+import * as cartActions from "@/store/slices/cartSlice";
 
 // ** Import Icon
 import {
@@ -32,6 +33,7 @@ import { toast } from "react-toastify";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import HeartRedIcon from "@/components/elements/svg/HeartRedIcon";
 import useWishList from "@/hooks/useWishList";
+import { useDispatch } from "react-redux";
 
 const ProductDetails = ({
   product,
@@ -53,9 +55,13 @@ const ProductDetails = ({
     selectedVariant?.discount_selling_price || product?.new_price;
   const oldPrice = selectedVariant?.selling_price || product?.old_price;
 
+  const dispatch = useDispatch();
+
   const isInWishList = handleWishListProductStatus(product.id);
   //demo
   const quantity = 1;
+
+  console.log(product)
 
   return (
     <div className="product-details">
@@ -68,9 +74,9 @@ const ProductDetails = ({
               selectedColor={selectedColor}
               shortDetails={shortDetails}
             />
-            <div className="px-3 responsive-action">
+{/*             <div className="px-3 responsive-action">
               <div className="product-actions pb-3 lg:py-6 flex gap-3 md:gap-4 justify-between items-center">
-                {/*                 <button
+                                <button
                   className="bg-secondary-700 py-3.5 md:py-3 w-full px-3 md:px-6 text-white rounded-lg text-center active:scale-95"
                   onClick={() => handleAddToCart(product, selectedVariant)}
                 >
@@ -78,8 +84,8 @@ const ProductDetails = ({
                   <span className="ml-2">
                     {translations["add-to-cart"] || "কার্টে রাখুন"}
                   </span>
-                </button> */}
-                {/*                 <button
+                </button>
+                                <button
                   onClick={() => handleAddAndCheckout(product, selectedVariant)}
                   className="bg-primary py-3.5 md:py-3 w-full px-3 md:px-6 text-white rounded-lg text-center active:scale-95"
                 >
@@ -100,9 +106,9 @@ const ProductDetails = ({
                   <span className="mr-2">
                     {translations["buy-now"] || "এখনই কিনুন"}
                   </span>
-                </button> */}
+                </button>
               </div>
-              {/*               <div className="lg:border-t border-slate-200 flex gap-3 md:gap-4 justify-center lg:justify-between items-center flex-wrap pt-1 lg:py-4 font-bold">
+                            <div className="lg:border-t border-slate-200 flex gap-3 md:gap-4 justify-center lg:justify-between items-center flex-wrap pt-1 lg:py-4 font-bold">
                 <p className="text-slate-900">
                   {translations["call-for-details"] ||
                     "বিস্তারিত জানতে কল করুন"}
@@ -120,8 +126,8 @@ const ProductDetails = ({
                     </p>
                   </>
                 )}
-              </div> */}
-            </div>
+              </div>
+            </div> */}
           </div>
         </div>
         <div className="lg:w-1/2">
