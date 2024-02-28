@@ -1,21 +1,25 @@
 "use client";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-import { forwardRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Thumbs, Pagination, Mousewheel } from "swiper/modules";
 // import useWishList from "@/hooks/useWishList";
 import noImage from "@/public/assets/images/no-image.png";
-import ImageZoom from "./ImageZoom";
+import "yet-another-react-lightbox/plugins/captions.css";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
+import Lightbox from "yet-another-react-lightbox";
 
 // ** Import Icon
 import { HiOutlineHeart, HiPlayCircle } from "react-icons/hi2";
 import { startVideoPlayer } from "@/store/slices/commonSlice";
 import HeartRedIcon from "@/components/elements/svg/HeartRedIcon";
+import HorizontalScrollView from "@/components/elements/HorizontalScrollView";
 
 const ProductViewSlider = forwardRef(
   ({ product, selectedColor, shortDetails }, ref) => {
     const dispatch = useDispatch();
+    const [basicExampleOpen, setBasicExampleOpen] = useState(false);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     /*   const {
     handleAddToWishlist,
@@ -50,6 +54,8 @@ const ProductViewSlider = forwardRef(
     };
 
     // const isInWishList = handleWishListProductStatus(product.id);
+    const onlyImages = slides.map(item => item.image);
+
 
     return (
       <>
@@ -81,6 +87,13 @@ const ProductViewSlider = forwardRef(
               }}
               modules={[Thumbs, Pagination]}
             >
+            
+
+{/*               <Lightbox
+                open={basicExampleOpen}
+                close={() => setBasicExampleOpen(false)}
+                slides={slide.image}
+              /> */}
               {slides.map((slide, index) => (
                 <SwiperSlide
                   key={index}
@@ -103,6 +116,7 @@ const ProductViewSlider = forwardRef(
                     {isFirstItem(slide?.color_name) && slide?.video_link ? (
                       <>
                         <Image
+                        
                           src={slide?.image}
                           alt=""
                           width={524}
@@ -132,13 +146,16 @@ const ProductViewSlider = forwardRef(
                       </>
                     ) : (
                       // <ImageZoom image={slide?.image} zoomImage={slide?.image} />
-                      <Image
-                        src={slide?.image}
-                        alt=""
-                        width={524}
-                        height={524}
-                        className="object-cover h-full w-full"
-                      />
+                      <>
+                      
+                        <Image
+                          src={slide?.image}
+                          alt=""
+                          width={524}
+                          height={524}
+                          className="object-cover h-full w-full"
+                        />
+                      </>
                     )}
                   </div>
                 </SwiperSlide>
@@ -166,28 +183,30 @@ const ProductViewSlider = forwardRef(
             </button>
           </div> */}
           </div>
-          <div className="thumb-slider !w-[100vw] md:!w-[38.75rem] ">
+          <div className="thumb-slider !w-[90vw] md:!w-[38.75rem] ">
             <Swiper
               onSwiper={setThumbsSwiper}
-              direction="horizontal"
-              slidesPerView={7}
-              mousewheel={true}
-              modules={[Thumbs, Mousewheel]}
-              className="!w-full "
+              slidesPerView={4}
+              spaceBetween={5}
+              // centeredSlides={true}
+              modules={[Pagination]}
+              className="mySwiper"
             >
-              {slides.map((slide, index) => (
-                <SwiperSlide key={index}>
-                  <div className="slider-image cursor-pointer mt-2 border border-slate-100 rounded-lg">
-                    <Image
-                      src={slide?.image}
-                      alt=""
-                      width={0}
-                      height={0}
-                      className="border border-slate-300 !w-24 !h-24 !shrink cursor-pointer p-2 mr-2 object-cover "
-                    />
-                  </div>
-                </SwiperSlide>
-              ))}
+              <HorizontalScrollView>
+                {slides.map((slide, index) => (
+                  <SwiperSlide className="!w-24" key={index}>
+                    <div className="slider-image cursor-pointer mt-2 border border-slate-100 rounded-lg">
+                      <Image
+                        src={slide?.image}
+                        alt=""
+                        width={0}
+                        height={0}
+                        className="border border-slate-300 !w-24 !h-24 cursor-pointer p-2 mr-2 object-cover "
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </HorizontalScrollView>
             </Swiper>
           </div>
         </div>

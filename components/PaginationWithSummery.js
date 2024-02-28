@@ -21,7 +21,10 @@ export default function PaginationWithSummery({
       )}
     >
       <SeeAll href="/products" buttonText={translations["see-all"]} />
+      <div className="flex justify-center md:justify-end">
       <Paginator meta={meta} paginateItems={paginateItems} />
+      </div>
+
     </div>
   );
 }

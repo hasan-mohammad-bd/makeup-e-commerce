@@ -55,13 +55,14 @@ const ProductDetails = ({
     selectedVariant?.discount_selling_price || product?.new_price;
   const oldPrice = selectedVariant?.selling_price || product?.old_price;
 
+
   const dispatch = useDispatch();
 
   const isInWishList = handleWishListProductStatus(product.id);
   //demo
   const quantity = 1;
 
-  console.log(product)
+  console.log(product);
 
   return (
     <div className="product-details">
@@ -74,7 +75,7 @@ const ProductDetails = ({
               selectedColor={selectedColor}
               shortDetails={shortDetails}
             />
-{/*             <div className="px-3 responsive-action">
+            {/*             <div className="px-3 responsive-action">
               <div className="product-actions pb-3 lg:py-6 flex gap-3 md:gap-4 justify-between items-center">
                                 <button
                   className="bg-secondary-700 py-3.5 md:py-3 w-full px-3 md:px-6 text-white rounded-lg text-center active:scale-95"
@@ -183,19 +184,25 @@ const ProductDetails = ({
               <h5 className="text-xl md:text-2xl font-bold font-title text-slate-900">
                 {getSlicedText(product?.product_name, 100)}
               </h5>
-              <div className="product-price flex items-center gap-4 mt-2 md:mt-3">
-                <span className="text-lg font-title text-slate-900">
+              <div className="product-price flex gap-2 justify-start mt-2 md:mt-3">
+                <span className="text-xl semibold font-title text-slate-900">
                   {siteConfig.currency.sign} {newPrice || "0.00"}{" "}
                 </span>
-                {oldPrice > newPrice ? (
-                  <>
-                    <del className="old-price text-base lg:text-lg/[24px] font-normal text-slate-400">
-                      {siteConfig.currency.sign} {oldPrice ? oldPrice : "0.00"}
-                    </del>
-                    {/*                     <span className="discount inline-block text-lg font-semibold font-title text-white bg-red-500 rounded-md py-1 px-2">
-                      {getDiscountPercent(oldPrice, newPrice)}% OFF
+                {product.old_price > product.new_price ? (
+                  <div className="flex gap-2 items-center ">
+                    {/*                    <span>
+                      <FiMinus className="text-slate-800 mx-1" />
                     </span> */}
-                  </>
+                    <del className="text-xl semibold font-title text-slate-900">
+                      {siteConfig.currency.sign}
+                      {product.old_price}
+                    </del>
+
+                    <span className="discount-badge ml-1 !text-[12px]">
+                      {getDiscountPercent(product.old_price, product.new_price)}
+                      % OFF
+                    </span>
+                  </div>
                 ) : null}
               </div>
               <div className="product-summary grid grid-cols-2 lg:flex gap-y-3 lg:gap-3 items-center mt-3">

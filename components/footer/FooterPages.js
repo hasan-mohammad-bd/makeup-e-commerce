@@ -13,14 +13,14 @@ export default function FooterPages({ title, pages }) {
     <div className="text-white ">
       <FooterTitle title={title} />
       <div className="flex items-center">
-        <button
+{/*         <button
           onClick={() => setPagesOpen(!pagesOpen)}
           className={`text-slate-400 lg:hidden`}
         >
           {!pagesOpen ? <BsChevronDown size={16} /> : <BsChevronUp size={16} />}
-        </button>
+        </button> */}
       </div>
-      {(!isMobile || pagesOpen) && (
+
         <ul className="footer-list">
           {pages.map((page) => (
             <li key={page?.path}>
@@ -28,7 +28,7 @@ export default function FooterPages({ title, pages }) {
             </li>
           ))}
         </ul>
-      )}
+
     </div>
   );
 }

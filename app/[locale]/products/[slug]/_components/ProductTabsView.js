@@ -87,7 +87,7 @@ const ProductTabsView = ({ product, settings, translations }) => {
   return (
     <div className="tabs-view bg-[#FCFCFC] py-3 container mx-auto">
       {/* tabs view */}
-      <div className="sticky bg-white top-20 z-20 mt-7 lg:mt-0 lg:pt-6 ">
+      <div className="sticky bg-white top-20 z-20 mt-5 lg:mt-0 lg:pt-6 ">
         <HorizontalScrollView
           className={
             "product-tab-links py-0 justify-evenly lg:w-full lg:pb-4 !w-fit"

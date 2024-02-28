@@ -13,7 +13,12 @@ import {
 import { HiShare } from "react-icons/hi2";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { toast } from "react-toastify";
-import { FaFacebookF, FaLinkedin, FaPinterest, FaTwitter } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaLinkedin,
+  FaPinterest,
+  FaTwitter,
+} from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 
 export default function SocialShare({ translations = {} }) {
@@ -47,7 +52,7 @@ export default function SocialShare({ translations = {} }) {
 
   const pageContent = (
     <div className="flex items-center">
-      <h3 className="font-semibold whitespace-nowrap">
+      <h3 className="font-semibold whitespace-nowrap mr-2">
         {translations["share"] || "শেয়ার করুন"}:
       </h3>
       <div
@@ -91,7 +96,7 @@ export default function SocialShare({ translations = {} }) {
           className="flex flex-col md:flex-row items-center mr-2 gap-3 my-3 hover:bg-amber-50"
         >
           <div className="rounded-full w-[30px] h-[30px] flex justify-center items-center bg-primary hover:bg-hovercolor">
-            <FaPinterest  url={currentUrl} className="text-white" size={18} />
+            <FaPinterest url={currentUrl} className="text-white" size={18} />
           </div>
         </PinterestShareButton>
       </div>
