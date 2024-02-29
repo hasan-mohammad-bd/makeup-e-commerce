@@ -10,7 +10,7 @@ import { GoMoveToBottom } from "react-icons/go";
 import { FiPlus } from "react-icons/fi";
 import { LuMinus } from "react-icons/lu";
 
-const CategoryItems = ({ closeFilterPanel }) => {
+const CategoryItems = ({ setShow }) => {
   const { locale } = useParams();
   const { data: categoriesRes } = useGetCategoriesQuery({ locale });
 
@@ -19,9 +19,6 @@ const CategoryItems = ({ closeFilterPanel }) => {
   // let status = false;
   const [categoryItems, setCategoryItems] = React.useState([]);
 
-  /*  categoryItems.forEach((item) => {
-    item.child_categories >= 1 && setCategoryChildItems(item.child_categories);
-  }) */
   useEffect(() => {
     const categoriesList = categoriesRes?.data || [];
     setCategoryItems(categoriesList);
@@ -40,6 +37,10 @@ const CategoryItems = ({ closeFilterPanel }) => {
     );
   }
 
+  const handleClose = (array) => {
+    array.length === 0 && setShow(false);
+  };
+
   return (
     <div>
       <div className="category-section flex flex-col h-auto">
@@ -51,6 +52,7 @@ const CategoryItems = ({ closeFilterPanel }) => {
           {categoryItems.map((item) => (
             <div className={`!w-full sub-menu`} key={item.id}>
               <Link
+                onClick={() => handleClose(item.child_categories)}
                 className={` hover:text-primary flex items-center justify-between px-3 !w-full py-2 ${
                   isMobile && "shadow"
                 } mb-2 text-lg ${
@@ -95,6 +97,9 @@ const CategoryItems = ({ closeFilterPanel }) => {
                           <>
                             {item.status === "active" && (
                               <Link
+                                onClick={() =>
+                                  setShow(false)
+                                }
                                 className={` pl-7 hover:text-primary py-2  flex items-center justify-between px-3  ${
                                   isMobile && "shadow"
                                 } text-lg mb-2 w-full ${

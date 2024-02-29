@@ -296,11 +296,11 @@ const MyProfile = () => {
           </div>
         </div>
         <div className="flex items-center gap-4 mt-10 responsive-action">
-          <div className="form-control w-full lg:w-fit">
+          <div className="form-control text-right lg:w-fit">
             <button
               type="button"
               onClick={() => setEditMode((prevMode) => !prevMode)}
-              className="py-3 px-4 bg-primary text-white"
+              className="py-3 px-4 text-primary border border-primary"
             >
               {editMode ? (
                 <>{translations["cancel"] || "বাতিল করুন"}</>

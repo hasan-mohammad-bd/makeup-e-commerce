@@ -460,6 +460,10 @@
 .qa-collapse {
   transition: height 0.3s ease;
 }
+/* custom toast */
+.Toastify__toast-container, .Toastify__toast-container--top-right {
+  padding: 10px !important;
+}
 
 /* Zoom Image */
 /* ======================================= */

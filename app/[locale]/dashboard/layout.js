@@ -49,11 +49,11 @@ const DashboardLayout = ({ children, params }) => {
       icon: <HiReceiptPercent />,
       path: "my-voucher",
     }, */
-/*     {
+    {
       text: translations["questions-and-answers"] || "প্রশ্ন ও উত্তর",
       icon: <RiQuestionAnswerFill />,
       path: "qna",
-    }, */
+    },
     {
       text: translations["support-ticket"] || "সাপোর্ট টিকিট",
       icon: <HiTicket />,

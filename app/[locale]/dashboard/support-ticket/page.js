@@ -93,7 +93,7 @@ export default function SupportTicket() {
             {
               <Link
                 href={"/dashboard/support-ticket/new"}
-                className="text-white z-10 md:hidden flex justify-center items-center gap-x-1 fixed bottom-4 right-3 font-semibold border bg-secondary-700 leading-none h-12 w-[131px] rounded-lg active:scale-95 cursor-pointer"
+                className="text-white z-10 md:hidden flex justify-center items-center gap-x-1 fixed bottom-4 right-3 font-semibold border bg-primary leading-none h-12 w-[131px] rounded-sm active:scale-95 cursor-pointer"
               >
                 <HiPlus size={20} className="font-bold" />{" "}
                 {translations["new-ticket"] || "নতুন টিকিট"}

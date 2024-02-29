@@ -139,10 +139,10 @@ export default function MobileDashboardLayout({ params }) {
         </div>
       </div>
       <div id="user-additional-menu" className="my-4 p-3">
-        <MenuCard
+{/*         <MenuCard
           title={translations["offer"] || "অফার"}
           menuItems={navItems.slice(4, 5)}
-        />
+        /> */}
         <MenuCard
           title={translations["help"] || "হেল্প"}
           menuItems={navItems.slice(5, 7)}

@@ -55,7 +55,7 @@ const MenuItems = ({ settings , noAds }) => {
         {navItems.map((item, index) => (
           <Link
             key={index}
-            className={`mr-10 hover:text-primary text-lg ${
+            className={`ml-10 hover:text-primary text-lg ${
               item.path && "relative sub-menu"
             }`}
             href={item.subLink ? "/" : item.path}

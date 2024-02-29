@@ -37,7 +37,7 @@ const SidebarMenu = ({ sidebarToggle, isSideBarOpen }) => {
     >
       {isSideBarOpen && (
         <div className="py-3 ">
-          <CategoryItems closeFilterPanel={closeFilterPanel} />
+          <CategoryItems setShow={closeFilterPanel} />
           <li
             className={`flex items-center py-3 px-4 hover:bg-amber-200 rounded-lg w-full font-bold`}
           >
