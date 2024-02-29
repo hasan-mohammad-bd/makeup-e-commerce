@@ -33,9 +33,7 @@ const Drawer = ({
       {/* Drawer */}
       <div
         className={twMerge(
-          `fixed top-0 ${position === "left" ? "left-0" : "right-0"} z-40 ${
-            isMobile && "w-[85vw]"
-          } lg:max-w-[23rem] h-[100dvh] transition-transform ease-in-out duration-300 transform ${
+          `fixed top-0 ${position === "left" ? "left-0" : "right-0"} z-40 w-[85vw] lg:max-w-[23rem] h-[100dvh] transition-transform ease-in-out duration-300 transform ${
             show
               ? "translate-x-0"
               : position === "left"

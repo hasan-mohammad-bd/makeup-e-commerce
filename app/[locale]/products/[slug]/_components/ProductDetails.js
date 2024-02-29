@@ -55,7 +55,6 @@ const ProductDetails = ({
     selectedVariant?.discount_selling_price || product?.new_price;
   const oldPrice = selectedVariant?.selling_price || product?.old_price;
 
-
   const dispatch = useDispatch();
 
   const isInWishList = handleWishListProductStatus(product.id);
@@ -279,8 +278,8 @@ const ProductDetails = ({
                 />
               ) : null}
             </div>
-            <div className="flex justify-start items-center mt-3 px-3 md:px-0">
-              <div className="flex w-fit rounded-full border border-slate-200 items-center products-center gap-2 text-slate-900 ">
+            <div className="flex justify-start items-center mt-3 md:px-0">
+              {/*               <div className="flex w-fit rounded-full border border-slate-200 items-center products-center gap-2 text-slate-900 ">
                 <button
                   disabled={quantity <= 1}
                   className={`rounded-l-full border-r bg-slate-200 w-7 h-7 flex justify-center items-center ${
@@ -289,7 +288,7 @@ const ProductDetails = ({
                       : ""
                   }  w-7 h-7`}
                   onClick={() =>
-                    dispatch(cartActions.removeQuantity(barcodeId))
+                    dispatch(cartActions.removeQuantity(product.id))
                   }
                 >
                   <FiMinus size={16} />
@@ -299,17 +298,17 @@ const ProductDetails = ({
                 </div>
                 <button
                   className=" border-l rounded-r-full bg-slate-200 border-slate-200 w-7 h-7 flex justify-center items-center"
-                  onClick={() => dispatch(cartActions.addQuantity(barcodeId))}
+                  onClick={() => dispatch(cartActions.addQuantity(product.id))}
                 >
                   <FiPlus size={16} />
                 </button>
-              </div>
+              </div> */}
               <button
-                className="bg-primary py-1 rounded-[0.2rem]  md:py-[6px] w-fit px-3 md:px-5 hover:bg-hovercolor text-white ml-3 text-center active:scale-95"
+                className="bg-primary py-1 rounded-[0.2rem]  md:py-[6px] w-fit md:px-5 hover:bg-hovercolor text-white text-center active:scale-95"
                 onClick={() => handleAddToCart(product, selectedVariant)}
               >
                 {/* <HiOutlineShoppingCart size={24} /> */}
-                <span className="ml-2">
+                <span className="px-2 py-1">
                   {translations["add-to-cart"] || "কার্টে রাখুন"}
                 </span>
               </button>

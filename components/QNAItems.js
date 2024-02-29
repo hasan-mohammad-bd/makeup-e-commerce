@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import QAItem from "./elements/QAItem";
 import { useGetFaqsQuery } from "@/store/api/faqsAPI";
 import ItemsListLoader from "./elements/loaders/ItemsListLoader";
+import NoItems from "@/app/[locale]/dashboard/_components/NoItems";
 
 export default function QNAItems() {
 	const { locale } = useParams();
@@ -20,19 +21,23 @@ export default function QNAItems() {
 	return (
 		<div className="qna-wpr mt-4 md:mt-4">
 			{isLoading ? (
-				<div className="mb-6">
-					<ItemsListLoader numItems={3} noImage={true} viewBoxWidth={900} />
-				</div>
-			) : (
-				faqs?.map((item, index) => (
-					<QAItem
-						item={{ ...item, index }}
-						key={index}
-						open={open === index}
-						toggleOpen={toggleOpen}
-					/>
-				))
-			)}
+    <div className="mb-6">
+        <ItemsListLoader numItems={3} noImage={true} viewBoxWidth={900} />
+    </div>
+) : (
+    faqs?.length < 1 ? (
+        <NoItems text="No QnA found" />
+    ) : (
+        faqs?.map((item, index) => (
+            <QAItem
+                item={{ ...item, index }}
+                key={index}
+                open={open === index}
+                toggleOpen={toggleOpen}
+            />
+        ))
+    )
+)}
 		</div>
 	);
 }

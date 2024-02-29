@@ -130,13 +130,17 @@ export default function MainNav({ settings }) {
                 />
               </Link>
             </div>
-            <div className=" justify-center md:!w-[500px] items-center hidden md:flex">
+          
               {!isVisible ? (
+                <div className=" justify-center items-center hidden md:flex">
                 <ResponsiveSearch />
+                </div>
+
               ) : (
+                <div className=" justify-center  items-center hidden md:flex">
                 <MenuItems noAds={true} settings={settings} />
-              )}
             </div>
+              )}
             <div className="header-right flex justify-between items-center ml-4 gap-2 lg:gap-6">
               <div className="header-actions flex items-center gap-4">
                 {
@@ -144,7 +148,7 @@ export default function MainNav({ settings }) {
 
                   <button
                     onClick={() => dispatch(setSearchModalOpen(true))}
-                    className={` hidden md:black flex-col ${
+                    className={` hidden md:flex flex-col ${
                       isSearchModalOpen ? "!text-primary" : "text-black"
                     }`}
                   >
