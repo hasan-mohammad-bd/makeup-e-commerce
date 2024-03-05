@@ -152,12 +152,12 @@ const CategoryItems = ({ setShow }) => {
                           </>
                         )}
 
-                        {!isMobile && (
+                        {!isMobile && subItem?.child_categories?.length >= 1 && (
                           <div
                             className={` ${
                               isMobile
                                 ? "pl-3 hover:text-primary py-2  flex items-center justify-between px-3 shadow text-lg mb-2 w-full"
-                                : "absolute  top-0 right-0 translate-x-full bg-white second-sub-item z-40 shadow  bg-blue  md:!w-[400px] lg:!w-[540px] xl:!w-[700px] 2xl:!w-[840px] !h-full"
+                                : `absolute ${!subItem?.child_categories?.length >= 1 && "" } top-0 right-0 translate-x-full bg-white second-sub-item z-40 shadow  bg-blue  md:!w-[400px] lg:!w-[540px] xl:!w-[700px] 2xl:!w-[840px] !h-full`
                             }`}
                           >
                             <div className="grid grid-cols-3 gap-3">

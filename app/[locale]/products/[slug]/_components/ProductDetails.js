@@ -315,15 +315,17 @@ const ProductDetails = ({
             </div>
 
             {/* wishlist button */}
-            <div className="product-action mt-6 z-10 flex justify-start items-center">
+            <div
+              onClick={(e) =>
+                isInWishList
+                  ? handleRemoveFromWishlist(product.id)
+                  : handleAddToWishlist(product.id)
+              }
+              className="product-action mt-6 z-10 flex justify-start items-center cursor-pointer"
+            >
               <button
                 aria-label="Add To Wishlist"
                 className=" inline-flex justify-center items-center mr-2"
-                onClick={(e) =>
-                  isInWishList
-                    ? handleRemoveFromWishlist(product.id)
-                    : handleAddToWishlist(product.id)
-                }
               >
                 {isInWishList ? (
                   <HeartRedIcon />
