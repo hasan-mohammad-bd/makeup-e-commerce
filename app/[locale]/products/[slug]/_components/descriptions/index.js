@@ -18,16 +18,48 @@ const Descriptions = ({ settings, product, translations }) => {
         <h4 className="text-2xl font-bold font-title text-slate-900">
           {translations["product-includes"] || "যা যা সাথে থাকবে"}
         </h4>
-        <Image
-          src={
-            product.includedProducts[0]?.image ||
-            `/assets/images/product-includes.png`
-          }
-          alt="Product Includes"
-          width={0}
-          height={0}
-          className="w-full rounded mt-3"
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Image
+            src={
+              product.includedProducts[0]?.image ||
+              `/assets/images/banner4.jpg`
+            }
+            alt="Product Includes"
+            width={0}
+            height={0}
+            className="w-full rounded"
+          />
+          <Image
+            src={
+              product.includedProducts[0]?.image ||
+              `/assets/images/banner1.jpg`
+            }
+            alt="Product Includes"
+            width={0}
+            height={0}
+            className="w-full rounded object-cover"
+          />
+          <Image
+            src={
+              product.includedProducts[0]?.image ||
+              `/assets/images/banner2.jpg`
+            }
+            alt="Product Includes"
+            width={0}
+            height={0}
+            className="w-full rounded"
+          />
+          <Image
+            src={
+              product.includedProducts[0]?.image ||
+              `/assets/images/banner3.jpg`
+            }
+            alt="Product Includes"
+            width={0}
+            height={0}
+            className="w-full rounded"
+          />
+        </div>
       </div>
       {/* ) : null} */}
       {product?.review_video && (

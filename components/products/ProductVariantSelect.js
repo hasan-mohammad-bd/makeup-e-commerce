@@ -23,6 +23,7 @@ const ProductVariantSelect = forwardRef(
     const [colorsGroup, setColorsGroup] = useState({});
     const [showSizeChart, setShowSizeChart] = useState(false);
     const colors = Object.keys(colorsGroup);
+    const [selectedColorShow, setSelectedColorShow] = useState(null);
 
     const handleVariantSelect = (variantProp) => {
       if (variantProp.stock_qty <= 0) {
@@ -100,7 +101,7 @@ const ProductVariantSelect = forwardRef(
         {!(colors.length === 1 && colors[0] === "") ? (
           <div className="product-color mt-4">
             <h4 className="text-slate-900 text-sm lg:text-base font-normal">
-              {translations["select-color"] || "কালার নির্বাচন করুন"}:
+              {translations["select-color"] || "কালার নির্বাচন করুন"}: <span className={` text-sm text-center my-3 ${selectedColorShow && "p-1 border border-slate-300"}  `}>{selectedColorShow}</span>
             </h4>
             <div className="flex gap-[10px] lg:gap-3 flex-wrap mt-2 lg:mt-3">
               {colors.map((color) => {
@@ -111,22 +112,28 @@ const ProductVariantSelect = forwardRef(
                 return (
                   <div
                     key={color}
-                    className={` h-[28px] w-[28px] rounded-full box-content border object-cover ${
+                    
+                  >
+                    {colorImgInfo ? (
+                      <>
+                        <div className={` h-[30px] w-[30px] rounded-full box-content border object-cover ${
                       selectedColor === color
                         ? "border-2 border-primary"
                         : "border-slate-300"
                     } cursor-pointer`}
-                    onClick={() => handleColorSelect(color)}
-                  >
-                    {colorImgInfo ? (
-                      <Image
-                        src={colorImgInfo?.image}
-                        alt="product"
-                        height={52}
-                        width={52}
-                        title={color}
-                        className={`h-full w-full rounded-full`}
-                      />
+                    onClick={() => handleColorSelect(color)}>
+                          <Image
+                            src={colorImgInfo?.image}
+                            alt="product"
+                            height={62}
+                            width={62}
+                            title={color}
+                            className={`h-full w-full rounded-full`}
+                          />
+                        </div>
+
+                        {selectedColor === color && selectedColor !== selectedColorShow && setSelectedColorShow(color)}
+                      </>
                     ) : (
                       <span
                         className={`h-full w-full flex items-center justify-center text-sm lg:text-base text-slate-700`}

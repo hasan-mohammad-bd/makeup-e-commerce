@@ -13,7 +13,7 @@ const TopHeaderBanner = ({ locale, settings }) => {
         <div className="md:flex justify-between ">
           <div className="text-area md:flex justify-center items-center">
             <p className="text-white text-center md:text-start !items-center w-full font-normal text-4">
-              Welcome to Netmark online Store
+              Welcome to Amarsolution online Store
             </p>
             <Link
               href="#"

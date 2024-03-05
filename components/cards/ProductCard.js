@@ -184,7 +184,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                   />
                   {"  "}
                   <span className="whitespace-nowrap  justify-center items-center hidden lg:flex">
-                    <p className="text-[14px] leading-none"> + Add to card</p>
+                    <p className="text-[14px] leading-none"> + Add to Cart</p>
                   </span>
                 </button>
                 <button

@@ -1,4 +1,4 @@
-# Suruchi Ecom - Project
+# Amarsolution Ecom - Project
 
 ## Getting Started
 
