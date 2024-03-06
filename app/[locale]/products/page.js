@@ -28,7 +28,7 @@ const page = async ({ params, searchParams }) => {
           </Link>
           <span className="text-primary mx-3 font-extrabold">/</span>{" "}
           <Link href={`/products`} className=" hover:text-primary text-white">
-            {translations["products"] || "প্রডাক্টস"}
+            {translations["products"] || "Products"}
           </Link>
         </div>
       </DynamicBackgroundComponent>

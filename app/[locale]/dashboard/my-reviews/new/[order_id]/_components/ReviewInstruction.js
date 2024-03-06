@@ -10,47 +10,47 @@ const ReviewInstruction = ({ isActive, setIsActive }) => {
 		<div className="text-[#334155] ml-2">
 			<div>
 				<h3 className="font-semibold text-4">
-					{translations["necessary-steps"] || "যা করবেন"}:
+					{translations["necessary-steps"] || "Necessary Steps"}:
 				</h3>
 				<ul className="list-outside list-disc whitespace-pre-line ml-6 leading-7 mt-1">
 					<li>
 						{translations["focus-on-product"] ||
-							"শুধুমাত্র পণ্য এবং এর বৈশিষ্ট্যগুলিতে ফোকাস করুন।"}
+							"Focus on the product you would like to review"}
 					</li>
 					<li>
 						{translations["discuss-about-the-product"] ||
-							"আপনার নিজের ব্যক্তিগত অভিজ্ঞতার উপর ভিত্তি করে পর্যালোচনা করুন।"}
+							"Discuss about the product you would like to review"}
 					</li>
 					<li>
 						{translations["review-feeling"] ||
-							"আমাদের বলুন কেন আপনি এটি সম্পর্কে একটি নির্দিষ্ট উপায় অনুভব করেন৷"}
+							"Review the feeling of the product you would like to review"}
 					</li>
 				</ul>
 			</div>
 			<div className="mt-6 ">
 				<h3 className="font-semibold text-4">
-					{translations["what-not-to-do"] || "যা করবেন না"}:
+					{translations["what-not-to-do"] || "What not to do"}:
 				</h3>
 				<ul className="list-outside list-disc whitespace-pre-line ml-6 leading-7 mt-1">
 					<li>
 						{translations["dont-share"] ||
-							"পণ্যের সাথে অপ্রাসঙ্গিক কিছু শেয়ার করবেন না।"}
+							"Don't share irrelevant information"}
 					</li>
 					<li className="">
 						{translations["dont-mislead"] ||
-							"প্রতারণামূলক, মিথ্যা, বিভ্রান্তিকর বা প্রতারণামূলক তথ্য অন্তর্ভুক্ত করবেন না।"}
+							"Please don't include false or misleading information"}
 					</li>
 					<li>
 						{translations["use-good-language"] ||
-							"অশ্লীল, মানহানিকর, হুমকিমূলক বা বৈষম্যমূলক ভাষা ব্যবহার করবেন না।"}
+							"Don't share any inappropriate language"}
 					</li>
 					<li>
 						{translations["dont-share-other-info"] ||
-							"কারো ব্যক্তিগত তথ্য শেয়ার করবেন না।"}
+							"Don't share any other information"}
 					</li>
 					<li>
 						{translations["unauthorized-tread-mark"] ||
-							"অননুমোদিত ট্রেডমার্ক বা কপিরাইটযুক্ত সামগ্রী অন্তর্ভুক্ত করবেন না।"}
+							"Don't include any unauthorized tread marks"}
 					</li>
 				</ul>
 			</div>

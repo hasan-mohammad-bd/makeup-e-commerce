@@ -41,12 +41,12 @@ const ContactForm = ({ translations }) => {
 		<form className="basis-3/5" onSubmit={handleSubmit(onSubmit)}>
 			<div className="form-control mb-4">
 				<label className="block text-base text-slate-900 mb-2 capitalize">
-					{translations["your-name"] || `আপনার নাম`}
+					{translations["your-name"] || `Your Name`}
 				</label>
 				<input
 					type="text"
 					name="name"
-					placeholder={translations["enter-name"] || `নাম লিখুন`}
+					placeholder={translations["enter-name"] || `Enter Name`}
 					{...register("name", {
 						required: "Name is required.",
 					})}
@@ -55,12 +55,12 @@ const ContactForm = ({ translations }) => {
 			</div>
 			<div className="form-control mb-4">
 				<label className="block text-base text-slate-900 mb-2 capitalize">
-					{translations["your-email-(if-any)"] || `আপনার ইমেইল (যদি থাকে)`}
+					{translations["your-email-(if-any)"] || `Your Email (if any)`}
 				</label>
 				<input
 					type="email"
 					name="email"
-					placeholder={translations["enter-email"] || `ইমেইল লিখুন`}
+					placeholder={translations["enter-email"] || `Enter Email`}
 					{...register("email", {
 						pattern: {
 							value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
@@ -72,12 +72,12 @@ const ContactForm = ({ translations }) => {
 			</div>
 			<div className="form-control mb-4">
 				<label className="block text-base text-slate-900 mb-2 capitalize">
-					{translations["subject"] || `সাবজেক্ট`}
+					{translations["subject"] || `Subject`}
 				</label>
 				<input
 					type="text"
 					name="subject"
-					placeholder={translations["enter-subject"] || `সাবজেক্ট লিখুন`}
+					placeholder={translations["enter-subject"] || `Enter Subject`}
 					{...register("subject", {
 						required: "Subject is required.",
 					})}
@@ -86,14 +86,14 @@ const ContactForm = ({ translations }) => {
 			</div>
 			<div className="form-control">
 				<label className="block text-base text-slate-900 mb-2 capitalize">
-					{translations["message"] || `মেসেজ`}
+					{translations["message"] || `Message`}
 				</label>
 				<textarea
 					className="h-[148px]"
 					type="text"
 					name="msg"
 					placeholder={
-						translations["enter-your-message"] || `আপনার মেসেজ লিখুন`
+						translations["enter-your-message"] || `Enter Your Message`
 					}
 					{...register("msg", {
 						required: "Message is required.",
@@ -104,7 +104,7 @@ const ContactForm = ({ translations }) => {
 			<div className="form-control mt-6 lg:mt-11">
 				<label></label>
 				<button type="submit" className="submit-btn">
-					{translations["send-message"] || `মেসেজ পাঠান`}
+					{translations["send-message"] || `Send Message`}
 				</button>
 			</div>
 		</form>

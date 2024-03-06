@@ -59,7 +59,7 @@ const IntroSlider = ({ sliders }) => {
                         href={slide?.url}
                         className="inline-block w-fit lg:px-4 text-sm lg:text-lg/[48px] text-white p-2 md:p-0 bg-primary text-center"
                       >
-                        সবগুলো দেখুন{" "}
+                        See More{" "}
                         <HiChevronRight
                           size={20}
                           color="#fff"

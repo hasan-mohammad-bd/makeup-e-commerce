@@ -138,7 +138,7 @@ const ProductDetails = ({
                   <div className="md:ml-[-90px] text-start md:text-end text-slate-600 grid grid-cols-1 md:grid-cols-2 md:gap-1 items-center justify-center">
                     <p className="whitespace-nowrap text-[12px] md:text-[16px]">
                       {" "}
-                      {translations["will-end"] || "শেষ হবে"}:
+                      {translations["will-end"] || "Will end"}:{" "}
                     </p>
 
                     <p className="text-[12px] md:text-[16px]">
@@ -150,7 +150,7 @@ const ProductDetails = ({
                   </div>
                   <div className="text-slate-600 grid md:gap-1 grid-cols-1 md:grid-cols-2 pr-8">
                     <h3 className="whitespace-nowrap text-[12px] md:text-[16px]">
-                      {translations["remaining"] || "বাকি আছে"}:{" "}
+                      {translations["remaining"] || "Remaining"}:{" "}
                       <span className="font-bold text-[12px] md:text-[14px] mx-1">
                         {product.stock_qty}
                       </span>
@@ -335,7 +335,7 @@ const ProductDetails = ({
               >
                 {/* <HiOutlineShoppingCart size={24} /> */}
                 <span className="px-2 py-1">
-                  {translations["add-to-cart"] || "কার্টে রাখুন"}
+                  {translations["add-to-cart"] || "Add to cart"}
                 </span>
               </button>
               {/* buy now button */}
@@ -358,7 +358,7 @@ const ProductDetails = ({
                   />
                 </svg>{" "}
                 <span className="mr-2">
-                  {translations["buy-now"] || "এখনই কিনুন"}
+                  {translations["buy-now"] || "Buy Now"}
                 </span>
               </button>
             </div>
@@ -367,23 +367,23 @@ const ProductDetails = ({
               {product?.coupons?.length ? (
                 <div className="mt-5 mb-8">
                   <p className="font-semibold font-title text-slate-900 mb-2">
-                    {translations["best-offer"] || "সেরা অফার"}{" "}
+                    {translations["best-offer"] || "Best Offer"}{" "}
                     <TbTag size={24} className="text-primary mb-1" />
                   </p>
                   <ul className="coupon-info">
                     <li className="relative text-slate-900 pl-4">
-                      {translations["coupon-discount"] || "কুপন ডিসকাউন্ট"}:{" "}
+                      {translations["coupon-discount"] || "Coupon Discount"}:{" "}
                       <span className="font-semibold text-title text-secondary-700">
                         &#2547;
                         {getCouponDiscount(
                           product?.coupons[0],
                           product.new_price
                         )}{" "}
-                        {translations["off!"] || "ছাড়!"}
+                        {translations["off!"] || "Off!"}
                       </span>
                     </li>
                     <li className="relative text-slate-900 pl-4 my-2 before:!top-3">
-                      {translations["coupon-code"] || "কুপন কোড"}:{" "}
+                      {translations["coupon-code"] || "Coupon Code"}:{" "}
                       <span className="inline-block text-primary border border-dashed border-primary rounded px-2 py-1 ml-1">
                         {product.coupons[0].code}{" "}
                         <CopyToClipboard
@@ -398,16 +398,16 @@ const ProductDetails = ({
                       </span>
                     </li>
                     <li className="relative text-slate-900 pl-4 mb-3">
-                      {translations["applicable"] || "প্রযোজ্য"}:{" "}
+                      {translations["applicable"] || "Applicable"}:{" "}
                       {siteConfig.currency.sign}
                       {product.coupons[0].max_discount}{" "}
                       {translations["amount-above-order"] ||
-                        "উপরে অর্ডারে (শুধুমাত্র প্রথম কেনাকাটায়)"}
+                        "Amount above order(Only First Order)"}
                     </li>
                   </ul>
                   <Link href="#" className="text-secondary-700 underline">
                     {translations["see-all-products-on-offer"] ||
-                      "অফারের সকল প্রডাক্ট দেখুন"}
+                      "See all products on offer"}
                   </Link>
                 </div>
               ) : null}
@@ -467,12 +467,12 @@ const ProductDetails = ({
                     />
                     <div className="info">
                       <p className="text-slate-600">
-                        {translations["delivery-charge"] || "ডেলিভারি চার্জ"}:{" "}
+                        {translations["delivery-charge"] || "Delivery Charge"}:{" "}
                       </p>
                       <p className="text-slate-600">
-                        {translations["inside-dhaka"] || "ঢাকার ভিতরে"} -{" "}
+                        {translations["inside-dhaka"] || "Inside Dhaka"} -{" "}
                         {settings?.inside_dhaka_delivery_charges}{" "}
-                        {translations["currency-locale"] || "টাকা"}
+                        {translations["currency-locale"] || "TK"}
                       </p>
                     </div>
                   </div>
@@ -487,12 +487,12 @@ const ProductDetails = ({
                     />
                     <div className="info">
                       <p className="text-slate-600">
-                        {translations["delivery-charge"] || "ডেলিভারি চার্জ"}:{" "}
+                        {translations["delivery-charge"] || "Delivery Charge"}:{" "}
                       </p>
                       <p className="text-slate-600">
-                        {translations["outside-dhaka"] || "ঢাকার বাইরে"} -{" "}
+                        {translations["outside-dhaka"] || "Outside Dhaka"} -{" "}
                         {settings?.outside_dhaka_delivery_charges}{" "}
-                        {translations["currency-locale"] || "টাকা"}
+                        {translations["currency-locale"] || "TK"}
                       </p>
                     </div>
                   </div>
@@ -508,7 +508,7 @@ const ProductDetails = ({
                     <div className="info">
                       <p className="text-slate-600">
                         {translations["cash-on-delivery-nationwide"] ||
-                          "সারাদেশ এ ক্যাশ অন ডেলিভারি"}
+                          "Cash on Delivery Nationwide"}
                       </p>
                     </div>
                   </div>
@@ -524,7 +524,7 @@ const ProductDetails = ({
                     <div className="info">
                       <p className="text-slate-600">
                         {translations["easy-way-to-make-secure-payments"] ||
-                          "নিরাপদ পেমেন্ট করার সহজ মাধ্যম"}
+                          "Easy way to make secure payments"}
                       </p>
                     </div>
                   </div>

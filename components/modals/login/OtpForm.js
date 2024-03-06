@@ -121,7 +121,7 @@ const OtpForm = ({ phone, setShowModal, setOtpSent, translations }) => {
 				onClick={handleOTPVerification}
 				className="primary-btn w-full"
 			>
-				{translations["confirm-code"] || "কোড নিশ্চিত করুন"}
+				{translations["confirm-code"] || "Confirm Code"}
 			</button>
 		</div>
 	);

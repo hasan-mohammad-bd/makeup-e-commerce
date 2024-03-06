@@ -24,37 +24,37 @@ export default function AuthUserMenus({ togglePopover }) {
   };
   const navItems = [
     {
-      text: translations["my-profile"] || "আমার প্রফাইল",
+      text: translations["my-profile"] || "My Profile",
       icon: <FaUser />,
       path: "/dashboard/profile",
     },
     {
-      text: translations["my-order"] || "আমার অর্ডার",
+      text: translations["my-order"] || "My Order",
       icon: <FaClipboardList />,
       path: "/dashboard/my-orders",
     },
     {
-      text: translations["my-wish-list"] || "আমার উইশ লিষ্ট",
+      text: translations["my-wish-list"] || "My Wish List",
       icon: <HiHeart />,
       path: "/dashboard/my-wishlist",
     },
     {
-      text: translations["my-review"] || "আমার রিভিউ",
+      text: translations["my-review"] || "My Review",
       icon: <MdRateReview />,
       path: "/dashboard/my-reviews",
     },
     {
-      text: translations["voucher"] || "ভাউচার",
+      text: translations["voucher"] || "Voucher",
       icon: <HiReceiptPercent />,
       path: "/dashboard/my-voucher",
     },
     {
-      text: translations["questions-and-answers"] || "প্রশ্ন ও উত্তর",
+      text: translations["questions-and-answers"] || "Questions & Answers",
       icon: <RiQuestionAnswerFill />,
       path: "/dashboard/qna",
     },
     {
-      text: translations["support-ticket"] || "সাপোর্ট টিকিট",
+      text: translations["support-ticket"] || "Support Ticket",
       icon: <HiTicket />,
       path: "/dashboard/support-ticket",
     },
@@ -97,7 +97,7 @@ export default function AuthUserMenus({ togglePopover }) {
                   <IoLogOut />
                 </span>
                 <span className="group-hover:text-primary hover:font-bold">
-                  {translations["log-out"] || "লগ-আউট"}
+                  {translations["log-out"] || "Logout"}
                 </span>
               </button>
             </li>

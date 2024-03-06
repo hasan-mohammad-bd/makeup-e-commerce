@@ -19,7 +19,7 @@ export default function ReviewSummaryPopover({ review, translations = {} }) {
 								fillColor="#F59E0B"
 							/>
 						</span>
-						<p>{translations["outstanding"] || "অসাধারণ"}</p>
+						<p>{translations["outstanding"] || "Outstanding"}</p>
 						<p className="text-primary">
 							<EmojiSmile />
 						</p>

@@ -21,26 +21,25 @@ const DashboardLayout = ({ children, params }) => {
   const { translations, settings } = useSelector((state) => state.common);
   const pathArray = usePathname().split("/");
 
-  console.log(settings);
 
   const navItems = [
     {
-      text: translations["my-profile"] || "আমার প্রফাইল",
+      text: translations["my-profile"] || "My Profile",
       icon: <FaUser />,
       path: "profile",
     },
     {
-      text: translations["my-order"] || "আমার অর্ডার",
+      text: translations["my-order"] || "My Order",
       icon: <FaClipboardList />,
       path: "my-orders",
     },
     {
-      text: translations["my-wish-list"] || "আমার উইশ লিষ্ট",
+      text: translations["my-wish-list"] || "My Wish List",
       icon: <HiHeart />,
       path: "my-wishlist",
     },
     {
-      text: translations["my-review"] || "আমার রিভিউ",
+      text: translations["my-review"] || "My Review",
       icon: <MdRateReview />,
       path: "my-reviews",
     },
@@ -50,12 +49,12 @@ const DashboardLayout = ({ children, params }) => {
       path: "my-voucher",
     }, */
     {
-      text: translations["questions-and-answers"] || "প্রশ্ন ও উত্তর",
+      text: translations["questions-and-answers"] || "Q&A",
       icon: <RiQuestionAnswerFill />,
       path: "qna",
     },
     {
-      text: translations["support-ticket"] || "সাপোর্ট টিকিট",
+      text: translations["support-ticket"] || "Support Ticket",
       icon: <HiTicket />,
       path: "support-ticket",
     },
@@ -132,7 +131,7 @@ const DashboardLayout = ({ children, params }) => {
                         <IoLogOut />
                       </span>
                       <span className="font-bold">
-                        {translations["log-out"] || "লগ-আউট"}
+                        {translations["log-out"] || "Log Out"}
                       </span>
                     </button>
                   </li>

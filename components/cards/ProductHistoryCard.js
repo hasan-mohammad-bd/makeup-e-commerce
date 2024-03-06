@@ -49,7 +49,7 @@ const ProductHistoryCard = ({ product, status }) => {
         {getDaysSinceCreation(created_at) < 8 && (
           <div className="absolute top-[-3px] left-0 z-20">
             <span className="bg-primary text-xs px-2 rounded-tl-lg rounded-br-lg text-white">
-              {translations["new"] || "নতুন"}
+              {translations["new"] || "New"}
             </span>
           </div>
         )}

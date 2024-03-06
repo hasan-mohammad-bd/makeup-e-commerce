@@ -8,7 +8,7 @@ export default function Voucher() {
 	return (
 		<div className="mb-4 lg:mb-14">
 			<NestedPageTitle
-				title={translations["voucher"] || "ভাউচার"}
+				title={translations["voucher"] || "Voucher"}
 				href={"/dashboard"}
 			/>
 		</div>

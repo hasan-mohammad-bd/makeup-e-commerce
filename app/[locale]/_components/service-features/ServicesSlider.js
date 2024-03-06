@@ -38,7 +38,7 @@ const ServicesSlider = () => {
 						/>
 						<p className="text-base/[22px] font-semibold font-title">
 							{translations["free-exchange"] ||
-								"৭ দিনের মধ্যে বিনামূল্যে পরিবর্তনযোগ্য"}
+								"7 days replacement policy"}
 						</p>
 					</div>{" "}
 				</SwiperSlide>
@@ -52,7 +52,7 @@ const ServicesSlider = () => {
 						/>
 						<p className="text-base/[22px] font-semibold font-title">
 							{translations["free-delivery-offer"] ||
-								"ঢাকার মধ্যে ফ্রি হোম ডেলিভারি"}
+								"Free delivery in Dhaka"}
 						</p>
 					</div>
 				</SwiperSlide>
@@ -66,7 +66,7 @@ const ServicesSlider = () => {
 						/>
 						<p className="text-base/[22px] font-semibold font-title">
 							{translations["easy-secure-payment"] ||
-								"নিরাপদে পেমেন্ট করার সহজ মাধ্যম"}
+								"Easy and secure payment"}
 						</p>
 					</div>
 				</SwiperSlide>
@@ -80,7 +80,7 @@ const ServicesSlider = () => {
 						/>
 						<p className="text-base/[22px] font-semibold font-title">
 							{translations["fast-service"] ||
-								"সর্বাক্ষনিক ও দ্রুত গ্রাহক সেবা"}
+								"24/7 online customer support "}
 						</p>
 					</div>
 				</SwiperSlide>

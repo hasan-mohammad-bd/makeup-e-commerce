@@ -62,12 +62,12 @@ const ProductTabsView = ({ product, settings, translations }) => {
   const tabItems = [
     {
       id: 1,
-      title: translations["product-description"] || "প্রডাক্টের বিবরণ",
+      title: translations["product-description"] || "Product Description",
       key: `p-descriptions`,
     },
     {
       id: 2,
-      title: translations["specifications"] || "স্পেসিফিকেশন",
+      title: translations["specifications"] || "Specifications",
       key: `p-specifications`,
     },
     {
@@ -77,7 +77,7 @@ const ProductTabsView = ({ product, settings, translations }) => {
     },
     {
       id: 4,
-      title: translations["questions-and-answers"] || "প্রশ্ন ও উত্তর",
+      title: translations["questions-and-answers"] || "Questions and Answers",
       key: `p-qna`,
     },
   ];

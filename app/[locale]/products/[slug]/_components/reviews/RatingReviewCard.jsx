@@ -62,12 +62,12 @@ const RatingReviewCard = ({ review, translations }) => {
 				>
 					{review.barcode.color && (
 						<p>
-							{translations["color"] || "কালার"}: {review.barcode?.color}
+							{translations["color"] || "Color"}: {review.barcode?.color}
 						</p>
 					)}
 					{review.barcode.size && (
 						<p>
-							{translations["size"] || "সাইজ"}: {review.barcode?.size}
+							{translations["size"] || "Size"}: {review.barcode?.size}
 						</p>
 					)}
 

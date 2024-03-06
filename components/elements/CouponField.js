@@ -53,7 +53,7 @@ const CouponField = ({ showModal, setShowModal, total }) => {
             type="text"
             className="flex items-center justify-center !max-w-[200px]"
             name="coupon_code"
-            placeholder={translations["type-coupon"] || "কুপন কোড লিখুন"}
+            placeholder={translations["type-coupon"] || "Type coupon code"}
             {...register("coupon_code", {
               required: "Coupon code is required.",
             })}
@@ -64,7 +64,7 @@ const CouponField = ({ showModal, setShowModal, total }) => {
           {error && (
             <p className="errorMsg max-w-[200px]">
               {translations["invalid-coupon-msg"] ||
-                "এই কোডে ভাউচার পাওয়া যায় নি"}
+                "Invalid coupon code"}
             </p>
           )}
         </div>
@@ -73,7 +73,7 @@ const CouponField = ({ showModal, setShowModal, total }) => {
             type="submit"
             className="px-4 py-3 w-full bg-primary text-white rounded-md"
           >
-            {translations["verify-coupon"] || "যাচাই করুন"}
+            {translations["verify-coupon"] || "Verify coupon"}
           </button>
         </div>
       </form>

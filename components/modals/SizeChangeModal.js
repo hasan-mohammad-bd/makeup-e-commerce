@@ -61,7 +61,7 @@ const SizeChangeModal = () => {
 			<Modal
 				showModal={product}
 				setShowModal={closeSizeChange}
-				title={translations["select-variant"] || "নির্বাচন করুন"}
+				title={translations["select-variant"] || "Select variant"}
 			>
 				<div className="lg:w-[430px]">
 					{/* Product details section */}
@@ -109,7 +109,7 @@ const SizeChangeModal = () => {
 					<div className="product-size mt-4">
 						<div className="flex justify-between font-normal items-center">
 							<h4 className="text-slate-900 text-sm lg:text-base">
-								{translations["select-size"] || "সাইজ নির্বাচন করুন"}:
+								{translations["select-size"] || "Select size"}:
 							</h4>
 						</div>
 						<div className="flex gap-2 lg:gap-3 flex-wrap mt-2 lg:mt-3">
@@ -138,7 +138,7 @@ const SizeChangeModal = () => {
 							onClick={handleSizeChangeAndClose}
 							className="bg-primary py-3 w-full px-2 text-white rounded-lg text-center active:scale-95"
 						>
-							{translations["save"] || "সংরক্ষন করুন"}
+							{translations["save"] || "Save"}
 						</button>
 					</div>
 				</div>

@@ -11,7 +11,7 @@ export default function CallInquiry() {
 			<p className="">
 				<span className="text-xl font-bold font-title text-slate-900">
 					{translations["call-inquiry"] ||
-						"যে কোন জিজ্ঞাসা বা অর্ডার করতে আমাদের কল করুন"}
+						"If you have any questions, please call us"}
 					:
 				</span>
 			</p>

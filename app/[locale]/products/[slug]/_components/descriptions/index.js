@@ -9,14 +9,14 @@ const Descriptions = ({ settings, product, translations }) => {
     <section id="product-descriptions">
       <div className="description">
         <h4 className="text-2xl font-bold font-title text-slate-900 mb-3">
-          {translations["product-description"] || "প্রডাক্টের বিবরণ"}:
+          {translations["product-description"] || "Product Description"}:
         </h4>
         <ViewHTML htmlText={product?.product_description} />
       </div>
       {/* {product.includedProducts?.length ? ( */}
       <div className="mt-6 lg:mt-8">
         <h4 className="text-2xl font-bold font-title text-slate-900">
-          {translations["product-includes"] || "যা যা সাথে থাকবে"}
+          {translations["product-includes"] || "Product Includes"}:
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Image
@@ -65,7 +65,7 @@ const Descriptions = ({ settings, product, translations }) => {
       {product?.review_video && (
         <div className="mt-6 lg:mt-8">
           <h4 className="text-2xl font-bold font-title text-slate-900">
-            {translations["review-video"] || "রিভিউ ভিডিও"}
+            {translations["review-video"] || "Review Video"}
           </h4>
           <div className="mt-3">
             <VideoPlayer
@@ -82,11 +82,11 @@ const Descriptions = ({ settings, product, translations }) => {
       {settings?.phone?.length && (
         <div className="contact mt-8 bg-[#FCFCFC] border border-primary p-5 text-center">
           <h5 className="text-2xl font-bold font-title text-slate-900 mb-3">
-            {translations["know-more"] || "আরও কিছু জানার থাকলে"}
+            {translations["know-more"] || "Call us for more details"} 
           </h5>
           <p className="flex justify-center items-center gap-4">
             <span className="text-base text-slate-900">
-              {translations["call-us"] || "কল করুন"}:
+              {translations["call-us"] || "Call Us"}:
             </span>{" "}
             <Link
               href={`tel:${settings?.phone[0]}`}

@@ -41,7 +41,7 @@ export default function ReviewViewModal({
 			setShowModal={setShowModal}
 			title={
 				translations["customer-review-images"] ||
-				"কাস্টমারের দেয়া রিভিউ ছবি গুলো"
+				"Customer Review Images"
 			}
 		>
 			{isLoading && reviewIdProp ? (
@@ -100,13 +100,13 @@ export default function ReviewViewModal({
 								<div className="actions flex items-center justify-between text-slate-600">
 									{review.barcode.color && (
 										<p>
-											{translations["color"] || "কালার"}:{" "}
+											{translations["color"] || "Color"}:{" "}
 											{review.barcode?.color}
 										</p>
 									)}
 									{review.barcode.size && (
 										<p>
-											{translations["size"] || "সাইজ"}: {review.barcode?.size}
+											{translations["size"] || "Size"}: {review.barcode?.size}
 										</p>
 									)}
 									<p className="lg:hidden"></p>

@@ -46,7 +46,7 @@ const CouponModal = ({ showModal, setShowModal, total }) => {
 		<Modal
 			showModal={showModal}
 			setShowModal={setShowModal}
-			title={translations["coupon-code"] || "কুপন কোড"}
+			title={translations["coupon-code"] || "Coupon code"}
 		>
 			<div className="md:w-[27rem] text-slate-500">
 				<form className="" onSubmit={handleSubmit(onSubmit)}>
@@ -55,7 +55,7 @@ const CouponModal = ({ showModal, setShowModal, total }) => {
 							type="text"
 							className=""
 							name="coupon_code"
-							placeholder={translations["type-coupon"] || "কুপন কোড লিখুন"}
+							placeholder={translations["type-coupon"] || "Your coupon code"}
 							{...register("coupon_code", {
 								required: "Coupon code is required.",
 							})}
@@ -66,13 +66,13 @@ const CouponModal = ({ showModal, setShowModal, total }) => {
 						{error && (
 							<p className="errorMsg">
 								{translations["invalid-coupon-msg"] ||
-									"এই কোডে ভাউচার পাওয়া যায় নি, সঠিক কোড খুজে আবার চেষ্টা করুন"}
+									"Invalid coupon code. Please try again."}
 							</p>
 						)}
 					</div>
 					<div className="form-control mb-2 md:mb-0">
 						<button type="submit" className="primary-btn w-full">
-							{translations["verify-coupon"] || "যাচাই করুন"}
+							{translations["verify-coupon"] || "Verify coupon"}
 						</button>
 					</div>
 				</form>

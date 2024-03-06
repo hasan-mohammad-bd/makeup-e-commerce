@@ -65,7 +65,7 @@ const ReviewImagesUpload = ({
 				>
 					<BsCameraFill size={24} />
 					<p className="text-[10px]/[14px] lg:text-sm/[100%] mt-1 lg:mt-2">
-						{translations["upload-image"] || "ছবি আপলোড করুন"}
+						{translations["upload-image"] || "Upload Image"}
 					</p>
 					<input
 						type="file"

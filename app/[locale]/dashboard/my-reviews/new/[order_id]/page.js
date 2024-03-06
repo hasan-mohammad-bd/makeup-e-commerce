@@ -125,15 +125,15 @@ const AddReview = ({ params }) => {
   return (
     <div className="mb-4 lg:mb-14">
       <NestedPageTitle
-        title={translations["my-review"] || "আমার রিভিউ"}
+        title={translations["my-review"] || "My Review"}
         href={"/dashboard/my-reviews"}
-        buttonText={translations["go-back"] || "ফিরে যান"}
+        buttonText={translations["go-back"] || "Go Back"}
       />
       <div className="content mt-7 lg:mt-6 px-3 lg:px-10">
         <div className="relative">
           <div className="sec-heading absolute top-[-10px] left-0 w-full px-3 lg:px-8">
             <span className="bg-white text-secondary-700 px-2">
-              {translations["delivery-completed"] || "ডেলিভারি সম্পন্ন হয়েছে"}:{" "}
+              {translations["delivery-completed"] || "Delivery Completed"}:{" "}
               {getFormattedDate(reviewShow?.delivered_at)}
             </span>
           </div>
@@ -172,7 +172,7 @@ const AddReview = ({ params }) => {
                     <div className="lg:text-center">
                       <p className="font-semibold">
                         <span className="text-primary">*</span>{" "}
-                        {translations["give-a-rating"] || "রেটিং দিন"}:
+                        {translations["give-a-rating"] || "Give a Rating"}:
                       </p>
                       <div className="bg-slate-100 h-fit lg:h-[8.75rem] w-full lg:w-[10.5rem] flex lg:flex-col justify-between gap-2 lg:gap-3 items-center p-3 lg:p-4 mt-2">
                         <div className="order-2 lg:order-none text-right lg:text-center">
@@ -193,7 +193,7 @@ const AddReview = ({ params }) => {
                             />
                           </div>
                           <p className="pt-2 lg:pt-4">
-                            {translations["outstanding"] || "অসাধারণ"}
+                            {translations["outstanding"] || "Outstanding"}
                           </p>
                         </div>
                         <p className="text-primary order-1 lg:order-none">
@@ -209,14 +209,14 @@ const AddReview = ({ params }) => {
                         <div className="flex-between mb-2">
                           <label className="font-semibold text-slate-900 text-sm lg:text-base whitespace-nowrap">
                             <span className="text-primary">*</span>{" "}
-                            {translations["write-a-comment"] || "মতামত লিখুন"}:
+                            {translations["write-a-comment"] || "Write a Comment"}:
                           </label>
                           <span
                             onClick={handleButtonClick}
                             className="cursor-pointer text-sm lg:text-base text-secondary-800 whitespace-nowrap relative"
                           >
                             {translations["review-tips-title"] ||
-                              "যেভাবে একটি সুন্দর রিভিউ লিখবেন"}{" "}
+                              "Review Tips"}{" "}
                             <span className="group ">
                               {isActive && (
                                 <ReviewInstruction
@@ -237,7 +237,7 @@ const AddReview = ({ params }) => {
                           type="text"
                           name="msg"
                           placeholder={
-                            translations["type-comment"] || "আপনার মতামত লিখুন"
+                            translations["type-comment"] || "Type comment"
                           }
                           value={reviews[index] || ""}
                           onChange={(e) =>
@@ -260,20 +260,20 @@ const AddReview = ({ params }) => {
                   </div>
                   <div className="mt-5 mb-0 bg-slate-50 p-4">
                     <h3 className="font-bold font-title">
-                      {translations["note"] || "মনে রাখবেন"}:
+                      {translations["note"] || "Note"}:
                     </h3>
                     <ul className="list-disc ml-8 text-slate-600 [&>*]:mt-1">
                       <li>
                         {translations["review-note-1"] ||
-                          "সর্বোচ্চ ৬টি ছবি আপলোড করা যাবে (ছবির সাইজ সর্বোচ্চ 5mb হতে পারে)"}
+                          "Maximum 6 images can be uploaded(max size 5MB)"}
                       </li>
                       <li>
                         {translations["review-note-2"] ||
-                          "ছবিটি পর্যালোচনা করতে 24 ঘন্টা পর্যন্ত সময় লাগে৷"}
+                          "Need maximum 24 hours to analyze your photos"}
                       </li>
                       <li>
                         {translations["review-note-3"] ||
-                          "আপনার পর্যালোচনা আপলোড করার আগে দয়া করে নিশ্চিত করুন যে আপনি সম্প্রদায় নির্দেশিকা পূরণ করেছেন৷"}
+                          "Make sure you have fulfilled all the criteria for giving a review"}
                       </li>
                     </ul>
                   </div>
@@ -291,7 +291,7 @@ const AddReview = ({ params }) => {
             onClick={handleReviewSubmit}
             className="text-white bg-primary py-3 px-6"
           >
-            {translations["give-review"] || "রিভিউ দিন"}
+            {translations["give-review"] || "Give Review"}
           </button>
         </div>
       </div>

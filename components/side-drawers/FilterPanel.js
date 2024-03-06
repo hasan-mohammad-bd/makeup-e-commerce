@@ -17,7 +17,7 @@ const FilterPanel = ({ category }) => {
 
 	return (
 		<Drawer
-			title={translations["filter"] || "ফিল্টার করুন"}
+			title={translations["filter"] || "Filter"}
 			show={isFilterPanelOpen}
 			position={"left"}
 			className={"lg:w-[25rem]"}

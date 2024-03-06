@@ -22,7 +22,7 @@ const FlashSale = ({ translations }) => {
 
   const flashSaleInfo = flashSaleData?.flashSale || {};
   const saleProducts = flashSaleData?.data || [];
-  console.log(flashSaleInfo);
+
   if (flashSaleData?.status === false || isLoading || !flashSaleData)
     return null;
 

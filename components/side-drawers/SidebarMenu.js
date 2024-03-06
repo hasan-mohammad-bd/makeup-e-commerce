@@ -49,7 +49,7 @@ const SidebarMenu = ({ sidebarToggle, isSideBarOpen }) => {
                 <IoLogOut size={28} />
               </span>
               <span className="font-bold">
-                {translations["log-out"] || "লগ-আউট"}
+                {translations["log-out"] || "Log Out"}
               </span>
             </button>
           </li>

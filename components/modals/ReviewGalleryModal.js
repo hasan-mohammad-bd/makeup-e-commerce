@@ -23,7 +23,7 @@ export default function ReviewGalleryModal({
 		<Modal
 			showModal={showModal}
 			setShowModal={setShowModal}
-			title={translations["imgs-from-cstmr"] || "কাস্টমারের দেয়া ছবি গুলো"}
+			title={translations["imgs-from-cstmr"] || "Customer Images"}
 		>
 			<div className="min-h-[500px]">
 				<div className="grid grid-cols-4 lg:grid-cols-6 items-start gap-3">

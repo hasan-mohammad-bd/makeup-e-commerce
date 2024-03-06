@@ -36,7 +36,7 @@ export default function MyReview() {
 					<HiArrowLongLeft size={24} />
 				</Link>
 				<h2 className="text-slate-900 font-semibold lg:font-bold text-base/4 lg:text-2xl">
-					{translations["my-review"] || "আমার রিভিউ"}
+					{translations["my-review"] || "My Review"}
 				</h2>
 			</div>
 			<div className="px-3 lg:px-0 lg:mx-10 flex items-center lg:mt-4 gap-4 border-b border-slate-200">
@@ -49,7 +49,7 @@ export default function MyReview() {
 					onClick={() => setIsReviewed((preRevState) => !preRevState)}
 				>
 					<span>
-						{translations["review-pending"] || "রিভিউ পেন্ডিং"} (
+						{translations["review-pending"] || "Review Pending "} (
 						{getCountByKeyValue(myReviews, "total_review", 0)})
 					</span>
 				</button>
@@ -62,7 +62,7 @@ export default function MyReview() {
 					onClick={() => setIsReviewed((preRevState) => !preRevState)}
 				>
 					<span>
-						{translations["reviewed"] || "রিভিউ হয়েছে "} (
+						{translations["reviewed"] || "Reviewed "} (
 						{getCountByKeyNotValue(myReviews, "total_review", 0)})
 					</span>
 				</button>
@@ -82,7 +82,7 @@ export default function MyReview() {
 							/>
 						))
 					) : (
-						<NoItems title={translations["no-reviews"] || "কোন রিভিউ নেই"} />
+						<NoItems title={translations["no-reviews"] || "No Reviews"} />
 					)}
 				</div>
 			)}

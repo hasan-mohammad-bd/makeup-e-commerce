@@ -96,7 +96,7 @@ const ProductSelect = () => {
         >
           <HiOutlineShoppingCart size={24} />
           <span className="ml-2">
-            {translations["add-to-cart"] || "কার্টে রাখুন"}
+            {translations["add-to-cart"] || "Add to cart"}
           </span>
         </button>
         <button
@@ -106,7 +106,7 @@ const ProductSelect = () => {
           className="bg-primary py-3 w-full px-2 text-white rounded-sm text-center active:scale-95"
         >
           <span className="mr-2">
-            {translations["buy-now"] || "এখনই কিনুন"}
+            {translations["buy-now"] || "Buy Now"}
           </span>
           <HiArrowLongRight size={20} className="hidden lg:inline" />
         </button>
@@ -117,7 +117,7 @@ const ProductSelect = () => {
       >
         <p className="text-center">
           {translations["click-product-details"] ||
-            "প্রোডাক্টির বিস্তারিত দেখতে ক্লিক করুন"}
+            "Click here to see product details"}
         </p>
       </Link>
     </div>
@@ -129,13 +129,13 @@ const ProductSelect = () => {
         <Modal
           showModal={selectedProduct}
           setShowModal={closeDrawer}
-          title={translations["select-variant"] || "নির্বাচন করুন"}
+          title={translations["select-variant"] || "Select variant"}
         >
           {pageContent}
         </Modal>
       ) : (
         <Drawer
-          title={translations["select-variant"] || "নির্বাচন করুন"}
+          title={translations["select-variant"] || "Select variant"}
           show={selectedProduct}
           setShow={closeDrawer}
         >

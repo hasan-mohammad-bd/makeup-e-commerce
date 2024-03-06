@@ -69,10 +69,10 @@ export default function AddSupportTicket() {
     <div className="">
       <NestedPageTitle
         title={
-          translations["create-support-ticket"] || "সাপোর্ট টিকিট তৈরি করুন"
+          translations["create-support-ticket"] || "Create Support Ticket"
         }
         href={"/dashboard/support-ticket"}
-        buttonText={translations["go-back"] || "ফিরে যান"}
+        buttonText={translations["go-back"] || "Go Back"}
       />
 
       <div className="content py-3 px-3 md:px-10 md:py-6">
@@ -80,7 +80,7 @@ export default function AddSupportTicket() {
           <div className="grid lg:grid-cols-2 lg:gap-8">
             <div className="form-control mb-4">
               <label className="block text-base text-slate-900 mb-2 mt-3 md:mt-0">
-                {translations["order-number"] || "অর্ডার নাম্বার"}
+                {translations["order-number"] || "Order Number"}
               </label>
 
               <select
@@ -91,7 +91,7 @@ export default function AddSupportTicket() {
               >
                 <option disabled selected>
                   {translations["select-order-number"] ||
-                    "অর্ডার নাম্বার নির্বাচন করুন"}
+                    "Select Order Number"}
                 </option>
                 {myOrders.map((order) => (
                   <option key={order.id} value={order.id}>
@@ -105,7 +105,7 @@ export default function AddSupportTicket() {
             </div>
             <div className="form-control mb-4">
               <label className="block text-base text-slate-900 capitalize mb-2">
-                {translations["type-of-problem"] || "সমস্যার ধরণ"}
+                {translations["type-of-problem"] || "Type of Problem"}
               </label>
 
               <select
@@ -116,7 +116,7 @@ export default function AddSupportTicket() {
               >
                 <option disabled selected className="">
                   {translations["select-problem-type"] ||
-                    "সমস্যার ধরণ নির্বাচন করুন"}
+                    "Select Problem Type"}
                 </option>
                 {ticketTypes.map((type) => (
                   <option key={type.id} value={type.id}>
@@ -131,12 +131,12 @@ export default function AddSupportTicket() {
           </div>
           <div className="form-control mb-4">
             <label className="block text-base text-slate-900 mb-2">
-              {translations["subject"] || "সাবজেক্ট"}
+              {translations["subject"] || "Subject"}
             </label>
             <input
               type="text"
               name="subject"
-              placeholder={translations["enter-subject"] || "সাবজেক্ট লিখুন"}
+              placeholder={translations["enter-subject"] || "Enter Subject"}
               {...register("subject", {
                 required: "Subject is required.",
               })}
@@ -148,14 +148,14 @@ export default function AddSupportTicket() {
           <div className="grid lg:grid-cols-2 lg:gap-8">
             <div className="form-control mb-4">
               <label className="block text-base text-slate-900 mb-2 capitalize">
-                {translations["message"] || "মেসেজ"}
+                {translations["message"] || "Message"}
               </label>
               <textarea
                 className="h-[148px]"
                 type="text"
                 name="msg"
                 placeholder={
-                  translations["enter-your-message"] || "আপনার মেসেজ লিখুন"
+                  translations["enter-your-message"] || "Enter Your Message"
                 }
                 {...register("msg", {
                   required: "Message is required.",
@@ -165,7 +165,7 @@ export default function AddSupportTicket() {
             </div>
             <div className="form-control mb-4">
               <label className="block text-base text-slate-900 mb-2">
-                {translations["attachment-file"] || "সংযুক্তি ফাইল"} (jpg, jpeg,
+                {translations["attachment-file"] || "Attachment File"} (jpg, jpeg,
                 png and max-size: 2MB)
               </label>
               {isMobile ? (
@@ -181,7 +181,7 @@ export default function AddSupportTicket() {
               type="submit"
               className="font-bold bg-primary py-3 w-full md:w-fit text-white px-4 active:scale-95"
             >
-              {translations["submit-ticket"] || "টিকিটি সাবমিট করুন"}
+              {translations["submit-ticket"] || "Submit Ticket"}
             </button>
           </div>
         </form>

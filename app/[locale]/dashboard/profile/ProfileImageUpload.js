@@ -67,7 +67,7 @@ const ProfileImageUpload = ({
 					</label>
 				)}
 				<h3 className="text-center my-3 text-sm text-slate-500 whitespace-nowrap">
-					{translations["profile-photo"] || "প্রফাইল ফটো"}
+					{translations["profile-photo"] || "Profile Photo"}
 				</h3>
 			</div>
 			{validationError && editMode && (

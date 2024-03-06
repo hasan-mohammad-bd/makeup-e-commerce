@@ -101,7 +101,7 @@ const ProductVariantSelect = forwardRef(
         {!(colors.length === 1 && colors[0] === "") ? (
           <div className="product-color mt-4">
             <h4 className="text-slate-900 text-sm lg:text-base font-normal">
-              {translations["select-color"] || "কালার নির্বাচন করুন"}: <span className={` text-sm text-center my-3 ${selectedColorShow && "p-1 border border-slate-300"}  `}>{selectedColorShow}</span>
+              {translations["select-color"] || "Select color"}: <span className={` text-sm text-center my-3 ${selectedColorShow && "p-1 border border-slate-300"}  `}>{selectedColorShow}</span>
             </h4>
             <div className="flex gap-[10px] lg:gap-3 flex-wrap mt-2 lg:mt-3">
               {colors.map((color) => {
@@ -153,7 +153,7 @@ const ProductVariantSelect = forwardRef(
           <div className="product-size mt-4">
             <div className="flex justify-between font-normal items-center">
               <h4 className="text-slate-900 text-sm lg:text-base">
-                {translations["select-size"] || "সাইজ নির্বাচন করুন"}:
+                {translations["select-size"] || "Select size"}:
               </h4>
               {sizeChart && (
                 <button
@@ -161,7 +161,7 @@ const ProductVariantSelect = forwardRef(
                   onClick={() => setShowSizeChart((show) => !show)}
                 >
                   <span>
-                    {translations["see-size-chart"] || "সাইজ চার্ট দেখুন"}
+                    {translations["see-size-chart"] || "See size chart"}
                   </span>
                   <MdArrowForwardIos />
                 </button>

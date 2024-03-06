@@ -8,23 +8,23 @@ const SortSelect = () => {
 	const { translations } = useSelector((state) => state.common);
 
 	const sortItems = [
-		{ key: "default", value: translations["random"] || "এলোমেলো" },
-		{ key: "new", value: translations["new-product"] || "নতুন প্রডাক্ট" },
+		{ key: "default", value: translations["random"] || "Random" },
+		{ key: "new", value: translations["new-product"] || "New Product" },
 		{
 			key: "low_high",
-			value: translations["price-(low-to-high)"] || "দাম (কম থেকে বেশি)",
+			value: translations["price-(low-to-high)"] || "Price (Low to High)",
 		},
 		{
 			key: "high_low",
-			value: translations["price-(high-to-low)"] || "দাম (বেশি থেকে কম)",
+			value: translations["price-(high-to-low)"] || "Price (High to Low)",
 		},
 		{
 			key: "rating_low_high",
-			value: translations["rating-(low-to-high)"] || "রেটিং (কম থেকে বেশি)",
+			value: translations["rating-(low-to-high)"] || "Rating (Low to High)",
 		},
 		{
 			key: "rating_high_low",
-			value: translations["rating-(high-to-low)"] || "রেটিং (বেশি থেকে কম)",
+			value: translations["rating-(high-to-low)"] || "Rating (High to Low)",
 		},
 	];
 
@@ -33,12 +33,12 @@ const SortSelect = () => {
 			<div className="sort-by-product-wrap flex items-center gap-x-4 gap-y-4">
 				<div className="sort-by">
 					<span className=" text-sm text-slate-600">
-						{translations["sort"] || "শর্টিং করুন"}:
+						{translations["sort"] || "Sort"}:
 					</span>
 				</div>
 				<div className="sort-by-dropdown-wrap">
 					<DropdownSelect
-						title={"এলোমেলো"}
+						title={"Random"}
 						className={"w-72"}
 						options={sortItems}
 						onSelectChange={(item) => handleSelectChange("sort_type", item.key)}

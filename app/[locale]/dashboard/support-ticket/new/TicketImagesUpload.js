@@ -66,7 +66,7 @@ const TicketImagesUpload = ({ setImageFiles }) => {
         <div className="flex flex-wrap gap-4 items-center">
           <label htmlFor="image-upload">
             <span className="border border-slate-300 rounded-lg py-2 px-4 cursor-pointer">
-            {translations["browse"] || "ব্রাউজ করুন"}
+            {translations["browse"] || "Browse"}
             </span>
             <input
               type="file"
@@ -78,7 +78,7 @@ const TicketImagesUpload = ({ setImageFiles }) => {
               onChange={handleImageUpload}
             />
           </label>
-          <h3 className="text-slate-500">{translations["or,-drag-and-drop-files-here"] || "অথবা, ফাইল টেনে এনে এখানে ছাড়ুন"}</h3>
+          <h3 className="text-slate-500">{translations["or,-drag-and-drop-files-here"] || "Or, drag and drop files here"}</h3>
         </div>
       </div>
       {validationError && (

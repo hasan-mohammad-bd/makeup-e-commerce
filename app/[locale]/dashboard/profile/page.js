@@ -37,7 +37,7 @@ const MyProfile = () => {
   return (
     <div className="mb-24 lg:mb-14">
       <NestedPageTitle
-        title={translations["my-profile"] || "আমার প্রফাইল"}
+        title={translations["my-profile"] || "My Profile"}
         href={"/dashboard"}
       />
       <form
@@ -53,13 +53,13 @@ const MyProfile = () => {
         <div className="grid grid-cols-2 gap-8 border border-slate-200 rounded-lg lg:border-none p-3 lg:p-0">
           <div className="form-control col-span-2 lg:col-span-1">
             <label className="block font-semibold text-base text-slate-500 mb-2 capitalize">
-              {translations["your-name"] || "আপনার নাম"}
+              {translations["your-name"] || "Your Name"}
             </label>
             {!editMode ? (
               <p className="text-slate-800">
                 {user?.name || (
                   <span className="text-slate-300">
-                    {translations["enter-your-name"] || "আপনার নাম লিখুন"}
+                    {translations["enter-your-name"] || "Enter Your Name"}
                   </span>
                 )}
               </p>
@@ -70,7 +70,7 @@ const MyProfile = () => {
                   name="name"
                   defaultValue={user?.name}
                   placeholder={
-                    translations["enter-your-name"] || "আপনার নাম লিখুন"
+                    translations["enter-your-name"] || "Enter Your Name"
                   }
                   {...register("name", {
                     required: "Name is required.",
@@ -89,7 +89,7 @@ const MyProfile = () => {
 
           <div className="form-control col-span-1">
             <label className="font-semibold block text-base text-slate-500 mb-2 capitalize">
-              {translations["date-of-birth"] || "জন্ম তারিখ"}
+              {translations["date-of-birth"] || "Date of Birth"}
             </label>
             {!editMode ? (
               <p>
@@ -97,7 +97,7 @@ const MyProfile = () => {
                   getFormattedDate(user?.birth_date)
                 ) : (
                   <span className="text-slate-300">
-                    {translations["day-month-year"] || "দিন/মাস/বছর"}
+                    {translations["day-month-year"] || "Day-Month-Year"}
                   </span>
                 )}
               </p>
@@ -117,7 +117,7 @@ const MyProfile = () => {
           </div>
           <div className="form-control col-span-1">
             <label className="block text-base text-slate-500 capitalize mb-2 font-semibold">
-              {translations["gender"] || "লিঙ্গ"}
+              {translations["gender"] || "Gender"}
             </label>
             {!editMode ? (
               <p className="text-slate-800">
@@ -125,7 +125,7 @@ const MyProfile = () => {
                   user?.gender
                 ) : (
                   <span className="text-slate-300">
-                    {translations["select-gender"] || "লিঙ্গ নির্বাচন করুন"}
+                    {translations["select-gender"] || "Select Gender"}
                   </span>
                 )}
               </p>
@@ -137,7 +137,7 @@ const MyProfile = () => {
                   defaultValue={user?.gender}
                 >
                   <option disabled>
-                    {translations["select-gender"] || "লিঙ্গ নির্বাচন করুন"}
+                    {translations["select-gender"] || "Select Gender"}
                   </option>
                   <option key="Male" value="Male">
                     Male
@@ -157,14 +157,14 @@ const MyProfile = () => {
           </div>
           <div className="form-control col-span-2 lg:col-span-1">
             <label className="block text-base text-slate-500 mb-2 capitalize font-semibold">
-              {translations["your-email-(if-any)"] || "আপনার ইমেইল (যদি থাকে)"}
+              {translations["your-email-(if-any)"] || "Your Email (if any)"}
             </label>
             {!editMode ? (
               <p className="text-slate-800">
                 {user?.email || (
                   <span className="text-slate-300">
                     {translations["enter-email-address"] ||
-                      "ইমেইল এড্রেস লিখুন"}
+                      "Enter Email Address"}
                   </span>
                 )}
               </p>
@@ -175,7 +175,7 @@ const MyProfile = () => {
                   name="email"
                   defaultValue={user?.email}
                   placeholder={
-                    translations["enter-email-address"] || "ইমেইল এড্রেস লিখুন"
+                    translations["enter-email-address"] || "Enter Email Address"
                   }
                   {...register("email", {
                     pattern: {
@@ -192,14 +192,14 @@ const MyProfile = () => {
           </div>
           <div className="col-span-2 lg:col-span-1">
             <label className="block text-slate-500 mb-2 font-semibold">
-              {translations["phone-number"] || "ফোন নাম্বার"}
+              {translations["phone-number"] || "Phone Number"}
             </label>
             {!editMode ? (
               <p className="text-slate-800">
                 {(user?.phone && siteConfig.phone.countryCode + user.phone) || (
                   <span className="text-slate-300">
                     {translations["enter-the-phone-number"] ||
-                      "ফোন নাম্বার লিখুন"}
+                      "Enter The Phone Number"}
                   </span>
                 )}
               </p>
@@ -221,7 +221,7 @@ const MyProfile = () => {
           </div>
           <div className="col-span-2 lg:col-span-1">
             <label className="block text-slate-500 mb-2 font-semibold">
-              {translations["alternate-phone-number"] || "বিকল্প ফোন নাম্বার"}
+              {translations["alternate-phone-number"] || "Alternate Phone Number"}
             </label>
             {!editMode ? (
               <p className="text-slate-800">
@@ -229,7 +229,7 @@ const MyProfile = () => {
                   siteConfig.phone.countryCode + user.alt_phone_no) || (
                   <span className="text-slate-300">
                     {translations["enter-alternate-phone-number"] ||
-                      "বিকল্প ফোন নাম্বার লিখুন"}
+                      "Enter alternate Phone Number"}
                   </span>
                 )}
               </p>
@@ -245,7 +245,7 @@ const MyProfile = () => {
                     name="alt_phone_no"
                     placeholder={
                       translations["enter-alternate-phone-number"] ||
-                      "বিকল্প ফোন নাম্বার লিখুন"
+                      "Enter alternate Phone Number"
                     }
                     defaultValue={user?.alt_phone_no}
                     {...register("alt_phone_no", {
@@ -264,14 +264,14 @@ const MyProfile = () => {
           </div>
           <div className="form-control col-span-2 lg:col-span-1">
             <label className="block text-base text-slate-500 mb-2 capitalize font-semibold">
-              {translations["your-address"] || "আপনার ঠিকানা"}
+              {translations["your-address"] || "Your Address"}
             </label>
             {!editMode ? (
               <p className="text-slate-800">
                 {user?.address || (
                   <span className="text-slate-300">
                     {translations["type-your-address"] ||
-                      "আপনার সম্পূর্ণ ঠিকানা লিখুন"}
+                      "Type your address"}
                   </span>
                 )}
               </p>
@@ -284,7 +284,7 @@ const MyProfile = () => {
                   name="address"
                   placeholder={
                     translations["type-your-address"] ||
-                    "আপনার সম্পূর্ণ ঠিকানা লিখুন"
+                    "Type your address"
                   }
                   {...register("address")}
                 />
@@ -303,16 +303,16 @@ const MyProfile = () => {
               className="py-3 px-4 text-primary border border-primary"
             >
               {editMode ? (
-                <>{translations["cancel"] || "বাতিল করুন"}</>
+                <>{translations["cancel"] || "Cancel"}</>
               ) : (
-                <>{translations["edit"] || "সম্পাদন করুন"}</>
+                <>{translations["edit"] || "Edit"}</>
               )}
             </button>
           </div>
           {editMode ? (
             <div className="form-control w-full lg:w-auto">
               <button type="submit" className="py-3 px-4 bg-primary text-white">
-                {translations["save"] || "সংরক্ষন করুন"}
+                {translations["save"] || "Save"}
               </button>
             </div>
           ) : null}

@@ -59,7 +59,7 @@ const page = async ({ params, searchParams }) => {
 									href={`/categories`}
 									className="text-base text-white hover:text-primary"
 								>
-									{translations["category"] || "ক্যাটাগরি"}
+									{translations["category"] || "Category"}
 								</Link>
 								<Link
 									href={`/categories/${category.slug}`}
@@ -80,13 +80,13 @@ const page = async ({ params, searchParams }) => {
 								href={`/`}
 								className="text-base text-slate-600 hover:text-primary"
 							>
-								{translations["home"] || "হোম"}
+								{translations["home"] || "Home"}
 							</Link>
 							<Link
 								href={`/categories`}
 								className="text-base text-slate-900 hover:text-primary"
 							>
-								{translations["category"] || "ক্যাটাগরি"}
+								{translations["category"] || "Category"}
 							</Link>
 							<Link
 								href={`/categories/${category.slug}`}
@@ -102,7 +102,7 @@ const page = async ({ params, searchParams }) => {
 
 			<div className="border-b border-slate-200 pt-3 lg:py-8">
 				<h6 className="container text-base font-semibold font-title text-slate-900 lg:mb-4">
-					{translations["top-5-categories"] || "সেরা ৫টি ক্যাটাগরি"}
+					{translations["top-5-categories"] || "Top 5 Categories"}
 				</h6>
 				<div className="lg:container">
 					<HorizontalScrollView className={"space-x-2 lg:space-x-4 py-3"}>

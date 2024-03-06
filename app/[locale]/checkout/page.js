@@ -35,12 +35,12 @@ const Checkout = () => {
   const deliveryMethods = [
     {
       key: "inside dhaka",
-      title: translations["inside-dhaka"] || "ঢাকার ভিতরে",
+      title: translations["inside-dhaka"] || "Inside Dhaka",
       charges: settings?.inside_dhaka_delivery_charges,
     },
     {
       key: "outside dhaka",
-      title: translations["outside-dhaka"] || "ঢাকার বাহিরে",
+      title: translations["outside-dhaka"] || "Outside Dhaka",
       charges: settings?.outside_dhaka_delivery_charges,
     },
   ];
@@ -131,7 +131,7 @@ const Checkout = () => {
         <div className="md:col-span-3">
           <h3 className="text-slate-700 text-lg/[26px] font-semibold mx-3 pb-4 md:mx-0">
             {translations["checkout-info-msg"] ||
-              "অর্ডারটি কনফার্ম করতে আপনার নাম, ঠিকানা, মোবাইল নাম্বার, লিখে অর্ডার কনফার্ম করুন বাটনে ক্লিক করুন"}
+              "Please give your Name, Address and Phone number to complete your order."}
           </h3>
           <form
             className="w-full mt-6"
@@ -144,14 +144,14 @@ const Checkout = () => {
                 <div className="grid lg:grid-cols-2 lg:gap-4">
                   <div className="form-control mb-4">
                     <label className="block text-base text-slate-900 mb-2">
-                      {translations["your-name"] || "আপনার নাম"}
+                      {translations["your-name"] || "Your Name"}
                     </label>
                     <input
                       type="text"
                       name="name"
                       defaultValue={user?.name}
                       placeholder={
-                        translations["enter-your-name"] || "নাম লিখুন"
+                        translations["enter-your-name"] || "Write your name"
                       }
                       {...register("name", {
                         required: "Name is required.",
@@ -164,7 +164,7 @@ const Checkout = () => {
 
                   <div className="form-control mb-4">
                     <label className="block text-base text-slate-900 mb-2">
-                      {translations["phone-number"] || "মোবাইল নাম্বার"}
+                      {translations["phone-number"] || "Phone Number"}
                     </label>
                     <div className="flex items-center group">
                       <div className="h-12 py-3 min-w-fit text-base font-title font-normal px-2 rounded-s-lg border bg-slate-100 border-gray-300 group-focus-within:border-primary group-focus-within:border-r-gray-300">
@@ -177,7 +177,7 @@ const Checkout = () => {
                         defaultValue={user?.phone || user?.alt_phone_no}
                         placeholder={
                           translations["your-mobile-number"] ||
-                          "আপনার মোবাইল নাম্বার"
+                          "Your Mobile Number"
                         }
                         {...register("phone", {
                           required: "Phone number is required.",
@@ -195,7 +195,7 @@ const Checkout = () => {
                 </div>
                 <div className="form-control mb-4">
                   <label className="block text-base text-slate-900 mb-2">
-                    {translations["your-address"] || "আপনার ঠিকানা"}
+                    {translations["your-address"] || "Your Address"}
                   </label>
                   <textarea
                     className="h-[148px] border border-slate-300 p-4"
@@ -204,7 +204,7 @@ const Checkout = () => {
                     defaultValue={user?.address}
                     placeholder={
                       translations["type-your-address"] ||
-                      "আপনার সম্পূর্ণ ঠিকানা লিখুন"
+                      "Write your address"
                     }
                     {...register("address", {
                       required: "Address is required.",
@@ -225,7 +225,7 @@ const Checkout = () => {
                   <PayOptionIcon />
                   <span>
                     {translations["payment-select-title"] ||
-                      "আপনি কিভাবে পরিশোধ করতে চান"}
+                      "How would you like to pay?"}
                   </span>
                 </h3>
                 {/* <div className="flex flex-nowrap space-x-4"> */}
@@ -285,14 +285,14 @@ const Checkout = () => {
                 type="submit"
                 className="primary-btn !rounded-md w-[232px] lg:w-full disabled:bg-slate-300 disabled:cursor-not-allowed"
               >
-                {translations["confirm-order"] || "অর্ডার কনফার্ম করুন"}
+                {translations["confirm-order"] || "Confirm Order"}
               </button>
             </div>
           </form>
         </div>
         <div className="md:col-span-3 p-3 lg:p-6 pl-8 mx-3 md:mx-0 border-l border-slate-200">
           <h3 className="text-lg/[26px] text-slate-700 font-semibold">
-            {translations["your-order"] || "আপনার অর্ডার"}
+            {translations["your-order"] || "Your Order"}
           </h3>
           <div
             className={`overflow-auto scrollbar-hide ${
@@ -310,7 +310,7 @@ const Checkout = () => {
                         onClick={() => setOrderCollapsed(true)}
                       >
                         <FiPlus />
-                        {translations["more"] || "আরও"} {cart.length - 2}
+                        {translations["more"] || "More"} {cart.length - 2}
                       </button>
                     </div>
                   </div>
@@ -352,7 +352,7 @@ const Checkout = () => {
             <div className="p-4 mt-4 lg:mt-8 bg-slate-100 shadow border border-primary">
               <h4 className="text-slate-700">
                 {translations["select-delivery-method"] ||
-                  "ডেলিভারি মেথড নির্বাচন করুন"}
+                  "Select Delivery Method"}
               </h4>
               <div className="flex flex-col lg:flex-row gap-3 lg:gap-12 lg:items-center py-3">
                 {deliveryMethods.map((dm) => (
@@ -377,7 +377,7 @@ const Checkout = () => {
 
             <div className="text-slate-700 p-4 rounded-lg shadow bg-white mt-2">
               <div className="flex-between my-2">
-                <p>{translations["total"] || "সর্বমোট"}</p>
+                <p>{translations["total"] || "Total"}</p>
                 <p>
                   {siteConfig.currency.sign}
                   {total}
@@ -385,7 +385,7 @@ const Checkout = () => {
               </div>
               <div className="flex-between my-2">
                 <p>
-                  {translations["coupon-discount"] || "কুপন/প্রোমো ডিসকাউন্ট"}
+                  {translations["coupon-discount"] || "Coupon Discount"}
                 </p>
                 {discountCoupon ? (
                   <span className="text-primary">{discountCoupon.code}</span>
@@ -394,12 +394,12 @@ const Checkout = () => {
                     className=" text-black"
                     // onClick={() => setShowModal(true)}
                   >
-                    {translations["coupon-code"] || "কোড যোগ করুন"}
+                    {translations["coupon-code"] || "Coupon Code"}
                   </button>
                 )}
               </div>
               <div className="flex-between my-2">
-                <p>{translations["discount-amount"] || "ডিসকাউন্ট পাচ্ছেন"}</p>
+                <p>{translations["discount-amount"] || "Discount Amount"}</p>
                 <p className="text-red-500">
                   -{siteConfig.currency.sign}
                   {couponDiscountedPrice}
@@ -408,7 +408,7 @@ const Checkout = () => {
 
               <div className="border-b border-slate-300 my-2"></div>
               <div className="flex-between my-2">
-                <p>{translations["total-with-discount"] || "মোট পরিমান"}</p>
+                <p>{translations["total-with-discount"] || "Total With Discount"}</p>
                 <p>
                   {siteConfig.currency.sign}
                   {totalWithDiscount}
@@ -417,7 +417,7 @@ const Checkout = () => {
 
               {isDeliveryCharge && (
                 <div className="flex-between my-2">
-                  <p>{translations["delivery-charge"] || "ডেলিভারি চার্জ"}</p>
+                  <p>{translations["delivery-charge"] || "Delivery Charge"}</p>
                   <p>
                     {siteConfig.currency.sign}
                     {deliveryMethod.charges}
@@ -426,7 +426,7 @@ const Checkout = () => {
               )}
               <div className="border-b border-slate-900 my-2"></div>
               <div className="flex-between my-2 font-bold">
-                <p>{translations["grand-total"] || "পরিশোধ করতে হবে"}</p>
+                <p>{translations["grand-total"] || "Grand Total"}</p>
 
                 <p>
                   {siteConfig.currency.sign}

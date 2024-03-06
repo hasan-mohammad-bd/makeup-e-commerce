@@ -50,7 +50,7 @@ const ProductDetailsView = async ({ params }) => {
                 href={`/products`}
                 className=" hover:text-primary text-white"
               >
-                {translations["products"] || "প্রডাক্টস"}
+                {translations["products"] || "Products"}
               </Link>
               {/*               <Link
                 href={`/products/${slug}`}
@@ -84,7 +84,7 @@ const ProductDetailsView = async ({ params }) => {
             className={"justify-start"}
             title={
               translations["same-category-products"] ||
-              "একই ক্যাটাগরির আরও প্রোডাক্ট"
+              "Similar Products in this Category"
             }
             buttonText={translations["see-all"]}
           />

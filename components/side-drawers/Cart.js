@@ -61,8 +61,7 @@ const Cart = () => {
 						}} */
             className="p-2 lg:p-3 text-black text-xs/[100%] lg:text-sm"
           >
-            {settings?.free_delivery_charges_limit} টাকার উপের অর্ডার করেল
-            ডেলিভারি চার্জ ফ্রী! সারাদেশে ক্যাশ অন ডেলিভারি।
+           Delivery charge is free if you order more than {settings?.free_delivery_charges_limit}. Cash on delivery nationwide
           </div>
         ) : null}
         <div className="cart-items px-3 py-4 lg:p-3">
@@ -77,13 +76,13 @@ const Cart = () => {
               className="text-primary text-sm lg:text-lg/[26px] font-semibold text-center"
             >
               <FiPlus size={20} className="mr-1" />
-              {translations["shop-more"] || "আরো শপিং করুন"}
+              {translations["shop-more"] || "Shop More"}
             </Link>
           </div>
         </div>
         <div className="fixed left-0 bottom-0 w-full px-3 py-4 lg:px-8 lg:py-4 bg-slate-50 border-t border-slate-200 flex flex-col lg:flex-row gap-2 lg:gap-12 justify-between lg:items-center">
           <div className="flex lg:block justify-between items-center lg:text-center">
-            <p className="">{translations["total"] || "সর্বমোট"}:</p>
+            <p className="">{translations["total"] || "Total"}:</p>
             <h3 className="text-slate-900 font-bold">
               {`${siteConfig.currency.sign} ${getCartTotal(cart)}`}
             </h3>

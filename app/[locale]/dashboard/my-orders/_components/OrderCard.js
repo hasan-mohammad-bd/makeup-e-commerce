@@ -32,42 +32,42 @@ function OrderCard({ order, translations = {} }) {
       case orderFilterKeys.pending:
         statusElement = (
           <span className="px-1 py-[2px] bg-yellow-500">
-            {translations["pending"] || "পেন্ডিং"}
+            {translations["pending"] || "Pending"}
           </span>
         );
         break;
       case orderFilterKeys.processing:
         statusElement = (
           <span className="px-1 py-[2px] bg-lime-500">
-            {translations["processing"] || "প্রসেসিং"}
+            {translations["processing"] || "Processing"}
           </span>
         );
         break;
       case orderFilterKeys.confirmed:
         statusElement = (
           <span className="px-1 py-[2px] bg-secondary-700">
-            {translations["confirmed"] || "নিশ্চিত"}
+            {translations["confirmed"] || "Confirmed"}
           </span>
         );
         break;
       case orderFilterKeys.inDeliver:
         statusElement = (
           <span className="px-1 py-[2px] bg-blue-500">
-            {translations["on-delivery"] || "ডেলিভারিতে"}
+            {translations["on-delivery"] || "On Delivery"}
           </span>
         );
         break;
       case orderFilterKeys.complete:
         statusElement = (
           <span className="px-1 py-[2px] bg-green-500">
-            {translations["complete"] || "সম্পন্ন"}
+            {translations["complete"] || "Complete"}
           </span>
         );
         break;
       case orderFilterKeys.cancelled:
         statusElement = (
           <span className="px-1 py-[2px] bg-red-500">
-            {translations["cancel"] || "বাতিল"}
+            {translations["cancel"] || "Cancel"}
           </span>
         );
         break;
@@ -76,7 +76,7 @@ function OrderCard({ order, translations = {} }) {
   };
 
   return (
-    <div className="text-slate-900 bg-slate-100 border border-slate-100 hover:border hover:border-primary mt-3">
+    <div className="text-slate-900 bg-slate-100 border border-slate-100 hover:border hover:border-primary mt-3 mx-3">
       <div className="lg:hidden p-3 flex-between col-span-2">
         <h3>{getFormattedDate(sale_date)}</h3>
         <h3>{invoice_no}</h3>
@@ -85,20 +85,20 @@ function OrderCard({ order, translations = {} }) {
         <div className="grid grid-cols-2 lg:grid-cols-4 justify-between">
           <div className="hidden lg:block">
             <h3 className="text-slate-500 mb-3">
-              {translations["date"] || "তারিখ"}
+              {translations["date"] || "Date"}
             </h3>
             <h3>{getFormattedDate(sale_date)}</h3>
           </div>
           <div className="hidden lg:block">
             <h3 className="text-slate-500 mb-3">
-              {translations["order-id"] || "অর্ডার আইডি"}
+              {translations["order-id"] || "Order ID"}
             </h3>
             <h3>{invoice_no}</h3>
           </div>
 
           <div>
             <h3 className="text-slate-500 mb-3">
-              {translations["total-amount"] || "টাকার পরিমান"}
+              {translations["total-amount"] || "Total Amount"}
             </h3>
             <h3 className="">
               {siteConfig.currency.sign} {total_amount || "Invalid"}{" "}
@@ -109,9 +109,9 @@ function OrderCard({ order, translations = {} }) {
               >
                 {due_amount > 0
                   ? payment_type !== "COD"
-                    ? translations["payment-incomplete"] || "পেমেন্ট অসম্পূর্ণ"
-                    : translations["due"] || "বাকি"
-                  : translations["paid"] || "পরিশোধ"}
+                    ? translations["payment-incomplete"] || "Payment Incomplete"
+                    : translations["due"] || "Due"
+                  : translations["paid"] || "Paid"}
               </span>
             </h3>
           </div>
@@ -125,7 +125,7 @@ function OrderCard({ order, translations = {} }) {
                 }
                 className="inline-block bg-primary py-2 px-4 text-white text-center active:scale-95"
               >
-                {translations["make-payment"] || "পেমেন্ট করুন"}
+                {translations["make-payment"] || "Make Payment"}
               </button>
             </div>
           ) : (
@@ -134,7 +134,7 @@ function OrderCard({ order, translations = {} }) {
                 {getOrderStatus(status)}
               </h3>
               <h3>
-                {total_product} {translations["items"] || "টি প্রডাক্ট"}
+                {total_product} {translations["items"] || "Items"}
               </h3>
             </div>
           )}
@@ -147,7 +147,7 @@ function OrderCard({ order, translations = {} }) {
             href={`/dashboard/my-orders/details/${id}`}
             className="text-slate-500 hover:text-primary"
           >
-            {translations["see-details"] || "বিস্তারিত দেখুন"}{" "}
+            {translations["see-details"] || "See Details"}{" "}
             <HiArrowLongRight />
           </Link>
         </div>

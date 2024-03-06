@@ -37,7 +37,7 @@ const CartTray = () => {
 				</div>
 				<div className="content rounded-es-lg text-center">
 					<p className="text-xs text-white">
-						{cart?.length} {translations["item" || "আইটেম"]}
+						{cart?.length} {translations["item" || "Item"]}
 					</p>
 					<div className="text-xs font-semibold text-white flex items-center justify-center">
 						<span className="mr-1">{siteConfig.currency.sign}</span>

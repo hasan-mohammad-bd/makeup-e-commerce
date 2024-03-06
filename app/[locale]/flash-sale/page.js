@@ -47,7 +47,7 @@ const FlashSellingProducts = async ({ searchParams }) => {
 							{flashSaleInfo?.title}
 						</h3>
 						<p className="text-base lg:text-lg/6 text-slate-600 mb-3 lg:mb-4">
-							{translations["the-offer-will-only-last"] || "অফার চলবে আর মাত্র"}
+							{translations["the-offer-will-only-last"] || "The offer will only last"}
 						</p>
 						<Timer targetDate={flashSaleInfo?.expire_time} />
 					</div>
@@ -67,7 +67,7 @@ const FlashSellingProducts = async ({ searchParams }) => {
 				<div className="toolbar hidden lg:flex justify-between items-center bg-slate-50 rounded-xl px-4 py-3 my-5">
 					<p>
 						{`${products?.length} ${translations["items"]}` ||
-							`এখানে ${products?.length} টি প্রডাক্ট আছে`}
+							`Here ${products?.length} Products`}
 					</p>
 					<Suspense fallback={<SearchBarFallback />}>
 						<SortSelect />

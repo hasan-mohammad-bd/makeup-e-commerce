@@ -41,7 +41,7 @@ const OrderReviewCard = ({ sellReview, translations = {} }) => {
     <div className="relative mb-6 lg:mb-8">
       <div className="sec-heading absolute top-[-10px] left-0 w-full px-3 lg:px-8">
         <span className="bg-white text-secondary-700 px-2">
-          {translations["delivery-completed"] || "ডেলিভারি সম্পন্ন হয়েছে"} :{" "}
+          {translations["delivery-completed"] || "Delivery Completed"} :{" "}
           {getFormattedDate(delivered_at)}
         </span>
       </div>

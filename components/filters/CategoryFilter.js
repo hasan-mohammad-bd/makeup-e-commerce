@@ -52,7 +52,7 @@ const CategoryFilter = ({ selectedCategory }) => {
   return (
     <div className="">
       <h6 className="text-sm font-bold text-slate-900 border-b border-slate-200 pb-3">
-        {translations["shop-by-category"] || "ক্যাটাগরি থেকে কেনাকাটা"}
+        {translations["shop-by-category"] || "By From Category"}
       </h6>
       <div className="category-filter pt-2">
         {selectedCategory?.id &&

@@ -42,7 +42,7 @@ const WishListCard = ({ product }) => {
           {stockOut ? (
             <div className="w-full h-full rounded absolute left-5 top-0 flex items-center justify-center">
               <span className="text-red-500 !text-4 rounded-lg whitespace-nowrap capitalize border-solid border bg-white  px-1 py-[2px]">
-                {translations["out-of-stock"] || "স্টক শেষ"}
+                {translations["out-of-stock"] || "Out of Stock"}
               </span>
             </div>
           ) : null}
@@ -91,7 +91,7 @@ const WishListCard = ({ product }) => {
           >
             <HiOutlineShoppingCart size={20} />
             <span className="ml-2 hidden md:inline whitespace-nowrap">
-              {translations["add-to-cart"] || "কার্টে রাখুন"}
+              {translations["add-to-cart"] || "Add to cart"}
             </span>
           </button>
         ) : (
@@ -100,10 +100,10 @@ const WishListCard = ({ product }) => {
             className="text-primary font-bold border whitespace-nowrap border-primary py-2 flex items-center px-3 rounded-sm active:scale-95 cursor-pointer"
           >
             <span className="hidden md:inline">
-              {translations["find-similar"] || "সিমিলার খুঁজুন"}
+              {translations["find-similar"] || "Find similar products"}
             </span>
             <span className="inline md:hidden">
-              {translations["find"] || "খুঁজুন"}
+              {translations["find"] || "Find"}
             </span>
           </Link>
         )}

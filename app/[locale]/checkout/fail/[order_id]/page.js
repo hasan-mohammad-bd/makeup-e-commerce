@@ -33,11 +33,11 @@ const PaymentFail = ({ params }) => {
 						</div>
 
 						<h1 className="text-red-500 text-2xl lg:text-3xl mt-4 lg:mt-8 font-bold">
-							{translations["payment-incomplete"] || "পেমেন্ট অসম্পূর্ণ"}
+							{translations["payment-incomplete"] || "payment incomplete"}
 						</h1>
 						<h3 className="text-slate-600 mt-2 text-base lg:text-xl">
 							{translations["payment-fail-msg"] ||
-								"সততা স্টোর থেকে আপনার অর্ডার নিশ্চিত করা হয়েছে, কিন্তু কোন কারণে পেমেন্ট ব্যর্থ হয়েছে"}
+								"Your order has been confirmed. <br /> but somehow the payment has failed."}
 						</h3>
 					</div>
 				)}
@@ -48,11 +48,11 @@ const PaymentFail = ({ params }) => {
 					<>
 						<div className="order-info bg-slate-100 p-4 my-4 text-center text-slate-600">
 							<p>
-								{translations["your-order-id"] || "আপনার অর্ডার আইডি"}: #
+								{translations["your-order-id"] || "Your Order ID"}: #
 								{order?.invoice_no}
 							</p>
 							<p>
-								{translations["amount-payable"] || "প্রদেয় পরিমান"}:{" "}
+								{translations["amount-payable"] || "Amount Payable"}:{" "}
 								{siteConfig.currency.sign}
 								{order?.due_amount}
 							</p>
@@ -60,12 +60,12 @@ const PaymentFail = ({ params }) => {
 						<div className="text-center text-slate-600 text-base lg:text-xl">
 							<h3 className="md:w-3/4 mx-auto">
 								{translations["payment-fail-info"] ||
-									"পেমেন্ট সম্পূর্ণ করতে পেমেন্ট বাটনে ক্লিক করুন <br /> অথবা, অর্ডারটির"}{" "}
+									"Press the button to complete payment process. <br /> or, of the order"}{" "}
 								<Link
 									href={`/dashboard/my-orders/details/${order_id}`}
 									className="text-secondary-700 active:scale-95 underline"
 								>
-									{translations["see-details"] || "বিস্তারিত দেখুন"}
+									{translations["see-details"] || "See Details"}
 								</Link>
 							</h3>
 						</div>
@@ -79,7 +79,7 @@ const PaymentFail = ({ params }) => {
 									}
 									className="bg-primary py-3 px-6 text-white rounded-lg text-center active:scale-95"
 								>
-									{translations["make-payment"] || "পেমেন্ট করুন"}
+									{translations["make-payment"] || "Make Payment"}
 								</button>
 							</div>
 						</div>

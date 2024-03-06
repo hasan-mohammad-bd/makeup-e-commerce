@@ -43,7 +43,7 @@ const ProductsWithFilter = async ({
             <p>
               {params.get("text") ? `"${params.get("text")}" ` : ""}
               {`${products?.length} ${translations["items"] || "Products"}` ||
-                `এখানে ${products?.length} টি প্রডাক্ট আছে`}
+                `Here ${products?.length} Products`}
             </p>
 
             <div className="hidden lg:block">

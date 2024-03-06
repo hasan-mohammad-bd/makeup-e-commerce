@@ -32,7 +32,7 @@ const VideoBanner = ({ translations }) => {
                 startVideoPlayer({
                   url: settings?.review_video_link || "https://youtube.com",
                   playing: true,
-                  title: translations["review-video"] || "রিভিউ ভিডিও",
+                  title: translations["review-video"] || "Review Video",
                   controls: true,
                   // className: "md:h-[480px] md:w-[854px]",
                 })

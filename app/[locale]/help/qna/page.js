@@ -19,13 +19,13 @@ const QnA = () => {
 							href={`/`}
 							className="text-base text-slate-600 hover:text-primary"
 						>
-							{translations["home"] || "হোম"}
+							{translations["home"] || "Home"}
 						</Link>
 						<Link
 							href={`/help/qna`}
 							className="text-base text-slate-900 hover:text-primary"
 						>
-							{translations["questions-and-answers"] || "প্রশ্ন ও উত্তর"}
+							{translations["questions-and-answers"] || "Questions and Answers"}
 						</Link>
 					</div>
 				</div>
@@ -33,7 +33,7 @@ const QnA = () => {
 
 			<div className="lg:container">
 				<NestedPageTitle
-					title={translations["questions-and-answers"] || "প্রশ্ন ও উত্তর"}
+					title={translations["questions-and-answers"] || "Questions and Answers"}
 					href={"/mobile-login"}
 					className={"lg:px-0"}
 				/>

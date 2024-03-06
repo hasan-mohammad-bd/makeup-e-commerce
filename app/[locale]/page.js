@@ -15,6 +15,7 @@ const FlashSale = dynamic(() => import("./_components/flash-sale"), {
 
 // ** Import Iocns
 import { SeeAll } from "@/components/elements/buttons";
+import HomeCategoryProducts from "./_components/HomeCategoryProducts";
 
 export default async function Home() {
   const data = await fetchData({ api: "translations" });
@@ -108,10 +109,14 @@ export default async function Home() {
       <section className="mt-6 lg:mt-14">
         <VideoBanner translations={translations} />
       </section>
+      <section className="home-category-products mb-10">
+        <HomeCategoryProducts />
+      </section>
 
       <section className="all-brands pt-6 pb-8 lg:py-14">
         <div className="lg:container lg:px-10 2xl:px-0">
           <SectionTitle title={translations["our-brands"]} />
+
           <div className="brands-slider mt-1 lg:mt-6  relative">
             <Brands />
           </div>

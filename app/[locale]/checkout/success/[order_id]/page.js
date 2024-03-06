@@ -37,11 +37,11 @@ const OrderSuccess = ({ params }) => {
 						</div>
 						<h1 className="text-green-500 text-2xl lg:text-3xl font-title">
 							{translations["order-success-msg"] ||
-								"অর্ডার সফলভাবে সম্পন্ন হয়েছে!"}
+								"Order Placed Successfully"}
 						</h1>
 						<h3 className="text-slate-800 text-base lg:text-2xl my-3">
 							{translations["order-thank-msg"] ||
-								"সততা স্টোর থেকে কেনাকাটা করার জন্য আপনাকে আন্তরিকভাবে ধন্যবাদ৷"}
+								"Thank you for your order"}
 						</h3>
 					</div>
 				)}
@@ -51,15 +51,15 @@ const OrderSuccess = ({ params }) => {
 					<div className="order-info">
 						<div className="order-info bg-slate-50 p-4 my-4 rounded-lg">
 							<div className="flex-between my-2">
-								<p>{translations["order-id"] || "অর্ডার আইডি"}</p>
+								<p>{translations["order-id"] || "Order ID"}</p>
 								<p>{order?.invoice_no}</p>
 							</div>
 							<div className="flex-between my-2">
-								<p>{translations["order-date"] || "অর্ডারের তারিখ"}</p>
+								<p>{translations["order-date"] || "Order Date"}</p>
 								<p>{getFormattedDate(order?.sale_date)}</p>
 							</div>
 							<div className="flex-between my-2">
-								<p>{translations["total-amount"] || "সর্বমোট পরিমাণ"}</p>
+								<p>{translations["total-amount"] || "Total Amount"}</p>
 								<p>
 									{siteConfig.currency.sign} {order?.total_amount}
 								</p>
@@ -67,9 +67,9 @@ const OrderSuccess = ({ params }) => {
 							<div className="border-b border-slate-700 my-2"></div>
 							<div className="flex-between my-2 font-bold">
 								<p>
-									{translations["amount-payable"] || "প্রদেয় পরিমান"}{" "}
+									{translations["amount-payable"] || "Amount Payable"}{" "}
 									<span className="bg-red-100 px-2 rounded-lg text-red-500">
-										{translations["due"] || "বাকি"}
+										{translations["due"] || "Due"}
 									</span>
 								</p>
 								<p>
@@ -82,13 +82,13 @@ const OrderSuccess = ({ params }) => {
 								href={`/dashboard/my-orders/details/${order_id}`}
 								className="bg-secondary-700 p-3 w-full text-white rounded-lg text-center active:scale-95"
 							>
-								{translations["track-order"] || "অর্ডার ট্র্যাক করুন"}
+								{translations["track-order"] || "Track Order"}
 							</Link>
 							<Link
 								href={"/products"}
 								className="bg-primary p-3 w-full text-white rounded-lg text-center active:scale-95"
 							>
-								{translations["shop-more"] || "আরও শপিং করুন "}
+								{translations["shop-more"] || "Shop More"}
 							</Link>
 						</div>
 					</div>

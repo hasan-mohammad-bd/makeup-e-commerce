@@ -35,7 +35,7 @@ const Timer = ({ targetDate }) => {
             {days}
           </p>
           <p className="text-lg font-normal text-black">
-            {translations["days"] || "দিন"}
+            {translations["days"] || "Days"}
           </p>
         </div>
         <span className="flex justify-center items-center text-4xl font-semibold">
@@ -49,7 +49,7 @@ const Timer = ({ targetDate }) => {
             {hours}
           </p>
           <p className="text-lg font-normal text-black">
-            {translations["hours"] || "ঘন্টা"}
+            {translations["hours"] || "Hours"}
           </p>
         </div>
 				<span className="flex justify-center items-center text-4xl font-semibold">
@@ -63,7 +63,7 @@ const Timer = ({ targetDate }) => {
             {minutes}
           </p>
           <p className="text-lg font-normal text-black">
-            {translations["minutes"] || "মিনিট"}
+            {translations["minutes"] || "Minutes"}
           </p>
         </div>
 				<span className="flex justify-center items-center text-4xl font-semibold">
@@ -77,7 +77,7 @@ const Timer = ({ targetDate }) => {
             {seconds}
           </p>
           <p className="text-lg font-normal text-black">
-            {translations["seconds"] || "সেকেন্ড"}
+            {translations["seconds"] || "Seconds"}
           </p>
         </div>
       </div>

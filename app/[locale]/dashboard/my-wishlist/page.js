@@ -19,7 +19,7 @@ const MyWishList = () => {
 	return (
 		<div className="mb-20 lg:mb-0">
 			<NestedPageTitle
-				title={translations["my-wish-list"] || "আমার উইশ লিষ্ট"}
+				title={translations["my-wish-list"] || "My Wish List"}
 				href={"/dashboard"}
 			/>
 
@@ -34,7 +34,7 @@ const MyWishList = () => {
 					))}
 				</div>
 			) : (
-				<NoItems title={"কোন প্রডাক্ট নেই"} />
+				<NoItems title={"No Items"} />
 			)}
 		</div>
 	);
