@@ -54,8 +54,7 @@ const ProductViewSlider = forwardRef(
     };
 
     // const isInWishList = handleWishListProductStatus(product.id);
-    const onlyImages = slides.map(item => item.image);
-
+    const onlyImages = slides.map((item) => item.image);
 
     return (
       <>
@@ -63,7 +62,9 @@ const ProductViewSlider = forwardRef(
           <div className=" preview-slider grid relative">
             <Swiper
               ref={ref}
-              className="product-preview-slider [&_.swiper-wrapper]:pb-3 lg:[&_.swiper-wrapper]:pb-0 lg:border border-slate-300"
+              className={`product-preview-slider [&_.swiper-wrapper]:pb-3  lg:[&_.swiper-wrapper]:pb-0 lg:border border-slate-300 ${
+                shortDetails && "md:!w-[25rem]"
+              }`}
               thumbs={{
                 swiper:
                   thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
@@ -87,9 +88,7 @@ const ProductViewSlider = forwardRef(
               }}
               modules={[Thumbs, Pagination]}
             >
-            
-
-{/*               <Lightbox
+              {/*               <Lightbox
                 open={basicExampleOpen}
                 close={() => setBasicExampleOpen(false)}
                 slides={slide.image}
@@ -99,8 +98,8 @@ const ProductViewSlider = forwardRef(
                   key={index}
                   className={`!h-[100vw] ${
                     shortDetails
-                      ? "!h-[28.75rem] !w-full"
-                      : "md:!h-[38.75rem] md:!w-[38.75rem]"
+                      ? "md:!h-[28.75rem] md:!w-full"
+                      : "md:!h-[42.75rem] md:!w-full"
                   } `}
                 >
                   <div className="slider-imag h-full w-full">
@@ -116,12 +115,11 @@ const ProductViewSlider = forwardRef(
                     {isFirstItem(slide?.color_name) && slide?.video_link ? (
                       <>
                         <Image
-                        
                           src={slide?.image}
                           alt=""
                           width={524}
                           height={524}
-                          className="object-cover h-full w-full"
+                          className="object-cover object-top h-full w-full"
                         />
 
                         <button
@@ -147,7 +145,6 @@ const ProductViewSlider = forwardRef(
                     ) : (
                       // <ImageZoom image={slide?.image} zoomImage={slide?.image} />
                       <>
-                      
                         <Image
                           src={slide?.image}
                           alt=""

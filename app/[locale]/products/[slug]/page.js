@@ -63,7 +63,7 @@ const ProductDetailsView = async ({ params }) => {
           </DynamicBackgroundComponent>
         </div>
       </div>
-      <div className="small-container mx-auto mt-5 md:mt-20">
+      <div className="container mx-auto mt-5 md:mt-20">
         <ProductDetails
           product={product}
           settings={settings}

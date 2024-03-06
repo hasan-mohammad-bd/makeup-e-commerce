@@ -71,7 +71,7 @@ const RatingReviews = ({ product_id }) => {
 	return (
 		<section id="product-rating-reviews">
 			<h2 className="text-2xl font-bold font-title text-slate-900">
-				{translations["ratings-and-reviews"] || "রেটিং ও রিভিউ"}:
+				{translations["ratings-and-reviews"] || "Rating and Reviews"}:
 			</h2>
 			{summaryLoading ? (
 				<ItemsListLoader noImage={true} numItems={1} />

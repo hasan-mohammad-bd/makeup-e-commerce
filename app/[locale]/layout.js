@@ -31,6 +31,7 @@ import VideoPlayerModal from "@/components/modals/VideoPlayerModal";
 import AuthProvider from "@/provider/AuthProvider";
 import { Jost } from "next/font/google";
 import { fetchData } from "@/lib/fetch-data";
+import { locales } from "@/navigation";
 
 export const generateMetadata = async ({ params }) => {
   let settings = {};
@@ -79,7 +80,6 @@ const jost = Jost({
   variable: "--font-jost",
 });
 
-const locales = ["bn", "en"];
 // export function generateStaticParams() {
 // 	return locales.map((locale) => ({ locale }));
 // }

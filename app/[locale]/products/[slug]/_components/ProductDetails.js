@@ -61,8 +61,6 @@ const ProductDetails = ({
   //demo
   const quantity = 1;
 
-  console.log(product);
-
   return (
     <div className="product-details">
       <div className="flex container flex-col lg:flex-row lg:gap-10 pb-3 lg:px-10  2xl:px-0 ">
@@ -303,27 +301,20 @@ const ProductDetails = ({
                   <FiPlus size={16} />
                 </button>
               </div> */}
-              <button
-                className="bg-primary py-1 rounded-[0.2rem]  md:py-[6px] w-fit md:px-5 hover:bg-hovercolor text-white text-center active:scale-95"
-                onClick={() => handleAddToCart(product, selectedVariant)}
-              >
-                {/* <HiOutlineShoppingCart size={24} /> */}
-                <span className="px-2 py-1">
-                  {translations["add-to-cart"] || "কার্টে রাখুন"}
-                </span>
-              </button>
             </div>
 
             {/* wishlist button */}
-            <div className="product-action mt-6 z-10 flex justify-start items-center">
+            <div
+              onClick={(e) =>
+                isInWishList
+                  ? handleRemoveFromWishlist(product.id)
+                  : handleAddToWishlist(product.id)
+              }
+              className="product-action mt-5 z-10 flex justify-start items-center cursor-pointer"
+            >
               <button
                 aria-label="Add To Wishlist"
                 className=" inline-flex justify-center items-center mr-2"
-                onClick={(e) =>
-                  isInWishList
-                    ? handleRemoveFromWishlist(product.id)
-                    : handleAddToWishlist(product.id)
-                }
               >
                 {isInWishList ? (
                   <HeartRedIcon />
@@ -337,29 +328,40 @@ const ProductDetails = ({
               </button>
               <p>Add to Wishlist</p>
             </div>
-            {/* buy now button */}
-            <button
-              onClick={() => handleAddAndCheckout(product, selectedVariant)}
-              className="bg-primary py-3.5 md:py-3 w-full md:mx-0 px-3 md:px-6  text-white hover:bg-hovercolor  !rounded-[0.2rem] text-center active:scale-95 mt-5"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
+            <div className="flex justify-center items-center gap-4">
+              <button
+                className="bg-primary py-3.5 md:py-3 w-full md:mx-0 px-3 md:px-6  text-white hover:bg-hovercolor  !rounded-[0.2rem] text-center active:scale-95 mt-5"
+                onClick={() => handleAddToCart(product, selectedVariant)}
               >
-                <path
-                  d="M7.91634 1.66667H15.4163L10.833 7.50001H17.083L7.08301 18.3333L9.16634 10.4167H3.33301L7.91634 1.66667Z"
-                  fill="white"
-                  stroke="white"
-                  strokeLinejoin="round"
-                />
-              </svg>{" "}
-              <span className="mr-2">
-                {translations["buy-now"] || "এখনই কিনুন"}
-              </span>
-            </button>
+                {/* <HiOutlineShoppingCart size={24} /> */}
+                <span className="px-2 py-1">
+                  {translations["add-to-cart"] || "কার্টে রাখুন"}
+                </span>
+              </button>
+              {/* buy now button */}
+              <button
+                onClick={() => handleAddAndCheckout(product, selectedVariant)}
+                className="bg-hovercolor py-3.5 md:py-3 w-full md:mx-0 px-3 md:px-6  text-white hover:bg-primary  !rounded-[0.2rem] text-center active:scale-95 mt-5"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M7.91634 1.66667H15.4163L10.833 7.50001H17.083L7.08301 18.3333L9.16634 10.4167H3.33301L7.91634 1.66667Z"
+                    fill="white"
+                    stroke="white"
+                    strokeLinejoin="round"
+                  />
+                </svg>{" "}
+                <span className="mr-2">
+                  {translations["buy-now"] || "এখনই কিনুন"}
+                </span>
+              </button>
+            </div>
             {/* <div className="h-2 w-full mt-4 bg-slate-200 lg:hidden"></div> */}
             <div className="">
               {product?.coupons?.length ? (

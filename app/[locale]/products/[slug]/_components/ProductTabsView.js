@@ -72,7 +72,7 @@ const ProductTabsView = ({ product, settings, translations }) => {
     },
     {
       id: 3,
-      title: translations["ratings-and-reviews"] || "রেটিং ও রিভিউ",
+      title: translations["ratings-and-reviews"] || "Ratings and Reviews",
       key: `p-rating-reviews`,
     },
     {
@@ -85,12 +85,12 @@ const ProductTabsView = ({ product, settings, translations }) => {
   // console.log(activeSection, "activeSection");
 
   return (
-    <div className="tabs-view bg-[#FCFCFC] py-3 container mx-auto">
+    <div className="tabs-view py-3 container mx-auto">
       {/* tabs view */}
-      <div className="sticky bg-white top-20 z-20 mt-5 lg:mt-0 lg:pt-6 ">
+      <div className="sticky bg-white top-20 z-20 mt-5 lg:mt-0 lg:pt-5 ">
         <HorizontalScrollView
           className={
-            "product-tab-links py-0 justify-evenly lg:w-full lg:pb-4 !w-fit"
+            "product-tab-links text-xl font-bold py-0 justify-evenly lg:w-full lg:pb-4 !w-fit"
           }
         >
           {tabItems.map((item) =>
@@ -110,7 +110,7 @@ const ProductTabsView = ({ product, settings, translations }) => {
         </HorizontalScrollView>
       </div>
       {/* tabs content  */}
-      <div className="product-tab-content small-container mx-auto">
+      <div className="product-tab-content container mx-auto">
         <div
           data-section
           id="p-descriptions"
@@ -124,7 +124,7 @@ const ProductTabsView = ({ product, settings, translations }) => {
         </div>
         {product?.specification && (
           <>
-            <div className="h-2 w-full bg-slate-200 lg:hidden"></div>
+            <div className="h-2 w-full lg:hidden"></div>
             <div
               data-section
               id="p-specifications"

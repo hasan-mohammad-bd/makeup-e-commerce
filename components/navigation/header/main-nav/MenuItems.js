@@ -9,7 +9,7 @@ const MegaMenu = dynamic(() => import("./MegaMenu"), {
 import React from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
-const MenuItems = ({ settings , noAds }) => {
+const MenuItems = ({ settings, noAds }) => {
   console.log(settings);
   const navItems = settings?.header_page || [
     {
@@ -55,7 +55,7 @@ const MenuItems = ({ settings , noAds }) => {
         {navItems.map((item, index) => (
           <Link
             key={index}
-            className={`ml-10 hover:text-primary text-lg ${
+            className={`mr-10 hover:text-primary text-lg ${
               item.path && "relative sub-menu"
             }`}
             href={item.subLink ? "/" : item.path}
