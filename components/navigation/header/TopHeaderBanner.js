@@ -20,7 +20,7 @@ const TopHeaderBanner = ({ locale, settings }) => {
               className="text-white hidden md:flex font-normal text-4 border-l border-white text-4 pl-3 ml-3 justify-center"
             >
               <TfiCar size={20} />{" "}
-              <Link href="/dashboard/my-orders" className="ml-2 whitespace-nowrap"> Track your order</Link>
+              <Link href="/dashboard/my-orders" className="ml-2 whitespace-nowrap !text-white"> Track your order</Link>
             </Link>
             <span className="text-white font-normal border-l border-white text-4 pl-3 ml-3 hidden md:flex justify-center items-center">
               <AiOutlineMail size={20} /> <p className="ml-2">{settings?.email}</p>

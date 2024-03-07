@@ -153,14 +153,14 @@ export default function MainNav({ settings }) {
                     }`}
                   >
                     <HiMagnifyingGlass className="" size={24} />
-                    <p className="">Search</p>
+                    {!isVisible && <p className="">Search</p>}
                     {/* <span>Search</span> */}
                   </button>
 
                   )
                 }
-                <div className="text-center ml-4 font-normal">
-                  <Link className="" href="/dashboard/profile">
+                <div className="text-center flex flex-col justify-center items-center ml-4 font-normal">
+                  <Link className="text center" href="/dashboard/profile">
                     {user?.image ? (
                       <Image
                         src={user.image}
@@ -172,7 +172,7 @@ export default function MainNav({ settings }) {
                     ) : (
                       <HiOutlineUser className="" size={28} />
                     )}
-                    <p className="hidden md:block">Profile</p>
+                   {!isVisible &&  <p className="hidden md:block">Profile</p>}
                   </Link>
                 </div>
                 <div className="text-center ml-4 hidden md:flex flex-col">
@@ -183,7 +183,7 @@ export default function MainNav({ settings }) {
                         {wishlistCount > 9 ? "9+" : wishlistCount}
                       </span>
                     ) : null}
-                    <p className="">My Wishlist</p>
+                   {!isVisible &&  <p className="">My Wishlist</p>}
                   </Link>
                 </div>
 
@@ -199,7 +199,7 @@ export default function MainNav({ settings }) {
                         {cart?.length > 9 ? "9+" : cart?.length}
                       </span>
                     ) : null}
-                    <p className="hidden md:block">My Cart</p>
+                   {!isVisible &&   <p className="hidden md:block">My Cart</p>}
                   </button>
                 </div>
                 <div
