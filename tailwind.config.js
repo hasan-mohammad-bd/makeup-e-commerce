@@ -13,7 +13,7 @@ module.exports = {
       fontFamily: {
         body: ["Hind Siliguri", ...defaultTheme.fontFamily.sans],
         // title: ["Hind Siliguri", ...defaultTheme.fontFamily.serif],
-        title: ["", ...defaultTheme.fontFamily.serif],
+        title: ["Hind Siliguri", ...defaultTheme.fontFamily.serif],
       },
       boxShadow: {
         top: "0 -4px 16px 0 rgba(0, 0, 0, 0.08)",

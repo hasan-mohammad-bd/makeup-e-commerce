@@ -5,13 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
-  font-family: "Noto Sans Bengali", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-} */
+body {
+  font-family: "Hind Siliguri", sans-serif;
+
+}
 
 @layer base {
   body {
