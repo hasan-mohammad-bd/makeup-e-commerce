@@ -9,6 +9,8 @@ import noImage from "@/public/assets/images/no-image.png";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Lightbox from "yet-another-react-lightbox";
+import dynamic from "next/dynamic";
+const ProductZoomYetAnother = dynamic(() => import("./ProductZoomYetAnother"));
 
 // ** Import Icon
 import { HiOutlineHeart, HiPlayCircle } from "react-icons/hi2";
@@ -21,6 +23,8 @@ const ProductViewSlider = forwardRef(
     const dispatch = useDispatch();
     const [basicExampleOpen, setBasicExampleOpen] = useState(false);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [open, setOpen] = useState(false);
+    const [index, setIndex] = useState(0);
     /*   const {
     handleAddToWishlist,
     handleWishListProductStatus,
@@ -56,8 +60,23 @@ const ProductViewSlider = forwardRef(
     // const isInWishList = handleWishListProductStatus(product.id);
     const onlyImages = slides.map((item) => item.image);
 
+    const handleOpenZoom = (index) => {
+      setOpen(true);
+      setIndex(index);
+    };
+
     return (
       <>
+        
+        {open && (
+          <ProductZoomYetAnother
+          open={open}
+          setIndex={setIndex}
+          index={index}
+          setOpen={setOpen}
+          images={slides}
+        />
+        )}
         <div className="px-3 md:px-0">
           <div className=" preview-slider grid relative">
             <Swiper
@@ -146,11 +165,12 @@ const ProductViewSlider = forwardRef(
                       // <ImageZoom image={slide?.image} zoomImage={slide?.image} />
                       <>
                         <Image
+                          onClick={() => handleOpenZoom(index)}
                           src={slide?.image}
                           alt=""
                           width={524}
                           height={524}
-                          className="object-cover h-full w-full"
+                          className="object-cover h-full w-full cursor-zoom-in"
                         />
                       </>
                     )}
