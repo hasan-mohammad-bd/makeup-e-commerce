@@ -15,12 +15,16 @@ import { HiOutlineHeart, HiPlayCircle } from "react-icons/hi2";
 import { startVideoPlayer } from "@/store/slices/commonSlice";
 import HeartRedIcon from "@/components/elements/svg/HeartRedIcon";
 import HorizontalScrollView from "@/components/elements/HorizontalScrollView";
+import ProductZoomYetAnother from "./ProductZoomYetAnother";
 
 const ProductViewSlider = forwardRef(
+  
   ({ product, selectedColor, shortDetails }, ref) => {
     const dispatch = useDispatch();
     const [basicExampleOpen, setBasicExampleOpen] = useState(false);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [open, setOpen] = useState(false);
+    const [index, setIndex] = useState(0);
     /*   const {
     handleAddToWishlist,
     handleWishListProductStatus,
@@ -56,8 +60,15 @@ const ProductViewSlider = forwardRef(
     // const isInWishList = handleWishListProductStatus(product.id);
     const onlyImages = slides.map((item) => item.image);
 
+    const handleOpenZoom = (index) => {
+      setOpen(true);
+      setIndex(index);
+    }
+
     return (
       <>
+        {" "}
+        <ProductZoomYetAnother open={open} setIndex={setIndex} index={index} setOpen={setOpen} images={slides} />
         <div className="px-3 md:px-0">
           <div className=" preview-slider grid relative">
             <Swiper
@@ -146,11 +157,12 @@ const ProductViewSlider = forwardRef(
                       // <ImageZoom image={slide?.image} zoomImage={slide?.image} />
                       <>
                         <Image
+                          onClick={() => handleOpenZoom(index)}
                           src={slide?.image}
                           alt=""
                           width={524}
                           height={524}
-                          className="object-cover h-full w-full"
+                          className="object-cover h-full w-full cursor-zoom-in"
                         />
                       </>
                     )}
