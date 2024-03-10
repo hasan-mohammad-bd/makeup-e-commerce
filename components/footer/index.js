@@ -52,7 +52,7 @@ const Footer = () => {
     <>
       <footer className="footer relative bg-black rounded-t-2xl lg:rounded-none pt-6 lg:pt-14 overflow-hidden z-10">
         <div className="footer-top pb-5">
-          <div className="container">
+          <div className="container lg:px-10 2xl:px-0">
             <div className="grid grid-cols-1 lg:grid-cols-4 justify-between gap-4 lg:gap-6">
               <div className="text-white ">
                 {/* 								<Link href="/" className="logo inline-block mb-3">

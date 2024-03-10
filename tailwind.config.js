@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: ["Hind Siliguri", ...defaultTheme.fontFamily.sans],
+        body: ["Jost", ...defaultTheme.fontFamily.sans],
         // title: ["Hind Siliguri", ...defaultTheme.fontFamily.serif],
         title: ["Hind Siliguri", ...defaultTheme.fontFamily.serif],
       },

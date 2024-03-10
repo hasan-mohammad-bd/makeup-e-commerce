@@ -17,11 +17,11 @@ const Intro = async () => {
     api: "sliders",
   });
   return (
-    <div className="container mx-auto lg:px-10  2xl:px-0 grid grid-cols-1 md:grid-cols-6">
+    <div className="container mx-auto lg:px-10  2xl:px-0 grid grid-cols-1 md:grid-cols-6 mt-3">
       <div className="md:col-span-1 hidden md:block">
         <CategoryItems />
       </div>
-      <div className="col-span-5">
+      <div className="col-span-5 ml-3">
         <IntroSlider sliders={sliders} />
       </div>
     </div>

@@ -12,10 +12,10 @@ const ProductSlider = ({ products, sliderId = "slider", isFlashSale }) => {
 		<div className="relative">
 			<Swiper
 				modules={[Navigation]}
-				slidesPerView={4}
+				slidesPerView={5}
 				breakpoints={{
 					0: {
-						slidesPerView: 1,
+						slidesPerView: 2,
 					},
 					540: {
 						slidesPerView: 2,
@@ -24,7 +24,7 @@ const ProductSlider = ({ products, sliderId = "slider", isFlashSale }) => {
 						slidesPerView: 3,
 					},
 					1024: {
-						slidesPerView: 4,
+						slidesPerView: 5,
 					},
 				}}
 				spaceBetween={20}

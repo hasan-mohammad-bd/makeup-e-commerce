@@ -15,6 +15,20 @@ const BestSellSlider = ({ bestProducts, translations }) => {
         slidesPerView={5}
         spaceBetween={24}
         loop={false}
+        breakpoints={{
+					0: {
+						slidesPerView: 2,
+					},
+					540: {
+						slidesPerView: 2,
+					},
+					768: {
+						slidesPerView: 3,
+					},
+					1024: {
+						slidesPerView: 5,
+					},
+				}}
         navigation={{
           prevEl: ".custom_prev_b",
           nextEl: ".custom_next_b",

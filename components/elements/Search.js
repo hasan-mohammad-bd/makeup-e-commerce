@@ -5,7 +5,7 @@ import {
 } from "@/store/api/searchAPI";
 import { toast } from "react-toastify";
 import { getSlicedText } from "@/utils/format-text";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
 // ** Import Icons
@@ -48,15 +48,15 @@ const Search = () => {
   const pathname = usePathname();
 
   // Clear search term when route changes
-  // useEffect(() => {
-  // 	const pathArray = pathname.split("/");
-  // 	if (pathArray[pathArray.length - 1] !== "products") {
-  // 		setSearchTerm("");
-  // 	}
-  // }, [pathname]);
+  useEffect(() => {
+  	const pathArray = pathname.split("/");
+  	if (pathArray[pathArray.length - 1] !== "products") {
+  		setSearchTerm("");
+  	}
+  }, [pathname]);
 
   const handleSearch = (text) => {
-    setSearchTerm(""); // Clear the search term
+    // setSearchTerm(""); // Clear the search term
     setShowSuggestionResults(false);
     if (user) {
       router.push(`/products?text=${text}&reference_id=${user.id}`);

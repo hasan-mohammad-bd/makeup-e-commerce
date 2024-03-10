@@ -35,7 +35,7 @@ const IntroSlider = ({ sliders }) => {
           <SwiperSlide key={slide?.id} className="">
             <DynamicBackgroundComponent
               imageUrl={slide?.image}
-              height={"388px"}
+              height={"378px"}
               mobileHeight={"40vh"}
             >
               <div
@@ -52,7 +52,7 @@ const IntroSlider = ({ sliders }) => {
                       <h1 className="text-lg/3 lg:text-5xl font-medium text-black">
                         {slide?.title_2}
                       </h1>
-                      <h3 className="lg:bg-transparent px-2 py-1 lg:p-0 text-sm lg:text-xl/[48px] w-3/4 mx-auto text-slate-600 font-normal my-2">
+                      <h3 className="lg:bg-transparent px-2 py-1 lg:p-0 text-sm lg:text-xl/[30px] w-3/4 mx-auto text-slate-600 font-normal my-2">
                         {slide?.text}
                       </h3>
                       <Link

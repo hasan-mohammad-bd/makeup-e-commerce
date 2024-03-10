@@ -47,17 +47,15 @@ const CategoryItems = ({ setShow }) => {
         <div
           className={`!h-full relative ${!isMobile ? "shadow pl-3 py-3" : ""}`}
         >
-          {categoryItems.length > 7 &&
-            setCategoryItems((prevItems) => prevItems.slice(0, 7))}
+          {categoryItems.length > 8 &&
+            setCategoryItems((prevItems) => prevItems.slice(0, 8))}
           {categoryItems.map((item) => (
             <div className={`!w-full sub-menu`} key={item.id}>
               <Link
                 onClick={() => handleClose(item.child_categories)}
                 className={` hover:text-primary flex items-center justify-between px-3 !w-full py-2 ${
                   isMobile && "shadow"
-                } mb-2 text-lg ${
-                  item.child_categories.length >= 1 && "sub-menu"
-                }`}
+                } text-lg ${item.child_categories.length >= 1 && "sub-menu"}`}
                 key={item.id}
                 href={
                   item.child_categories.length >= 1
@@ -144,9 +142,7 @@ const CategoryItems = ({ setShow }) => {
                                   {!isMobile ? (
                                     <>
                                       <MdOutlineKeyboardArrowRight size={20} />
-                                      <div className="w-[30px] absolute left-6 top-0 h-[20px] bg-red">
-                                        
-                                      </div>
+                                      <div className="w-[30px] absolute left-6 top-0 h-[20px] bg-red"></div>
                                     </>
                                   ) : null}
                                 </span>
