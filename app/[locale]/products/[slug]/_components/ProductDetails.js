@@ -41,6 +41,7 @@ const ProductDetails = ({
   translations,
   shortDetails,
   demoShortDetails,
+  modalShortDescription,
 }) => {
   const {
     handleAddToWishlist,
@@ -60,6 +61,7 @@ const ProductDetails = ({
   const isInWishList = handleWishListProductStatus(product.id);
   //demo
   const quantity = 1;
+
 
   return (
     <div className="product-details">
@@ -248,8 +250,8 @@ const ProductDetails = ({
 
               <ViewHTML
                 htmlText={
-                  shortDetails
-                    ? demoShortDetails
+                  modalShortDescription 
+                    ? modalShortDescription
                     : product?.product_short_description
                 }
                 className={"desc text-sm lg:text-base text-slate-600 mt-3"}

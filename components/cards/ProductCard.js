@@ -34,9 +34,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
   } = useWishList(); //custom hook for reusing
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(false);
-  console.log(hovered)
 
-  console.log(product);
 
   const {
     id,
@@ -52,7 +50,10 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
     total_sale_qty,
     created_at,
     hover_image,
+    short_descriptio
   } = product;
+
+
 
   const isInWishList = handleWishListProductStatus(id);
   const stockOut = stock_qty <= 0 ? true : false;
@@ -283,6 +284,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
           setShowModal={setShowModal}
           settings={settings}
           translations={translations}
+          modalShortDescription={short_descriptio}
         />
       )}
     </>

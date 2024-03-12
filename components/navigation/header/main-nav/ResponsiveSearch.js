@@ -12,7 +12,6 @@ export default function ResponsiveSearch() {
   const [searchOpen, setSearchOpen] = useState(false);
   const searchMenuRef = useRef(null);
   const dispatch = useDispatch();
- console.log(isSearchModalOpen, "hello")
   const closeMenu = () => {
     setSearchModalOpen(false);
   };

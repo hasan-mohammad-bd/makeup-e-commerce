@@ -19,7 +19,7 @@ const OrderSuccess = ({ params }) => {
 		locale,
 	});
 	const order = orderData?.sale || null;
-	// console.log(order);
+
 	return (
 		<div className="container min-h-screen">
 			<div className="w-full lg:w-[540px] mx-auto my-6 lg:my-12 py-6 lg:p-5 rounded-lg">
