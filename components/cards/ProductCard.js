@@ -33,6 +33,10 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
     handleRemoveFromWishlist,
   } = useWishList(); //custom hook for reusing
   const [loading, setLoading] = useState(true);
+  const [hovered, setHovered] = useState(false);
+  console.log(hovered)
+
+  console.log(product);
 
   const {
     id,
@@ -47,6 +51,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
     stock_qty,
     total_sale_qty,
     created_at,
+    hover_image,
   } = product;
 
   const isInWishList = handleWishListProductStatus(id);
@@ -98,11 +103,13 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                   as={`/products/${slug}`}
                 >
                   <Image
-                    className={`default-img object-cover lg:!h-[18.188rem] !h-[12rem] md:!h-[15rem] w-full bg-[#DCDDDF]`}
-                    src={image || "/assets/images/no-image.png"}
+                    className={`default-img object-cover lg:!h-[18.188rem] !h-[12rem] md:!h-[15rem] hover:transition-all duration-300 w-full bg-[#DCDDDF]`}
+                    src={hovered ? hover_image || image : image || "/assets/images/no-image.png"}
                     alt={product_name}
                     width={0}
                     height={0}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
 
                     // priority={true}
                   />

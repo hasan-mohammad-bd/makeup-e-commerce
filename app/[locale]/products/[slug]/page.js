@@ -31,6 +31,8 @@ const ProductDetailsView = async ({ params }) => {
     per_page: 20,
   };
 
+  console.log(product)
+
   return (
     <div className="mb-32 lg:mb-0  mx-auto">
       <div className="">
