@@ -67,7 +67,7 @@ const DashboardLayout = ({ children, params }) => {
       <div className="">
         <DynamicBackgroundComponent
           heading={"My Account"}
-          imageUrl={settings?.all_product_banner}
+          imageUrl={settings?.profile_banner_image}
           height={"30vh"}
         >
           <div className="text-lg mt-2 md:mt-5">

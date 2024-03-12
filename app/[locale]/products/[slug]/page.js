@@ -33,11 +33,12 @@ const ProductDetailsView = async ({ params }) => {
 
   return (
     <div className="mb-32 lg:mb-0  mx-auto">
-      <div className="">
-        <div className="">
+
+    {settingsRes.value.data.product_details_banner_image && (
+              <div className="">
           <DynamicBackgroundComponent
             heading={"Product Details"}
-            imageUrl={product.image}
+            imageUrl={settingsRes.value.data.product_details_banner_image}
             height={"30vh"}
             mobileHeight={"15vh"}
           >
@@ -62,7 +63,8 @@ const ProductDetailsView = async ({ params }) => {
             </div>
           </DynamicBackgroundComponent>
         </div>
-      </div>
+    )}
+
       <div className="container mx-auto mt-5 md:mt-20">
         <ProductDetails
           product={product}

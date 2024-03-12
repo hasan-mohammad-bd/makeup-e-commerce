@@ -16,7 +16,7 @@ function SearchBarFallback() {
 
 const FlashSellingProducts = async ({ searchParams }) => {
 	const params = new URLSearchParams(searchParams);
-	// console.log(searchParams);
+
 
 	const [flashRes, tranRes] = await Promise.allSettled([
 		fetchData({ api: `product-flash-sale?per_page=20&${params.toString()}` }),
@@ -52,13 +52,13 @@ const FlashSellingProducts = async ({ searchParams }) => {
 						<Timer targetDate={flashSaleInfo?.expire_time} />
 					</div>
 					<div className="hidden lg:block">
-						<Image
+{/* 						<Image
 							src={`/assets/images/banner/robot.png`}
 							alt="image"
 							width={307}
 							height={211}
 							className="h-full w-[307px] object-contain"
-						/>
+						/> */}
 					</div>
 				</div>
 			</div>

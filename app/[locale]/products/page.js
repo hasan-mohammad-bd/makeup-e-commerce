@@ -9,6 +9,7 @@ const page = async ({ params, searchParams }) => {
     fetchData({ api: `translations` }),
   ]);
 
+
   const settings =
     settingsRes.status === "fulfilled" ? settingsRes.value?.data || {} : {};
   const translations =

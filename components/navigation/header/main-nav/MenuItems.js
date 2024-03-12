@@ -10,7 +10,7 @@ import React from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 const MenuItems = ({ settings, noAds }) => {
-  console.log(settings);
+
   const navItems = settings?.header_page || [
     {
       name: "Home",
