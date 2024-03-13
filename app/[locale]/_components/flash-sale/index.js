@@ -33,7 +33,8 @@ const FlashSale = ({ translations }) => {
           <>
             <DynamicBackgroundComponent
               imageUrl={flashSaleInfo?.banner_image}
-              height={"50vh"}
+              // height={"500px"}
+              mobileHeight={"400px"}
             >
               <div className="flex flex-col gap-4 bg-transparent px-3 justify-center items-center">
                 <div className="text-center lg:text-left">
@@ -96,7 +97,7 @@ const FlashSale = ({ translations }) => {
               <>
                 <DynamicBackgroundComponent
                   imageUrl={flashSaleInfo?.banner_image}
-                  height={"50vh"}
+                  height={"500px"}
                 />
               </>
             </div>

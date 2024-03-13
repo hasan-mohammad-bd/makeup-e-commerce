@@ -4,6 +4,7 @@ import Paginator from "./elements/Paginator";
 import { useSelector } from "react-redux";
 import { twMerge } from "tailwind-merge";
 import { SeeAll } from "./elements/buttons";
+import { useParams } from "next/navigation";
 
 export default function PaginationWithSummery({
   meta,
@@ -12,6 +13,7 @@ export default function PaginationWithSummery({
   className,
 }) {
   const { translations } = useSelector((state) => state.common);
+  const param = useParams();
   // console.log(translations);
   return (
     <div
@@ -20,11 +22,21 @@ export default function PaginationWithSummery({
         className
       )}
     >
-      <SeeAll href="/products" buttonText={translations["see-all"]} />
-      <div className="flex justify-center md:justify-end">
-      <Paginator meta={meta} paginateItems={paginateItems} />
-      </div>
+      {
+        (param.slug ? (
+          <p>
+            {translations["showing"] || "Showing"} {totalItemsShowing || 0}{" "}
+            {translations["out-of"] || "out of"} {meta?.total}{" "}
+            {translations["total-products" || "products"]}{" "}
+          </p>
+        ) : (
+          <SeeAll href="/products" buttonText={translations["see-all"]} />
+        ))
+      }
 
+      <div className="flex justify-center md:justify-end">
+        <Paginator meta={meta} paginateItems={paginateItems} />
+      </div>
     </div>
   );
 }

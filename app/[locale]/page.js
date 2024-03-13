@@ -80,7 +80,7 @@ export default async function Home() {
             title={translations["new-in-shop"]}
             buttonText={translations["see-all"]}
           />
-          <HomeAllProducts translations={translations} />
+          <HomeAllProducts home={true} translations={translations} />
           {/* <SeeAll href="/products" buttonText={translations["see-all"]} /> */}
         </div>
       </section>

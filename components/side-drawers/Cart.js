@@ -83,7 +83,7 @@ const Cart = () => {
         <div className="fixed left-0 bottom-0 w-full px-3 py-4 lg:px-8 lg:py-4 bg-slate-50 border-t border-slate-200 flex flex-col lg:flex-row gap-2 lg:gap-12 justify-between lg:items-center">
           <div className="flex lg:block justify-between items-center lg:text-center">
             <p className="">{translations["total"] || "Total"}:</p>
-            <h3 className="text-slate-900 font-bold">
+            <h3 className="text-slate-900 font-bold whitespace-nowrap">
               {`${siteConfig.currency.sign} ${getCartTotal(cart)}`}
             </h3>
           </div>
