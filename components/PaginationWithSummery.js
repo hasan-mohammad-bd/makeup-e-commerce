@@ -4,7 +4,7 @@ import Paginator from "./elements/Paginator";
 import { useSelector } from "react-redux";
 import { twMerge } from "tailwind-merge";
 import { SeeAll } from "./elements/buttons";
-import { useParams } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 export default function PaginationWithSummery({
   meta,
@@ -14,7 +14,12 @@ export default function PaginationWithSummery({
 }) {
   const { translations } = useSelector((state) => state.common);
   const param = useParams();
-  // console.log(translations);
+  const pathname = usePathname()
+  const route = pathname.split("/")[1];
+ 
+
+
+
   return (
     <div
       className={twMerge(
@@ -23,7 +28,7 @@ export default function PaginationWithSummery({
       )}
     >
       {
-        (param.slug ? (
+        ((param.slug || route === "products") ? (
           <p>
             {translations["showing"] || "Showing"} {totalItemsShowing || 0}{" "}
             {translations["out-of"] || "out of"} {meta?.total}{" "}
