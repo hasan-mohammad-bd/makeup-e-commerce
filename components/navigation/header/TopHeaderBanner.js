@@ -8,7 +8,7 @@ const TopHeaderBanner = ({ locale, settings }) => {
 
   
   return (
-    <div className="top-header-banner bg-primary w-full py-1">
+    <div className="top-header-banner bg-primary w-full">
       <div className="container mx-auto lg:px-10 2xl:px-0">
         <div className="md:flex justify-between ">
           <div className="text-area md:flex justify-center items-center">

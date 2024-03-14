@@ -62,7 +62,6 @@ const ProductDetails = ({
   //demo
   const quantity = 1;
 
-
   return (
     <div className="product-details">
       <div className="flex container flex-col lg:flex-row lg:gap-10 pb-3 lg:px-10  2xl:px-0 ">
@@ -134,7 +133,7 @@ const ProductDetails = ({
           <div className="mx-3 md:mx-0">
             <div className="mt-2">
               {product.flashSale && (
-                <div className="flesh-sell-bar w-full h-12 rounded-3xl border border-primary flex justify-between items-center">
+                <div className="flesh-sell-bar w-full h-12 overflow-hidden mb-3 rounded-3xl border border-primary flex justify-between items-center">
                   <FlashSellCorner className="" />
 
                   <div className="md:ml-[-90px] text-start md:text-end text-slate-600 grid grid-cols-1 md:grid-cols-2 md:gap-1 items-center justify-center">
@@ -250,7 +249,7 @@ const ProductDetails = ({
 
               <ViewHTML
                 htmlText={
-                  modalShortDescription 
+                  modalShortDescription
                     ? modalShortDescription
                     : product?.product_short_description
                 }

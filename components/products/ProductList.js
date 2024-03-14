@@ -6,6 +6,7 @@ export default function ProductList({
   isFlashSale,
   translations,
   isWithFilter,
+  home,
 }) {
   return (
     <div
@@ -15,14 +16,25 @@ export default function ProductList({
           : "2xl:!grid-cols-5 xl:!grid-cols-5 md:!grid-cols-3"
       } `}
     >
-      {products?.map((product, i) => (
-        <ProductCard
-          key={i}
-          product={product}
-          isFlashSale={isFlashSale}
-          translations={translations}
-        />
-      ))}
+      {home
+        ? products
+            ?.slice(0, 12)
+            .map((product, i) => (
+              <ProductCard
+                key={i}
+                product={product}
+                isFlashSale={isFlashSale}
+                translations={translations}
+              />
+            ))
+        : products?.map((product, i) => (
+            <ProductCard
+              key={i}
+              product={product}
+              isFlashSale={isFlashSale}
+              translations={translations}
+            />
+          ))}
     </div>
   );
 }
