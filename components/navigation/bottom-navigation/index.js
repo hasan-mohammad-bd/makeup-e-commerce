@@ -19,12 +19,18 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import FilterMenu from "@/components/elements/FilterMenu";
 import SortMenu from "./SortMenu";
 import ResponsiveSearch from "../header/main-nav/ResponsiveSearch";
-import { HiMagnifyingGlass, HiOutlineHeart } from "react-icons/hi2";
+import {
+  HiMagnifyingGlass,
+  HiOutlineHeart,
+  HiOutlineUser,
+} from "react-icons/hi2";
 import useWishList from "@/hooks/useWishList";
 import { setSearchModalOpen } from "@/store/slices/commonSlice";
+import Image from "next/image";
 
 export default function BottomNavigation() {
   const dispatch = useDispatch();
+
   const { translations, settings, isSearchModalOpen } = useSelector(
     (state) => state.common
   );
@@ -76,7 +82,7 @@ export default function BottomNavigation() {
     }, */
     {
       href: "https://m.me/p.touhid",
-      name: translations["chat"],
+      name: translations["chat"] || "chat",
       icon: <MessengerIcon />,
       activeIcon: <MessengerFillIcon />,
     },
@@ -88,7 +94,6 @@ export default function BottomNavigation() {
     }, */
   ];
 
-
   return (
     <div className={`${isSortFilter ? "pb-40" : "pb-24"} bg-white`}>
       <div className="fixed bottom-0 left-0 z-20 w-screen h-fit bg-white">
@@ -99,16 +104,25 @@ export default function BottomNavigation() {
           </div>
         )}
         <div className=" shadow-top grid h-full max-w-lg items-center grid-cols-5 mx-auto font-medium py-3">
-          <button
-            onClick={() => dispatch(setSearchModalOpen(true))}
-            className={`single-action flex-col mb-[-3px] ml-6 ${
-              isSearchModalOpen ? "!text-primary" : "text-slate-400"
-            }`}
+          <Link
+            className="inline-flex flex-col items-center justify-center px-5 group"
+            href="/dashboard/profile"
           >
-            <HiMagnifyingGlass className="" size={24} />
-            <p className="md:hidden  text-[12px]">Search</p>
-            {/* <span>Search</span> */}
-          </button>
+            {user?.image ? (
+              <Image
+                src={user.image}
+                alt="Profile"
+                height={0}
+                width={0}
+                className="rounded-full w-[25px] h-[25px] object-cover"
+              />
+            ) : (
+              <HiOutlineUser className="" size={28} />
+            )}
+            <p className="mt-2 text-xs/[100%] text-slate-400 capitalize">
+              Profile
+            </p>
+          </Link>
           {menuList.map((menu, index) => (
             <Link
               key={index}
