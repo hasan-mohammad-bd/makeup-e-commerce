@@ -32,9 +32,11 @@ import SidebarMenu from "@/components/side-drawers/SidebarMenu";
 import Search from "@/components/elements/Search";
 import { AiOutlineClose } from "react-icons/ai";
 import { setSearchModalOpen } from "@/store/slices/commonSlice";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function MainNav({ settings }) {
   const [isVisible, setIsVisible] = useState(false);
+    const isMobile = useMediaQuery("(max-width: 768px)");
   const searchMenuRef = useRef(null);
   const [isSideBarOpen, setIsSidebarOpen] = useState(false);
   const { locale } = useParams();
@@ -141,25 +143,23 @@ export default function MainNav({ settings }) {
                 <MenuItems noAds={true} settings={settings} />
             </div>
               )}
-            <div className="header-right flex justify-between items-center ml-4 gap-2 lg:gap-6">
+            <div className="header-right  flex justify-between items-center ml-4 gap-2 lg:gap-6">
               <div className="header-actions flex items-center gap-4">
-                {
-                  isVisible && (
+
 
                   <button
                     onClick={() => dispatch(setSearchModalOpen(true))}
-                    className={` hidden md:flex flex-col ${
+                    className={`${!isVisible && "md:!hidden"} md:flex flex-col  ${
                       isSearchModalOpen ? "!text-primary" : "text-black"
                     }`}
                   >
                     <HiMagnifyingGlass className="" size={24} />
-                    {!isVisible && <p className="">Search</p>}
+                    {!isVisible && <p className="hidden md:block">Search</p>}
                     {/* <span>Search</span> */}
                   </button>
 
-                  )
-                }
-                <div className="text-center flex flex-col justify-center items-center ml-4 font-normal">
+
+                <div className="text-center hidden md:flex flex-col justify-center items-center ml-4 font-normal">
                   <Link className="text center" href="/dashboard/profile">
                     {user?.image ? (
                       <Image
@@ -267,9 +267,9 @@ export default function MainNav({ settings }) {
           className="fixed top-0 right-0 z-30 w-full bg-white"
         >
           <div className=" flex flex-col justify-center gap-6 py-5 shadow">
-            <h3 className="text-xl md:text-2xl font-bold text-center">
+{/*             <h3 className="text-xl md:text-2xl font-bold text-center">
               Product Search
-            </h3>
+            </h3> */}
             <div className="flex justify-center items-center gap-2 mx-3 md:mx-0">
               <Search />
               <button

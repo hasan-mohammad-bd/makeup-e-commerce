@@ -16,6 +16,9 @@ const FlashSale = dynamic(() => import("./_components/flash-sale"), {
 // ** Import Iocns
 import { SeeAll } from "@/components/elements/buttons";
 import HomeCategoryProducts from "./_components/HomeCategoryProducts";
+import { HiArrowLongRight } from "react-icons/hi2";
+import PopularCategories from "./_components/popular-categories";
+import { Link } from "@/navigation";
 
 export default async function Home() {
   const data = await fetchData({ api: "translations" });
@@ -39,14 +42,14 @@ export default async function Home() {
         <ServiceFeatures />
       </section> */}
 
-      {/* 
-
-          <section className="lg:pb-14 mt-6 lg:mt-12 relative">
+      <section className="lg:pb-14 mt-6 lg:mt-12 relative">
         <div
-          className="all-category py-4 lg:py-14"
-          style={{
-            backgroundImage: "linear-gradient(90deg, #00B7C9 0%, #00C999 100%)",
-          }}
+          className="all-category py-4 lg:py-14 bg-primary"
+          style={
+            {
+              // backgroundImage: "linear-gradient(90deg, #ffffff 0%, #EE2761 100%)",
+            }
+          }
         >
           <div className="container">
             <div className="sec-heading w-full flex justify-between items-center">
@@ -65,14 +68,16 @@ export default async function Home() {
             <div className="mt-6 lg:mt-10">
               <PopularCategories />
             </div>
-            <SeeAll
-              href="/products"
-              buttonText={translations["see-all"]}
-              invert={true}
-            />
+            <div className="md:hidden">
+              <SeeAll
+                href="/products"
+                buttonText={translations["see-all"]}
+                invert={true}
+              />
+            </div>
           </div>
         </div>
-      </section>  */}
+      </section>
 
       <section className="all-products mt-6 lg:mt-14">
         <div className="container lg:px-10 2xl:px-0">

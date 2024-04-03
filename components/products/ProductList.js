@@ -17,24 +17,35 @@ export default function ProductList({
       } `}
     >
       {home
-        ? products
-            ?.slice(0, 12)
-            .map((product, i) => (
-              <ProductCard
-                key={i}
-                product={product}
-                isFlashSale={isFlashSale}
-                translations={translations}
-              />
-            ))
-        : products?.map((product, i) => (
-            <ProductCard
-              key={i}
-              product={product}
-              isFlashSale={isFlashSale}
-              translations={translations}
-            />
-          ))}
+        ? products.slice(0, 12).map((product, i) => {
+            const stockOut = product.stock_qty <= 0;
+            if (!stockOut) {
+              return (
+                <ProductCard
+                  key={i}
+                  product={product}
+                  isFlashSale={isFlashSale}
+                  translations={translations}
+                />
+              );
+            } else {
+              // If product is out of stock, don't render anything
+              return null;
+            }
+          })
+        : products?.map((product, i) => {
+            const stockOut = product.stock_qty <= 0;
+            if (!stockOut) {
+              return (
+                <ProductCard
+                  key={i}
+                  product={product}
+                  isFlashSale={isFlashSale}
+                  translations={translations}
+                />
+              );
+            }
+        })}
     </div>
   );
 }

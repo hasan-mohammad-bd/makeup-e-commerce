@@ -16,33 +16,39 @@ const BestSellSlider = ({ bestProducts, translations }) => {
         spaceBetween={24}
         loop={false}
         breakpoints={{
-					0: {
-						slidesPerView: 2,
-					},
-					540: {
-						slidesPerView: 2,
-					},
-					768: {
-						slidesPerView: 3,
-					},
-					1024: {
-						slidesPerView: 5,
-					},
-				}}
+          0: {
+            slidesPerView: 2,
+          },
+          540: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 5,
+          },
+        }}
         navigation={{
           prevEl: ".custom_prev_b",
           nextEl: ".custom_next_b",
         }}
       >
-        {bestProducts?.map((product, i) => (
-          <SwiperSlide key={i}>
-            <ProductCard
-              product={product}
-              isBestSale={true}
-              translations={translations}
-            />
-          </SwiperSlide>
-        ))}
+        {bestProducts?.map((product, i) => {
+          const stockOut = product?.stock_qty <= 0;
+          if (!stockOut) {
+            return (
+              <SwiperSlide key={i}>
+                <ProductCard
+                  product={product}
+                  isBestSale={true}
+                  translations={translations}
+                />
+              </SwiperSlide>
+            );
+          }
+          return null; // Return null if the product is out of stock
+        })}
       </Swiper>
 
       <div className="slider-arrow hidden lg:block">

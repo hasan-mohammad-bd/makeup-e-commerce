@@ -34,8 +34,9 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
   } = useWishList(); //custom hook for reusing
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(false);
+  const [colorClicked, setColorClicked] = useState(false);
 
-
+  console.log(product);
   const {
     id,
     slug,
@@ -50,10 +51,9 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
     total_sale_qty,
     created_at,
     hover_image,
-    short_descriptio
+    short_descriptio,
+    photos,
   } = product;
-
-
 
   const isInWishList = handleWishListProductStatus(id);
   const stockOut = stock_qty <= 0 ? true : false;
@@ -75,7 +75,7 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
           <div className="absolute top-4 right-4 z-20"></div>
           {stockOut ? (
             <div className="rounded z-10 absolute right-1/2 w-full translate-x-1/2 top-1/4 flex items-center justify-center ">
-              <span className="text-red-500  text-[14px] md:[18px] leading-6 rounded-lg whitespace-nowrap capitalize bg-white border-red-500 px-3 py-1">
+              <span className="text-red-500 text-[14px] md:[18px] leading-6 rounded-lg whitespace-nowrap capitalize bg-white border-red-500 px-3 py-1">
                 {translations["out-of-stock"] || "Out of Stock"}
               </span>
             </div>
@@ -88,15 +88,47 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
             )}
           >
             <div className="product-img-action-wrap relative">
-              {getDaysSinceCreation(created_at) < 8 && (
-                <div className="absolute top-3 left-3 z-20">
-                  <span className="bg-primary text-sm px-2 rounded-tl-lg rounded-br-lg text-white">
-                    {translations["new"] || "New"}
+              <div className="absolute top-2 left-2 z-20">
+                {getDaysSinceCreation(created_at) < 8 && (
+                  <div className=" mb-2 z-20">
+                    <span className="bg-primary text-sm px-2 rounded-tl-lg rounded-br-lg text-white">
+                      {translations["new"] || "New"}
+                    </span>
+                  </div>
+                )}
+                {old_price > new_price ? (
+                  <div className="flex items-center gap-2">
+                    <span className="w-12 flex justify-center items-center ml-[-12px] z-30 h-12 rounded-full bg-primary text-white !text-[16px] font-semibold">
+                      --{getDiscountPercent(old_price, new_price)}%
+                    </span>
+                  </div>
+                ) : null}
+              </div>
+              <span
+                aria-label="Add To Wishlist group hover:bg-primary"
+                className={` absolute top-2 right-2 group  @ text-primary`}
+                onClick={(e) =>
+                  isInWishList
+                    ? handleRemoveFromWishlist(id)
+                    : handleAddToWishlist(id)
+                }
+              >
+                {isInWishList ? (
+                  <HeartRedIcon
+                    className="text-red-500 border group-hover:border-white"
+                    size={20}
+                  />
+                ) : (
+                  <span className="">
+                    <HiOutlineHeart
+                      className="group-hover:text-white"
+                      size={20}
+                    />
                   </span>
-                </div>
-              )}
+                )}
+              </span>
 
-              <div className="product-img pb-0">
+              <div className="product-img pb-0 ">
                 <Link
                   className={`${stockOut ? "pointer-events-none" : ""}`}
                   disabled={stockOut}
@@ -105,24 +137,46 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
                 >
                   <Image
                     className={`default-img object-cover lg:!h-[18.188rem] !h-[12rem] md:!h-[15rem] hover:transition-all duration-300 w-full bg-[#DCDDDF]`}
-                    src={hovered ? hover_image || image : image || "/assets/images/no-image.png"}
+                    src={
+                      colorClicked
+                        ? colorClicked
+                        : hovered
+                        ? hover_image || image
+                        : image || "/assets/images/no-image.png"
+                    }
                     alt={product_name}
                     width={0}
                     height={0}
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}
-
-                    // priority={true}
                   />
                 </Link>
+                <div className="flex gap-1 mt-1">
+                  {photos
+                    .filter(
+                      (photo) =>
+                        photo.color_name !== "" &&
+                        photos.find((p) => p.color_name === photo.color_name )
+                    )
+                    .map((photo) => (
+                      <>
+                        <Image
+                          onClick={() => setColorClicked(photo.image)}
+                          key={photo.color_code}
+                          className={`default-img object-cover w-10 h-10 shadow hover:transition-all p-[1.5px] rounded-sm duration-300 bg-[#DCDDDF]`}
+                          src={photo.image}
+                          alt={product_name}
+                          width={0}
+                          height={0}
+                        />
+                      </>
+                    ))}
+                </div>
               </div>
             </div>
             <div className="product-content-wrap my-3">
               <div className="product-category">
-                <span
-                  // href={`/brands/${brand?.id ? brand?.id : ""}`}
-                  className="text-xs capitalize text-slate-500"
-                >
+                <span className="text-xs capitalize text-slate-500">
                   {brand?.brand_name || "No Brand"}
                 </span>
               </div>
@@ -146,132 +200,66 @@ const ProductCard = ({ product, isFlashSale, isLarge, translations = {} }) => {
 
                 {old_price > new_price ? (
                   <div className="flex items-center gap-2">
-                    {/*                    <span>
-                      <FiMinus className="text-slate-800 mx-1" />
-                    </span> */}
                     <del className="old-price mx-1 font-normal text-slate-800">
                       {siteConfig.currency.sign}
                       {old_price}
                     </del>
 
-                    <span className="discount-badge ml-1 !text-[12px]">
-                      {getDiscountPercent(old_price, new_price)}% OFF
-                    </span>
+                    {/*                       <span className="discount-badge ml-1 !text-[12px]">
+                        {getDiscountPercent(old_price, new_price)}% OFF
+                      </span> */}
                   </div>
                 ) : null}
               </div>
-              <div className="product-rating mt-2 md:mt-0">
-                <span className="font-semibold text-slate-900">
-                  <Rating
-                    initialValue={average_rating || 5}
-                    allowFraction
-                    readonly
-                    size={18}
-                    fillColor="#FFC107"
-                  />{" "}
-                </span>
-                <span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
-                  {total_rating === 0 ? 0 : formatLongNumber(total_rating)}
-                </span>
-              </div>
+              {/*             <div className="product-rating mt-2 md:mt-0">
+              <span className="font-semibold text-slate-900">
+                <Rating initialValue={average_rating || 5} allowFraction readonly size={18} fillColor="#FFC107" />{" "}
+              </span>
+              <span className="block border-l border-l-slate-200 pl-2 font-semibold text-slate-900">
+                {total_rating === 0 ? 0 : formatLongNumber(total_rating)}
+              </span>
+            </div> */}
             </div>
-            <div className="actions bottom-3 w-full">
-              <div
-                className="product-actions flex gap-2"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  disabled={stockOut}
-                  aria-label="Add To Cart"
-                  className="border border-slate-200 flex items-center h-fit px-[0.625rem] py-2 rounded-[0.2rem] group  hover:text-white hover:bg-primary"
-                  onClick={(e) => handleAddToCart(product)}
-                >
-                  <HiOutlineShoppingCart
-                    size={24}
-                    className="active:scale-90 text-slate-500 mr-1 group-hover:text-white"
-                  />
-                  {"  "}
-                  <span className="whitespace-nowrap  justify-center items-center hidden lg:flex">
-                    <p className="text-[14px] leading-none"> + Add to Cart</p>
+            {/*           <div className="actions bottom-3 w-full">
+            <div className="product-actions flex gap-2" onClick={(e) => e.stopPropagation()}>
+              <button disabled={stockOut} aria-label="Add To Cart" className="border border-slate-200 flex items-center h-fit px-[0.625rem] py-2 rounded-[0.2rem] group hover:text-white hover:bg-primary" onClick={(e) => handleAddToCart(product)}>
+                <HiOutlineShoppingCart size={24} className="active:scale-90 text-slate-500 mr-1 group-hover:text-white" />
+                {"  "}
+                <span className="whitespace-nowrap justify-center items-center hidden lg:flex">
+                  <p className="text-[14px] leading-none"> + Add to Cart</p>
+                </span>
+              </button>
+              <button aria-label="Add To Wishlist group hover:bg-primary" className={`border border-slate-300 px-3 rounded-[0.2rem] group hover:bg-primary @ text-slate-500`} onClick={(e) => isInWishList ? handleRemoveFromWishlist(id) : handleAddToWishlist(id)}>
+                {isInWishList ? (
+                  <HeartRedIcon className="text-red-500 border group-hover:border-white" size={20} />
+                ) : (
+                  <span className="">
+                    <HiOutlineHeart className="group-hover:text-white" size={20} />
                   </span>
-                </button>
-                <button
-                  aria-label="Add To Wishlist group hover:bg-primary"
-                  className={`border border-slate-300 px-3 rounded-[0.2rem] group hover:bg-primary  @  text-slate-500`}
-                  onClick={(e) =>
-                    isInWishList
-                      ? handleRemoveFromWishlist(id)
-                      : handleAddToWishlist(id)
-                  }
-                >
-                  {isInWishList ? (
-                    <HeartRedIcon
-                      className="text-red-500 border group-hover:border-white"
-                      size={20}
-                    />
-                  ) : (
-                    <>
-                      <span className="">
-                        <HiOutlineHeart
-                          className="group-hover:text-white"
-                          size={20}
-                        />
-                      </span>
-                    </>
-                  )}
-                </button>
-                <button
-                  className={`border border-slate-300 px-3 group hover:bg-primary rounded-[0.2rem] text-slate-500`}
-                  onClick={() => toggleModal()}
-                >
-                  <MdOutlineRemoveRedEye
-                    className="group-hover:text-white"
-                    size={20}
-                  />
-                </button>
-                {/*                 <button
-                  disabled={stockOut}
-                  onClick={() => handleAddAndCheckout(product)}
-                  className="buy-btn flex-center gap-1"
-                >
-                  {translations["buy-now"] || "এখনই কিনুন"}
-                  <div className="hidden lg:block">
-                    <HiOutlineArrowNarrowRight
-                      className="hidden lg:block"
-                      size={20}
-                    />
-                  </div>
-                </button> */}
-              </div>
-              {isFlashSale && (
-                <div className="product-flash-counter mt-4">
-                  <div className=" flex items-center gap-3">
-                    <div className="w-full h-[6px] bg-gray-200 rounded">
-                      <div
-                        className="h-[6px] bg-secondary-700 rounded"
-                        style={{
-                          width: `${getSalePercent(
-                            total_sale_qty,
-                            stock_qty
-                          )}%`,
-                        }}
-                      ></div>
-                    </div>
-                    {/* <h3>{getSalePercent(total_sale_qty, stock_qty)}%</h3> */}
-                  </div>
-                  <div className="flex-between mt-3 text-xs">
-                    <h3>
-                      {translations["sold"] || "Sold"}:{" "}
-                      <span className="font-bold">{total_sale_qty}</span>
-                    </h3>
-                    <h3>
-                      {translations["in-stock"] || "In Stock"}:{" "}
-                      <span className="font-bold">{stock_qty}</span>
-                    </h3>
+                )}
+              </button>
+              <button className={`border border-slate-300 px-3 group hover:bg-primary rounded-[0.2rem] text-slate-500`} onClick={() => toggleModal()}>
+                <MdOutlineRemoveRedEye className="group-hover:text-white" size={20} />
+              </button>
+            </div>
+            {isFlashSale && (
+              <div className="product-flash-counter mt-4">
+                <div className=" flex items-center gap-3">
+                  <div className="w-full h-[6px] bg-gray-200 rounded">
+                    <div className="h-[6px] bg-secondary-700 rounded" style={{ width: `${getSalePercent(total_sale_qty, stock_qty)}%` }}></div>
                   </div>
                 </div>
-              )}
-            </div>
+                <div className="flex-between mt-3 text-xs">
+                  <h3>
+                    {translations["sold"] || "Sold"}: <span className="font-bold">{total_sale_qty}</span>
+                  </h3>
+                  <h3>
+                    {translations["in-stock"] || "In Stock"}: <span className="font-bold">{stock_qty}</span>
+                  </h3>
+                </div>
+              </div>
+            )}
+          </div> */}
           </div>
         </div>
       ) : (
