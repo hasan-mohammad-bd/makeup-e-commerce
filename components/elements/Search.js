@@ -120,7 +120,7 @@ const Search = () => {
 
           <button
             onClick={() => handleSearch(searchTerm)}
-            className={`search-btn group-focus-within:border-primary ${isSearchModalOpen ? "hidden" : ""}  inline-block`}
+            className={`search-btn group-focus-within:border-primary ml-[-45px] inline-block`}
           >
             <HiMagnifyingGlass
               size={24}

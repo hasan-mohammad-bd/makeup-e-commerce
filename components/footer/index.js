@@ -11,6 +11,7 @@ import {
   FaYoutube,
   FaWhatsapp,
   FaLinkedin,
+  FaFacebookMessenger,
 } from "react-icons/fa";
 import FooterPages from "./FooterPages";
 import SocialIcon from "../elements/SocialIcon";
@@ -225,6 +226,12 @@ const Footer = () => {
           </div>
         </div>
         <ScrollToTopButton />
+        <Link
+          className="fixed hidden md:inline-block z-30 bottom-20 right-5 text-blue-500"
+          href={`https://m.me/${process.env.MESSENGER_LINK}`}
+        >
+          <FaFacebookMessenger size={45}/>
+        </Link>
       </footer>
     </>
   );
